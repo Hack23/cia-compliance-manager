@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.10**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.11**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: Tab
 
-Defined in: [types/tabs.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/eb3dd66ffaf39f50db4da1b4d578d20d1c37a0b3/src/types/tabs.ts#L17)
+Defined in: [types/tabs.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/types/tabs.ts#L17)
 
 Individual tab configuration
 
@@ -18,7 +18,7 @@ Represents a single tab in a tab list with its associated content and metadata.
 
 > `optional` **badge**: `string` \| `number`
 
-Defined in: [types/tabs.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/eb3dd66ffaf39f50db4da1b4d578d20d1c37a0b3/src/types/tabs.ts#L28)
+Defined in: [types/tabs.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/types/tabs.ts#L28)
 
 Optional badge/count to display (e.g., "3" or "New")
 
@@ -28,7 +28,7 @@ Optional badge/count to display (e.g., "3" or "New")
 
 > **content**: `ReactNode`
 
-Defined in: [types/tabs.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/eb3dd66ffaf39f50db4da1b4d578d20d1c37a0b3/src/types/tabs.ts#L31)
+Defined in: [types/tabs.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/types/tabs.ts#L31)
 
 Content to display when tab is active
 
@@ -38,7 +38,7 @@ Content to display when tab is active
 
 > `optional` **disabled**: `boolean`
 
-Defined in: [types/tabs.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/eb3dd66ffaf39f50db4da1b4d578d20d1c37a0b3/src/types/tabs.ts#L34)
+Defined in: [types/tabs.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/types/tabs.ts#L34)
 
 Optional disabled state
 
@@ -48,7 +48,7 @@ Optional disabled state
 
 > `optional` **icon**: `ReactNode`
 
-Defined in: [types/tabs.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/eb3dd66ffaf39f50db4da1b4d578d20d1c37a0b3/src/types/tabs.ts#L25)
+Defined in: [types/tabs.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/types/tabs.ts#L25)
 
 Optional icon element to display alongside the label
 
@@ -58,7 +58,7 @@ Optional icon element to display alongside the label
 
 > **id**: `string`
 
-Defined in: [types/tabs.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/eb3dd66ffaf39f50db4da1b4d578d20d1c37a0b3/src/types/tabs.ts#L19)
+Defined in: [types/tabs.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/types/tabs.ts#L19)
 
 Unique identifier for the tab
 
@@ -68,7 +68,7 @@ Unique identifier for the tab
 
 > **label**: `string`
 
-Defined in: [types/tabs.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/eb3dd66ffaf39f50db4da1b4d578d20d1c37a0b3/src/types/tabs.ts#L22)
+Defined in: [types/tabs.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/types/tabs.ts#L22)
 
 Display label for the tab
 
@@ -78,6 +78,6 @@ Display label for the tab
 
 > `optional` **testId**: `string`
 
-Defined in: [types/tabs.ts:37](https://github.com/Hack23/cia-compliance-manager/blob/eb3dd66ffaf39f50db4da1b4d578d20d1c37a0b3/src/types/tabs.ts#L37)
+Defined in: [types/tabs.ts:37](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/types/tabs.ts#L37)
 
 Optional test ID for testing purposes

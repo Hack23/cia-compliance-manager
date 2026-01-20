@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.10**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.11**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **CostEstimationWidgetProps** = `AllCIAComponentsProps`
 
-Defined in: [types/widget-props.ts:504](https://github.com/Hack23/cia-compliance-manager/blob/eb3dd66ffaf39f50db4da1b4d578d20d1c37a0b3/src/types/widget-props.ts#L504)
+Defined in: [types/widget-props.ts:504](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/types/widget-props.ts#L504)
 
 Props for CostEstimationWidget component
 

@@ -313,9 +313,7 @@
 <a name='L248'></a><a href='#L248'>248</a>
 <a name='L249'></a><a href='#L249'>249</a>
 <a name='L250'></a><a href='#L250'>250</a>
-<a name='L251'></a><a href='#L251'>251</a>
-<a name='L252'></a><a href='#L252'>252</a>
-<a name='L253'></a><a href='#L253'>253</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L251'></a><a href='#L251'>251</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -565,8 +563,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { SECURITY_SUMMARY_WIDGET_IDS, SECURITY_SUMMARY_TEST_IDS } from "../../../constants/testIds";
@@ -581,7 +577,7 @@ import {
   getWidgetAriaDescription,
   ARIA_ROLES 
 } from "../../../utils/accessibility";
-import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
+import { cn } from "../../../utils/tailwindClassHelpers";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 import TabContainer from "../../common/TabContainer";
@@ -740,51 +736,50 @@ const SecuritySummaryWidget: React.FC&lt;SecuritySummaryWidgetProps&gt; = ({
         error={error}
       &gt;
         &lt;div 
-          className="space-y-sm"
+          className="space-y-xs"
           role={ARIA_ROLES.REGION}
           aria-label={getWidgetAriaDescription(
             "Security Summary",
             "Comprehensive executive summary of security posture with key metrics"
           )}
         &gt;
-          {/* Security Classification Banner */}
+          {/* Security Classification Banner - Compact layout */}
           &lt;section 
             className={cn(
-              WidgetClasses.section,
-              "p-sm rounded-md shadow-sm border-l-4 border-info dark:border-info-light",
+              "p-xs rounded-md border-l-4 border-info dark:border-info-light",
               "bg-info-light/10 dark:bg-info-dark/20"
             )}
             aria-labelledby="security-classification-heading"
             data-testid={SECURITY_SUMMARY_WIDGET_IDS.section('classification-banner')}
           &gt;
-            &lt;div className="flex justify-between items-center"&gt;
-              &lt;div&gt;
+            &lt;div className="flex justify-between items-center gap-sm"&gt;
+              &lt;div className="flex-1 min-w-0"&gt;
                 &lt;h2 
                   id="security-classification-heading"
-                  className={cn(WidgetClasses.heading, "flex items-center gap-sm")}
+                  className="text-body-lg font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-xs mb-xs"
                 &gt;
                   &lt;span 
-                    className="inline-block w-3 h-3 rounded-full bg-info dark:bg-info-light pulse-dot"
+                    className="inline-block w-2 h-2 rounded-full bg-info dark:bg-info-light pulse-dot"
                     aria-hidden="true"
                   &gt;&lt;/span&gt;
                   {securityClassification}
                 &lt;/h2&gt;
                 &lt;p 
-                  className={WidgetClasses.body}
+                  className="text-caption text-gray-600 dark:text-gray-400"
                   id="security-classification-description"
                 &gt;
                   {securityLevelDescription}
                 &lt;/p&gt;
               &lt;/div&gt;
-              &lt;div className="text-right" role="group" aria-label="Security metrics"&gt;
+              &lt;div className="text-right flex-shrink-0" role="group" aria-label="Security metrics"&gt;
                 &lt;div 
-                  className={WidgetClasses.label}
+                  className="text-xs font-medium text-gray-500 dark:text-gray-500 uppercase tracking-wide mb-xs"
                   id="security-score-label"
                 &gt;
-                  Security Score
+                  Score
                 &lt;/div&gt;
                 &lt;div 
-                  className="font-bold text-title text-info dark:text-info-light"
+                  className="font-bold text-heading text-info dark:text-info-light leading-none"
                   aria-labelledby="security-score-label"
                   aria-live="polite"
                 &gt;
@@ -792,8 +787,7 @@ const SecuritySummaryWidget: React.FC&lt;SecuritySummaryWidgetProps&gt; = ({
                 &lt;/div&gt;
                 &lt;div
                   className={cn(
-                    WidgetClasses.body,
-                    "font-medium",
+                    "text-caption font-medium mt-xs",
                     getRiskColorClass(riskLevel)
                   )}
                   data-testid={SECURITY_SUMMARY_WIDGET_IDS.label('risk-level')}
@@ -826,7 +820,7 @@ export default SecuritySummaryWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-20T01:34:03.308Z
+                at 2026-01-20T16:39:16.643Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

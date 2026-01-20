@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75.67% </span>
+                <span class="strong">48.64% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>28/37</span>
+                <span class='fraction'>18/37</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.52% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>25/34</span>
+                <span class='fraction'>17/34</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>1/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75.67% </span>
+                <span class="strong">48.64% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>28/37</span>
+                <span class='fraction'>18/37</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -351,17 +351,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">29x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -374,17 +374,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">29x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -513,19 +513,19 @@ export function getImplementationDescription(
  * @param level - The security level
  * @returns Human-readable validation level
  */
-export function getIntegrityValidationLevel(level: SecurityLevel): string {
-  switch (level) {
+export function <span class="fstat-no" title="function not covered" >getIntegrityValidationLevel(l</span>evel: SecurityLevel): string {
+<span class="cstat-no" title="statement not covered" >  switch (level) {</span>
     case "None":
-      return "Unverified";
-<span class="branch-1 cbranch-no" title="branch not covered" >    case "Low":</span>
+<span class="cstat-no" title="statement not covered" >      return "Unverified";</span>
+    case "Low":
 <span class="cstat-no" title="statement not covered" >      return "Basic Validation";</span>
     case "Moderate":
-      return "Validated";
+<span class="cstat-no" title="statement not covered" >      return "Validated";</span>
     case "High":
-      return "Strongly Validated";
+<span class="cstat-no" title="statement not covered" >      return "Strongly Validated";</span>
     case "Very High":
-      return "Formally Verified";
-<span class="branch-5 cbranch-no" title="branch not covered" >    default:</span>
+<span class="cstat-no" title="statement not covered" >      return "Formally Verified";</span>
+    default:
 <span class="cstat-no" title="statement not covered" >      return "Unknown";</span>
   }
 }
@@ -536,19 +536,19 @@ export function getIntegrityValidationLevel(level: SecurityLevel): string {
  * @param level - The security level
  * @returns Human-readable uptime target
  */
-export function getAvailabilityUptimeTarget(level: SecurityLevel): string {
-  switch (level) {
+export function <span class="fstat-no" title="function not covered" >getAvailabilityUptimeTarget(l</span>evel: SecurityLevel): string {
+<span class="cstat-no" title="statement not covered" >  switch (level) {</span>
     case "None":
-      return "No guarantee";
-<span class="branch-1 cbranch-no" title="branch not covered" >    case "Low":</span>
+<span class="cstat-no" title="statement not covered" >      return "No guarantee";</span>
+    case "Low":
 <span class="cstat-no" title="statement not covered" >      return "95%";</span>
     case "Moderate":
-      return "99%";
+<span class="cstat-no" title="statement not covered" >      return "99%";</span>
     case "High":
-      return "99.9%";
+<span class="cstat-no" title="statement not covered" >      return "99.9%";</span>
     case "Very High":
-      return "99.999%";
-<span class="branch-5 cbranch-no" title="branch not covered" >    default:</span>
+<span class="cstat-no" title="statement not covered" >      return "99.999%";</span>
+    default:
 <span class="cstat-no" title="statement not covered" >      return "Unknown";</span>
   }
 }
@@ -559,7 +559,7 @@ export function getAvailabilityUptimeTarget(level: SecurityLevel): string {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-20T01:34:03.193Z
+                at 2026-01-20T16:39:16.530Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

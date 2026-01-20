@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.10**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.11**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **MetricCard**: `React.FC`\<`MetricCardProps`\>
 
-Defined in: [components/common/MetricCard.tsx:47](https://github.com/Hack23/cia-compliance-manager/blob/eb3dd66ffaf39f50db4da1b4d578d20d1c37a0b3/src/components/common/MetricCard.tsx#L47)
+Defined in: [components/common/MetricCard.tsx:49](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/components/common/MetricCard.tsx#L49)
 
 Reusable card component for displaying key metrics
 
@@ -17,6 +17,9 @@ Reusable card component for displaying key metrics
 This component presents key security metrics in a consistent,
 easy-to-scan format. Standardized metric cards help stakeholders
 quickly understand critical security indicators. 📊
+
+**DESIGN SYSTEM**: Uses Tailwind classes only - no inline styles.
+Compact sizing (p-xs=4px, text-body-lg=16px) for balanced layouts.
 
 ## Example
 

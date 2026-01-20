@@ -527,24 +527,7 @@
 <a name='L462'></a><a href='#L462'>462</a>
 <a name='L463'></a><a href='#L463'>463</a>
 <a name='L464'></a><a href='#L464'>464</a>
-<a name='L465'></a><a href='#L465'>465</a>
-<a name='L466'></a><a href='#L466'>466</a>
-<a name='L467'></a><a href='#L467'>467</a>
-<a name='L468'></a><a href='#L468'>468</a>
-<a name='L469'></a><a href='#L469'>469</a>
-<a name='L470'></a><a href='#L470'>470</a>
-<a name='L471'></a><a href='#L471'>471</a>
-<a name='L472'></a><a href='#L472'>472</a>
-<a name='L473'></a><a href='#L473'>473</a>
-<a name='L474'></a><a href='#L474'>474</a>
-<a name='L475'></a><a href='#L475'>475</a>
-<a name='L476'></a><a href='#L476'>476</a>
-<a name='L477'></a><a href='#L477'>477</a>
-<a name='L478'></a><a href='#L478'>478</a>
-<a name='L479'></a><a href='#L479'>479</a>
-<a name='L480'></a><a href='#L480'>480</a>
-<a name='L481'></a><a href='#L481'>481</a>
-<a name='L482'></a><a href='#L482'>482</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L465'></a><a href='#L465'>465</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -757,23 +740,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">103x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1248,7 +1214,7 @@ const CostEstimationWidget: React.FC&lt;CostEstimationWidgetProps&gt; = ({
         error={serviceError}
       &gt;
       &lt;div 
-        className="p-md"
+        className="p-xs space-y-xs"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Cost Estimation",
@@ -1257,46 +1223,43 @@ const CostEstimationWidget: React.FC&lt;CostEstimationWidgetProps&gt; = ({
       &gt;
         {/* Summary cost section - Compact 3-column grid */}
         &lt;section 
-          className="grid grid-cols-1 sm:grid-cols-3 gap-sm mb-md"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-xs mb-xs"
           aria-labelledby="cost-summary-heading"
         &gt;
           &lt;h3 id="cost-summary-heading" className="sr-only"&gt;Cost Summary&lt;/h3&gt;
-          &lt;div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light/30 dark:border-info-dark/30"&gt;
+          &lt;div className="p-xs bg-info-light/10 dark:bg-info-dark/20 rounded border border-info-light/30 dark:border-info-dark/30"&gt;
             &lt;div className="text-caption text-info-dark dark:text-info-light font-medium mb-xs"&gt;CAPEX&lt;/div&gt;
-            &lt;div className="text-heading font-bold text-info-dark dark:text-info-light" data-testid={COST_ESTIMATION_WIDGET_IDS.label('capex')}&gt;
+            &lt;div className="text-heading font-bold text-info-dark dark:text-info-light leading-none" data-testid={COST_ESTIMATION_WIDGET_IDS.label('capex')}&gt;
               {formatCurrency(totalCapex)}
             &lt;/div&gt;
-            &lt;div className="text-caption text-info-dark/70 dark:text-info-light/70"&gt;One-time&lt;/div&gt;
           &lt;/div&gt;
-          &lt;div className="p-sm bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light/30 dark:border-success-dark/30"&gt;
+          &lt;div className="p-xs bg-success-light/10 dark:bg-success-dark/20 rounded border border-success-light/30 dark:border-success-dark/30"&gt;
             &lt;div className="text-caption text-success-dark dark:text-success-light font-medium mb-xs"&gt;OPEX&lt;/div&gt;
-            &lt;div className="text-heading font-bold text-success-dark dark:text-success-light" data-testid={COST_ESTIMATION_WIDGET_IDS.label('opex')}&gt;
+            &lt;div className="text-heading font-bold text-success-dark dark:text-success-light leading-none" data-testid={COST_ESTIMATION_WIDGET_IDS.label('opex')}&gt;
               {formatCurrency(totalOpex)}
             &lt;/div&gt;
-            &lt;div className="text-caption text-success-dark/70 dark:text-success-light/70"&gt;Annual&lt;/div&gt;
           &lt;/div&gt;
-          &lt;div className="p-sm bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light/30 dark:border-primary-dark/30"&gt;
+          &lt;div className="p-xs bg-primary-light/10 dark:bg-primary-dark/20 rounded border border-primary-light/30 dark:border-primary-dark/30"&gt;
             &lt;div className="text-caption text-primary-dark dark:text-primary-light font-medium mb-xs"&gt;TOTAL&lt;/div&gt;
-            &lt;div className="text-heading font-bold text-primary-dark dark:text-primary-light" data-testid={COST_ESTIMATION_WIDGET_IDS.label('total')}&gt;
+            &lt;div className="text-heading font-bold text-primary-dark dark:text-primary-light leading-none" data-testid={COST_ESTIMATION_WIDGET_IDS.label('total')}&gt;
               {formatCurrency(totalCost)}
             &lt;/div&gt;
-            &lt;div className="text-caption text-primary-dark/70 dark:text-primary-light/70"&gt;First Year&lt;/div&gt;
           &lt;/div&gt;
         &lt;/section&gt;
 &nbsp;
         {/* Implementation details - Compact inline layout */}
-        &lt;div className="grid grid-cols-1 sm:grid-cols-2 gap-sm mb-md"&gt;
+        &lt;div className="grid grid-cols-1 sm:grid-cols-2 gap-xs mb-xs"&gt;
           {/* Implementation complexity */}
-          &lt;div className="p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20"&gt;
+          &lt;div className="p-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded border border-neutral-light/20 dark:border-neutral-dark/20"&gt;
             &lt;div className="flex justify-between items-center mb-xs"&gt;
               &lt;span className="text-caption font-medium"&gt;Complexity&lt;/span&gt;
               &lt;span className="text-body-lg font-bold text-primary-dark dark:text-primary-light"&gt;
                 {implementationComplexity}
               &lt;/span&gt;
             &lt;/div&gt;
-            &lt;div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5"&gt;
+            &lt;div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1"&gt;
               &lt;div
-                className="h-1.5 bg-primary dark:bg-primary-light rounded-full"
+                className="h-1 bg-primary dark:bg-primary-light rounded-full"
                 style={{ width: `${complexityPercentage}%` }}
                 role="progressbar"
                 aria-valuenow={complexityPercentage}
@@ -1308,29 +1271,27 @@ const CostEstimationWidget: React.FC&lt;CostEstimationWidgetProps&gt; = ({
           &lt;/div&gt;
 &nbsp;
           {/* Personnel requirements - Compact */}
-          &lt;div className="p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20"&gt;
+          &lt;div className="p-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded border border-neutral-light/20 dark:border-neutral-dark/20"&gt;
             &lt;div className="flex justify-between items-center mb-xs"&gt;
               &lt;span className="text-caption font-medium"&gt;Personnel&lt;/span&gt;
               &lt;span className="text-body-lg font-bold text-info-dark dark:text-info-light"&gt;
                 {fteRequirements.total} FTE
               &lt;/span&gt;
             &lt;/div&gt;
-            &lt;div className="flex justify-between text-caption"&gt;
-              &lt;span className="text-neutral-dark/70 dark:text-neutral-light/70"&gt;
-                Impl: {fteRequirements.implementation} | Maint: {fteRequirements.maintenance}
-              &lt;/span&gt;
+            &lt;div className="text-caption text-neutral-dark/70 dark:text-neutral-light/70"&gt;
+              Impl: {fteRequirements.implementation} | Maint: {fteRequirements.maintenance}
             &lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
 &nbsp;
         {/* Component breakdown - Horizontal cards */}
-        &lt;div className="mb-md"&gt;
-          &lt;h3 className="text-body-lg font-medium mb-sm"&gt;Cost by Component&lt;/h3&gt;
-          &lt;div className="grid grid-cols-1 sm:grid-cols-3 gap-sm"&gt;
+        &lt;div className="mb-xs"&gt;
+          &lt;h3 className="text-body-lg font-medium mb-xs"&gt;By Component&lt;/h3&gt;
+          &lt;div className="grid grid-cols-1 sm:grid-cols-3 gap-xs"&gt;
             {/* Confidentiality */}
-            &lt;div className="p-sm bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light/30 dark:border-primary-dark/30"&gt;
+            &lt;div className="p-xs bg-primary-light/10 dark:bg-primary-dark/20 rounded border border-primary-light/30 dark:border-primary-dark/30"&gt;
               &lt;div className="flex items-center justify-between mb-xs"&gt;
-                &lt;span className="text-caption font-medium text-primary-dark dark:text-primary-light"&gt;&lt;span aria-hidden="true"&gt;🔒&lt;/span&gt; Confidentiality&lt;/span&gt;
+                &lt;span className="text-caption font-medium text-primary-dark dark:text-primary-light"&gt;&lt;span aria-hidden="true"&gt;🔒&lt;/span&gt; Conf&lt;/span&gt;
                 &lt;SecurityLevelBadge
                   category=""
                   level={confidentialityLevel}
@@ -1338,19 +1299,15 @@ const CostEstimationWidget: React.FC&lt;CostEstimationWidgetProps&gt; = ({
                   testId={COST_ESTIMATION_WIDGET_IDS.label('conf-level')}
                 /&gt;
               &lt;/div&gt;
-              &lt;div className="text-subheading font-bold text-primary-dark dark:text-primary-light mb-xs"&gt;
+              &lt;div className="text-body-lg font-bold text-primary-dark dark:text-primary-light leading-none"&gt;
                 {formatCurrency(confidentialityCost.capex + confidentialityCost.opex)}
-              &lt;/div&gt;
-              &lt;div className="flex justify-between text-caption text-primary-dark/70 dark:text-primary-light/70"&gt;
-                &lt;span&gt;{formatCurrency(confidentialityCost.capex)}&lt;/span&gt;
-                &lt;span&gt;{formatCurrency(confidentialityCost.opex)}&lt;/span&gt;
               &lt;/div&gt;
             &lt;/div&gt;
 &nbsp;
             {/* Integrity */}
-            &lt;div className="p-sm bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light/30 dark:border-success-dark/30"&gt;
+            &lt;div className="p-xs bg-success-light/10 dark:bg-success-dark/20 rounded border border-success-light/30 dark:border-success-dark/30"&gt;
               &lt;div className="flex items-center justify-between mb-xs"&gt;
-                &lt;span className="text-caption font-medium text-success-dark dark:text-success-light"&gt;&lt;span aria-hidden="true"&gt;✓&lt;/span&gt; Integrity&lt;/span&gt;
+                &lt;span className="text-caption font-medium text-success-dark dark:text-success-light"&gt;&lt;span aria-hidden="true"&gt;✓&lt;/span&gt; Integ&lt;/span&gt;
                 &lt;SecurityLevelBadge
                   category=""
                   level={integrityLevel}
@@ -1358,19 +1315,15 @@ const CostEstimationWidget: React.FC&lt;CostEstimationWidgetProps&gt; = ({
                   testId={COST_ESTIMATION_WIDGET_IDS.label('int-level')}
                 /&gt;
               &lt;/div&gt;
-              &lt;div className="text-subheading font-bold text-success-dark dark:text-success-light mb-xs"&gt;
+              &lt;div className="text-body-lg font-bold text-success-dark dark:text-success-light leading-none"&gt;
                 {formatCurrency(integrityCost.capex + integrityCost.opex)}
-              &lt;/div&gt;
-              &lt;div className="flex justify-between text-caption text-success-dark/70 dark:text-success-light/70"&gt;
-                &lt;span&gt;{formatCurrency(integrityCost.capex)}&lt;/span&gt;
-                &lt;span&gt;{formatCurrency(integrityCost.opex)}&lt;/span&gt;
               &lt;/div&gt;
             &lt;/div&gt;
 &nbsp;
             {/* Availability */}
-            &lt;div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light/30 dark:border-info-dark/30"&gt;
+            &lt;div className="p-xs bg-info-light/10 dark:bg-info-dark/20 rounded border border-info-light/30 dark:border-info-dark/30"&gt;
               &lt;div className="flex items-center justify-between mb-xs"&gt;
-                &lt;span className="text-caption font-medium text-info-dark dark:text-info-light"&gt;&lt;span aria-hidden="true"&gt;⏱️&lt;/span&gt; Availability&lt;/span&gt;
+                &lt;span className="text-caption font-medium text-info-dark dark:text-info-light"&gt;&lt;span aria-hidden="true"&gt;⏱️&lt;/span&gt; Avail&lt;/span&gt;
                 &lt;SecurityLevelBadge
                   category=""
                   level={availabilityLevel}
@@ -1378,23 +1331,19 @@ const CostEstimationWidget: React.FC&lt;CostEstimationWidgetProps&gt; = ({
                   testId={COST_ESTIMATION_WIDGET_IDS.label('avail-level')}
                 /&gt;
               &lt;/div&gt;
-              &lt;div className="text-subheading font-bold text-info-dark dark:text-info-light mb-xs"&gt;
+              &lt;div className="text-body-lg font-bold text-info-dark dark:text-info-light leading-none"&gt;
                 {formatCurrency(availabilityCost.capex + availabilityCost.opex)}
-              &lt;/div&gt;
-              &lt;div className="flex justify-between text-caption text-info-dark/70 dark:text-info-light/70"&gt;
-                &lt;span&gt;{formatCurrency(availabilityCost.capex)}&lt;/span&gt;
-                &lt;span&gt;{formatCurrency(availabilityCost.opex)}&lt;/span&gt;
               &lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
 &nbsp;
         {/* Expertise required - Compact grid */}
-        &lt;div className="p-sm bg-info-light/5 dark:bg-info-dark/10 rounded-md border border-info-light/20 dark:border-info-dark/20"&gt;
-          &lt;h3 className="text-body-lg font-medium mb-sm flex items-center"&gt;
-            &lt;span className="mr-xs" aria-hidden="true"&gt;💡&lt;/span&gt;Expertise Required
+        &lt;div className="p-xs bg-info-light/5 dark:bg-info-dark/10 rounded border border-info-light/20 dark:border-info-dark/20"&gt;
+          &lt;h3 className="text-body-lg font-medium mb-xs flex items-center"&gt;
+            &lt;span className="mr-xs" aria-hidden="true"&gt;💡&lt;/span&gt;Expertise
           &lt;/h3&gt;
-          &lt;div className="grid grid-cols-1 sm:grid-cols-2 gap-x-md gap-y-xs text-caption text-neutral-dark dark:text-neutral-light"&gt;
+          &lt;div className="grid grid-cols-1 sm:grid-cols-2 gap-x-xs gap-y-xs text-caption text-neutral-dark dark:text-neutral-light"&gt;
             {expertiseRequired.map((expertise: string, index: number) =&gt; (
               &lt;div key={`expertise-${index}`} className="flex items-start"&gt;
                 &lt;span className="text-info-dark dark:text-info-light mr-xs"&gt;•&lt;/span&gt;
@@ -1513,7 +1462,7 @@ export default CostEstimationWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-20T01:34:03.193Z
+                at 2026-01-20T16:39:16.530Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
