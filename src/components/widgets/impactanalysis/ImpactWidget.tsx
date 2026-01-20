@@ -98,8 +98,8 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig => {
         textClass: ciaColors.text,
         ariaDescription: "Business impact of availability controls including uptime targets and recovery objectives",
         categoryLabel: "Availability",
-        containerClassName: "cia-availability",
-        contentClassName: "cia-widget",
+        containerClassName: "",
+        contentClassName: "",
         getSecurityBadgeTestId: (_effectiveTestId, widgetIds) => widgetIds.label("security-level"),
       };
     case "integrity":
@@ -126,8 +126,8 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig => {
         textClass: ciaColors.text,
         ariaDescription: "Business impact of confidentiality controls including data classification and privacy measures",
         categoryLabel: "Confidentiality",
-        containerClassName: "overflow-visible",
-        contentClassName: "max-h-[550px] overflow-y-auto pr-1",
+        containerClassName: "",
+        contentClassName: "",
         getSecurityBadgeTestId: (_effectiveTestId, widgetIds) => widgetIds.label("security-badge"),
       };
     default: {

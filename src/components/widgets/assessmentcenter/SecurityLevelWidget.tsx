@@ -326,7 +326,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 <button
                   className={cn(
                     WidgetClasses.buttonPrimary,
-                    "mt-sm min-h-[44px] min-w-[44px]"
+                    "mt-sm min-h-[40px]"
                   )}
                   onClick={() => setActiveComponent("confidentiality")}
                   data-testid={SECURITY_LEVEL_WIDGET_IDS.button('confidentiality-details')}
@@ -391,7 +391,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 </div>
 
                 <button
-                  className="mt-sm px-4 py-3 sm:px-3 sm:py-2 text-sm sm:text-xs min-h-[44px] min-w-[44px] bg-green-600 text-white rounded hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600 transition-colors"
+                  className="mt-sm px-4 py-3 sm:px-3 sm:py-2 text-sm sm:text-xs min-h-[40px] bg-green-600 text-white rounded hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600 transition-colors"
                   onClick={() => setActiveComponent("integrity")}
                   data-testid={SECURITY_LEVEL_WIDGET_IDS.button('integrity-details')}
                 >
@@ -455,7 +455,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 </div>
 
                 <button
-                  className="mt-sm px-4 py-3 sm:px-3 sm:py-2 text-sm sm:text-xs min-h-[44px] min-w-[44px] bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+                  className="mt-sm px-4 py-3 sm:px-3 sm:py-2 text-sm sm:text-xs min-h-[40px] bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
                   onClick={() => setActiveComponent("availability")}
                   data-testid={SECURITY_LEVEL_WIDGET_IDS.button('availability-details')}
                 >

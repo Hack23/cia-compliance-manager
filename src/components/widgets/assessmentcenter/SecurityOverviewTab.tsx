@@ -53,7 +53,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
         <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Security Profile
         </h3>
-        <div className="h-[300px]">
+        <div className="min-h-[250px]">
           <RadarChart
             availabilityLevel={availabilityLevel}
             integrityLevel={integrityLevel}
