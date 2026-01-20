@@ -316,7 +316,7 @@ describe("CostEstimationWidget", () => {
     );
   });
 
-  it("presents monthly and annual operational costs", async () => {
+  it("presents operational cost breakdown", async () => {
     await act(async () => {
       render(<CostEstimationWidget {...defaultProps} />);
     });
@@ -326,8 +326,8 @@ describe("CostEstimationWidget", () => {
         COST_ESTIMATION_WIDGET_IDS.root
       ).textContent;
 
-      // Should contain terms related to monthly/annual costs
-      expect(widgetContent).toMatch(/month|year|annual/i);
+      // Compact design shows CAPEX/OPEX/TOTAL cost structure
+      expect(widgetContent).toMatch(/CAPEX|OPEX|TOTAL/i);
     });
   });
 
@@ -342,9 +342,8 @@ describe("CostEstimationWidget", () => {
         COST_ESTIMATION_WIDGET_IDS.root
       ).textContent;
 
-      // Look for terms that are actually in the component (compact layout)
+      // Compact layout shows CAPEX and OPEX without descriptive labels
       expect(widgetContent).toMatch(/CAPEX|OPEX/i);
-      expect(widgetContent).toMatch(/one-time|annual/i);
     });
   });
 
@@ -499,8 +498,8 @@ describe("CostEstimationWidget", () => {
         COST_ESTIMATION_WIDGET_IDS.root
       ).textContent;
 
-      // Should show breakdown by CIA components
-      expect(widgetContent).toMatch(/availability|integrity|confidentiality/i);
+      // Compact design uses shortened names: Conf, Integ, Avail
+      expect(widgetContent).toMatch(/Conf|Integ|Avail/i);
     });
   });
 

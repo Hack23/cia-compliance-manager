@@ -43,8 +43,8 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   // Get CIA content service for value creation data
   const { ciaContentService, error, isLoading } = useCIAContentService();
 
-  // State for collapsible sections - start collapsed for compact design
-  const [expandedSection, setExpandedSection] = React.useState<string | null>(null);
+  // State for collapsible sections - start with "summary" expanded to show metrics immediately
+  const [expandedSection, setExpandedSection] = React.useState<string | null>("summary");
 
   // Calculate overall security level
   const securityScore = useMemo(() => {

@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import { SPACING, TYPOGRAPHY, BORDER_RADIUS, SHADOWS } from '../../constants/designTokens';
 
 interface WidgetSectionProps {
   /** Section title */
@@ -29,6 +28,9 @@ interface WidgetSectionProps {
  * improving readability and user experience when viewing security assessments.
  * Standardized sections help users quickly locate relevant information. 📦
  *
+ * **DESIGN SYSTEM**: Uses Tailwind classes only - no inline styles.
+ * All spacing via design tokens (p-xs=4px, p-sm=6px, rounded-md=12px)
+ *
  * @example
  * ```tsx
  * <WidgetSection
@@ -51,7 +53,7 @@ export const WidgetSection: React.FC<WidgetSectionProps> = ({
   ariaLabelledBy,
   variant = 'default',
 }) => {
-  // Variant color classes for borders and backgrounds
+  // Variant color classes for borders and backgrounds - Tailwind only
   const variantClasses = {
     default: 'border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800',
     primary: 'border-primary-light dark:border-primary-dark bg-primary-light/10 dark:bg-primary-dark/20',
@@ -66,27 +68,21 @@ export const WidgetSection: React.FC<WidgetSectionProps> = ({
 
   return (
     <section
-      className={`border ${variantClasses[variant]} ${className}`}
-      style={{
-        padding: SPACING.md,
-        borderRadius: BORDER_RADIUS.md,
-        boxShadow: SHADOWS.sm,
-      }}
+      className={`p-xs border rounded-md shadow-sm ${variantClasses[variant]} ${className}`}
       data-testid={testId}
       aria-labelledby={headingId}
     >
-      <div className="flex items-center gap-2 mb-4">
-        {icon && <span aria-hidden="true">{icon}</span>}
+      <div className="flex items-center gap-xs mb-xs">
+        {icon && <span className="text-body" aria-hidden="true">{icon}</span>}
         <h3
-          style={{ fontSize: TYPOGRAPHY.subheading }}
-          className="font-semibold text-gray-800 dark:text-gray-200"
+          className="text-body-lg font-semibold text-gray-800 dark:text-gray-200"
           id={headingId}
         >
           {title}
         </h3>
       </div>
       {subtitle && (
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{subtitle}</p>
+        <p className="text-caption text-gray-600 dark:text-gray-400 mb-xs">{subtitle}</p>
       )}
       <div>{children}</div>
     </section>

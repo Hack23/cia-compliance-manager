@@ -12,7 +12,7 @@ import {
   getWidgetAriaDescription,
   ARIA_ROLES 
 } from "../../../utils/accessibility";
-import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
+import { cn } from "../../../utils/tailwindClassHelpers";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 import TabContainer from "../../common/TabContainer";
@@ -171,51 +171,50 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
         error={error}
       >
         <div 
-          className="space-y-sm"
+          className="space-y-xs"
           role={ARIA_ROLES.REGION}
           aria-label={getWidgetAriaDescription(
             "Security Summary",
             "Comprehensive executive summary of security posture with key metrics"
           )}
         >
-          {/* Security Classification Banner */}
+          {/* Security Classification Banner - Compact layout */}
           <section 
             className={cn(
-              WidgetClasses.section,
-              "p-sm rounded-md shadow-sm border-l-4 border-info dark:border-info-light",
+              "p-xs rounded-md border-l-4 border-info dark:border-info-light",
               "bg-info-light/10 dark:bg-info-dark/20"
             )}
             aria-labelledby="security-classification-heading"
             data-testid={SECURITY_SUMMARY_WIDGET_IDS.section('classification-banner')}
           >
-            <div className="flex justify-between items-center">
-              <div>
+            <div className="flex justify-between items-center gap-sm">
+              <div className="flex-1 min-w-0">
                 <h2 
                   id="security-classification-heading"
-                  className={cn(WidgetClasses.heading, "flex items-center gap-sm")}
+                  className="text-body-lg font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-xs mb-xs"
                 >
                   <span 
-                    className="inline-block w-3 h-3 rounded-full bg-info dark:bg-info-light pulse-dot"
+                    className="inline-block w-2 h-2 rounded-full bg-info dark:bg-info-light pulse-dot"
                     aria-hidden="true"
                   ></span>
                   {securityClassification}
                 </h2>
                 <p 
-                  className={WidgetClasses.body}
+                  className="text-caption text-gray-600 dark:text-gray-400"
                   id="security-classification-description"
                 >
                   {securityLevelDescription}
                 </p>
               </div>
-              <div className="text-right" role="group" aria-label="Security metrics">
+              <div className="text-right flex-shrink-0" role="group" aria-label="Security metrics">
                 <div 
-                  className={WidgetClasses.label}
+                  className="text-xs font-medium text-gray-500 dark:text-gray-500 uppercase tracking-wide mb-xs"
                   id="security-score-label"
                 >
-                  Security Score
+                  Score
                 </div>
                 <div 
-                  className="font-bold text-title text-info dark:text-info-light"
+                  className="font-bold text-heading text-info dark:text-info-light leading-none"
                   aria-labelledby="security-score-label"
                   aria-live="polite"
                 >
@@ -223,8 +222,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                 </div>
                 <div
                   className={cn(
-                    WidgetClasses.body,
-                    "font-medium",
+                    "text-caption font-medium mt-xs",
                     getRiskColorClass(riskLevel)
                   )}
                   data-testid={SECURITY_SUMMARY_WIDGET_IDS.label('risk-level')}

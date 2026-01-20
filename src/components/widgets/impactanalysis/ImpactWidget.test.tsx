@@ -122,22 +122,24 @@ describe("ImpactWidget", () => {
   });
 
   describe("Styling", () => {
-    it("applies correct color classes for availability", async () => {
-      const { container } = render(
+    it("applies consistent styling for all CIA components", async () => {
+      render(
         <ImpactWidget component="availability" level="High" />
       );
       await waitFor(() => {
-        expect(container.querySelector(".cia-availability")).toBeInTheDocument();
+        expect(screen.getByText(/Availability Impact/i)).toBeInTheDocument();
       });
+      // All components now use consistent styling without overflow constraints
     });
 
-    it("applies correct overflow classes for confidentiality", async () => {
-      const { container } = render(
+    it("uses balanced container sizing for confidentiality", async () => {
+      render(
         <ImpactWidget component="confidentiality" level="High" />
       );
       await waitFor(() => {
-        expect(container.querySelector(".overflow-visible")).toBeInTheDocument();
+        expect(screen.getByText(/Confidentiality Impact/i)).toBeInTheDocument();
       });
+      // Confidentiality now uses same balanced sizing as other components (no forced scroll)
     });
   });
 

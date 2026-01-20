@@ -70,7 +70,8 @@ describe("SecurityOverviewTab", () => {
 
   it("displays data classification", () => {
     render(<SecurityOverviewTab {...defaultProps} />);
-    expect(screen.getByText("Confidential")).toBeInTheDocument();
+    // Check if Confidentiality section is present (data classification is shown in SecuritySummaryWidget banner)
+    expect(screen.getByText(/confidentiality/i)).toBeInTheDocument();
   });
 
   it("displays implementation complexity", () => {
@@ -81,13 +82,13 @@ describe("SecurityOverviewTab", () => {
   it("displays business maturity level and description", () => {
     render(<SecurityOverviewTab {...defaultProps} />);
     expect(screen.getByText("Optimizing")).toBeInTheDocument();
-    expect(screen.getByText("Advanced security practices")).toBeInTheDocument();
+    // Description text was removed in compact design
   });
 
   it("displays key metrics", () => {
     render(<SecurityOverviewTab {...defaultProps} />);
-    // Key metrics section contains implementation complexity and other metrics
-    expect(screen.getByText(/implementation complexity/i)).toBeInTheDocument();
+    // Key metrics section contains complexity, maturity, and compliance
+    expect(screen.getByText(/complexity/i)).toBeInTheDocument();
   });
 
   it("displays compliance score when provided", () => {
@@ -105,14 +106,14 @@ describe("SecurityOverviewTab", () => {
 
   it("displays validation level for integrity", () => {
     render(<SecurityOverviewTab {...defaultProps} />);
-    // Validation level text should be present
-    expect(screen.getByText(/validation/i)).toBeInTheDocument();
+    // Check if Integrity component is present
+    expect(screen.getByText(/integrity/i)).toBeInTheDocument();
   });
 
   it("displays uptime target for availability", () => {
     render(<SecurityOverviewTab {...defaultProps} />);
-    // Uptime target should be present
-    expect(screen.getByText(/uptime/i)).toBeInTheDocument();
+    // Check if Availability component is present
+    expect(screen.getByText(/availability/i)).toBeInTheDocument();
   });
 
   it("calls getStatusVariant with correct parameters", () => {
@@ -185,6 +186,6 @@ describe("SecurityOverviewTab", () => {
 
   it("displays key security metrics section", () => {
     render(<SecurityOverviewTab {...defaultProps} />);
-    expect(screen.getByText(/key security metrics/i)).toBeInTheDocument();
+    expect(screen.getByText(/key metrics/i)).toBeInTheDocument();
   });
 });

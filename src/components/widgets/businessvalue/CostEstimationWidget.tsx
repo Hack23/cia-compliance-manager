@@ -221,7 +221,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         error={serviceError}
       >
       <div 
-        className="p-md"
+        className="p-xs space-y-xs"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Cost Estimation",
@@ -230,46 +230,43 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
       >
         {/* Summary cost section - Compact 3-column grid */}
         <section 
-          className="grid grid-cols-1 sm:grid-cols-3 gap-sm mb-md"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-xs mb-xs"
           aria-labelledby="cost-summary-heading"
         >
           <h3 id="cost-summary-heading" className="sr-only">Cost Summary</h3>
-          <div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light/30 dark:border-info-dark/30">
+          <div className="p-xs bg-info-light/10 dark:bg-info-dark/20 rounded border border-info-light/30 dark:border-info-dark/30">
             <div className="text-caption text-info-dark dark:text-info-light font-medium mb-xs">CAPEX</div>
-            <div className="text-heading font-bold text-info-dark dark:text-info-light" data-testid={COST_ESTIMATION_WIDGET_IDS.label('capex')}>
+            <div className="text-heading font-bold text-info-dark dark:text-info-light leading-none" data-testid={COST_ESTIMATION_WIDGET_IDS.label('capex')}>
               {formatCurrency(totalCapex)}
             </div>
-            <div className="text-caption text-info-dark/70 dark:text-info-light/70">One-time</div>
           </div>
-          <div className="p-sm bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light/30 dark:border-success-dark/30">
+          <div className="p-xs bg-success-light/10 dark:bg-success-dark/20 rounded border border-success-light/30 dark:border-success-dark/30">
             <div className="text-caption text-success-dark dark:text-success-light font-medium mb-xs">OPEX</div>
-            <div className="text-heading font-bold text-success-dark dark:text-success-light" data-testid={COST_ESTIMATION_WIDGET_IDS.label('opex')}>
+            <div className="text-heading font-bold text-success-dark dark:text-success-light leading-none" data-testid={COST_ESTIMATION_WIDGET_IDS.label('opex')}>
               {formatCurrency(totalOpex)}
             </div>
-            <div className="text-caption text-success-dark/70 dark:text-success-light/70">Annual</div>
           </div>
-          <div className="p-sm bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light/30 dark:border-primary-dark/30">
+          <div className="p-xs bg-primary-light/10 dark:bg-primary-dark/20 rounded border border-primary-light/30 dark:border-primary-dark/30">
             <div className="text-caption text-primary-dark dark:text-primary-light font-medium mb-xs">TOTAL</div>
-            <div className="text-heading font-bold text-primary-dark dark:text-primary-light" data-testid={COST_ESTIMATION_WIDGET_IDS.label('total')}>
+            <div className="text-heading font-bold text-primary-dark dark:text-primary-light leading-none" data-testid={COST_ESTIMATION_WIDGET_IDS.label('total')}>
               {formatCurrency(totalCost)}
             </div>
-            <div className="text-caption text-primary-dark/70 dark:text-primary-light/70">First Year</div>
           </div>
         </section>
 
         {/* Implementation details - Compact inline layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-sm mb-md">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-xs mb-xs">
           {/* Implementation complexity */}
-          <div className="p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20">
+          <div className="p-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded border border-neutral-light/20 dark:border-neutral-dark/20">
             <div className="flex justify-between items-center mb-xs">
               <span className="text-caption font-medium">Complexity</span>
               <span className="text-body-lg font-bold text-primary-dark dark:text-primary-light">
                 {implementationComplexity}
               </span>
             </div>
-            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
+            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1">
               <div
-                className="h-1.5 bg-primary dark:bg-primary-light rounded-full"
+                className="h-1 bg-primary dark:bg-primary-light rounded-full"
                 style={{ width: `${complexityPercentage}%` }}
                 role="progressbar"
                 aria-valuenow={complexityPercentage}
@@ -281,29 +278,27 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
           </div>
 
           {/* Personnel requirements - Compact */}
-          <div className="p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20">
+          <div className="p-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded border border-neutral-light/20 dark:border-neutral-dark/20">
             <div className="flex justify-between items-center mb-xs">
               <span className="text-caption font-medium">Personnel</span>
               <span className="text-body-lg font-bold text-info-dark dark:text-info-light">
                 {fteRequirements.total} FTE
               </span>
             </div>
-            <div className="flex justify-between text-caption">
-              <span className="text-neutral-dark/70 dark:text-neutral-light/70">
-                Impl: {fteRequirements.implementation} | Maint: {fteRequirements.maintenance}
-              </span>
+            <div className="text-caption text-neutral-dark/70 dark:text-neutral-light/70">
+              Impl: {fteRequirements.implementation} | Maint: {fteRequirements.maintenance}
             </div>
           </div>
         </div>
 
         {/* Component breakdown - Horizontal cards */}
-        <div className="mb-md">
-          <h3 className="text-body-lg font-medium mb-sm">Cost by Component</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-sm">
+        <div className="mb-xs">
+          <h3 className="text-body-lg font-medium mb-xs">By Component</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-xs">
             {/* Confidentiality */}
-            <div className="p-sm bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light/30 dark:border-primary-dark/30">
+            <div className="p-xs bg-primary-light/10 dark:bg-primary-dark/20 rounded border border-primary-light/30 dark:border-primary-dark/30">
               <div className="flex items-center justify-between mb-xs">
-                <span className="text-caption font-medium text-primary-dark dark:text-primary-light"><span aria-hidden="true">🔒</span> Confidentiality</span>
+                <span className="text-caption font-medium text-primary-dark dark:text-primary-light"><span aria-hidden="true">🔒</span> Conf</span>
                 <SecurityLevelBadge
                   category=""
                   level={confidentialityLevel}
@@ -311,19 +306,15 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                   testId={COST_ESTIMATION_WIDGET_IDS.label('conf-level')}
                 />
               </div>
-              <div className="text-subheading font-bold text-primary-dark dark:text-primary-light mb-xs">
+              <div className="text-body-lg font-bold text-primary-dark dark:text-primary-light leading-none">
                 {formatCurrency(confidentialityCost.capex + confidentialityCost.opex)}
-              </div>
-              <div className="flex justify-between text-caption text-primary-dark/70 dark:text-primary-light/70">
-                <span>{formatCurrency(confidentialityCost.capex)}</span>
-                <span>{formatCurrency(confidentialityCost.opex)}</span>
               </div>
             </div>
 
             {/* Integrity */}
-            <div className="p-sm bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light/30 dark:border-success-dark/30">
+            <div className="p-xs bg-success-light/10 dark:bg-success-dark/20 rounded border border-success-light/30 dark:border-success-dark/30">
               <div className="flex items-center justify-between mb-xs">
-                <span className="text-caption font-medium text-success-dark dark:text-success-light"><span aria-hidden="true">✓</span> Integrity</span>
+                <span className="text-caption font-medium text-success-dark dark:text-success-light"><span aria-hidden="true">✓</span> Integ</span>
                 <SecurityLevelBadge
                   category=""
                   level={integrityLevel}
@@ -331,19 +322,15 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                   testId={COST_ESTIMATION_WIDGET_IDS.label('int-level')}
                 />
               </div>
-              <div className="text-subheading font-bold text-success-dark dark:text-success-light mb-xs">
+              <div className="text-body-lg font-bold text-success-dark dark:text-success-light leading-none">
                 {formatCurrency(integrityCost.capex + integrityCost.opex)}
-              </div>
-              <div className="flex justify-between text-caption text-success-dark/70 dark:text-success-light/70">
-                <span>{formatCurrency(integrityCost.capex)}</span>
-                <span>{formatCurrency(integrityCost.opex)}</span>
               </div>
             </div>
 
             {/* Availability */}
-            <div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light/30 dark:border-info-dark/30">
+            <div className="p-xs bg-info-light/10 dark:bg-info-dark/20 rounded border border-info-light/30 dark:border-info-dark/30">
               <div className="flex items-center justify-between mb-xs">
-                <span className="text-caption font-medium text-info-dark dark:text-info-light"><span aria-hidden="true">⏱️</span> Availability</span>
+                <span className="text-caption font-medium text-info-dark dark:text-info-light"><span aria-hidden="true">⏱️</span> Avail</span>
                 <SecurityLevelBadge
                   category=""
                   level={availabilityLevel}
@@ -351,23 +338,19 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                   testId={COST_ESTIMATION_WIDGET_IDS.label('avail-level')}
                 />
               </div>
-              <div className="text-subheading font-bold text-info-dark dark:text-info-light mb-xs">
+              <div className="text-body-lg font-bold text-info-dark dark:text-info-light leading-none">
                 {formatCurrency(availabilityCost.capex + availabilityCost.opex)}
-              </div>
-              <div className="flex justify-between text-caption text-info-dark/70 dark:text-info-light/70">
-                <span>{formatCurrency(availabilityCost.capex)}</span>
-                <span>{formatCurrency(availabilityCost.opex)}</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Expertise required - Compact grid */}
-        <div className="p-sm bg-info-light/5 dark:bg-info-dark/10 rounded-md border border-info-light/20 dark:border-info-dark/20">
-          <h3 className="text-body-lg font-medium mb-sm flex items-center">
-            <span className="mr-xs" aria-hidden="true">💡</span>Expertise Required
+        <div className="p-xs bg-info-light/5 dark:bg-info-dark/10 rounded border border-info-light/20 dark:border-info-dark/20">
+          <h3 className="text-body-lg font-medium mb-xs flex items-center">
+            <span className="mr-xs" aria-hidden="true">💡</span>Expertise
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-md gap-y-xs text-caption text-neutral-dark dark:text-neutral-light">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-xs gap-y-xs text-caption text-neutral-dark dark:text-neutral-light">
             {expertiseRequired.map((expertise: string, index: number) => (
               <div key={`expertise-${index}`} className="flex items-start">
                 <span className="text-info-dark dark:text-info-light mr-xs">•</span>
