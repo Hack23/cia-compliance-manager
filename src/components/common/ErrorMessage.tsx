@@ -73,7 +73,7 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
 }) => {
   return (
     <div 
-      className={`p-4 border border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-900 dark:bg-opacity-20 rounded-lg ${className}`}
+      className={`p-4 border border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-900/20 rounded-lg ${className}`}
       data-testid={testId}
       role="alert"
       aria-live="polite"

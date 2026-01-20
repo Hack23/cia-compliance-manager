@@ -54,15 +54,15 @@ const SecurityLevelBadge: React.FC<SecurityLevelBadgeProps> = ({
   const defaultColorClass = () => {
     switch (level) {
       case 'None':
-        return 'bg-red-100 dark:bg-red-900 dark:bg-opacity-20';
+        return 'bg-red-100 dark:bg-red-900/20';
       case 'Low':
-        return 'bg-yellow-100 dark:bg-yellow-900 dark:bg-opacity-20';
+        return 'bg-yellow-100 dark:bg-yellow-900/20';
       case 'Moderate':
-        return 'bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20';
+        return 'bg-blue-100 dark:bg-blue-900/20';
       case 'High':
-        return 'bg-green-100 dark:bg-green-900 dark:bg-opacity-20';
+        return 'bg-green-100 dark:bg-green-900/20';
       case 'Very High':
-        return 'bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20';
+        return 'bg-purple-100 dark:bg-purple-900/20';
       default:
         return 'bg-gray-100 dark:bg-gray-800';
     }

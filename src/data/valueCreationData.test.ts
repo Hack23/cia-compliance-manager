@@ -2,18 +2,18 @@ import { describe, expect, it } from "vitest";
 import { SecurityLevel } from "../types/cia";
 import { ROI_ESTIMATES } from "./ciaOptionsData";
 import {
+  BUSINESS_BENEFITS,
+  BUSINESS_CONSIDERATIONS,
+  getBusinessBenefits,
+  getBusinessConsiderations,
+  getROIEstimate,
   getROIEstimateForLevel,
+  getValuePoints,
+  VALUE_CREATION_POINTS,
+  ROI_ESTIMATES as VALUE_ROI_ESTIMATES,
+  valueCreationImpact,
   valueCreationPoints,
   valueCreationTitles,
-  valueCreationImpact,
-  VALUE_CREATION_POINTS,
-  BUSINESS_CONSIDERATIONS,
-  BUSINESS_BENEFITS,
-  getROIEstimate,
-  getValuePoints,
-  getBusinessConsiderations,
-  getBusinessBenefits,
-  ROI_ESTIMATES as VALUE_ROI_ESTIMATES,
 } from "./valueCreationData";
 
 describe("Value Creation Data", () => {
@@ -56,8 +56,8 @@ describe("Value Creation Data", () => {
         valueCreationPoints.None.some(
           (point) =>
             point.toLowerCase().includes("no security") ||
-            point.toLowerCase().includes("maximum risk")
-        )
+            point.toLowerCase().includes("maximum risk"),
+        ),
       ).toBe(true);
 
       // High level should mention sophisticated protection
@@ -65,8 +65,8 @@ describe("Value Creation Data", () => {
         valueCreationPoints.High.some(
           (point) =>
             point.toLowerCase().includes("advanced") ||
-            point.toLowerCase().includes("comprehensive")
-        )
+            point.toLowerCase().includes("comprehensive"),
+        ),
       ).toBe(true);
 
       // Very High should mention maximum protection
@@ -74,8 +74,8 @@ describe("Value Creation Data", () => {
         valueCreationPoints["Very High"].some(
           (point) =>
             point.toLowerCase().includes("maximum") ||
-            point.toLowerCase().includes("comprehensive")
-        )
+            point.toLowerCase().includes("comprehensive"),
+        ),
       ).toBe(true);
     });
   });
@@ -151,40 +151,40 @@ describe("Value Creation Data", () => {
       expect(getROIEstimateForLevel("None")).toEqual(ROI_ESTIMATES.NONE);
       expect(getROIEstimateForLevel("Low")).toEqual(ROI_ESTIMATES.LOW);
       expect(getROIEstimateForLevel("Moderate")).toEqual(
-        ROI_ESTIMATES.MODERATE
+        ROI_ESTIMATES.MODERATE,
       );
       expect(getROIEstimateForLevel("High")).toEqual(ROI_ESTIMATES.HIGH);
       expect(getROIEstimateForLevel("Very High")).toEqual(
-        ROI_ESTIMATES.VERY_HIGH
+        ROI_ESTIMATES.VERY_HIGH,
       );
     });
 
     it("should handle case insensitivity", () => {
       // Test case insensitivity
       expect(getROIEstimateForLevel("None" as SecurityLevel)).toEqual(
-        ROI_ESTIMATES.NONE
+        ROI_ESTIMATES.NONE,
       );
       expect(getROIEstimateForLevel("Low" as SecurityLevel)).toEqual(
-        ROI_ESTIMATES.LOW
+        ROI_ESTIMATES.LOW,
       );
     });
 
     it("should return NONE estimate for invalid security levels", () => {
-      // @ts-ignore - Testing invalid input
+      // @ts-expect-error - Testing invalid input
       expect(getROIEstimateForLevel("Invalid")).toEqual(ROI_ESTIMATES.NONE);
-      // @ts-ignore - Testing null
+      // @ts-expect-error - Testing null
       expect(getROIEstimateForLevel(null)).toEqual(ROI_ESTIMATES.NONE);
-      // @ts-ignore - Testing undefined
+      // @ts-expect-error - Testing undefined
       expect(getROIEstimateForLevel(undefined)).toEqual(ROI_ESTIMATES.NONE);
     });
 
     it("returns correct ROI estimates for different security levels", () => {
       // Use type assertion for SecurityLevel
       expect(getROIEstimateForLevel("None" as SecurityLevel)).toEqual(
-        ROI_ESTIMATES.NONE
+        ROI_ESTIMATES.NONE,
       );
       expect(getROIEstimateForLevel("Low" as SecurityLevel)).toEqual(
-        ROI_ESTIMATES.LOW
+        ROI_ESTIMATES.LOW,
       );
       // ... rest of the test assertions ...
     });
@@ -220,7 +220,7 @@ describe("Value Creation Data", () => {
     it("should have value points with appropriate length", () => {
       expect(VALUE_CREATION_POINTS.None.length).toBeGreaterThan(0);
       expect(VALUE_CREATION_POINTS["Very High"].length).toBeGreaterThanOrEqual(
-        VALUE_CREATION_POINTS.None.length
+        VALUE_CREATION_POINTS.None.length,
       );
     });
   });
@@ -332,7 +332,9 @@ describe("Value Creation Data", () => {
     });
 
     it("should return None considerations for invalid levels", () => {
-      const considerations = getBusinessConsiderations("Invalid" as SecurityLevel);
+      const considerations = getBusinessConsiderations(
+        "Invalid" as SecurityLevel,
+      );
       expect(considerations).toEqual(BUSINESS_CONSIDERATIONS.None);
     });
   });

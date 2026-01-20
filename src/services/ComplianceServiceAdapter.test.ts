@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockDataProvider } from "../tests/testMocks/mockTypes";
 import { SecurityLevel } from "../types/cia";
 import {
@@ -13,25 +13,29 @@ describe("ComplianceServiceAdapter - Additional Coverage", () => {
     adapter = new ComplianceServiceAdapter(createMockDataProvider());
   });
 
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   describe("getFrameworkRequiredLevel", () => {
     it("returns correct security level for standard frameworks", () => {
       expect(
-        adapter.getFrameworkRequiredLevel("ISO 27001", "confidentiality")
+        adapter.getFrameworkRequiredLevel("ISO 27001", "confidentiality"),
       ).toBe("Moderate");
       expect(
-        adapter.getFrameworkRequiredLevel("HIPAA", "confidentiality")
+        adapter.getFrameworkRequiredLevel("HIPAA", "confidentiality"),
       ).toBe("High");
       expect(adapter.getFrameworkRequiredLevel("PCI DSS", "integrity")).toBe(
-        "High"
+        "High",
       );
     });
 
     it("handles case-insensitive framework names", () => {
       expect(
-        adapter.getFrameworkRequiredLevel("iso 27001", "confidentiality")
+        adapter.getFrameworkRequiredLevel("iso 27001", "confidentiality"),
       ).toBe("Moderate");
       expect(
-        adapter.getFrameworkRequiredLevel("Hipaa", "confidentiality")
+        adapter.getFrameworkRequiredLevel("Hipaa", "confidentiality"),
       ).toBe("High");
     });
   });

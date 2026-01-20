@@ -164,10 +164,10 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
 
         {/* Implementation considerations */}
         <div className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-          <h3 className="text-lg font-medium mb-md flex items-center">
+          <h3 className="text-subheading font-medium mb-md flex items-center">
             <span className="mr-sm">💡</span>Implementation Notes
           </h3>
-          <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+          <ul className="space-y-xs text-body text-gray-600 dark:text-gray-400">
             <li className="flex items-start">
               <span className="mr-sm text-blue-500">•</span>
               <span>

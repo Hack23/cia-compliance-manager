@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SecurityLevel } from "../types/cia";
 import { CIADataProvider } from "../types/cia-services";
 import { createTestDataProvider } from "./testDataProvider";
@@ -8,6 +8,10 @@ describe("TestDataProvider", () => {
 
   beforeEach(() => {
     dataProvider = createTestDataProvider();
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   describe("Structure", () => {
@@ -66,10 +70,10 @@ describe("TestDataProvider", () => {
         const availOption = dataProvider.availabilityOptions[level];
         expect(availOption.businessImpactDetails).toBeDefined();
         expect(
-          availOption.businessImpactDetails?.financialImpact
+          availOption.businessImpactDetails?.financialImpact,
         ).toBeDefined();
         expect(
-          availOption.businessImpactDetails?.operationalImpact
+          availOption.businessImpactDetails?.operationalImpact,
         ).toBeDefined();
       });
     });
@@ -81,8 +85,8 @@ describe("TestDataProvider", () => {
         expect(availOption.technicalImplementation?.description).toBeTruthy();
         expect(
           Array.isArray(
-            availOption.technicalImplementation?.implementationSteps
-          )
+            availOption.technicalImplementation?.implementationSteps,
+          ),
         ).toBe(true);
         expect(availOption.technicalImplementation?.effort).toBeDefined();
       });
@@ -113,16 +117,16 @@ describe("TestDataProvider", () => {
       // Verify specific validation methods for different levels
       expect(dataProvider.integrityOptions.None.validationMethod).toBe("None");
       expect(dataProvider.integrityOptions.Low.validationMethod).toBe(
-        "Manual checks"
+        "Manual checks",
       );
       expect(dataProvider.integrityOptions.Moderate.validationMethod).toBe(
-        "Automated validation"
+        "Automated validation",
       );
       expect(dataProvider.integrityOptions.High.validationMethod).toBe(
-        "Cryptographic verification"
+        "Cryptographic verification",
       );
       expect(dataProvider.integrityOptions["Very High"].validationMethod).toBe(
-        "Blockchain/distributed ledger"
+        "Blockchain/distributed ledger",
       );
     });
   });
@@ -151,19 +155,19 @@ describe("TestDataProvider", () => {
 
       // Verify specific protection methods for different levels
       expect(dataProvider.confidentialityOptions.None.protectionMethod).toBe(
-        "None"
+        "None",
       );
       expect(dataProvider.confidentialityOptions.Low.protectionMethod).toBe(
-        "Basic access control"
+        "Basic access control",
       );
       expect(
-        dataProvider.confidentialityOptions.Moderate.protectionMethod
+        dataProvider.confidentialityOptions.Moderate.protectionMethod,
       ).toBe("Standard encryption");
       expect(dataProvider.confidentialityOptions.High.protectionMethod).toBe(
-        "E2E encryption"
+        "E2E encryption",
       );
       expect(
-        dataProvider.confidentialityOptions["Very High"].protectionMethod
+        dataProvider.confidentialityOptions["Very High"].protectionMethod,
       ).toBe("Military-grade encryption with zero-trust");
     });
 
@@ -172,7 +176,7 @@ describe("TestDataProvider", () => {
         const confidentialityOption =
           dataProvider.confidentialityOptions[level];
         expect(
-          confidentialityOption.businessImpactDetails?.reputationalImpact
+          confidentialityOption.businessImpactDetails?.reputationalImpact,
         ).toBeDefined();
       });
     });
@@ -202,16 +206,16 @@ describe("TestDataProvider", () => {
     it("should have appropriate values for different ROI levels", () => {
       const dataProvider = createTestDataProvider();
       const roiEstimates = dataProvider.roiEstimates;
-      
+
       expect(roiEstimates.NONE.returnRate).toMatch(/^\d+%$|^0%$/);
       expect(roiEstimates.LOW.returnRate).toMatch(/^\d+%$/);
-      
+
       // Verify tiers have increasing values
       const noneValue = parseInt(roiEstimates.NONE.returnRate);
       const lowValue = parseInt(roiEstimates.LOW.returnRate);
       const moderateValue = parseInt(roiEstimates.MODERATE.returnRate);
       const highValue = parseInt(roiEstimates.HIGH.returnRate);
-      
+
       // Expect increasing values or equal values
       expect(lowValue).toBeGreaterThanOrEqual(noneValue);
       expect(moderateValue).toBeGreaterThanOrEqual(lowValue);
@@ -269,19 +273,19 @@ describe("TestDataProvider", () => {
         // Check availability risk level
         expect(
           dataProvider.availabilityOptions[level].businessImpactDetails
-            ?.financialImpact?.riskLevel
+            ?.financialImpact?.riskLevel,
         ).toBe(expectedRiskLevel);
 
         // Check integrity risk level
         expect(
           dataProvider.integrityOptions[level].businessImpactDetails
-            ?.financialImpact?.riskLevel
+            ?.financialImpact?.riskLevel,
         ).toBe(expectedRiskLevel);
 
         // Check confidentiality risk level
         expect(
           dataProvider.confidentialityOptions[level].businessImpactDetails
-            ?.reputationalImpact?.riskLevel
+            ?.reputationalImpact?.riskLevel,
         ).toBe(expectedRiskLevel);
       });
     });
@@ -322,7 +326,13 @@ describe("Test Data Provider", () => {
   const provider = createTestDataProvider();
 
   it("should return CIA options for all security levels", () => {
-    const levels: SecurityLevel[] = ["None", "Low", "Moderate", "High", "Very High"];
+    const levels: SecurityLevel[] = [
+      "None",
+      "Low",
+      "Moderate",
+      "High",
+      "Very High",
+    ];
     levels.forEach((level) => {
       expect(provider.availabilityOptions[level]).toBeDefined();
       expect(provider.integrityOptions[level]).toBeDefined();

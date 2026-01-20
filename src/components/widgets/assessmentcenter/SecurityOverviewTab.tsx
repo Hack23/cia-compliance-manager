@@ -7,7 +7,7 @@ import {
   getIntegrityValidationLevel,
   getAvailabilityUptimeTarget,
 } from "../../../utils/implementationUtils";
-import { WidgetClasses } from "../../../utils/tailwindClassHelpers";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 import RadarChart from "../../charts/RadarChart";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import StatusBadge from "../../common/StatusBadge";
@@ -49,8 +49,8 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
   return (
     <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-overview')} className="space-y-sm">
       {/* Security Radar Chart */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.cardWhite, "shadow-sm")}>
+        <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Security Profile
         </h3>
         <div className="h-[300px]">
@@ -64,15 +64,15 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
       </div>
 
       {/* Security Level Summary */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.cardWhite, "shadow-sm")}>
+        <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Security Components
         </h3>
 
         <div className={WidgetClasses.grid3Cols}>
           {/* Confidentiality Card */}
           <div
-            className="p-sm bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800"
+            className="p-sm bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-100 dark:border-purple-800"
             data-testid={SECURITY_SUMMARY_TEST_IDS.CONFIDENTIALITY_CARD}
           >
             <div className="flex items-center mb-sm">
@@ -102,7 +102,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
 
           {/* Integrity Card */}
           <div
-            className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-100 dark:border-green-800"
+            className="p-sm bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800"
             data-testid={SECURITY_SUMMARY_TEST_IDS.INTEGRITY_CARD}
           >
             <div className="flex items-center mb-sm">
@@ -134,7 +134,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
 
           {/* Availability Card */}
           <div
-            className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800"
+            className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800"
             data-testid={SECURITY_SUMMARY_TEST_IDS.AVAILABILITY_CARD}
           >
             <div className="flex items-center mb-sm">
@@ -167,8 +167,8 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
       </div>
 
       {/* Key Metrics Dashboard */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.cardWhite, "shadow-sm")}>
+        <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Key Security Metrics
         </h3>
         <div className={WidgetClasses.grid3Cols}>

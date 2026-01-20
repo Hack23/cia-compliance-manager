@@ -4,7 +4,7 @@
  * Tests for all color utility functions to ensure consistent
  * color representation of security levels across the application.
  */
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { SecurityLevel } from "../types/cia";
 import * as colorUtils from "./colorUtils";
 
@@ -25,7 +25,7 @@ describe("Color Utilities", () => {
     });
 
     it("should return None colors for invalid security levels", () => {
-      // @ts-ignore - Testing invalid input
+      // @ts-expect-error - Testing invalid input
       const invalidColors = colorUtils.getSecurityLevelColorPair("Invalid");
       expect(invalidColors).toEqual({ bg: "#f5f5f5", text: "#a0a0a0" });
     });
@@ -34,40 +34,40 @@ describe("Color Utilities", () => {
   describe("getSecurityLevelColorClass", () => {
     it("should return correct color classes for each security level", () => {
       expect(colorUtils.getSecurityLevelColorClass("None")).toBe(
-        "text-red-600 dark:text-red-400"
+        "text-red-600 dark:text-red-400",
       );
       expect(colorUtils.getSecurityLevelColorClass("Low")).toBe(
-        "text-yellow-600 dark:text-yellow-400"
+        "text-yellow-600 dark:text-yellow-400",
       );
       expect(colorUtils.getSecurityLevelColorClass("Moderate")).toBe(
-        "text-blue-600 dark:text-blue-400"
+        "text-blue-600 dark:text-blue-400",
       );
       expect(colorUtils.getSecurityLevelColorClass("High")).toBe(
-        "text-green-600 dark:text-green-400"
+        "text-green-600 dark:text-green-400",
       );
       expect(colorUtils.getSecurityLevelColorClass("Very High")).toBe(
-        "text-purple-600 dark:text-purple-400"
+        "text-purple-600 dark:text-purple-400",
       );
     });
 
     it("should handle case insensitivity", () => {
       expect(colorUtils.getSecurityLevelColorClass("none")).toBe(
-        "text-red-600 dark:text-red-400"
+        "text-red-600 dark:text-red-400",
       );
       expect(colorUtils.getSecurityLevelColorClass("LOW")).toBe(
-        "text-yellow-600 dark:text-yellow-400"
+        "text-yellow-600 dark:text-yellow-400",
       );
       expect(colorUtils.getSecurityLevelColorClass("moderate")).toBe(
-        "text-blue-600 dark:text-blue-400"
+        "text-blue-600 dark:text-blue-400",
       );
     });
 
     it("should return default color class for unknown levels", () => {
       expect(colorUtils.getSecurityLevelColorClass("Unknown")).toBe(
-        "text-gray-600 dark:text-gray-400"
+        "text-gray-600 dark:text-gray-400",
       );
       expect(colorUtils.getSecurityLevelColorClass("")).toBe(
-        "text-gray-600 dark:text-gray-400"
+        "text-gray-600 dark:text-gray-400",
       );
     });
   });
@@ -79,7 +79,7 @@ describe("Color Utilities", () => {
       expect(colorUtils.getSecurityLevelBackground("Moderate")).toBe("#e8f5e9");
       expect(colorUtils.getSecurityLevelBackground("High")).toBe("#fff8e1");
       expect(colorUtils.getSecurityLevelBackground("Very High")).toBe(
-        "#fbe9e7"
+        "#fbe9e7",
       );
     });
 
@@ -95,37 +95,37 @@ describe("Color Utilities", () => {
   describe("getSecurityLevelBackgroundClass", () => {
     it("should return correct background classes for each security level", () => {
       expect(colorUtils.getSecurityLevelBackgroundClass("None")).toBe(
-        "bg-red-100 dark:bg-red-900 dark:bg-opacity-20"
+        "bg-red-100 dark:bg-red-900/20",
       );
       expect(colorUtils.getSecurityLevelBackgroundClass("Low")).toBe(
-        "bg-yellow-100 dark:bg-yellow-900 dark:bg-opacity-20"
+        "bg-yellow-100 dark:bg-yellow-900/20",
       );
       expect(colorUtils.getSecurityLevelBackgroundClass("Moderate")).toBe(
-        "bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
+        "bg-blue-100 dark:bg-blue-900/20",
       );
       expect(colorUtils.getSecurityLevelBackgroundClass("High")).toBe(
-        "bg-green-100 dark:bg-green-900 dark:bg-opacity-20"
+        "bg-green-100 dark:bg-green-900/20",
       );
       expect(colorUtils.getSecurityLevelBackgroundClass("Very High")).toBe(
-        "bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
+        "bg-purple-100 dark:bg-purple-900/20",
       );
     });
 
     it("should handle case insensitivity", () => {
       expect(colorUtils.getSecurityLevelBackgroundClass("none")).toBe(
-        "bg-red-100 dark:bg-red-900 dark:bg-opacity-20"
+        "bg-red-100 dark:bg-red-900/20",
       );
       expect(colorUtils.getSecurityLevelBackgroundClass("MODERATE")).toBe(
-        "bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
+        "bg-blue-100 dark:bg-blue-900/20",
       );
     });
 
     it("should return default background class for unknown levels", () => {
       expect(colorUtils.getSecurityLevelBackgroundClass("Unknown")).toBe(
-        "bg-gray-100 dark:bg-gray-800 dark:bg-opacity-20"
+        "bg-gray-100 dark:bg-gray-800/20",
       );
       expect(colorUtils.getSecurityLevelBackgroundClass("")).toBe(
-        "bg-gray-100 dark:bg-gray-800 dark:bg-opacity-20"
+        "bg-gray-100 dark:bg-gray-800/20",
       );
     });
   });
@@ -175,10 +175,14 @@ describe("Color Utilities", () => {
       });
     });
 
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
     it("should return light mode colors when not in dark mode", () => {
       // Mock dark mode detection to return false
       vi.spyOn(document.documentElement.classList, "contains").mockReturnValue(
-        false
+        false,
       );
 
       expect(colorUtils.getSecurityLevelHexColor("None")).toBe("#f44336");
@@ -191,7 +195,7 @@ describe("Color Utilities", () => {
     it("should return dark mode colors when in dark mode", () => {
       // Mock dark mode detection to return true
       vi.spyOn(document.documentElement.classList, "contains").mockReturnValue(
-        true
+        true,
       );
 
       expect(colorUtils.getSecurityLevelHexColor("None")).toBe("#ef5350");
@@ -203,7 +207,7 @@ describe("Color Utilities", () => {
 
     it("should handle case insensitivity", () => {
       vi.spyOn(document.documentElement.classList, "contains").mockReturnValue(
-        false
+        false,
       );
 
       expect(colorUtils.getSecurityLevelHexColor("none")).toBe("#f44336");
@@ -212,12 +216,12 @@ describe("Color Utilities", () => {
 
     it("should return default gray for unknown levels", () => {
       vi.spyOn(document.documentElement.classList, "contains").mockReturnValue(
-        false
+        false,
       );
       expect(colorUtils.getSecurityLevelHexColor("Unknown")).toBe("#757575");
 
       vi.spyOn(document.documentElement.classList, "contains").mockReturnValue(
-        true
+        true,
       );
       expect(colorUtils.getSecurityLevelHexColor("Unknown")).toBe("#9e9e9e");
     });
@@ -226,26 +230,26 @@ describe("Color Utilities", () => {
   describe("getSecurityLevelClass", () => {
     it("should return correct CSS class for each security level", () => {
       expect(colorUtils.getSecurityLevelClass("None")).toBe(
-        "security-level-none"
+        "security-level-none",
       );
       expect(colorUtils.getSecurityLevelClass("Low")).toBe(
-        "security-level-low"
+        "security-level-low",
       );
       expect(colorUtils.getSecurityLevelClass("Moderate")).toBe(
-        "security-level-moderate"
+        "security-level-moderate",
       );
       expect(colorUtils.getSecurityLevelClass("High")).toBe(
-        "security-level-high"
+        "security-level-high",
       );
       expect(colorUtils.getSecurityLevelClass("Very High")).toBe(
-        "security-level-very-high"
+        "security-level-very-high",
       );
     });
 
     it("should handle complex security level names with spaces", () => {
       const customLevel = "Custom Level Name" as SecurityLevel;
       expect(colorUtils.getSecurityLevelClass(customLevel)).toBe(
-        "security-level-custom-level-name"
+        "security-level-custom-level-name",
       );
     });
   });

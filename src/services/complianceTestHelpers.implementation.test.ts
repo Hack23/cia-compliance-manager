@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, test } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
 import { SecurityLevel } from "../types/cia";
 import {
   ComplianceServiceStatic,
@@ -72,7 +72,7 @@ describe("ComplianceTestHelpers Implementation", () => {
       const noneStatus = createLevelBasedComplianceStatus(
         "None" as SecurityLevel,
         "None" as SecurityLevel,
-        "None" as SecurityLevel
+        "None" as SecurityLevel,
       );
       // Fix expected value to match actual implementation
       expect(noneStatus.status).toBe("Non-Compliant");
@@ -81,37 +81,37 @@ describe("ComplianceTestHelpers Implementation", () => {
       const lowStatus = createLevelBasedComplianceStatus(
         "Low" as SecurityLevel,
         "Low" as SecurityLevel,
-        "Low" as SecurityLevel
+        "Low" as SecurityLevel,
       );
       expect(lowStatus.complianceScore).toBeGreaterThan(
-        noneStatus.complianceScore
+        noneStatus.complianceScore,
       );
 
       const moderateStatus = createLevelBasedComplianceStatus(
         "Moderate" as SecurityLevel,
         "Moderate" as SecurityLevel,
-        "Moderate" as SecurityLevel
+        "Moderate" as SecurityLevel,
       );
       expect(moderateStatus.complianceScore).toBeGreaterThan(
-        lowStatus.complianceScore
+        lowStatus.complianceScore,
       );
 
       const highStatus = createLevelBasedComplianceStatus(
         "High" as SecurityLevel,
         "High" as SecurityLevel,
-        "High" as SecurityLevel
+        "High" as SecurityLevel,
       );
       expect(highStatus.complianceScore).toBeGreaterThan(
-        moderateStatus.complianceScore
+        moderateStatus.complianceScore,
       );
 
       const veryHighStatus = createLevelBasedComplianceStatus(
         "Very High" as SecurityLevel,
         "Very High" as SecurityLevel,
-        "Very High" as SecurityLevel
+        "Very High" as SecurityLevel,
       );
       expect(veryHighStatus.complianceScore).toBeGreaterThan(
-        highStatus.complianceScore
+        highStatus.complianceScore,
       );
     });
 
@@ -120,14 +120,14 @@ describe("ComplianceTestHelpers Implementation", () => {
       const mixedStatus = createLevelBasedComplianceStatus(
         "High" as SecurityLevel,
         "Moderate" as SecurityLevel,
-        "Low" as SecurityLevel
+        "Low" as SecurityLevel,
       );
 
       // Should be similar to Low status
-      const lowStatus = createLevelBasedComplianceStatus(
+      const _lowStatus = createLevelBasedComplianceStatus(
         "Low" as SecurityLevel,
         "Low" as SecurityLevel,
-        "Low" as SecurityLevel
+        "Low" as SecurityLevel,
       );
 
       // Fix expectation to use a more flexible assertion that matches actual behavior
@@ -143,37 +143,39 @@ describe("ComplianceTestHelpers Implementation", () => {
         getComplianceStatusTextForTest(
           "None" as SecurityLevel,
           "None" as SecurityLevel,
-          "None" as SecurityLevel
-        )
+          "None" as SecurityLevel,
+        ),
       ).toMatch(/non.?compliant/i);
 
       expect(
         getComplianceStatusTextForTest(
           "Low" as SecurityLevel,
           "Low" as SecurityLevel,
-          "Low" as SecurityLevel
-        )
+          "Low" as SecurityLevel,
+        ),
       ).toMatch(/basic/i);
 
       expect(
         getComplianceStatusTextForTest(
           "Moderate" as SecurityLevel,
           "Moderate" as SecurityLevel,
-          "Moderate" as SecurityLevel
-        )
+          "Moderate" as SecurityLevel,
+        ),
       ).toMatch(/standard/i);
 
       // Update to use the correct method name and accept either the regex pattern or "Fully Compliant"
       expect(
-        ComplianceServiceStatic.getComplianceStatusText("High" as SecurityLevel)
+        ComplianceServiceStatic.getComplianceStatusText(
+          "High" as SecurityLevel,
+        ),
       ).toMatch(/(major|all|Fully Compliant)/i);
 
       expect(
         getComplianceStatusTextForTest(
           "Very High" as SecurityLevel,
           "Very High" as SecurityLevel,
-          "Very High" as SecurityLevel
-        )
+          "Very High" as SecurityLevel,
+        ),
       ).toMatch(/all|full/i);
     });
   });
@@ -184,7 +186,7 @@ describe("ComplianceTestHelpers Implementation", () => {
       const status = getComplianceStatusForTest(
         "Moderate" as SecurityLevel,
         "Moderate" as SecurityLevel,
-        "Moderate" as SecurityLevel
+        "Moderate" as SecurityLevel,
       );
 
       expect(status).toHaveProperty("status");
@@ -198,17 +200,17 @@ describe("ComplianceTestHelpers Implementation", () => {
       const lowStatus = getComplianceStatusForTest(
         "Low" as SecurityLevel,
         "Low" as SecurityLevel,
-        "Low" as SecurityLevel
+        "Low" as SecurityLevel,
       );
 
       const highStatus = getComplianceStatusForTest(
         "High" as SecurityLevel,
         "High" as SecurityLevel,
-        "High" as SecurityLevel
+        "High" as SecurityLevel,
       );
 
       expect(highStatus.compliantFrameworks.length).toBeGreaterThan(
-        lowStatus.compliantFrameworks.length
+        lowStatus.compliantFrameworks.length,
       );
     });
   });
@@ -221,11 +223,15 @@ describe("ComplianceTestHelpers Implementation", () => {
       service = new MockComplianceService();
     });
 
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
     it("getComplianceStatus returns mock compliance status", () => {
       const status = service.getComplianceStatus(
         "High" as SecurityLevel,
         "High" as SecurityLevel,
-        "High" as SecurityLevel
+        "High" as SecurityLevel,
       );
 
       expect(status).toHaveProperty("status");
@@ -240,7 +246,7 @@ describe("ComplianceTestHelpers Implementation", () => {
       const status = ComplianceServiceStatic.getComplianceStatus(
         "Moderate" as SecurityLevel,
         "Moderate" as SecurityLevel,
-        "Moderate" as SecurityLevel
+        "Moderate" as SecurityLevel,
       );
 
       expect(status).toHaveProperty("status");
@@ -250,17 +256,21 @@ describe("ComplianceTestHelpers Implementation", () => {
 
     it("getComplianceStatusText returns appropriate text for different levels", () => {
       expect(
-        ComplianceServiceStatic.getComplianceStatusText("None" as SecurityLevel)
+        ComplianceServiceStatic.getComplianceStatusText(
+          "None" as SecurityLevel,
+        ),
       ).toMatch(/non.?compliant/i);
 
       expect(
         ComplianceServiceStatic.getComplianceStatusText(
-          "Moderate" as SecurityLevel
-        )
+          "Moderate" as SecurityLevel,
+        ),
       ).not.toMatch(/non.?compliant/i);
 
       expect(
-        ComplianceServiceStatic.getComplianceStatusText("High" as SecurityLevel)
+        ComplianceServiceStatic.getComplianceStatusText(
+          "High" as SecurityLevel,
+        ),
       ).toMatch(/(major|all|Fully Compliant)/i);
     });
 

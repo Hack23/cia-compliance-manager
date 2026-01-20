@@ -2,67 +2,87 @@
  * Tests for ErrorContext
  */
 
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
-import { renderHook, act } from '@testing-library/react';
-import { useEffect } from 'react';
-import { ErrorProvider, useError } from './ErrorContext';
-import * as errorServiceModule from '../services/errorService';
+import {
+  act,
+  render,
+  renderHook,
+  screen,
+  waitFor,
+} from "@testing-library/react";
+import { useEffect } from "react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import * as errorServiceModule from "../services/errorService";
+import { ErrorProvider, useError } from "./ErrorContext";
 
 // Mock errorService
-vi.mock('../services/errorService', () => ({
+vi.mock("../services/errorService", () => ({
   errorService: {
     logError: vi.fn(),
-    getUserFriendlyMessage: vi.fn(() => 'An unexpected error occurred. Please try again.'),
+    getUserFriendlyMessage: vi.fn(
+      () => "An unexpected error occurred. Please try again.",
+    ),
     canRecover: vi.fn(() => true),
   },
   ErrorSeverity: {
-    LOW: 'low',
-    MEDIUM: 'medium',
-    HIGH: 'high',
-    CRITICAL: 'critical',
+    LOW: "low",
+    MEDIUM: "medium",
+    HIGH: "high",
+    CRITICAL: "critical",
   },
 }));
 
 // Mock ErrorToast component
-vi.mock('../components/common/ErrorToast', () => ({
-  default: ({ message, title, isVisible, onDismiss, retry }: {
+vi.mock("../components/common/ErrorToast", () => ({
+  default: ({
+    message,
+    title,
+    isVisible,
+    onDismiss,
+    retry,
+  }: {
     message: string;
     title?: string;
     isVisible: boolean;
     onDismiss: () => void;
     retry?: () => void;
-  }) => (
+  }) =>
     isVisible ? (
       <div data-testid="error-toast">
-        <div data-testid="error-toast-title">{title || 'Error'}</div>
+        <div data-testid="error-toast-title">{title || "Error"}</div>
         <div data-testid="error-toast-message">{message}</div>
-        <button onClick={onDismiss} data-testid="error-toast-close">Close</button>
+        <button onClick={onDismiss} data-testid="error-toast-close">
+          Close
+        </button>
         {retry && (
-          <button onClick={retry} data-testid="error-toast-retry">Retry</button>
+          <button onClick={retry} data-testid="error-toast-retry">
+            Retry
+          </button>
         )}
       </div>
-    ) : null
-  ),
+    ) : null,
 }));
 
-describe('ErrorContext', () => {
+describe("ErrorContext", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  describe('ErrorProvider', () => {
-    it('should render children', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  describe("ErrorProvider", () => {
+    it("should render children", () => {
       render(
         <ErrorProvider>
           <div>Test content</div>
-        </ErrorProvider>
+        </ErrorProvider>,
       );
 
-      expect(screen.getByText('Test content')).toBeInTheDocument();
+      expect(screen.getByText("Test content")).toBeInTheDocument();
     });
 
-    it('should provide error context to children', () => {
+    it("should provide error context to children", () => {
       const TestComponent = () => {
         const { errors } = useError();
         return <div>Errors: {errors.length}</div>;
@@ -71,42 +91,44 @@ describe('ErrorContext', () => {
       render(
         <ErrorProvider>
           <TestComponent />
-        </ErrorProvider>
+        </ErrorProvider>,
       );
 
-      expect(screen.getByText('Errors: 0')).toBeInTheDocument();
+      expect(screen.getByText("Errors: 0")).toBeInTheDocument();
     });
   });
 
-  describe('useError hook', () => {
-    it('should throw error when used outside ErrorProvider', () => {
+  describe("useError hook", () => {
+    it("should throw error when used outside ErrorProvider", () => {
       // Suppress console.error for this test
-      const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleError = vi
+        .spyOn(console, "error")
+        .mockImplementation(() => {});
 
       expect(() => {
         renderHook(() => useError());
-      }).toThrow('useError must be used within an ErrorProvider');
+      }).toThrow("useError must be used within an ErrorProvider");
 
       consoleError.mockRestore();
     });
 
-    it('should return context value when used inside ErrorProvider', () => {
+    it("should return context value when used inside ErrorProvider", () => {
       const { result } = renderHook(() => useError(), {
         wrapper: ErrorProvider,
       });
 
-      expect(result.current).toHaveProperty('errors');
-      expect(result.current).toHaveProperty('addError');
-      expect(result.current).toHaveProperty('clearError');
-      expect(result.current).toHaveProperty('clearAllErrors');
-      expect(result.current).toHaveProperty('showToast');
-      expect(result.current).toHaveProperty('hideToast');
-      expect(result.current).toHaveProperty('getLatestError');
+      expect(result.current).toHaveProperty("errors");
+      expect(result.current).toHaveProperty("addError");
+      expect(result.current).toHaveProperty("clearError");
+      expect(result.current).toHaveProperty("clearAllErrors");
+      expect(result.current).toHaveProperty("showToast");
+      expect(result.current).toHaveProperty("hideToast");
+      expect(result.current).toHaveProperty("getLatestError");
     });
   });
 
-  describe('addError', () => {
-    it('should add error to errors list', () => {
+  describe("addError", () => {
+    it("should add error to errors list", () => {
       const { result } = renderHook(() => useError(), {
         wrapper: ErrorProvider,
       });
@@ -114,22 +136,23 @@ describe('ErrorContext', () => {
       expect(result.current.errors).toHaveLength(0);
 
       act(() => {
-        result.current.addError(new Error('Test error'));
+        result.current.addError(new Error("Test error"));
       });
 
       expect(result.current.errors).toHaveLength(1);
-      expect(result.current.errors[0].error.message).toBe('Test error');
+      expect(result.current.errors[0].error.message).toBe("Test error");
     });
 
-    it('should log error using error service', () => {
-      const mockLogError = errorServiceModule.errorService.logError as ReturnType<typeof vi.fn>;
-      
+    it("should log error using error service", () => {
+      const mockLogError = errorServiceModule.errorService
+        .logError as ReturnType<typeof vi.fn>;
+
       const { result } = renderHook(() => useError(), {
         wrapper: ErrorProvider,
       });
 
-      const error = new Error('Test error');
-      const context = { component: 'TestComponent' };
+      const error = new Error("Test error");
+      const context = { component: "TestComponent" };
 
       act(() => {
         result.current.addError(error, context);
@@ -138,23 +161,25 @@ describe('ErrorContext', () => {
       expect(mockLogError).toHaveBeenCalledWith(error, context);
     });
 
-    it('should generate user-friendly message for error', () => {
-      const mockGetUserFriendlyMessage = errorServiceModule.errorService.getUserFriendlyMessage as ReturnType<typeof vi.fn>;
-      mockGetUserFriendlyMessage.mockReturnValue('User-friendly message');
+    it("should generate user-friendly message for error", () => {
+      const mockGetUserFriendlyMessage = errorServiceModule.errorService
+        .getUserFriendlyMessage as ReturnType<typeof vi.fn>;
+      mockGetUserFriendlyMessage.mockReturnValue("User-friendly message");
 
       const { result } = renderHook(() => useError(), {
         wrapper: ErrorProvider,
       });
 
       act(() => {
-        result.current.addError(new Error('Test error'));
+        result.current.addError(new Error("Test error"));
       });
 
-      expect(result.current.errors[0].message).toBe('User-friendly message');
+      expect(result.current.errors[0].message).toBe("User-friendly message");
     });
 
-    it('should check if error is recoverable', () => {
-      const mockCanRecover = errorServiceModule.errorService.canRecover as ReturnType<typeof vi.fn>;
+    it("should check if error is recoverable", () => {
+      const mockCanRecover = errorServiceModule.errorService
+        .canRecover as ReturnType<typeof vi.fn>;
       mockCanRecover.mockReturnValue(false);
 
       const { result } = renderHook(() => useError(), {
@@ -162,13 +187,13 @@ describe('ErrorContext', () => {
       });
 
       act(() => {
-        result.current.addError(new Error('Test error'));
+        result.current.addError(new Error("Test error"));
       });
 
       expect(result.current.errors[0].recoverable).toBe(false);
     });
 
-    it('should limit errors to maxErrors', () => {
+    it("should limit errors to maxErrors", () => {
       const { result } = renderHook(() => useError(), {
         wrapper: ({ children }) => (
           <ErrorProvider maxErrors={3}>{children}</ErrorProvider>
@@ -176,40 +201,40 @@ describe('ErrorContext', () => {
       });
 
       act(() => {
-        result.current.addError(new Error('Error 1'));
-        result.current.addError(new Error('Error 2'));
-        result.current.addError(new Error('Error 3'));
-        result.current.addError(new Error('Error 4'));
+        result.current.addError(new Error("Error 1"));
+        result.current.addError(new Error("Error 2"));
+        result.current.addError(new Error("Error 3"));
+        result.current.addError(new Error("Error 4"));
       });
 
       expect(result.current.errors).toHaveLength(3);
-      expect(result.current.errors[0].error.message).toBe('Error 4');
+      expect(result.current.errors[0].error.message).toBe("Error 4");
     });
 
-    it('should include context in error entry', () => {
+    it("should include context in error entry", () => {
       const { result } = renderHook(() => useError(), {
         wrapper: ErrorProvider,
       });
 
-      const context = { component: 'TestComponent', action: 'save' };
+      const context = { component: "TestComponent", action: "save" };
 
       act(() => {
-        result.current.addError(new Error('Test error'), context);
+        result.current.addError(new Error("Test error"), context);
       });
 
       expect(result.current.errors[0].context).toEqual(context);
     });
   });
 
-  describe('clearError', () => {
-    it('should remove specific error from list', () => {
+  describe("clearError", () => {
+    it("should remove specific error from list", () => {
       const { result } = renderHook(() => useError(), {
         wrapper: ErrorProvider,
       });
 
       act(() => {
-        result.current.addError(new Error('Error 1'));
-        result.current.addError(new Error('Error 2'));
+        result.current.addError(new Error("Error 1"));
+        result.current.addError(new Error("Error 2"));
       });
 
       expect(result.current.errors).toHaveLength(2);
@@ -221,18 +246,18 @@ describe('ErrorContext', () => {
       });
 
       expect(result.current.errors).toHaveLength(1);
-      expect(result.current.errors[0].error.message).toBe('Error 1');
+      expect(result.current.errors[0].error.message).toBe("Error 1");
     });
 
-    it('should not affect other errors when clearing specific error', () => {
+    it("should not affect other errors when clearing specific error", () => {
       const { result } = renderHook(() => useError(), {
         wrapper: ErrorProvider,
       });
 
       act(() => {
-        result.current.addError(new Error('Error 1'));
-        result.current.addError(new Error('Error 2'));
-        result.current.addError(new Error('Error 3'));
+        result.current.addError(new Error("Error 1"));
+        result.current.addError(new Error("Error 2"));
+        result.current.addError(new Error("Error 3"));
       });
 
       const middleErrorId = result.current.errors[1].id;
@@ -242,20 +267,23 @@ describe('ErrorContext', () => {
       });
 
       expect(result.current.errors).toHaveLength(2);
-      expect(result.current.errors.map(e => e.error.message)).toEqual(['Error 3', 'Error 1']);
+      expect(result.current.errors.map((e) => e.error.message)).toEqual([
+        "Error 3",
+        "Error 1",
+      ]);
     });
   });
 
-  describe('clearAllErrors', () => {
-    it('should remove all errors from list', () => {
+  describe("clearAllErrors", () => {
+    it("should remove all errors from list", () => {
       const { result } = renderHook(() => useError(), {
         wrapper: ErrorProvider,
       });
 
       act(() => {
-        result.current.addError(new Error('Error 1'));
-        result.current.addError(new Error('Error 2'));
-        result.current.addError(new Error('Error 3'));
+        result.current.addError(new Error("Error 1"));
+        result.current.addError(new Error("Error 2"));
+        result.current.addError(new Error("Error 3"));
       });
 
       expect(result.current.errors).toHaveLength(3);
@@ -268,89 +296,105 @@ describe('ErrorContext', () => {
     });
   });
 
-  describe('showToast', () => {
-    it('should display toast with message', async () => {
+  describe("showToast", () => {
+    it("should display toast with message", async () => {
       const { result } = renderHook(() => useError(), {
         wrapper: ErrorProvider,
       });
 
-      render(<ErrorProvider><div /></ErrorProvider>);
+      render(
+        <ErrorProvider>
+          <div />
+        </ErrorProvider>,
+      );
 
       act(() => {
         result.current.showToast({
-          message: 'Test toast message',
+          message: "Test toast message",
         });
       });
 
       await waitFor(() => {
-        expect(screen.getByTestId('error-toast-message')).toHaveTextContent('Test toast message');
+        expect(screen.getByTestId("error-toast-message")).toHaveTextContent(
+          "Test toast message",
+        );
       });
     });
 
-    it('should display toast with custom title', async () => {
+    it("should display toast with custom title", async () => {
       const { result } = renderHook(() => useError(), {
         wrapper: ErrorProvider,
       });
 
-      render(<ErrorProvider><div /></ErrorProvider>);
+      render(
+        <ErrorProvider>
+          <div />
+        </ErrorProvider>,
+      );
 
       act(() => {
         result.current.showToast({
-          title: 'Custom Title',
-          message: 'Test message',
+          title: "Custom Title",
+          message: "Test message",
         });
       });
 
       await waitFor(() => {
-        expect(screen.getByTestId('error-toast-title')).toHaveTextContent('Custom Title');
+        expect(screen.getByTestId("error-toast-title")).toHaveTextContent(
+          "Custom Title",
+        );
       });
     });
 
-    it('should display toast with retry button when retry provided', async () => {
+    it("should display toast with retry button when retry provided", async () => {
       let retryFn: (() => void) | undefined;
-      
+
       function TestComponent() {
         const { showToast } = useError();
         retryFn = vi.fn();
-        
+
         useEffect(() => {
           showToast({
-            message: 'Test message',
+            message: "Test message",
             retry: retryFn,
           });
         }, [showToast]);
-        
+
         return <div />;
       }
 
       render(
         <ErrorProvider>
           <TestComponent />
-        </ErrorProvider>
+        </ErrorProvider>,
       );
 
       await waitFor(() => {
-        expect(screen.getByTestId('error-toast-retry')).toBeInTheDocument();
+        expect(screen.getByTestId("error-toast-retry")).toBeInTheDocument();
       });
     });
   });
 
-  describe('hideToast', () => {
-    it('should hide the toast', async () => {
+  describe("hideToast", () => {
+    it("should hide the toast", async () => {
       const { result } = renderHook(() => useError(), {
         wrapper: ErrorProvider,
       });
 
-      render(<ErrorProvider><div /></ErrorProvider>);
+      render(
+        <ErrorProvider>
+          <div />
+        </ErrorProvider>,
+      );
 
       act(() => {
         result.current.showToast({
-          message: 'Test message',
+          message: "Test message",
         });
       });
 
       await waitFor(() => {
-        expect(screen.getByTestId('error-toast')).toBeInTheDocument();
+        expect(screen.getByTestId("error-toast")).toBeInTheDocument();
       });
 
       act(() => {
@@ -358,13 +402,13 @@ describe('ErrorContext', () => {
       });
 
       await waitFor(() => {
-        expect(screen.queryByTestId('error-toast')).not.toBeInTheDocument();
+        expect(screen.queryByTestId("error-toast")).not.toBeInTheDocument();
       });
     });
   });
 
-  describe('getLatestError', () => {
-    it('should return undefined when no errors', () => {
+  describe("getLatestError", () => {
+    it("should return undefined when no errors", () => {
       const { result } = renderHook(() => useError(), {
         wrapper: ErrorProvider,
       });
@@ -372,19 +416,19 @@ describe('ErrorContext', () => {
       expect(result.current.getLatestError()).toBeUndefined();
     });
 
-    it('should return most recent error', () => {
+    it("should return most recent error", () => {
       const { result } = renderHook(() => useError(), {
         wrapper: ErrorProvider,
       });
 
       act(() => {
-        result.current.addError(new Error('Error 1'));
-        result.current.addError(new Error('Error 2'));
-        result.current.addError(new Error('Error 3'));
+        result.current.addError(new Error("Error 1"));
+        result.current.addError(new Error("Error 2"));
+        result.current.addError(new Error("Error 3"));
       });
 
       const latest = result.current.getLatestError();
-      expect(latest?.error.message).toBe('Error 3');
+      expect(latest?.error.message).toBe("Error 3");
     });
   });
 });

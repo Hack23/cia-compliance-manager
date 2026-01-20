@@ -1,0 +1,54 @@
+/**
+ * CIA Component Color Utilities
+ *
+ * Provides consistent color styling for Confidentiality, Integrity, and Availability components
+ * across the application. These utilities ensure visual consistency and proper theme support.
+ */
+
+import type { CIAComponent } from "../types/cia";
+
+export interface CIAColors {
+  bg: string;
+  text: string;
+  border: string;
+  badge: string;
+}
+
+/**
+ * Get consistent color classes for CIA components
+ *
+ * @param component - The CIA component type
+ * @returns Object with Tailwind color classes for different uses
+ *
+ * @example
+ * ```typescript
+ * const colors = getCIAColors('confidentiality');
+ * <div className={cn(colors.bg, colors.border)}>
+ *   Confidentiality Content
+ * </div>
+ * ```
+ */
+export function getCIAColors(component: CIAComponent): CIAColors {
+  const colors: Record<CIAComponent, CIAColors> = {
+    confidentiality: {
+      bg: "bg-purple-50 dark:bg-purple-900/20",
+      text: "text-purple-800 dark:text-purple-300",
+      border: "border-l-4 border-purple-500 dark:border-purple-400",
+      badge: "bg-purple-100 dark:bg-purple-900/30",
+    },
+    integrity: {
+      bg: "bg-green-50 dark:bg-green-900/20",
+      text: "text-green-800 dark:text-green-300",
+      border: "border-l-4 border-green-500 dark:border-green-400",
+      badge: "bg-green-100 dark:bg-green-900/30",
+    },
+    availability: {
+      bg: "bg-blue-50 dark:bg-blue-900/20",
+      text: "text-blue-800 dark:text-blue-300",
+      border: "border-l-4 border-blue-500 dark:border-blue-400",
+      badge: "bg-blue-100 dark:bg-blue-900/30",
+    },
+  };
+
+  return colors[component];
+}

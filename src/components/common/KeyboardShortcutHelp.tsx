@@ -157,7 +157,7 @@ export const KeyboardShortcutHelp: React.FC<KeyboardShortcutHelpProps> = ({
               className="mb-6 last:mb-0"
               data-testid={KEYBOARD_TEST_IDS.HELP_MODAL_CATEGORY}
             >
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+              <h3 className="text-subheading font-semibold text-gray-900 dark:text-white mb-3">
                 {SHORTCUT_CATEGORY_LABELS[category as keyof typeof SHORTCUT_CATEGORY_LABELS] || category}
               </h3>
               <div className="space-y-2">

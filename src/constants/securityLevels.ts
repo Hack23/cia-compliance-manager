@@ -70,23 +70,23 @@ export const SECURITY_LEVEL_CSS_CLASSES: Record<
   { bg: string; text: string }
 > = {
   None: {
-    bg: "bg-red-100 dark:bg-red-900 dark:bg-opacity-20",
+    bg: "bg-red-100 dark:bg-red-900/20",
     text: "text-red-800 dark:text-red-300",
   },
   Low: {
-    bg: "bg-yellow-100 dark:bg-yellow-900 dark:bg-opacity-20",
+    bg: "bg-yellow-100 dark:bg-yellow-900/20",
     text: "text-yellow-800 dark:text-yellow-300",
   },
   Moderate: {
-    bg: "bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20",
+    bg: "bg-blue-100 dark:bg-blue-900/20",
     text: "text-blue-800 dark:text-blue-300",
   },
   High: {
-    bg: "bg-green-100 dark:bg-green-900 dark:bg-opacity-20",
+    bg: "bg-green-100 dark:bg-green-900/20",
     text: "text-green-800 dark:text-green-300",
   },
   "Very High": {
-    bg: "bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20",
+    bg: "bg-purple-100 dark:bg-purple-900/20",
     text: "text-purple-800 dark:text-purple-300",
   },
 };

@@ -1,11 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { SecurityLevel } from "../../../types/cia";
 import { mockWidgetProps } from "../../../utils/testUtils";
 import SecurityVisualizationWidget from "./SecurityVisualizationWidget"; // Fixed import syntax
 
 describe("SecurityVisualizationWidget", () => {
-  const defaultProps = {
+  const _defaultProps = {
     ...mockWidgetProps,
   };
 
@@ -15,17 +14,19 @@ describe("SecurityVisualizationWidget", () => {
         availabilityLevel="Moderate"
         integrityLevel="Moderate"
         confidentialityLevel="Moderate"
-      />
+      />,
     );
 
     // Check that widget container is rendered
     const widget = screen.getByTestId(
-      "widget-container-widget-security-visualization"
+      "widget-container-widget-security-visualization",
     );
     expect(widget).toBeInTheDocument();
 
     // Find the risk level element and check its content
-    const riskLevel = screen.getByTestId("widget-security-visualization-label-risk-level");
+    const riskLevel = screen.getByTestId(
+      "widget-security-visualization-label-risk-level",
+    );
     expect(riskLevel).toBeInTheDocument();
     expect(riskLevel.textContent).toContain("Low Risk");
   });

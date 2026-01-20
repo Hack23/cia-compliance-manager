@@ -1,10 +1,10 @@
-import { renderHook, act } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { useWidgetError } from './useWidgetError';
-import logger from '../utils/logger';
+import { act, renderHook } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import logger from "../utils/logger";
+import { useWidgetError } from "./useWidgetError";
 
 // Mock the logger
-vi.mock('../utils/logger', () => ({
+vi.mock("../utils/logger", () => ({
   default: {
     error: vi.fn(),
     warn: vi.fn(),
@@ -13,34 +13,38 @@ vi.mock('../utils/logger', () => ({
   },
 }));
 
-describe('useWidgetError', () => {
-  const widgetName = 'TestWidget';
+describe("useWidgetError", () => {
+  const widgetName = "TestWidget";
 
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  describe('Initial State', () => {
-    it('should initialize with no error', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  describe("Initial State", () => {
+    it("should initialize with no error", () => {
       const { result } = renderHook(() => useWidgetError(widgetName));
 
       expect(result.current.error).toBeNull();
       expect(result.current.hasError).toBe(false);
     });
 
-    it('should provide all required methods', () => {
+    it("should provide all required methods", () => {
       const { result } = renderHook(() => useWidgetError(widgetName));
 
-      expect(typeof result.current.clearError).toBe('function');
-      expect(typeof result.current.setError).toBe('function');
-      expect(typeof result.current.handleError).toBe('function');
+      expect(typeof result.current.clearError).toBe("function");
+      expect(typeof result.current.setError).toBe("function");
+      expect(typeof result.current.handleError).toBe("function");
     });
   });
 
-  describe('setError', () => {
-    it('should set an error and log it', () => {
+  describe("setError", () => {
+    it("should set an error and log it", () => {
       const { result } = renderHook(() => useWidgetError(widgetName));
-      const testError = new Error('Test error message');
+      const testError = new Error("Test error message");
 
       act(() => {
         result.current.setError(testError);
@@ -50,14 +54,14 @@ describe('useWidgetError', () => {
       expect(result.current.hasError).toBe(true);
       expect(logger.error).toHaveBeenCalledWith(
         `${widgetName}: Test error message`,
-        testError
+        testError,
       );
     });
 
-    it('should update error when called multiple times', () => {
+    it("should update error when called multiple times", () => {
       const { result } = renderHook(() => useWidgetError(widgetName));
-      const error1 = new Error('First error');
-      const error2 = new Error('Second error');
+      const error1 = new Error("First error");
+      const error2 = new Error("Second error");
 
       act(() => {
         result.current.setError(error1);
@@ -74,10 +78,10 @@ describe('useWidgetError', () => {
     });
   });
 
-  describe('handleError', () => {
-    it('should handle Error instances', () => {
+  describe("handleError", () => {
+    it("should handle Error instances", () => {
       const { result } = renderHook(() => useWidgetError(widgetName));
-      const testError = new Error('Test error');
+      const testError = new Error("Test error");
 
       act(() => {
         result.current.handleError(testError);
@@ -87,13 +91,13 @@ describe('useWidgetError', () => {
       expect(result.current.hasError).toBe(true);
       expect(logger.error).toHaveBeenCalledWith(
         `${widgetName}: Test error`,
-        testError
+        testError,
       );
     });
 
-    it('should convert string errors to Error objects', () => {
+    it("should convert string errors to Error objects", () => {
       const { result } = renderHook(() => useWidgetError(widgetName));
-      const errorMessage = 'String error message';
+      const errorMessage = "String error message";
 
       act(() => {
         result.current.handleError(errorMessage);
@@ -104,22 +108,24 @@ describe('useWidgetError', () => {
       expect(result.current.hasError).toBe(true);
     });
 
-    it('should handle unknown error types with detailed message', () => {
+    it("should handle unknown error types with detailed message", () => {
       const { result } = renderHook(() => useWidgetError(widgetName));
-      const unknownError = { code: 500, status: 'failed' };
+      const unknownError = { code: 500, status: "failed" };
 
       act(() => {
         result.current.handleError(unknownError);
       });
 
       expect(result.current.error).toBeInstanceOf(Error);
-      expect(result.current.error?.message).toContain(`${widgetName}: Unknown error occurred`);
+      expect(result.current.error?.message).toContain(
+        `${widgetName}: Unknown error occurred`,
+      );
       expect(result.current.error?.message).toContain('"code": 500');
       expect(result.current.error?.message).toContain('"status": "failed"');
       expect(result.current.hasError).toBe(true);
     });
 
-    it('should handle null and undefined errors', () => {
+    it("should handle null and undefined errors", () => {
       const { result } = renderHook(() => useWidgetError(widgetName));
 
       act(() => {
@@ -142,10 +148,10 @@ describe('useWidgetError', () => {
     });
   });
 
-  describe('clearError', () => {
-    it('should clear the error state', () => {
+  describe("clearError", () => {
+    it("should clear the error state", () => {
       const { result } = renderHook(() => useWidgetError(widgetName));
-      const testError = new Error('Test error');
+      const testError = new Error("Test error");
 
       act(() => {
         result.current.setError(testError);
@@ -161,7 +167,7 @@ describe('useWidgetError', () => {
       expect(result.current.hasError).toBe(false);
     });
 
-    it('should be safe to call multiple times', () => {
+    it("should be safe to call multiple times", () => {
       const { result } = renderHook(() => useWidgetError(widgetName));
 
       act(() => {
@@ -174,7 +180,7 @@ describe('useWidgetError', () => {
       expect(result.current.hasError).toBe(false);
     });
 
-    it('should be safe to call when no error exists', () => {
+    it("should be safe to call when no error exists", () => {
       const { result } = renderHook(() => useWidgetError(widgetName));
 
       act(() => {
@@ -186,11 +192,11 @@ describe('useWidgetError', () => {
     });
   });
 
-  describe('Widget Name Context', () => {
-    it('should include widget name in error logs', () => {
-      const customWidgetName = 'SecurityMetricsWidget';
+  describe("Widget Name Context", () => {
+    it("should include widget name in error logs", () => {
+      const customWidgetName = "SecurityMetricsWidget";
       const { result } = renderHook(() => useWidgetError(customWidgetName));
-      const testError = new Error('Service unavailable');
+      const testError = new Error("Service unavailable");
 
       act(() => {
         result.current.setError(testError);
@@ -198,12 +204,12 @@ describe('useWidgetError', () => {
 
       expect(logger.error).toHaveBeenCalledWith(
         `${customWidgetName}: Service unavailable`,
-        testError
+        testError,
       );
     });
 
-    it('should include widget name in unknown error messages', () => {
-      const customWidgetName = 'ComplianceWidget';
+    it("should include widget name in unknown error messages", () => {
+      const customWidgetName = "ComplianceWidget";
       const { result } = renderHook(() => useWidgetError(customWidgetName));
 
       act(() => {
@@ -214,11 +220,11 @@ describe('useWidgetError', () => {
     });
   });
 
-  describe('Integration Scenarios', () => {
-    it('should support error recovery workflow', () => {
+  describe("Integration Scenarios", () => {
+    it("should support error recovery workflow", () => {
       const { result } = renderHook(() => useWidgetError(widgetName));
-      const error1 = new Error('Network error');
-      const error2 = new Error('Retry failed');
+      const error1 = new Error("Network error");
+      const error2 = new Error("Retry failed");
 
       // First attempt fails
       act(() => {
@@ -240,9 +246,9 @@ describe('useWidgetError', () => {
       expect(result.current.error).toBe(error2);
     });
 
-    it('should maintain stable function references', () => {
+    it("should maintain stable function references", () => {
       const { result, rerender } = renderHook(() => useWidgetError(widgetName));
-      
+
       const initialClearError = result.current.clearError;
       const initialSetError = result.current.setError;
       const initialHandleError = result.current.handleError;

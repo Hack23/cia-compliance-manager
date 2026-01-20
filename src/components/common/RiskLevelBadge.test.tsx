@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import RiskLevelBadge from "./RiskLevelBadge";
-import { COMMON_COMPONENT_TEST_IDS } from "../../constants/testIds";
 
 describe("RiskLevelBadge", () => {
   it("displays risk level text", () => {
@@ -20,7 +20,7 @@ describe("RiskLevelBadge", () => {
 
   it("displays icon when showIcon is true", () => {
     const { rerender } = render(
-      <RiskLevelBadge risk="Critical" showIcon={true} />
+      <RiskLevelBadge risk="Critical" showIcon={true} />,
     );
     const badgeText = screen.getByTestId("risk-level-badge").textContent;
     expect(badgeText).match(/⚠️/);
@@ -38,6 +38,6 @@ describe("RiskLevelBadge", () => {
   it("applies custom class name", () => {
     render(<RiskLevelBadge risk="Medium Risk" className="custom-class" />);
     const badge = screen.getByTestId("risk-level-badge");
-    expect(badge.classList.contains("custom-class")).true;
+    expect(badge.classList.contains("custom-class")).toBe(true);
   });
 });

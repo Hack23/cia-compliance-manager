@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   createMockDataProvider,
   TEST_SECURITY_LEVELS,
@@ -46,6 +46,10 @@ describe("BusinessImpactService", () => {
   beforeEach(() => {
     dataProvider = createTestDataProvider();
     service = new BusinessImpactService(dataProvider);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   describe("getBusinessImpact", () => {
@@ -127,7 +131,7 @@ describe("BusinessImpactService", () => {
         it(`returns business impact description for ${component} at ${level} level`, () => {
           const description = service.getBusinessImpactDescription(
             component,
-            level
+            level,
           );
 
           expect(typeof description).toBe("string");
@@ -164,7 +168,7 @@ describe("BusinessImpactService", () => {
       const level = service.calculateBusinessImpactLevel(
         "High",
         "Moderate",
-        "Low"
+        "Low",
       );
 
       expect(typeof level).toBe("string");
@@ -203,7 +207,7 @@ describe("BusinessImpactService", () => {
     it("defaults to Moderate level when invalid level provided", () => {
       // Using TypeScript's private method access pattern for testing
       const result = (service as any).getImpactForLevel(
-        "Invalid" as unknown as SecurityLevel
+        "Invalid" as unknown as SecurityLevel,
       );
 
       expect(result).toBeDefined();
@@ -267,7 +271,7 @@ describe("BusinessImpactService additional methods", () => {
 
     const impact = instance.createDefaultBusinessImpact(
       "availability",
-      "Moderate"
+      "Moderate",
     );
     expect(impact).toBeDefined();
     expect(impact).toHaveProperty("summary");
