@@ -61,7 +61,7 @@ const defaultMock = vi.hoisted(() => ({
         .fn()
         .mockImplementation(
           (component: CIAComponentType, level: SecurityLevel) =>
-            `${level} ${component} description`
+            `${level} ${component} description`,
         ),
       calculateBusinessImpactLevel: vi
         .fn()
@@ -81,7 +81,7 @@ const defaultMock = vi.hoisted(() => ({
   }),
 }));
 
-const errorMock = vi.hoisted(() => ({
+const _errorMock = vi.hoisted(() => ({
   useCIAContentService: () => ({
     ciaContentService: null,
     error: new Error("Test error"),
@@ -128,7 +128,7 @@ vi.mock("../../../components/common/StatusBadge", () => ({
   default: ({
     children,
     status,
-    size,
+    size: _size,
     testId,
   }: {
     children: React.ReactNode;
@@ -164,7 +164,7 @@ describe("BusinessImpactAnalysisWidget", () => {
   };
 
   // Mock elements similar to what might be in the component
-  const tabProps = {
+  const _tabProps = {
     considerationsTab: "Implementation Considerations",
     benefitsTab: "Business Benefits",
   };
@@ -189,7 +189,7 @@ describe("BusinessImpactAnalysisWidget", () => {
           integrityLevel={"Moderate" as SecurityLevel}
           confidentialityLevel={"Moderate" as SecurityLevel}
           testId="business-impact-analysis-widget"
-        />
+        />,
       );
     });
 
@@ -209,7 +209,7 @@ describe("BusinessImpactAnalysisWidget", () => {
           integrityLevel={"Moderate" as SecurityLevel}
           confidentialityLevel={"Moderate" as SecurityLevel}
           testId="business-impact-analysis-widget"
-        />
+        />,
       );
     });
 
@@ -231,7 +231,7 @@ describe("BusinessImpactAnalysisWidget", () => {
           integrityLevel={"Moderate" as SecurityLevel}
           confidentialityLevel={"Moderate" as SecurityLevel}
           testId="business-impact-analysis-widget"
-        />
+        />,
       );
     });
 
@@ -240,7 +240,7 @@ describe("BusinessImpactAnalysisWidget", () => {
       const content =
         screen.getByTestId("business-impact-analysis-widget").textContent || "";
       expect(content).toMatch(
-        /impact|financial|operational|reputational|regulatory/i
+        /impact|financial|operational|reputational|regulatory/i,
       );
     });
   });
@@ -253,7 +253,7 @@ describe("BusinessImpactAnalysisWidget", () => {
           integrityLevel={"High" as SecurityLevel}
           confidentialityLevel={"High" as SecurityLevel}
           testId="business-impact-analysis-widget"
-        />
+        />,
       );
     });
 
@@ -273,7 +273,7 @@ describe("BusinessImpactAnalysisWidget", () => {
           integrityLevel={"High" as SecurityLevel}
           confidentialityLevel={"High" as SecurityLevel}
           testId="business-impact-analysis-widget"
-        />
+        />,
       );
     });
 
@@ -290,7 +290,10 @@ describe("BusinessImpactAnalysisWidget", () => {
 
     await act(async () => {
       render(
-        <BusinessImpactAnalysisWidget {...defaultProps} testId={customTestId} />
+        <BusinessImpactAnalysisWidget
+          {...defaultProps}
+          testId={customTestId}
+        />,
       );
     });
 
@@ -306,7 +309,7 @@ describe("BusinessImpactAnalysisWidget", () => {
           integrityLevel={"Moderate" as SecurityLevel}
           confidentialityLevel={"Moderate" as SecurityLevel}
           testId="business-impact-analysis-widget"
-        />
+        />,
       );
     });
 
@@ -317,13 +320,13 @@ describe("BusinessImpactAnalysisWidget", () => {
     const considerationsTab = tabElements.find(
       (tab) =>
         tab.textContent?.toLowerCase().includes("consideration") ||
-        tab.textContent?.toLowerCase().includes("implement")
+        tab.textContent?.toLowerCase().includes("implement"),
     );
 
     const benefitsTab = tabElements.find(
       (tab) =>
         tab.textContent?.toLowerCase().includes("benefit") ||
-        tab.textContent?.toLowerCase().includes("business")
+        tab.textContent?.toLowerCase().includes("business"),
     );
 
     // If we found tabs, test the tab switching
@@ -370,7 +373,7 @@ describe("BusinessImpactAnalysisWidget", () => {
           integrityLevel={"High" as SecurityLevel}
           confidentialityLevel={"High" as SecurityLevel}
           testId="business-impact-analysis-widget"
-        />
+        />,
       );
     });
 
@@ -402,7 +405,7 @@ describe("BusinessImpactAnalysisWidget", () => {
           integrityLevel={"Moderate" as SecurityLevel}
           confidentialityLevel={"Moderate" as SecurityLevel}
           testId="business-impact-analysis-widget"
-        />
+        />,
       );
     });
 
@@ -436,11 +439,11 @@ describe("BusinessImpactAnalysisWidget", () => {
           integrityLevel="Very High"
           confidentialityLevel="Very High"
           testId="business-impact-analysis-widget"
-        />
+        />,
       );
 
       expect(
-        screen.getByTestId("business-impact-analysis-widget")
+        screen.getByTestId("business-impact-analysis-widget"),
       ).toBeInTheDocument();
     });
 
@@ -451,11 +454,11 @@ describe("BusinessImpactAnalysisWidget", () => {
           integrityLevel="None"
           confidentialityLevel="None"
           testId="business-impact-analysis-widget"
-        />
+        />,
       );
 
       expect(
-        screen.getByTestId("business-impact-analysis-widget")
+        screen.getByTestId("business-impact-analysis-widget"),
       ).toBeInTheDocument();
     });
 
@@ -466,11 +469,11 @@ describe("BusinessImpactAnalysisWidget", () => {
           integrityLevel="Low"
           confidentialityLevel="Low"
           testId="business-impact-analysis-widget"
-        />
+        />,
       );
 
       expect(
-        screen.getByTestId("business-impact-analysis-widget")
+        screen.getByTestId("business-impact-analysis-widget"),
       ).toBeInTheDocument();
     });
 
@@ -481,11 +484,11 @@ describe("BusinessImpactAnalysisWidget", () => {
           integrityLevel="Low"
           confidentialityLevel="Moderate"
           testId="business-impact-analysis-widget"
-        />
+        />,
       );
 
       expect(
-        screen.getByTestId("business-impact-analysis-widget")
+        screen.getByTestId("business-impact-analysis-widget"),
       ).toBeInTheDocument();
     });
 
@@ -497,7 +500,7 @@ describe("BusinessImpactAnalysisWidget", () => {
           confidentialityLevel="Moderate"
           className="custom-test-class"
           testId="business-impact-analysis-widget"
-        />
+        />,
       );
 
       // The widget container passes className through
@@ -512,7 +515,7 @@ describe("BusinessImpactAnalysisWidget", () => {
           integrityLevel="High"
           confidentialityLevel="High"
           testId="business-impact-analysis-widget"
-        />
+        />,
       );
 
       const content =
@@ -529,7 +532,7 @@ describe("BusinessImpactAnalysisWidget", () => {
           integrityLevel="Moderate"
           confidentialityLevel="Moderate"
           testId="business-impact-analysis-widget"
-        />
+        />,
       );
 
       const content =
@@ -544,7 +547,7 @@ describe("BusinessImpactAnalysisWidget", () => {
           integrityLevel="Moderate"
           confidentialityLevel="Low"
           testId="business-impact-analysis-widget"
-        />
+        />,
       );
 
       const content =

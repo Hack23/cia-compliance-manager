@@ -14,7 +14,7 @@ import {
 } from "./costCalculationUtils";
 
 // Add missing Industry type import or definition
-type Industry =
+type _Industry =
   | "general"
   | "financial"
   | "healthcare"
@@ -49,7 +49,7 @@ describe("Cost Calculation Utilities", () => {
       const largeOrgCost = calculateImplementationCost(level, "large");
       const enterpriseOrgCost = calculateImplementationCost(
         level,
-        "enterprise"
+        "enterprise",
       );
 
       // Check scale factors are applied correctly
@@ -70,17 +70,17 @@ describe("Cost Calculation Utilities", () => {
       const generalCost = calculateImplementationCost(
         level,
         "medium",
-        "general"
+        "general",
       );
       const financialCost = calculateImplementationCost(
         level,
         "medium",
-        "financial"
+        "financial",
       );
       const healthcareCost = calculateImplementationCost(
         level,
         "medium",
-        "healthcare"
+        "healthcare",
       );
 
       // Check industry factors are applied correctly
@@ -94,19 +94,26 @@ describe("Cost Calculation Utilities", () => {
     });
 
     it("should handle invalid or undefined inputs gracefully", () => {
-      // @ts-ignore - Testing invalid input
-      const nullLevelCost = calculateImplementationCost(null);
-      // @ts-ignore - Testing invalid input
-      const undefinedLevelCost = calculateImplementationCost(undefined);
-      // @ts-ignore - Testing invalid input
-      const invalidLevelCost = calculateImplementationCost("Invalid");
-      // @ts-ignore - Testing invalid input
-      const invalidOrgSize = calculateImplementationCost("Moderate", "invalid");
-      // @ts-ignore was not working, use type assertion instead
+      // Cast to any to bypass TypeScript checking for testing invalid inputs
+      const nullLevelCost = calculateImplementationCost(
+        null as unknown as SecurityLevel,
+      );
+      const undefinedLevelCost = calculateImplementationCost(
+        undefined as unknown as SecurityLevel,
+      );
+      const invalidLevelCost = calculateImplementationCost(
+        "Invalid" as unknown as SecurityLevel,
+      );
+      // Test with valid security level but invalid org size
+      const invalidOrgSize = calculateImplementationCost(
+        "Moderate",
+        "invalid" as "medium",
+      );
+      // Test with valid security level and org size but invalid industry
       const invalidIndustry = calculateImplementationCost(
         "Moderate",
         "medium",
-        "invalid" as any // Cast to any to bypass type checking for testing
+        "invalid" as "general", // Cast to valid type to bypass type checking for testing
       );
 
       // All should default gracefully
@@ -120,19 +127,19 @@ describe("Cost Calculation Utilities", () => {
     it("should normalize security level case variations", () => {
       // Type assertion to string to test case insensitivity features
       expect(calculateImplementationCost("low" as SecurityLevel)).toEqual(
-        calculateImplementationCost("Low")
+        calculateImplementationCost("Low"),
       );
       expect(calculateImplementationCost("MODERATE" as SecurityLevel)).toEqual(
-        calculateImplementationCost("Moderate")
+        calculateImplementationCost("Moderate"),
       );
       expect(calculateImplementationCost("high" as SecurityLevel)).toEqual(
-        calculateImplementationCost("High")
+        calculateImplementationCost("High"),
       );
       expect(calculateImplementationCost("very high" as SecurityLevel)).toEqual(
-        calculateImplementationCost("Very High")
+        calculateImplementationCost("Very High"),
       );
       expect(
-        calculateImplementationCost("very   high" as SecurityLevel)
+        calculateImplementationCost("very   high" as SecurityLevel),
       ).toEqual(calculateImplementationCost("Very High"));
     });
 
@@ -163,7 +170,7 @@ describe("Cost Calculation Utilities", () => {
       const result = calculateImplementationCost(
         "Moderate",
         "medium",
-        "invalid" as any // Cast to any to bypass type checking for testing
+        "invalid" as any, // Cast to any to bypass type checking for testing
       );
 
       // Test with properties that actually exist
@@ -192,7 +199,7 @@ describe("Cost Calculation Utilities", () => {
       const result = calculateTotalSecurityCost(
         "Moderate",
         "Moderate",
-        "Moderate"
+        "Moderate",
       );
 
       // All components should have same costs
@@ -213,7 +220,7 @@ describe("Cost Calculation Utilities", () => {
         "Low",
         "Low",
         "enterprise",
-        "financial"
+        "financial",
       );
 
       // Calculate expected values (5000 capex × 5.0 size × 1.5 industry = 37500)
@@ -309,7 +316,7 @@ describe("Cost Calculation Utilities", () => {
         totalBudget,
         "Low", // Value 1
         "Moderate", // Value 2
-        "High" // Value 3
+        "High", // Value 3
       );
 
       // Total value: 1 + 2 + 3 = 6
@@ -321,7 +328,7 @@ describe("Cost Calculation Utilities", () => {
       expect(result.integrity).toBe(100000);
       expect(result.confidentiality).toBe(150000);
       expect(
-        result.availability + result.integrity + result.confidentiality
+        result.availability + result.integrity + result.confidentiality,
       ).toBe(totalBudget);
     });
 
@@ -331,7 +338,7 @@ describe("Cost Calculation Utilities", () => {
         totalBudget,
         "Moderate", // Value 2
         "Moderate", // Value 2
-        "Moderate" // Value 2
+        "Moderate", // Value 2
       );
 
       // All equal, so should split evenly
@@ -339,7 +346,7 @@ describe("Cost Calculation Utilities", () => {
       expect(result.integrity).toBe(100000);
       expect(result.confidentiality).toBe(100000);
       expect(
-        result.availability + result.integrity + result.confidentiality
+        result.availability + result.integrity + result.confidentiality,
       ).toBe(totalBudget);
     });
 
@@ -349,7 +356,7 @@ describe("Cost Calculation Utilities", () => {
         totalBudget,
         "None", // Value 0
         "None", // Value 0
-        "None" // Value 0
+        "None", // Value 0
       );
 
       // All None (0), so should split evenly
@@ -363,7 +370,7 @@ describe("Cost Calculation Utilities", () => {
         0,
         "Low",
         "Moderate",
-        "High"
+        "High",
       );
 
       // Zero budget means zero allocation
@@ -378,7 +385,7 @@ describe("Cost Calculation Utilities", () => {
         100,
         "Low", // Value 1
         "Moderate", // Value 2
-        "High" // Value 3
+        "High", // Value 3
       );
 
       // Total value: 1 + 2 + 3 = 6
@@ -393,7 +400,7 @@ describe("Cost Calculation Utilities", () => {
 
       // Check they roughly add up to total budget
       expect(
-        result.availability + result.integrity + result.confidentiality
+        result.availability + result.integrity + result.confidentiality,
       ).toBeCloseTo(100, 0);
     });
   });

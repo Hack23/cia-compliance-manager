@@ -11,7 +11,7 @@ import { ComplianceServiceAdapter } from "./ComplianceServiceAdapter";
 import { ComplianceServiceStatic } from "./complianceTestHelpers";
 
 // Define mock compliance data as a regular object
-const mockComplianceData = {
+const _mockComplianceData = {
   frameworks: {
     "ISO 27001": {
       name: "ISO 27001",
@@ -234,7 +234,7 @@ const mockComplianceData = {
 // Create a proper mock detail function
 const createMockDetail = (
   description: string,
-  technical: string
+  technical: string,
 ): CIADetails => ({
   description,
   technical,
@@ -268,7 +268,7 @@ const mockDataProvider: CIADataProvider = {
     High: createMockDetail("High confidentiality", "Advanced controls"),
     "Very High": createMockDetail(
       "Maximum confidentiality",
-      "Maximum controls"
+      "Maximum controls",
     ),
   },
   roiEstimates: {
@@ -296,7 +296,7 @@ interface ExtendedComplianceService extends ComplianceService {
   mapControlsToFrameworks(
     availabilityLevel: SecurityLevel,
     integrityLevel?: SecurityLevel,
-    confidentialityLevel?: SecurityLevel
+    confidentialityLevel?: SecurityLevel,
   ): Record<string, string[]>;
   getFrameworkRequirements(framework: string): string[];
   getRequiredSecurityLevel(framework: string): {
@@ -308,7 +308,7 @@ interface ExtendedComplianceService extends ComplianceService {
     framework: string,
     availabilityLevel: SecurityLevel,
     integrityLevel: SecurityLevel,
-    confidentialityLevel: SecurityLevel
+    confidentialityLevel: SecurityLevel,
   ): boolean;
 }
 
@@ -372,8 +372,8 @@ class TestExtendedComplianceService
 
   public mapControlsToFrameworks(
     availabilityLevel: SecurityLevel,
-    integrityLevel: SecurityLevel = availabilityLevel,
-    confidentialityLevel: SecurityLevel = availabilityLevel
+    _integrityLevel: SecurityLevel = availabilityLevel,
+    _confidentialityLevel: SecurityLevel = availabilityLevel,
   ): Record<string, string[]> {
     return {
       "Access Control": ["NIST 800-53", "ISO 27001", "HIPAA"],
@@ -428,7 +428,7 @@ class TestExtendedComplianceService
     framework: string,
     availabilityLevel: SecurityLevel,
     integrityLevel: SecurityLevel,
-    confidentialityLevel: SecurityLevel
+    confidentialityLevel: SecurityLevel,
   ): boolean {
     // Check if this is NIST CSF which has lower requirements
     if (framework.toLowerCase() === "nist csf") {
@@ -483,16 +483,16 @@ describe("ComplianceServiceAdapter", () => {
       const lowStatus = service.getComplianceStatus("Low", "Low", "Low");
       expect(lowStatus.compliantFrameworks).toBeDefined();
       expect(
-        lowStatus.partiallyCompliantFrameworks.length
+        lowStatus.partiallyCompliantFrameworks.length,
       ).toBeGreaterThanOrEqual(0);
 
       const moderateStatus = service.getComplianceStatus(
         "Moderate",
         "Moderate",
-        "Moderate"
+        "Moderate",
       );
       expect(moderateStatus.compliantFrameworks.length).toBeGreaterThanOrEqual(
-        0
+        0,
       );
 
       // Remove the industry parameter since it's not supported
@@ -502,7 +502,7 @@ describe("ComplianceServiceAdapter", () => {
       const veryHighStatus = service.getComplianceStatus(
         "Very High",
         "Very High",
-        "Very High"
+        "Very High",
       );
       expect(veryHighStatus.compliantFrameworks.length).toBeGreaterThan(0);
     });
@@ -511,7 +511,7 @@ describe("ComplianceServiceAdapter", () => {
       const status = service.getComplianceStatus(
         "Moderate",
         "Moderate",
-        "Moderate"
+        "Moderate",
       );
 
       expect(status).toHaveProperty("compliantFrameworks");
@@ -535,7 +535,7 @@ describe("ComplianceServiceAdapter", () => {
       const status = service.getComplianceStatus(
         "Very High",
         "Very High",
-        "Very High"
+        "Very High",
       );
 
       expect(status.compliantFrameworks.length).toBeGreaterThan(0);
@@ -549,10 +549,10 @@ describe("ComplianceServiceAdapter", () => {
           // Check if some compliantFrameworks contain the framework (might be a substring)
           expect(
             status.compliantFrameworks.some((f: string) =>
-              f.includes(framework)
-            )
+              f.includes(framework),
+            ),
           ).toBe(true);
-        }
+        },
       );
     });
 
@@ -563,7 +563,7 @@ describe("ComplianceServiceAdapter", () => {
       // Verify we get compliant, partial, and non-compliant frameworks
       expect(status.compliantFrameworks.length).toBeGreaterThanOrEqual(0);
       expect(status.partiallyCompliantFrameworks.length).toBeGreaterThanOrEqual(
-        0
+        0,
       );
       expect(status.nonCompliantFrameworks.length).toBeGreaterThanOrEqual(0);
 
@@ -606,8 +606,8 @@ describe("ComplianceServiceAdapter", () => {
           status.remediationSteps.some(
             (step: string) =>
               step.toLowerCase().includes("data protection") ||
-              step.toLowerCase().includes("consent")
-          )
+              step.toLowerCase().includes("consent"),
+          ),
         ).toBe(true);
       }
 
@@ -620,8 +620,8 @@ describe("ComplianceServiceAdapter", () => {
             (step: string) =>
               step.toLowerCase().includes("phi") ||
               step.toLowerCase().includes("healthcare") ||
-              step.toLowerCase().includes("audit")
-          )
+              step.toLowerCase().includes("audit"),
+          ),
         ).toBe(true);
       }
 
@@ -635,8 +635,8 @@ describe("ComplianceServiceAdapter", () => {
               (step: string) =>
                 step.includes("secure") ||
                 step.includes("encryption") ||
-                step.includes("protection")
-            )
+                step.includes("protection"),
+            ),
           ).toBe(true);
         }
       }
@@ -666,8 +666,8 @@ describe("ComplianceServiceAdapter", () => {
             (req: string) =>
               req.toLowerCase().includes("security") ||
               req.toLowerCase().includes("control") ||
-              req.toLowerCase().includes("protection")
-          )
+              req.toLowerCase().includes("protection"),
+          ),
         ).toBe(true);
       }
     });
@@ -677,7 +677,7 @@ describe("ComplianceServiceAdapter", () => {
       const healthcareStatus = service.getComplianceStatus(
         "High",
         "High",
-        "High"
+        "High",
       );
       // Only verify that we get a valid compliance status response
       expect(healthcareStatus).toHaveProperty("compliantFrameworks");
@@ -688,7 +688,7 @@ describe("ComplianceServiceAdapter", () => {
       const financialStatus = service.getComplianceStatus(
         "Very High",
         "Very High",
-        "Very High"
+        "Very High",
       );
       expect(financialStatus).toHaveProperty("compliantFrameworks");
 
@@ -701,7 +701,7 @@ describe("ComplianceServiceAdapter", () => {
       const status = service.getComplianceStatus(
         "Moderate",
         "Moderate",
-        "Moderate"
+        "Moderate",
       );
 
       // Create a Set of all frameworks to check for duplicates
@@ -733,13 +733,13 @@ describe("ComplianceServiceAdapter", () => {
       const borderlineStatus = service.getComplianceStatus(
         "Moderate",
         "Low",
-        "None"
+        "None",
       );
 
       // This combination should have a low compliance score
       expect(borderlineStatus.compliantFrameworks).toBeDefined();
       expect(
-        borderlineStatus.nonCompliantFrameworks.length
+        borderlineStatus.nonCompliantFrameworks.length,
       ).toBeGreaterThanOrEqual(0);
 
       const score = borderlineStatus.complianceScore ?? 0;
@@ -749,7 +749,7 @@ describe("ComplianceServiceAdapter", () => {
       const borderlineStatus2 = service.getComplianceStatus(
         "High",
         "High",
-        "Moderate"
+        "Moderate",
       );
 
       const score2 = borderlineStatus2.complianceScore ?? 0;
@@ -761,7 +761,7 @@ describe("ComplianceServiceAdapter", () => {
       const status = service.getComplianceStatus(
         "Moderate",
         "Moderate",
-        "Moderate"
+        "Moderate",
       );
 
       const score = status.complianceScore ?? 0;
@@ -775,23 +775,23 @@ describe("ComplianceServiceAdapter", () => {
       const noneFrameworks = service.getCompliantFrameworks(
         "None",
         "None",
-        "None"
+        "None",
       );
       const lowFrameworks = service.getCompliantFrameworks("Low", "Low", "Low");
       const moderateFrameworks = service.getCompliantFrameworks(
         "Moderate",
         "Moderate",
-        "Moderate"
+        "Moderate",
       );
-      const highFrameworks = service.getCompliantFrameworks(
+      const _highFrameworks = service.getCompliantFrameworks(
         "High",
         "High",
-        "High"
+        "High",
       );
       const veryHighFrameworks = service.getCompliantFrameworks(
         "Very High",
         "Very High",
-        "Very High"
+        "Very High",
       );
 
       expect(noneFrameworks).toBeDefined();
@@ -815,7 +815,7 @@ describe("ComplianceServiceAdapter", () => {
       const frameworks = service.getCompliantFrameworks(
         "Very High",
         "Very High",
-        "Very High"
+        "Very High",
       );
 
       expect(frameworks).toContain("HIPAA");
@@ -834,17 +834,17 @@ describe("ComplianceServiceAdapter", () => {
     it("returns appropriate status text for each security level", () => {
       expect(service.getComplianceStatusText("None")).toBe("Non-Compliant");
       expect(service.getComplianceStatusText("Low")).toBe(
-        "Meets basic compliance only"
+        "Meets basic compliance only",
       );
       expect(service.getComplianceStatusText("Moderate")).toBe(
-        "Compliant with standard frameworks"
+        "Compliant with standard frameworks",
       );
       // Update expectation to match actual implementation
       expect(service.getComplianceStatusText("High")).toBe(
-        "Compliant with all major frameworks"
+        "Compliant with all major frameworks",
       );
       expect(service.getComplianceStatusText("Very High")).toBe(
-        "Compliant with all major frameworks"
+        "Compliant with all major frameworks",
       );
     });
   });
@@ -856,7 +856,7 @@ describe("ComplianceServiceAdapter", () => {
         "NIST 800-53",
         "High",
         "High",
-        "High"
+        "High",
       );
       expect(result.status).toBe("Compliant");
 
@@ -864,7 +864,7 @@ describe("ComplianceServiceAdapter", () => {
         "GDPR",
         "Moderate",
         "High",
-        "High"
+        "High",
       );
       expect(gdprResult.status).toBe("Compliant");
 
@@ -872,7 +872,7 @@ describe("ComplianceServiceAdapter", () => {
         "SOC2",
         "Low",
         "Moderate",
-        "Moderate"
+        "Moderate",
       );
       expect(soc2Result.status).toBe("Partially Compliant");
 
@@ -880,7 +880,7 @@ describe("ComplianceServiceAdapter", () => {
         "PCI DSS",
         "Low",
         "Low",
-        "Low"
+        "Low",
       );
       expect(pciResult.status).toBe("Non-Compliant");
 
@@ -888,7 +888,7 @@ describe("ComplianceServiceAdapter", () => {
         "HIPAA",
         "None",
         "None",
-        "None"
+        "None",
       );
       expect(hipaaResult.status).toBe("Non-Compliant");
     });
@@ -899,7 +899,7 @@ describe("ComplianceServiceAdapter", () => {
         "Unknown Framework",
         "Low",
         "Low",
-        "Low"
+        "Low",
       );
       expect(unknownResult.status).toBe("Non-Compliant");
 
@@ -907,7 +907,7 @@ describe("ComplianceServiceAdapter", () => {
         "Unknown Framework",
         "Moderate",
         "Moderate",
-        "Moderate"
+        "Moderate",
       );
       expect(unknownResult2.status).toBe("Non-Compliant");
 
@@ -915,7 +915,7 @@ describe("ComplianceServiceAdapter", () => {
         "Unknown Framework",
         "None",
         "None",
-        "None"
+        "None",
       );
       expect(unknownResult3.status).toBe("Non-Compliant");
     });
@@ -928,7 +928,7 @@ describe("ComplianceServiceAdapter", () => {
           SecurityLevel,
           SecurityLevel,
           SecurityLevel,
-          FrameworkComplianceStatusType
+          FrameworkComplianceStatusType,
         ]
       > = [
         // Framework / Availability / Integrity / Confidentiality / Expected
@@ -952,8 +952,8 @@ describe("ComplianceServiceAdapter", () => {
           expected === "compliant"
             ? "Compliant"
             : expected === "partially-compliant"
-            ? "Partially Compliant"
-            : "Non-Compliant"
+              ? "Partially Compliant"
+              : "Non-Compliant",
         );
       });
     });
@@ -964,23 +964,23 @@ describe("ComplianceServiceAdapter", () => {
 
       // Test with various unknown frameworks
       expect(
-        service.getFrameworkStatus("Unknown Framework", "Low", "Low", "Low")
+        service.getFrameworkStatus("Unknown Framework", "Low", "Low", "Low"),
       ).toBe("non-compliant");
       expect(
         service.getFrameworkStatus(
           "ACME Corp Standard",
           "Moderate",
           "Moderate",
-          "Moderate"
-        )
+          "Moderate",
+        ),
       ).toBe("non-compliant");
       expect(
         service.getFrameworkStatus(
           "Custom Internal Framework",
           "High",
           "High",
-          "High"
-        )
+          "High",
+        ),
       ).toBe("non-compliant");
     });
   });
@@ -988,17 +988,17 @@ describe("ComplianceServiceAdapter", () => {
   describe("getFrameworkDescription", () => {
     it("returns appropriate descriptions for known frameworks", () => {
       expect(service.getFrameworkDescription("NIST 800-53")).toContain(
-        "NIST Special Publication 800-53"
+        "NIST Special Publication 800-53",
       );
       expect(service.getFrameworkDescription("ISO 27001")).toContain(
-        "Information Security Management System standard for implementing security controls"
+        "Information Security Management System standard for implementing security controls",
       );
       expect(service.getFrameworkDescription("GDPR")).toContain(
-        "General Data Protection Regulation for protecting personal data in the EU"
+        "General Data Protection Regulation for protecting personal data in the EU",
       );
       // Update to match actual text in HIPAA description
       expect(service.getFrameworkDescription("HIPAA")).toContain(
-        "Health Insurance Portability and Accountability Act for healthcare data protection"
+        "Health Insurance Portability and Accountability Act for healthcare data protection",
       );
       expect(service.getFrameworkDescription("PCI DSS")).toContain("card");
     });
@@ -1012,21 +1012,21 @@ describe("ComplianceServiceAdapter", () => {
     it("provides comprehensive descriptions relevant to business context", () => {
       // Test descriptions contain relevant business context
       expect(service.getFrameworkDescription("GDPR")).toMatch(
-        /EU|European|General Data Protection/i
+        /EU|European|General Data Protection/i,
       );
       expect(service.getFrameworkDescription("HIPAA")).toMatch(
-        /patient|health|medical/i
+        /patient|health|medical/i,
       );
       expect(service.getFrameworkDescription("PCI DSS")).toMatch(
-        /card|payment|information/i
+        /card|payment|information/i,
       );
 
       // Test descriptions provide value-add information
       expect(service.getFrameworkDescription("ISO 27001")).toMatch(
-        /standard|management|system/i
+        /standard|management|system/i,
       );
       expect(service.getFrameworkDescription("NIST 800-53")).toMatch(
-        /federal|government|controls/i
+        /federal|government|controls/i,
       );
     });
   });
@@ -1034,42 +1034,42 @@ describe("ComplianceServiceAdapter", () => {
   describe("getFrameworkRequiredLevel", () => {
     it("returns the correct security level for each framework component", () => {
       expect(service.getFrameworkRequiredLevel("HIPAA", "availability")).toBe(
-        "High"
+        "High",
       );
       expect(service.getFrameworkRequiredLevel("HIPAA", "integrity")).toBe(
-        "High"
+        "High",
       );
       expect(
-        service.getFrameworkRequiredLevel("HIPAA", "confidentiality")
+        service.getFrameworkRequiredLevel("HIPAA", "confidentiality"),
       ).toBe("High");
 
       // Update expectation to match actual implementation
       expect(
-        service.getFrameworkRequiredLevel("PCI DSS", "confidentiality")
+        service.getFrameworkRequiredLevel("PCI DSS", "confidentiality"),
       ).toBe("High");
 
       expect(service.getFrameworkRequiredLevel("GDPR", "confidentiality")).toBe(
-        "High"
+        "High",
       );
       expect(service.getFrameworkRequiredLevel("GDPR", "integrity")).toBe(
-        "Moderate"
+        "Moderate",
       );
 
       expect(
-        service.getFrameworkRequiredLevel("NIST CSF", "availability")
+        service.getFrameworkRequiredLevel("NIST CSF", "availability"),
       ).toBe("Low");
     });
 
     it("handles inconsistent framework name casing", () => {
       // Update expectation to match actual implementation behavior
       expect(service.getFrameworkRequiredLevel("gdpr", "confidentiality")).toBe(
-        "High"
+        "High",
       );
       expect(
-        service.getFrameworkRequiredLevel("Pci Dss", "confidentiality")
+        service.getFrameworkRequiredLevel("Pci Dss", "confidentiality"),
       ).toBe("High");
       expect(service.getFrameworkRequiredLevel("HIPAA", "integrity")).toBe(
-        "High"
+        "High",
       );
     });
   });
@@ -1085,13 +1085,13 @@ describe("ComplianceServiceAdapter", () => {
     it("returns true for region-specific frameworks", () => {
       expect(service.isFrameworkApplicable("GDPR", undefined, "EU")).toBe(true);
       expect(service.isFrameworkApplicable("GDPR", undefined, "Europe")).toBe(
-        true
+        true,
       );
       expect(
-        service.isFrameworkApplicable("NIST 800-53", undefined, "US")
+        service.isFrameworkApplicable("NIST 800-53", undefined, "US"),
       ).toBe(true);
       expect(service.isFrameworkApplicable("NIST CSF", undefined, "US")).toBe(
-        true
+        true,
       );
     });
 
@@ -1100,7 +1100,7 @@ describe("ComplianceServiceAdapter", () => {
       expect(service.isFrameworkApplicable("SOC2")).toBe(true);
       expect(service.isFrameworkApplicable("NIST CSF")).toBe(true);
       expect(service.isFrameworkApplicable("Basic Security Guidelines")).toBe(
-        true
+        true,
       );
     });
 
@@ -1124,16 +1124,16 @@ describe("ComplianceServiceAdapter", () => {
 
     it("validates framework with both industry and region", () => {
       expect(service.isFrameworkApplicable("GDPR", "healthcare", "EU")).toBe(
-        true
+        true,
       );
       expect(service.isFrameworkApplicable("GDPR", "data", "Europe")).toBe(
-        true
+        true,
       );
       expect(service.isFrameworkApplicable("HIPAA", "healthcare", "US")).toBe(
-        true
+        true,
       );
       expect(
-        service.isFrameworkApplicable("PCI DSS", "finance", "global")
+        service.isFrameworkApplicable("PCI DSS", "finance", "global"),
       ).toBe(true);
     });
   });
@@ -1182,7 +1182,7 @@ describe("ComplianceService", () => {
       const status = service.getComplianceStatus(
         "Moderate" as SecurityLevel,
         "Moderate" as SecurityLevel,
-        "Moderate" as SecurityLevel
+        "Moderate" as SecurityLevel,
       );
 
       // Verify structure of returned object
@@ -1203,7 +1203,7 @@ describe("ComplianceService", () => {
       const status = service.getComplianceStatus(
         "Very High" as SecurityLevel,
         "Very High" as SecurityLevel,
-        "Very High" as SecurityLevel
+        "Very High" as SecurityLevel,
       );
 
       // All frameworks should be compliant
@@ -1219,7 +1219,7 @@ describe("ComplianceService", () => {
       const status = service.getComplianceStatus(
         "None" as SecurityLevel,
         "None" as SecurityLevel,
-        "None" as SecurityLevel
+        "None" as SecurityLevel,
       );
 
       // All frameworks should be non-compliant
@@ -1233,7 +1233,7 @@ describe("ComplianceService", () => {
       const status = service.getComplianceStatus(
         "Low" as SecurityLevel,
         "Low" as SecurityLevel,
-        "Low" as SecurityLevel
+        "Low" as SecurityLevel,
       );
 
       // Should have remediation steps
@@ -1267,7 +1267,7 @@ describe("ComplianceService", () => {
       const mapping = service.mapControlsToFrameworks(
         "Moderate" as SecurityLevel,
         "Moderate" as SecurityLevel,
-        "Moderate" as SecurityLevel
+        "Moderate" as SecurityLevel,
       );
 
       // Should return an object
@@ -1317,7 +1317,7 @@ describe("ComplianceService", () => {
         "HIPAA",
         "High" as SecurityLevel,
         "High" as SecurityLevel,
-        "High" as SecurityLevel
+        "High" as SecurityLevel,
       );
 
       expect(typeof isHIPAACompliant).toBe("boolean");
@@ -1328,7 +1328,7 @@ describe("ComplianceService", () => {
         "HIPAA",
         "Low" as SecurityLevel,
         "Low" as SecurityLevel,
-        "Low" as SecurityLevel
+        "Low" as SecurityLevel,
       );
 
       expect(isHIPAACompliant).toBe(false);

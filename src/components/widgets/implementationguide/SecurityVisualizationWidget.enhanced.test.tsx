@@ -2,19 +2,14 @@ import { render, screen } from "@testing-library/react";
 import type { Chart } from "chart.js";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { setupChartEnvironment } from "../../../tests/testUtils/chartTestUtils";
-import { SecurityLevel } from "../../../types/cia";
 import { mockWidgetProps } from "../../../utils/testUtils";
 import SecurityVisualizationWidget from "./SecurityVisualizationWidget"; // Fixed import syntax
 
 // Add proper Chart type declaration
-interface ChartInstance {
+interface _ChartInstance {
   destroy: () => void;
   update: () => void;
 }
-
-// Mock Chart.js
-let mockChartData: unknown = null;
-let mockChartOptions: unknown = null;
 
 // Setup test environment
 setupChartEnvironment();
@@ -24,6 +19,10 @@ describe("SecurityVisualizationWidget Enhanced Tests", () => {
     ...mockWidgetProps,
     testId: "security-visualization-widget",
   };
+
+  // Track chart data for testing
+  let mockChartData: unknown = null;
+  let mockChartOptions: unknown = null;
 
   beforeEach(() => {
     // Reset mocks
@@ -46,7 +45,7 @@ describe("SecurityVisualizationWidget Enhanced Tests", () => {
 
     // Check for radar chart canvas
     const chartElement = screen.getByTestId(
-      "security-visualization-widget-radar-chart"
+      "security-visualization-widget-radar-chart",
     );
     expect(chartElement).toBeInTheDocument();
 
@@ -61,11 +60,13 @@ describe("SecurityVisualizationWidget Enhanced Tests", () => {
 
     // Check component sections using widget-scoped test IDs
     const confidentialitySection = screen.getByTestId(
-      "widget-security-visualization-section-confidentiality-component"
+      "widget-security-visualization-section-confidentiality-component",
     );
-    const integritySection = screen.getByTestId("widget-security-visualization-section-integrity-component");
+    const integritySection = screen.getByTestId(
+      "widget-security-visualization-section-integrity-component",
+    );
     const availabilitySection = screen.getByTestId(
-      "widget-security-visualization-section-availability-component"
+      "widget-security-visualization-section-availability-component",
     );
 
     expect(confidentialitySection).toBeInTheDocument();
@@ -77,7 +78,9 @@ describe("SecurityVisualizationWidget Enhanced Tests", () => {
     render(<SecurityVisualizationWidget {...defaultProps} />);
 
     // Check security score using widget-scoped test ID
-    const securityScore = screen.getByTestId("widget-security-visualization-value-security-score");
+    const securityScore = screen.getByTestId(
+      "widget-security-visualization-value-security-score",
+    );
     expect(securityScore).toBeInTheDocument();
     expect(securityScore.textContent).toBe("50");
 
@@ -89,7 +92,9 @@ describe("SecurityVisualizationWidget Enhanced Tests", () => {
     render(<SecurityVisualizationWidget {...defaultProps} />);
 
     // Check risk level using widget-scoped test ID
-    const riskLevel = screen.getByTestId("widget-security-visualization-label-risk-level");
+    const riskLevel = screen.getByTestId(
+      "widget-security-visualization-label-risk-level",
+    );
     expect(riskLevel).toBeInTheDocument();
     expect(riskLevel.textContent).toBe("Low Risk");
   });
