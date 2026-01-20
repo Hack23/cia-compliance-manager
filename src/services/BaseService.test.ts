@@ -38,6 +38,18 @@ class TestBaseService extends BaseService {
   public testGetValuePoints(level: SecurityLevel) {
     return this.getValuePoints(level);
   }
+
+  public testValidateSecurityLevel(level: SecurityLevel) {
+    return this.validateSecurityLevel(level);
+  }
+
+  public testValidateComponent(component: CIAComponentType) {
+    return this.validateComponent(component);
+  }
+
+  public testGetSecurityLevelDescription(level: SecurityLevel) {
+    return this.getSecurityLevelDescription(level);
+  }
 }
 
 describe("BaseService", () => {
@@ -235,6 +247,58 @@ describe("BaseService", () => {
         expect(Array.isArray(result)).toBe(true);
         expect(result.length).toBeGreaterThan(0);
       });
+    });
+  });
+
+  describe("validateSecurityLevel", () => {
+    it("should return true for valid security levels", () => {
+      TEST_SECURITY_LEVELS.forEach((level) => {
+        expect(service.testValidateSecurityLevel(level)).toBe(true);
+      });
+    });
+
+    it("should throw error for invalid security level", () => {
+      expect(() => {
+        service.testValidateSecurityLevel("Invalid" as SecurityLevel);
+      }).toThrow();
+    });
+  });
+
+  describe("validateComponent", () => {
+    it("should return true for valid components", () => {
+      const components: CIAComponentType[] = [
+        "availability",
+        "integrity",
+        "confidentiality",
+      ];
+      components.forEach((component) => {
+        expect(service.testValidateComponent(component)).toBe(true);
+      });
+    });
+
+    it("should throw error for invalid component", () => {
+      expect(() => {
+        service.testValidateComponent("invalid" as CIAComponentType);
+      }).toThrow();
+    });
+  });
+
+  describe("getSecurityLevelDescription", () => {
+    it("should return description for each security level", () => {
+      TEST_SECURITY_LEVELS.forEach((level) => {
+        const result = service.testGetSecurityLevelDescription(level);
+        expect(typeof result).toBe("string");
+        expect(result.length).toBeGreaterThan(0);
+      });
+    });
+  });
+
+  describe("handleError", () => {
+    it("should handle standard Error and return ServiceError", () => {
+      const error = new Error("Test error");
+      const result = service.handleError(error);
+      expect(result).toBeDefined();
+      expect(result.message).toBe("Test error");
     });
   });
 });
