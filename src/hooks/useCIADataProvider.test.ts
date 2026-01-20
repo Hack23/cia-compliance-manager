@@ -1,5 +1,5 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { useCIADataProvider } from "./useCIADataProvider";
 
 // Mock the data provider module
@@ -15,6 +15,10 @@ vi.mock("../services/dataProviders", () => ({
 describe("useCIADataProvider", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   it("should initialize with loading state", async () => {
@@ -34,7 +38,7 @@ describe("useCIADataProvider", () => {
       () => {
         expect(result.current.isLoading).toBe(false);
       },
-      { timeout: 1000 }
+      { timeout: 1000 },
     );
 
     expect(result.current.error).toBe(null);
@@ -42,7 +46,7 @@ describe("useCIADataProvider", () => {
     expect(result.current.dataProvider).toHaveProperty("availabilityOptions");
     expect(result.current.dataProvider).toHaveProperty("integrityOptions");
     expect(result.current.dataProvider).toHaveProperty(
-      "confidentialityOptions"
+      "confidentialityOptions",
     );
     expect(result.current.dataProvider).toHaveProperty("roiEstimates");
   });
@@ -55,7 +59,7 @@ describe("useCIADataProvider", () => {
       () => {
         expect(result.current.isLoading).toBe(false);
       },
-      { timeout: 1000 }
+      { timeout: 1000 },
     );
 
     // Pre-refresh checks
@@ -72,7 +76,7 @@ describe("useCIADataProvider", () => {
       () => {
         expect(result.current.isLoading).toBe(false);
       },
-      { timeout: 1000 }
+      { timeout: 1000 },
     );
 
     // Post-refresh checks

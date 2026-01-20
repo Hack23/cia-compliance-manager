@@ -16,31 +16,31 @@ import { SecurityLevel } from "../types/cia";
 
 /**
  * Get color pair (background and text) for a specific security level
- * 
+ *
  * Returns coordinated background and text colors optimized for readability
  * and visual hierarchy in security level displays. Colors follow consistent
  * semantic meaning across the application.
  *
  * @param level - Security level to get color for
  * @returns Object with background and text color hex codes
- * 
+ *
  * @example
  * ```typescript
  * const colors = getSecurityLevelColorPair('High');
  * console.log(colors.bg);   // "#fff8e1" (light amber background)
  * console.log(colors.text); // "#ff8f00" (amber text)
- * 
+ *
  * // Usage in component
- * <div style={{ 
+ * <div style={{
  *   backgroundColor: colors.bg,
- *   color: colors.text 
+ *   color: colors.text
  * }}>
  *   High Security Level
  * </div>
  * ```
  */
 export function getSecurityLevelColorPair(
-  level: SecurityLevel
+  level: SecurityLevel,
 ): SecurityLevelColorPair {
   const colorMap: Record<SecurityLevel, SecurityLevelColorPair> = {
     None: { bg: "#f5f5f5", text: "#a0a0a0" },
@@ -59,7 +59,7 @@ export function getSecurityLevelColorPair(
  * @returns CSS class string
  */
 export function getSecurityLevelColorClass(
-  level: SecurityLevel | string
+  level: SecurityLevel | string,
 ): string {
   // Normalize the level to handle case variations
   const normalizedLevel =
@@ -89,7 +89,7 @@ export function getSecurityLevelColorClass(
  * @returns CSS background class string
  */
 export function getSecurityLevelBackgroundClass(
-  level: SecurityLevel | string
+  level: SecurityLevel | string,
 ): string {
   // Normalize the level to handle case variations
   const normalizedLevel =
@@ -203,24 +203,6 @@ export function getContrastColor(backgroundColor: string): string {
 }
 
 /**
- * Convert hex color to RGB values
- *
- * @param hex - Hex color string (e.g., #RRGGBB)
- * @returns RGB color object
- */
-export function hexToRgb(hex: string): { r: number; g: number; b: number } {
-  // Ensure hex is properly formatted with leading #
-  const cleanHex = hex.charAt(0) === "#" ? hex.substring(1) : hex;
-
-  // Use substring instead of deprecated substr
-  const r = parseInt(cleanHex.substring(0, 2), 16);
-  const g = parseInt(cleanHex.substring(2, 4), 16);
-  const b = parseInt(cleanHex.substring(4, 6), 16);
-
-  return { r, g, b };
-}
-
-/**
  * Get background color class for security score (0-100)
  * Preserve the exact behavior from main branch
  *
@@ -234,4 +216,3 @@ export function getSecurityScoreColorClass(score: number): string {
   if (score <= 80) return "bg-green-500"; // Low
   return "bg-blue-500"; // Minimal
 }
-

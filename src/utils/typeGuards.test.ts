@@ -135,20 +135,20 @@ describe("Type Guard Utilities", () => {
 
       // Missing required fields
       expect(isCIADetails({ ...validDetails, description: undefined })).toBe(
-        false
+        false,
       );
       expect(isCIADetails({ ...validDetails, technical: undefined })).toBe(
-        false
+        false,
       );
       expect(isCIADetails({ ...validDetails, businessImpact: undefined })).toBe(
-        false
+        false,
       );
       expect(isCIADetails({ ...validDetails, capex: undefined })).toBe(false);
       expect(isCIADetails({ ...validDetails, opex: undefined })).toBe(false);
       expect(isCIADetails({ ...validDetails, bg: undefined })).toBe(false);
       expect(isCIADetails({ ...validDetails, text: undefined })).toBe(false);
       expect(
-        isCIADetails({ ...validDetails, recommendations: undefined })
+        isCIADetails({ ...validDetails, recommendations: undefined }),
       ).toBe(false);
 
       // Not an object
@@ -172,16 +172,16 @@ describe("Type Guard Utilities", () => {
 
       // Missing required fields
       expect(
-        isAvailabilityDetail({ ...validDetail, description: undefined })
+        isAvailabilityDetail({ ...validDetail, description: undefined }),
       ).toBe(false);
       expect(
-        isAvailabilityDetail({ ...validDetail, businessImpact: undefined })
+        isAvailabilityDetail({ ...validDetail, businessImpact: undefined }),
       ).toBe(false);
       expect(isAvailabilityDetail({ ...validDetail, uptime: undefined })).toBe(
-        false
+        false,
       );
       expect(
-        isAvailabilityDetail({ ...validDetail, recommendations: undefined })
+        isAvailabilityDetail({ ...validDetail, recommendations: undefined }),
       ).toBe(false);
     });
 
@@ -196,13 +196,13 @@ describe("Type Guard Utilities", () => {
 
       // Missing required fields
       expect(
-        isIntegrityDetail({ ...validDetail, description: undefined })
+        isIntegrityDetail({ ...validDetail, description: undefined }),
       ).toBe(false);
       expect(
-        isIntegrityDetail({ ...validDetail, businessImpact: undefined })
+        isIntegrityDetail({ ...validDetail, businessImpact: undefined }),
       ).toBe(false);
       expect(
-        isIntegrityDetail({ ...validDetail, recommendations: undefined })
+        isIntegrityDetail({ ...validDetail, recommendations: undefined }),
       ).toBe(false);
     });
 
@@ -217,13 +217,13 @@ describe("Type Guard Utilities", () => {
 
       // Missing required fields
       expect(
-        isConfidentialityDetail({ ...validDetail, impact: undefined })
+        isConfidentialityDetail({ ...validDetail, impact: undefined }),
       ).toBe(false);
       expect(
-        isConfidentialityDetail({ ...validDetail, businessImpact: undefined })
+        isConfidentialityDetail({ ...validDetail, businessImpact: undefined }),
       ).toBe(false);
       expect(
-        isConfidentialityDetail({ ...validDetail, recommendations: undefined })
+        isConfidentialityDetail({ ...validDetail, recommendations: undefined }),
       ).toBe(false);
     });
 
@@ -240,7 +240,7 @@ describe("Type Guard Utilities", () => {
 
       // Missing required fields
       expect(
-        isBusinessImpactDetails({ ...validDetails, summary: undefined })
+        isBusinessImpactDetails({ ...validDetails, summary: undefined }),
       ).toBe(false);
 
       // No impact categories
@@ -266,16 +266,16 @@ describe("Type Guard Utilities", () => {
 
       // Missing required fields
       expect(
-        isSecurityProfile({ ...validProfile, availability: undefined })
+        isSecurityProfile({ ...validProfile, availability: undefined }),
       ).toBe(false);
       expect(isSecurityProfile({ ...validProfile, integrity: undefined })).toBe(
-        false
+        false,
       );
       expect(
-        isSecurityProfile({ ...validProfile, confidentiality: undefined })
+        isSecurityProfile({ ...validProfile, confidentiality: undefined }),
       ).toBe(false);
       expect(isSecurityProfile({ ...validProfile, overall: undefined })).toBe(
-        false
+        false,
       );
 
       // Not an object
@@ -303,7 +303,7 @@ describe("Type Guard Utilities", () => {
           requirements: ["Req 1"],
           status: "Partially Compliant",
           complianceScore: 75,
-        })
+        }),
       ).toBe(true);
 
       // Invalid array properties
@@ -311,21 +311,21 @@ describe("Type Guard Utilities", () => {
         isComplianceStatus({
           ...validStatus,
           compliantFrameworks: "NIST",
-        })
+        }),
       ).toBe(false);
 
       expect(
         isComplianceStatus({
           ...validStatus,
           partiallyCompliantFrameworks: "ISO27001",
-        })
+        }),
       ).toBe(false);
 
       expect(
         isComplianceStatus({
           ...validStatus,
           nonCompliantFrameworks: "HIPAA",
-        })
+        }),
       ).toBe(false);
 
       // Invalid optional properties
@@ -333,14 +333,14 @@ describe("Type Guard Utilities", () => {
         isComplianceStatus({
           ...validStatus,
           remediationSteps: "Step 1",
-        })
+        }),
       ).toBe(false);
 
       expect(
         isComplianceStatus({
           ...validStatus,
           status: 123,
-        })
+        }),
       ).toBe(false);
 
       // Not an object
@@ -693,7 +693,7 @@ describe("Type Guards", () => {
     it("returns true for arrays", () => {
       expect(isArray([])).toBe(true);
       expect(isArray([1, 2, 3])).toBe(true);
-      expect(isArray(new Array())).toBe(true);
+      expect(isArray([] as unknown[])).toBe(true);
     });
 
     it("returns false for non-arrays", () => {

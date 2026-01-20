@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   TEST_SECURITY_LEVELS,
   createMockDataProvider,
@@ -36,6 +36,10 @@ describe("SecurityResourceService", () => {
     service = new SecurityResourceService(dataProvider);
   });
 
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   describe("getValuePoints", () => {
     it("returns value points for each security level", () => {
       TEST_SECURITY_LEVELS.forEach((level) => {
@@ -50,7 +54,7 @@ describe("SecurityResourceService", () => {
         } else {
           expect(valuePoints.length).toBeGreaterThan(0);
           expect(valuePoints).toEqual(
-            expect.arrayContaining([expect.any(String)])
+            expect.arrayContaining([expect.any(String)]),
           );
         }
       });
@@ -103,21 +107,21 @@ describe("SecurityResourceService", () => {
             const availabilityResource = resources.find(
               (r) =>
                 r.description?.toLowerCase().includes("availability") ||
-                r.title.toLowerCase().includes("availability")
+                r.title.toLowerCase().includes("availability"),
             );
             expect(availabilityResource).toBeDefined();
           } else if (component === "integrity") {
             const integrityResource = resources.find(
               (r) =>
                 r.description?.toLowerCase().includes("integrity") ||
-                r.title.toLowerCase().includes("integrity")
+                r.title.toLowerCase().includes("integrity"),
             );
             expect(integrityResource).toBeDefined();
           } else if (component === "confidentiality") {
             const confidentialityResource = resources.find(
               (r) =>
                 r.description?.toLowerCase().includes("confidentiality") ||
-                r.title.toLowerCase().includes("confidentiality")
+                r.title.toLowerCase().includes("confidentiality"),
             );
             expect(confidentialityResource).toBeDefined();
           }
@@ -129,14 +133,14 @@ describe("SecurityResourceService", () => {
   describe("Factory function", () => {
     it("creates a service instance with default data provider when none provided", () => {
       const defaultService = createSecurityResourceService(
-        mockTestDataProvider()
+        mockTestDataProvider(),
       );
       expect(defaultService).toBeInstanceOf(SecurityResourceService);
 
       // Test methods work with default provider
       const resources = defaultService.getSecurityResources(
         "availability",
-        "Moderate"
+        "Moderate",
       );
       expect(Array.isArray(resources)).toBe(true);
       expect(resources.length).toBeGreaterThan(0);

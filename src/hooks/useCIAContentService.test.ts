@@ -1,5 +1,5 @@
 import { act, renderHook } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { CIAContentService } from "../services/ciaContentService";
 import { useCIAContentService } from "./useCIAContentService";
 
@@ -37,10 +37,10 @@ const mockedModule = vi.mocked(await import("../services/ciaContentService"));
 vi.mock("../utils", () => ({
   // Provide both functions used from the utils module
   toErrorObject: vi.fn((err) =>
-    err instanceof Error ? err : new Error(String(err))
+    err instanceof Error ? err : new Error(String(err)),
   ),
   formatError: vi.fn((err, prefix) =>
-    prefix ? `${prefix}: ${String(err)}` : String(err)
+    prefix ? `${prefix}: ${String(err)}` : String(err),
   ),
 }));
 
@@ -50,6 +50,10 @@ describe("useCIAContentService", () => {
 
     // Reset the createCIAContentService implementation to default
     mockedModule.createCIAContentService.mockReturnValue(mockCIAService);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   it("should return a CIAContentService instance", async () => {
@@ -101,7 +105,7 @@ describe("useCIAContentService", () => {
       expect(result.current.isLoading).toBe(false);
       expect(result.current.error).toBeInstanceOf(Error);
       expect(result.current.error?.message).toBe(
-        "Service initialization failed"
+        "Service initialization failed",
       );
     });
   });

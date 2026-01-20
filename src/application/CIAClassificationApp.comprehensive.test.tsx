@@ -57,19 +57,15 @@ vi.mock("../components/dashboard/Dashboard", () => ({
 }));
 
 // Import components after mocks
-import React from "react";
 import { act, render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
-import CIAClassificationApp from "./CIAClassificationApp";
+import React from "react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { KeyboardShortcutProvider } from "../contexts/KeyboardShortcutContext";
+import CIAClassificationApp from "./CIAClassificationApp";
 
 // Helper to render with keyboard shortcut provider
 const renderWithProviders = (ui: React.ReactElement) => {
-  return render(
-    <KeyboardShortcutProvider>
-      {ui}
-    </KeyboardShortcutProvider>
-  );
+  return render(<KeyboardShortcutProvider>{ui}</KeyboardShortcutProvider>);
 };
 
 // Define proper test IDs that match the actual component
@@ -113,6 +109,10 @@ describe("CIAClassificationApp Comprehensive Tests", () => {
       .fn()
       .mockReturnValue(false);
     document.documentElement.classList.toggle = vi.fn();
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   it("renders application structure with header and dashboard", () => {

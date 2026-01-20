@@ -73,7 +73,7 @@ describe("RadarChart Extended Tests", () => {
 
     // Mock window.ResizeObserver with correct type
     global.ResizeObserver = class ResizeObserver {
-      constructor(callback: ResizeObserverCallback) {}
+      constructor(_callback: ResizeObserverCallback) {}
       observe() {}
       unobserve() {}
       disconnect() {}
@@ -94,7 +94,7 @@ describe("RadarChart Extended Tests", () => {
         availabilityLevel="High"
         integrityLevel="Moderate"
         confidentialityLevel="Low"
-      />
+      />,
     );
 
     expect(resizeSpy).toHaveBeenCalledWith("resize", expect.any(Function));
@@ -107,7 +107,7 @@ describe("RadarChart Extended Tests", () => {
         availabilityLevel="Low"
         integrityLevel="Low"
         confidentialityLevel="Low"
-      />
+      />,
     );
 
     rerender(
@@ -115,17 +115,17 @@ describe("RadarChart Extended Tests", () => {
         availabilityLevel="High"
         integrityLevel="High"
         confidentialityLevel="High"
-      />
+      />,
     );
 
     expect(
-      screen.getByTestId(CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE)
+      screen.getByTestId(CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE),
     ).toHaveTextContent("High");
     expect(
-      screen.getByTestId(CHART_TEST_IDS.RADAR_INTEGRITY_VALUE)
+      screen.getByTestId(CHART_TEST_IDS.RADAR_INTEGRITY_VALUE),
     ).toHaveTextContent("High");
     expect(
-      screen.getByTestId(CHART_TEST_IDS.RADAR_CONFIDENTIALITY_VALUE)
+      screen.getByTestId(CHART_TEST_IDS.RADAR_CONFIDENTIALITY_VALUE),
     ).toHaveTextContent("High");
   });
 
@@ -135,7 +135,7 @@ describe("RadarChart Extended Tests", () => {
         availabilityLevel="High"
         integrityLevel="Moderate"
         confidentialityLevel="Low"
-      />
+      />,
     );
 
     expect(mockChartConstructor).toHaveBeenCalled();
@@ -147,7 +147,7 @@ describe("RadarChart Extended Tests", () => {
         availabilityLevel="High"
         integrityLevel="Moderate"
         confidentialityLevel="Low"
-      />
+      />,
     );
 
     unmount();

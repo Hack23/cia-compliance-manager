@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import React from "react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { KeyboardShortcutProvider } from "../contexts/KeyboardShortcutContext";
-import { beforeEach, describe, expect, it, vi } from "vitest";
 import CIAClassificationApp from "./CIAClassificationApp";
 
 // Define AppWrapper component for testing
@@ -113,11 +113,7 @@ vi.mock("../components/widgets/SecuritySummaryWidget", () => ({
 
 // Helper to render with keyboard shortcut provider
 const renderWithProviders = (ui: React.ReactElement) => {
-  return render(
-    <KeyboardShortcutProvider>
-      {ui}
-    </KeyboardShortcutProvider>
-  );
+  return render(<KeyboardShortcutProvider>{ui}</KeyboardShortcutProvider>);
 };
 
 describe("CIAClassificationApp Dark Mode Tests", () => {
@@ -151,6 +147,10 @@ describe("CIAClassificationApp Dark Mode Tests", () => {
     });
   });
 
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   it("has dark mode enabled by default", () => {
     renderWithProviders(<CIAClassificationApp />);
 
@@ -170,7 +170,7 @@ describe("CIAClassificationApp Dark Mode Tests", () => {
     render(
       <AppWrapper darkMode={true}>
         <CIAClassificationApp />
-      </AppWrapper>
+      </AppWrapper>,
     );
 
     // Check that dark mode class is applied

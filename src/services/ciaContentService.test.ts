@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createCIAOptionsMock } from "../tests/testMocks/ciaOptionsMocks";
 import { createTestCIAContentService } from "../tests/utils/mock";
 import { SecurityLevel } from "../types/cia";
@@ -376,53 +376,53 @@ const mockDataProvider = {
           level === "None"
             ? "Critical"
             : level === "Low"
-            ? "High"
-            : level === "Moderate"
-            ? "Medium"
-            : level === "High"
-            ? "Low"
-            : "Minimal"
+              ? "High"
+              : level === "Moderate"
+                ? "Medium"
+                : level === "High"
+                  ? "Low"
+                  : "Minimal"
         } business impact`,
         capex:
           level === "None"
             ? 0
             : level === "Low"
-            ? 5000
-            : level === "Moderate"
-            ? 15000
-            : level === "High"
-            ? 30000
-            : 60000,
+              ? 5000
+              : level === "Moderate"
+                ? 15000
+                : level === "High"
+                  ? 30000
+                  : 60000,
         opex:
           level === "None"
             ? 0
             : level === "Low"
-            ? 1000
-            : level === "Moderate"
-            ? 3000
-            : level === "High"
-            ? 6000
-            : 12000,
+              ? 1000
+              : level === "Moderate"
+                ? 3000
+                : level === "High"
+                  ? 6000
+                  : 12000,
         bg:
           level === "None"
             ? "#ffffff"
             : level === "Low"
-            ? "#f8d7da"
-            : level === "Moderate"
-            ? "#fff3cd"
-            : level === "High"
-            ? "#d4edda"
-            : "#cce5ff",
+              ? "#f8d7da"
+              : level === "Moderate"
+                ? "#fff3cd"
+                : level === "High"
+                  ? "#d4edda"
+                  : "#cce5ff",
         text:
           level === "None"
             ? "#000000"
             : level === "Low"
-            ? "#721c24"
-            : level === "Moderate"
-            ? "#856404"
-            : level === "High"
-            ? "#155724"
-            : "#004085",
+              ? "#721c24"
+              : level === "Moderate"
+                ? "#856404"
+                : level === "High"
+                  ? "#155724"
+                  : "#004085",
         recommendations:
           level === "None" ? [] : [`Availability recommendation for ${level}`],
       };
@@ -446,53 +446,53 @@ const mockDataProvider = {
           level === "None"
             ? "Critical"
             : level === "Low"
-            ? "High"
-            : level === "Moderate"
-            ? "Medium"
-            : level === "High"
-            ? "Low"
-            : "Minimal"
+              ? "High"
+              : level === "Moderate"
+                ? "Medium"
+                : level === "High"
+                  ? "Low"
+                  : "Minimal"
         } business impact`,
         capex:
           level === "None"
             ? 0
             : level === "Low"
-            ? 5000
-            : level === "Moderate"
-            ? 15000
-            : level === "High"
-            ? 30000
-            : 60000,
+              ? 5000
+              : level === "Moderate"
+                ? 15000
+                : level === "High"
+                  ? 30000
+                  : 60000,
         opex:
           level === "None"
             ? 0
             : level === "Low"
-            ? 1000
-            : level === "Moderate"
-            ? 3000
-            : level === "High"
-            ? 6000
-            : 12000,
+              ? 1000
+              : level === "Moderate"
+                ? 3000
+                : level === "High"
+                  ? 6000
+                  : 12000,
         bg:
           level === "None"
             ? "#ffffff"
             : level === "Low"
-            ? "#f8d7da"
-            : level === "Moderate"
-            ? "#fff3cd"
-            : level === "High"
-            ? "#d4edda"
-            : "#cce5ff",
+              ? "#f8d7da"
+              : level === "Moderate"
+                ? "#fff3cd"
+                : level === "High"
+                  ? "#d4edda"
+                  : "#cce5ff",
         text:
           level === "None"
             ? "#000000"
             : level === "Low"
-            ? "#721c24"
-            : level === "Moderate"
-            ? "#856404"
-            : level === "High"
-            ? "#155724"
-            : "#004085",
+              ? "#721c24"
+              : level === "Moderate"
+                ? "#856404"
+                : level === "High"
+                  ? "#155724"
+                  : "#004085",
         recommendations:
           level === "None" ? [] : [`Integrity recommendation for ${level}`],
       };
@@ -516,53 +516,53 @@ const mockDataProvider = {
           level === "None"
             ? "Critical"
             : level === "Low"
-            ? "High"
-            : level === "Moderate"
-            ? "Medium"
-            : level === "High"
-            ? "Low"
-            : "Minimal"
+              ? "High"
+              : level === "Moderate"
+                ? "Medium"
+                : level === "High"
+                  ? "Low"
+                  : "Minimal"
         } business impact`,
         capex:
           level === "None"
             ? 0
             : level === "Low"
-            ? 5000
-            : level === "Moderate"
-            ? 15000
-            : level === "High"
-            ? 30000
-            : 60000,
+              ? 5000
+              : level === "Moderate"
+                ? 15000
+                : level === "High"
+                  ? 30000
+                  : 60000,
         opex:
           level === "None"
             ? 0
             : level === "Low"
-            ? 1000
-            : level === "Moderate"
-            ? 3000
-            : level === "High"
-            ? 6000
-            : 12000,
+              ? 1000
+              : level === "Moderate"
+                ? 3000
+                : level === "High"
+                  ? 6000
+                  : 12000,
         bg:
           level === "None"
             ? "#ffffff"
             : level === "Low"
-            ? "#f8d7da"
-            : level === "Moderate"
-            ? "#fff3cd"
-            : level === "High"
-            ? "#d4edda"
-            : "#cce5ff",
+              ? "#f8d7da"
+              : level === "Moderate"
+                ? "#fff3cd"
+                : level === "High"
+                  ? "#d4edda"
+                  : "#cce5ff",
         text:
           level === "None"
             ? "#000000"
             : level === "Low"
-            ? "#721c24"
-            : level === "Moderate"
-            ? "#856404"
-            : level === "High"
-            ? "#155724"
-            : "#004085",
+              ? "#721c24"
+              : level === "Moderate"
+                ? "#856404"
+                : level === "High"
+                  ? "#155724"
+                  : "#004085",
         recommendations:
           level === "None"
             ? []
@@ -609,6 +609,10 @@ describe("CIAContentService", () => {
 
   beforeEach(() => {
     service = createTestCIAContentService();
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   describe("Core Functionality", () => {
@@ -801,7 +805,7 @@ describe("CIAContentService", () => {
 
       // Mock the method to return the expected result
       vi.spyOn(service, "getDetailedDescription").mockReturnValueOnce(
-        expectedResult
+        expectedResult,
       );
 
       const details = service.getDetailedDescription("confidentiality", "High");
@@ -814,7 +818,7 @@ describe("CIAContentService", () => {
     it("getTechnicalDescription should return string value", () => {
       const description = service.getTechnicalDescription(
         "availability",
-        "High"
+        "High",
       );
       expect(typeof description).toBe("string");
       expect(description.length).toBeGreaterThan(0);
@@ -861,7 +865,7 @@ describe("CIAContentService", () => {
 
       levels.forEach((level, index) => {
         expect(service.getInformationSensitivity(level)).toBe(
-          expectedLabels[index]
+          expectedLabels[index],
         );
       });
     });
@@ -904,7 +908,7 @@ describe("Integration with test utilities", () => {
 
     expect(service).toBeDefined();
     expect(
-      service.getComponentDetails("availability", "Moderate")
+      service.getComponentDetails("availability", "Moderate"),
     ).toBeDefined();
     expect(service.getROIEstimate("High")).toBeDefined();
     expect(service.getBusinessImpact("availability", "High")).toBeDefined();
@@ -917,6 +921,10 @@ describe("CIAContentService advanced functions", () => {
 
   beforeEach(() => {
     service = new CIAContentService(mockDataProvider);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   it("calculateRoi calculates ROI correctly", () => {
@@ -953,7 +961,7 @@ describe("CIAContentService advanced functions", () => {
     const plan = service.getRecommendedImplementationPlan(
       "Low",
       "Moderate",
-      "High"
+      "High",
     );
     expect(plan).toBeDefined();
     expect(typeof plan).toBe("string");

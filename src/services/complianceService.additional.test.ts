@@ -1,14 +1,18 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockDataProvider } from "../tests/testMocks/mockTypes";
 import { SecurityLevel } from "../types/cia";
 import { ComplianceService, getComplianceStatus } from "./complianceService";
 
 // This file replaces previous tests that were trying to import private functions
 describe("ComplianceService Internal Functions", () => {
-  let service: ComplianceService;
+  let _service: ComplianceService;
 
   beforeEach(() => {
-    service = new ComplianceService(createMockDataProvider());
+    _service = new ComplianceService(createMockDataProvider());
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   describe("getComplianceStatus", () => {
@@ -16,7 +20,7 @@ describe("ComplianceService Internal Functions", () => {
       const status = await getComplianceStatus(
         "Moderate" as SecurityLevel,
         "Moderate" as SecurityLevel,
-        "Moderate" as SecurityLevel
+        "Moderate" as SecurityLevel,
       );
 
       // Use optional chaining to handle potentially undefined properties

@@ -30,7 +30,7 @@ describe("RadarChart", () => {
         availabilityLevel="None"
         integrityLevel="None"
         confidentialityLevel="None"
-      />
+      />,
     );
 
     expect(screen.getByTestId(CHART_TEST_IDS.RADAR_CHART)).toBeInTheDocument();
@@ -42,32 +42,32 @@ describe("RadarChart", () => {
         availabilityLevel="High"
         integrityLevel="Moderate"
         confidentialityLevel="Low"
-      />
+      />,
     );
 
     expect(
-      screen.getByTestId(CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE)
+      screen.getByTestId(CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE),
     ).toHaveTextContent("High");
     expect(
-      screen.getByTestId(CHART_TEST_IDS.RADAR_INTEGRITY_VALUE)
+      screen.getByTestId(CHART_TEST_IDS.RADAR_INTEGRITY_VALUE),
     ).toHaveTextContent("Moderate");
     expect(
-      screen.getByTestId(CHART_TEST_IDS.RADAR_CONFIDENTIALITY_VALUE)
+      screen.getByTestId(CHART_TEST_IDS.RADAR_CONFIDENTIALITY_VALUE),
     ).toHaveTextContent("Low");
   });
 
   it("handles null or undefined values gracefully", () => {
-    // @ts-ignore - intentionally testing with undefined values
+    // @ts-expect-error - intentionally testing with undefined values
     render(<RadarChart />);
 
     expect(
-      screen.getByTestId(CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE)
+      screen.getByTestId(CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE),
     ).toHaveTextContent("None");
     expect(
-      screen.getByTestId(CHART_TEST_IDS.RADAR_INTEGRITY_VALUE)
+      screen.getByTestId(CHART_TEST_IDS.RADAR_INTEGRITY_VALUE),
     ).toHaveTextContent("None");
     expect(
-      screen.getByTestId(CHART_TEST_IDS.RADAR_CONFIDENTIALITY_VALUE)
+      screen.getByTestId(CHART_TEST_IDS.RADAR_CONFIDENTIALITY_VALUE),
     ).toHaveTextContent("None");
   });
 
@@ -80,12 +80,12 @@ describe("RadarChart", () => {
         availabilityLevel="None"
         integrityLevel="None"
         confidentialityLevel="None"
-      />
+      />,
     );
 
     // Should render the chart container even if canvas fails
     expect(
-      screen.getByTestId(CHART_TEST_IDS.RADAR_CHART_CONTAINER)
+      screen.getByTestId(CHART_TEST_IDS.RADAR_CHART_CONTAINER),
     ).toBeInTheDocument();
   });
 
@@ -97,7 +97,7 @@ describe("RadarChart", () => {
         integrityLevel="None"
         confidentialityLevel="None"
         testId={customTestId}
-      />
+      />,
     );
 
     expect(screen.getByTestId(customTestId)).toBeInTheDocument();
@@ -111,7 +111,7 @@ describe("RadarChart", () => {
         integrityLevel="Low"
         confidentialityLevel="Low"
         className={customClass}
-      />
+      />,
     );
 
     // Note: We can't directly check container classes because of how the component is structured
@@ -124,17 +124,17 @@ describe("RadarChart", () => {
         availabilityLevel="Very High"
         integrityLevel="High"
         confidentialityLevel="Moderate"
-      />
+      />,
     );
 
     expect(
-      screen.getByTestId(CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE)
+      screen.getByTestId(CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE),
     ).toHaveTextContent("Very High");
     expect(
-      screen.getByTestId(CHART_TEST_IDS.RADAR_INTEGRITY_VALUE)
+      screen.getByTestId(CHART_TEST_IDS.RADAR_INTEGRITY_VALUE),
     ).toHaveTextContent("High");
     expect(
-      screen.getByTestId(CHART_TEST_IDS.RADAR_CONFIDENTIALITY_VALUE)
+      screen.getByTestId(CHART_TEST_IDS.RADAR_CONFIDENTIALITY_VALUE),
     ).toHaveTextContent("Moderate");
   });
 
@@ -144,7 +144,7 @@ describe("RadarChart", () => {
         availabilityLevel="Low"
         integrityLevel="Low"
         confidentialityLevel="Low"
-      />
+      />,
     );
 
     rerender(
@@ -152,11 +152,11 @@ describe("RadarChart", () => {
         availabilityLevel="High"
         integrityLevel="High"
         confidentialityLevel="High"
-      />
+      />,
     );
 
     expect(
-      screen.getByTestId(CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE)
+      screen.getByTestId(CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE),
     ).toHaveTextContent("High");
   });
 });

@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockDataProvider } from "../tests/testMocks/mockTypes";
 import { BusinessImpactService } from "./businessImpactService";
 
@@ -10,6 +10,10 @@ describe("BusinessImpactService Internal Functions", () => {
     service = new BusinessImpactService(createMockDataProvider());
   });
 
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   // Test the public API instead of attempting to access private functions
   describe("getBusinessImpact returns consistent risk levels", () => {
     it("matches expected risk levels for each security level", () => {
@@ -19,7 +23,7 @@ describe("BusinessImpactService Internal Functions", () => {
       const high = service.getBusinessImpact("confidentiality", "High");
       const veryHigh = service.getBusinessImpact(
         "confidentiality",
-        "Very High"
+        "Very High",
       );
 
       expect(none.financial?.riskLevel).toBe("Critical Risk");

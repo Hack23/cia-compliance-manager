@@ -128,7 +128,7 @@ describe("RadarChart Comprehensive Tests", () => {
             "Confidentiality",
           ]),
         }),
-      })
+      }),
     );
   });
 
@@ -157,7 +157,7 @@ describe("RadarChart Comprehensive Tests", () => {
         integrityLevel="High"
         confidentialityLevel="Moderate"
         testId="test-radar-chart"
-      />
+      />,
     );
 
     // Fix: Force effect cleanup and execution since props changed
@@ -222,13 +222,13 @@ describe("RadarChart Comprehensive Tests", () => {
     // Verify that addEventListener was called with 'resize'
     expect(addEventListenerSpy).toHaveBeenCalledWith(
       "resize",
-      expect.any(Function)
+      expect.any(Function),
     );
 
     // Get the resize handler
     const resizeHandler = addEventListenerSpy.mock.calls.find(
-      (call) => call[0] === "resize"
-    )?.[1] as Function;
+      (call) => call[0] === "resize",
+    )?.[1] as () => void;
 
     // Make sure we found the resize handler
     expect(resizeHandler).toBeDefined();
