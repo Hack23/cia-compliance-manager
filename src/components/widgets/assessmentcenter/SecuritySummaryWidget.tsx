@@ -12,7 +12,7 @@ import {
   getWidgetAriaDescription,
   ARIA_ROLES 
 } from "../../../utils/accessibility";
-import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
+import { cn } from "../../../utils/tailwindClassHelpers";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 import TabContainer from "../../common/TabContainer";

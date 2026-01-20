@@ -3,11 +3,7 @@ import { SECURITY_SUMMARY_WIDGET_IDS, SECURITY_SUMMARY_TEST_IDS } from "../../..
 import { SecurityLevel } from "../../../types/cia";
 import { StatusType } from "../../../types/common/StatusTypes";
 import { getRiskLevelFromSecurityLevel } from "../../../utils/securityLevelUtils";
-import {
-  getIntegrityValidationLevel,
-  getAvailabilityUptimeTarget,
-} from "../../../utils/implementationUtils";
-import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
+import { WidgetClasses } from "../../../utils/tailwindClassHelpers";
 import RadarChart from "../../charts/RadarChart";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import StatusBadge from "../../common/StatusBadge";

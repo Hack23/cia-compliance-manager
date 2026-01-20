@@ -1,7 +1,6 @@
 import React from "react";
 import { SECURITY_SUMMARY_WIDGET_IDS } from "../../../constants/testIds";
 import { formatCurrency } from "../../../utils/formatUtils";
-import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 
 /**
  * Props for SecurityBusinessTab component
