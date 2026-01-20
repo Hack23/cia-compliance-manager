@@ -22,7 +22,6 @@ import type { ImpactWidgetProps } from "../../../types/widget-props";
 import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
-import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 import { getCIAColors } from "../../../utils/ciaColorUtils";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import MetricCard from "../../common/MetricCard";
@@ -175,24 +174,6 @@ const getTestIds = (component: CIAComponent) => {
       // Exhaustive check to ensure all CIAComponent values are handled
       const exhaustiveCheck: never = component;
       throw new Error(`Unsupported CIA component in getTestIds: ${String(exhaustiveCheck)}`);
-    }
-  }
-};
-
-/**
- * Get border color class based on component color (explicit for Tailwind purging)
- * @param color - Color name (blue, green, orange)
- * @returns Explicit border color className string
- */
-const getBorderColorClass = (color: CIAComponentColor): string => {
-  switch (color) {
-    case "blue": return "border-blue-500";
-    case "green": return "border-green-500";
-    case "orange": return "border-orange-500";
-    default: {
-      // Exhaustive check - TypeScript will error if new colors are added
-      const exhaustiveCheck: never = color;
-      throw new Error(`Unsupported color: ${String(exhaustiveCheck)}`);
     }
   }
 };

@@ -256,7 +256,7 @@ describe("ComplianceStatusWidget", () => {
       // Gap analysis should now be visible (compact layout shows gaps in a condensed format)
       const widgetContent = screen.getByTestId("widget-container-test-compliance-widget").textContent;
       expect(widgetContent).toMatch(/Gap|gap|Gaps/i);
-      expect(widgetContent).toMatch(/PCI DSS Gap Analysis/i);
+      expect(widgetContent).toMatch(/PCI DSS Analysis/i);
     });
 
     it("shows component requirements in gap analysis", async () => {
