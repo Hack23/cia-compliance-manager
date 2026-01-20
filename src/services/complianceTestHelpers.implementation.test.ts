@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, test } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
 import { SecurityLevel } from "../types/cia";
 import {
   ComplianceServiceStatic,
@@ -221,6 +221,10 @@ describe("ComplianceTestHelpers Implementation", () => {
 
     beforeEach(() => {
       service = new MockComplianceService();
+    });
+
+    afterEach(() => {
+      vi.restoreAllMocks();
     });
 
     it("getComplianceStatus returns mock compliance status", () => {

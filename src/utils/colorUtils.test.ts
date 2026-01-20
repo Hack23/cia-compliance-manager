@@ -4,7 +4,7 @@
  * Tests for all color utility functions to ensure consistent
  * color representation of security levels across the application.
  */
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { SecurityLevel } from "../types/cia";
 import * as colorUtils from "./colorUtils";
 
@@ -173,6 +173,10 @@ describe("Color Utilities", () => {
         },
         configurable: true,
       });
+    });
+
+    afterEach(() => {
+      vi.restoreAllMocks();
     });
 
     it("should return light mode colors when not in dark mode", () => {

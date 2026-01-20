@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockDataProvider } from "../tests/testMocks/mockTypes";
 import { SecurityLevel } from "../types/cia";
 import { ComplianceService, getComplianceStatus } from "./complianceService";
@@ -9,6 +9,10 @@ describe("ComplianceService Internal Functions", () => {
 
   beforeEach(() => {
     _service = new ComplianceService(createMockDataProvider());
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   describe("getComplianceStatus", () => {

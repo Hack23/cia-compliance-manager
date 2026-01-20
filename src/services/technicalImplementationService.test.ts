@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SecurityLevel } from "../types/cia";
 import {
   CIADetails,
@@ -85,11 +85,15 @@ describe("TechnicalImplementationService", () => {
     service = createTechnicalImplementationService(dataProviderMock);
   });
 
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   describe("getTechnicalDescription", () => {
     it("returns technical description for a component and level", () => {
       const description = service.getTechnicalDescription(
         "availability",
-        "Moderate"
+        "Moderate",
       );
 
       // It should return the technical description from the component details
@@ -109,7 +113,7 @@ describe("TechnicalImplementationService", () => {
 
       const description = service.getTechnicalDescription(
         "availability",
-        "Moderate"
+        "Moderate",
       );
 
       // Should return a fallback message
@@ -119,15 +123,15 @@ describe("TechnicalImplementationService", () => {
     it("gets technical description for different components", () => {
       const availabilityDescription = service.getTechnicalDescription(
         "availability",
-        "Moderate"
+        "Moderate",
       );
       const integrityDescription = service.getTechnicalDescription(
         "integrity",
-        "Moderate"
+        "Moderate",
       );
       const confidentialityDescription = service.getTechnicalDescription(
         "confidentiality",
-        "Moderate"
+        "Moderate",
       );
 
       // All should return the technical description from their component details
@@ -141,7 +145,7 @@ describe("TechnicalImplementationService", () => {
     it("returns implementation details for a component and level", () => {
       const details = service.getComponentImplementationDetails(
         "availability",
-        "Moderate"
+        "Moderate",
       );
 
       // It should return the technical implementation details
@@ -165,7 +169,7 @@ describe("TechnicalImplementationService", () => {
 
       const details = service.getComponentImplementationDetails(
         "availability",
-        "Moderate"
+        "Moderate",
       );
 
       // Should return default implementation details
@@ -186,7 +190,7 @@ describe("TechnicalImplementationService", () => {
 
       const details = service.getComponentImplementationDetails(
         "availability",
-        "Moderate"
+        "Moderate",
       );
 
       // Should use recommendations as implementation steps
@@ -203,7 +207,7 @@ describe("TechnicalImplementationService", () => {
     it("returns recommendations for a component and level", () => {
       const recommendationsList = service.getRecommendations(
         "availability",
-        "Moderate"
+        "Moderate",
       );
 
       // It should return the recommendations array
@@ -225,7 +229,7 @@ describe("TechnicalImplementationService", () => {
 
       const recommendationsList = service.getRecommendations(
         "availability",
-        "Moderate"
+        "Moderate",
       );
 
       // Should return empty array
@@ -248,7 +252,7 @@ describe("TechnicalImplementationService", () => {
 
       const resultRecommendations = service.getRecommendations(
         "availability",
-        "Moderate"
+        "Moderate",
       );
 
       // Should return empty array
@@ -292,7 +296,7 @@ describe("TechnicalImplementationService", () => {
       const getSteps = (component: string, level: SecurityLevel) => {
         const details = service.getComponentImplementationDetails(
           component as any,
-          level
+          level,
         );
         return details.implementationSteps;
       };
@@ -333,7 +337,7 @@ describe("TechnicalImplementationService", () => {
       const getSteps = (component: string, level: SecurityLevel) => {
         const details = service.getComponentImplementationDetails(
           component as any,
-          level
+          level,
         );
         return details.implementationSteps;
       };
@@ -363,7 +367,7 @@ describe("TechnicalImplementationService", () => {
       const getSteps = (component: string, level: SecurityLevel) => {
         const details = service.getComponentImplementationDetails(
           component as any,
-          level
+          level,
         );
         return details.implementationSteps;
       };

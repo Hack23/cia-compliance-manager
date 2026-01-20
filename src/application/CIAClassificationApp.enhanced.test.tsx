@@ -1,7 +1,7 @@
-import React from "react";
-import { KeyboardShortcutProvider } from "../contexts/KeyboardShortcutContext";
 import { render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import React from "react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { KeyboardShortcutProvider } from "../contexts/KeyboardShortcutContext";
 import CIAClassificationApp from "./CIAClassificationApp";
 
 // Mock useCIAOptions hook
@@ -97,11 +97,7 @@ vi.mock("../components/widgets/SecuritySummaryWidget", () => ({
 
 // Helper to render with keyboard shortcut provider
 const renderWithProviders = (ui: React.ReactElement) => {
-  return render(
-    <KeyboardShortcutProvider>
-      {ui}
-    </KeyboardShortcutProvider>
-  );
+  return render(<KeyboardShortcutProvider>{ui}</KeyboardShortcutProvider>);
 };
 
 describe("CIAClassificationApp", () => {
@@ -121,6 +117,10 @@ describe("CIAClassificationApp", () => {
     // Set up document handler spies
     vi.spyOn(document, "addEventListener");
     vi.spyOn(document, "removeEventListener");
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   // Basic tests that don't depend on DOM complexity
