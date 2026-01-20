@@ -280,6 +280,7 @@ src/types/widgets.ts
 src/utils/accessibility.test.ts
 src/utils/accessibility.ts
 src/utils/businessValueUtils.ts
+src/utils/ciaColorUtils.ts
 src/utils/colorUtils.test.ts
 src/utils/colorUtils.ts
 src/utils/complianceTextUtils.ts

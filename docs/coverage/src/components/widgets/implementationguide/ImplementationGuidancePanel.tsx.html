@@ -249,7 +249,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -415,15 +415,15 @@ const ImplementationGuidancePanel: React.FC&lt;ImplementationGuidancePanelProps&
 }) =&gt; {
   return (
     &lt;div className={`mt-lg ${className}`} data-testid={testId}&gt;
-      &lt;h3 className="text-lg font-medium mb-md"&gt;Implementation Tips&lt;/h3&gt;
+      &lt;h3 className="text-subheading font-medium mb-md"&gt;Implementation Tips&lt;/h3&gt;
 &nbsp;
       &lt;div className="space-y-sm"&gt;
         {/* General implementation tips */}
         &lt;div className="p-sm bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md"&gt;
-          &lt;h4 className="text-md font-medium mb-sm"&gt;
+          &lt;h4 className="text-body-lg font-medium mb-sm"&gt;
             Getting Started with Implementation
           &lt;/h4&gt;
-          &lt;ol className="list-decimal list-inside space-y-xs text-sm text-gray-600 dark:text-gray-400 pl-md"&gt;
+          &lt;ol className="list-decimal list-inside space-y-xs text-body text-gray-600 dark:text-gray-400 pl-md"&gt;
             &lt;li&gt;Begin with a thorough assessment of your current security controls&lt;/li&gt;
             &lt;li&gt;Prioritize implementations based on risk exposure and business impact&lt;/li&gt;
             &lt;li&gt;Implement controls gradually, starting with foundational elements&lt;/li&gt;
@@ -438,15 +438,15 @@ const ImplementationGuidancePanel: React.FC&lt;ImplementationGuidancePanelProps&
             {/* Confidentiality Implementation */}
             {implementationGuides[2] &amp;&amp; (
               &lt;div className="p-sm bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light dark:border-primary-dark"&gt;
-                &lt;h4 className="text-md font-medium mb-sm text-primary-dark dark:text-primary-light flex items-center"&gt;
+                &lt;h4 className="text-body-lg font-medium mb-sm text-primary-dark dark:text-primary-light flex items-center"&gt;
                   &lt;span className="mr-sm"&gt;🔒&lt;/span&gt;Confidentiality ({confidentialityLevel})
                 &lt;/h4&gt;
-                &lt;div className="text-sm text-gray-600 dark:text-gray-400"&gt;
+                &lt;div className="text-body text-gray-600 dark:text-gray-400"&gt;
                   &lt;p className="mb-sm"&gt;
                     {implementationGuides[2].description ||
                       "Focus on data protection and access controls."}
                   &lt;/p&gt;
-                  &lt;div className="text-xs space-y-xs"&gt;
+                  &lt;div className="text-caption space-y-xs"&gt;
                     &lt;div&gt;
                       &lt;span className="font-medium"&gt;Expertise:&lt;/span&gt;{" "}
                       {implementationGuides[2].expertiseLevel || "Standard"}
@@ -463,15 +463,15 @@ const ImplementationGuidancePanel: React.FC&lt;ImplementationGuidancePanelProps&
             {/* Integrity Implementation */}
             {implementationGuides[1] &amp;&amp; (
               &lt;div className="p-sm bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light dark:border-success-dark"&gt;
-                &lt;h4 className="text-md font-medium mb-sm text-green-700 dark:text-green-300 flex items-center"&gt;
+                &lt;h4 className="text-body-lg font-medium mb-sm text-green-700 dark:text-green-300 flex items-center"&gt;
                   &lt;span className="mr-sm"&gt;✓&lt;/span&gt;Integrity ({integrityLevel})
                 &lt;/h4&gt;
-                &lt;div className="text-sm text-gray-600 dark:text-gray-400"&gt;
+                &lt;div className="text-body text-gray-600 dark:text-gray-400"&gt;
                   &lt;p className="mb-sm"&gt;
                     {implementationGuides[1].description ||
                       "Focus on data accuracy and validation mechanisms."}
                   &lt;/p&gt;
-                  &lt;div className="text-xs space-y-xs"&gt;
+                  &lt;div className="text-caption space-y-xs"&gt;
                     &lt;div&gt;
                       &lt;span className="font-medium"&gt;Expertise:&lt;/span&gt;{" "}
                       {implementationGuides[1].expertiseLevel || "Standard"}
@@ -488,15 +488,15 @@ const ImplementationGuidancePanel: React.FC&lt;ImplementationGuidancePanelProps&
             {/* Availability Implementation */}
             {implementationGuides[0] &amp;&amp; (
               &lt;div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light dark:border-info-dark"&gt;
-                &lt;h4 className="text-md font-medium mb-sm text-blue-700 dark:text-blue-300 flex items-center"&gt;
+                &lt;h4 className="text-body-lg font-medium mb-sm text-blue-700 dark:text-blue-300 flex items-center"&gt;
                   &lt;span className="mr-sm"&gt;⏱️&lt;/span&gt;Availability ({availabilityLevel})
                 &lt;/h4&gt;
-                &lt;div className="text-sm text-gray-600 dark:text-gray-400"&gt;
+                &lt;div className="text-body text-gray-600 dark:text-gray-400"&gt;
                   &lt;p className="mb-sm"&gt;
                     {implementationGuides[0].description ||
                       "Focus on systems uptime and recovery capabilities."}
                   &lt;/p&gt;
-                  &lt;div className="text-xs space-y-xs"&gt;
+                  &lt;div className="text-caption space-y-xs"&gt;
                     &lt;div&gt;
                       &lt;span className="font-medium"&gt;Expertise:&lt;/span&gt;{" "}
                       {implementationGuides[0].expertiseLevel || "Standard"}
@@ -513,11 +513,11 @@ const ImplementationGuidancePanel: React.FC&lt;ImplementationGuidancePanelProps&
         )}
 &nbsp;
         {/* Common Implementation Challenges */}
-        &lt;div className="p-sm bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg border border-yellow-100 dark:border-yellow-800"&gt;
-          &lt;h4 className="text-md font-medium mb-sm text-yellow-700 dark:text-yellow-300 flex items-center"&gt;
+        &lt;div className="p-sm bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-100 dark:border-yellow-800"&gt;
+          &lt;h4 className="text-body-lg font-medium mb-sm text-yellow-700 dark:text-yellow-300 flex items-center"&gt;
             &lt;span className="mr-sm"&gt;⚠️&lt;/span&gt;Common Implementation Challenges
           &lt;/h4&gt;
-          &lt;ul className="list-disc list-inside space-y-xs text-sm text-gray-600 dark:text-gray-400 pl-md"&gt;
+          &lt;ul className="list-disc list-inside space-y-xs text-body text-gray-600 dark:text-gray-400 pl-md"&gt;
             &lt;li&gt;Balancing security with usability and performance&lt;/li&gt;
             &lt;li&gt;Maintaining consistent controls across different environments&lt;/li&gt;
             &lt;li&gt;Integration with legacy systems and applications&lt;/li&gt;
@@ -538,7 +538,7 @@ export default ImplementationGuidancePanel;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-16T14:06:41.825Z
+                at 2026-01-20T01:34:03.193Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.5% </span>
+                <span class="strong">87.69% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>56/64</span>
+                <span class='fraction'>57/65</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.33% </span>
+                <span class="strong">88.52% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>53/60</span>
+                <span class='fraction'>54/61</span>
             </div>
         
             
@@ -584,7 +584,12 @@
 <a name='L519'></a><a href='#L519'>519</a>
 <a name='L520'></a><a href='#L520'>520</a>
 <a name='L521'></a><a href='#L521'>521</a>
-<a name='L522'></a><a href='#L522'>522</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L522'></a><a href='#L522'>522</a>
+<a name='L523'></a><a href='#L523'>523</a>
+<a name='L524'></a><a href='#L524'>524</a>
+<a name='L525'></a><a href='#L525'>525</a>
+<a name='L526'></a><a href='#L526'>526</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -669,6 +674,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
@@ -1130,6 +1138,7 @@ import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
+import { getCIAColors } from "../../../utils/ciaColorUtils";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import MetricCard from "../../common/MetricCard";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
@@ -1190,6 +1199,9 @@ interface ComponentConfig {
  * ```
  */
 const getComponentConfig = (component: CIAComponent): ComponentConfig =&gt; {
+  // Get consistent CIA colors from utility
+  const ciaColors = getCIAColors(component);
+  
   switch (component) {
     case "availability":
       return {
@@ -1198,7 +1210,7 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig =&gt; {
         defaultTitle: "Availability Impact Analysis",
         defaultIcon: "⏱️",
         color: "blue",
-        textClass: "text-blue-800 dark:text-blue-300",
+        textClass: ciaColors.text,
         ariaDescription: "Business impact of availability controls including uptime targets and recovery objectives",
         categoryLabel: "Availability",
         containerClassName: "cia-availability",
@@ -1212,7 +1224,7 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig =&gt; {
         defaultTitle: "Integrity Impact Analysis",
         defaultIcon: "✓",
         color: "green",
-        textClass: "text-green-800 dark:text-green-300",
+        textClass: ciaColors.text,
         ariaDescription: "Business impact of integrity controls including data accuracy and validation mechanisms",
         categoryLabel: "Integrity",
         containerClassName: "",
@@ -1226,7 +1238,7 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig =&gt; {
         defaultTitle: "Confidentiality Impact Analysis",
         defaultIcon: "🔒",
         color: "orange",
-        textClass: "text-orange-800 dark:text-orange-300",
+        textClass: ciaColors.text,
         ariaDescription: "Business impact of confidentiality controls including data classification and privacy measures",
         categoryLabel: "Confidentiality",
         containerClassName: "overflow-visible",
@@ -1604,7 +1616,7 @@ const ImpactWidget = React.memo&lt;ImpactWidgetProps&gt;(({
           {showExtendedDetails &amp;&amp; component === "integrity" &amp;&amp; recommendations.length &gt; 0 &amp;&amp; (
             &lt;div className="mt-md"&gt;
               &lt;h3 className="text-lg font-medium mb-sm"&gt;Recommendations&lt;/h3&gt;
-              &lt;ul className="list-disc pl-5 space-y-1"&gt;
+              &lt;ul className="list-disc pl-5 space-y-xs"&gt;
                 {recommendations.map((rec, index) =&gt; (
                   &lt;li
                     key={index}
@@ -1633,7 +1645,7 @@ export default ImpactWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-16T14:06:41.825Z
+                at 2026-01-20T01:34:03.193Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

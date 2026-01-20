@@ -617,11 +617,11 @@ const getTextColorClasses = (color: CIAComponentColor): string =&gt; {
 const getBadgeColorClasses = (color: CIAComponentColor): string =&gt; {
   switch (color) {
     case "blue":
-      return "bg-blue-50 text-blue-700 dark:bg-blue-900 dark:bg-opacity-50 dark:text-blue-300";
+      return "bg-blue-50 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300";
     case "green":
-      return "bg-green-50 text-green-700 dark:bg-green-900 dark:bg-opacity-50 dark:text-green-300";
+      return "bg-green-50 text-green-700 dark:bg-green-900/50 dark:text-green-300";
     case "orange":
-      return "bg-orange-50 text-orange-700 dark:bg-orange-900 dark:bg-opacity-50 dark:text-orange-300";
+      return "bg-orange-50 text-orange-700 dark:bg-orange-900/50 dark:text-orange-300";
 <span class="branch-3 cbranch-no" title="branch not covered" >    default: {</span>
       // Exhaustive check - TypeScript will error if new colors are added
       const exhaustiveCheck: never = <span class="cstat-no" title="statement not covered" >color;</span>
@@ -681,12 +681,12 @@ const BusinessImpactSection: React.FC&lt;BusinessImpactSectionProps&gt; = ({
                 Financial Impact
               &lt;/span&gt;
             &lt;/div&gt;
-            &lt;p className="text-xs text-gray-700 dark:text-gray-300"&gt;
+            &lt;p className="text-caption text-gray-700 dark:text-gray-300"&gt;
               {impact.financial.description ||
                 "No financial impact information available"}
             &lt;/p&gt;
             {impact.financial.annualRevenueLoss &amp;&amp; (
-              &lt;p className="text-xs text-gray-700 dark:text-gray-300 mt-1"&gt;
+              &lt;p className="text-caption text-gray-700 dark:text-gray-300 mt-1"&gt;
                 &lt;span className="font-medium"&gt;Annual Revenue Loss: &lt;/span&gt;
                 {impact.financial.annualRevenueLoss}
               &lt;/p&gt;
@@ -705,12 +705,12 @@ const BusinessImpactSection: React.FC&lt;BusinessImpactSectionProps&gt; = ({
                 Operational Impact
               &lt;/span&gt;
             &lt;/div&gt;
-            &lt;p className="text-xs text-gray-700 dark:text-gray-300"&gt;
+            &lt;p className="text-caption text-gray-700 dark:text-gray-300"&gt;
               {impact.operational.description ||
                 "No operational impact information available"}
             &lt;/p&gt;
             {impact.operational.meanTimeToRecover &amp;&amp; (
-              &lt;p className="text-xs text-gray-700 dark:text-gray-300 mt-1"&gt;
+              &lt;p className="text-caption text-gray-700 dark:text-gray-300 mt-1"&gt;
                 &lt;span className="font-medium"&gt;Mean Time to Recover: &lt;/span&gt;
                 {impact.operational.meanTimeToRecover}
               &lt;/p&gt;
@@ -729,12 +729,12 @@ const BusinessImpactSection: React.FC&lt;BusinessImpactSectionProps&gt; = ({
                 Reputational Impact
               &lt;/span&gt;
             &lt;/div&gt;
-            &lt;p className="text-xs text-gray-700 dark:text-gray-300"&gt;
+            &lt;p className="text-caption text-gray-700 dark:text-gray-300"&gt;
               {impact.reputational.description ||
 <span class="branch-1 cbranch-no" title="branch not covered" >                "No reputational impact information available"}</span>
             &lt;/p&gt;
             {impact.reputational.reputationalImpact &amp;&amp; (
-<span class="branch-1 cbranch-no" title="branch not covered" >              &lt;p className="text-xs text-gray-700 dark:text-gray-300 mt-1"&gt;</span>
+<span class="branch-1 cbranch-no" title="branch not covered" >              &lt;p className="text-caption text-gray-700 dark:text-gray-300 mt-1"&gt;</span>
                 {impact.reputational.reputationalImpact}
               &lt;/p&gt;
             )}
@@ -752,12 +752,12 @@ const BusinessImpactSection: React.FC&lt;BusinessImpactSectionProps&gt; = ({
                 Strategic Impact
               &lt;/span&gt;
             &lt;/div&gt;
-            &lt;p className="text-xs text-gray-700 dark:text-gray-300"&gt;
+            &lt;p className="text-caption text-gray-700 dark:text-gray-300"&gt;
               {impact.strategic.description ||
 <span class="branch-1 cbranch-no" title="branch not covered" >                "No strategic impact information available"}</span>
             &lt;/p&gt;
             {impact.strategic.competitiveAdvantage &amp;&amp; (
-<span class="branch-1 cbranch-no" title="branch not covered" >              &lt;p className="text-xs text-gray-700 dark:text-gray-300 mt-1"&gt;</span>
+<span class="branch-1 cbranch-no" title="branch not covered" >              &lt;p className="text-caption text-gray-700 dark:text-gray-300 mt-1"&gt;</span>
                 &lt;span className="font-medium"&gt;Competitive Advantage: &lt;/span&gt;
                 {impact.strategic.competitiveAdvantage}
               &lt;/p&gt;
@@ -776,19 +776,19 @@ const BusinessImpactSection: React.FC&lt;BusinessImpactSectionProps&gt; = ({
                 Regulatory Impact
               &lt;/span&gt;
             &lt;/div&gt;
-            &lt;p className="text-xs text-gray-700 dark:text-gray-300"&gt;
+            &lt;p className="text-caption text-gray-700 dark:text-gray-300"&gt;
               {impact.regulatory.description ||
 <span class="branch-1 cbranch-no" title="branch not covered" >                "No regulatory impact information available"}</span>
             &lt;/p&gt;
             {impact.regulatory.complianceImpact &amp;&amp; (
-<span class="branch-1 cbranch-no" title="branch not covered" >              &lt;p className="text-xs text-gray-700 dark:text-gray-300 mt-1"&gt;</span>
+<span class="branch-1 cbranch-no" title="branch not covered" >              &lt;p className="text-caption text-gray-700 dark:text-gray-300 mt-1"&gt;</span>
                 {impact.regulatory.complianceImpact}
               &lt;/p&gt;
             )}
             {impact.regulatory.complianceViolations &amp;&amp;
               impact.regulatory.complianceViolations.length &gt; 0 &amp;&amp; (
                 &lt;div className="mt-1"&gt;
-                  &lt;span className="text-xs font-medium text-gray-700 dark:text-gray-300"&gt;
+                  &lt;span className="text-caption font-medium text-gray-700 dark:text-gray-300"&gt;
                     Potential Violations:{" "}
                   &lt;/span&gt;
                   &lt;div className="flex flex-wrap gap-1 mt-1"&gt;
@@ -820,7 +820,7 @@ export default BusinessImpactSection;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-16T14:06:41.825Z
+                at 2026-01-20T01:34:03.193Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

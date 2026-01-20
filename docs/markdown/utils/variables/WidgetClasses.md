@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.7**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.10**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **WidgetClasses**: `object`
 
-Defined in: [utils/tailwindClassHelpers.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/6efa8b7e4173b2ed17e0594b4b26c48a1b704d1e/src/utils/tailwindClassHelpers.ts#L34)
+Defined in: [utils/tailwindClassHelpers.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/eb3dd66ffaf39f50db4da1b4d578d20d1c37a0b3/src/utils/tailwindClassHelpers.ts#L34)
 
 Standard class patterns for consistent widget styling
 
@@ -88,6 +88,13 @@ Lighter background to distinguish from main container
 
 Interactive card with hover effect
 Use for clickable cards and list items
+
+### cardWhite
+
+> `readonly` **cardWhite**: `"rounded-lg border border-gray-100 dark:border-gray-700 p-sm bg-white dark:bg-gray-800"` = `'rounded-lg border border-gray-100 dark:border-gray-700 p-sm bg-white dark:bg-gray-800'`
+
+White card container with clean appearance
+Use for primary content cards and widget sections
 
 ### container
 

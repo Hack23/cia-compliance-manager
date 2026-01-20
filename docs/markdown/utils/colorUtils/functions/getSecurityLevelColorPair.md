@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.7**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.10**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityLevelColorPair**(`level`): `SecurityLevelColorPair`
 
-Defined in: [utils/colorUtils.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/6efa8b7e4173b2ed17e0594b4b26c48a1b704d1e/src/utils/colorUtils.ts#L42)
+Defined in: [utils/colorUtils.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/eb3dd66ffaf39f50db4da1b4d578d20d1c37a0b3/src/utils/colorUtils.ts#L42)
 
 Get color pair (background and text) for a specific security level
 
@@ -38,9 +38,9 @@ console.log(colors.bg);   // "#fff8e1" (light amber background)
 console.log(colors.text); // "#ff8f00" (amber text)
 
 // Usage in component
-<div style={{ 
+<div style={{
   backgroundColor: colors.bg,
-  color: colors.text 
+  color: colors.text
 }}>
   High Security Level
 </div>

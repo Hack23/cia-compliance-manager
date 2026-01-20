@@ -692,9 +692,9 @@ interface ComponentTheme {
 const COMPONENT_THEMES: Record&lt;CIAComponent, ComponentTheme&gt; = {
   confidentiality: {
     icon: "🔒",
-    colorClass: "bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20",
+    colorClass: "bg-purple-100 dark:bg-purple-900/20",
     textClass: "text-purple-800 dark:text-purple-300",
-    bgClass: "bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20",
+    bgClass: "bg-purple-50 dark:bg-purple-900/20",
     borderClass: "border-purple-100 dark:border-purple-800",
     accentClass: "text-purple-500",
     accentBgClass: "bg-purple-500 dark:bg-purple-600",
@@ -702,9 +702,9 @@ const COMPONENT_THEMES: Record&lt;CIAComponent, ComponentTheme&gt; = {
   },
   integrity: {
     icon: "✓",
-    colorClass: "bg-green-100 dark:bg-green-900 dark:bg-opacity-20",
+    colorClass: "bg-green-100 dark:bg-green-900/20",
     textClass: "text-green-800 dark:text-green-300",
-    bgClass: "bg-green-50 dark:bg-green-900 dark:bg-opacity-20",
+    bgClass: "bg-green-50 dark:bg-green-900/20",
     borderClass: "border-green-100 dark:border-green-800",
     accentClass: "text-green-500",
     accentBgClass: "bg-green-500 dark:bg-green-600",
@@ -712,9 +712,9 @@ const COMPONENT_THEMES: Record&lt;CIAComponent, ComponentTheme&gt; = {
   },
   availability: {
     icon: "⏱️",
-    colorClass: "bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20",
+    colorClass: "bg-blue-100 dark:bg-blue-900/20",
     textClass: "text-blue-800 dark:text-blue-300",
-    bgClass: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20",
+    bgClass: "bg-blue-50 dark:bg-blue-900/20",
     borderClass: "border-blue-100 dark:border-blue-800",
     accentClass: "text-blue-500",
     accentBgClass: "bg-blue-500 dark:bg-blue-600",
@@ -791,7 +791,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
         &lt;span className={`text-xl mr-2 ${theme.accentClass}`}&gt;
           {theme.icon}
         &lt;/span&gt;
-        &lt;h3 className="text-lg font-medium"&gt;{theme.title}&lt;/h3&gt;
+        &lt;h3 className="text-subheading font-medium"&gt;{theme.title}&lt;/h3&gt;
         &lt;div className="ml-auto"&gt;
           &lt;SecurityLevelBadge
             category=""
@@ -812,7 +812,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
             Technical Description
           &lt;/h4&gt;
           &lt;p
-            className="text-sm text-gray-600 dark:text-gray-400"
+            className="text-body text-gray-600 dark:text-gray-400"
             data-testid={TECHNICAL_DETAILS_WIDGET_IDS.label('description')}
           &gt;
             {getOptionalProperty(
@@ -836,7 +836,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
                   style={{ width: `${complexity.value}%` }}
                 &gt;&lt;/div&gt;
               &lt;/div&gt;
-              &lt;span className="text-xs font-medium"&gt;{complexity.label}&lt;/span&gt;
+              &lt;span className="text-caption font-medium"&gt;{complexity.label}&lt;/span&gt;
             &lt;/div&gt;
           &lt;/div&gt;
 &nbsp;
@@ -849,7 +849,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
               data-testid={TECHNICAL_DETAILS_WIDGET_IDS.label('maintenance-level')}
             &gt;
               &lt;span className="text-sm"&gt;Estimated staffing: &lt;/span&gt;
-              &lt;span className={`ml-2 text-sm font-medium ${theme.textClass}`}&gt;
+              &lt;span className={`ml-2 text-body font-medium ${theme.textClass}`}&gt;
                 {getPersonnelRequirements(level)}
               &lt;/span&gt;
             &lt;/div&gt;
@@ -865,7 +865,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
             Implementation Requirements
           &lt;/h4&gt;
           &lt;ul
-            className="list-disc list-inside space-y-xs text-sm text-gray-600 dark:text-gray-400"
+            className="list-disc list-inside space-y-xs text-body text-gray-600 dark:text-gray-400"
             data-testid={TECHNICAL_DETAILS_WIDGET_IDS.list('implementation-steps')}
           &gt;
             {getTechnicalRequirements(component, level).map((req, index) =&gt; (
@@ -896,7 +896,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
           aria-label={`Toggle ${component} advanced details section`}
           data-testid={`${testId}-${component}-toggle-advanced`}
         &gt;
-          &lt;span className="text-sm font-medium"&gt;
+          &lt;span className="text-body font-medium"&gt;
             {showAdvancedDetails ? "Hide" : "Show"} Advanced Details
           &lt;/span&gt;
           &lt;span className="text-gray-500"&gt;
@@ -909,7 +909,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
             &lt;div className="grid grid-cols-1 md:grid-cols-2 gap-sm"&gt;
               {/* Technologies card */}
               &lt;div className="p-sm bg-white dark:bg-gray-800 rounded-md shadow-sm border border-neutral-light dark:border-neutral-dark"&gt;
-                &lt;h4 className="text-sm font-medium flex items-center mb-sm"&gt;
+                &lt;h4 className="text-body font-medium flex items-center mb-sm"&gt;
                   &lt;span className={`mr-xs ${theme.accentClass}`}&gt;💻&lt;/span&gt;Technologies
                 &lt;/h4&gt;
                 &lt;p className={`text-sm ${theme.textClass}`}&gt;
@@ -923,7 +923,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
 &nbsp;
               {/* Configurations card */}
               &lt;div className="p-sm bg-white dark:bg-gray-800 rounded-md shadow-sm border border-neutral-light dark:border-neutral-dark"&gt;
-                &lt;h4 className="text-sm font-medium flex items-center mb-sm"&gt;
+                &lt;h4 className="text-body font-medium flex items-center mb-sm"&gt;
                   &lt;span className={`mr-xs ${theme.accentClass}`}&gt;⚙️&lt;/span&gt;
                   Configurations
                 &lt;/h4&gt;
@@ -939,7 +939,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
 &nbsp;
             {/* Expertise Required card */}
             &lt;div className="p-sm bg-white dark:bg-gray-800 rounded-md shadow-sm border border-gray-200 dark:border-gray-700"&gt;
-              &lt;h4 className="text-sm font-medium flex items-center mb-sm"&gt;
+              &lt;h4 className="text-body font-medium flex items-center mb-sm"&gt;
                 &lt;span className={`mr-xs ${theme.accentClass}`}&gt;👨‍💻&lt;/span&gt;Expertise Required
               &lt;/h4&gt;
               &lt;ul
@@ -970,7 +970,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-16T14:06:41.941Z
+                at 2026-01-20T01:34:03.308Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

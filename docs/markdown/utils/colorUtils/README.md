@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.7**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.10**](../../README.md)
 
 ***
 
@@ -18,4 +18,3 @@
 - [getSecurityLevelHexColor](functions/getSecurityLevelHexColor.md)
 - [getSecurityLevelTextColor](functions/getSecurityLevelTextColor.md)
 - [getSecurityScoreColorClass](functions/getSecurityScoreColorClass.md)
-- [hexToRgb](functions/hexToRgb.md)

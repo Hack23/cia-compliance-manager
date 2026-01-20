@@ -1659,7 +1659,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
                   &lt;SecurityLevelBadge
                     category=""
                     level={confidentialityLevel}
-                    colorClass="bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
+                    colorClass="bg-purple-100 dark:bg-purple-900/20"
                     textClass="text-purple-800 dark:text-purple-300"
                     testId="security-level-widget-confidentiality-badge"
                   /&gt;
@@ -1729,7 +1729,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
                   &lt;SecurityLevelBadge
                     category=""
                     level={integrityLevel}
-                    colorClass="bg-green-100 dark:bg-green-900 dark:bg-opacity-20"
+                    colorClass="bg-green-100 dark:bg-green-900/20"
                     textClass="text-green-800 dark:text-green-300"
                     testId="security-level-widget-integrity-badge"
                   /&gt;
@@ -1793,7 +1793,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
                   &lt;SecurityLevelBadge
                     category=""
                     level={availabilityLevel}
-                    colorClass="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
+                    colorClass="bg-blue-100 dark:bg-blue-900/20"
                     textClass="text-blue-800 dark:text-blue-300"
                     testId="security-level-widget-availability-badge"
                   /&gt;
@@ -1854,7 +1854,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
               data-testid={`${activeComponent}-details-content`}
             &gt;
               {activeDetails ? (
-                &lt;div className="space-y-4"&gt;
+                &lt;div className="space-y-md"&gt;
                   &lt;h4
                     className={`font-medium ${getComponentColor(
                       activeComponent
@@ -1868,7 +1868,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
                     Level
                   &lt;/h4&gt;
 &nbsp;
-                  &lt;div className="space-y-3"&gt;
+                  &lt;div className="space-y-sm"&gt;
                     {/* Description */}
                     &lt;div&gt;
                       &lt;h5 className="text-sm font-medium mb-xs"&gt;Description&lt;/h5&gt;
@@ -1903,7 +1903,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
                     {/* Component-specific details */}
                     {activeComponent === "availability" &amp;&amp; (
                       &lt;div className="mt-md grid grid-cols-2 gap-md"&gt;
-                        &lt;div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-sm rounded"&gt;
+                        &lt;div className="bg-blue-50 dark:bg-blue-900/20 p-sm rounded"&gt;
                           &lt;div className="text-xs font-medium mb-xs text-blue-700 dark:text-blue-300"&gt;
                             Uptime
                           &lt;/div&gt;
@@ -1911,7 +1911,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
                             {activeDetails.uptime || <span class="branch-1 cbranch-no" title="branch not covered" >"N/A"}</span>
                           &lt;/div&gt;
                         &lt;/div&gt;
-                        &lt;div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-sm rounded"&gt;
+                        &lt;div className="bg-blue-50 dark:bg-blue-900/20 p-sm rounded"&gt;
                           &lt;div className="text-xs font-medium mb-xs text-blue-700 dark:text-blue-300"&gt;
                             Recovery Time
                           &lt;/div&gt;
@@ -1924,7 +1924,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
 &nbsp;
                     {activeComponent === "integrity" &amp;&amp;
 <span class="branch-1 cbranch-no" title="branch not covered" >                      activeDetails.validationMethod &amp;&amp; (</span>
-<span class="branch-2 cbranch-no" title="branch not covered" >                        &lt;div className="mt-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 p-sm rounded"&gt;</span>
+<span class="branch-2 cbranch-no" title="branch not covered" >                        &lt;div className="mt-md bg-green-50 dark:bg-green-900/20 p-sm rounded"&gt;</span>
                           &lt;div className="text-xs font-medium mb-xs text-green-700 dark:text-green-300"&gt;
                             Validation Method
                           &lt;/div&gt;
@@ -1936,7 +1936,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
 &nbsp;
                     {activeComponent === "confidentiality" &amp;&amp;
 <span class="branch-1 cbranch-no" title="branch not covered" >                      activeDetails.protectionMethod &amp;&amp; (</span>
-<span class="branch-2 cbranch-no" title="branch not covered" >                        &lt;div className="mt-md bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 p-sm rounded"&gt;</span>
+<span class="branch-2 cbranch-no" title="branch not covered" >                        &lt;div className="mt-md bg-purple-50 dark:bg-purple-900/20 p-sm rounded"&gt;</span>
                           &lt;div className="text-xs font-medium mb-xs text-purple-700 dark:text-purple-300"&gt;
                             Protection Method
                           &lt;/div&gt;
@@ -1966,7 +1966,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
           &lt;/p&gt;
 &nbsp;
           &lt;div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-sm text-xs"&gt;
-            &lt;div className="p-sm bg-red-50 dark:bg-red-900 dark:bg-opacity-20 rounded"&gt;
+            &lt;div className="p-sm bg-red-50 dark:bg-red-900/20 rounded"&gt;
               &lt;div className="font-medium text-red-700 dark:text-red-300"&gt;
                 None
               &lt;/div&gt;
@@ -1974,7 +1974,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
                 Minimal to no security controls
               &lt;/div&gt;
             &lt;/div&gt;
-            &lt;div className="p-sm bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded"&gt;
+            &lt;div className="p-sm bg-yellow-50 dark:bg-yellow-900/20 rounded"&gt;
               &lt;div className="font-medium text-yellow-700 dark:text-yellow-300"&gt;
                 Low
               &lt;/div&gt;
@@ -1982,7 +1982,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
                 Basic security controls
               &lt;/div&gt;
             &lt;/div&gt;
-            &lt;div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded"&gt;
+            &lt;div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded"&gt;
               &lt;div className="font-medium text-blue-700 dark:text-blue-300"&gt;
                 Moderate
               &lt;/div&gt;
@@ -1990,7 +1990,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
                 Standard security controls
               &lt;/div&gt;
             &lt;/div&gt;
-            &lt;div className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded"&gt;
+            &lt;div className="p-sm bg-green-50 dark:bg-green-900/20 rounded"&gt;
               &lt;div className="font-medium text-green-700 dark:text-green-300"&gt;
                 High
               &lt;/div&gt;
@@ -1998,7 +1998,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
                 Advanced security controls
               &lt;/div&gt;
             &lt;/div&gt;
-            &lt;div className="p-sm bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded"&gt;
+            &lt;div className="p-sm bg-purple-50 dark:bg-purple-900/20 rounded"&gt;
               &lt;div className="font-medium text-purple-700 dark:text-purple-300"&gt;
                 Very High
               &lt;/div&gt;
@@ -2023,7 +2023,7 @@ export default SecurityLevelWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-16T14:06:41.941Z
+                at 2026-01-20T01:34:03.308Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
