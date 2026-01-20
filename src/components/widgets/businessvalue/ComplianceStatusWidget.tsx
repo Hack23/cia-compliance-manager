@@ -280,7 +280,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         error={serviceError}
       >
       <div 
-        className="p-md"
+        className="p-xs space-y-xs"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Compliance Status",
@@ -289,20 +289,20 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
       >
         {/* Overall Compliance Status - Compact */}
         <section 
-          className="mb-md"
+          className="mb-xs"
           aria-label="Overall Compliance Status"
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-sm mb-sm">
-            <div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light/30 dark:border-info-dark/30">
-              <div className="text-caption text-info-dark dark:text-info-light font-medium mb-xs">Compliance Status</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-xs mb-xs">
+            <div className="p-xs bg-info-light/10 dark:bg-info-dark/20 rounded border border-info-light/30 dark:border-info-dark/30">
+              <div className="text-caption text-info-dark dark:text-info-light font-medium mb-xs">Status</div>
               <div className="text-body-lg font-bold text-info-dark dark:text-info-light">
                 {statusText}
               </div>
             </div>
-            <div className="p-sm bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light/30 dark:border-success-dark/30">
+            <div className="p-xs bg-success-light/10 dark:bg-success-dark/20 rounded border border-success-light/30 dark:border-success-dark/30">
               <div className="text-caption text-success-dark dark:text-success-light font-medium mb-xs">Score</div>
               <div className="flex items-center">
-                <div className="text-body-lg font-bold text-success-dark dark:text-success-light mr-sm" data-testid={COMPLIANCE_TEST_IDS.COMPLIANCE_SCORE}>
+                <div className="text-body-lg font-bold text-success-dark dark:text-success-light mr-xs" data-testid={COMPLIANCE_TEST_IDS.COMPLIANCE_SCORE}>
                   {complianceStatus?.complianceScore ?? 0}%
                 </div>
                 <StatusBadge
@@ -318,7 +318,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
           {/* Progress bar */}
           {complianceStatus && (
             <div 
-              className="relative h-1.5 rounded-full bg-info-light/20 dark:bg-info-dark overflow-hidden"
+              className="relative h-1 rounded-full bg-info-light/20 dark:bg-info-dark overflow-hidden"
               role="progressbar"
               aria-valuenow={complianceStatus.complianceScore ?? 0}
               aria-valuemin={0}
@@ -336,12 +336,12 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
 
         {/* Framework Status - Horizontal Badge Layout */}
         {complianceStatus && (
-          <div className="mb-md">
-            <h3 className="text-body-lg font-medium mb-sm">Framework Status</h3>
+          <div className="mb-xs">
+            <h3 className="text-body-lg font-medium mb-xs">Frameworks</h3>
             
             {/* Compliant Frameworks - Horizontal badges */}
             {complianceStatus.compliantFrameworks.length > 0 && (
-              <div className="mb-sm">
+              <div className="mb-xs">
                 <div className="text-caption text-success-dark dark:text-success-light font-medium mb-xs"><span aria-hidden="true">✓</span> Compliant</div>
                 <div className="flex flex-wrap gap-xs" data-testid={COMPLIANCE_TEST_IDS.COMPLIANT_FRAMEWORKS_LIST}>
                   {complianceStatus.compliantFrameworks.map((framework, index) => (
@@ -350,11 +350,11 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                       key={framework}
                       onClick={() => setActiveFramework(framework)}
                       className={cn(
-                        "px-sm py-xs rounded-md text-caption font-medium transition-all",
+                        "px-xs py-xs rounded text-caption font-medium transition-all",
                         "bg-success-light/20 dark:bg-success-dark/30 text-success-dark dark:text-success-light",
                         "border border-success-light/50 dark:border-success-dark/50",
                         "hover:bg-success-light/30 dark:hover:bg-success-dark/40",
-                        activeFramework === framework && "ring-2 ring-success dark:ring-success-light"
+                        activeFramework === framework && "ring-1 ring-success dark:ring-success-light"
                       )}
                       data-testid={`${COMPLIANCE_TEST_IDS.FRAMEWORK_ITEM_PREFIX}-${index}`}
                       aria-label={`View ${framework} compliance details`}
@@ -368,7 +368,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
 
             {/* Partially Compliant - Horizontal badges */}
             {complianceStatus.partiallyCompliantFrameworks.length > 0 && (
-              <div className="mb-sm">
+              <div className="mb-xs">
                 <div className="text-caption text-warning-dark dark:text-warning-light font-medium mb-xs"><span aria-hidden="true">⚠</span> Partial</div>
                 <div className="flex flex-wrap gap-xs" data-testid={COMPLIANCE_TEST_IDS.PARTIALLY_COMPLIANT_FRAMEWORKS_LIST}>
                   {complianceStatus.partiallyCompliantFrameworks.map((framework, index) => (
@@ -377,11 +377,11 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                       key={framework}
                       onClick={() => setActiveFramework(framework)}
                       className={cn(
-                        "px-sm py-xs rounded-md text-caption font-medium transition-all",
+                        "px-xs py-xs rounded text-caption font-medium transition-all",
                         "bg-warning-light/20 dark:bg-warning-dark/30 text-warning-dark dark:text-warning-light",
                         "border border-warning-light/50 dark:border-warning-dark/50",
                         "hover:bg-warning-light/30 dark:hover:bg-warning-dark/40",
-                        activeFramework === framework && "ring-2 ring-warning dark:ring-warning-light"
+                        activeFramework === framework && "ring-1 ring-warning dark:ring-warning-light"
                       )}
                       data-testid={`${COMPLIANCE_TEST_IDS.FRAMEWORK_ITEM_PREFIX}-partial-${index}`}
                       aria-label={`View ${framework} compliance details`}
@@ -395,7 +395,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
 
             {/* Non-Compliant - Horizontal badges */}
             {complianceStatus.nonCompliantFrameworks.length > 0 && (
-              <div className="mb-sm">
+              <div className="mb-xs">
                 <div className="text-caption text-error-dark dark:text-error-light font-medium mb-xs"><span aria-hidden="true">✗</span> Non-Compliant</div>
                 <div className="flex flex-wrap gap-xs" data-testid={COMPLIANCE_TEST_IDS.NON_COMPLIANT_FRAMEWORKS_LIST}>
                   {complianceStatus.nonCompliantFrameworks.map((framework, index) => (
@@ -404,11 +404,11 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                       key={framework}
                       onClick={() => setActiveFramework(framework)}
                       className={cn(
-                        "px-sm py-xs rounded-md text-caption font-medium transition-all",
+                        "px-xs py-xs rounded text-caption font-medium transition-all",
                         "bg-error-light/20 dark:bg-error-dark/30 text-error-dark dark:text-error-light",
                         "border border-error-light/50 dark:border-error-dark/50",
                         "hover:bg-error-light/30 dark:hover:bg-error-dark/40",
-                        activeFramework === framework && "ring-2 ring-error dark:ring-error-light"
+                        activeFramework === framework && "ring-1 ring-error dark:ring-error-light"
                       )}
                       data-testid={`${COMPLIANCE_TEST_IDS.FRAMEWORK_ITEM_PREFIX}-non-${index}`}
                       aria-label={`View ${framework} compliance details`}
@@ -424,12 +424,12 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
 
         {/* Framework Gap Analysis - Compact */}
         {activeFramework && (
-          <div className="mb-md">
-            <div className="p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20">
-              <h3 className="text-body-lg font-medium mb-sm">{activeFramework} Gap Analysis</h3>
+          <div className="mb-xs">
+            <div className="p-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded border border-neutral-light/20 dark:border-neutral-dark/20">
+              <h3 className="text-body-lg font-medium mb-xs">{activeFramework} Analysis</h3>
               
               {gapAnalysis ? (
-                <div className="space-y-sm">
+                <div className="space-y-xs">
                   {/* Status */}
                   <div className="text-caption text-neutral-dark dark:text-neutral-light">
                     {gapAnalysis.isCompliant
@@ -472,11 +472,11 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                     })}
                   </div>
 
-                  {/* Gaps and Recommendations - Compact */}
+                  {/* Gaps - Compact */}
                   {gapAnalysis.gaps && gapAnalysis.gaps.length > 0 && (
                     <div className="text-caption text-error-dark dark:text-error-light">
                       <div className="font-medium mb-xs">Gaps:</div>
-                      <ul className="space-y-xs pl-sm">
+                      <ul className="space-y-xs pl-xs">
                         {gapAnalysis.gaps.slice(0, UI_DISPLAY_LIMITS.MAX_DISPLAYED_GAPS).map((gap, index) => (
                           <li key={index}>
                             • {typeof gap === "string" ? gap : gap.framework || gap.frameworkDescription || "Undefined gap"}
@@ -493,7 +493,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                   )}
                 </div>
               ) : (
-                <div className="text-center text-caption text-neutral-dark/70 dark:text-neutral-light/70 py-sm">
+                <div className="text-center text-caption text-neutral-dark/70 dark:text-neutral-light/70 py-xs">
                   No gap analysis available
                 </div>
               )}
@@ -502,12 +502,12 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         )}
 
         {/* Compliance Tips - Compact */}
-        <div className="p-sm bg-info-light/5 dark:bg-info-dark/10 rounded-md border border-info-light/20 dark:border-info-dark/20">
+        <div className="p-xs bg-info-light/5 dark:bg-info-dark/10 rounded border border-info-light/20 dark:border-info-dark/20">
           <div className="flex items-center mb-xs">
             <span className="text-info-dark dark:text-info-light mr-xs" aria-hidden="true">💡</span>
             <h3 className="text-body font-medium">Tips</h3>
           </div>
-          <ul className="text-caption text-neutral-dark dark:text-neutral-light space-y-xs pl-sm">
+          <ul className="text-caption text-neutral-dark dark:text-neutral-light space-y-xs pl-xs">
             {complianceStatus && complianceStatus.complianceScore ? (
               complianceStatus.complianceScore < 50 ? (
                 <>
