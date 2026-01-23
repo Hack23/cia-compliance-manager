@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.11**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.12**](../../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > `const` **defaultCIAContentService**: [`CIAContentService`](../ciaContentService/classes/CIAContentService.md)
 
-Defined in: [services/ciaContentService.ts:1308](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/services/ciaContentService.ts#L1308)
+Defined in: [services/ciaContentService.ts:1308](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/ciaContentService.ts#L1308)

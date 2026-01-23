@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.11**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.12**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **calculateTotalCapex**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `number`
 
-Defined in: [constants/costConstants.ts:269](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/constants/costConstants.ts#L269)
+Defined in: [constants/costConstants.ts:269](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/constants/costConstants.ts#L269)
 
 Calculate total CAPEX for all components
 

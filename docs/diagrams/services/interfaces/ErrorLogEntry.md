@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.11**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.12**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ErrorLogEntry
 
-Defined in: [services/errorService.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/services/errorService.ts#L47)
+Defined in: [services/errorService.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/errorService.ts#L47)
 
 Error log entry structure
 
@@ -16,7 +16,7 @@ Error log entry structure
 
 > `optional` **context**: [`ErrorContext`](ErrorContext.md)
 
-Defined in: [services/errorService.ts:53](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/services/errorService.ts#L53)
+Defined in: [services/errorService.ts:53](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/errorService.ts#L53)
 
 Error context
 
@@ -26,7 +26,7 @@ Error context
 
 > **message**: `string`
 
-Defined in: [services/errorService.ts:49](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/services/errorService.ts#L49)
+Defined in: [services/errorService.ts:49](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/errorService.ts#L49)
 
 Error message
 
@@ -36,7 +36,7 @@ Error message
 
 > **recoverable**: `boolean`
 
-Defined in: [services/errorService.ts:61](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/services/errorService.ts#L61)
+Defined in: [services/errorService.ts:61](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/errorService.ts#L61)
 
 Whether the error is recoverable
 
@@ -46,7 +46,7 @@ Whether the error is recoverable
 
 > **severity**: [`ErrorSeverity`](../enumerations/ErrorSeverity.md)
 
-Defined in: [services/errorService.ts:51](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/services/errorService.ts#L51)
+Defined in: [services/errorService.ts:51](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/errorService.ts#L51)
 
 Error severity
 
@@ -56,7 +56,7 @@ Error severity
 
 > `optional` **stack**: `string`
 
-Defined in: [services/errorService.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/services/errorService.ts#L55)
+Defined in: [services/errorService.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/errorService.ts#L55)
 
 Error stack trace
 
@@ -66,7 +66,7 @@ Error stack trace
 
 > **timestamp**: `string`
 
-Defined in: [services/errorService.ts:57](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/services/errorService.ts#L57)
+Defined in: [services/errorService.ts:57](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/errorService.ts#L57)
 
 Timestamp
 
@@ -76,6 +76,6 @@ Timestamp
 
 > **userMessage**: `string`
 
-Defined in: [services/errorService.ts:59](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/services/errorService.ts#L59)
+Defined in: [services/errorService.ts:59](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/errorService.ts#L59)
 
 User-friendly message

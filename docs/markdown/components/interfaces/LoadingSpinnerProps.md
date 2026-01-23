@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.11**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.12**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: LoadingSpinnerProps
 
-Defined in: [types/componentPropExports.ts:336](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/types/componentPropExports.ts#L336)
+Defined in: [types/componentPropExports.ts:336](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/types/componentPropExports.ts#L336)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:336](https://github.com/Hack23/cia-co
 
 > `optional` **className**: `string`
 
-Defined in: [types/componentPropExports.ts:351](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/types/componentPropExports.ts#L351)
+Defined in: [types/componentPropExports.ts:351](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/types/componentPropExports.ts#L351)
 
 Optional CSS class name
 
@@ -24,7 +24,7 @@ Optional CSS class name
 
 > `optional` **size**: `"sm"` \| `"md"` \| `"lg"`
 
-Defined in: [types/componentPropExports.ts:341](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/types/componentPropExports.ts#L341)
+Defined in: [types/componentPropExports.ts:341](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/types/componentPropExports.ts#L341)
 
 Size of the spinner
 
@@ -40,6 +40,6 @@ Size of the spinner
 
 > `optional` **testId**: `string`
 
-Defined in: [types/componentPropExports.ts:346](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/types/componentPropExports.ts#L346)
+Defined in: [types/componentPropExports.ts:346](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/types/componentPropExports.ts#L346)
 
 Optional test ID for automated testing

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.11**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.12**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isStatusType**(`value`): `value is StatusType`
 
-Defined in: [utils/typeGuards.ts:942](https://github.com/Hack23/cia-compliance-manager/blob/bdceac647232fcd21e28eab47eb85ed4588b8e2a/src/utils/typeGuards.ts#L942)
+Defined in: [utils/typeGuards.ts:942](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/utils/typeGuards.ts#L942)
 
 Type guard to check if a value is a valid StatusType
 
