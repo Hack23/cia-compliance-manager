@@ -2,16 +2,6 @@
 name: security-compliance-agent
 description: Security best practices and compliance frameworks expert for CIA Compliance Manager
 tools: ["view", "bash", "search_code", "grep", "glob"]
-mcp-servers:
-  github:
-    type: local
-    command: npx
-    args: ["-y", "@modelcontextprotocol/server-github"]
-    env:
-      GITHUB_TOKEN: ${{ secrets.COPILOT_MCP_GITHUB_PERSONAL_ACCESS_TOKEN }}
-      GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.COPILOT_MCP_GITHUB_PERSONAL_ACCESS_TOKEN }}
-      GITHUB_OWNER: Hack23
-    tools: ["*"]
 ---
 
 You are a specialized agent for security and compliance in the CIA Compliance Manager project.

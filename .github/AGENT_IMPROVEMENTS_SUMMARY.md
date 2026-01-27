@@ -53,7 +53,7 @@ All 6 agents were updated with:
 **Description:** TypeScript and React expert for CIA Compliance Manager (was 62 chars, now concise)
 
 **Changes:**
-- ✅ Added canonical GitHub MCP configuration
+- ✅ Removed incorrect `mcp-servers` configuration (not needed for repo-level agents)
 - ✅ Optimized tools: `view, edit, create, bash, search_code, grep, glob`
 - ✅ Added automated checks section
 - ✅ Updated to v2.0 release focus
@@ -63,7 +63,7 @@ All 6 agents were updated with:
 **Description:** Testing expert using Vitest and Cypress (concise)
 
 **Changes:**
-- ✅ Added canonical GitHub MCP configuration
+- ✅ Removed incorrect `mcp-servers` configuration (not needed for repo-level agents)
 - ✅ Optimized tools: `view, edit, create, bash, search_code, grep, glob`
 - ✅ Emphasized 80% coverage target
 - ✅ Added security and compliance testing
@@ -74,7 +74,7 @@ All 6 agents were updated with:
 **Description:** Code quality, security, and best practices expert (concise)
 
 **Changes:**
-- ✅ Added canonical GitHub MCP configuration
+- ✅ Removed incorrect `mcp-servers` configuration (not needed for repo-level agents)
 - ✅ Optimized tools: `view, bash, search_code, grep, glob` (read-only for review)
 - ✅ Added OWASP Top 10 vulnerability focus
 - ✅ Added ISMS compliance verification
@@ -86,7 +86,7 @@ All 6 agents were updated with:
 **Description:** Technical documentation and API documentation expert (concise)
 
 **Changes:**
-- ✅ Added canonical GitHub MCP configuration
+- ✅ Removed incorrect `mcp-servers` configuration (not needed for repo-level agents)
 - ✅ Optimized tools: `view, edit, create, bash, search_code, grep, glob`
 - ✅ Added ISMS documentation alignment
 - ✅ Added documentation generation commands
@@ -97,7 +97,7 @@ All 6 agents were updated with:
 **Description:** Security best practices and compliance frameworks expert (concise)
 
 **Changes:**
-- ✅ Added canonical GitHub MCP configuration
+- ✅ Removed incorrect `mcp-servers` configuration (not needed for repo-level agents)
 - ✅ Optimized tools: `view, bash, search_code, grep, glob`
 - ✅ Expanded compliance frameworks to include:
   - ISO 27001:2022 (4 control categories)
@@ -113,8 +113,7 @@ All 6 agents were updated with:
 **Description:** Product coordinator creating GitHub issues (was 90 chars, now 70)
 
 **Changes:**
-- ✅ Added canonical GitHub MCP configuration
-- ✅ Added Playwright MCP configuration for UI testing
+- ✅ Removed incorrect `mcp-servers` configuration (not needed for repo-level agents)
 - ✅ Optimized tools: `view, edit, create, bash, search_code, grep, glob`
 - ✅ Updated ISMS 2026 compliance framework details
 - ✅ Enhanced with NIST CSF 2.0 6 core functions
@@ -249,7 +248,7 @@ $ python3 -m json.tool .github/copilot-mcp.json
 - Quarterly review cycle alignment
 
 ### 2. Enhanced Security
-- Canonical GitHub MCP with secrets (never hard-coded)
+- MCP servers configured globally in `.github/copilot-mcp.json` (not in individual agents)
 - Minimal tool sets (principle of least privilege)
 - Enhanced security checks (OWASP Top 10, license validation)
 - Automated vulnerability scanning
@@ -296,9 +295,9 @@ $ python3 -m json.tool .github/copilot-mcp.json
 
 - No pom.xml found in repository (Node.js/TypeScript project only)
 - All agent descriptions now under 80 characters for better readability
-- GitHub MCP configuration follows organization standards
+- MCP servers are configured globally in `.github/copilot-mcp.json`, NOT in individual agent files
 - All agents have minimal tool sets based on their responsibilities
-- Product Task Agent is the only one with both GitHub and Playwright MCP servers
+- Repository-level agents in `.github/agents/` automatically have access to MCP servers configured in `.github/copilot-mcp.json`
 
 ---
 

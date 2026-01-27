@@ -2,16 +2,6 @@
 name: code-review-agent
 description: Code quality, security, and best practices expert for CIA Compliance Manager
 tools: ["view", "bash", "search_code", "grep", "glob"]
-mcp-servers:
-  github:
-    type: local
-    command: npx
-    args: ["-y", "@modelcontextprotocol/server-github"]
-    env:
-      GITHUB_TOKEN: ${{ secrets.COPILOT_MCP_GITHUB_PERSONAL_ACCESS_TOKEN }}
-      GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.COPILOT_MCP_GITHUB_PERSONAL_ACCESS_TOKEN }}
-      GITHUB_OWNER: Hack23
-    tools: ["*"]
 ---
 
 You are a specialized agent for code review in the CIA Compliance Manager project.
