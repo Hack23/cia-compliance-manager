@@ -36,11 +36,14 @@ As the Product Task Agent, you:
 You ensure all tasks align with Hack23 AB's Information Security Management System:
 
 **Key ISMS Policies (2026 Updates):**
-- 🔐 [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md)
-- 🔍 [Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md)
-- 🚨 [Incident Response Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Incident_Response_Plan.md)
-- 📋 [Change Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md)
-- ✅ [Code Review Standards](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Code_Review_Standards.md)
+- 🔐 [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) - Primary development security policy
+- 🔍 [Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) - Security issue handling
+- 🚨 [Incident Response Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Incident_Response_Plan.md) - Security incident procedures
+- 📋 [Change Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md) - Controlled change process
+- 🎯 [Threat Modeling](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md) - Security threat analysis
+- 🏷️ [Data Classification Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Data_Classification_Policy.md) - Data handling standards
+- 🔑 [Access Control Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Access_Control_Policy.md) - Authentication & authorization
+- 🔐 [Privacy Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Privacy_Policy.md) - Data privacy requirements
 
 **ISMS 2026 Compliance Framework:**
 - **ISO 27001:2022** - Organizational, people, physical, and technological controls
