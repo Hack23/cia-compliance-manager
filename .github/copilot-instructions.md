@@ -1,9 +1,10 @@
-# Copilot Instructions for CIA Compliance Manager (v0.8.x → v1.0 Release)
+# Copilot Instructions for CIA Compliance Manager (v1.1.x → v2.0 Release)
 
 ## Release Priority
 
-- **v1.0 Focus:** Fix bugs, complete current widgets, stabilize existing functionality, and improve test coverage.
+- **v2.0 Focus:** Fix bugs, complete current widgets, stabilize existing functionality, and improve test coverage.
 - **No New Features:** Do not extend functionality; strictly work on existing components and APIs.
+- **ISMS 2026 Alignment:** Ensure full compliance with ISO 27001:2022, NIST CSF 2.0, and CIS Controls v8.1.
 
 ## Coding Guidelines
 
@@ -72,9 +73,17 @@
   - Never expose sensitive data in logs or error messages
   - Validate all user inputs using type guards
   - Use strict TypeScript settings to catch potential vulnerabilities
-  - Follow secure coding practices per `SECURITY.md`
+  - Follow secure coding practices per `SECURITY.md` and [Hack23 ISMS-PUBLIC](https://github.com/Hack23/ISMS-PUBLIC)
   - Consider security implications for every code change
   - Review security alerts and address them promptly
+
+- **ISMS 2026 Compliance:**
+  - Align with ISO 27001:2022 (Organizational, People, Physical, Technological controls)
+  - Follow NIST CSF 2.0 (Govern, Identify, Protect, Detect, Respond, Recover)
+  - Implement CIS Controls v8.1 safeguards
+  - Address GDPR, HIPAA, SOC2, PCI DSS, NIS2 requirements
+  - Apply risk-based control implementation
+  - Maintain quarterly security review cycle
 
 - **Data Handling:**
   - Sanitize data before display
@@ -137,24 +146,35 @@
 - **Review Checklist:**
   - TypeScript strict mode compliance
   - Reusability: Are existing utilities/components used?
-  - Test coverage: Are changes tested?
+  - Test coverage: Are changes tested? (80% minimum)
   - Performance: Any negative impact on bundle size or runtime?
-  - Security: Any potential vulnerabilities?
+  - Security: Any potential vulnerabilities? Run `npm run test:licenses` for dependency security
+  - ISMS Compliance: Aligned with Hack23 security policies?
   - Documentation: Are changes documented?
   - Breaking changes: Are they justified and documented?
+
+- **Automated Checks:**
+  - `npm run lint` - ESLint code quality
+  - `npm test` - Vitest unit tests
+  - `npm run coverage` - Code coverage (80% target)
+  - `npm run test:licenses` - License compliance check
+  - `npm run validate:agents` - Agent configuration validation
+  - `npm run knip` - Detect unused code
+  - `npm run audit:design-tokens` - Design system consistency
 
 ## Specialized Agents
 
 This project has specialized agent profiles in `.github/agents/` that provide domain-specific expertise:
 
-- **TypeScript React Agent** (`typescript-react-agent.yml`) - Expert in TypeScript and React development
-- **Testing Agent** (`testing-agent.yml`) - Expert in Vitest and Cypress testing
-- **Code Review Agent** (`code-review-agent.yml`) - Expert in code quality and security review
-- **Documentation Agent** (`documentation-agent.yml`) - Expert in technical documentation
-- **Security Compliance Agent** (`security-compliance-agent.yml`) - Expert in security and compliance frameworks
+- **TypeScript React Agent** (`typescript-react-agent.md`) - Expert in TypeScript and React development
+- **Testing Agent** (`testing-agent.md`) - Expert in Vitest and Cypress testing
+- **Code Review Agent** (`code-review-agent.md`) - Expert in code quality and security review
+- **Documentation Agent** (`documentation-agent.md`) - Expert in technical documentation
+- **Security Compliance Agent** (`security-compliance-agent.md`) - Expert in security and compliance frameworks
+- **Product Task Agent** (`product-task-agent.md`) - Expert in task coordination and issue creation
 
 For detailed information about these agents and how to use them, see [`.github/agents/README.md`](.github/agents/README.md).
 
 ## Summary
 
-Focus on stability, strict TypeScript usage, and Vite-enhanced testing while reusing existing code. Align all changes with clear business, architectural, and security requirements to achieve a robust v1.0 release.
+Focus on stability, strict TypeScript usage, and Vite-enhanced testing while reusing existing code. Align all changes with clear business, architectural, and security requirements. Ensure full ISMS 2026 compliance (ISO 27001:2022, NIST CSF 2.0, CIS Controls v8.1) to achieve a robust v2.0 release that demonstrates Hack23 AB's commitment to security excellence and transparency.
