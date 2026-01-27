@@ -1,6 +1,6 @@
 # 🤖 GitHub Copilot Custom Agents
 
-This directory contains specialized agent configurations for the **CIA Compliance Manager** project. Each agent is an expert in a specific domain, providing targeted assistance and following project-specific best practices.
+This directory contains specialized agent configurations for the **CIA Compliance Manager** project. Each agent is an expert in a specific domain, providing targeted assistance and following project-specific best practices with full ISMS 2026 compliance.
 
 ## 🎯 Agent Context & Setup
 
@@ -107,14 +107,14 @@ sequenceDiagram
 ### 🎯 Product Task Agent
 **File:** `product-task-agent.md`
 
-Expert product coordinator for creating GitHub issues, assigning tasks to agents, and ensuring quality across all dimensions.
+Expert product coordinator for creating GitHub issues, assigning tasks to agents, and ensuring quality across all dimensions with ISMS 2026 compliance.
 
 **🎯 Core Expertise:**
-- Comprehensive product analysis (code quality, UX, ISMS)
+- Comprehensive product analysis (code quality, UX, ISMS 2026)
 - GitHub issue creation and task coordination
 - Multi-dimensional quality assessment
 - Agent assignment and workflow coordination
-- ISMS compliance alignment
+- ISMS 2026 compliance alignment (ISO 27001:2022, NIST CSF 2.0, CIS Controls v8.1)
 
 **💡 Use Cases:**
 - Conducting product audits and creating improvement backlogs
@@ -218,12 +218,13 @@ Expert in technical documentation, API docs, and architecture visualization.
 ### 🔐 Security & Compliance Agent
 **File:** `security-compliance-agent.md`
 
-Expert in security best practices and compliance framework mapping.
+Expert in security best practices and compliance framework mapping with full ISMS 2026 support.
 
 **🎯 Core Expertise:**
 - CIA triad (Confidentiality, Integrity, Availability)
-- Compliance frameworks (NIST CSF, ISO 27001, GDPR, HIPAA, SOC2)
-- Security vulnerability prevention
+- Compliance frameworks (ISO 27001:2022, NIST CSF 2.0, NIST 800-53, CIS Controls v8.1)
+- Regulatory compliance (GDPR, HIPAA, SOC2, PCI DSS, NIS2, EU CRA)
+- Security vulnerability prevention (OWASP Top 10)
 - Secure coding practices
 - Threat modeling and risk assessment
 
@@ -412,7 +413,7 @@ graph LR
 - 📁 **Components**: `src/components/common/*` - Shared components
 - 📁 **Services**: `src/services/*.ts` - Business logic services
 
-### 🎯 Release Priority (v1.0 Focus)
+### 🎯 Release Priority (v2.0 Focus)
 
 ```mermaid
 graph TD
@@ -420,13 +421,14 @@ graph TD
         A[Fix Bugs]:::allowed
         B[Complete Widgets]:::allowed
         C[Stabilize Code]:::allowed
-        D[Improve Tests]:::allowed
+        D[Improve Tests 80%+]:::allowed
+        E[ISMS 2026 Compliance]:::allowed
     end
     
     subgraph "Not Allowed ❌"
-        E[New Features]:::blocked
-        F[Extend Functionality]:::blocked
-        G[New Widgets]:::blocked
+        F[New Features]:::blocked
+        G[Extend Functionality]:::blocked
+        H[New Widgets]:::blocked
     end
     
     classDef allowed fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
@@ -437,8 +439,37 @@ graph TD
 
 - ✅ Strict TypeScript typing (no `any`)
 - ✅ 80% minimum test coverage
-- ✅ Security-first approach
+- ✅ Security-first approach (OWASP Top 10)
 - ✅ Accessibility (WCAG 2.1 AA) compliance
+- ✅ ISMS 2026 compliance (ISO 27001:2022, NIST CSF 2.0, CIS Controls v8.1)
+
+### 🔧 Automated Quality Checks
+
+All agents can leverage these npm scripts for quality validation:
+
+```bash
+# Code Quality
+npm run lint              # ESLint code quality checks
+npm run knip              # Detect unused code
+
+# Testing
+npm test                  # Run unit tests with Vitest
+npm run coverage          # Generate test coverage report (80% target)
+npm run test:e2e          # Run Cypress E2E tests
+
+# Security & Compliance
+npm run test:licenses     # License and dependency security validation
+npm audit                 # npm vulnerability scanning
+
+# Documentation
+npm run docs              # Generate TypeDoc API documentation
+npm run docs:bundle       # Generate all documentation (API, UML, diagrams)
+
+# Build & Validation
+npm run build             # TypeScript compilation and build
+npm run validate:agents   # Validate agent configurations
+npm run audit:design-tokens  # Design system consistency check
+```
 
 ---
 
