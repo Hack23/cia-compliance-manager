@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.12**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.13**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **useResponsiveBreakpoint**(): [`Breakpoint`](../type-aliases/Breakpoint.md)
 
-Defined in: [hooks/useResponsiveBreakpoint.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/hooks/useResponsiveBreakpoint.ts#L55)
+Defined in: [hooks/useResponsiveBreakpoint.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/hooks/useResponsiveBreakpoint.ts#L55)
 
 Custom hook for detecting current responsive breakpoint
 

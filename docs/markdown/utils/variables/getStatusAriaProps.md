@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.12**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.13**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getStatusAriaProps**: (`message`, `politeness`) => `object`
 
-Defined in: [utils/index.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/utils/index.ts#L44)
+Defined in: [utils/index.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/utils/index.ts#L44)
 
 Generate ARIA props for a status/live region
 

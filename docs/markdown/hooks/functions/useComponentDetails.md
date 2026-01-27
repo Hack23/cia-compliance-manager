@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.12**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.13**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **useComponentDetails**(`component`, `level`): [`CIADetails`](../../types/interfaces/CIADetails.md) \| `null`
 
-Defined in: [hooks/useComponentDetails.ts:29](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/hooks/useComponentDetails.ts#L29)
+Defined in: [hooks/useComponentDetails.ts:29](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/hooks/useComponentDetails.ts#L29)
 
 Custom hook for fetching CIA component details with error handling
 

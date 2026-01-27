@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.12**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.13**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isSecurityLevelWidgetProps**(`value`): `value is SecurityLevelWidgetProps`
 
-Defined in: [utils/typeGuards.ts:513](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/utils/typeGuards.ts#L513)
+Defined in: [utils/typeGuards.ts:513](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/utils/typeGuards.ts#L513)
 
 Type guard for checking if a value is a SecurityLevelWidgetProps
 

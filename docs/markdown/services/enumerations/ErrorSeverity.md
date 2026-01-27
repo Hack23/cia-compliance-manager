@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.12**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.13**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Enumeration: ErrorSeverity
 
-Defined in: [services/errorService.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/errorService.ts#L33)
+Defined in: [services/errorService.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/services/errorService.ts#L33)
 
 Error severity levels for categorization
 
@@ -16,7 +16,7 @@ Error severity levels for categorization
 
 > **CRITICAL**: `"critical"`
 
-Defined in: [services/errorService.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/errorService.ts#L41)
+Defined in: [services/errorService.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/services/errorService.ts#L41)
 
 Critical severity - application-wide impact
 
@@ -26,7 +26,7 @@ Critical severity - application-wide impact
 
 > **HIGH**: `"high"`
 
-Defined in: [services/errorService.ts:39](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/errorService.ts#L39)
+Defined in: [services/errorService.ts:39](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/services/errorService.ts#L39)
 
 High severity - significant functionality impacted
 
@@ -36,7 +36,7 @@ High severity - significant functionality impacted
 
 > **LOW**: `"low"`
 
-Defined in: [services/errorService.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/errorService.ts#L35)
+Defined in: [services/errorService.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/services/errorService.ts#L35)
 
 Low severity - informational errors
 
@@ -46,6 +46,6 @@ Low severity - informational errors
 
 > **MEDIUM**: `"medium"`
 
-Defined in: [services/errorService.ts:37](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/errorService.ts#L37)
+Defined in: [services/errorService.ts:37](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/services/errorService.ts#L37)
 
 Medium severity - user action may be needed

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.12**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.13**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: BaseService
 
-Defined in: [services/BaseService.ts:40](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/BaseService.ts#L40)
+Defined in: [services/BaseService.ts:40](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/services/BaseService.ts#L40)
 
 Base service class that provides common functionality
 for security-related services
@@ -38,7 +38,7 @@ for security-related services
 
 > **new BaseService**(`dataProvider`): `BaseService`
 
-Defined in: [services/BaseService.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/BaseService.ts#L56)
+Defined in: [services/BaseService.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/services/BaseService.ts#L56)
 
 Create a new service instance
 
@@ -60,7 +60,7 @@ Data provider for security information
 
 > `readonly` **name**: `string` = `'BaseService'`
 
-Defined in: [services/BaseService.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/BaseService.ts#L44)
+Defined in: [services/BaseService.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/services/BaseService.ts#L44)
 
 Service name for identification
 
@@ -74,7 +74,7 @@ Service name for identification
 
 > **getComponentDetails**(`component`, `level`): [`CIADetails`](../../../types/interfaces/CIADetails.md) \| `undefined`
 
-Defined in: [services/BaseService.ts:193](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/BaseService.ts#L193)
+Defined in: [services/BaseService.ts:193](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/services/BaseService.ts#L193)
 
 Get component details for a specific component and security level
 
@@ -102,7 +102,7 @@ Get component details for a specific component and security level
 
 > **getRiskLevelFromSecurityLevel**(`level`): `string`
 
-Defined in: [services/BaseService.ts:254](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/BaseService.ts#L254)
+Defined in: [services/BaseService.ts:254](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/services/BaseService.ts#L254)
 
 Get risk level from security level
 
@@ -126,7 +126,7 @@ Get risk level from security level
 
 > **getSecurityLevelDescription**(`level`): `string`
 
-Defined in: [services/BaseService.ts:233](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/BaseService.ts#L233)
+Defined in: [services/BaseService.ts:233](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/services/BaseService.ts#L233)
 
 Get security level description
 
@@ -150,7 +150,7 @@ Get security level description
 
 > **handleError**(`error`): [`ServiceError`](../../classes/ServiceError.md)
 
-Defined in: [services/BaseService.ts:104](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/BaseService.ts#L104)
+Defined in: [services/BaseService.ts:104](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/services/BaseService.ts#L104)
 
 Handle errors consistently across services
 
@@ -178,7 +178,7 @@ ServiceError
 
 > **validate**(`input`): `boolean`
 
-Defined in: [services/BaseService.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/BaseService.ts#L73)
+Defined in: [services/BaseService.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/services/BaseService.ts#L73)
 
 Validate input parameters (to be overridden by subclasses)
 

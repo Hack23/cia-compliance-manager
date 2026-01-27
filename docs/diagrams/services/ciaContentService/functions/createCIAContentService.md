@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.12**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.13**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **createCIAContentService**(`dataProvider?`): [`CIAContentService`](../classes/CIAContentService.md)
 
-Defined in: [services/ciaContentService.ts:1371](https://github.com/Hack23/cia-compliance-manager/blob/2fe41170de20f6c4fdd8b4b044dd9ce34202b4fe/src/services/ciaContentService.ts#L1371)
+Defined in: [services/ciaContentService.ts:1371](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/services/ciaContentService.ts#L1371)
 
 Create a CIA content service with the specified data provider
 
