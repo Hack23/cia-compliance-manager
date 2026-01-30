@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.13**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.14**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ShortcutBadgeProps
 
-Defined in: [types/keyboard.ts:121](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/types/keyboard.ts#L121)
+Defined in: [types/keyboard.ts:121](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/keyboard.ts#L121)
 
 Props for shortcut badge component
 
@@ -16,7 +16,7 @@ Props for shortcut badge component
 
 > `optional` **className**: `string`
 
-Defined in: [types/keyboard.ts:129](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/types/keyboard.ts#L129)
+Defined in: [types/keyboard.ts:129](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/keyboard.ts#L129)
 
 Additional CSS classes
 
@@ -26,7 +26,7 @@ Additional CSS classes
 
 > `optional` **platformSpecific**: `boolean`
 
-Defined in: [types/keyboard.ts:132](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/types/keyboard.ts#L132)
+Defined in: [types/keyboard.ts:132](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/keyboard.ts#L132)
 
 Whether to show platform-specific keys
 
@@ -36,7 +36,7 @@ Whether to show platform-specific keys
 
 > **shortcut**: `string`
 
-Defined in: [types/keyboard.ts:123](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/types/keyboard.ts#L123)
+Defined in: [types/keyboard.ts:123](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/keyboard.ts#L123)
 
 Key combination to display
 
@@ -46,6 +46,6 @@ Key combination to display
 
 > `optional` **size**: `"sm"` \| `"md"` \| `"lg"`
 
-Defined in: [types/keyboard.ts:126](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/types/keyboard.ts#L126)
+Defined in: [types/keyboard.ts:126](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/keyboard.ts#L126)
 
 Size variant

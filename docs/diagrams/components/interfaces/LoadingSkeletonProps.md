@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.13**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.14**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: LoadingSkeletonProps
 
-Defined in: [types/componentPropExports.ts:354](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/types/componentPropExports.ts#L354)
+Defined in: [types/componentPropExports.ts:354](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/componentPropExports.ts#L354)
 
 Props for LoadingSkeleton component
 
@@ -16,7 +16,7 @@ Props for LoadingSkeleton component
 
 > `optional` **className**: `string`
 
-Defined in: [types/componentPropExports.ts:369](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/types/componentPropExports.ts#L369)
+Defined in: [types/componentPropExports.ts:369](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/componentPropExports.ts#L369)
 
 Optional CSS class name
 
@@ -26,7 +26,7 @@ Optional CSS class name
 
 > `optional` **lines**: `number`
 
-Defined in: [types/componentPropExports.ts:359](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/types/componentPropExports.ts#L359)
+Defined in: [types/componentPropExports.ts:359](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/componentPropExports.ts#L359)
 
 Number of skeleton lines to display
 
@@ -42,7 +42,7 @@ Number of skeleton lines to display
 
 > `optional` **testId**: `string`
 
-Defined in: [types/componentPropExports.ts:364](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/types/componentPropExports.ts#L364)
+Defined in: [types/componentPropExports.ts:364](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/componentPropExports.ts#L364)
 
 Optional test ID for automated testing
 
@@ -52,7 +52,7 @@ Optional test ID for automated testing
 
 > `optional` **variant**: `SkeletonVariant`
 
-Defined in: [types/componentPropExports.ts:546](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/types/componentPropExports.ts#L546)
+Defined in: [types/componentPropExports.ts:546](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/componentPropExports.ts#L546)
 
 Skeleton variant for different widget types
 

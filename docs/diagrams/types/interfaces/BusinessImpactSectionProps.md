@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.13**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.14**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpactSectionProps
 
-Defined in: [types/componentPropExports.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/types/componentPropExports.ts#L32)
+Defined in: [types/componentPropExports.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/componentPropExports.ts#L32)
 
 Props for the BusinessImpactSection component
 
@@ -16,7 +16,7 @@ Props for the BusinessImpactSection component
 
 > **color**: [`CIAComponentColor`](../type-aliases/CIAComponentColor.md)
 
-Defined in: [types/componentPropExports.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/types/componentPropExports.ts#L34)
+Defined in: [types/componentPropExports.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/componentPropExports.ts#L34)
 
 Color theme for the section (blue, green, or orange)
 
@@ -26,7 +26,7 @@ Color theme for the section (blue, green, or orange)
 
 > **impact**: [`BusinessImpactDetails`](BusinessImpactDetails.md)
 
-Defined in: [types/componentPropExports.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/types/componentPropExports.ts#L33)
+Defined in: [types/componentPropExports.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/componentPropExports.ts#L33)
 
 Business impact data to display
 
@@ -36,6 +36,6 @@ Business impact data to display
 
 > `optional` **testId**: `string`
 
-Defined in: [types/componentPropExports.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/d1f49c8017dd6649366103fd87fa14f3af19f220/src/types/componentPropExports.ts#L35)
+Defined in: [types/componentPropExports.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/componentPropExports.ts#L35)
 
 Optional test ID for testing purposes
