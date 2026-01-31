@@ -19,6 +19,51 @@ All agents in this project are configured to **automatically read** key context 
 
 These context files ensure agents have a consistent understanding of the development environment, tools, and project structure.
 
+## 🎓 Foundational Skills
+
+All agents are guided by **strategic, rule-based skills** that define high-level principles and best practices:
+
+### Core Skills (Located in `.github/skills/`)
+
+1. **🔐 Security by Design** (`security-by-design.md`)
+   - Threat modeling before implementation
+   - Defense in depth, least privilege, secure by default
+   - Mandatory input validation and security testing
+   - **Learn more**: [Security by Design Skill](../skills/security-by-design.md)
+
+2. **✨ Code Quality Excellence** (`code-quality-excellence.md`)
+   - **CRITICAL**: Code reusability - check existing code first
+   - Strict TypeScript typing (no `any`)
+   - Functions < 50 lines, single responsibility principle
+   - 80%+ test coverage mandatory
+   - **Learn more**: [Code Quality Excellence Skill](../skills/code-quality-excellence.md)
+
+3. **🛡️ ISMS Compliance** (`isms-compliance.md`)
+   - Align with Hack23 AB ISMS policies
+   - Map to ISO 27001:2022, NIST CSF 2.0, CIS Controls v8
+   - Required documentation (SECURITY_ARCHITECTURE.md, C4 models)
+   - Vulnerability management and secure SDLC
+   - **Learn more**: [ISMS Compliance Skill](../skills/isms-compliance.md)
+
+4. **🧪 Testing Excellence** (`testing-excellence.md`)
+   - Testing pyramid: 70% unit, 20% integration, 10% E2E
+   - 80%+ overall coverage, 100% for security-critical paths
+   - AAA pattern, FIRST principles, behavior-focused testing
+   - **Learn more**: [Testing Excellence Skill](../skills/testing-excellence.md)
+
+### Skills vs. Agents
+
+| Aspect | Skills | Agents |
+|--------|--------|--------|
+| **Purpose** | Strategic principles & rules | Task execution |
+| **Scope** | Project-wide guidelines | Domain-specific |
+| **Level** | Strategic ("What" & "Why") | Tactical ("How") |
+| **Application** | Referenced by all agents | Invoked for specific tasks |
+
+**Example**: When implementing authentication, the **Security by Design skill** defines threat modeling requirements, while the **Security Compliance Agent** implements the feature following those principles.
+
+**Full Skills Documentation**: [`.github/skills/README.md`](../skills/README.md)
+
 ## 📋 Available Agents
 
 ### Agent Architecture Overview
@@ -128,6 +173,18 @@ Expert product coordinator for creating GitHub issues, assigning tasks to agents
 - Playwright for UI/UX testing (navigate, screenshot, click)
 - Code analysis and quality metrics
 - ISMS policy mapping
+- **🤖 GitHub Copilot Assignment** (Advanced Insiders features):
+  - `assign_copilot_to_issue` - Assign issues with `base_ref` and `custom_instructions`
+  - `create_pull_request_with_copilot` - Create PRs with specific custom agents
+  - `get_copilot_job_status` - Track Copilot job progress
+  - Stacked PRs workflow for sequential dependencies
+
+**🚀 Advanced Capabilities:**
+- Can assign complex tasks directly to Copilot coding agent
+- Supports feature branch workflows via `base_ref` parameter
+- Can provide custom instructions for Copilot assignments
+- Routes work to specific agents via `custom_agent` parameter
+- Tracks job status for long-running Copilot tasks
 
 ---
 
@@ -565,16 +622,23 @@ sed -n '/^---$/,/^---$/p' my-agent.md | sed '1d;$d' | npx js-yaml -t
 
 | Resource | Description | Link |
 |----------|-------------|------|
+| 🎓 **Skills Documentation** | Strategic principles and best practices | [.github/skills/README.md](../skills/README.md) |
+| 🔐 **Security by Design** | Security principles and threat modeling | [.github/skills/security-by-design.md](../skills/security-by-design.md) |
+| ✨ **Code Quality Excellence** | Reusability, type safety, best practices | [.github/skills/code-quality-excellence.md](../skills/code-quality-excellence.md) |
+| 🛡️ **ISMS Compliance** | ISO 27001, NIST CSF, CIS Controls | [.github/skills/isms-compliance.md](../skills/isms-compliance.md) |
+| 🧪 **Testing Excellence** | Testing standards and coverage requirements | [.github/skills/testing-excellence.md](../skills/testing-excellence.md) |
 | 📘 **Agent Usage Guide** | Comprehensive guide to using custom agents | [AGENT_GUIDE.md](AGENT_GUIDE.md) |
 | 📖 **Main README** | Project overview, features, and getting started | [README.md](../../README.md) |
 | ⚙️ **Setup Steps** | Environment setup and available tools | [.github/workflows/copilot-setup-steps.yml](../workflows/copilot-setup-steps.yml) |
 | 🔧 **MCP Configuration** | MCP server configuration details | [.github/copilot-mcp.json](../copilot-mcp.json) |
 | 🌐 **GitHub Docs** | Official Copilot agent documentation | [View Docs](https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-custom-agents) |
+| 🌐 **GitHub Skills Changelog** | GitHub Copilot Skills feature announcement | [View Blog](https://github.blog/changelog/2025-12-18-github-copilot-now-supports-agent-skills/) |
 | 📖 **Copilot Instructions** | Global project guidelines | [.github/copilot-instructions.md](../copilot-instructions.md) |
 | 🤝 **Contributing** | General contribution guide | [CONTRIBUTING.md](../../CONTRIBUTING.md) |
 | 🧪 **Test Plans** | Unit & E2E testing guidelines | [docs/UnitTestPlan.md](../../docs/UnitTestPlan.md), [docs/E2ETestPlan.md](../../docs/E2ETestPlan.md) |
 | 🏗️ **Architecture** | System architecture docs | [docs/architecture/](../../docs/architecture/) |
 | 🔐 **ISMS Guide** | Security implementation guide | [ISMS_IMPLEMENTATION_GUIDE.md](../../ISMS_IMPLEMENTATION_GUIDE.md) |
+| 🔐 **Hack23 ISMS Public** | Organization-wide ISMS policies | [ISMS-PUBLIC](https://github.com/Hack23/ISMS-PUBLIC) |
 
 ---
 
