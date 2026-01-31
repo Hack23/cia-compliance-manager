@@ -469,8 +469,8 @@ npm run bundle-analysis   # Check bundle size compliance
 # Ensure documentation exists
 ls docs/architecture/SECURITY_ARCHITECTURE.md
 ls docs/architecture/FUTURE_SECURITY_ARCHITECTURE.md
-ls docs/ARCHITECTURE.md
-ls docs/DATA_MODEL.md
+ls docs/architecture/ARCHITECTURE.md
+ls docs/architecture/DATA_MODEL.md
 ```
 
 ## ISMS Enforcement Rules
