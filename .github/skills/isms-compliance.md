@@ -467,8 +467,8 @@ npm run bundle-analysis   # Check bundle size compliance
 ### Documentation Checks
 ```bash
 # Ensure documentation exists
-ls SECURITY_ARCHITECTURE.md
-ls FUTURE_SECURITY_ARCHITECTURE.md
+ls docs/architecture/SECURITY_ARCHITECTURE.md
+ls docs/architecture/FUTURE_SECURITY_ARCHITECTURE.md
 ls docs/ARCHITECTURE.md
 ls docs/DATA_MODEL.md
 ```
