@@ -1,160 +1,443 @@
-# Copilot Instructions for CIA Compliance Manager (v0.8.x → v1.0 Release)
+# 🤖 GitHub Copilot Instructions for CIA Compliance Manager
 
-## Release Priority
+**Version**: 2.0 (Rule-Based) | **Release Focus**: v1.0 - Bugs, Stability, Testing
 
-- **v1.0 Focus:** Fix bugs, complete current widgets, stabilize existing functionality, and improve test coverage.
-- **No New Features:** Do not extend functionality; strictly work on existing components and APIs.
+---
 
-## Coding Guidelines
+## 🎯 Core Philosophy
 
-- **Strict Typing:**
+**DO MORE, ASK LESS**: You are empowered to make decisions and complete work autonomously following these rules. Only ask questions when genuinely ambiguous or when making architectural decisions.
 
-  - _Use explicit types and interfaces; avoid `any` (use `unknown` if needed)_.
-  - _Leverage utility types (Pick, Omit, Partial) and always define return types_.
-  - _Enable TypeScript's strict options in `tsconfig.json` (e.g., `strictNullChecks`, `noImplicitAny`)_.
-  - _See: [link to tsconfig.json]_
+**RULE-BASED EXECUTION**: Follow the MUST/SHOULD/MAY hierarchy. MUST rules are non-negotiable. SHOULD rules require justification to skip. MAY rules are best practices.
 
-- **Reusability - _Mandatory_:**
-  - **Always** reuse/extend existing utilities, helpers, constants, components, and types.
-    - **Key Reusable Items:**
-      - **Types:** `src/types/cia.ts`, `src/types/businessImpact.ts`, `src/types/widgets.ts`, `src/types/compliance.ts`, `src/types/componentPropExports.ts`, `src/types/widget-props.ts`
-      - **Constants:** `src/constants/securityLevels.ts`, `src/constants/businessConstants.ts`, `src/constants/appConstants.ts`, `src/constants/uiConstants.ts`, `src/constants/testIds.ts`
-      - **Utilities:** `src/utils/securityLevelUtils.ts`, `src/utils/riskUtils.ts`, `src/utils/formatUtils.ts`, `src/utils/typeGuards.ts`, `src/utils/colorUtils.ts`
-      - **Services:** `src/services/ciaContentService.ts`, `src/services/businessImpactService.ts`, `src/services/complianceService.ts`, `src/services/securityMetricsService.ts`, `src/services/BaseService.ts`
-      - **Components:** `src/components/common/*`, `src/components/charts/*`, `src/components/widgets/*`
-  - _Avoid creating new types files unless absolutely necessary. Extend existing ones_.
-  - _Any new component/type PR MUST justify why existing ones couldn't be reused/extended with a detailed comment_.
+**SKILLS-FIRST APPROACH**: Always apply the foundational skills framework before writing code.
 
-## Testing Guidelines
+---
 
-- **Vite & Vitest Integration:**
-  - Configure Vite and Vitest for fast feedback and native ESM support.
-  - Separate unit and integration tests, leveraging Vite's watch mode and coverage tools.
-  - Mock external dependencies using existing helpers with proper TypeScript typings.
-- **Quality Standards:**
-  - Aim for a minimum of 80% code coverage.
-  - Write tests for critical business logic and security paths.
+## 📚 Foundational Skills Framework
 
-## Component Architecture
+**CRITICAL**: Before ANY code change, consult these skills located in `.github/skills/`:
 
-- **Component Organization:**
-  - Place shared/common components in `src/components/common/`
-  - Place chart components in `src/components/charts/`
-  - Place feature-specific widget components in `src/components/widgets/`
-  - Keep components small and focused on a single responsibility
-  - Extract complex logic into custom hooks in `src/hooks/`
+### 🔐 1. Security by Design (MANDATORY)
+**File**: `.github/skills/security-by-design.md`
 
-- **Component Patterns:**
-  - Use functional components with TypeScript interfaces for props
-  - Define prop interfaces in `src/types/componentPropExports.ts` or `src/types/widget-props.ts`
-  - Use React hooks for state management
-  - Implement proper error boundaries using `react-error-boundary`
-  - Use `React.memo()` for performance optimization when appropriate
+**Core Rules**:
+- ✅ **MUST**: Threat model for sensitive operations (auth, data handling, external APIs)
+- ✅ **MUST**: Validate ALL user inputs at boundaries
+- ✅ **MUST**: Use defense in depth (multiple security layers)
+- ✅ **MUST**: Never hardcode secrets or credentials
+- ✅ **MUST**: Encrypt sensitive data at rest and in transit
+- ✅ **MUST**: Include security tests for security-critical paths
 
-## Error Handling
+**When to Apply**: Authentication, authorization, data handling, external APIs, file operations, user input processing.
 
-- **Error Handling Strategy:**
-  - Use try-catch blocks in service methods and async operations
-  - Log errors using the centralized logger from `src/utils/logger.ts`
-  - Return `undefined` or appropriate default values instead of throwing errors in most cases
-  - Use type guards from `src/utils/typeGuards.ts` for runtime type validation
-  - Implement error boundaries for component-level error handling
+---
 
-- **Error Messages:**
-  - Provide clear, actionable error messages
-  - Include context about what operation failed
-  - Never expose sensitive information in error messages
-  - Use consistent error message formatting
+### ✨ 2. Code Quality Excellence (CRITICAL PRIORITY)
+**File**: `.github/skills/code-quality-excellence.md`
 
-## Security Considerations
+**Core Rules**:
+- ✅ **MUST**: Check existing code BEFORE creating new (types, utils, components, services)
+- ✅ **MUST**: No `any` types - use explicit types or `unknown`
+- ✅ **MUST**: All functions have explicit return types
+- ✅ **MUST**: JSDoc for all public APIs
+- ✅ **MUST**: 80%+ test coverage for new code
+- ✅ **MUST**: Functions < 50 lines, single responsibility
+- ✅ **SHOULD**: Prefer immutability (`const`, `readonly`)
+- ✅ **SHOULD**: Use utility types (Pick, Omit, Partial)
 
-- **Security-First Development:**
-  - Never expose sensitive data in logs or error messages
-  - Validate all user inputs using type guards
-  - Use strict TypeScript settings to catch potential vulnerabilities
-  - Follow secure coding practices per `SECURITY.md`
-  - Consider security implications for every code change
-  - Review security alerts and address them promptly
+**Reusable Code Locations** (CHECK FIRST):
+```
+src/types/          - cia.ts, businessImpact.ts, widgets.ts, compliance.ts, componentPropExports.ts, widget-props.ts
+src/constants/      - securityLevels.ts, businessConstants.ts, appConstants.ts, uiConstants.ts, testIds.ts
+src/utils/          - securityLevelUtils.ts, riskUtils.ts, formatUtils.ts, typeGuards.ts, colorUtils.ts
+src/services/       - ciaContentService.ts, businessImpactService.ts, complianceService.ts, securityMetricsService.ts, BaseService.ts
+src/components/     - common/*, charts/*, widgets/*
+```
 
-- **Data Handling:**
-  - Sanitize data before display
-  - Use parameterized queries/functions to prevent injection
-  - Implement proper access controls
-  - Follow principle of least privilege
+**When to Apply**: All code changes. Always check reusable locations first.
 
-## Performance Optimization
+---
 
-- **Performance Guidelines:**
-  - Use `React.memo()` for expensive renders
-  - Implement code splitting for large components
-  - Optimize bundle size (refer to `budget.json` limits)
-  - Lazy load components when appropriate
-  - Avoid unnecessary re-renders
-  - Use efficient data structures and algorithms
+### 🛡️ 3. ISMS Compliance (MANDATORY)
+**File**: `.github/skills/isms-compliance.md`
 
-- **Resource Management:**
-  - Clean up event listeners and subscriptions
-  - Optimize images and assets
-  - Monitor bundle size impact
-  - Use Vite's build analyzer to identify optimization opportunities
+**Core Rules**:
+- ✅ **MUST**: Follow secure development lifecycle (all phases)
+- ✅ **MUST**: Security architecture documented (SECURITY_ARCHITECTURE.md)
+- ✅ **MUST**: Map features to compliance frameworks (ISO 27001, NIST CSF, CIS Controls)
+- ✅ **MUST**: Vulnerability remediation SLA (Critical: 24h, High: 7d, Medium: 30d, Low: 90d)
+- ✅ **MUST**: All code reviewed for security before merge
+- ✅ **SHOULD**: Update documentation portfolio (ARCHITECTURE.md, DATA_MODEL.md, etc.)
 
-## Documentation Standards
+**When to Apply**: Security features, compliance features, architecture changes, vulnerability fixes.
 
-- **Code Documentation:**
-  - Use JSDoc comments for all public functions, classes, and interfaces
-  - Document complex algorithms and business logic
-  - Keep comments up-to-date with code changes
-  - Use TypeDoc-compatible documentation format
-  - Document parameters, return types, and exceptions
+---
 
-- **Documentation Files:**
-  - Update relevant documentation in `docs/` when making architectural changes
-  - Keep README.md current with feature changes
-  - Update API documentation when modifying public interfaces
-  - Document breaking changes clearly
+### 🧪 4. Testing Excellence (MANDATORY)
+**File**: `.github/skills/testing-excellence.md`
 
-## Common Patterns and Conventions
+**Core Rules**:
+- ✅ **MUST**: 80%+ overall coverage, 100% for security-critical paths
+- ✅ **MUST**: Testing pyramid (70% unit, 20% integration, 10% E2E)
+- ✅ **MUST**: All tests pass before merge
+- ✅ **MUST**: AAA pattern (Arrange-Act-Assert)
+- ✅ **MUST**: No flaky tests
+- ✅ **SHOULD**: Use React Testing Library for components (behavior-focused)
+- ✅ **SHOULD**: Test accessibility with @axe-core/react
 
-- **Naming Conventions:**
-  - Use PascalCase for components and types
-  - Use camelCase for functions, variables, and hooks
-  - Use UPPER_SNAKE_CASE for constants
-  - Prefix custom hooks with `use`
-  - Use descriptive, meaningful names
+**When to Apply**: All code changes. Write tests with or before implementation.
 
-- **Import Organization:**
-  - Group imports: React/external libraries, internal types, internal components, internal utilities
-  - Use absolute imports via TypeScript path mapping
-  - Avoid circular dependencies
+---
 
-- **File Structure:**
-  - Co-locate tests with source files using `.test.ts(x)` extension
-  - Keep files focused and under 300 lines when possible
-  - Use index files for clean exports
+## 🚨 Enforcement Rules (MUST/SHOULD/MAY Hierarchy)
 
-## Code Review Standards
+### MUST (Critical - Block PR if Violated)
 
-- **Review Checklist:**
-  - TypeScript strict mode compliance
-  - Reusability: Are existing utilities/components used?
-  - Test coverage: Are changes tested?
-  - Performance: Any negative impact on bundle size or runtime?
-  - Security: Any potential vulnerabilities?
-  - Documentation: Are changes documented?
-  - Breaking changes: Are they justified and documented?
+**Code Quality**:
+- No `any` types anywhere in codebase
+- All functions have explicit return types
+- Check existing code before creating new types/utils/components
+- 80%+ test coverage for new code
+- All tests pass
 
-## Specialized Agents
+**Security**:
+- All user inputs validated
+- No hardcoded secrets or credentials
+- Sensitive data encrypted
+- Error messages never leak sensitive information
+- Security tests for security-critical paths
 
-This project has specialized agent profiles in `.github/agents/` that provide domain-specific expertise:
+**ISMS Compliance**:
+- Security architecture documented and current
+- Code reviewed for security
+- Vulnerability SLA followed
 
-- **TypeScript React Agent** (`typescript-react-agent.yml`) - Expert in TypeScript and React development
-- **Testing Agent** (`testing-agent.yml`) - Expert in Vitest and Cypress testing
-- **Code Review Agent** (`code-review-agent.yml`) - Expert in code quality and security review
-- **Documentation Agent** (`documentation-agent.yml`) - Expert in technical documentation
-- **Security Compliance Agent** (`security-compliance-agent.yml`) - Expert in security and compliance frameworks
+**Testing**:
+- 100% coverage for security-critical paths (auth, data handling)
+- No skipped tests without documented justification
+- All tests deterministic (no flaky tests)
 
-For detailed information about these agents and how to use them, see [`.github/agents/README.md`](.github/agents/README.md).
+**Documentation**:
+- JSDoc for all public functions, classes, interfaces
+- Update relevant docs when changing functionality
+- README current with feature changes
 
-## Summary
+### SHOULD (High Priority - Justify if Not Followed)
 
-Focus on stability, strict TypeScript usage, and Vite-enhanced testing while reusing existing code. Align all changes with clear business, architectural, and security requirements to achieve a robust v1.0 release.
+**Code Quality**:
+- Functions < 50 lines
+- Use immutability (`const`, `readonly`)
+- Use utility types for type composition
+- React.memo() for expensive components
+
+**Security**:
+- Threat model documented for sensitive operations
+- Audit logging for security events
+- Use security linters (ESLint security plugins)
+
+**Testing**:
+- Accessibility tests using jest-axe
+- Test error scenarios and edge cases
+- Use MSW for API mocking
+
+**Documentation**:
+- Inline comments for complex algorithms
+- Architecture diagrams for major changes
+- Update C4 model documentation
+
+### MAY (Recommended - Best Practice)
+
+**Code Quality**:
+- Performance benchmarks for critical paths
+- Code complexity metrics tracking
+- Bundle size analysis
+
+**Security**:
+- Penetration testing for critical changes
+- Security training sessions
+- Bug bounty participation
+
+**Testing**:
+- Mutation testing
+- Visual regression tests
+- Performance tests
+
+---
+
+## 🎯 Release Context: v1.0 Focus
+
+### ALLOWED ✅
+- Fix bugs in existing functionality
+- Complete in-progress widgets
+- Stabilize existing features
+- Improve test coverage (target 80%+)
+- Refactor for maintainability
+- Performance optimizations
+- Security vulnerability fixes (CRITICAL PRIORITY)
+- Documentation improvements
+
+### NOT ALLOWED ❌
+- New features or functionality
+- New widgets or components (unless completing in-progress)
+- Extending APIs with new endpoints
+- Adding new dependencies (unless fixing vulnerabilities)
+- Breaking changes to public APIs
+
+---
+
+## 💻 Development Workflow
+
+### Before Writing Code:
+
+1. **Understand the Task**
+   - Read issue/requirement fully
+   - Identify affected components
+   - Check related code
+
+2. **Check Reusability** (CRITICAL)
+   ```bash
+   # Search for existing implementations
+   grep -r "similar_function_name" src/
+   ls src/types/  # Check existing types
+   ls src/utils/  # Check existing utilities
+   ls src/services/  # Check existing services
+   ```
+
+3. **Apply Skills Framework**
+   - Security by Design: Need threat model?
+   - Code Quality: What can be reused?
+   - ISMS Compliance: Compliance requirements?
+   - Testing: What tests are needed?
+
+4. **Plan Implementation**
+   - Minimal changes approach
+   - Identify files to modify
+   - Plan test strategy
+
+### While Writing Code:
+
+1. **Follow TypeScript Strict Mode**
+   ```typescript
+   // ✅ GOOD
+   function calculateRisk(
+     confidentiality: SecurityLevel,
+     integrity: SecurityLevel,
+     availability: SecurityLevel
+   ): number {
+     // Implementation
+   }
+   
+   // ❌ BAD
+   function calculateRisk(c, i, a) {
+     // Implementation
+   }
+   ```
+
+2. **Reuse Existing Code**
+   ```typescript
+   // ✅ GOOD: Use existing utility
+   import { getColorForSecurityLevel } from '@/utils/colorUtils';
+   
+   // ❌ BAD: Create duplicate
+   function getSecurityColor(level: string): string { ... }
+   ```
+
+3. **Write Tests Alongside Code**
+   ```typescript
+   // Component.tsx
+   export function MyComponent() { ... }
+   
+   // Component.test.tsx (same directory)
+   describe('MyComponent', () => {
+     it('should render correctly', () => { ... });
+   });
+   ```
+
+### Before Committing:
+
+1. **Run Checks** (MANDATORY)
+   ```bash
+   npm run lint              # Fix all errors
+   npm run type-check        # No TypeScript errors
+   npm run test              # All tests pass
+   npm run test:coverage     # Coverage ≥ 80%
+   npm run build             # Build succeeds
+   ```
+
+2. **Verify Changes**
+   ```bash
+   git status                # Review changed files
+   git diff                  # Review actual changes
+   ```
+
+3. **Validate Against Rules**
+   - [ ] No `any` types?
+   - [ ] Reused existing code?
+   - [ ] Tests written and passing?
+   - [ ] Coverage ≥ 80%?
+   - [ ] Security considerations addressed?
+   - [ ] Documentation updated?
+
+---
+
+## 🤖 Custom Agents (Use When Appropriate)
+
+Located in `.github/agents/`, these specialized agents provide domain expertise:
+
+### When to Use Agents:
+
+| Task Type | Agent | Use When |
+|-----------|-------|----------|
+| **TypeScript/React code** | `@typescript-react-agent` | Building components, hooks, TypeScript types |
+| **Writing tests** | `@testing-agent` | Unit tests, integration tests, E2E tests |
+| **Code review** | `@code-review-agent` | Reviewing PRs, checking quality/security |
+| **Documentation** | `@documentation-agent` | Writing docs, creating diagrams, API docs |
+| **Security/Compliance** | `@security-compliance-agent` | Security reviews, ISMS mapping, threat models |
+| **Product coordination** | `@product-task-agent` | Creating issues, coordinating quality improvements |
+
+**See**: `.github/agents/README.md` for full agent documentation.
+
+---
+
+## 📝 File Creation Policy
+
+### NEVER Create New Files Unless:
+
+1. **Explicitly asked** by user ("create a new file X")
+2. **Test files** for new code (Component.test.tsx)
+3. **Required by framework** (e.g., TypeScript requires certain files)
+
+### DO NOT Create:
+
+- ❌ Planning documents or notes (work in memory)
+- ❌ Temporary markdown files
+- ❌ TODO lists or tracking files
+- ❌ Summary documents (unless explicitly requested)
+- ❌ Additional documentation files (update existing instead)
+
+### Before Creating ANY File:
+
+1. Check if existing file can be updated instead
+2. Verify file is necessary and requested
+3. Use appropriate naming conventions
+4. Place in correct directory
+
+---
+
+## 🔍 Quality Checklist (Before PR)
+
+Use this checklist for every change:
+
+### Code Quality
+- [ ] No `any` types (use explicit types or `unknown`)
+- [ ] All functions have explicit return types
+- [ ] Existing code reused where possible
+- [ ] JSDoc comments for public APIs
+- [ ] Follows naming conventions (PascalCase, camelCase, UPPER_SNAKE_CASE)
+- [ ] Functions < 50 lines, single responsibility
+- [ ] No code duplication
+
+### Security
+- [ ] All user inputs validated
+- [ ] No hardcoded secrets
+- [ ] Sensitive data encrypted or protected
+- [ ] Error messages don't leak sensitive information
+- [ ] Security tests for security-critical code
+
+### Testing
+- [ ] Tests written for new code
+- [ ] All tests pass (`npm run test`)
+- [ ] Coverage ≥ 80% (`npm run test:coverage`)
+- [ ] No flaky tests
+- [ ] Tests use AAA pattern
+- [ ] Critical paths have 100% coverage
+
+### ISMS Compliance
+- [ ] Security considerations documented
+- [ ] Compliance framework mapped (if applicable)
+- [ ] Architecture docs updated (if needed)
+
+### Documentation
+- [ ] JSDoc for new public APIs
+- [ ] README updated (if features changed)
+- [ ] Architecture docs updated (if structure changed)
+- [ ] Breaking changes documented
+
+### Build & Performance
+- [ ] Build succeeds (`npm run build`)
+- [ ] No ESLint errors (`npm run lint`)
+- [ ] No TypeScript errors (`npm run type-check`)
+- [ ] Bundle size acceptable (check `budget.json`)
+- [ ] No performance regressions
+
+---
+
+## 🎓 Learning & Improvement
+
+### When Uncertain:
+
+1. **Check Skills** (`.github/skills/`) for principles
+2. **Check Agents** (`.github/agents/`) for domain guidance
+3. **Check Existing Code** for patterns
+4. **Only then ask** if genuinely ambiguous
+
+### When You Make a Mistake:
+
+1. **Learn from it** - understand why it violated a rule
+2. **Update your approach** - apply the correct pattern
+3. **Move forward** - don't repeat the same mistake
+
+### Continuous Improvement:
+
+- Study existing codebase patterns
+- Understand why rules exist (security, maintainability, quality)
+- Apply skills framework consistently
+- Evolve implementation while maintaining standards
+
+---
+
+## 📚 Quick Reference Links
+
+### Core Documentation
+- **Skills Framework**: `.github/skills/README.md`
+- **Agent Documentation**: `.github/agents/README.md`
+- **Project README**: `README.md`
+- **Security Policy**: `SECURITY.md`
+- **ISMS Guide**: `ISMS_IMPLEMENTATION_GUIDE.md`
+
+### Skills (Rule-Based Principles)
+- **Security by Design**: `.github/skills/security-by-design.md`
+- **Code Quality Excellence**: `.github/skills/code-quality-excellence.md`
+- **ISMS Compliance**: `.github/skills/isms-compliance.md`
+- **Testing Excellence**: `.github/skills/testing-excellence.md`
+
+### Agents (Task Execution)
+- **TypeScript React Agent**: `.github/agents/typescript-react-agent.md`
+- **Testing Agent**: `.github/agents/testing-agent.md`
+- **Code Review Agent**: `.github/agents/code-review-agent.md`
+- **Documentation Agent**: `.github/agents/documentation-agent.md`
+- **Security Compliance Agent**: `.github/agents/security-compliance-agent.md`
+- **Product Task Agent**: `.github/agents/product-task-agent.md`
+
+### External Resources
+- [Hack23 ISMS Public](https://github.com/Hack23/ISMS-PUBLIC)
+- [ISO 27001:2022](https://www.iso.org/standard/27001)
+- [NIST CSF 2.0](https://www.nist.gov/cyberframework)
+- [CIS Controls v8](https://www.cisecurity.org/controls/)
+
+---
+
+## 🎯 Remember
+
+**YOU ARE EMPOWERED TO ACT**: These rules give you the authority to make decisions and complete work autonomously. Follow the MUST rules, justify SHOULD exceptions, apply MAY practices.
+
+**SKILLS → AGENTS → CODE**: Always apply skills framework first, leverage agents for domain expertise, then write code following all rules.
+
+**QUALITY OVER SPEED**: It's better to do it right than to do it fast. Follow the rules, run the checks, deliver quality.
+
+**ASK LESS, DO MORE**: Only ask when genuinely ambiguous. These instructions, skills, and agents give you everything needed to complete most tasks independently.
+
+---
+
+**Made with ❤️ for CIA Compliance Manager v1.0** | [Hack23 AB](https://www.hack23.com) | Rule-Based Excellence

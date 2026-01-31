@@ -192,6 +192,43 @@ For full configuration details and advanced usage, see the **Agent README**:
 
 - [`.github/agents/README.md`](https://github.com/Hack23/cia-compliance-manager/blob/main/.github/agents/README.md)
 
+### 🎓 Foundational Skills Framework
+
+All agents are guided by **strategic, rule-based skills** that define high-level principles and best practices:
+
+<table>
+  <tr>
+    <td width="50%">
+      <h4>🔐 Security by Design</h4>
+      <p><strong>File:</strong> <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/.github/skills/security-by-design.md"><code>.github/skills/security-by-design.md</code></a></p>
+      <p>Threat modeling, defense in depth, least privilege, secure by default. Security must be built into every phase of development.</p>
+      <p><strong>Key Rules:</strong> Validate all inputs, use proven crypto, never hardcode secrets, encrypt sensitive data, test security controls.</p>
+    </td>
+    <td width="50%">
+      <h4>✨ Code Quality Excellence</h4>
+      <p><strong>File:</strong> <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/.github/skills/code-quality-excellence.md"><code>.github/skills/code-quality-excellence.md</code></a></p>
+      <p><strong>CRITICAL:</strong> Code reusability - always check existing code first. Strict TypeScript, no <code>any</code>, 80%+ coverage mandatory.</p>
+      <p><strong>Key Rules:</strong> Reuse existing code, explicit types, functions &lt; 50 lines, JSDoc for public APIs, immutability preferred.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h4>🛡️ ISMS Compliance</h4>
+      <p><strong>File:</strong> <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/.github/skills/isms-compliance.md"><code>.github/skills/isms-compliance.md</code></a></p>
+      <p>Align with Hack23 ISMS policies, ISO 27001:2022, NIST CSF 2.0, CIS Controls v8. Required documentation portfolio and secure SDLC.</p>
+      <p><strong>Key Rules:</strong> Security architecture documented, vulnerability SLA followed, compliance mapped, code reviewed for security.</p>
+    </td>
+    <td width="50%">
+      <h4>🧪 Testing Excellence</h4>
+      <p><strong>File:</strong> <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/.github/skills/testing-excellence.md"><code>.github/skills/testing-excellence.md</code></a></p>
+      <p>Testing pyramid (70% unit, 20% integration, 10% E2E), 80%+ overall coverage, 100% for security-critical paths.</p>
+      <p><strong>Key Rules:</strong> AAA pattern, FIRST principles, behavior-focused testing, no flaky tests, accessibility tests.</p>
+    </td>
+  </tr>
+</table>
+
+**Skills vs. Agents**: Skills provide strategic principles ("what" and "why"), while agents execute tasks ("how"). See [`.github/skills/README.md`](https://github.com/Hack23/cia-compliance-manager/blob/main/.github/skills/README.md) for comprehensive documentation.
+
 ## 📝 Featured Blog Posts
 
 Explore in-depth technical insights and architectural analysis from our expert contributors:
