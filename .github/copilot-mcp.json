@@ -1,59 +1,52 @@
 {
-  "$schema": "https://github.com/modelcontextprotocol/specification/blob/main/schema/mcp-config-schema.json",
   "mcpServers": {
-    "filesystem": {
+    "github":  {
+      "type": "local",
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/workspaces/cia-compliance-manager"],
-      "description": "Provides secure filesystem access for reading and editing project files",
-      "disabled": false
-    },
-    "github": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_TOKEN": "${{ secrets.COPILOT_MCP_GITHUB_PERSONAL_ACCESS_TOKEN }}"
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "${{ secrets.COPILOT_MCP_GITHUB_PERSONAL_ACCESS_TOKEN }}"
-        "GITHUB_OWNER": "Hack23",
-        "GITHUB_REPO": "cia-compliance-manager"
-      },
-      "description": "Provides access to GitHub repository data, issues, PRs, and workflows",
-      "disabled": false
-    },
-    "sequential-thinking": {
-      "command": "npx",
-      "args": [
+      "args":  [
         "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
-      ]
+        "@modelcontextprotocol/server-github",
+        "--toolsets",
+        "all",
+        "--tools",
+        "*"
+      ],
+      "env": {
+        "GITHUB_TOKEN": "${{ secrets.COPILOT_MCP_GITHUB_PERSONAL_ACCESS_TOKEN }}",
+        "GITHUB_PERSONAL_ACCESS_TOKEN":  "${{ secrets. COPILOT_MCP_GITHUB_PERSONAL_ACCESS_TOKEN }}",
+        "GITHUB_OWNER": "Hack23"
+      },
+      "tools":  ["*"]
+    },
+    "filesystem": {
+      "type": "local",
+      "command":  "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/workspaces"],
+      "tools":  ["*"]
     },
     "git": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "/workspaces/cia-compliance-manager"],
-      "description": "Provides Git operations and repository history context",
-      "disabled": false
+      "type": "local",
+      "command":  "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "/workspaces"],
+      "tools": ["*"]
     },
     "memory": {
+      "type":  "local",
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-memory"],
-      "description": "Maintains conversation history and context between agent sessions",
-      "disabled": false
+      "tools": ["*"]
     },
-    "brave-search": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
-      "env": {
-        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
-      },
-      "description": "Enables searching documentation for React, TypeScript, PixiJS, and Vite",
-      "disabled": true,
-      "note": "Enable this by setting BRAVE_API_KEY environment variable"
+    "sequential-thinking": {
+      "type": "local",
+      "command":  "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "tools": ["*"]
     },
-    "playwright": {
+    "playwright":  {
+      "type": "local",
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-playwright"],
-      "description": "Browser automation for testing and debugging web applications",
-      "disabled": false
+      "tools": ["*"]
     }
-  },
-  "globalShortcut": "Ctrl+Shift+Space"
+  }
 }
