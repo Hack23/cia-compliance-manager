@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.14**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.15**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ConfidentialityImpact
 
-Defined in: [types/cia.ts:415](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/cia.ts#L415)
+Defined in: [types/cia.ts:415](https://github.com/Hack23/cia-compliance-manager/blob/4266fd44b58119e0a4772b578ef7fb2d2999a68d/src/types/cia.ts#L415)
 
 Impact associated with the confidentiality of the system
 
@@ -34,7 +34,7 @@ const impact: ConfidentialityImpact = {
 
 > **accessControls**: `string`
 
-Defined in: [types/cia.ts:420](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/cia.ts#L420)
+Defined in: [types/cia.ts:420](https://github.com/Hack23/cia-compliance-manager/blob/4266fd44b58119e0a4772b578ef7fb2d2999a68d/src/types/cia.ts#L420)
 
 Access control mechanisms required (e.g., "MFA", "RBAC", "encryption")
 
@@ -44,7 +44,7 @@ Access control mechanisms required (e.g., "MFA", "RBAC", "encryption")
 
 > **dataClassification**: `string`
 
-Defined in: [types/cia.ts:417](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/cia.ts#L417)
+Defined in: [types/cia.ts:417](https://github.com/Hack23/cia-compliance-manager/blob/4266fd44b58119e0a4772b578ef7fb2d2999a68d/src/types/cia.ts#L417)
 
 Data classification level (e.g., "Public", "Internal", "Confidential", "Restricted")
 
@@ -54,7 +54,7 @@ Data classification level (e.g., "Public", "Internal", "Confidential", "Restrict
 
 > **description**: `string`
 
-Defined in: [types/cia.ts:348](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/cia.ts#L348)
+Defined in: [types/cia.ts:348](https://github.com/Hack23/cia-compliance-manager/blob/4266fd44b58119e0a4772b578ef7fb2d2999a68d/src/types/cia.ts#L348)
 
 Human-readable description of the impact
 
@@ -68,7 +68,7 @@ Human-readable description of the impact
 
 > **level**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:345](https://github.com/Hack23/cia-compliance-manager/blob/2572cfa2ede06cc7942019b0f742928ad9d5ceb3/src/types/cia.ts#L345)
+Defined in: [types/cia.ts:345](https://github.com/Hack23/cia-compliance-manager/blob/4266fd44b58119e0a4772b578ef7fb2d2999a68d/src/types/cia.ts#L345)
 
 Security level associated with this impact
 
