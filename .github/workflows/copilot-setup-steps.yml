@@ -60,12 +60,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-apt-
 
-      # Setup complete Three.js test environment
-      - name: Setup Three.js Test Environment (Chrome + Xvfb + Dependencies)
+      # Setup complete Web test environment
+      - name: Setup Web Test Environment (Chrome + Xvfb + Dependencies)
         run: |
-          echo "🔧 Setting up complete Three.js test environment..."
+          echo "🔧 Setting up complete Web test environment..."
 
-          # Install system dependencies for Three.js rendering
+          # Install system dependencies for Web rendering
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
             xvfb dbus-x11 x11-utils \
@@ -81,7 +81,7 @@ jobs:
             libxfixes3 libxrandr2 libxrender1 \
             libxshmfence1 xdg-utils wget libxkbcommon0 xkb-data
 
-          # Install Google Chrome Stable for Three.js WebGL support
+          # Install Google Chrome Stable for Web WebGL support
           wget -qO- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg
           echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
           sudo apt-get update
@@ -93,7 +93,7 @@ jobs:
                     
           # Verify Chrome installation
           google-chrome --version
-          echo "✅ Three.js test environment setup complete"
+          echo "✅ Web test environment setup complete"
         env:
           DISPLAY: ":99"
           XKB_DEFAULT_RULES: evdev
@@ -185,11 +185,11 @@ jobs:
           restore-keys: |
             cypress-${{ runner.os }}-
 
-      - name: Verify Cypress for Three.js Testing
+      - name: Verify Cypress for Web Testing
         run: |
           npx cypress verify
           npx cypress info
-          echo "✅ Cypress verified and ready for Three.js tests"
+          echo "✅ Cypress verified and ready for Web tests"
 
       - name: Display environment info
         run: |
@@ -214,7 +214,7 @@ jobs:
           echo "- mcp-server-sequential-thinking: $(which mcp-server-sequential-thinking 2>/dev/null || echo 'not found')"
           echo "- Playwright MCP: @playwright/mcp (via npx)"
           echo "========================================="
-          echo "Three.js Test Environment Ready"
+          echo "Web Test Environment Ready"
           echo "- WebGL rendering: SwiftShader (software)"
           echo "- Target FPS: 30-60fps"
           echo "- Memory limit: 4GB Node.js heap"
