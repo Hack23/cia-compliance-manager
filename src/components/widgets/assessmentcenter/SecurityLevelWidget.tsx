@@ -52,11 +52,10 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   testId = SECURITY_LEVEL_WIDGET_IDS.root,
 }) => {
   // Use the content service for security level details
-  const { ciaContentService } = useCIAContentService();
+  const { ciaContentService, isLoading: serviceLoading, error: serviceError } = useCIAContentService();
 
-  // Define local state for error and loading
-  const [serviceError, setServiceError] = useState<Error | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  // Define local state for details loading (separate from service loading)
+  const [isLoadingDetails, setIsLoadingDetails] = useState(false);
 
   // Track which component is active for details display
   const [activeComponent, setActiveComponent] = useState<
@@ -74,12 +73,14 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
   // Get details for the active component with error handling
   useEffect(() => {
-    setIsLoading(true);
-    try {
-      if (!ciaContentService) {
-        throw new Error("Content service unavailable");
-      }
+    // Wait for service to be available before loading details
+    if (!ciaContentService) {
+      setIsLoadingDetails(true);
+      return;
+    }
 
+    setIsLoadingDetails(true);
+    try {
       const selectedLevel =
         activeComponent === "availability"
           ? availabilityLevel
@@ -99,7 +100,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
       setActiveDetails(details);
       setError(null);
-      setServiceError(null);
     } catch (err) {
       console.error("Error loading component details:", err);
       setError(
@@ -107,9 +107,8 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           ? err
           : new Error("Failed to load component details")
       );
-      setServiceError(err instanceof Error ? err : new Error("Service error"));
     } finally {
-      setIsLoading(false);
+      setIsLoadingDetails(false);
     }
   }, [
     ciaContentService,
@@ -253,7 +252,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
         )}
 
         {/* Display loading state */}
-        {isLoading && (
+        {(serviceLoading || isLoadingDetails) && (
           <div className={cn(
             WidgetClasses.card,
             WidgetClasses.loading,
