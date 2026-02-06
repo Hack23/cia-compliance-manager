@@ -170,8 +170,8 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
         isLoading={isLoading}
         error={error}
       >
-        <div 
-          className="space-y-xs"
+        <div
+          className="space-y-sm"
           role={ARIA_ROLES.REGION}
           aria-label={getWidgetAriaDescription(
             "Security Summary",
@@ -179,9 +179,9 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
           )}
         >
           {/* Security Classification Banner - Compact layout */}
-          <section 
+          <section
             className={cn(
-              "p-xs rounded-md border-l-4 border-info dark:border-info-light",
+              "p-sm rounded-md border-l-4 border-info dark:border-info-light",
               "bg-info-light/10 dark:bg-info-dark/20"
             )}
             aria-labelledby="security-classification-heading"
@@ -189,9 +189,9 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
           >
             <div className="flex justify-between items-center gap-sm">
               <div className="flex-1 min-w-0">
-                <h2 
+                <h2
                   id="security-classification-heading"
-                  className="text-body-lg font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-xs mb-xs"
+                  className="text-body-lg font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-sm mb-sm"
                 >
                   <span 
                     className="inline-block w-2 h-2 rounded-full bg-info dark:bg-info-light pulse-dot"

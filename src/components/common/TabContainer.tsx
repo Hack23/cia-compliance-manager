@@ -86,7 +86,7 @@ export const TabContainer: React.FC<TabContainerProps> = ({
       {/* Tab List */}
       <div
         role={ARIA_ROLES.TABLIST}
-        className="flex space-x-2 border-b border-gray-200 dark:border-gray-700 mb-sm"
+        className="flex space-x-sm border-b border-gray-200 dark:border-gray-700 mb-sm"
         data-testid={`${testId}-list`}
         aria-label="Tab navigation"
       >
@@ -113,7 +113,7 @@ export const TabContainer: React.FC<TabContainerProps> = ({
               data-testid={tab.testId || `${testId}-tab-${tab.id}`}
               aria-describedby={`${testId}-keyboard-instructions`}
               className={`
-                px-4 py-2 font-medium text-sm rounded-t-lg
+                px-md py-sm font-medium text-sm rounded-t-lg
                 transition-colors
                 focus:outline-none focus:ring-2 focus:ring-info focus:ring-offset-2
                 ${isActive 
@@ -124,11 +124,11 @@ export const TabContainer: React.FC<TabContainerProps> = ({
               `.trim()}
               style={{ transitionDuration: TRANSITIONS.fast }}
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-sm">
                 {tab.icon}
                 <span>{tab.label}</span>
                 {tab.badge && (
-                  <span className="ml-2 px-2 py-0.5 text-xs bg-info-light/10 dark:bg-info-dark/20 text-info-dark dark:text-info-light rounded-full">
+                  <span className="ml-sm px-sm py-0.5 text-xs bg-info-light/10 dark:bg-info-dark/20 text-info-dark dark:text-info-light rounded-full">
                     {tab.badge}
                   </span>
                 )}
