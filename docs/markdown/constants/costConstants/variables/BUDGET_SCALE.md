@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.15**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.16**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **BUDGET\_SCALE**: `object`
 
-Defined in: [constants/costConstants.ts:148](https://github.com/Hack23/cia-compliance-manager/blob/4266fd44b58119e0a4772b578ef7fb2d2999a68d/src/constants/costConstants.ts#L148)
+Defined in: [constants/costConstants.ts:148](https://github.com/Hack23/cia-compliance-manager/blob/08d981d9d23db94df1debc77186c22027f4d896e/src/constants/costConstants.ts#L148)
 
 Budget scale for cost calculations
 Higher numbers mean higher cost multiplier

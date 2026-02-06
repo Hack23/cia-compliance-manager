@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.15**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.16**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: MetricFormattingOptions
 
-Defined in: [hooks/useFormattedMetrics.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/4266fd44b58119e0a4772b578ef7fb2d2999a68d/src/hooks/useFormattedMetrics.ts#L7)
+Defined in: [hooks/useFormattedMetrics.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/08d981d9d23db94df1debc77186c22027f4d896e/src/hooks/useFormattedMetrics.ts#L7)
 
 Options for metric formatting
 
@@ -16,7 +16,7 @@ Options for metric formatting
 
 > `optional` **currency**: `string`
 
-Defined in: [hooks/useFormattedMetrics.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/4266fd44b58119e0a4772b578ef7fb2d2999a68d/src/hooks/useFormattedMetrics.ts#L16)
+Defined in: [hooks/useFormattedMetrics.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/08d981d9d23db94df1debc77186c22027f4d896e/src/hooks/useFormattedMetrics.ts#L16)
 
 Currency code (e.g., 'USD', 'EUR', 'SEK')
 
@@ -26,6 +26,6 @@ Currency code (e.g., 'USD', 'EUR', 'SEK')
 
 > `optional` **locale**: `string`
 
-Defined in: [hooks/useFormattedMetrics.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/4266fd44b58119e0a4772b578ef7fb2d2999a68d/src/hooks/useFormattedMetrics.ts#L11)
+Defined in: [hooks/useFormattedMetrics.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/08d981d9d23db94df1debc77186c22027f4d896e/src/hooks/useFormattedMetrics.ts#L11)
 
 Locale string for regional formatting (e.g., 'en-US', 'sv-SE')
