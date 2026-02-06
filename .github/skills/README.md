@@ -122,6 +122,152 @@ Comprehensive testing strategy ensuring quality through unit, integration, and E
 
 ---
 
+### ⚡ Performance Optimization
+**File:** `performance-optimization.md`
+
+Strategic performance optimization techniques for React and TypeScript applications.
+
+**Core Principles:**
+- React performance (memo, useMemo, useCallback)
+- Bundle size optimization
+- Efficient data structures
+- Virtualization for large lists
+- Debounce and throttle
+- Avoid prop drilling
+
+**Key Rules:**
+- ✅ **MUST**: Use React.memo() for expensive components
+- ✅ **MUST**: Lazy load non-critical components
+- ✅ **MUST**: Use Map/Set for frequent lookups
+- ✅ **MUST**: Virtualize lists with > 100 items
+- ✅ **MUST**: Debounce search/filter inputs
+
+**Use Cases:**
+- Optimizing slow components
+- Reducing bundle size
+- Improving render performance
+- Optimizing data operations
+- Performance audits
+
+---
+
+### 🎨 UI/UX Design System
+**File:** `ui-ux-design-system.md`
+
+Comprehensive design system standards for consistent, accessible, and intuitive user interfaces.
+
+**Core Principles:**
+- Design system consistency (colors, typography, spacing)
+- Component library usage
+- Responsive design (mobile-first)
+- Accessibility (WCAG 2.1 AA)
+- Visual hierarchy
+- User-centric patterns
+
+**Key Rules:**
+- ✅ **MUST**: Use design system colors from constants
+- ✅ **MUST**: Follow 8px spacing grid
+- ✅ **MUST**: Reuse existing components
+- ✅ **MUST**: Test on mobile, tablet, desktop
+- ✅ **MUST**: Maintain 4.5:1 contrast for text
+
+**Use Cases:**
+- Building new UI components
+- Implementing responsive layouts
+- Ensuring visual consistency
+- Designing accessible interfaces
+- Creating user-friendly experiences
+
+---
+
+### ♿ Accessibility Excellence
+**File:** `accessibility-excellence.md`
+
+WCAG 2.1 Level AA compliance standards ensuring inclusive experiences for all users.
+
+**Core Principles:**
+- Semantic HTML
+- ARIA attributes (when needed)
+- Keyboard navigation
+- Focus management
+- Color and contrast
+- Form accessibility
+- Screen reader support
+
+**Key Rules:**
+- ✅ **MUST**: Use semantic HTML elements
+- ✅ **MUST**: All interactive elements keyboard accessible
+- ✅ **MUST**: 4.5:1 contrast for text
+- ✅ **MUST**: Label all form inputs
+- ✅ **MUST**: Announce dynamic content
+
+**Use Cases:**
+- Building accessible components
+- Implementing keyboard navigation
+- Creating accessible forms
+- Testing with screen readers
+- Accessibility audits
+
+---
+
+### 📝 Documentation Standards
+**File:** `documentation-standards.md`
+
+Documentation standards for code, APIs, and architecture ensuring clarity and maintainability.
+
+**Core Principles:**
+- JSDoc for all public APIs
+- Type documentation
+- Component documentation
+- Architecture documentation (C4 model)
+- Mermaid diagrams
+- README maintenance
+
+**Key Rules:**
+- ✅ **MUST**: JSDoc for all exported functions/classes/interfaces
+- ✅ **MUST**: Include usage examples
+- ✅ **MUST**: Document parameters and return values
+- ✅ **MUST**: Use C4 model for architecture
+- ✅ **MUST**: Keep READMEs current
+
+**Use Cases:**
+- Documenting new APIs
+- Creating architecture diagrams
+- Writing component documentation
+- Maintaining READMEs
+- Generating API references
+
+---
+
+### 🎯 Product Quality Analysis
+**File:** `product-quality-analysis.md`
+
+Framework for comprehensive product quality analysis across all dimensions.
+
+**Core Principles:**
+- Multi-dimensional quality assessment
+- Code quality analysis
+- User experience evaluation
+- Security and ISMS compliance
+- Issue prioritization
+- Continuous quality monitoring
+
+**Key Rules:**
+- ✅ **MUST**: Assess all four quality dimensions
+- ✅ **MUST**: Prioritize security and critical bugs
+- ✅ **MUST**: Consider user impact
+- ✅ **MUST**: Track metrics over time
+- ✅ **MUST**: Create actionable issues
+
+**Use Cases:**
+- Conducting product audits
+- Quality gate enforcement
+- Issue prioritization
+- Trend analysis
+- Continuous improvement
+
+---
+
 ## 🎯 How Skills Work
 
 ### Skills vs. Agents
@@ -156,6 +302,21 @@ Operational Level (Code)
 ```
 
 Skills provide the strategic direction, agents implement tactically, and developers write the operational code—all in alignment.
+
+### Agent-Skill Mapping
+
+Which skills should each agent follow?
+
+| Agent | Primary Skills | Supporting Skills |
+|-------|---------------|-------------------|
+| **TypeScript React Agent** | Code Quality Excellence, UI/UX Design System | Performance Optimization, Accessibility Excellence |
+| **Testing Agent** | Testing Excellence | Code Quality Excellence, Accessibility Excellence |
+| **Code Review Agent** | Code Quality Excellence, Security by Design | Performance Optimization, Accessibility Excellence, ISMS Compliance |
+| **Documentation Agent** | Documentation Standards | Code Quality Excellence, UI/UX Design System |
+| **Security Compliance Agent** | Security by Design, ISMS Compliance | Code Quality Excellence, Testing Excellence |
+| **Product Task Agent** | Product Quality Analysis | All skills (holistic assessment) |
+
+**All agents should be aware of all skills, but prioritize their primary skills.**
 
 ## 📖 Using Skills in Development
 

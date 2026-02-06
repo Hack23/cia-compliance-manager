@@ -51,6 +51,36 @@ All agents are guided by **strategic, rule-based skills** that define high-level
    - AAA pattern, FIRST principles, behavior-focused testing
    - **Learn more**: [Testing Excellence Skill](../skills/testing-excellence.md)
 
+5. **⚡ Performance Optimization** (`performance-optimization.md`)
+   - React optimization (memo, useMemo, useCallback)
+   - Bundle size management, code splitting
+   - Efficient data structures, virtualization
+   - **Learn more**: [Performance Optimization Skill](../skills/performance-optimization.md)
+
+6. **🎨 UI/UX Design System** (`ui-ux-design-system.md`)
+   - Design system consistency (colors, typography, spacing)
+   - Component library usage, responsive design
+   - Accessibility (WCAG 2.1 AA)
+   - **Learn more**: [UI/UX Design System Skill](../skills/ui-ux-design-system.md)
+
+7. **♿ Accessibility Excellence** (`accessibility-excellence.md`)
+   - WCAG 2.1 Level AA compliance
+   - Semantic HTML, ARIA attributes, keyboard navigation
+   - Screen reader support, focus management
+   - **Learn more**: [Accessibility Excellence Skill](../skills/accessibility-excellence.md)
+
+8. **📝 Documentation Standards** (`documentation-standards.md`)
+   - JSDoc for all public APIs
+   - Component and architecture documentation
+   - Mermaid diagrams (C4 model)
+   - **Learn more**: [Documentation Standards Skill](../skills/documentation-standards.md)
+
+9. **🎯 Product Quality Analysis** (`product-quality-analysis.md`)
+   - Multi-dimensional quality assessment
+   - Code, UX, security, and business value analysis
+   - Issue prioritization and continuous monitoring
+   - **Learn more**: [Product Quality Analysis Skill](../skills/product-quality-analysis.md)
+
 ### Skills vs. Agents
 
 | Aspect | Skills | Agents |

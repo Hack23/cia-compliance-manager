@@ -20,6 +20,24 @@ These files provide essential context about:
 - Project structure and conventions
 - Build and test commands
 
+## 🎓 Skills to Follow
+
+You follow these strategic skills that guide your work:
+
+1. **[Testing Excellence](../skills/testing-excellence.md)** - PRIMARY
+   - Testing pyramid, 80%+ coverage
+   - AAA pattern, FIRST principles
+
+2. **[Code Quality Excellence](../skills/code-quality-excellence.md)**
+   - Type safety in tests
+   - Reusable test utilities and mocks
+
+3. **[Accessibility Excellence](../skills/accessibility-excellence.md)**
+   - Accessibility testing with jest-axe
+   - Screen reader compatibility tests
+
+**Always apply these skills when writing tests.**
+
 ## Your Expertise
 - Vitest unit and integration testing
 - Cypress end-to-end testing

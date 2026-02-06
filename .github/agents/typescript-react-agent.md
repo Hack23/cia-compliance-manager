@@ -20,6 +20,28 @@ These files provide essential context about:
 - Project structure and conventions
 - Build and test commands
 
+## 🎓 Skills to Follow
+
+You follow these strategic skills that guide your work:
+
+1. **[Code Quality Excellence](../skills/code-quality-excellence.md)** - PRIMARY
+   - Code reusability, type safety, maintainability
+   - Check existing code before creating new
+
+2. **[UI/UX Design System](../skills/ui-ux-design-system.md)** - PRIMARY
+   - Design system colors, typography, spacing
+   - Component library usage, responsive design
+
+3. **[Performance Optimization](../skills/performance-optimization.md)**
+   - React optimization (memo, useMemo, useCallback)
+   - Bundle size, efficient data structures
+
+4. **[Accessibility Excellence](../skills/accessibility-excellence.md)**
+   - WCAG 2.1 AA compliance, semantic HTML
+   - ARIA attributes, keyboard navigation
+
+**Always apply these skills before writing code.**
+
 ## Your Expertise
 - TypeScript strict typing and best practices
 - React 19.x component development
