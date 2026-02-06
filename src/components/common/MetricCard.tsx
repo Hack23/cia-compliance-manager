@@ -31,7 +31,7 @@ interface MetricCardProps {
  * quickly understand critical security indicators. 📊
  *
  * **DESIGN SYSTEM**: Uses Tailwind classes only - no inline styles.
- * Compact sizing (p-xs=4px, text-body-lg=16px) for balanced layouts.
+ * Follows 8px grid system (p-sm=8px minimum) for consistent spacing.
  *
  * @example
  * ```tsx
@@ -101,11 +101,11 @@ export const MetricCard: React.FC<MetricCardProps> = ({
 
   return (
     <div
-      className={`p-xs border rounded-md shadow-sm ${colors.container} ${className}`}
+      className={`p-sm border rounded-md shadow-sm ${colors.container} ${className}`}
       data-testid={testId}
       aria-label={ariaLabel || `${label}: ${value}${unit || ''}`}
     >
-      <div className={`flex items-center ${icon ? 'justify-between' : 'justify-end'} mb-xs`}>
+      <div className={`flex items-center ${icon ? 'justify-between' : 'justify-end'} mb-sm`}>
         {icon && (
           <span className="text-body" aria-hidden="true">
             {icon}
@@ -127,7 +127,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
       </p>
       {description && (
         <p
-          className={`text-xs mt-xs ${colors.description}`}
+          className={`text-xs mt-sm ${colors.description}`}
           data-testid={`${testId}-description`}
         >
           {description}
