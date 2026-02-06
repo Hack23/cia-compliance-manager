@@ -1359,13 +1359,13 @@ const ImpactWidget = React.memo&lt;ImpactWidgetProps&gt;(<span class="fstat-no" 
         error={error}
       &gt;
         &lt;div
-          className="p-xs space-y-xs"
+          className="p-sm space-y-sm"
           role="region"
           aria-label={getWidgetAriaDescription(config.defaultTitle, config.ariaDescription)}
         &gt;
           {/* Security level indicator */}
           &lt;section
-            className="mb-xs"
+            className="mb-sm"
             aria-labelledby={`${component}-level-heading`}
           &gt;
             &lt;h3 id={`${component}-level-heading`} className="sr-only"&gt;
@@ -1383,10 +1383,10 @@ const ImpactWidget = React.memo&lt;ImpactWidgetProps&gt;(<span class="fstat-no" 
           {/* Business Impact Analysis */}
           {businessImpact &amp;&amp; (
             &lt;section
-              className="mb-xs"
+              className="mb-sm"
               aria-labelledby={`${component}-business-impact-heading`}
             &gt;
-              &lt;h3 id={`${component}-business-impact-heading`} className="text-body-lg font-semibold text-gray-800 dark:text-gray-100 mb-xs"&gt;
+              &lt;h3 id={`${component}-business-impact-heading`} className="text-body-lg font-semibold text-gray-800 dark:text-gray-100 mb-sm"&gt;
                 Business Impact
               &lt;/h3&gt;
               &lt;BusinessImpactSection
@@ -1403,12 +1403,12 @@ const ImpactWidget = React.memo&lt;ImpactWidgetProps&gt;(<span class="fstat-no" 
               title="SLA Metrics"
               icon="⏱️"
               variant="info"
-              className="mb-xs"
+              className="mb-sm"
               ariaLabelledBy="sla-metrics-heading"
               testId={testIds.widgetIds.section("sla-metrics")}
             &gt;
               &lt;div
-                className="grid grid-cols-1 md:grid-cols-3 gap-xs mb-xs"
+                className="grid grid-cols-1 md:grid-cols-3 gap-sm mb-sm"
                 role="group"
                 aria-label="Service level agreement metrics"
               &gt;
@@ -1437,7 +1437,7 @@ const ImpactWidget = React.memo&lt;ImpactWidgetProps&gt;(<span class="fstat-no" 
                   testId={testIds.widgetIds.label("rpo")}
                 /&gt;
               &lt;/div&gt;
-              &lt;div className="grid grid-cols-1 md:grid-cols-2 gap-xs"&gt;
+              &lt;div className="grid grid-cols-1 md:grid-cols-2 gap-sm"&gt;
                 &lt;MetricCard
                   label="Service Level Agreement"
                   value={metrics.data.sla}
@@ -1455,10 +1455,10 @@ const ImpactWidget = React.memo&lt;ImpactWidgetProps&gt;(<span class="fstat-no" 
               title="Data Integrity Metrics"
               icon="📊"
               variant="success"
-              className="mb-xs"
+              className="mb-sm"
               testId={testIds.widgetIds.section("metrics")}
             &gt;
-              &lt;div className="grid grid-cols-1 md:grid-cols-2 gap-xs"&gt;
+              &lt;div className="grid grid-cols-1 md:grid-cols-2 gap-sm"&gt;
                 &lt;MetricCard
                   label="Data Validation Controls"
                   value={metrics.data.validationLevel}
@@ -1483,10 +1483,10 @@ const ImpactWidget = React.memo&lt;ImpactWidgetProps&gt;(<span class="fstat-no" 
                 title="Data Protection"
                 icon="📊"
                 variant="primary"
-                className="mb-xs"
+                className="mb-sm"
                 testId={testIds.widgetIds.section("data-protection")}
               &gt;
-                &lt;div className="grid grid-cols-1 md:grid-cols-2 gap-xs"&gt;
+                &lt;div className="grid grid-cols-1 md:grid-cols-2 gap-sm"&gt;
                   &lt;MetricCard
                     label="Data Classification"
                     value={metrics.data.dataClassification}
@@ -1502,10 +1502,10 @@ const ImpactWidget = React.memo&lt;ImpactWidgetProps&gt;(<span class="fstat-no" 
                 title="Privacy Impact"
                 icon="🔒"
                 variant="primary"
-                className="mb-xs"
+                className="mb-sm"
                 testId={testIds.widgetIds.section("privacy-impact")}
               &gt;
-                &lt;div className="grid grid-cols-1 lg:grid-cols-2 gap-xs"&gt;
+                &lt;div className="grid grid-cols-1 lg:grid-cols-2 gap-sm"&gt;
                   &lt;MetricCard
                     label="Privacy Impact"
                     value={metrics.data.privacyImpact}
@@ -1526,7 +1526,7 @@ const ImpactWidget = React.memo&lt;ImpactWidgetProps&gt;(<span class="fstat-no" 
           {showExtendedDetails &amp;&amp; component === "integrity" &amp;&amp; recommendations.length &gt; 0 &amp;&amp; (
             &lt;div className="mt-md"&gt;
               &lt;h3 className="text-lg font-medium mb-sm"&gt;Recommendations&lt;/h3&gt;
-              &lt;ul className="list-disc pl-5 space-y-xs"&gt;
+              &lt;ul className="list-disc pl-5 space-y-sm"&gt;
                 {recommendations.map((rec, index) =&gt; (
                   &lt;li
                     key={index}
@@ -1555,7 +1555,7 @@ export default ImpactWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-06T09:40:21.656Z
+                at 2026-02-06T17:39:38.627Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

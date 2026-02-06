@@ -310,9 +310,9 @@ export const SecurityBusinessTab: React.FC&lt;SecurityBusinessTabProps&gt; = ({
   roiEstimate,
 }) =&gt; {
   return (
-    &lt;div data-testid={testId || <span class="branch-1 cbranch-no" title="branch not covered" >SECURITY_SUMMARY_WIDGET_IDS.section('content-business')} c</span>lassName="space-y-xs"&gt;
+    &lt;div data-testid={testId || <span class="branch-1 cbranch-no" title="branch not covered" >SECURITY_SUMMARY_WIDGET_IDS.section('content-business')} c</span>lassName="space-y-sm"&gt;
       {/* Business Value content */}
-      &lt;div className="p-xs bg-blue-50 dark:bg-blue-900/20 rounded mb-xs"&gt;
+      &lt;div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded mb-sm"&gt;
         &lt;p className="text-caption"&gt;
           Business value and financial impact of your security levels.
         &lt;/p&gt;
@@ -320,27 +320,27 @@ export const SecurityBusinessTab: React.FC&lt;SecurityBusinessTabProps&gt; = ({
 &nbsp;
       {/* Business Impact Summary */}
       &lt;div className="rounded-lg border border-gray-100 dark:border-gray-700 p-sm bg-white dark:bg-gray-800"&gt;
-        &lt;h3 className="text-body-lg font-medium mb-xs text-gray-800 dark:text-gray-100"&gt;
+        &lt;h3 className="text-body-lg font-medium mb-sm text-gray-800 dark:text-gray-100"&gt;
           Business Value Summary
         &lt;/h3&gt;
 &nbsp;
-        &lt;div className="grid grid-cols-1 md:grid-cols-2 gap-xs"&gt;
+        &lt;div className="grid grid-cols-1 md:grid-cols-2 gap-sm"&gt;
           {/* Business Maturity */}
-          &lt;div className="p-xs bg-blue-50 dark:bg-blue-900/20 rounded"&gt;
+          &lt;div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded"&gt;
             &lt;h4 className="text-caption font-medium text-blue-700 dark:text-blue-300"&gt;
               Business Maturity
             &lt;/h4&gt;
-            &lt;div className="text-body-lg font-bold text-blue-600 dark:text-blue-400 mt-xs"&gt;
+            &lt;div className="text-body-lg font-bold text-blue-600 dark:text-blue-400 mt-sm"&gt;
               {businessMaturityLevel}
             &lt;/div&gt;
           &lt;/div&gt;
 &nbsp;
           {/* ROI Estimation */}
-          &lt;div className="p-xs bg-green-50 dark:bg-green-900/20 rounded"&gt;
+          &lt;div className="p-sm bg-green-50 dark:bg-green-900/20 rounded"&gt;
             &lt;h4 className="text-caption font-medium text-green-700 dark:text-green-300"&gt;
               Estimated ROI
             &lt;/h4&gt;
-            &lt;div className="text-body-lg font-bold text-green-600 dark:text-green-400 mt-xs"&gt;
+            &lt;div className="text-body-lg font-bold text-green-600 dark:text-green-400 mt-sm"&gt;
               {roiEstimate}
             &lt;/div&gt;
           &lt;/div&gt;
@@ -349,30 +349,30 @@ export const SecurityBusinessTab: React.FC&lt;SecurityBusinessTabProps&gt; = ({
 &nbsp;
       {/* Cost Summary */}
       &lt;div className="rounded-lg border border-gray-100 dark:border-gray-700 p-sm bg-white dark:bg-gray-800"&gt;
-        &lt;h3 className="text-body-lg font-medium mb-xs text-gray-800 dark:text-gray-100"&gt;
+        &lt;h3 className="text-body-lg font-medium mb-sm text-gray-800 dark:text-gray-100"&gt;
           Cost Summary
         &lt;/h3&gt;
 &nbsp;
-        &lt;div className="grid grid-cols-1 md:grid-cols-3 gap-xs"&gt;
+        &lt;div className="grid grid-cols-1 md:grid-cols-3 gap-sm"&gt;
           {/* Implementation Cost */}
-          &lt;div className="p-xs bg-gray-50 dark:bg-gray-700 rounded"&gt;
-            &lt;div className="text-xs font-medium mb-xs text-gray-700 dark:text-gray-200"&gt;CAPEX&lt;/div&gt;
+          &lt;div className="p-sm bg-gray-50 dark:bg-gray-700 rounded"&gt;
+            &lt;div className="text-xs font-medium mb-sm text-gray-700 dark:text-gray-200"&gt;CAPEX&lt;/div&gt;
             &lt;div className="text-body-lg font-bold text-blue-600 dark:text-blue-400"&gt;
               {formatCurrency(costDetails.totalCapex)}
             &lt;/div&gt;
           &lt;/div&gt;
 &nbsp;
           {/* Operational Cost */}
-          &lt;div className="p-xs bg-gray-50 dark:bg-gray-700 rounded"&gt;
-            &lt;div className="text-xs font-medium mb-xs text-gray-700 dark:text-gray-200"&gt;OPEX&lt;/div&gt;
+          &lt;div className="p-sm bg-gray-50 dark:bg-gray-700 rounded"&gt;
+            &lt;div className="text-xs font-medium mb-sm text-gray-700 dark:text-gray-200"&gt;OPEX&lt;/div&gt;
             &lt;div className="text-body-lg font-bold text-green-600 dark:text-green-400"&gt;
               {formatCurrency(costDetails.totalOpex)}
             &lt;/div&gt;
           &lt;/div&gt;
 &nbsp;
           {/* Total Cost */}
-          &lt;div className="p-xs bg-gray-50 dark:bg-gray-700 rounded"&gt;
-            &lt;div className="text-xs font-medium mb-xs text-gray-700 dark:text-gray-200"&gt;
+          &lt;div className="p-sm bg-gray-50 dark:bg-gray-700 rounded"&gt;
+            &lt;div className="text-xs font-medium mb-sm text-gray-700 dark:text-gray-200"&gt;
               Total
             &lt;/div&gt;
             &lt;div className="text-body-lg font-bold text-purple-600 dark:text-purple-400"&gt;
@@ -391,7 +391,7 @@ export const SecurityBusinessTab: React.FC&lt;SecurityBusinessTabProps&gt; = ({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-06T09:40:21.551Z
+                at 2026-02-06T17:39:38.513Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.16**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.17**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getRiskLevelColor**(`riskLevel`): `string`
 
-Defined in: [utils/colorUtils.ts:142](https://github.com/Hack23/cia-compliance-manager/blob/08d981d9d23db94df1debc77186c22027f4d896e/src/utils/colorUtils.ts#L142)
+Defined in: [utils/colorUtils.ts:142](https://github.com/Hack23/cia-compliance-manager/blob/64549ac2e28eb854ca1acff8c4df7f34bf49dfaa/src/utils/colorUtils.ts#L142)
 
 Get color for risk level
 

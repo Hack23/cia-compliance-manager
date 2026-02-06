@@ -462,10 +462,10 @@ export const SecurityOverviewTab: React.FC&lt;SecurityOverviewTabProps&gt; = ({
   getStatusVariant,
 }) =&gt; {
   return (
-    &lt;div data-testid={testId || <span class="branch-1 cbranch-no" title="branch not covered" >SECURITY_SUMMARY_WIDGET_IDS.section('content-overview')} c</span>lassName="space-y-xs"&gt;
+    &lt;div data-testid={testId || <span class="branch-1 cbranch-no" title="branch not covered" >SECURITY_SUMMARY_WIDGET_IDS.section('content-overview')} c</span>lassName="space-y-sm"&gt;
       {/* Security Radar Chart */}
       &lt;div className="rounded-lg border border-gray-100 dark:border-gray-700 p-sm bg-white dark:bg-gray-800"&gt;
-        &lt;h3 className="text-body-lg font-medium mb-xs text-gray-800 dark:text-gray-100"&gt;
+        &lt;h3 className="text-body-lg font-medium mb-sm text-gray-800 dark:text-gray-100"&gt;
           Security Profile
         &lt;/h3&gt;
         &lt;div className="h-[200px]"&gt;
@@ -480,18 +480,18 @@ export const SecurityOverviewTab: React.FC&lt;SecurityOverviewTabProps&gt; = ({
 &nbsp;
       {/* Security Level Summary */}
       &lt;div className="rounded-lg border border-gray-100 dark:border-gray-700 p-sm bg-white dark:bg-gray-800"&gt;
-        &lt;h3 className="text-body-lg font-medium mb-xs text-gray-800 dark:text-gray-100"&gt;
+        &lt;h3 className="text-body-lg font-medium mb-sm text-gray-800 dark:text-gray-100"&gt;
           Security Components
         &lt;/h3&gt;
 &nbsp;
         &lt;div className={WidgetClasses.grid3Cols}&gt;
           {/* Confidentiality Card */}
           &lt;div
-            className="p-xs bg-purple-50 dark:bg-purple-900/20 rounded border border-purple-100 dark:border-purple-800"
+            className="p-sm bg-purple-50 dark:bg-purple-900/20 rounded border border-purple-100 dark:border-purple-800"
             data-testid={SECURITY_SUMMARY_TEST_IDS.CONFIDENTIALITY_CARD}
           &gt;
-            &lt;div className="flex items-center mb-xs"&gt;
-              &lt;span className="text-body mr-xs text-purple-500 dark:text-purple-400" aria-hidden="true"&gt;
+            &lt;div className="flex items-center mb-sm"&gt;
+              &lt;span className="text-body mr-sm text-purple-500 dark:text-purple-400" aria-hidden="true"&gt;
                 🔒
               &lt;/span&gt;
               &lt;h4 className="text-caption font-medium text-purple-700 dark:text-purple-300"&gt;
@@ -513,11 +513,11 @@ export const SecurityOverviewTab: React.FC&lt;SecurityOverviewTabProps&gt; = ({
 &nbsp;
           {/* Integrity Card */}
           &lt;div
-            className="p-xs bg-green-50 dark:bg-green-900/20 rounded border border-green-100 dark:border-green-800"
+            className="p-sm bg-green-50 dark:bg-green-900/20 rounded border border-green-100 dark:border-green-800"
             data-testid={SECURITY_SUMMARY_TEST_IDS.INTEGRITY_CARD}
           &gt;
-            &lt;div className="flex items-center mb-xs"&gt;
-              &lt;span className="text-body mr-xs text-green-500 dark:text-green-400" aria-hidden="true"&gt;
+            &lt;div className="flex items-center mb-sm"&gt;
+              &lt;span className="text-body mr-sm text-green-500 dark:text-green-400" aria-hidden="true"&gt;
                 ✓
               &lt;/span&gt;
               &lt;h4 className="text-caption font-medium text-green-700 dark:text-green-300"&gt;
@@ -539,11 +539,11 @@ export const SecurityOverviewTab: React.FC&lt;SecurityOverviewTabProps&gt; = ({
 &nbsp;
           {/* Availability Card */}
           &lt;div
-            className="p-xs bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-100 dark:border-blue-800"
+            className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-100 dark:border-blue-800"
             data-testid={SECURITY_SUMMARY_TEST_IDS.AVAILABILITY_CARD}
           &gt;
-            &lt;div className="flex items-center mb-xs"&gt;
-              &lt;span className="text-body mr-xs text-blue-500 dark:text-blue-400" aria-hidden="true"&gt;
+            &lt;div className="flex items-center mb-sm"&gt;
+              &lt;span className="text-body mr-sm text-blue-500 dark:text-blue-400" aria-hidden="true"&gt;
                 ⏱️
               &lt;/span&gt;
               &lt;h4 className="text-caption font-medium text-blue-700 dark:text-blue-300"&gt;
@@ -567,24 +567,24 @@ export const SecurityOverviewTab: React.FC&lt;SecurityOverviewTabProps&gt; = ({
 &nbsp;
       {/* Key Metrics Dashboard */}
       &lt;div className="rounded-lg border border-gray-100 dark:border-gray-700 p-sm bg-white dark:bg-gray-800"&gt;
-        &lt;h3 className="text-body-lg font-medium mb-xs text-gray-800 dark:text-gray-100"&gt;
+        &lt;h3 className="text-body-lg font-medium mb-sm text-gray-800 dark:text-gray-100"&gt;
           Key Metrics
         &lt;/h3&gt;
-        &lt;div className="grid grid-cols-1 md:grid-cols-3 gap-xs"&gt;
-          &lt;div className="p-xs bg-gray-50 dark:bg-gray-700 rounded"&gt;
-            &lt;div className="text-xs font-medium mb-xs text-gray-700 dark:text-gray-200"&gt;
+        &lt;div className="grid grid-cols-1 md:grid-cols-3 gap-sm"&gt;
+          &lt;div className="p-sm bg-gray-50 dark:bg-gray-700 rounded"&gt;
+            &lt;div className="text-xs font-medium mb-sm text-gray-700 dark:text-gray-200"&gt;
               Complexity
             &lt;/div&gt;
             &lt;div className="text-body-lg font-bold"&gt;{implementationComplexity}&lt;/div&gt;
           &lt;/div&gt;
 &nbsp;
-          &lt;div className="p-xs bg-gray-50 dark:bg-gray-700 rounded"&gt;
-            &lt;div className="text-xs font-medium mb-xs text-gray-700 dark:text-gray-200"&gt;Maturity&lt;/div&gt;
+          &lt;div className="p-sm bg-gray-50 dark:bg-gray-700 rounded"&gt;
+            &lt;div className="text-xs font-medium mb-sm text-gray-700 dark:text-gray-200"&gt;Maturity&lt;/div&gt;
             &lt;div className="text-body-lg font-bold"&gt;{businessMaturityLevel}&lt;/div&gt;
           &lt;/div&gt;
 &nbsp;
-          &lt;div className="p-xs bg-gray-50 dark:bg-gray-700 rounded"&gt;
-            &lt;div className="text-xs font-medium mb-xs text-gray-700 dark:text-gray-200"&gt;Compliance&lt;/div&gt;
+          &lt;div className="p-sm bg-gray-50 dark:bg-gray-700 rounded"&gt;
+            &lt;div className="text-xs font-medium mb-sm text-gray-700 dark:text-gray-200"&gt;Compliance&lt;/div&gt;
             &lt;div className="text-body-lg font-bold"&gt;
               {complianceScore || securityScore}%
             &lt;/div&gt;
@@ -601,7 +601,7 @@ export const SecurityOverviewTab: React.FC&lt;SecurityOverviewTabProps&gt; = ({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-06T09:40:21.656Z
+                at 2026-02-06T17:39:38.627Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
