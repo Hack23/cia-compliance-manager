@@ -29,7 +29,7 @@ interface WidgetSectionProps {
  * Standardized sections help users quickly locate relevant information. 📦
  *
  * **DESIGN SYSTEM**: Uses Tailwind classes only - no inline styles.
- * All spacing via design tokens (p-xs=4px, p-sm=6px, rounded-md=12px)
+ * All spacing follows 8px grid system (p-sm=8px minimum)
  *
  * @example
  * ```tsx
@@ -68,11 +68,11 @@ export const WidgetSection: React.FC<WidgetSectionProps> = ({
 
   return (
     <section
-      className={`p-xs border rounded-md shadow-sm ${variantClasses[variant]} ${className}`}
+      className={`p-sm border rounded-md shadow-sm ${variantClasses[variant]} ${className}`}
       data-testid={testId}
       aria-labelledby={headingId}
     >
-      <div className="flex items-center gap-xs mb-xs">
+      <div className="flex items-center gap-sm mb-sm">
         {icon && <span className="text-body" aria-hidden="true">{icon}</span>}
         <h3
           className="text-body-lg font-semibold text-gray-800 dark:text-gray-200"
@@ -82,7 +82,7 @@ export const WidgetSection: React.FC<WidgetSectionProps> = ({
         </h3>
       </div>
       {subtitle && (
-        <p className="text-caption text-gray-600 dark:text-gray-400 mb-xs">{subtitle}</p>
+        <p className="text-caption text-gray-600 dark:text-gray-400 mb-sm">{subtitle}</p>
       )}
       <div>{children}</div>
     </section>

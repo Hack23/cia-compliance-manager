@@ -1,0 +1,947 @@
+- generic [ref=e5]:
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - img "CIA Compliance Manager Logo" [ref=e111]
+      - generic [ref=e8]:
+        - heading "CIA Compliance Manager Dashboard" [level=1] [ref=e9]
+        - generic [ref=e10]:
+          - generic [ref=e11]: ■
+          - generic [ref=e12]: v1.1.16
+          - generic [ref=e13]: •
+          - link "Source" [ref=e14] [cursor=pointer]:
+            - /url: https://github.com/Hack23/cia-compliance-manager
+          - generic [ref=e15]: •
+          - link "Doc" [ref=e16] [cursor=pointer]:
+            - /url: https://www.hack23.com/cia-compliance-manager-features.html
+          - generic [ref=e17]: •
+          - link "Hack23" [ref=e18] [cursor=pointer]:
+            - /url: https://hack23.com/
+    - generic [ref=e19]:
+      - button "⌨️ Shortcuts" [ref=e20] [cursor=pointer]
+      - button "🌙 Dark" [ref=e21] [cursor=pointer]
+  - generic [ref=e23]:
+    - generic [ref=e25]:
+      - heading "🔐 Security Level Configuration" [level=3] [ref=e27]:
+        - generic [ref=e28]: 🔐
+        - text: Security Level Configuration
+      - region "Security Level Configuration widget. Configure security levels for each CIA component to set your organization's security posture" [ref=e30]:
+        - paragraph [ref=e32]: Configure security levels for each CIA component to set your organization's security posture. Higher levels provide stronger protection but may require more resources to implement.
+        - generic [ref=e36]:
+          - generic [ref=e37]:
+            - heading "Configure Security Levels" [level=3] [ref=e38]
+            - generic [ref=e39]:
+              - generic [ref=e40]:
+                - generic [ref=e41]:
+                  - generic [ref=e42]:
+                    - generic [ref=e43]: 🔒
+                    - text: Confidentiality
+                  - generic [ref=e44]: Moderate
+                - combobox "🔒 Confidentiality" [ref=e45]:
+                  - option "None"
+                  - option "Low"
+                  - option "Moderate" [selected]
+                  - option "High"
+                  - option "Very High"
+                - generic [ref=e46]: "Moderate: RBAC with encryption"
+                - button "View details" [ref=e47] [cursor=pointer]
+              - generic [ref=e48]:
+                - generic [ref=e49]:
+                  - generic [ref=e50]:
+                    - generic [ref=e51]: ✓
+                    - text: Integrity
+                  - generic [ref=e52]: Moderate
+                - combobox "✓ Integrity" [ref=e53]:
+                  - option "None"
+                  - option "Low"
+                  - option "Moderate" [selected]
+                  - option "High"
+                  - option "Very High"
+                - generic [ref=e54]: "Moderate: Automated validation with checks"
+                - button "View details" [ref=e55] [cursor=pointer]
+              - generic [ref=e56]:
+                - generic [ref=e57]:
+                  - generic [ref=e58]:
+                    - generic [ref=e59]: ⏱️
+                    - text: Availability
+                  - generic [ref=e60]: Moderate
+                - combobox "⏱️ Availability" [ref=e61]:
+                  - option "None"
+                  - option "Low"
+                  - option "Moderate" [selected]
+                  - option "High"
+                  - option "Very High"
+                - generic [ref=e62]: "Moderate: ~99% uptime, 4-8h recovery"
+                - button "View details" [ref=e63] [cursor=pointer]
+          - generic [ref=e64]:
+            - heading "Availability Details" [level=3] [ref=e65]
+            - generic [ref=e67]:
+              - heading "Moderate Level" [level=4] [ref=e112]
+              - generic [ref=e113]:
+                - generic [ref=e114]:
+                  - heading "Description" [level=5] [ref=e115]
+                  - paragraph [ref=e116]: Standard availability measures that yield acceptable uptime with planned disaster recovery processes.
+                - generic [ref=e117]:
+                  - heading "Technical Implementation" [level=5] [ref=e118]
+                  - paragraph [ref=e119]: Scheduled backups, automated monitoring with alerts, documented recovery procedures, and partial redundancy for key components.
+                - generic [ref=e120]:
+                  - heading "Business Impact" [level=5] [ref=e121]
+                  - paragraph [ref=e122]: Occasional disruptions are generally contained, with revenue losses estimated at 1-3% annually.
+                - generic [ref=e123]:
+                  - generic [ref=e124]:
+                    - generic [ref=e125]: Uptime
+                    - generic [ref=e126]: 99%
+                  - generic [ref=e127]:
+                    - generic [ref=e128]: Recovery Time
+                    - generic [ref=e129]: 4-8 hours
+        - generic [ref=e69]:
+          - heading "Security Level Overview" [level=3] [ref=e70]
+          - paragraph [ref=e71]: Higher security levels provide stronger protection but typically require more resources to implement and maintain. Consider your organization's needs and constraints when selecting security levels.
+          - generic [ref=e72]:
+            - generic [ref=e73]:
+              - generic [ref=e74]: None
+              - generic [ref=e75]: Minimal to no security controls
+            - generic [ref=e76]:
+              - generic [ref=e77]: Low
+              - generic [ref=e78]: Basic security controls
+            - generic [ref=e79]:
+              - generic [ref=e80]: Moderate
+              - generic [ref=e81]: Standard security controls
+            - generic [ref=e82]:
+              - generic [ref=e83]: High
+              - generic [ref=e84]: Advanced security controls
+            - generic [ref=e85]:
+              - generic [ref=e86]: Very High
+              - generic [ref=e87]: Maximum security controls
+    - generic [ref=e130]:
+      - heading "📈 Business Impact Analysis" [level=3] [ref=e132]:
+        - generic [ref=e133]: 📈
+        - text: Business Impact Analysis
+      - region "Business Impact Analysis widget. Business implications of security measures across financial, operational, reputational and regulatory dimensions" [ref=e135]:
+        - region "Business Impacts by Component" [ref=e136]:
+          - heading "Business Impacts by Component" [level=3] [ref=e137]
+          - generic [ref=e138]:
+            - heading "Confidentiality Impact" [level=4] [ref=e139]:
+              - generic [ref=e140]: 🔒
+              - text: Confidentiality Impact
+            - generic [ref=e141]:
+              - generic [ref=e142]:
+                - generic [ref=e143]:
+                  - heading "Reputational Impact" [level=3] [ref=e144]:
+                    - generic [ref=e145]: 👥
+                    - text: Reputational Impact
+                  - generic [ref=e146]: Medium Risk
+                - paragraph [ref=e147]: Sensitive data is largely protected, mitigating the risk of reputational damage in the event of an incident.
+              - generic [ref=e148]:
+                - generic [ref=e149]:
+                  - heading "Regulatory Impact" [level=3] [ref=e150]:
+                    - generic [ref=e151]: 📜
+                    - text: Regulatory Impact
+                  - generic [ref=e152]: Medium Risk
+                - paragraph [ref=e153]: Generally meets standard data protection requirements, though vulnerabilities may remain against highly sophisticated attacks.
+          - generic [ref=e154]:
+            - heading "Integrity Impact" [level=4] [ref=e155]:
+              - generic [ref=e156]: ✅
+              - text: Integrity Impact
+            - generic [ref=e157]:
+              - generic [ref=e158]:
+                - generic [ref=e159]:
+                  - heading "Financial Impact" [level=3] [ref=e160]:
+                    - generic [ref=e161]: 💰
+                    - text: Financial Impact
+                  - generic [ref=e162]: Medium Risk
+                - paragraph [ref=e163]: Financial data is generally reliable; however, occasional discrepancies may still impact reporting accuracy.
+              - generic [ref=e164]:
+                - generic [ref=e165]:
+                  - heading "Operational Impact" [level=3] [ref=e166]:
+                    - generic [ref=e167]: ⚙️
+                    - text: Operational Impact
+                  - generic [ref=e168]: Medium Risk
+                - paragraph [ref=e169]: Operational disruptions are infrequent and usually resolved quickly via established audit trails.
+          - generic [ref=e170]:
+            - heading "Availability Impact" [level=4] [ref=e171]:
+              - generic [ref=e172]: ⏱️
+              - text: Availability Impact
+            - generic [ref=e173]:
+              - generic [ref=e174]:
+                - generic [ref=e175]:
+                  - heading "Financial Impact" [level=3] [ref=e176]:
+                    - generic [ref=e177]: 💰
+                    - text: Financial Impact
+                  - generic [ref=e178]: Medium Risk
+                - paragraph [ref=e179]: Revenue impact is modest, estimated at approximately 1-3% annually, assuming typical outage scenarios.
+              - generic [ref=e180]:
+                - generic [ref=e181]:
+                  - heading "Operational Impact" [level=3] [ref=e182]:
+                    - generic [ref=e183]: ⚙️
+                    - text: Operational Impact
+                  - generic [ref=e184]: Medium Risk
+                - paragraph [ref=e185]: Disruptions occur infrequently and recovery is relatively quick.
+        - generic [ref=e187]:
+          - heading "Executive Summary" [level=3] [ref=e188]:
+            - generic [ref=e189]: 📊
+            - text: Executive Summary
+          - paragraph [ref=e190]: Current security posture provides Medium protection for business operations. Business impacts are most significant in minimal areas.
+          - generic [ref=e191]:
+            - generic [ref=e192]:
+              - generic [ref=e193]: Overall Impact
+              - generic [ref=e194]: Medium
+            - generic [ref=e195]:
+              - generic [ref=e196]: Implementation Complexity
+              - generic [ref=e197]: Moderate
+            - generic [ref=e198]:
+              - generic [ref=e199]: Security Profile
+              - generic [ref=e200]: Moderate
+        - generic [ref=e201]:
+          - heading "Current Security Levels" [level=3] [ref=e202]
+          - generic [ref=e203]:
+            - generic [ref=e204]: "Confidentiality: Moderate"
+            - generic [ref=e205]: "Integrity: Moderate"
+            - generic [ref=e206]: "Availability: Moderate"
+          - generic [ref=e207]:
+            - generic [ref=e208]:
+              - generic [ref=e209]: Confidentiality
+              - generic [ref=e210]: Moderate
+            - generic [ref=e211]:
+              - generic [ref=e212]: Integrity
+              - generic [ref=e213]: Moderate
+            - generic [ref=e214]:
+              - generic [ref=e215]: Availability
+              - generic [ref=e216]: Moderate
+        - generic [ref=e218]:
+          - tablist "Tab navigation" [ref=e219]:
+            - generic [ref=e220]: Use arrow keys to navigate between tabs. Press Enter or Space to activate a tab.
+            - tab "Implementation Considerations" [selected] [ref=e221] [cursor=pointer]:
+              - generic [ref=e223]: Implementation Considerations
+            - tab "Business Benefits" [ref=e224] [cursor=pointer]:
+              - generic [ref=e226]: Business Benefits
+          - tabpanel "Implementation Considerations" [ref=e227]:
+            - generic [ref=e228]:
+              - generic [ref=e229]:
+                - generic [ref=e230]:
+                  - generic [ref=e231]: ⚙️
+                  - heading "Implementation Effort" [level=4] [ref=e232]
+                - paragraph [ref=e233]: Moderate complexity implementation requiring appropriate planning and resources.
+              - generic [ref=e234]:
+                - generic [ref=e235]:
+                  - generic [ref=e236]: 👥
+                  - heading "Resource Requirements" [level=4] [ref=e237]
+                - paragraph [ref=e238]: Security levels of this tier typically require significant resources and dedicated security personnel.
+              - generic [ref=e239]:
+                - generic [ref=e240]:
+                  - generic [ref=e241]: 🔧
+                  - heading "Maintenance Overhead" [level=4] [ref=e242]
+                - paragraph [ref=e243]: Ongoing maintenance will require dedicated staff time and routine assessments.
+              - generic [ref=e244]:
+                - generic [ref=e245]:
+                  - generic [ref=e246]: 🏢
+                  - heading "Organizational Impact" [level=4] [ref=e247]
+                - paragraph [ref=e248]: These security controls will have moderate impact on business processes requiring training and adaptation.
+          - tabpanel "Business Benefits" [ref=e249]
+    - generic [ref=e250]:
+      - heading "📊 Security Summary" [level=3] [ref=e252]:
+        - generic [ref=e253]: 📊
+        - text: Security Summary
+      - region "Security Summary widget. Comprehensive executive summary of security posture with key metrics" [ref=e255]:
+        - region "Standard Security" [ref=e256]:
+          - generic [ref=e257]:
+            - generic [ref=e258]:
+              - heading "Standard Security" [level=2] [ref=e259]: Standard Security
+              - paragraph [ref=e261]: Standard security controls with adequate protection
+            - group "Security metrics" [ref=e262]:
+              - generic [ref=e263]: Score
+              - generic "Score" [ref=e264]: 50%
+              - 'status "Risk level: High Risk" [ref=e265]': High Risk
+        - generic [ref=e266]:
+          - tablist "Tab navigation" [ref=e267]:
+            - generic [ref=e268]: Use arrow keys to navigate between tabs. Press Enter or Space to activate a tab.
+            - tab "Overview" [ref=e269] [cursor=pointer]:
+              - generic [ref=e271]: Overview
+            - tab "Business Value" [ref=e272] [cursor=pointer]:
+              - generic [ref=e274]: Business Value
+            - tab "Implementation" [active] [selected] [ref=e275] [cursor=pointer]:
+              - generic [ref=e277]: Implementation
+            - tab "Compliance 12" [ref=e278] [cursor=pointer]:
+              - generic [ref=e279]:
+                - generic [ref=e280]: Compliance
+                - generic [ref=e281]: "12"
+          - tabpanel "Overview" [ref=e282]
+          - tabpanel "Business Value" [ref=e332]
+          - tabpanel "Implementation" [ref=e333]:
+            - generic [ref=e982]:
+              - paragraph [ref=e984]: This section summarizes implementation requirements for your selected security levels, helping plan resources, timelines, and technical approaches.
+              - generic [ref=e985]:
+                - heading "Implementation Overview" [level=3] [ref=e986]
+                - generic [ref=e987]:
+                  - generic [ref=e988]:
+                    - generic [ref=e989]: "Implementation Complexity:"
+                    - generic [ref=e990]: Moderate
+                  - paragraph [ref=e993]: Standard security measures with moderate implementation effort
+                - generic [ref=e994]:
+                  - generic [ref=e995]:
+                    - generic [ref=e996]: Estimated Implementation Time
+                    - generic [ref=e997]: 11 weeks
+                    - generic [ref=e998]: Typical project timeline
+                  - generic [ref=e999]:
+                    - generic [ref=e1000]: Required Resources
+                    - generic [ref=e1001]: Security professional
+                    - generic [ref=e1002]: Resource allocation recommendation
+              - generic [ref=e1003]:
+                - heading "Component Implementation Summary" [level=3] [ref=e1004]
+                - generic [ref=e1005]:
+                  - generic [ref=e1006]:
+                    - heading "Confidentiality Implementation" [level=4] [ref=e1007]
+                    - paragraph [ref=e1008]: Role-based access and encryption for sensitive data
+                    - generic [ref=e1009]: "Level: Moderate"
+                  - generic [ref=e1010]:
+                    - heading "Integrity Implementation" [level=4] [ref=e1011]
+                    - paragraph [ref=e1012]: Data validation and cryptographic checksums
+                    - generic [ref=e1013]: "Level: Moderate"
+                  - generic [ref=e1014]:
+                    - heading "Availability Implementation" [level=4] [ref=e1015]
+                    - paragraph [ref=e1016]: Redundant components and standard backups
+                    - generic [ref=e1017]: "Level: Moderate"
+              - generic [ref=e1018]:
+                - heading "Implementation Considerations" [level=3] [ref=e1019]
+                - generic [ref=e1020]:
+                  - generic [ref=e1021]:
+                    - heading "Success Factors" [level=4] [ref=e1022]
+                    - list [ref=e1023]:
+                      - listitem [ref=e1024]: Executive sponsorship and support
+                      - listitem [ref=e1025]: Clear security requirements definition
+                      - listitem [ref=e1026]: Adequate resource allocation
+                      - listitem [ref=e1027]: Proper testing and validation
+                      - listitem [ref=e1028]: Staff training and awareness
+                  - generic [ref=e1029]:
+                    - heading "Key Challenges" [level=4] [ref=e1030]
+                    - list [ref=e1031]:
+                      - listitem [ref=e1032]: Balancing security with usability
+                      - listitem [ref=e1033]: Integration with existing systems
+                      - listitem [ref=e1034]: Managing scope and expectations
+                      - listitem [ref=e1035]: Maintaining consistent controls
+                      - listitem [ref=e1036]: Securing necessary expertise
+          - tabpanel "Compliance 12" [ref=e334]
+    - generic [ref=e335]:
+      - heading "💎 Value Creation" [level=3] [ref=e337]:
+        - generic [ref=e338]: 💎
+        - text: Value Creation
+      - region "Business Value Creation widget. Business value and return on investment created by security investments" [ref=e340]:
+        - region "Summary metrics" [ref=e341]:
+          - generic [ref=e342]:
+            - generic [ref=e343]: ROI
+            - generic [ref=e344]: 100-200%
+            - generic [ref=e345]: Balanced security approach delivers positive returns for most organizations
+          - generic [ref=e346]:
+            - generic [ref=e347]: Security Level
+            - generic [ref=e348]:
+              - generic [ref=e349]: Moderate
+              - generic [ref=e350]: Moderate
+          - generic [ref=e351]:
+            - generic [ref=e352]: Value Metrics
+            - generic [ref=e353]: "6"
+            - generic [ref=e354]: Categories
+        - generic [ref=e355]:
+          - button "Toggle Value Overview section" [expanded] [ref=e356] [cursor=pointer]:
+            - generic [ref=e357]: 📊 Value Overview
+            - generic [ref=e358]: ▼
+          - generic [ref=e359]:
+            - paragraph [ref=e360]: Balanced security investments deliver operational stability, data reliability, and reasonable protection that enable business growth.
+            - generic [ref=e361]:
+              - generic [ref=e362]:
+                - generic [ref=e363]:
+                  - generic [ref=e364]: 🤝
+                  - generic [ref=e365]: Trust Enhancement
+                - generic [ref=e366]: 86%
+              - generic [ref=e367]:
+                - generic [ref=e368]:
+                  - generic [ref=e369]: ⚙️
+                  - generic [ref=e370]: Operational Efficiency
+                - generic [ref=e371]: 36%
+              - generic [ref=e372]:
+                - generic [ref=e373]:
+                  - generic [ref=e374]: 💡
+                  - generic [ref=e375]: Innovation Enablement
+                - generic [ref=e376]: 63%
+              - generic [ref=e377]:
+                - generic [ref=e378]:
+                  - generic [ref=e379]: 📊
+                  - generic [ref=e380]: Decision Quality
+                - generic [ref=e381]: 54%
+            - generic [ref=e382]: + 2 more metrics
+        - button "Toggle Component Business Value section" [ref=e384] [cursor=pointer]:
+          - generic [ref=e385]: 🔒 Component Business Value
+          - generic [ref=e386]: ▶
+        - button "Toggle Investment Business Case section" [ref=e388] [cursor=pointer]:
+          - generic [ref=e389]: 💼 Investment Business Case
+          - generic [ref=e390]: ▶
+    - generic [ref=e391]:
+      - heading "💰 Cost Estimation" [level=3] [ref=e393]:
+        - generic [ref=e394]: 💰
+        - text: Cost Estimation
+      - region "Cost Estimation widget. Cost estimates for implementing and maintaining security controls" [ref=e396]:
+        - region "Cost Summary" [ref=e397]:
+          - heading "Cost Summary" [level=3] [ref=e398]
+          - generic [ref=e399]:
+            - generic [ref=e400]: CAPEX
+            - generic [ref=e401]: $45,000
+          - generic [ref=e402]:
+            - generic [ref=e403]: OPEX
+            - generic [ref=e404]: $15,000
+          - generic [ref=e405]:
+            - generic [ref=e406]: TOTAL
+            - generic [ref=e407]: $60,000
+        - generic [ref=e408]:
+          - generic [ref=e409]:
+            - generic [ref=e410]:
+              - generic [ref=e411]: Complexity
+              - generic [ref=e412]: Moderate
+            - generic:
+              - 'progressbar "Implementation complexity: Moderate"'
+          - generic [ref=e413]:
+            - generic [ref=e414]:
+              - generic [ref=e415]: Personnel
+              - generic [ref=e416]: 0.8 FTE
+            - generic [ref=e417]: "Impl: 0.5 | Maint: 0.3"
+        - generic [ref=e418]:
+          - heading "By Component" [level=3] [ref=e419]
+          - generic [ref=e420]:
+            - generic [ref=e421]:
+              - generic [ref=e422]:
+                - generic [ref=e423]: 🔒 Conf
+                - generic [ref=e424]: Moderate
+              - generic [ref=e425]: $20,000
+            - generic [ref=e426]:
+              - generic [ref=e427]:
+                - generic [ref=e428]: ✓ Integ
+                - generic [ref=e429]: Moderate
+              - generic [ref=e430]: $20,000
+            - generic [ref=e431]:
+              - generic [ref=e432]:
+                - generic [ref=e433]: ⏱️ Avail
+                - generic [ref=e434]: Moderate
+              - generic [ref=e435]: $20,000
+        - generic [ref=e436]:
+          - heading "Expertise" [level=3] [ref=e437]:
+            - generic [ref=e438]: 💡
+            - text: Expertise
+          - generic [ref=e439]:
+            - generic [ref=e440]:
+              - generic [ref=e441]: •
+              - generic [ref=e442]: System redundancy
+            - generic [ref=e443]:
+              - generic [ref=e444]: •
+              - generic [ref=e445]: Backup management
+            - generic [ref=e446]:
+              - generic [ref=e447]: •
+              - generic [ref=e448]: Basic load balancing
+    - generic [ref=e449]:
+      - heading "📋 Compliance Status" [level=3] [ref=e451]:
+        - generic [ref=e452]: 📋
+        - text: Compliance Status
+      - region "Compliance Status widget. Status of compliance with regulatory frameworks and industry standards" [ref=e454]:
+        - region "Overall Compliance Status" [ref=e455]:
+          - generic [ref=e456]:
+            - generic [ref=e457]:
+              - generic [ref=e458]: Status
+              - generic [ref=e459]: Compliant with standard frameworks
+            - generic [ref=e460]:
+              - generic [ref=e461]: Score
+              - generic [ref=e462]:
+                - generic [ref=e463]: 63%
+                - generic [ref=e464]: warning
+          - 'progressbar "Compliance score: 63 percent"'
+        - generic [ref=e465]:
+          - heading "Frameworks" [level=3] [ref=e466]
+          - generic [ref=e467]:
+            - generic [ref=e468]: ✓ Compliant
+            - generic [ref=e469]:
+              - button "View NIST 800-53 compliance details" [ref=e470] [cursor=pointer]: NIST 800-53
+              - button "View ISO 27001 compliance details" [ref=e471] [cursor=pointer]: ISO 27001
+              - button "View NIST CSF compliance details" [ref=e472] [cursor=pointer]: NIST CSF
+              - button "View SOC2 compliance details" [ref=e473] [cursor=pointer]: SOC2
+              - button "View FedRAMP Moderate compliance details" [ref=e474] [cursor=pointer]: FedRAMP Moderate
+          - generic [ref=e475]:
+            - generic [ref=e476]: ⚠ Partial
+            - generic [ref=e477]:
+              - button "View GDPR compliance details" [ref=e478] [cursor=pointer]: GDPR
+              - button "View PCI DSS compliance details" [ref=e479] [cursor=pointer]: PCI DSS
+              - button "View CMMC Level 3 compliance details" [ref=e480] [cursor=pointer]: CMMC Level 3
+              - button "View SOX compliance details" [ref=e481] [cursor=pointer]: SOX
+              - button "View CCPA compliance details" [ref=e482] [cursor=pointer]: CCPA
+          - generic [ref=e483]:
+            - generic [ref=e484]: ✗ Non-Compliant
+            - generic [ref=e485]:
+              - button "View HIPAA compliance details" [ref=e486] [cursor=pointer]: HIPAA
+              - button "View FedRAMP High compliance details" [ref=e487] [cursor=pointer]: FedRAMP High
+        - generic [ref=e488]:
+          - generic [ref=e489]:
+            - generic [ref=e490]: 💡
+            - heading "Tips" [level=3] [ref=e491]
+          - list [ref=e492]:
+            - listitem [ref=e493]: • Address specific gaps in partial frameworks
+            - listitem [ref=e494]: • Implement regular compliance monitoring
+    - generic [ref=e495]:
+      - heading "🔒 Confidentiality Impact" [level=3] [ref=e497]:
+        - generic [ref=e498]: 🔒
+        - text: Confidentiality Impact
+      - region "Confidentiality Impact Analysis widget. Business impact of confidentiality controls including data classification and privacy measures" [ref=e500]:
+        - region "Current Confidentiality Security Level" [ref=e501]:
+          - heading "Current Confidentiality Security Level" [level=3] [ref=e502]
+          - generic [ref=e503]: "Confidentiality: Moderate"
+        - region "Business Impact" [ref=e504]:
+          - heading "Business Impact" [level=3] [ref=e505]
+          - generic [ref=e506]:
+            - 'heading "💼 Business Impact Risk: Low" [level=4] [ref=e507]':
+              - generic [ref=e508]: 💼
+              - text: Business Impact
+              - generic [ref=e509]: "Risk: Low"
+            - paragraph [ref=e510]: Analysis of data confidentiality impacts
+            - generic [ref=e511]:
+              - generic [ref=e512]:
+                - generic [ref=e513]:
+                  - generic [ref=e514]: 💰
+                  - generic [ref=e515]: Financial Impact
+                - paragraph [ref=e516]: Reduced risk of financial penalties from data breaches
+              - generic [ref=e517]:
+                - generic [ref=e518]:
+                  - generic [ref=e519]: ⚙️
+                  - generic [ref=e520]: Operational Impact
+                - paragraph [ref=e521]: Smooth operations with secure data flows
+              - generic [ref=e522]:
+                - generic [ref=e523]:
+                  - generic [ref=e524]: 🏆
+                  - generic [ref=e525]: Reputational Impact
+                - paragraph [ref=e526]: Sensitive data is largely protected, mitigating the risk of reputational damage in the event of an incident.
+              - generic [ref=e527]:
+                - generic [ref=e528]:
+                  - generic [ref=e529]: 📜
+                  - generic [ref=e530]: Regulatory Impact
+                - paragraph [ref=e531]: Generally meets standard data protection requirements, though vulnerabilities may remain against highly sophisticated attacks.
+        - region "Data Protection" [ref=e532]:
+          - generic [ref=e533]:
+            - generic [ref=e534]: 📊
+            - heading "Data Protection" [level=3] [ref=e535]
+          - 'generic "Data Classification: Sensitive Data" [ref=e538]':
+            - generic [ref=e539]:
+              - generic [ref=e540]: 🏷️
+              - generic [ref=e541]: Sensitive Data
+            - paragraph [ref=e542]: Data Classification
+            - paragraph [ref=e543]: Level of data sensitivity
+        - region "Privacy Impact" [ref=e544]:
+          - generic [ref=e545]:
+            - generic [ref=e546]: 🔒
+            - heading "Privacy Impact" [level=3] [ref=e547]
+          - 'generic "Privacy Impact: Standard Privacy Controls" [ref=e550]':
+            - generic [ref=e551]:
+              - generic [ref=e552]: 🛡️
+              - generic [ref=e553]: Standard Privacy Controls
+            - paragraph [ref=e554]: Privacy Impact
+    - generic [ref=e555]:
+      - heading "✓ Integrity Impact" [level=3] [ref=e557]:
+        - generic [ref=e558]: ✓
+        - text: Integrity Impact
+      - region "Integrity Impact Analysis widget. Business impact of integrity controls including data accuracy and validation mechanisms" [ref=e560]:
+        - region "Current Integrity Security Level" [ref=e561]:
+          - heading "Current Integrity Security Level" [level=3] [ref=e562]
+          - generic [ref=e563]: "Integrity: Moderate"
+        - region "Business Impact" [ref=e564]:
+          - heading "Business Impact" [level=3] [ref=e565]
+          - generic [ref=e566]:
+            - 'heading "💼 Business Impact Risk: Medium" [level=4] [ref=e567]':
+              - generic [ref=e568]: 💼
+              - text: Business Impact
+              - generic [ref=e569]: "Risk: Medium"
+            - paragraph [ref=e570]: Analysis of data integrity impacts
+            - generic [ref=e571]:
+              - generic [ref=e572]:
+                - generic [ref=e573]:
+                  - generic [ref=e574]: 💰
+                  - generic [ref=e575]: Financial Impact
+                - paragraph [ref=e576]: Financial data is generally reliable; however, occasional discrepancies may still impact reporting accuracy.
+              - generic [ref=e577]:
+                - generic [ref=e578]:
+                  - generic [ref=e579]: ⚙️
+                  - generic [ref=e580]: Operational Impact
+                - paragraph [ref=e581]: Operational disruptions are infrequent and usually resolved quickly via established audit trails.
+              - generic [ref=e582]:
+                - generic [ref=e583]:
+                  - generic [ref=e584]: 📜
+                  - generic [ref=e585]: Regulatory Impact
+                - paragraph [ref=e586]: Controls meet basic regulatory standards, though they might fall short of stricter compliance requirements.
+        - region "Data Integrity Metrics" [ref=e587]:
+          - generic [ref=e588]:
+            - generic [ref=e589]: 📊
+            - heading "Data Integrity Metrics" [level=3] [ref=e590]
+          - generic [ref=e592]:
+            - 'generic "Data Validation Controls: Standard" [ref=e593]':
+              - generic [ref=e594]:
+                - generic [ref=e595]: ✓
+                - generic [ref=e596]: Standard
+              - paragraph [ref=e597]: Data Validation Controls
+            - 'generic "Acceptable Error Rate: < 3%" [ref=e598]':
+              - generic [ref=e599]:
+                - generic [ref=e600]: 📉
+                - generic [ref=e601]: < 3%
+              - paragraph [ref=e602]: Acceptable Error Rate
+    - generic [ref=e603]:
+      - heading "⏱️ Availability Impact" [level=3] [ref=e605]:
+        - generic [ref=e606]: ⏱️
+        - text: Availability Impact
+      - region "Availability Impact Analysis widget. Business impact of availability controls including uptime targets and recovery objectives" [ref=e608]:
+        - region "Current Availability Security Level" [ref=e609]:
+          - heading "Current Availability Security Level" [level=3] [ref=e610]
+          - generic [ref=e611]: "Availability: Moderate"
+        - region "Business Impact" [ref=e612]:
+          - heading "Business Impact" [level=3] [ref=e613]
+          - generic [ref=e614]:
+            - 'heading "💼 Business Impact Risk: Medium" [level=4] [ref=e615]':
+              - generic [ref=e616]: 💼
+              - text: Business Impact
+              - generic [ref=e617]: "Risk: Medium"
+            - paragraph [ref=e618]: Comprehensive impact analysis
+            - generic [ref=e619]:
+              - generic [ref=e620]:
+                - generic [ref=e621]:
+                  - generic [ref=e622]: 💰
+                  - generic [ref=e623]: Financial Impact
+                - paragraph [ref=e624]: Revenue impact is modest, estimated at approximately 1-3% annually, assuming typical outage scenarios.
+                - paragraph [ref=e625]: "Annual Revenue Loss: 1-3% of annual revenue"
+              - generic [ref=e626]:
+                - generic [ref=e627]:
+                  - generic [ref=e628]: ⚙️
+                  - generic [ref=e629]: Operational Impact
+                - paragraph [ref=e630]: Disruptions occur infrequently and recovery is relatively quick.
+                - paragraph [ref=e631]: "Mean Time to Recover: 2-4 hours"
+        - region "SLA Metrics" [ref=e632]:
+          - generic [ref=e633]:
+            - generic [ref=e634]: ⏱️
+            - heading "SLA Metrics" [level=3] [ref=e635]
+          - generic [ref=e636]:
+            - group "Service level agreement metrics" [ref=e637]:
+              - 'generic "Uptime Target: 99%" [ref=e638]':
+                - generic [ref=e639]:
+                  - generic [ref=e640]: 📈
+                  - generic [ref=e641]: 99%
+                - paragraph [ref=e642]: Uptime Target
+                - paragraph [ref=e643]: Expected system availability
+              - 'generic "Recovery Time Objective: 4-8 hours" [ref=e644]':
+                - generic [ref=e645]:
+                  - generic [ref=e646]: ⏱️
+                  - generic [ref=e647]: 4-8 hours
+                - paragraph [ref=e648]: Recovery Time Objective
+                - paragraph [ref=e649]: Time to restore service
+              - 'generic "Recovery Point Objective: 4 hours" [ref=e650]':
+                - generic [ref=e651]:
+                  - generic [ref=e652]: 💾
+                  - generic [ref=e653]: 4 hours
+                - paragraph [ref=e654]: Recovery Point Objective
+                - paragraph [ref=e655]: Maximum data loss allowed
+            - 'generic "Service Level Agreement: Business hours, 7 days" [ref=e657]':
+              - generic [ref=e658]:
+                - generic [ref=e659]: 📋
+                - generic [ref=e660]: Business hours, 7 days
+              - paragraph [ref=e661]: Service Level Agreement
+              - paragraph [ref=e662]: Support coverage period
+    - generic [ref=e663]:
+      - heading "⚙️ Technical Implementation Details" [level=3] [ref=e665]:
+        - generic [ref=e666]: ⚙️
+        - text: Technical Implementation Details
+      - region "Technical Implementation Details widget. Detailed technical implementation requirements for achieving selected security levels" [ref=e668]:
+        - region "This widget provides technical implementation details for achieving your selected security levels. Use these guidelines when designing and implementing your security controls." [ref=e669]:
+          - paragraph [ref=e670]: This widget provides technical implementation details for achieving your selected security levels. Use these guidelines when designing and implementing your security controls.
+        - generic [ref=e671]:
+          - tablist "Tab navigation" [ref=e672]:
+            - generic [ref=e673]: Use arrow keys to navigate between tabs. Press Enter or Space to activate a tab.
+            - tab "Confidentiality" [selected] [ref=e674] [cursor=pointer]:
+              - generic [ref=e675]:
+                - generic [ref=e676]: 🔒
+                - generic [ref=e677]: Confidentiality
+            - tab "Integrity" [ref=e678] [cursor=pointer]:
+              - generic [ref=e679]:
+                - generic [ref=e680]: ✓
+                - generic [ref=e681]: Integrity
+            - tab "Availability" [ref=e682] [cursor=pointer]:
+              - generic [ref=e683]:
+                - generic [ref=e684]: ⏱️
+                - generic [ref=e685]: Availability
+          - tabpanel "Confidentiality" [ref=e686]:
+            - generic [ref=e687]:
+              - generic [ref=e688]:
+                - generic [ref=e689]: 🔒
+                - heading "Confidentiality Controls" [level=3] [ref=e690]
+                - generic [ref=e692]: Moderate
+              - generic [ref=e693]:
+                - generic [ref=e694]:
+                  - heading "Technical Description" [level=4] [ref=e695]
+                  - paragraph [ref=e696]: Utilizes strong authentication, role-based access control, and encryption both at rest and in transit.
+                  - generic [ref=e697]:
+                    - heading "Implementation Complexity" [level=5] [ref=e698]
+                    - generic [ref=e701]: Moderate
+                  - generic [ref=e702]:
+                    - heading "Personnel Requirements" [level=5] [ref=e703]
+                    - generic [ref=e704]:
+                      - generic [ref=e705]: "Estimated staffing:"
+                      - generic [ref=e706]: 0.5 FTE
+                - generic [ref=e707]:
+                  - heading "Implementation Requirements" [level=4] [ref=e708]
+                  - list [ref=e709]:
+                    - listitem [ref=e710]: Implement role-based access control
+                    - listitem [ref=e711]: Use standard TLS for data in transit
+                    - listitem [ref=e712]: Encrypt sensitive data at rest
+                    - listitem [ref=e713]: Enforce strong password policies
+                    - listitem [ref=e714]: Implement session management
+              - button "Toggle confidentiality advanced details section" [ref=e716] [cursor=pointer]:
+                - generic [ref=e717]: Show Advanced Details
+                - generic [ref=e718]: ▼
+          - tabpanel "Integrity" [ref=e719]
+          - tabpanel "Availability" [ref=e720]
+        - generic [ref=e721]:
+          - heading "💡 Implementation Notes" [level=3] [ref=e722]:
+            - generic [ref=e723]: 💡
+            - text: Implementation Notes
+          - list [ref=e724]:
+            - listitem [ref=e725]:
+              - generic [ref=e726]: •
+              - generic [ref=e727]: Implement these technical controls in a layered approach, starting with foundational controls.
+            - listitem [ref=e728]:
+              - generic [ref=e729]: •
+              - generic [ref=e730]: Regular testing and validation are required to ensure controls are functioning as intended.
+            - listitem [ref=e731]:
+              - generic [ref=e732]: •
+              - generic [ref=e733]: Consider integrating with existing security infrastructure to maximize effectiveness.
+            - listitem [ref=e734]:
+              - generic [ref=e735]: •
+              - generic [ref=e736]: Document all implementation details and maintain up-to-date configuration records.
+    - generic [ref=e737]:
+      - heading "📈 Security Visualization" [level=3] [ref=e739]:
+        - generic [ref=e740]: 📈
+        - text: Security Visualization
+      - region "Security Visualization widget. Visual representation of security posture with CIA triad metrics, security score, and risk level" [ref=e742]:
+        - region "Security Posture" [ref=e743]:
+          - heading "Security Posture" [level=3] [ref=e744]
+          - group "Security metrics" [ref=e745]:
+            - generic [ref=e746]:
+              - generic [ref=e747]:
+                - generic [ref=e748]: Security Score
+                - 'generic "Security score: 50 out of 100" [ref=e749]': "50"
+              - generic [ref=e750]:
+                - generic [ref=e751]: Risk Level
+                - 'status "Risk level: Low Risk" [ref=e752]': Low Risk
+            - generic "Security score visualization" [ref=e753]:
+              - generic [ref=e754]: Security Level
+              - generic [ref=e755]:
+                - generic [ref=e756]: Critical
+                - generic [ref=e757]: High
+                - generic [ref=e758]: Medium
+                - generic [ref=e759]: Low
+                - generic [ref=e760]: Minimal
+        - generic [ref=e761]:
+          - heading "Security Components" [level=3] [ref=e762]
+          - generic [ref=e766]:
+            - generic [ref=e767]:
+              - strong [ref=e768]: "Availability:"
+              - text: Moderate
+            - generic [ref=e769]:
+              - strong [ref=e770]: "Integrity:"
+              - text: Moderate
+            - generic [ref=e771]:
+              - strong [ref=e772]: "Confidentiality:"
+              - text: Moderate
+        - generic [ref=e774]:
+          - heading "Component Details" [level=3] [ref=e775]
+          - generic [ref=e776]:
+            - generic [ref=e778]:
+              - generic [ref=e779]: Confidentiality
+              - generic [ref=e780]: Moderate
+            - generic [ref=e782]:
+              - generic [ref=e783]: Integrity
+              - generic [ref=e784]: Moderate
+            - generic [ref=e786]:
+              - generic [ref=e787]: Availability
+              - generic [ref=e788]: Moderate
+        - paragraph [ref=e791]: Enhance data validation mechanisms and change management to improve integrity.
+        - generic [ref=e792]:
+          - heading "Security Visualization Key" [level=3] [ref=e793]
+          - paragraph [ref=e794]: The security score represents your overall security posture based on your CIA triad levels. The risk level indicates the potential business risk associated with your current security posture.
+          - generic [ref=e795]:
+            - generic [ref=e796]: Critical Risk
+            - generic [ref=e797]: High Risk
+            - generic [ref=e798]: Medium Risk
+            - generic [ref=e799]: Low Risk
+            - generic [ref=e800]: Minimal Risk
+    - generic [ref=e801]:
+      - heading "📚 Security Resources" [level=3] [ref=e803]:
+        - generic [ref=e804]: 📚
+        - text: Security Resources
+      - region "Security Resources widget. Curated security resources and implementation guides for selected CIA security levels" [ref=e806]:
+        - region "Security Resources Introduction" [ref=e807]:
+          - heading "Security Resources Introduction" [level=2] [ref=e808]
+          - paragraph [ref=e809]: This widget provides curated security resources to help implement controls that align with your selected security levels across the CIA triad.
+        - generic [ref=e810]:
+          - complementary "Resource filters and search" [ref=e811]:
+            - generic [ref=e812]:
+              - text: Search Resources
+              - generic [ref=e813]:
+                - textbox "Search security resources by title or description" [ref=e814]:
+                  - /placeholder: Search by title, description...
+                - generic [ref=e815]: 🔍
+            - navigation "Resource categories" [ref=e816]:
+              - heading "Categories" [level=3] [ref=e817]
+              - list [ref=e818]:
+                - listitem [ref=e819]:
+                  - button "All Resources" [pressed] [ref=e820] [cursor=pointer]
+                - listitem [ref=e821]:
+                  - button "best_practices" [ref=e822] [cursor=pointer]
+                - listitem [ref=e823]:
+                  - button "documentation" [ref=e824] [cursor=pointer]
+            - region "Implementation Guidelines" [ref=e825]:
+              - heading "Implementation Guidelines" [level=3] [ref=e826]
+              - generic [ref=e827]:
+                - paragraph [ref=e828]: "Selected Security Levels:"
+                - generic [ref=e829]:
+                  - generic [ref=e830]:
+                    - term [ref=e831]: "Confidentiality:"
+                    - definition [ref=e832]: Moderate
+                  - generic [ref=e833]:
+                    - term [ref=e834]: "Integrity:"
+                    - definition [ref=e835]: Moderate
+                  - generic [ref=e836]:
+                    - term [ref=e837]: "Availability:"
+                    - definition [ref=e838]: Moderate
+                - paragraph [ref=e839]: Focus on implementing controls that satisfy all three components for a balanced security posture.
+          - generic [ref=e840]:
+            - generic [ref=e841]:
+              - generic [ref=e842]:
+                - heading "Security Resources" [level=3] [ref=e843]
+                - generic [ref=e844]: 18 resources found
+              - generic [ref=e845]:
+                - 'button "Availability Best Practices availability Guidance for implementing availability controls Source: NIST availability uptime" [ref=e846]':
+                  - generic [ref=e847]:
+                    - heading "Availability Best Practices" [level=3] [ref=e848]
+                    - generic [ref=e849]: availability
+                  - paragraph [ref=e850]: Guidance for implementing availability controls
+                  - generic [ref=e852]: "Source: NIST"
+                  - generic [ref=e853]:
+                    - generic [ref=e854]: availability
+                    - generic [ref=e855]: uptime
+                - 'button "AWS Well-Architected Framework availability Helps cloud architects build secure, high-performing, resilient, and efficient infrastructure Source: AWS cloud architecture resilience" [ref=e856]':
+                  - generic [ref=e857]:
+                    - heading "AWS Well-Architected Framework" [level=3] [ref=e858]
+                    - generic [ref=e859]: availability
+                  - paragraph [ref=e860]: Helps cloud architects build secure, high-performing, resilient, and efficient infrastructure
+                  - generic [ref=e862]: "Source: AWS"
+                  - generic [ref=e863]:
+                    - generic [ref=e864]: cloud
+                    - generic [ref=e865]: architecture
+                    - generic [ref=e866]: resilience
+                - 'button "Basic security guidance for availability availability Start with these resources to implement availability security controls Source: NIST beginner basics" [ref=e867]':
+                  - generic [ref=e868]:
+                    - heading "Basic security guidance for availability" [level=3] [ref=e869]
+                    - generic [ref=e870]: availability
+                  - paragraph [ref=e871]: Start with these resources to implement availability security controls
+                  - generic [ref=e873]: "Source: NIST"
+                  - generic [ref=e874]:
+                    - generic [ref=e875]: beginner
+                    - generic [ref=e876]: basics
+                - 'button "Confidentiality Controls confidentiality Guidance for implementing confidentiality controls Source: NIST confidentiality encryption" [ref=e877]':
+                  - generic [ref=e878]:
+                    - heading "Confidentiality Controls" [level=3] [ref=e879]
+                    - generic [ref=e880]: confidentiality
+                  - paragraph [ref=e881]: Guidance for implementing confidentiality controls
+                  - generic [ref=e883]: "Source: NIST"
+                  - generic [ref=e884]:
+                    - generic [ref=e885]: confidentiality
+                    - generic [ref=e886]: encryption
+                - 'button "Data Encryption Standard confidentiality Standards and guidelines for implementing encryption to protect sensitive data Source: NIST encryption data_protection standards" [ref=e887]':
+                  - generic [ref=e888]:
+                    - heading "Data Encryption Standard" [level=3] [ref=e889]
+                    - generic [ref=e890]: confidentiality
+                  - paragraph [ref=e891]: Standards and guidelines for implementing encryption to protect sensitive data
+                  - generic [ref=e893]: "Source: NIST"
+                  - generic [ref=e894]:
+                    - generic [ref=e895]: encryption
+                    - generic [ref=e896]: data_protection
+                    - generic [ref=e897]: standards
+                - 'button "Integrity Guidelines integrity Guidance for implementing integrity controls Source: NIST integrity validation" [ref=e898]':
+                  - generic [ref=e899]:
+                    - heading "Integrity Guidelines" [level=3] [ref=e900]
+                    - generic [ref=e901]: integrity
+                  - paragraph [ref=e902]: Guidance for implementing integrity controls
+                  - generic [ref=e904]: "Source: NIST"
+                  - generic [ref=e905]:
+                    - generic [ref=e906]: integrity
+                    - generic [ref=e907]: validation
+                - 'button "OWASP Top 10 integrity Standard awareness document for developers about the most critical security risks to web application... Source: OWASP web vulnerabilities security_testing" [ref=e908]':
+                  - generic [ref=e909]:
+                    - heading "OWASP Top 10" [level=3] [ref=e910]
+                    - generic [ref=e911]: integrity
+                  - paragraph [ref=e912]: Standard awareness document for developers about the most critical security risks to web application...
+                  - generic [ref=e914]: "Source: OWASP"
+                  - generic [ref=e915]:
+                    - generic [ref=e916]: web
+                    - generic [ref=e917]: vulnerabilities
+                    - generic [ref=e918]: security_testing
+                - 'button "CIS Benchmarks general Best practices for secure configuration of technology systems Source: CIS configuration benchmarks hardening" [ref=e919]':
+                  - generic [ref=e920]:
+                    - heading "CIS Benchmarks" [level=3] [ref=e921]
+                    - generic [ref=e922]: general
+                  - paragraph [ref=e923]: Best practices for secure configuration of technology systems
+                  - generic [ref=e925]: "Source: CIS"
+                  - generic [ref=e926]:
+                    - generic [ref=e927]: configuration
+                    - generic [ref=e928]: benchmarks
+                    - generic [ref=e929]: hardening
+              - navigation "Pagination" [ref=e931]:
+                - button "Previous" [disabled] [ref=e932] [cursor=pointer]
+                - button "1" [ref=e933] [cursor=pointer]
+                - button "2" [ref=e934] [cursor=pointer]
+                - button "3" [ref=e935] [cursor=pointer]
+                - button "Next" [ref=e936] [cursor=pointer]
+            - generic [ref=e937]:
+              - heading "Implementation Tips" [level=3] [ref=e938]
+              - generic [ref=e939]:
+                - generic [ref=e940]:
+                  - heading "Getting Started with Implementation" [level=4] [ref=e941]
+                  - list [ref=e942]:
+                    - listitem [ref=e943]: Begin with a thorough assessment of your current security controls
+                    - listitem [ref=e944]: Prioritize implementations based on risk exposure and business impact
+                    - listitem [ref=e945]: Implement controls gradually, starting with foundational elements
+                    - listitem [ref=e946]: Document your implementation process and security configurations
+                    - listitem [ref=e947]: Test and validate controls after implementation
+                - generic [ref=e948]:
+                  - generic [ref=e949]:
+                    - heading "🔒 Confidentiality (Moderate)" [level=4] [ref=e950]:
+                      - generic [ref=e951]: 🔒
+                      - text: Confidentiality (Moderate)
+                    - generic [ref=e952]:
+                      - paragraph [ref=e953]: Encryption and role-based access control
+                      - generic [ref=e954]:
+                        - generic [ref=e955]: "Expertise: Standard"
+                        - generic [ref=e956]: "Effort: Medium"
+                  - generic [ref=e957]:
+                    - heading "✓ Integrity (Moderate)" [level=4] [ref=e958]:
+                      - generic [ref=e959]: ✓
+                      - text: Integrity (Moderate)
+                    - generic [ref=e960]:
+                      - paragraph [ref=e961]: Automated validation with database constraints
+                      - generic [ref=e962]:
+                        - generic [ref=e963]: "Expertise: Standard"
+                        - generic [ref=e964]: "Effort: Medium"
+                  - generic [ref=e965]:
+                    - heading "⏱️ Availability (Moderate)" [level=4] [ref=e966]:
+                      - generic [ref=e967]: ⏱️
+                      - text: Availability (Moderate)
+                    - generic [ref=e968]:
+                      - paragraph [ref=e969]: Standard availability controls with some automation
+                      - generic [ref=e970]:
+                        - generic [ref=e971]: "Expertise: Standard"
+                        - generic [ref=e972]: "Effort: Medium"
+                - generic [ref=e973]:
+                  - heading "⚠️ Common Implementation Challenges" [level=4] [ref=e974]:
+                    - generic [ref=e975]: ⚠️
+                    - text: Common Implementation Challenges
+                  - list [ref=e976]:
+                    - listitem [ref=e977]: Balancing security with usability and performance
+                    - listitem [ref=e978]: Maintaining consistent controls across different environments
+                    - listitem [ref=e979]: Integration with legacy systems and applications
+                    - listitem [ref=e980]: Building security expertise and awareness across teams
+                    - listitem [ref=e981]: Allocating sufficient resources for ongoing maintenance

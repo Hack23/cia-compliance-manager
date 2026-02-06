@@ -30,7 +30,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
 
   return (
     <div
-      className={`bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 mb-4 hover:shadow-lg transition-shadow ${className}`}
+      className={`bg-white dark:bg-gray-800 rounded-lg shadow-md p-md mb-md hover:shadow-lg transition-shadow focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark ${className}`}
       onClick={handleClick}
       role="button"
       tabIndex={0}
@@ -41,11 +41,11 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
       }}
       data-testid={testId || "resource-item"}
     >
-      <div className="flex justify-between items-start mb-2">
+      <div className="flex justify-between items-start mb-sm">
         <h3 className="text-subheading font-semibold text-gray-800 dark:text-gray-100">
           {resource.title}
         </h3>
-        <div className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 px-2 py-1 rounded">
+        <div className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 px-2 py-1.5 rounded">
           {resource.type || "General"}
         </div>
       </div>
@@ -64,11 +64,11 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
         {resource.level && <span>Level: {resource.level}</span>}
       </div>
 
-      <div className="mt-2 flex flex-wrap">
+      <div className="mt-sm flex flex-wrap gap-sm">
         {resource.tags?.map((tag, index) => (
           <span
             key={index}
-            className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1 rounded mr-1 mb-1"
+            className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1 rounded"
           >
             {tag}
           </span>

@@ -55,7 +55,7 @@ function KeyValuePair({
       className={`p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 ${className}`}
       data-testid={testId || COMMON_COMPONENT_TEST_IDS.KEY_VALUE_PAIR}
     >
-      <div className={`text-xs font-medium mb-1 text-gray-600 dark:text-gray-400 ${keyClassName} ${labelClassName}`} data-testid={COMMON_COMPONENT_TEST_IDS.KEY_VALUE_KEY}>
+      <div className={`text-xs font-medium mb-2 text-gray-600 dark:text-gray-400 ${keyClassName} ${labelClassName}`} data-testid={COMMON_COMPONENT_TEST_IDS.KEY_VALUE_KEY}>
         {iconPrefix && <span className="mr-1">{iconPrefix}</span>}
         {label}
       </div>

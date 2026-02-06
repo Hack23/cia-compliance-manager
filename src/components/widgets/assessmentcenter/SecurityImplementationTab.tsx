@@ -84,7 +84,7 @@ export const SecurityImplementationTab: React.FC<
         <div className={WidgetClasses.grid2Cols}>
           {/* Implementation Timeline */}
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-body font-medium mb-xs text-gray-700 dark:text-gray-200">
+            <div className="text-body font-medium mb-sm text-gray-700 dark:text-gray-200">
               Estimated Implementation Time
             </div>
             <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{implementationTime}</div>
@@ -95,7 +95,7 @@ export const SecurityImplementationTab: React.FC<
 
           {/* Required Resources */}
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-body font-medium mb-xs text-gray-700 dark:text-gray-200">Required Resources</div>
+            <div className="text-body font-medium mb-sm text-gray-700 dark:text-gray-200">Required Resources</div>
             <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{requiredResources}</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               Resource allocation recommendation
@@ -166,7 +166,7 @@ export const SecurityImplementationTab: React.FC<
             <h4 className="font-medium text-yellow-700 dark:text-yellow-300">
               Success Factors
             </h4>
-            <ul className="mt-sm space-y-xs list-disc list-inside text-sm">
+            <ul className="mt-sm space-y-sm list-disc list-inside text-sm">
               <li>Executive sponsorship and support</li>
               <li>Clear security requirements definition</li>
               <li>Adequate resource allocation</li>
@@ -179,7 +179,7 @@ export const SecurityImplementationTab: React.FC<
             <h4 className="font-medium text-blue-700 dark:text-blue-300">
               Key Challenges
             </h4>
-            <ul className="mt-sm space-y-xs list-disc list-inside text-sm">
+            <ul className="mt-sm space-y-sm list-disc list-inside text-sm">
               <li>Balancing security with usability</li>
               <li>Integration with existing systems</li>
               <li>Managing scope and expectations</li>

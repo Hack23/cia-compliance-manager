@@ -304,13 +304,13 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
         error={error}
       >
         <div
-          className="p-xs space-y-xs"
+          className="p-sm space-y-sm"
           role="region"
           aria-label={getWidgetAriaDescription(config.defaultTitle, config.ariaDescription)}
         >
           {/* Security level indicator */}
           <section
-            className="mb-xs"
+            className="mb-sm"
             aria-labelledby={`${component}-level-heading`}
           >
             <h3 id={`${component}-level-heading`} className="sr-only">
@@ -328,10 +328,10 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
           {/* Business Impact Analysis */}
           {businessImpact && (
             <section
-              className="mb-xs"
+              className="mb-sm"
               aria-labelledby={`${component}-business-impact-heading`}
             >
-              <h3 id={`${component}-business-impact-heading`} className="text-body-lg font-semibold text-gray-800 dark:text-gray-100 mb-xs">
+              <h3 id={`${component}-business-impact-heading`} className="text-body-lg font-semibold text-gray-800 dark:text-gray-100 mb-sm">
                 Business Impact
               </h3>
               <BusinessImpactSection
@@ -348,12 +348,12 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
               title="SLA Metrics"
               icon="⏱️"
               variant="info"
-              className="mb-xs"
+              className="mb-sm"
               ariaLabelledBy="sla-metrics-heading"
               testId={testIds.widgetIds.section("sla-metrics")}
             >
               <div
-                className="grid grid-cols-1 md:grid-cols-3 gap-xs mb-xs"
+                className="grid grid-cols-1 md:grid-cols-3 gap-sm mb-sm"
                 role="group"
                 aria-label="Service level agreement metrics"
               >
@@ -382,7 +382,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
                   testId={testIds.widgetIds.label("rpo")}
                 />
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-xs">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-sm">
                 <MetricCard
                   label="Service Level Agreement"
                   value={metrics.data.sla}
@@ -400,10 +400,10 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
               title="Data Integrity Metrics"
               icon="📊"
               variant="success"
-              className="mb-xs"
+              className="mb-sm"
               testId={testIds.widgetIds.section("metrics")}
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-xs">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-sm">
                 <MetricCard
                   label="Data Validation Controls"
                   value={metrics.data.validationLevel}
@@ -428,10 +428,10 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
                 title="Data Protection"
                 icon="📊"
                 variant="primary"
-                className="mb-xs"
+                className="mb-sm"
                 testId={testIds.widgetIds.section("data-protection")}
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-xs">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-sm">
                   <MetricCard
                     label="Data Classification"
                     value={metrics.data.dataClassification}
@@ -447,10 +447,10 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
                 title="Privacy Impact"
                 icon="🔒"
                 variant="primary"
-                className="mb-xs"
+                className="mb-sm"
                 testId={testIds.widgetIds.section("privacy-impact")}
               >
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-xs">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-sm">
                   <MetricCard
                     label="Privacy Impact"
                     value={metrics.data.privacyImpact}
@@ -471,7 +471,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
           {showExtendedDetails && component === "integrity" && recommendations.length > 0 && (
             <div className="mt-md">
               <h3 className="text-lg font-medium mb-sm">Recommendations</h3>
-              <ul className="list-disc pl-5 space-y-xs">
+              <ul className="list-disc pl-5 space-y-sm">
                 {recommendations.map((rec, index) => (
                   <li
                     key={index}
