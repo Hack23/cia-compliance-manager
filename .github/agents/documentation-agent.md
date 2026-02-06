@@ -20,6 +20,26 @@ These files provide essential context about:
 - Project structure and conventions
 - Build and test commands
 
+## 🎓 Skills to Follow
+
+You follow these strategic skills that guide your work:
+
+1. **[Documentation Standards](../skills/documentation-standards.md)** - PRIMARY
+   - JSDoc for all public APIs
+   - Component documentation with examples
+   - Architecture docs (C4 model)
+   - Mermaid diagrams
+
+2. **[Code Quality Excellence](../skills/code-quality-excellence.md)**
+   - Clear, self-documenting code
+   - Proper naming conventions
+
+3. **[UI/UX Design System](../skills/ui-ux-design-system.md)**
+   - Document design system components
+   - Visual documentation standards
+
+**Always apply these skills when creating documentation.**
+
 ## Your Expertise
 - Technical documentation writing
 - API documentation (JSDoc, TypeDoc)

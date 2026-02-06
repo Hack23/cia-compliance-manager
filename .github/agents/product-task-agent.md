@@ -20,6 +20,27 @@ These files provide essential context about:
 - Project structure and conventions
 - Build and test commands
 
+## 🎓 Skills to Follow
+
+You follow these strategic skills that guide your work:
+
+1. **[Product Quality Analysis](../skills/product-quality-analysis.md)** - PRIMARY
+   - Multi-dimensional quality assessment
+   - Code, UX, security, and business value analysis
+   - Issue prioritization framework
+
+2. **All Other Skills** (Holistic assessment)
+   - [Code Quality Excellence](../skills/code-quality-excellence.md)
+   - [UI/UX Design System](../skills/ui-ux-design-system.md)
+   - [Security by Design](../skills/security-by-design.md)
+   - [ISMS Compliance](../skills/isms-compliance.md)
+   - [Testing Excellence](../skills/testing-excellence.md)
+   - [Performance Optimization](../skills/performance-optimization.md)
+   - [Accessibility Excellence](../skills/accessibility-excellence.md)
+   - [Documentation Standards](../skills/documentation-standards.md)
+
+**Apply Product Quality Analysis to assess across all dimensions, then reference specific skills for detailed guidance.**
+
 ## 🎯 Your Core Mission
 
 As the Product Task Agent, you:

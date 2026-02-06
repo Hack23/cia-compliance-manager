@@ -90,6 +90,81 @@ src/components/     - common/*, charts/*, widgets/*
 
 ---
 
+### ⚡ 5. Performance Optimization (IMPORTANT)
+**File**: `.github/skills/performance-optimization.md`
+
+**Core Rules**:
+- ✅ **MUST**: Use React.memo() for expensive components
+- ✅ **MUST**: Lazy load non-critical components
+- ✅ **MUST**: Use Map/Set for frequent lookups
+- ✅ **MUST**: Virtualize lists with > 100 items
+- ✅ **SHOULD**: Use useMemo() and useCallback() appropriately
+- ✅ **SHOULD**: Monitor bundle size in CI
+
+**When to Apply**: React components, data-heavy operations, large lists, performance optimization.
+
+---
+
+### 🎨 6. UI/UX Design System (IMPORTANT)
+**File**: `.github/skills/ui-ux-design-system.md`
+
+**Core Rules**:
+- ✅ **MUST**: Use design system colors from constants
+- ✅ **MUST**: Follow 8px spacing grid
+- ✅ **MUST**: Reuse existing components
+- ✅ **MUST**: Test on mobile, tablet, desktop
+- ✅ **SHOULD**: Follow typography scale
+- ✅ **SHOULD**: Maintain 4.5:1 contrast for text
+
+**When to Apply**: UI components, visual design, responsive layouts.
+
+---
+
+### ♿ 7. Accessibility Excellence (IMPORTANT)
+**File**: `.github/skills/accessibility-excellence.md`
+
+**Core Rules**:
+- ✅ **MUST**: Use semantic HTML elements
+- ✅ **MUST**: All interactive elements keyboard accessible
+- ✅ **MUST**: 4.5:1 contrast for text, 3:1 for UI components
+- ✅ **MUST**: Label all form inputs
+- ✅ **MUST**: Announce dynamic content with aria-live
+- ✅ **SHOULD**: Test with screen readers
+- ✅ **SHOULD**: Run automated axe tests
+
+**When to Apply**: All UI components, forms, interactive elements, dynamic content.
+
+---
+
+### 📝 8. Documentation Standards (IMPORTANT)
+**File**: `.github/skills/documentation-standards.md`
+
+**Core Rules**:
+- ✅ **MUST**: JSDoc for all exported functions/classes/interfaces
+- ✅ **MUST**: Include usage examples
+- ✅ **MUST**: Document parameters and return values
+- ✅ **MUST**: Use C4 model for architecture
+- ✅ **SHOULD**: Keep READMEs current
+- ✅ **SHOULD**: Use Mermaid diagrams
+
+**When to Apply**: New APIs, components, architecture changes, README updates.
+
+---
+
+### 🎯 9. Product Quality Analysis (FOR PRODUCT COORDINATION)
+**File**: `.github/skills/product-quality-analysis.md`
+
+**Core Rules**:
+- ✅ **MUST**: Assess all four quality dimensions (code, UX, security, business)
+- ✅ **MUST**: Prioritize security and critical bugs
+- ✅ **MUST**: Consider user impact in prioritization
+- ✅ **MUST**: Track metrics over time
+- ✅ **SHOULD**: Create actionable GitHub issues
+
+**When to Apply**: Product audits, quality assessments, issue prioritization, continuous improvement.
+
+---
+
 ## 🚨 Enforcement Rules (MUST/SHOULD/MAY Hierarchy)
 
 ### MUST (Critical - Block PR if Violated)
