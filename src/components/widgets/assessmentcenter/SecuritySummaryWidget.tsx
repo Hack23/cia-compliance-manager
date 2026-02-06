@@ -207,13 +207,13 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                 </p>
               </div>
               <div className="text-right flex-shrink-0" role="group" aria-label="Security metrics">
-                <div 
-                  className="text-xs font-medium text-gray-500 dark:text-gray-500 uppercase tracking-wide mb-xs"
+                <div
+                  className="text-xs font-medium text-gray-500 dark:text-gray-500 uppercase tracking-wide mb-sm"
                   id="security-score-label"
                 >
                   Score
                 </div>
-                <div 
+                <div
                   className="font-bold text-heading text-info dark:text-info-light leading-none"
                   aria-labelledby="security-score-label"
                   aria-live="polite"
@@ -222,7 +222,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                 </div>
                 <div
                   className={cn(
-                    "text-caption font-medium mt-xs",
+                    "text-caption font-medium mt-sm",
                     getRiskColorClass(riskLevel)
                   )}
                   data-testid={SECURITY_SUMMARY_WIDGET_IDS.label('risk-level')}
