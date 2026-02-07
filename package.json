@@ -92,7 +92,7 @@
     "eslint-plugin-react-hooks": "7.0.1",
     "globals": "17.3.0",
     "jsdom": "28.0.0",
-    "knip": "5.83.0",
+    "knip": "5.83.1",
     "license-compliance": "3.0.1",
     "madge": "^8.0.0",
     "mocha-junit-reporter": "2.2.1",
