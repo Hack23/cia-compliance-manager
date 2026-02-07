@@ -1,0 +1,242 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+permissions: write-all
+
+env:
+  AWS_REGION : "us-east-1"
+  AWS_REGION_ZONE : "us-east-1"
+  S3_BUCKET_NAME: "ciacompliancemanager-frontend-us-east-1-172017021075"
+  CLOUDFRONT_STACK_NAME: "ciacompliancemanager-frontend"
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@5ef0c079ce82195b2a36a210272d6b661572d83e # v2.14.2
+        with:
+          egress-policy: block
+          allowed-endpoints: >
+            accounts.google.com:443
+            amazon-cloudfront-secure-static-site-s3bucketroot-14oliw5cmta06.s3.us-east-1.amazonaws.com:443
+            api.github.com:443
+            api.securityscorecards.dev:443
+            app.fossa.io:443
+            auth.docker.io:443
+            bestpractices.coreinfrastructure.org:443
+            cfu.zaproxy.org:443
+            cla-assistant.io:443
+            cla-assistant.io:80
+            clients2.google.com:80
+            cloudformation.us-east-1.amazonaws.com:443
+            cloudfront.amazonaws.com:443
+            content-signature-2.cdn.mozilla.net:443
+            deb.debian.org:80
+            firefox-settings-attachments.cdn.mozilla.net:443
+            firefox.settings.services.mozilla.com:443
+            fonts.googleapis.com:443
+            fonts.gstatic.com:443
+            ghcr.io:443
+            github.com:443
+            hack23.com:443
+            hack23.com:80
+            hack23.comnull:443
+            img.shields.io:443
+            isitmaintained.com:443
+            isitmaintained.com:80
+            location.services.mozilla.com:443
+            news.zaproxy.org:443
+            objects.githubusercontent.com:443
+            pkg-containers.githubusercontent.com:443
+            production.cloudflare.docker.com:443
+            r10.o.lencr.org:443
+            r11.o.lencr.org:80
+            raw.githubusercontent.com:443
+            registry-1.docker.io:443
+            registry.npmjs.org:443
+            safebrowsingohttpgateway.googleapis.com:443
+            shavar.services.mozilla.com:443
+            slsa.dev:443
+            sonarcloud.io:443
+            storage.googleapis.com:443
+            sts.us-east-1.amazonaws.com:443
+            tel.zaproxy.org:443
+            tracking-protection.cdn.mozilla.net:443
+            us-central1-lighthouse-infrastructure.cloudfunctions.net:443
+            www.google.com:443
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Cache apt packages
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        with:
+          path: /var/cache/apt/archives
+          key: ${{ runner.os }}-apt-${{ hashFiles('**/.github/workflows/main.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-apt-
+
+      - name: Cache npm dependencies
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-minify-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-minify-
+            ${{ runner.os }}-npm-
+
+      - name: Cache Docker layers
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-docker-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-docker-
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@8df5847569e6427dd6c4fb1cf565c83acfa8afa7 # v6.0.0
+        with:
+          role-to-assume: arn:aws:iam::172017021075:role/GithubWorkFlowRole
+          role-session-name: githubworkflowrolesessiont2
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Deploy to S3
+        run: |
+          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ --exclude ".git/*"
+      - name: Set cache headers S3
+        run: |
+          # Set cache headers for CSS files (1 year cache for versioned assets)
+          echo "🎨 Setting cache headers for CSS files..."
+          for css_file in $(aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/ --recursive | grep "\.css" | awk '{print $4}' | grep -v "^screenshots/"); do
+            if [ -n "$css_file" ]; then
+              aws s3 cp s3://${{ env.S3_BUCKET_NAME }}/$css_file s3://${{ env.S3_BUCKET_NAME }}/$css_file \
+                --metadata-directive REPLACE \
+                --cache-control "public, max-age=31536000, immutable" \
+                --content-type "text/css"
+              echo "✅ Updated cache headers for $css_file"
+            fi
+          done
+
+          # Set cache headers for JavaScript files (1 year cache for versioned assets)
+          echo "⚡ Setting cache headers for JavaScript files..."
+          for js_file in $(aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/ --recursive | grep "\.js" | awk '{print $4}' | grep -v "^screenshots/"); do
+            if [ -n "$js_file" ]; then
+              aws s3 cp s3://${{ env.S3_BUCKET_NAME }}/$js_file s3://${{ env.S3_BUCKET_NAME }}/$js_file \
+                --metadata-directive REPLACE \
+                --cache-control "public, max-age=31536000, immutable" \
+                --content-type "application/javascript"
+              echo "✅ Updated cache headers for $js_file"
+            fi
+          done
+
+          # Set cache headers for image files (1 year cache for static images)
+          # Note: Excluding screenshots/ directory for performance (large number of files, CloudFront handles caching)
+          echo "🖼️  Setting cache headers for image files (excluding screenshots)..."
+          for img_file in $(aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/ --recursive | grep -E "\.(webp|png|jpg|jpeg|gif|svg|ico)" | awk '{print $4}' | grep -v "^screenshots/"); do
+            if [ -n "$img_file" ]; then
+              # Determine content type based on file extension
+              case "$img_file" in
+                *.webp) content_type="image/webp" ;;
+                *.png) content_type="image/png" ;;
+                *.jpg|*.jpeg) content_type="image/jpeg" ;;
+                *.gif) content_type="image/gif" ;;
+                *.svg) content_type="image/svg+xml" ;;
+                *.ico) content_type="image/x-icon" ;;
+                *) content_type="application/octet-stream" ;;
+              esac
+              aws s3 cp s3://${{ env.S3_BUCKET_NAME }}/$img_file s3://${{ env.S3_BUCKET_NAME }}/$img_file \
+                --metadata-directive REPLACE \
+                --cache-control "public, max-age=31536000, immutable" \
+                --content-type "$content_type"
+              echo "✅ Updated cache headers for $img_file"
+            fi
+          done
+
+          # Set cache headers for HTML files (short cache - 1 hour for dynamic content)
+          echo "📄 Setting cache headers for HTML files..."
+          for html_file in $(aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/ --recursive | grep "\.html" | awk '{print $4}' | grep -v "^screenshots/"); do
+            if [ -n "$html_file" ]; then
+              aws s3 cp s3://${{ env.S3_BUCKET_NAME }}/$html_file s3://${{ env.S3_BUCKET_NAME }}/$html_file \
+                --metadata-directive REPLACE \
+                --cache-control "public, max-age=3600, must-revalidate" \
+                --content-type "text/html; charset=utf-8"
+              echo "✅ Updated cache headers for $html_file"
+            fi
+          done
+
+          # Set cache headers for metadata files (medium cache - 1 day)
+          echo "📋 Setting cache headers for metadata files..."
+          for meta_file in $(aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/ --recursive | grep -E "\.(xml|json|txt)" | awk '{print $4}' | grep -v "^screenshots/"); do
+            if [ -n "$meta_file" ]; then
+              # Determine content type based on file extension
+              case "$meta_file" in
+                *.xml) content_type="application/xml" ;;
+                *.json) content_type="application/json" ;;
+                *.txt) content_type="text/plain" ;;
+                *) content_type="text/plain" ;;
+              esac
+              aws s3 cp s3://${{ env.S3_BUCKET_NAME }}/$meta_file s3://${{ env.S3_BUCKET_NAME }}/$meta_file \
+                --metadata-directive REPLACE \
+                --cache-control "public, max-age=86400" \
+                --content-type "$content_type"
+              echo "✅ Updated cache headers for $meta_file"
+            fi
+          done
+
+          # Set cache headers for font files (1 year cache)
+          echo "🔤 Setting cache headers for font files..."
+          for font_file in $(aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/ --recursive | grep -E "\.(woff|woff2|ttf|eot|otf)" | awk '{print $4}' | grep -v "^screenshots/"); do
+            if [ -n "$font_file" ]; then
+              # Determine content type based on file extension
+              case "$font_file" in
+                *.woff) content_type="font/woff" ;;
+                *.woff2) content_type="font/woff2" ;;
+                *.ttf) content_type="font/ttf" ;;
+                *.eot) content_type="application/vnd.ms-fontobject" ;;
+                *.otf) content_type="font/otf" ;;
+                *) content_type="application/octet-stream" ;;
+              esac
+              aws s3 cp s3://${{ env.S3_BUCKET_NAME }}/$font_file s3://${{ env.S3_BUCKET_NAME }}/$font_file \
+                --metadata-directive REPLACE \
+                --cache-control "public, max-age=31536000, immutable" \
+                --content-type "$content_type"
+              echo "✅ Updated cache headers for $font_file"
+            fi
+          done
+
+          echo "✅ Cache headers configuration completed for all asset types"
+          echo "ℹ️  Screenshots directory excluded for performance (CloudFront uses S3 default headers)"
+
+      # Invalidate CloudFront cache to ensure latest content is served
+      - name: Invalidate CloudFront
+        run: |
+          echo "🔍 Discovering CloudFront distribution ID from stack: ${{ env.CLOUDFRONT_STACK_NAME }}"
+          CloudFrontDistId=$(aws cloudformation describe-stacks \
+            --stack-name ${{ env.CLOUDFRONT_STACK_NAME }} \
+            --query "Stacks[0].Outputs[?OutputKey=='CloudFrontDistributionId'].OutputValue" \
+            --output text 2>/dev/null || echo "")
+          
+          if [ -z "$CloudFrontDistId" ]; then
+            echo "⚠️  Warning: CloudFront distribution ID not found in stack outputs"
+            echo "Attempting to find distribution by S3 origin domain..."
+            # List all distributions and filter by S3 bucket origin
+            CloudFrontDistId=$(aws cloudfront list-distributions \
+              --output json 2>/dev/null | \
+              jq -r ".DistributionList.Items[] | select(.Origins.Items[].DomainName | contains(\"${{ env.S3_BUCKET_NAME }}\")) | .Id" | \
+              head -n 1 || echo "")
+          fi
+          
+          if [ -z "$CloudFrontDistId" ] || [ "$CloudFrontDistId" = "None" ]; then
+            echo "❌ Error: Could not discover CloudFront distribution ID"
+            exit 1
+          fi
+          
+          echo "✅ Found CloudFront distribution: $CloudFrontDistId"
+          echo "🔄 Creating cache invalidation for all paths..."
+          
+          aws cloudfront create-invalidation \
+            --distribution-id $CloudFrontDistId \
+            --paths "/*"
+          
+          echo "✅ CloudFront cache invalidation completed"
+
