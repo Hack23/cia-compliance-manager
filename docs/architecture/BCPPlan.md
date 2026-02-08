@@ -1,8 +1,35 @@
-# 🔄 Business Continuity Planning for CIA Compliance Manager
+<p align="center">
+  <img src="https://hack23.com/icon-192.png" alt="Hack23 Logo" width="192" height="192">
+</p>
 
-## 📋 Executive Summary
+<h1 align="center">🔄 CIA Compliance Manager — Business Continuity Plan</h1>
 
-This Business Continuity Plan (BCP) outlines strategies to ensure the CIA Compliance Manager application and its data remain available during disruptions while maintaining the confidentiality and integrity of security assessments. The plan is tailored specifically for our GitHub-based infrastructure and provides comprehensive analysis of business impacts, recovery objectives, and resilience strategies.
+<p align="center">
+  <strong>🛡️ Classification-Driven Business Resilience Framework</strong><br>
+  <em>🎯 Systematic Recovery Planning Through Enterprise-Grade Business Continuity</em>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Owner-CEO-0A66C2?style=for-the-badge" alt="Owner"/>
+  <img src="https://img.shields.io/badge/Version-1.0-555?style=for-the-badge" alt="Version"/>
+  <img src="https://img.shields.io/badge/Effective-2025--01--11-success?style=for-the-badge" alt="Effective Date"/>
+  <img src="https://img.shields.io/badge/Review-Semi_Annual-orange?style=for-the-badge" alt="Review Cycle"/>
+</p>
+
+**📋 Document Owner:** CEO | **📄 Version:** 1.0 | **📅 Last Updated:** 2026-02-08 (UTC)  
+**🔄 Review Cycle:** Semi-Annual | **⏰ Next Review:** 2026-08-08 | **✅ Status:** Production Ready
+
+---
+
+## 🎯 **Purpose Statement**
+
+**🏢 CIA Compliance Manager's** business continuity framework demonstrates how **🔧 systematic recovery planning directly enables both operational resilience and competitive advantage.** Our 📊 classification-driven continuity approach serves as both operational necessity and 👥 client demonstration of our cybersecurity compliance methodologies.
+
+This plan ensures 🏢 platform operations can continue during and after disruptive events, based on our [🏷️ Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) impact analysis and recovery requirements. Our 🌟 transparent continuity planning showcases how methodical preparation creates business value through 📉 reduced downtime and 📈 enhanced service reliability. The plan leverages an AWS-first architecture (Amazon CloudFront with Amazon S3 as the primary hosting platform) with GitHub Pages as a documented disaster recovery fallback to provide comprehensive analysis of business impacts, recovery objectives, and resilience strategies aligned with our classification-driven security posture.
+
+*— 👨‍💼 James Pether Sörling, CEO/Founder*
+
+---
 
 ```mermaid
 mindmap
@@ -25,32 +52,53 @@ mindmap
         🔍 Audit Failures
         ⚠️ Legal Consequences
     🎯 Recovery Objectives
-      ⏱️ RTO - Recovery Time
-        🚨 Critical Services
-        🔔 Important Services
-        📊 Standard Services
-      📊 RPO - Recovery Point
-        💾 User Data
-        ⚙️ Configuration
-        🗄️ Historical Records
-      🔄 MTTR - Mean Time To Recover
+      ⏱️ RTO - Recovery Time (Objectives)
+        🚨 Critical Services: Target ~5 min (CloudFront origin failover + health checks + routing propagation)
+        🔔 Important Services: Target ~15 min (GitHub Pages DR via DNS switch + TTL propagation)
+        📊 Standard Services: Target < 1 hour
+      📊 RPO - Recovery Point (Objectives)
+        💾 User Data: 0 (browser-based/local storage, no backend persistence)
+        ⚙️ Configuration: Last successful CI/CD deployment
+        🗄️ Historical Records: Asynchronous S3 CRR (monitor replication status)
+      🔄 MTTR - Mean Time To Recover (Objectives)
+        ☁️ CloudFront: Target ~5 min (dependent on health check detection + routing)
+        📄 GitHub Pages DR: Target ~15 min (DNS switch + TTL/resolver propagation)
       ⬆️ Uptime Requirements
-    🛡️ GitHub Infrastructure
-      📂 GitHub Pages Hosting
-        🌐 Primary Deployment
-        🔄 Backup Deployment
-      🗄️ GitHub Repository Storage
-        🔐 Main Repository
-        📚 Repository Mirrors
-      🔄 GitHub Actions Workflows
-        ⚙️ CI/CD Pipelines
-        🧪 Automated Testing
-        🔍 Security Scanning
+        ☁️ CloudFront: 99.9% (SLA)
+        💾 S3 Multi-Region: 99.99% (SLA)
+    🛡️ AWS Infrastructure (Primary)
+      ☁️ CloudFront Distribution
+        🌐 Global Edge Locations
+        🔄 Automatic Failover
+        🛡️ DDoS Protection
+      🗄️ S3 Storage
+        💾 Multi-Region Replication
+        🔐 Encryption at Rest
+        📦 Versioning
+      🌐 Route53 DNS
+        📍 Primary: CloudFront
+        🔄 DR: GitHub Pages
+      🔑 IAM OIDC
+        ⚙️ Temporary Credentials
+        🔒 Least Privilege
+    🔄 Disaster Recovery
+      📄 GitHub Pages Fallback
+        🔄 Release-based Deployment (via .github/workflows/release.yml)
+        📊 Target ~15 min RTO (DNS switch + propagation)
+        🌐 Alternative CDN
     🚀 Recovery Strategies
       💾 Data Backup & Recovery
+        S3 Versioning
+        Cross-Region Replication
       📱 Application Recovery
+        CloudFront Failover
+        GitHub Pages DR
       🧩 Component Restoration
+        Automated Deployment
+        Infrastructure as Code
       🔄 Service Continuity
+        Multi-Region Architecture
+        DNS Failover
 ```
 
 ## 🏢 Related Architecture Documentation
@@ -64,15 +112,30 @@ mindmap
 
 ## 🔍 Business Impact Analysis (BIA)
 
+### 🏷️ Classification-Driven Impact Assessment
+
+This Business Impact Analysis follows our [🏷️ Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) to systematically determine recovery requirements based on data classification levels and business impact thresholds. Our classification-driven approach ensures that recovery objectives align with the confidentiality, integrity, and availability requirements of each system component and data type.
+
+**Business Impact Thresholds:**
+
+| Impact Level | RTO Target | RPO Target | Data Classification | Business Impact |
+|--------------|------------|------------|---------------------|-----------------|
+| **Critical** | < 5 minutes | < 15 minutes | Confidential/High Integrity | Severe operational disruption, significant financial/reputational impact |
+| **High** | < 15 minutes | < 30 minutes | Internal/Moderate Integrity | Major operational disruption, notable business impact |
+| **Medium** | < 1 hour | < 2 hours | Internal/Standard Integrity | Moderate operational disruption, measurable business impact |
+| **Standard** | < 4 hours | < 8 hours | Public/Standard Integrity | Minor operational disruption, limited business impact |
+
+These thresholds are derived from our Classification Framework's availability requirements and inform all recovery planning decisions throughout this document.
+
 ### 📊 Critical Function Identification
 
-Our GitHub-based infrastructure supports several critical functions that require comprehensive business continuity planning.
+The application supports several critical functions delivered via AWS CloudFront + S3 infrastructure that require comprehensive business continuity planning based on classification-driven impact assessment.
 
 ```mermaid
 graph TB
     subgraph "Business Process Dependencies"
         A[CIA Compliance Manager System] --> B[Security Assessment Engine]
-        A --> C[User Authentication]
+        A --> C[Static Content Delivery]
         A --> D[Security Dashboard]
         A --> E[Compliance Mapping]
         A --> F[Reporting & Export]
@@ -343,87 +406,91 @@ graph TB
 
 ```mermaid
 timeline
-    title Recovery Objectives Timeline
-    section RTO (Recovery Time Objective)
-        Authentication System : < 2 hours
-        Core Assessment Engine : < 4 hours
-        Dashboard & Analytics : < 8 hours
-        Reporting Functions : < 12 hours
-        Compliance Mapping : < 24 hours
-    section RPO (Recovery Point Objective)
-        User Assessment Data : < 15 minutes
-        User Settings : < 30 minutes
-        Compliance Data : < 2 hours
-        Historical Reports : < 4 hours
+    title Recovery Objectives Timeline - AWS Multi-Region Architecture
+    section RTO (Recovery Time Objective - Targets)
+        CloudFront Edge Failover : Target < 5 min (health checks + routing propagation)
+        S3 Multi-Region Replication : Async CRR (monitor replication status)
+        GitHub Pages DR Failover : Target < 15 min (DNS switch + TTL propagation)
+        Core Assessment Engine : Target < 5 min (CloudFront delivery)
+        Dashboard & Analytics : Target < 5 min (CloudFront delivery)
+    section RPO (Recovery Point Objective - Targets)
+        User Assessment Data : 0 (no backend persistence)
+        Static Content : Last successful deployment (CI/CD workflow)
+        S3 Replicated Data : Async CRR (monitor replication lag)
+        CloudFront Cache : Depends on invalidation propagation (typically minutes)
 ```
 
 ```mermaid
 mindmap
   root((Recovery<br>Objectives))
-    ⏱️ RTO Targets
-      User Authentication
-        🚨 Critical: < 2 hours
-        🔔 Enhanced: < 1 hour
-        ✨ Gold Standard: < 30 minutes
+    ⏱️ RTO Targets (Objectives)
+      CloudFront Distribution
+        🚨 Target: ~5 min (health checks + routing propagation)
+        🔔 Manual Intervention: ~15 min (investigation + action)
+        ✨ DNS Failover to GitHub Pages: ~15 min (DNS switch + TTL propagation)
+      S3 Multi-Region
+        🚨 Async CRR: Monitor replication lag (aspirational < 5 min with RTC)
+        🔔 Manual Failover: ~5 min (Route53 DNS adjustment)
+        ✨ GitHub Pages DR: ~15 min (DNS propagation)
       Security Assessment Engine
-        🚨 Critical: < 4 hours
-        🔔 Enhanced: < 2 hours
-        ✨ Gold Standard: < 1 hour
+        🚨 Critical: ~5 min (CloudFront delivery objective)
+        🔔 Enhanced: ~15 min (GitHub Pages DR objective)
+        ✨ Gold Standard: ~5 min (multi-edge with monitoring)
       Dashboard & Visualizations
-        🚨 Critical: < 8 hours
-        🔔 Enhanced: < 4 hours
-        ✨ Gold Standard: < 2 hours
-      User Data Access
-        🚨 Critical: < 4 hours
-        🔔 Enhanced: < 2 hours
-        ✨ Gold Standard: < 1 hour
-    📊 RPO Targets
-      User Assessments
-        🚨 Critical: < 4 hours
-        🔔 Enhanced: < 1 hour
-        ✨ Gold Standard: < 15 minutes
-      User Settings
-        🚨 Critical: < 8 hours
-        🔔 Enhanced: < 2 hours
-        ✨ Gold Standard: < 30 minutes
-      Compliance Data
-        🚨 Critical: < 24 hours
-        🔔 Enhanced: < 8 hours
-        ✨ Gold Standard: < 2 hours
+        🚨 Critical: ~5 min (CloudFront delivery objective)
+        🔔 Enhanced: ~15 min (GitHub Pages DR objective)
+        ✨ Gold Standard: ~5 min (cached with monitoring)
+    📊 RPO Targets (Objectives)
+      Static Content (HTML/CSS/JS)
+        🚨 Critical: Last successful deployment (CI/CD workflow)
+        🔔 Enhanced: Last successful deployment to both platforms
+        ✨ Gold Standard: Last successful deployment + monitoring
+      S3 Replicated Content
+        🚨 Critical: Async CRR (aspirational < 5 min with RTC + alerts)
+        🔔 Enhanced: Monitor replication lag (investigate if > 5 min)
+        ✨ Gold Standard: Observed low latency (RTC + monitoring in place)
+      CloudFront Cache
+        🚨 Critical: ≤ 15 min (invalidation + TTL propagation window)
+        🔔 Enhanced: ≤ 5 min typical (monitored invalidation completion)
+        ✨ Gold Standard: Within propagation window (typically minutes) with automated monitoring
     🔄 MTTR Targets
-      GitHub Pages
-        🎯 Current: 1.5 hours
-        🎯 Target: < 1 hour
-      GitHub Repository
-        🎯 Current: 1 hour
-        🎯 Target: < 30 minutes
-      Local Storage
-        🎯 Current: 2 hours
-        🎯 Target: < 1 hour
+      CloudFront Edge
+        🎯 Current: < 5 minutes
+        🎯 Target: < 5 minutes (automatic)
+      S3 Primary
+        🎯 Current: < 5 minutes
+        🎯 Target: < 5 minutes (automatic)
+      GitHub Pages DR
+        🎯 Current: < 15 minutes (DNS switch)
+        🎯 Target: < 10 minutes (automated DNS)
     ⬆️ Uptime Requirements
-      GitHub Pages Frontend
+      CloudFront Distribution
+        🎯 Minimum: 99.9% (AWS SLA)
+        🎯 Target: 99.99% (multi-region)
+      S3 Multi-Region
+        🎯 Minimum: 99.99% (AWS SLA)
+        🎯 Target: 99.999% (cross-region)
+      GitHub Pages DR
         🎯 Minimum: 99.5%
         🎯 Target: 99.9%
-      GitHub OAuth Auth
-        🎯 Minimum: 99.9%
-        🎯 Target: 99.95%
-      Application Core
-        🎯 Minimum: 99%
-        🎯 Target: 99.5%
 ```
 
 #### Recovery Time Objectives (RTO)
 
-| Component                  | Basic Target | Enhanced Target | Critical Target | GitHub Infrastructure Component      |
-| -------------------------- | ------------ | --------------- | --------------- | ------------------------------------ |
-| User Authentication        | < 4 hours    | < 2 hours       | < 30 minutes    | GitHub OAuth, GitHub Pages           |
-| Security Assessment Engine | < 8 hours    | < 4 hours       | < 1 hour        | GitHub Pages, JavaScript Application |
-| Dashboard & Visualizations | < 12 hours   | < 6 hours       | < 2 hours       | GitHub Pages, Chart.js Integration   |
-| User Data Access           | < 8 hours    | < 4 hours       | < 1 hour        | Browser Local Storage, GitHub Pages  |
-| Reporting Functions        | < 24 hours   | < 12 hours      | < 4 hours       | Browser Processing, GitHub Pages     |
-| Compliance Mapping         | < 48 hours   | < 24 hours      | < 8 hours       | GitHub Repository, JSON Data         |
+**Classification Framework Alignment:** These RTO targets are derived from our [🏷️ Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) availability requirements. Components classified as Critical (< 5 min downtime tolerance) receive automated failover, while High availability components (< 15 min) utilize DNS-based disaster recovery.
+
+| Component                  | CloudFront (Primary) | GitHub Pages (DR) | Critical Target | Infrastructure Component      |
+| -------------------------- | -------------------- | ----------------- | --------------- | ----------------------------- |
+| Content Delivery           | < 5 minutes          | < 15 minutes      | < 5 minutes     | CloudFront → S3 Multi-Region  |
+| Security Assessment Engine | < 5 minutes          | < 15 minutes      | < 5 minutes     | CloudFront Edge Cache         |
+| Dashboard & Visualizations | < 5 minutes          | < 15 minutes      | < 5 minutes     | CloudFront Global Delivery    |
+| Static Assets (CSS/JS)     | < 5 minutes          | < 15 minutes      | < 5 minutes     | CloudFront + S3 Versioning    |
+| DNS Resolution             | < 1 minute           | < 15 minutes      | < 1 minute      | Route53 Health Checks         |
+| Full Site Availability     | < 5 minutes          | < 15 minutes      | < 5 minutes     | AWS Multi-Region + GitHub DR  |
 
 #### Recovery Point Objectives (RPO)
+
+**Classification Framework Alignment:** RPO targets are determined by data classification levels per our [🏷️ Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md). Confidential data (User Assessments) requires < 15 min RPO, Internal data (User Settings) < 30 min RPO, and Public data (Compliance Data) can tolerate longer recovery windows.
 
 ```mermaid
 graph LR
@@ -459,55 +526,57 @@ graph LR
 
 ```mermaid
 gantt
-    title MTTR Targets by Component
+    title MTTR Targets by Component - AWS Multi-Region Architecture
     dateFormat HH:mm
     axisFormat %H:%M
 
-    section GitHub Infrastructure
-    GitHub Pages       :done, 00:00, 01:30
-    GitHub Repository  :done, 00:00, 01:00
-    GitHub Actions     :done, 00:00, 02:00
-    GitHub OAuth       :done, 00:00, 01:15
+    section AWS Infrastructure (Primary)
+    CloudFront Edge     :done, 00:00, 00:05
+    S3 Multi-Region     :done, 00:00, 00:05
+    Route53 DNS         :done, 00:00, 00:01
+    IAM OIDC            :done, 00:00, 00:02
+
+    section Disaster Recovery
+    GitHub Pages DR     :done, 00:00, 00:15
+    DNS Failover        :done, 00:00, 00:15
 
     section Application Components
-    Authentication     :done, 00:00, 01:45
-    Assessment Engine  :done, 00:00, 03:30
-    Dashboard          :done, 00:00, 05:15
-    Reporting          :done, 00:00, 06:00
-
-    section Data Components
-    User Assessments   :done, 00:00, 02:00
-    User Settings      :done, 00:00, 01:30
-    Compliance Data    :done, 00:00, 03:00
+    Content Delivery    :done, 00:00, 00:05
+    Assessment Engine   :done, 00:00, 00:05
+    Dashboard           :done, 00:00, 00:05
+    Reporting           :done, 00:00, 00:05
 ```
 
 | Component               | Current MTTR | Target MTTR  | Improvement Strategy                            |
 | ----------------------- | ------------ | ------------ | ----------------------------------------------- |
-| GitHub Pages Deployment | 1.5 hours    | < 1 hour     | Automated rollback via GitHub Actions           |
-| GitHub Repository       | 1 hour       | < 30 minutes | Redundant mirrors and automated synchronization |
-| Local Storage Data      | 2 hours      | < 1 hour     | Enhanced backup/export notifications and guides |
-| Application Code        | 2 hours      | < 1 hour     | Automated canary deployment and monitoring      |
+| CloudFront Distribution | < 5 minutes  | < 5 minutes  | CloudFront origin failover; Route53 DNS failover to GitHub Pages DR |
+| S3 Primary Bucket       | < 5 minutes  | < 5 minutes  | Multi-region replication, versioning            |
+| GitHub Pages DR         | < 15 minutes | < 10 minutes | Automated DNS failover scripting                |
+| Application Deployment  | < 10 minutes | < 5 minutes  | Automated canary deployment and health checks   |
+| CloudFront Cache        | < 5 minutes  | < 3 minutes  | Optimized invalidation patterns                 |
 
 #### ⬆️ Uptime Requirements
 
 ```mermaid
-pie title Uptime Requirements by Component
-    "User Authentication (99.9%)" : 999
-    "Security Assessment (99.5%)" : 995
-    "Dashboard (99%)" : 990
-    "Reporting (98%)" : 980
-    "Compliance Mapping (97%)" : 970
+pie title Uptime Requirements by Component - AWS Architecture
+    "CloudFront CDN (99.9%)" : 999
+    "S3 Multi-Region (99.99%)" : 9999
+    "Route53 DNS (100% SLA – service credits)" : 10000
+    "GitHub Pages DR (99.5%)" : 995
+    "Overall Platform (99.9%)" : 999
 ```
 
-| Component             | Minimum Uptime | Target Uptime | Maximum Downtime (Annual) | Measurement Method                |
-| --------------------- | -------------- | ------------- | ------------------------- | --------------------------------- |
-| GitHub Pages Frontend | 99.5%          | 99.9%         | 8.77 hours                | GitHub Status & Custom Monitoring |
-| GitHub OAuth Auth     | 99.9%          | 99.95%        | 4.38 hours                | GitHub Status & Auth Success Rate |
-| Application Core      | 99%            | 99.5%         | 43.83 hours               | Health Check Endpoint             |
-| User Data Access      | 99.5%          | 99.9%         | 8.77 hours                | Data Access Success Rate          |
-| Export Functions      | 98%            | 99%           | 87.66 hours               | Function Availability Tests       |
+| Component             | Minimum Uptime | Target Uptime | Maximum Downtime (Annual) | AWS SLA / Measurement Method                |
+| --------------------- | -------------- | ------------- | ------------------------- | ------------------------------------------- |
+| CloudFront Distribution | 99.9%        | 99.99%        | 8.77 hours                | AWS CloudFront SLA + Custom Monitoring      |
+| S3 Multi-Region       | 99.99%         | 99.999%       | 52.6 minutes              | AWS S3 SLA + Replication Health             |
+| Route53 DNS           | 100%           | 100%          | N/A (SLA-based, not guaranteed zero downtime) | AWS Route53 100% SLA (financially-backed, service credits) |
+| GitHub Pages DR       | 99.5%          | 99.9%         | 8.77 hours                | GitHub Status + Custom Health Checks        |
+| Application Core      | 99.9%          | 99.99%        | 8.77 hours                | Synthetic Monitoring + Health Endpoints     |
+| User Data Access      | 99.9%          | 99.99%        | 8.77 hours                | Local storage (no backend dependency)       |
+| Export Functions      | 99%            | 99.5%         | 43.83 hours               | Client-side processing (browser-based)      |
 
-## 🛡️ GitHub-Specific Resilience Strategy
+## 🛡️ AWS + GitHub Pages DR Resilience Strategy
 
 ```mermaid
 flowchart TB
@@ -1348,5 +1417,37 @@ sequenceDiagram
 ```
 
 #### 📝 Critical Incident Template
-````
-<copilot-edited-file>````
+
+```
+SUBJECT: [CRITICAL] CIA Compliance Manager Service Disruption
+
+SEVERITY: Critical
+IMPACT: [Description of user impact]
+ESTIMATED RESOLUTION: [Time estimate]
+
+CURRENT STATUS:
+- Detection Time: [Timestamp]
+- Initial Assessment: [Brief description]
+- Response Team: Activated
+- Current Actions: [What's being done]
+
+AFFECTED SERVICES:
+- [List of affected components]
+
+WORKAROUNDS:
+- [Any available workarounds]
+
+NEXT UPDATE: [Time of next communication]
+
+For real-time updates: [Link to status page]
+```
+
+---
+
+**📋 Document Control:**  
+**✅ Approved by:** James Pether Sörling, CEO  
+**📤 Distribution:** Public  
+**🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-lightgrey?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#confidentiality-levels)  
+**📅 Effective Date:** 2025-01-11  
+**⏰ Next Review:** 2026-08-08  
+**🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)

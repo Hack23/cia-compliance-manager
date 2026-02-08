@@ -86,7 +86,13 @@ The project uses GitHub Actions for automation with the following workflows:
    - **Purpose:** Builds, attests, and releases new versions with comprehensive security scanning
    - **Key Features:** SLSA Level 3 attestation, SBOM generation, automated documentation deployment
 
-2. **🧪 Test and Report** (`.github/workflows/test-and-report.yml`)
+2. **☁️ AWS S3 Deployment** (`.github/workflows/deploy-s3.yml`)
+   - **Triggers:** Push to main branch
+   - **Jobs:** 1 job - deploy to AWS CloudFront + S3
+   - **Purpose:** Primary production deployment to AWS infrastructure with global CDN
+   - **Key Features:** IAM OIDC authentication, S3 multi-region, CloudFront cache invalidation, optimized cache headers, harden-runner egress control
+
+3. **🧪 Test and Report** (`.github/workflows/test-and-report.yml`)
    - **Triggers:** Push to main, pull requests to main
    - **Jobs:** 5 jobs - prepare, build-validation, unit-tests, e2e-tests, report
    - **Purpose:** Comprehensive testing suite with coverage reporting
@@ -94,41 +100,41 @@ The project uses GitHub Actions for automation with the following workflows:
 
 ### Security Scanning Workflows
 
-3. **🔍 CodeQL Analysis** (`.github/workflows/codeql.yml`)
+4. **🔍 CodeQL Analysis** (`.github/workflows/codeql.yml`)
    - **Triggers:** Push to main, pull requests to main, weekly schedule (Mondays)
    - **Purpose:** Static Application Security Testing (SAST) for code vulnerabilities
    - **Key Features:** JavaScript/TypeScript analysis, security vulnerability detection
 
-4. **📦 Dependency Review** (`.github/workflows/dependency-review.yml`)
+5. **📦 Dependency Review** (`.github/workflows/dependency-review.yml`)
    - **Triggers:** Pull requests
    - **Purpose:** Software Composition Analysis (SCA) for dependency vulnerabilities
    - **Key Features:** PR comments with vulnerability details, blocks vulnerable dependencies
 
-5. **⭐ Scorecard Analysis** (`.github/workflows/scorecards.yml`)
+6. **⭐ Scorecard Analysis** (`.github/workflows/scorecards.yml`)
    - **Triggers:** Branch protection rule changes, weekly schedule (Tuesdays), push to main
    - **Purpose:** OSSF security scorecard for supply chain security assessment
    - **Key Features:** Branch protection checks, security best practices evaluation
 
 ### Quality & Performance Workflows
 
-6. **🔆 Lighthouse Performance** (`.github/workflows/lighthouse-performance.yml`)
+7. **🔆 Lighthouse Performance** (`.github/workflows/lighthouse-performance.yml`)
    - **Triggers:** Manual workflow dispatch
    - **Purpose:** Performance, accessibility, SEO, and best practices auditing
    - **Key Features:** Performance budgets, artifacts upload, temporary public reports
 
-7. **🔒 ZAP Scan** (`.github/workflows/zap-scan.yml`)
+8. **🔒 ZAP Scan** (`.github/workflows/zap-scan.yml`)
    - **Triggers:** Manual workflow dispatch
    - **Purpose:** Dynamic Application Security Testing (DAST) for deployed application
    - **Key Features:** OWASP ZAP full scan, runtime vulnerability detection
 
 ### Automation Workflows
 
-8. **🏷️ PR Labeler** (`.github/workflows/labeler.yml`)
+9. **🏷️ PR Labeler** (`.github/workflows/labeler.yml`)
    - **Triggers:** Pull request events (opened, synchronize, reopened, edited)
    - **Purpose:** Automated labeling of pull requests based on file changes
    - **Key Features:** Consistent PR categorization, improved workflow organization
 
-9. **🤖 Copilot Setup Steps** (`.github/workflows/copilot-setup-steps.yml`)
+10. **🤖 Copilot Setup Steps** (`.github/workflows/copilot-setup-steps.yml`)
    - **Triggers:** Manual dispatch, workflow file changes, pull requests affecting workflow
    - **Purpose:** GitHub Copilot workspace environment setup and validation
    - **Key Features:** Node.js 24 setup, dependency caching, environment validation
@@ -708,6 +714,354 @@ All jobs implement StepSecurity Harden Runner with:
 - Minimal permission grants per job
 - Comprehensive artifact validation
 
+## ☁️ AWS S3 Deployment Workflow
+
+The AWS S3 deployment workflow (`.github/workflows/deploy-s3.yml`) handles the primary production deployment to AWS infrastructure with CloudFront CDN, providing global content delivery with multi-region resilience.
+
+### Workflow Overview
+
+**Triggers:**
+- Push to `main` branch (automatic deployment)
+- Permissions: `write-all` (required for AWS operations and GitHub Pages fallback)
+
+**Environment (refer to `.github/workflows/deploy-s3.yml` for current values):**
+```yaml
+# Example values – see .github/workflows/deploy-s3.yml for authoritative configuration
+AWS_REGION: us-east-1
+S3_BUCKET_NAME: ciacompliancemanager-frontend-us-east-1-172017021075
+CLOUDFRONT_STACK_NAME: ciacompliancemanager-frontend
+```
+
+### AWS Deployment Architecture
+
+```mermaid
+sequenceDiagram
+    participant GHA as GitHub Actions
+    participant HR as Harden-Runner
+    participant OIDC as AWS STS (OIDC)
+    participant S3 as S3 us-east-1
+    participant CF as CloudFront
+    participant CFN as CloudFormation
+    
+    Note over GHA,CF: AWS CloudFront + S3 Deployment Flow
+    
+    GHA->>HR: Start deploy-s3.yml workflow
+    HR->>HR: Apply egress block policy
+    HR->>HR: Verify allowed endpoints
+    
+    GHA->>OIDC: Request temporary AWS credentials
+    Note over GHA,OIDC: OIDC token exchange (no long-lived keys)
+    OIDC->>GHA: Return temporary credentials (< 1hr TTL)
+    
+    GHA->>S3: Sync docs/ directory to S3
+    Note over GHA,S3: Upload: HTML, CSS, JS, images, fonts, metadata
+    S3-->>GHA: Sync complete
+    
+    GHA->>S3: Set cache headers (CSS files: 1 year)
+    GHA->>S3: Set cache headers (JS files: 1 year)
+    GHA->>S3: Set cache headers (HTML files: 1 hour)
+    GHA->>S3: Set cache headers (Images: 1 year)
+    GHA->>S3: Set cache headers (Fonts: 1 year)
+    GHA->>S3: Set cache headers (Metadata: 1 day)
+    Note over S3: Screenshots excluded for performance
+    
+    GHA->>CFN: Query stack for CloudFront distribution ID
+    CFN-->>GHA: Return distribution ID
+    
+    GHA->>CF: Create cache invalidation (/* paths)
+    CF-->>GHA: Invalidation ID returned
+    Note over CF: CloudFront invalidates all edge caches
+    
+    CF->>S3: Fetch fresh content from origin
+    S3-->>CF: Return updated assets with cache headers
+    
+    Note over CF,S3: Content now available globally<br/>with optimized caching
+```
+
+### Deployment Steps
+
+#### **Step 1: Security Hardening**
+
+Uses **Harden-Runner v2.14.2** with strict egress policy:
+
+```yaml
+egress-policy: block  # Default deny all outbound traffic
+allowed-endpoints: >  # Explicit allowlist, newline-separated
+  sts.us-east-1.amazonaws.com:443
+  amazon-cloudfront-secure-static-site-s3bucketroot-14oliw5cmta06.s3.us-east-1.amazonaws.com:443
+  cloudfront.amazonaws.com:443
+  cloudformation.us-east-1.amazonaws.com:443
+  github.com:443
+  api.github.com:443
+  objects.githubusercontent.com:443
+  registry.npmjs.org:443
+  fonts.googleapis.com:443
+  fonts.gstatic.com:443
+  sonarcloud.io:443
+  api.securityscorecards.dev:443
+  app.fossa.io:443
+  # ... additional endpoints for ZAP, Docker, Mozilla services, etc.
+  # See .github/workflows/deploy-s3.yml for complete list (50+ endpoints)
+```
+
+**Note:** This snippet is a schematic representation for documentation purposes and does not reflect the exact production configuration. The authoritative egress allowlist in `.github/workflows/deploy-s3.yml` includes 50+ specific endpoints for build tools, security scanners, and infrastructure services. Always refer to the actual workflow file for production deployment configuration.
+
+**Security Benefits:**
+- ✅ Prevents data exfiltration from compromised dependencies
+- ✅ Limits supply chain attack surface
+- ✅ Provides network activity audit trail
+- ✅ Enforces least privilege for network access
+
+#### **Step 2: AWS Authentication (OIDC)**
+
+**Configuration:**
+```yaml
+Role ARN: arn:aws:iam::172017021075:role/GithubWorkFlowRole
+Session Name: githubworkflowrolesessiont2  # Production configuration
+Region: us-east-1
+```
+
+> **Note:** Documents current production workflow configuration (`.github/workflows/deploy-s3.yml` line 101) used for CloudTrail audit logging.
+
+**Authentication Flow:**
+1. GitHub Actions requests OIDC token from GitHub's token service
+2. Token contains workflow identity (repository, workflow, branch)
+3. Token exchanged with AWS STS for temporary credentials
+4. Credentials valid for < 1 hour (automatic expiration)
+5. No long-lived AWS access keys required
+
+**IAM Role Permissions:**
+- `s3:PutObject`, `s3:GetObject`, `s3:ListBucket` (specific bucket only)
+- `cloudfront:CreateInvalidation`, `cloudfront:GetDistribution`
+- `cloudformation:DescribeStacks` (read-only for distribution ID)
+
+**Compliance Mapping:**
+- **ISO 27001 A.9.2**: User access management (role-based)
+- **NIST CSF PR.AC-4**: Access control (least privilege)
+- **CIS Control 5**: Account management (temporary credentials)
+
+#### **Step 3: S3 Synchronization**
+
+Syncs entire `docs/` directory to S3 bucket:
+
+```bash
+aws s3 sync docs/. s3://$S3_BUCKET_NAME/ --exclude ".git/*"
+```
+
+**Uploaded Content:**
+- HTML files (index.html, documentation pages)
+- CSS stylesheets (versioned for long-term caching)
+- JavaScript bundles (versioned, code-split)
+- Images (WebP, PNG, SVG, favicons)
+- Fonts (WOFF, WOFF2)
+- Metadata files (sitemap.xml, robots.txt, manifest.json)
+
+**Exclusions (Sync Step):**
+- `.git/` directory (version control metadata)
+
+> **Note:** The `screenshots/` directory is **synced to S3 like other assets**, but is **excluded from cache-header rewrite loops** for performance. Large, mostly-static screenshot assets keep their default S3/object headers instead of being iterated over during cache-optimization steps.
+
+#### **Step 4: Cache Header Optimization**
+
+Applies optimized cache headers for each asset type:
+
+**Static Assets (Long-Term Caching):**
+```bash
+# CSS Files
+Cache-Control: public, max-age=31536000, immutable
+Content-Type: text/css
+
+# JavaScript Files
+Cache-Control: public, max-age=31536000, immutable
+Content-Type: application/javascript
+
+# Images (WebP, PNG, JPG, SVG, ICO)
+Cache-Control: public, max-age=31536000, immutable
+Content-Type: image/webp | image/png | image/jpeg | image/svg+xml
+
+# Fonts (WOFF, WOFF2, TTF)
+Cache-Control: public, max-age=31536000, immutable
+Content-Type: font/woff2 | font/woff | font/ttf
+```
+
+**Dynamic Content (Short-Term Caching):**
+```bash
+# HTML Files
+Cache-Control: public, max-age=3600, must-revalidate
+Content-Type: text/html; charset=utf-8
+
+# Metadata Files (XML, JSON, TXT)
+Cache-Control: public, max-age=86400
+Content-Type: application/xml | application/json | text/plain
+```
+
+**Caching Strategy Rationale:**
+- **1-Year Cache (CSS/JS/Images/Fonts)**: Versioned assets never change; maximize CDN cache hit rate
+- **1-Hour Cache (HTML)**: Balance freshness with performance; content updates visible within 1 hour
+- **1-Day Cache (Metadata)**: Sitemaps and robots.txt update infrequently
+- **Screenshots Excluded**: Large directory (performance); CloudFront uses S3 defaults
+
+**Performance Benefits:**
+- Global edge caching significantly reduces origin requests and improves cache hit ratio
+- Faster page load times (assets served from the nearest CloudFront edge location)
+- Lower S3 data transfer costs (traffic served from CloudFront cache instead of S3 origin)
+- Improved user experience through low-latency asset delivery
+- Actual cache hit ratio, latency, and origin request metrics can be monitored via CloudFront analytics and logs
+
+#### **Step 5: CloudFront Cache Invalidation**
+
+**Distribution Discovery:**
+```bash
+# Query CloudFormation stack for distribution ID
+CloudFrontDistId=$(aws cloudformation describe-stacks \
+  --stack-name ciacompliancemanager-frontend \
+  --query "Stacks[0].Outputs[?OutputKey=='CloudFrontDistributionId'].OutputValue" \
+  --output text 2>/dev/null || echo "")
+
+# Fallback: Search distributions by S3 origin (with validation)
+if [ -z "$CloudFrontDistId" ]; then
+  CloudFrontDistId=$(aws cloudfront list-distributions \
+    --output json 2>/dev/null | \
+    jq -r ".DistributionList.Items[] | select(.Origins.Items[].DomainName | contains(\"$S3_BUCKET_NAME\")) | .Id" | \
+    head -n 1 || echo "")
+fi
+
+# Validate result
+if [ -z "$CloudFrontDistId" ] || [ "$CloudFrontDistId" = "None" ]; then
+  echo "❌ Error: Could not discover CloudFront distribution ID"
+  exit 1
+fi
+```
+
+> **Note:** This snippet is schematic – always refer to `.github/workflows/deploy-s3.yml` for the authoritative implementation.
+
+**Cache Invalidation:**
+```bash
+aws cloudfront create-invalidation \
+  --distribution-id $CloudFrontDistId \
+  --paths "/*"
+```
+
+**Invalidation Process:**
+1. Invalidation request sent to CloudFront API
+2. CloudFront marks all edge cache entries as stale
+3. Next request to each edge location fetches fresh content from S3
+4. New content propagates globally, typically within a few minutes (~5 minutes in most cases)
+5. Users see updated content once the invalidation has propagated to their edge location, usually within minutes (significantly reduced cache staleness)
+
+**Why Invalidation is Necessary:**
+- Edge caches may have old content (from previous deployment)
+- Invalidation accelerates content updates globally, reducing cache staleness from potentially long TTLs to a short propagation window (typically minutes)
+- Alternative: Wait for cache expiration (up to 1 year for static assets)
+- Cost: First 1,000 invalidations/month free (typically single invalidation per deploy)
+
+### Workflow Execution Flow
+
+```mermaid
+flowchart TD
+    Start[Push to main branch] --> CheckoutCode[Checkout Repository]
+    CheckoutCode --> CacheApt[Cache APT Packages]
+    CacheApt --> CacheNpm[Cache npm Dependencies]
+    CacheNpm --> CacheDocker[Cache Docker Layers]
+    
+    CacheDocker --> HardenRunner[Harden-Runner: Apply Egress Policy]
+    HardenRunner --> AWSAuth[AWS OIDC Authentication]
+    
+    AWSAuth --> S3Sync[S3 Sync: Upload docs/ directory]
+    S3Sync --> SetCacheCSS[Set Cache Headers: CSS 1yr]
+    SetCacheCSS --> SetCacheJS[Set Cache Headers: JS 1yr]
+    SetCacheJS --> SetCacheHTML[Set Cache Headers: HTML 1hr]
+    SetCacheHTML --> SetCacheImages[Set Cache Headers: Images 1yr]
+    SetCacheImages --> SetCacheFonts[Set Cache Headers: Fonts 1yr]
+    SetCacheFonts --> SetCacheMeta[Set Cache Headers: Metadata 1day]
+    
+    SetCacheMeta --> DiscoverDistribution[Discover CloudFront Distribution ID]
+    DiscoverDistribution --> CreateInvalidation[Create CloudFront Invalidation /*]
+    CreateInvalidation --> Complete[✅ Deployment Complete]
+    
+    style Start fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:white,font-weight:bold
+    style HardenRunner fill:#F44336,stroke:#C62828,stroke-width:2px,color:white,font-weight:bold
+    style AWSAuth fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
+    style S3Sync fill:#2979FF,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
+    style CreateInvalidation fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:white,font-weight:bold
+    style Complete fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:white,font-weight:bold
+```
+
+### Security Controls in Deployment
+
+| Control | Implementation | Benefit | Compliance |
+|---------|---------------|---------|------------|
+| **No Long-Lived Credentials** | IAM OIDC authentication | Zero credential leakage risk | ISO 27001 A.9.2 |
+| **Temporary Tokens** | STS tokens (< 1hr TTL) | Automatic expiration | NIST PR.AC-4 |
+| **Least Privilege** | IAM role with minimal permissions | Limits blast radius | CIS Control 5 |
+| **Egress Blocking** | Harden-runner policy | Prevents data exfiltration | NIST PR.DS-5 |
+| **Network Allowlist** | Explicit endpoint list | Limits supply chain attacks | CIS Control 13 |
+| **Audit Logging** | CloudTrail + GitHub logs | Full traceability | ISO 27001 A.12.4 |
+| **TLS Encryption** | TLS 1.3 for all transfers | Data in transit protection | NIST PR.DS-2 |
+| **CloudFront Security** | HTTPS, security headers | Content delivery protection | OWASP ASVS |
+| **Multi-Region** | S3 cross-region replication | Resilience and DR | NIST PR.IP-9 |
+
+### Disaster Recovery Integration
+
+**Primary Deployment:** AWS CloudFront + S3 (this workflow)
+**Disaster Recovery:** GitHub Pages (separate workflow, parallel deployment)
+
+**Failover Strategy (Objectives, Not Guarantees):**
+1. **Automatic CloudFront Origin Failover**: Target < 5 minutes from incident detection via health checks (origin groups), with user-visible recovery dependent on CloudFront routing propagation
+2. **Manual DNS Failover**: Target < 15 minutes for Route53 DNS switch to GitHub Pages, with end-user cutover timing further constrained by DNS TTLs and resolver caching
+
+**RPO/RTO Objectives (Non-Binding Targets):**
+- **RPO Objective**: Effectively zero content loss for static artifacts by deploying the same build artifact to AWS and GitHub Pages; actual RPO bounded by time since last successful CI/CD deployment
+- **RTO Objective (CloudFront)**: Target service restoration within ~5–10 minutes from incident detection (time to trigger failover + CloudFront routing propagation), measured via AWS monitoring and CloudFront metrics
+- **RTO Objective (GitHub Pages DR)**: Target DNS failover completion within ~15 minutes from manual initiation (time to update Route53 + DNS TTL and global resolver propagation)
+
+### Performance Metrics
+
+**Deployment Performance Targets:**
+
+| Metric | Objective (non-binding target) | Measurement Source |
+|--------|--------------------------------|--------------------|
+| **S3 Sync Time** | Maintain fast deployments for typical content sizes | GitHub Actions workflow duration statistics |
+| **Cache Header Application** | Ensure cache headers applied promptly after updates | GitHub Actions logs and S3 object metadata |
+| **CloudFront Invalidation** | Aim for global propagation in operationally acceptable timeframe | AWS CloudFront invalidation and performance reports |
+| **Total Deployment Time** | Support frequent, incremental changes with fast end-to-end deployment | GitHub Actions workflow run statistics |
+| **Cache Hit Rate** | Maintain high cache hit rate appropriate for current content mix | AWS CloudFront cache analytics (AWS Console) |
+| **Global Latency (P50)** | Optimize for low median latency for key assets from edge locations | AWS CloudFront performance reports |
+| **Global Latency (P99)** | Keep tail latency acceptable for remote regions given current routing | AWS CloudFront performance reports |
+
+**Note:** The values above are illustrative, non-binding objectives. For authoritative metrics, consult GitHub Actions workflow run statistics and AWS CloudFront analytics dashboard.
+
+### Future Enhancements
+
+**Planned Improvements:**
+1. **AWS WAF Integration**: Web Application Firewall for threat protection
+2. **CloudFront Functions**: Edge compute for dynamic content
+3. **Lambda@Edge**: Advanced request/response manipulation
+4. **S3 Access Logging**: Detailed access logs for forensics
+5. **CloudWatch Alarms**: Real-time alerting for deployment issues
+6. **Automated Rollback**: Auto-rollback on health check failure
+7. **Blue-Green Deployment**: Zero-downtime deployments with instant rollback
+8. **AWS Backup**: Automated backup schedules with retention policies
+
+### Compliance Summary
+
+**ISO 27001:**
+- A.12.1 (Operational Procedures): Documented deployment workflow
+- A.12.4 (Logging and Monitoring): CloudTrail audit trail
+- A.13.1 (Network Security): Harden-runner egress control
+
+**NIST Cybersecurity Framework:**
+- PR.AC-4 (Access Control): IAM OIDC least privilege
+- PR.DS-2 (Data in Transit): TLS 1.3 encryption
+- PR.DS-5 (Data Leak Protection): Egress blocking
+- PR.IP-9 (Response and Recovery): Multi-region resilience
+
+**CIS Controls:**
+- CIS 5 (Account Management): Temporary credentials
+- CIS 8 (Audit Logging): Comprehensive logging
+- CIS 13 (Network Monitoring): Harden-runner telemetry
+- CIS 17 (Security Awareness): Documented processes
+
 ## 🔍 Security and Quality Scanning Workflows
 
 Multiple security and quality scanning workflows validate different aspects of the codebase and deployed application.
@@ -1030,33 +1384,29 @@ flowchart LR
 - **Monitoring First**: Implement monitoring before deploying new features
 - **Error Boundaries**: React 19.x error boundaries prevent cascade failures in production
 
-### Performance Trends
+### Performance Metrics
 
-**Build Time Evolution:**
-- **Q1 2024**: 15.2 minutes average
-- **Q2 2024**: 12.1 minutes (-20% through caching)
-- **Q3 2024**: 10.3 minutes (-15% through parallelization)
-- **Q4 2024**: 8.2 minutes (-20% through optimization)
-- **v1.0 (Nov 2025)**: 7.8 minutes (-5% through React 19.x and bundle optimization)
+**Build & Test Objectives:**
+- **Fast Feedback**: CI pipelines are optimized to provide rapid feedback on code changes
+- **Parallelization**: Build, test, and security steps run in parallel where possible to reduce total duration
+- **Live Timings**: For up-to-date pipeline durations, refer to GitHub Actions workflow run statistics in the repository
 
-**Test Coverage Evolution:**
-- **Q1 2024**: 65% line coverage
-- **Q2 2024**: 70% line coverage (+5% through new tests)
-- **Q3 2024**: 75% line coverage (+5% through widget tests)
-- **Q4 2024**: 80% line coverage (+5% through E2E tests)
-- **v1.0 (Nov 2025)**: 83.26% line coverage (+3.26% exceeding target)
+**Quality & Coverage Objectives:**
+- **Line Coverage Target**: Minimum 80% line coverage across services and components
+- **Branch & E2E Coverage**: Tests focus on critical user and security flows, including regression-prone areas
+- **Coverage Reports**: Detailed coverage metrics are published as part of CI artifacts and reports; consult those for current values
+- **Component Tests**: Widget-level tests validate core UI behavior and integration
 
-**Security Posture Evolution:**
-- **Initial State**: Manual security reviews only
-- **Phase 1**: Added CodeQL SAST scanning
-- **Phase 2**: Integrated Dependabot and dependency review
-- **Phase 3**: Added OSSF Scorecard and supply chain security
-- **Phase 4**: Implemented ZAP DAST and SLSA attestations
-- **Current**: Comprehensive automated security pipeline with 100% gate coverage
+**Security Posture:**
+- **Build Integrity**: CI enforces SLSA-aligned build provenance and attestation
+- **Security Scanning**: Includes CodeQL analysis, dependency vulnerability scanning (e.g., Dependabot), and supply-chain checks (e.g., OSSF Scorecard)
+- **DAST Testing**: OWASP ZAP is used for dynamic application security testing in scheduled and pre-release workflows
+- **Supply Chain Monitoring**: Dependency and supply-chain risks are monitored continuously via CI security tooling
+- **Gate Coverage**: All pull requests must pass configured security and quality gates; see branch protection and CI checks for the authoritative list
 
 ## Future CI/CD Improvements
 
-While focusing on stabilizing the current workflows for the v1.0 release, the following enhancements are planned for future pipeline improvements:
+While focusing on stabilizing the current workflows, the following enhancements are planned for future pipeline improvements:
 
 1. **Automated Versioning**: Semantic versioning based on commit messages
 2. **Performance Testing**: Expanding performance benchmarks with more metrics
