@@ -14,17 +14,21 @@ This document outlines the comprehensive architectural evolution roadmap for the
 - ✅ **SLSA Level 3**: Build provenance and supply chain integrity
 - ✅ **CSP Security Headers**: Production-ready Content Security Policy
 - ✅ **Cypress 15.7.0**: Advanced E2E and component testing
-- ✅ **Frontend-Only**: Client-side assessment with no backend dependencies
+- ✅ **AWS CloudFront + S3**: Multi-region deployment with global CDN
+- ✅ **IAM OIDC Authentication**: Secure, temporary credential-based deployments
+- ✅ **Multi-Region Resilience**: S3 cross-region replication, CloudFront global edge
+- ✅ **GitHub Pages DR**: Disaster recovery fallback with < 15 min RTO
+- ✅ **Harden-Runner Security**: Egress policy control in CI/CD
 
 ### **v2.0 AWS Serverless Vision (Future State)**
-- 🚀 **AWS Lambda Functions**: Serverless compute for backend logic and API processing
-- 🚀 **API Gateway**: RESTful and GraphQL APIs with authentication and rate limiting
-- 🚀 **Multi-Region DynamoDB**: Global data persistence with automatic replication
-- 🚀 **CloudFront + WAF**: Global CDN with advanced security protection
-- 🚀 **AWS Resilience Hub**: Operational readiness and disaster recovery automation
-- 🚀 **Cognito Authentication**: Enterprise-grade user authentication with MFA
+- 🚀 **AWS Lambda Functions**: Serverless compute for backend logic and API processing (build on existing CloudFront)
+- 🚀 **API Gateway**: RESTful and GraphQL APIs with authentication and rate limiting (integrate with CloudFront)
+- 🚀 **Multi-Region DynamoDB**: Global data persistence with automatic replication (complement S3 static assets)
+- 🚀 **CloudFront + WAF**: Enhance existing CloudFront with Web Application Firewall for advanced protection
+- 🚀 **AWS Resilience Hub**: Operational readiness and disaster recovery automation (extend multi-region strategy)
+- 🚀 **Cognito Authentication**: Enterprise-grade user authentication with MFA (add to current architecture)
 - 🚀 **EventBridge Integration**: Event-driven architecture for real-time updates
-- 🚀 **Well-Architected Framework**: Full alignment with AWS best practices
+- 🚀 **Well-Architected Framework**: Full alignment with AWS best practices (build on current foundation)
 
 ## 📚 Related Architecture Documentation
 

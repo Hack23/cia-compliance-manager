@@ -32,8 +32,8 @@ The future enhancements build upon the robust v1.1 workflow foundation:
 ### Current Architecture (v1.0 Baseline)
 | Document                                            | Focus           | Description                               |
 | --------------------------------------------------- | --------------- | ----------------------------------------- |
-| **[Current Architecture](ARCHITECTURE.md)**         | 🏛️ Architecture | C4 model showing v1.0 system structure    |
-| **[Current Workflows](WORKFLOWS.md)**               | 🔧 DevOps       | v1.0 CI/CD automation processes           |
+| **[Current Architecture](ARCHITECTURE.md)**         | 🏛️ Architecture | C4 model showing v1.0 AWS multi-region structure |
+| **[Current Workflows](WORKFLOWS.md)**               | 🔧 DevOps       | v1.0 AWS deployment with OIDC and CloudFront |
 | **[Current State Diagrams](STATEDIAGRAM.md)**       | 🔄 Behavior     | v1.0 state transitions                    |
 | **[Current Flowcharts](FLOWCHART.md)**              | 🔄 Process      | v1.0 security workflows                   |
 

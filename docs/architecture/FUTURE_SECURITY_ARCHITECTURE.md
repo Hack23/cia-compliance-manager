@@ -38,10 +38,10 @@ This document outlines the comprehensive future security architecture for the CI
 ### Current Architecture (v1.0 Baseline)
 | Document                                                        | Focus          | Description                                         |
 | --------------------------------------------------------------- | -------------- | --------------------------------------------------- |
-| [Current Security Architecture](SECURITY_ARCHITECTURE.md)       | 🛡️ Security    | v1.0 frontend-only security implementation          |
-| [Current Architecture](ARCHITECTURE.md)                         | 🏛️ Architecture | C4 model showing v1.0 system structure              |
+| [Current Security Architecture](SECURITY_ARCHITECTURE.md)       | 🛡️ Security    | v1.0 AWS CloudFront + S3 security implementation    |
+| [Current Architecture](ARCHITECTURE.md)                         | 🏛️ Architecture | C4 model showing v1.0 AWS multi-region structure    |
 | [Current State Diagrams](STATEDIAGRAM.md)                       | 🔄 Behavior    | v1.0 state transitions and error handling           |
-| [Current Workflows](WORKFLOWS.md)                               | 🔧 CI/CD       | v1.0 security-hardened CI/CD workflows              |
+| [Current Workflows](WORKFLOWS.md)                               | 🔧 CI/CD       | v1.0 AWS deployment workflows with OIDC             |
 
 ### Future Architecture Evolution (v2.0+)
 | Document                                                        | Focus          | Description                                         |

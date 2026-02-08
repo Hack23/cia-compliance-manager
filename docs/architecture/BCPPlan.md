@@ -26,31 +26,52 @@ mindmap
         ⚠️ Legal Consequences
     🎯 Recovery Objectives
       ⏱️ RTO - Recovery Time
-        🚨 Critical Services
-        🔔 Important Services
-        📊 Standard Services
+        🚨 Critical Services: < 5 min (CloudFront)
+        🔔 Important Services: < 15 min (GitHub Pages DR)
+        📊 Standard Services: < 1 hour
       📊 RPO - Recovery Point
-        💾 User Data
-        ⚙️ Configuration
-        🗄️ Historical Records
+        💾 User Data: 0 (real-time)
+        ⚙️ Configuration: 0 (simultaneous deployment)
+        🗄️ Historical Records: < 1 min (S3 replication)
       🔄 MTTR - Mean Time To Recover
+        ☁️ CloudFront: < 5 min (automatic)
+        📄 GitHub Pages DR: < 15 min (DNS switch)
       ⬆️ Uptime Requirements
-    🛡️ GitHub Infrastructure
-      📂 GitHub Pages Hosting
-        🌐 Primary Deployment
-        🔄 Backup Deployment
-      🗄️ GitHub Repository Storage
-        🔐 Main Repository
-        📚 Repository Mirrors
-      🔄 GitHub Actions Workflows
-        ⚙️ CI/CD Pipelines
-        🧪 Automated Testing
-        🔍 Security Scanning
+        ☁️ CloudFront: 99.9% (SLA)
+        💾 S3 Multi-Region: 99.99% (SLA)
+    🛡️ AWS Infrastructure (Primary)
+      ☁️ CloudFront Distribution
+        🌐 Global Edge Locations
+        🔄 Automatic Failover
+        🛡️ DDoS Protection
+      🗄️ S3 Storage
+        💾 Multi-Region Replication
+        🔐 Encryption at Rest
+        📦 Versioning
+      🌐 Route53 DNS
+        📍 Primary: CloudFront
+        🔄 DR: GitHub Pages
+      🔑 IAM OIDC
+        ⚙️ Temporary Credentials
+        🔒 Least Privilege
+    🔄 Disaster Recovery
+      📄 GitHub Pages Fallback
+        🔄 Parallel Deployment
+        📊 < 15 min RTO (DNS)
+        🌐 Alternative CDN
     🚀 Recovery Strategies
       💾 Data Backup & Recovery
+        S3 Versioning
+        Cross-Region Replication
       📱 Application Recovery
+        CloudFront Failover
+        GitHub Pages DR
       🧩 Component Restoration
+        Automated Deployment
+        Infrastructure as Code
       🔄 Service Continuity
+        Multi-Region Architecture
+        DNS Failover
 ```
 
 ## 🏢 Related Architecture Documentation
@@ -343,85 +364,85 @@ graph TB
 
 ```mermaid
 timeline
-    title Recovery Objectives Timeline
+    title Recovery Objectives Timeline - AWS Multi-Region Architecture
     section RTO (Recovery Time Objective)
-        Authentication System : < 2 hours
-        Core Assessment Engine : < 4 hours
-        Dashboard & Analytics : < 8 hours
-        Reporting Functions : < 12 hours
-        Compliance Mapping : < 24 hours
+        CloudFront Edge Failover : < 5 minutes (automatic)
+        S3 Multi-Region Replication : < 1 minute (continuous)
+        GitHub Pages DR Failover : < 15 minutes (DNS switch)
+        Core Assessment Engine : < 5 minutes (cached at edge)
+        Dashboard & Analytics : < 5 minutes (CloudFront delivery)
     section RPO (Recovery Point Objective)
-        User Assessment Data : < 15 minutes
-        User Settings : < 30 minutes
-        Compliance Data : < 2 hours
-        Historical Reports : < 4 hours
+        User Assessment Data : 0 (no backend persistence)
+        Static Content : 0 (simultaneous AWS + GitHub deployment)
+        S3 Replicated Data : < 1 minute (cross-region)
+        CloudFront Cache : 0 (invalidation on deploy)
 ```
 
 ```mermaid
 mindmap
   root((Recovery<br>Objectives))
     ⏱️ RTO Targets
-      User Authentication
-        🚨 Critical: < 2 hours
-        🔔 Enhanced: < 1 hour
-        ✨ Gold Standard: < 30 minutes
+      CloudFront Distribution
+        🚨 Automatic: < 5 minutes
+        🔔 Manual Intervention: < 15 minutes
+        ✨ DNS Failover to GitHub Pages: < 15 minutes
+      S3 Multi-Region
+        🚨 Automatic Replication: < 1 minute
+        🔔 Manual Failover: < 5 minutes
+        ✨ GitHub Pages DR: < 15 minutes
       Security Assessment Engine
-        🚨 Critical: < 4 hours
-        🔔 Enhanced: < 2 hours
-        ✨ Gold Standard: < 1 hour
+        🚨 Critical: < 5 minutes (CloudFront)
+        🔔 Enhanced: < 15 minutes (GitHub Pages DR)
+        ✨ Gold Standard: < 5 minutes (multi-edge)
       Dashboard & Visualizations
-        🚨 Critical: < 8 hours
-        🔔 Enhanced: < 4 hours
-        ✨ Gold Standard: < 2 hours
-      User Data Access
-        🚨 Critical: < 4 hours
-        🔔 Enhanced: < 2 hours
-        ✨ Gold Standard: < 1 hour
+        🚨 Critical: < 5 minutes (CloudFront)
+        🔔 Enhanced: < 15 minutes (GitHub Pages DR)
+        ✨ Gold Standard: < 5 minutes (cached)
     📊 RPO Targets
-      User Assessments
-        🚨 Critical: < 4 hours
-        🔔 Enhanced: < 1 hour
-        ✨ Gold Standard: < 15 minutes
-      User Settings
-        🚨 Critical: < 8 hours
-        🔔 Enhanced: < 2 hours
-        ✨ Gold Standard: < 30 minutes
-      Compliance Data
-        🚨 Critical: < 24 hours
-        🔔 Enhanced: < 8 hours
-        ✨ Gold Standard: < 2 hours
+      Static Content (HTML/CSS/JS)
+        🚨 Critical: 0 (simultaneous deployment)
+        🔔 Enhanced: 0 (AWS + GitHub parallel)
+        ✨ Gold Standard: 0 (instant sync)
+      S3 Replicated Content
+        🚨 Critical: < 1 minute (CRR)
+        🔔 Enhanced: < 30 seconds
+        ✨ Gold Standard: Near real-time
+      CloudFront Cache
+        🚨 Critical: 0 (invalidation on deploy)
+        🔔 Enhanced: 0 (instant invalidation)
+        ✨ Gold Standard: 0 (synchronized)
     🔄 MTTR Targets
-      GitHub Pages
-        🎯 Current: 1.5 hours
-        🎯 Target: < 1 hour
-      GitHub Repository
-        🎯 Current: 1 hour
-        🎯 Target: < 30 minutes
-      Local Storage
-        🎯 Current: 2 hours
-        🎯 Target: < 1 hour
+      CloudFront Edge
+        🎯 Current: < 5 minutes
+        🎯 Target: < 5 minutes (automatic)
+      S3 Primary
+        🎯 Current: < 5 minutes
+        🎯 Target: < 5 minutes (automatic)
+      GitHub Pages DR
+        🎯 Current: < 15 minutes (DNS switch)
+        🎯 Target: < 10 minutes (automated DNS)
     ⬆️ Uptime Requirements
-      GitHub Pages Frontend
+      CloudFront Distribution
+        🎯 Minimum: 99.9% (AWS SLA)
+        🎯 Target: 99.99% (multi-region)
+      S3 Multi-Region
+        🎯 Minimum: 99.99% (AWS SLA)
+        🎯 Target: 99.999% (cross-region)
+      GitHub Pages DR
         🎯 Minimum: 99.5%
         🎯 Target: 99.9%
-      GitHub OAuth Auth
-        🎯 Minimum: 99.9%
-        🎯 Target: 99.95%
-      Application Core
-        🎯 Minimum: 99%
-        🎯 Target: 99.5%
 ```
 
 #### Recovery Time Objectives (RTO)
 
-| Component                  | Basic Target | Enhanced Target | Critical Target | GitHub Infrastructure Component      |
-| -------------------------- | ------------ | --------------- | --------------- | ------------------------------------ |
-| User Authentication        | < 4 hours    | < 2 hours       | < 30 minutes    | GitHub OAuth, GitHub Pages           |
-| Security Assessment Engine | < 8 hours    | < 4 hours       | < 1 hour        | GitHub Pages, JavaScript Application |
-| Dashboard & Visualizations | < 12 hours   | < 6 hours       | < 2 hours       | GitHub Pages, Chart.js Integration   |
-| User Data Access           | < 8 hours    | < 4 hours       | < 1 hour        | Browser Local Storage, GitHub Pages  |
-| Reporting Functions        | < 24 hours   | < 12 hours      | < 4 hours       | Browser Processing, GitHub Pages     |
-| Compliance Mapping         | < 48 hours   | < 24 hours      | < 8 hours       | GitHub Repository, JSON Data         |
+| Component                  | CloudFront (Primary) | GitHub Pages (DR) | Critical Target | Infrastructure Component      |
+| -------------------------- | -------------------- | ----------------- | --------------- | ----------------------------- |
+| Content Delivery           | < 5 minutes          | < 15 minutes      | < 5 minutes     | CloudFront → S3 Multi-Region  |
+| Security Assessment Engine | < 5 minutes          | < 15 minutes      | < 5 minutes     | CloudFront Edge Cache         |
+| Dashboard & Visualizations | < 5 minutes          | < 15 minutes      | < 5 minutes     | CloudFront Global Delivery    |
+| Static Assets (CSS/JS)     | < 5 minutes          | < 15 minutes      | < 5 minutes     | CloudFront + S3 Versioning    |
+| DNS Resolution             | < 1 minute           | < 15 minutes      | < 1 minute      | Route53 Health Checks         |
+| Full Site Availability     | < 5 minutes          | < 15 minutes      | < 5 minutes     | AWS Multi-Region + GitHub DR  |
 
 #### Recovery Point Objectives (RPO)
 
@@ -459,53 +480,55 @@ graph LR
 
 ```mermaid
 gantt
-    title MTTR Targets by Component
+    title MTTR Targets by Component - AWS Multi-Region Architecture
     dateFormat HH:mm
     axisFormat %H:%M
 
-    section GitHub Infrastructure
-    GitHub Pages       :done, 00:00, 01:30
-    GitHub Repository  :done, 00:00, 01:00
-    GitHub Actions     :done, 00:00, 02:00
-    GitHub OAuth       :done, 00:00, 01:15
+    section AWS Infrastructure (Primary)
+    CloudFront Edge     :done, 00:00, 00:05
+    S3 Multi-Region     :done, 00:00, 00:05
+    Route53 DNS         :done, 00:00, 00:01
+    IAM OIDC            :done, 00:00, 00:02
+
+    section Disaster Recovery
+    GitHub Pages DR     :done, 00:00, 00:15
+    DNS Failover        :done, 00:00, 00:15
 
     section Application Components
-    Authentication     :done, 00:00, 01:45
-    Assessment Engine  :done, 00:00, 03:30
-    Dashboard          :done, 00:00, 05:15
-    Reporting          :done, 00:00, 06:00
-
-    section Data Components
-    User Assessments   :done, 00:00, 02:00
-    User Settings      :done, 00:00, 01:30
-    Compliance Data    :done, 00:00, 03:00
+    Content Delivery    :done, 00:00, 00:05
+    Assessment Engine   :done, 00:00, 00:05
+    Dashboard           :done, 00:00, 00:05
+    Reporting           :done, 00:00, 00:05
 ```
 
 | Component               | Current MTTR | Target MTTR  | Improvement Strategy                            |
 | ----------------------- | ------------ | ------------ | ----------------------------------------------- |
-| GitHub Pages Deployment | 1.5 hours    | < 1 hour     | Automated rollback via GitHub Actions           |
-| GitHub Repository       | 1 hour       | < 30 minutes | Redundant mirrors and automated synchronization |
-| Local Storage Data      | 2 hours      | < 1 hour     | Enhanced backup/export notifications and guides |
-| Application Code        | 2 hours      | < 1 hour     | Automated canary deployment and monitoring      |
+| CloudFront Distribution | < 5 minutes  | < 5 minutes  | Automatic multi-region failover (AWS SLA)       |
+| S3 Primary Bucket       | < 5 minutes  | < 5 minutes  | Multi-region replication, versioning            |
+| GitHub Pages DR         | < 15 minutes | < 10 minutes | Automated DNS failover scripting                |
+| Application Deployment  | < 10 minutes | < 5 minutes  | Automated canary deployment and health checks   |
+| CloudFront Cache        | < 5 minutes  | < 3 minutes  | Optimized invalidation patterns                 |
 
 #### ⬆️ Uptime Requirements
 
 ```mermaid
-pie title Uptime Requirements by Component
-    "User Authentication (99.9%)" : 999
-    "Security Assessment (99.5%)" : 995
-    "Dashboard (99%)" : 990
-    "Reporting (98%)" : 980
-    "Compliance Mapping (97%)" : 970
+pie title Uptime Requirements by Component - AWS Architecture
+    "CloudFront CDN (99.9%)" : 999
+    "S3 Multi-Region (99.99%)" : 9999
+    "Route53 DNS (100%)" : 10000
+    "GitHub Pages DR (99.5%)" : 995
+    "Overall Platform (99.9%)" : 999
 ```
 
-| Component             | Minimum Uptime | Target Uptime | Maximum Downtime (Annual) | Measurement Method                |
-| --------------------- | -------------- | ------------- | ------------------------- | --------------------------------- |
-| GitHub Pages Frontend | 99.5%          | 99.9%         | 8.77 hours                | GitHub Status & Custom Monitoring |
-| GitHub OAuth Auth     | 99.9%          | 99.95%        | 4.38 hours                | GitHub Status & Auth Success Rate |
-| Application Core      | 99%            | 99.5%         | 43.83 hours               | Health Check Endpoint             |
-| User Data Access      | 99.5%          | 99.9%         | 8.77 hours                | Data Access Success Rate          |
-| Export Functions      | 98%            | 99%           | 87.66 hours               | Function Availability Tests       |
+| Component             | Minimum Uptime | Target Uptime | Maximum Downtime (Annual) | AWS SLA / Measurement Method                |
+| --------------------- | -------------- | ------------- | ------------------------- | ------------------------------------------- |
+| CloudFront Distribution | 99.9%        | 99.99%        | 8.77 hours                | AWS CloudFront SLA + Custom Monitoring      |
+| S3 Multi-Region       | 99.99%         | 99.999%       | 52.6 minutes              | AWS S3 SLA + Replication Health             |
+| Route53 DNS           | 100%           | 100%          | 0 hours                   | AWS Route53 100% SLA (financially-backed)   |
+| GitHub Pages DR       | 99.5%          | 99.9%         | 8.77 hours                | GitHub Status + Custom Health Checks        |
+| Application Core      | 99.9%          | 99.99%        | 8.77 hours                | Synthetic Monitoring + Health Endpoints     |
+| User Data Access      | 99.9%          | 99.99%        | 8.77 hours                | Local storage (no backend dependency)       |
+| Export Functions      | 99%            | 99.5%         | 43.83 hours               | Client-side processing (browser-based)      |
 
 ## 🛡️ GitHub-Specific Resilience Strategy
 
