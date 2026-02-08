@@ -816,11 +816,11 @@ allowed-endpoints:    # Explicit allowlist only
 **Configuration:**
 ```yaml
 Role ARN: arn:aws:iam::172017021075:role/GithubWorkFlowRole
-Session Name: githubworkflowrolesessiont2
+Session Name: githubworkflowrolesessiont2  # Production configuration
 Region: us-east-1
 ```
 
-> **Note:** This session name is configured in `.github/workflows/deploy-s3.yml` (line 101) for CloudTrail audit logging.
+> **Note:** Documents current production workflow configuration (`.github/workflows/deploy-s3.yml` line 101) used for CloudTrail audit logging.
 
 **Authentication Flow:**
 1. GitHub Actions requests OIDC token from GitHub's token service
