@@ -784,7 +784,7 @@ Security Features:
 - **Primary Region**: us-east-1 (active serving)
 - **Secondary Region**: Cross-region replication for disaster recovery
 - **RPO**: Asynchronous S3 cross-region replication; monitor replication metrics and use S3 Replication Time Control (RTC) if deterministic SLAs required
-- **RTO**: < 5 minutes (automatic CloudFront failover)
+- **RTO**: Target < 5 minutes when CloudFront origin failover (origin groups) is configured with health checks; otherwise RTO depends on manual failover or Route53 DNS changes as documented in the DR runbook
 
 **Cache Control Strategy:**
 ```yaml

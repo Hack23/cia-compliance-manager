@@ -856,9 +856,10 @@ aws s3 sync docs/. s3://$S3_BUCKET_NAME/ --exclude ".git/*"
 - Fonts (WOFF, WOFF2)
 - Metadata files (sitemap.xml, robots.txt, manifest.json)
 
-**Exclusions:**
+**Exclusions (Sync Step):**
 - `.git/` directory (version control metadata)
-- Screenshots directory (handled separately for performance)
+
+> **Note:** The `screenshots/` directory is **synced to S3 like other assets**, but is **excluded from cache-header rewrite loops** for performance. Large, mostly-static screenshot assets keep their default S3/object headers instead of being iterated over during cache-optimization steps.
 
 #### **Step 4: Cache Header Optimization**
 
@@ -994,14 +995,14 @@ flowchart TD
 **Primary Deployment:** AWS CloudFront + S3 (this workflow)
 **Disaster Recovery:** GitHub Pages (separate workflow, parallel deployment)
 
-**Failover Strategy:**
-1. **Automatic CloudFront Failover**: < 5 minutes (AWS Shield, health checks)
-2. **Manual DNS Failover**: < 15 minutes (Route53 switch to GitHub Pages)
+**Failover Strategy (Objectives, Not Guarantees):**
+1. **Automatic CloudFront Origin Failover**: Target < 5 minutes from incident detection via health checks (origin groups), with user-visible recovery dependent on CloudFront routing propagation
+2. **Manual DNS Failover**: Target < 15 minutes for Route53 DNS switch to GitHub Pages, with end-user cutover timing further constrained by DNS TTLs and resolver caching
 
-**RPO/RTO Objectives:**
-- **RPO**: 0 (simultaneous AWS + GitHub deployment)
-- **RTO (CloudFront)**: < 5 minutes (automatic multi-region)
-- **RTO (GitHub Pages DR)**: < 15 minutes (manual DNS switch)
+**RPO/RTO Objectives (Non-Binding Targets):**
+- **RPO Objective**: Effectively zero content loss for static artifacts by deploying the same build artifact to AWS and GitHub Pages; actual RPO bounded by time since last successful CI/CD deployment
+- **RTO Objective (CloudFront)**: Target service restoration within ~5–10 minutes from incident detection (time to trigger failover + CloudFront routing propagation), measured via AWS monitoring and CloudFront metrics
+- **RTO Objective (GitHub Pages DR)**: Target DNS failover completion within ~15 minutes from manual initiation (time to update Route53 + DNS TTL and global resolver propagation)
 
 ### Performance Metrics
 

@@ -864,11 +864,11 @@ sequenceDiagram
 | **Modularity** | Widget-based organization with error boundaries | 13 independent widgets |
 | **Maintainability** | TypeScript strict mode, 83.26% test coverage | Zero `any` types |
 | **Extensibility** | Service abstractions, data provider pattern | Clean interfaces |
-| **Performance** | Code splitting, lazy loading, tree-shaking, CloudFront CDN | 175KB total bundle, global edge caching |
-| **Security** | SLSA Level 3, CodeQL, AWS IAM OIDC, Harden-runner | OpenSSF Score 7.5/10 |
+| **Performance** | Code splitting, lazy loading, tree-shaking, CloudFront CDN | Optimized bundle (budget enforced), global edge caching |
+| **Security** | SLSA Level 3, CodeQL, AWS IAM OIDC, Harden-runner | OpenSSF Scorecard (consult badge for current score) |
 | **Usability** | Consistent UI, error recovery, responsive design | Error boundaries active |
-| **Reliability** | Multi-region S3, CloudFront, GitHub Pages DR | 99.9% uptime (CloudFront SLA) |
-| **Availability** | AWS multi-region, Route53 DNS failover | RTO < 5 min (CloudFront), < 15 min (DR) |
+| **Reliability** | Multi-region S3, CloudFront, GitHub Pages DR | Target 99.9% (CloudFront SLA – service credits) |
+| **Availability** | AWS multi-region, Route53 DNS failover | RTO targets: ~5–10 min (CloudFront), ~15 min (DR) |
 | **Type Safety** | TypeScript 5.9.x strict mode | 100% type coverage |
 
 ## 🔍 Business View of Architecture 

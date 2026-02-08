@@ -407,52 +407,52 @@ graph TB
 ```mermaid
 timeline
     title Recovery Objectives Timeline - AWS Multi-Region Architecture
-    section RTO (Recovery Time Objective)
-        CloudFront Edge Failover : < 5 minutes (automatic)
-        S3 Multi-Region Replication : < 1 minute (continuous)
-        GitHub Pages DR Failover : < 15 minutes (DNS switch)
-        Core Assessment Engine : < 5 minutes (cached at edge)
-        Dashboard & Analytics : < 5 minutes (CloudFront delivery)
-    section RPO (Recovery Point Objective)
+    section RTO (Recovery Time Objective - Targets)
+        CloudFront Edge Failover : Target < 5 min (health checks + routing propagation)
+        S3 Multi-Region Replication : Async CRR (monitor replication status)
+        GitHub Pages DR Failover : Target < 15 min (DNS switch + TTL propagation)
+        Core Assessment Engine : Target < 5 min (CloudFront delivery)
+        Dashboard & Analytics : Target < 5 min (CloudFront delivery)
+    section RPO (Recovery Point Objective - Targets)
         User Assessment Data : 0 (no backend persistence)
-        Static Content : 0 (simultaneous AWS + GitHub deployment)
-        S3 Replicated Data : < 1 minute (cross-region)
-        CloudFront Cache : 0 (invalidation on deploy)
+        Static Content : Last successful deployment (CI/CD workflow)
+        S3 Replicated Data : Async CRR (monitor replication lag)
+        CloudFront Cache : Depends on invalidation propagation (typically minutes)
 ```
 
 ```mermaid
 mindmap
   root((Recovery<br>Objectives))
-    ⏱️ RTO Targets
+    ⏱️ RTO Targets (Objectives)
       CloudFront Distribution
-        🚨 Automatic: < 5 minutes
-        🔔 Manual Intervention: < 15 minutes
-        ✨ DNS Failover to GitHub Pages: < 15 minutes
+        🚨 Target: ~5 min (health checks + routing propagation)
+        🔔 Manual Intervention: ~15 min (investigation + action)
+        ✨ DNS Failover to GitHub Pages: ~15 min (DNS switch + TTL propagation)
       S3 Multi-Region
-        🚨 Automatic Replication: < 1 minute
-        🔔 Manual Failover: < 5 minutes
-        ✨ GitHub Pages DR: < 15 minutes
+        🚨 Async CRR: Monitor replication lag (aspirational < 5 min with RTC)
+        🔔 Manual Failover: ~5 min (Route53 DNS adjustment)
+        ✨ GitHub Pages DR: ~15 min (DNS propagation)
       Security Assessment Engine
-        🚨 Critical: < 5 minutes (CloudFront)
-        🔔 Enhanced: < 15 minutes (GitHub Pages DR)
-        ✨ Gold Standard: < 5 minutes (multi-edge)
+        🚨 Critical: ~5 min (CloudFront delivery objective)
+        🔔 Enhanced: ~15 min (GitHub Pages DR objective)
+        ✨ Gold Standard: ~5 min (multi-edge with monitoring)
       Dashboard & Visualizations
-        🚨 Critical: < 5 minutes (CloudFront)
-        🔔 Enhanced: < 15 minutes (GitHub Pages DR)
-        ✨ Gold Standard: < 5 minutes (cached)
-    📊 RPO Targets
+        🚨 Critical: ~5 min (CloudFront delivery objective)
+        🔔 Enhanced: ~15 min (GitHub Pages DR objective)
+        ✨ Gold Standard: ~5 min (cached with monitoring)
+    📊 RPO Targets (Objectives)
       Static Content (HTML/CSS/JS)
-        🚨 Critical: 0 (simultaneous deployment)
-        🔔 Enhanced: 0 (AWS + GitHub parallel)
-        ✨ Gold Standard: 0 (instant sync)
+        🚨 Critical: Last successful deployment (CI/CD workflow)
+        🔔 Enhanced: Last successful deployment to both platforms
+        ✨ Gold Standard: Last successful deployment + monitoring
       S3 Replicated Content
-        🚨 Critical: < 1 minute (CRR)
-        🔔 Enhanced: < 30 seconds
-        ✨ Gold Standard: Near real-time
+        🚨 Critical: Async CRR (aspirational < 5 min with RTC + alerts)
+        🔔 Enhanced: Monitor replication lag (investigate if > 5 min)
+        ✨ Gold Standard: Observed low latency (RTC + monitoring in place)
       CloudFront Cache
-        🚨 Critical: 0 (invalidation on deploy)
-        🔔 Enhanced: 0 (instant invalidation)
-        ✨ Gold Standard: 0 (synchronized)
+        🚨 Critical: ≤ 15 min (invalidation + TTL propagation window)
+        🔔 Enhanced: ≤ 5 min typical (monitored invalidation completion)
+        ✨ Gold Standard: Within propagation window (typically minutes) with automated monitoring
     🔄 MTTR Targets
       CloudFront Edge
         🎯 Current: < 5 minutes
@@ -561,7 +561,7 @@ gantt
 pie title Uptime Requirements by Component - AWS Architecture
     "CloudFront CDN (99.9%)" : 999
     "S3 Multi-Region (99.99%)" : 9999
-    "Route53 DNS (100%)" : 10000
+    "Route53 DNS (100% SLA – service credits)" : 10000
     "GitHub Pages DR (99.5%)" : 995
     "Overall Platform (99.9%)" : 999
 ```
