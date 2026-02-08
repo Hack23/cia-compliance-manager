@@ -3,7 +3,18 @@ on:
   release:
     types: [published]
   workflow_dispatch:
-permissions: write-all
+    inputs:
+      force_metadata_update:
+        description: 'Force metadata update for all files (bypasses size-only check)'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+permissions:
+  contents: read
+  id-token: write
 
 env:
   AWS_REGION : "us-east-1"
@@ -94,6 +105,10 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: Deploy to S3 with proper cache headers
         run: |
+          # Determine sync mode: use --size-only by default, but allow override for metadata updates
+          SYNC_MODE="${{ github.event.inputs.force_metadata_update == 'true' && '--metadata-directive REPLACE' || '--size-only' }}"
+          echo "🚀 Starting deployment with sync mode: $SYNC_MODE"
+          
           # Deploy JS and CSS files with 1-year cache (versioned, immutable assets)
           echo "⚡ Deploying JS and CSS files with immutable cache headers..."
           aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
@@ -101,9 +116,19 @@ jobs:
             --include "*.js" \
             --include "*.css" \
             --cache-control "public, max-age=31536000, immutable" \
-            --size-only \
-            --exclude ".git/*" \
-            --exclude "screenshots/*"
+            $SYNC_MODE \
+            --exclude ".git/*"
+          
+          # Deploy source map files with 1-year cache (versioned, immutable assets)
+          echo "🗺️  Deploying source map files with immutable cache headers..."
+          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
+            --exclude "*" \
+            --include "*.js.map" \
+            --include "*.css.map" \
+            --cache-control "public, max-age=31536000, immutable" \
+            --content-type "application/json" \
+            $SYNC_MODE \
+            --exclude ".git/*"
           
           # Deploy font files with 1-year cache (static, immutable assets)
           echo "🔤 Deploying font files with immutable cache headers..."
@@ -115,11 +140,10 @@ jobs:
             --include "*.eot" \
             --include "*.otf" \
             --cache-control "public, max-age=31536000, immutable" \
-            --size-only \
-            --exclude ".git/*" \
-            --exclude "screenshots/*"
+            $SYNC_MODE \
+            --exclude ".git/*"
           
-          # Deploy image files with 1-year cache (static, immutable assets)
+          # Deploy image files with 1-year cache (static, immutable assets, excluding screenshots)
           echo "🖼️  Deploying image files with immutable cache headers..."
           aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
             --exclude "*" \
@@ -131,7 +155,7 @@ jobs:
             --include "*.svg" \
             --include "*.ico" \
             --cache-control "public, max-age=31536000, immutable" \
-            --size-only \
+            $SYNC_MODE \
             --exclude ".git/*" \
             --exclude "screenshots/*"
           
@@ -142,9 +166,8 @@ jobs:
             --include "*.html" \
             --cache-control "public, max-age=3600, must-revalidate" \
             --content-type "text/html; charset=utf-8" \
-            --size-only \
-            --exclude ".git/*" \
-            --exclude "screenshots/*"
+            $SYNC_MODE \
+            --exclude ".git/*"
           
           # Deploy metadata files with medium cache (1 day)
           echo "📋 Deploying metadata files with 1-day cache headers..."
@@ -154,9 +177,17 @@ jobs:
             --include "*.json" \
             --include "*.txt" \
             --cache-control "public, max-age=86400" \
-            --size-only \
-            --exclude ".git/*" \
-            --exclude "screenshots/*"
+            $SYNC_MODE \
+            --exclude ".git/*"
+          
+          # Deploy screenshots with default cache (if directory exists)
+          if [ -d "docs/screenshots" ]; then
+            echo "📸 Deploying screenshots with default cache headers..."
+            aws s3 sync docs/screenshots/. s3://${{ env.S3_BUCKET_NAME }}/screenshots/ \
+              $SYNC_MODE
+          else
+            echo "ℹ️  No screenshots directory found, skipping..."
+          fi
           
           # Deploy all remaining files not already handled (catch-all)
           echo "📦 Deploying remaining files..."
@@ -165,6 +196,8 @@ jobs:
             --exclude "screenshots/*" \
             --exclude "*.js" \
             --exclude "*.css" \
+            --exclude "*.js.map" \
+            --exclude "*.css.map" \
             --exclude "*.woff" \
             --exclude "*.woff2" \
             --exclude "*.ttf" \
@@ -181,7 +214,7 @@ jobs:
             --exclude "*.xml" \
             --exclude "*.json" \
             --exclude "*.txt" \
-            --size-only
+            $SYNC_MODE
           
           echo "✅ Deployment completed with optimized cache headers"
 
