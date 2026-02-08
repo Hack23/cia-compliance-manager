@@ -787,7 +787,7 @@ Uses **Harden-Runner v2.14.2** with strict egress policy:
 egress-policy: block  # Default deny all outbound traffic
 allowed-endpoints: >  # Explicit allowlist, newline-separated
   sts.us-east-1.amazonaws.com:443
-  ciacompliancemanager-frontend-us-east-1-172017021075.s3.us-east-1.amazonaws.com:443
+  amazon-cloudfront-secure-static-site-s3bucketroot-14oliw5cmta06.s3.us-east-1.amazonaws.com:443
   cloudfront.amazonaws.com:443
   cloudformation.us-east-1.amazonaws.com:443
   github.com:443
@@ -803,7 +803,7 @@ allowed-endpoints: >  # Explicit allowlist, newline-separated
   # See .github/workflows/deploy-s3.yml for complete list (50+ endpoints)
 ```
 
-**Note:** The above shows key security-relevant endpoints only and is provided as an illustrative example. The complete authoritative allowlist in `.github/workflows/deploy-s3.yml` includes additional endpoints for build tools, security scanners, and infrastructure services. Do not copy this snippet for production use - always refer to the actual workflow file.
+**Note:** This snippet is a schematic representation for documentation purposes and does not reflect the exact production configuration. The authoritative egress allowlist in `.github/workflows/deploy-s3.yml` includes 50+ specific endpoints for build tools, security scanners, and infrastructure services. Always refer to the actual workflow file for production deployment configuration.
 
 **Security Benefits:**
 - ✅ Prevents data exfiltration from compromised dependencies
@@ -900,10 +900,11 @@ Content-Type: application/xml | application/json | text/plain
 - **Screenshots Excluded**: Large directory (performance); CloudFront uses S3 defaults
 
 **Performance Benefits:**
-- Global edge caching reduces origin requests by ~95%
-- Faster page load times (assets served from nearest edge location)
-- Lower S3 data transfer costs (cached at CloudFront)
-- Improved user experience (sub-second asset delivery)
+- Global edge caching significantly reduces origin requests and improves cache hit ratio
+- Faster page load times (assets served from the nearest CloudFront edge location)
+- Lower S3 data transfer costs (traffic served from CloudFront cache instead of S3 origin)
+- Improved user experience through low-latency asset delivery
+- Actual cache hit ratio, latency, and origin request metrics can be monitored via CloudFront analytics and logs
 
 #### **Step 5: CloudFront Cache Invalidation**
 
@@ -932,12 +933,12 @@ aws cloudfront create-invalidation \
 1. Invalidation request sent to CloudFront API
 2. CloudFront marks all edge cache entries as stale
 3. Next request to each edge location fetches fresh content from S3
-4. New content propagates globally within ~5 minutes
-5. Users immediately see updated content (no cache staleness)
+4. New content propagates globally, typically within a few minutes (~5 minutes in most cases)
+5. Users see updated content once the invalidation has propagated to their edge location, usually within minutes (significantly reduced cache staleness)
 
 **Why Invalidation is Necessary:**
 - Edge caches may have old content (from previous deployment)
-- Invalidation ensures immediate content updates globally
+- Invalidation accelerates content updates globally, reducing cache staleness from potentially long TTLs to a short propagation window (typically minutes)
 - Alternative: Wait for cache expiration (up to 1 year for static assets)
 - Cost: First 1,000 invalidations/month free (typically single invalidation per deploy)
 

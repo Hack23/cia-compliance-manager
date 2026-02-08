@@ -869,7 +869,7 @@ sequenceDiagram
 | **Usability** | Consistent UI, error recovery, responsive design | Error boundaries active |
 | **Reliability** | Multi-region S3, CloudFront, GitHub Pages DR | 99.9% uptime (CloudFront SLA) |
 | **Availability** | AWS multi-region, Route53 DNS failover | RTO < 5 min (CloudFront), < 15 min (DR) |
-| **Type Safety** | TypeScript 5.9.3 strict mode | 100% type coverage |
+| **Type Safety** | TypeScript 5.9.x strict mode | 100% type coverage |
 
 ## 🔍 Business View of Architecture 
 

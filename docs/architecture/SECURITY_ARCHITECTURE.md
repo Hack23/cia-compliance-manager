@@ -814,7 +814,7 @@ Policy: Egress Block (deny by default)
 Allowed Endpoints (Explicit Allowlist):
   AWS Services:
     - sts.us-east-1.amazonaws.com:443 (STS authentication)
-    - *.s3.us-east-1.amazonaws.com:443 (S3 sync)
+    - amazon-cloudfront-secure-static-site-s3bucketroot-14oliw5cmta06.s3.us-east-1.amazonaws.com:443 (S3 sync)
     - cloudfront.amazonaws.com:443 (CloudFront invalidation)
     - cloudformation.us-east-1.amazonaws.com:443 (Stack queries)
   

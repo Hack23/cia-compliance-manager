@@ -549,7 +549,7 @@ gantt
 
 | Component               | Current MTTR | Target MTTR  | Improvement Strategy                            |
 | ----------------------- | ------------ | ------------ | ----------------------------------------------- |
-| CloudFront Distribution | < 5 minutes  | < 5 minutes  | Automatic multi-region failover (AWS SLA)       |
+| CloudFront Distribution | < 5 minutes  | < 5 minutes  | CloudFront origin failover with Route53 health checks |
 | S3 Primary Bucket       | < 5 minutes  | < 5 minutes  | Multi-region replication, versioning            |
 | GitHub Pages DR         | < 15 minutes | < 10 minutes | Automated DNS failover scripting                |
 | Application Deployment  | < 10 minutes | < 5 minutes  | Automated canary deployment and health checks   |
@@ -570,7 +570,7 @@ pie title Uptime Requirements by Component - AWS Architecture
 | --------------------- | -------------- | ------------- | ------------------------- | ------------------------------------------- |
 | CloudFront Distribution | 99.9%        | 99.99%        | 8.77 hours                | AWS CloudFront SLA + Custom Monitoring      |
 | S3 Multi-Region       | 99.99%         | 99.999%       | 52.6 minutes              | AWS S3 SLA + Replication Health             |
-| Route53 DNS           | 100%           | 100%          | 0 hours                   | AWS Route53 100% SLA (financially-backed)   |
+| Route53 DNS           | 100%           | 100%          | N/A (SLA-based, not guaranteed zero downtime) | AWS Route53 100% SLA (financially-backed, service credits) |
 | GitHub Pages DR       | 99.5%          | 99.9%         | 8.77 hours                | GitHub Status + Custom Health Checks        |
 | Application Core      | 99.9%          | 99.99%        | 8.77 hours                | Synthetic Monitoring + Health Endpoints     |
 | User Data Access      | 99.9%          | 99.99%        | 8.77 hours                | Local storage (no backend dependency)       |
