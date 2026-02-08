@@ -16,8 +16,8 @@
   <img src="https://img.shields.io/badge/Review-Semi_Annual-orange?style=for-the-badge" alt="Review Cycle"/>
 </p>
 
-**📋 Document Owner:** CEO | **📄 Version:** 1.0 | **📅 Last Updated:** 2025-01-11 (UTC)  
-**🔄 Review Cycle:** Semi-Annual | **⏰ Next Review:** 2025-07-11 | **✅ Status:** Production Ready
+**📋 Document Owner:** CEO | **📄 Version:** 1.0 | **📅 Last Updated:** 2026-02-08 (UTC)  
+**🔄 Review Cycle:** Semi-Annual | **⏰ Next Review:** 2026-08-08 | **✅ Status:** Production Ready
 
 ---
 
@@ -25,7 +25,7 @@
 
 **🏢 CIA Compliance Manager's** business continuity framework demonstrates how **🔧 systematic recovery planning directly enables both operational resilience and competitive advantage.** Our 📊 classification-driven continuity approach serves as both operational necessity and 👥 client demonstration of our cybersecurity compliance methodologies.
 
-This plan ensures 🏢 platform operations can continue during and after disruptive events, based on our [🏷️ Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) impact analysis and recovery requirements. Our 🌟 transparent continuity planning showcases how methodical preparation creates business value through 📉 reduced downtime and 📈 enhanced service reliability. The plan leverages GitHub-based infrastructure to provide comprehensive analysis of business impacts, recovery objectives, and resilience strategies aligned with our classification-driven security posture.
+This plan ensures 🏢 platform operations can continue during and after disruptive events, based on our [🏷️ Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) impact analysis and recovery requirements. Our 🌟 transparent continuity planning showcases how methodical preparation creates business value through 📉 reduced downtime and 📈 enhanced service reliability. The plan leverages an AWS-first architecture (Amazon CloudFront with Amazon S3 as the primary hosting platform) with GitHub Pages as a documented disaster recovery fallback to provide comprehensive analysis of business impacts, recovery objectives, and resilience strategies aligned with our classification-driven security posture.
 
 *— 👨‍💼 James Pether Sörling, CEO/Founder*
 

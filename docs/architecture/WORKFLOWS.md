@@ -799,7 +799,11 @@ allowed-endpoints: >  # Explicit allowlist, newline-separated
   sonarcloud.io:443
   api.securityscorecards.dev:443
   app.fossa.io:443
+  # ... additional endpoints for ZAP, Docker, Mozilla services, etc.
+  # See .github/workflows/deploy-s3.yml for complete list (50+ endpoints)
 ```
+
+**Note:** The above shows key security-relevant endpoints. The complete allowlist in `.github/workflows/deploy-s3.yml` includes additional endpoints for build tools, security scanners, and infrastructure services.
 
 **Security Benefits:**
 - ✅ Prevents data exfiltration from compromised dependencies
@@ -999,15 +1003,19 @@ flowchart TD
 
 ### Performance Metrics
 
-| Metric | Target | Actual | Measurement |
-|--------|--------|--------|-------------|
-| **S3 Sync Time** | < 2 minutes | ~1.5 minutes | Excludes screenshots directory |
-| **Cache Header Application** | < 5 minutes | ~3 minutes | Per-file header updates |
-| **CloudFront Invalidation** | < 5 minutes | ~3 minutes | Global edge propagation |
-| **Total Deployment Time** | < 10 minutes | ~8 minutes | End-to-end workflow |
-| **Cache Hit Rate** | > 90% | ~95% | CloudFront analytics |
-| **Global Latency (P50)** | < 100ms | ~50ms | Edge location proximity |
-| **Global Latency (P99)** | < 500ms | ~200ms | Even remote regions |
+**Deployment Performance Targets:**
+
+| Metric | Target | Measurement |
+|--------|--------|-------------|
+| **S3 Sync Time** | < 2 minutes | Excludes screenshots directory |
+| **Cache Header Application** | < 5 minutes | Per-file header updates |
+| **CloudFront Invalidation** | < 5 minutes | Global edge propagation |
+| **Total Deployment Time** | < 10 minutes | End-to-end workflow |
+| **Cache Hit Rate** | > 90% | CloudFront analytics (consult AWS Console for current values) |
+| **Global Latency (P50)** | < 100ms | Edge location proximity (measured via CloudFront reports) |
+| **Global Latency (P99)** | < 500ms | Even remote regions (measured via CloudFront reports) |
+
+**Note:** For current deployment timings, refer to GitHub Actions workflow run statistics. For CloudFront performance metrics, consult AWS CloudFront analytics dashboard.
 
 ### Future Enhancements
 

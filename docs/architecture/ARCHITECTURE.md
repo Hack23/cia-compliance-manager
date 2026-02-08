@@ -120,10 +120,10 @@ C4Container
 
 | Container | Technology Stack | Purpose | Key Features |
 |-----------|-----------------|---------|--------------|
-| **Frontend Application** | React 19.2.0, TypeScript 5.9.3 | User interface | Error boundaries, concurrent rendering, strict types |
+| **Frontend Application** | React 19.2.x, TypeScript 5.9.x | User interface | Error boundaries, concurrent rendering, strict types |
 | **Static Data** | TypeScript/JSON | Data source | CIA triad controls, compliance frameworks |
-| **Build System** | Vite 7.2.4, esbuild | Build pipeline | 175KB bundle, code splitting, tree-shaking |
-| **Test Infrastructure** | Vitest 4.0.6, Cypress 15.7.0 | Quality assurance | 83.26% line coverage, component & E2E tests |
+| **Build System** | Vite 7.x, esbuild | Build pipeline | Optimized bundle, code splitting, tree-shaking |
+| **Test Infrastructure** | Vitest 4.x, Cypress 15.x | Quality assurance | Exceeds 80% line coverage, component & E2E tests |
 | **Security Scanner** | CodeQL, SonarCloud | Vulnerability detection | SAST, SCA, dependency scanning |
 | **Deployment** | AWS CloudFront + S3, GitHub Pages DR | Multi-region hosting | CloudFront CDN, S3 multi-region, SLSA Level 3, Route53 DNS |
 
@@ -669,9 +669,9 @@ C4Component
   - CloudFront failover: < 5 minutes (automatic)
   - GitHub Pages DR: < 15 minutes (Route53 DNS switch)
 - **RPO Objectives**: 
-  - CloudFront: 0 (real-time sync)
-  - S3 replication: < 1 minute
-  - GitHub Pages: 0 (parallel deployment)
+  - Static Content: Aligns with S3 bucket RPO (deployment + CloudFront invalidation)
+  - S3 Multi-Region Replication: < 1 minute
+  - GitHub Pages DR: 0 (parallel deployment maintains separate copy)
 
 #### **Cache Strategy**
 - **Static Assets**: 1-year cache with immutable flag for versioned assets
