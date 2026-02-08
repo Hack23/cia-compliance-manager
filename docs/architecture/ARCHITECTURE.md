@@ -670,7 +670,7 @@ C4Component
   - GitHub Pages DR: < 15 minutes (Route53 DNS switch)
 - **RPO Objectives**: 
   - Static Content: Aligns with S3 bucket RPO (deployment + CloudFront invalidation)
-  - S3 Multi-Region Replication: < 1 minute
+  - S3 Multi-Region Replication: Asynchronous CRR; monitor replication metrics (RTC SLA if enabled)
   - GitHub Pages DR: 0 (parallel deployment maintains separate copy)
 
 #### **Cache Strategy**

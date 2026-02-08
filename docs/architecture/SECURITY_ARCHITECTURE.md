@@ -783,7 +783,7 @@ Security Features:
 **Multi-Region Resilience:**
 - **Primary Region**: us-east-1 (active serving)
 - **Secondary Region**: Cross-region replication for disaster recovery
-- **RPO**: < 1 minute (near real-time replication)
+- **RPO**: Asynchronous S3 cross-region replication; monitor replication metrics and use S3 Replication Time Control (RTC) if deterministic SLAs required
 - **RTO**: < 5 minutes (automatic CloudFront failover)
 
 **Cache Control Strategy:**

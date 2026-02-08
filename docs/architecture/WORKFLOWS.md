@@ -724,8 +724,9 @@ The AWS S3 deployment workflow (`.github/workflows/deploy-s3.yml`) handles the p
 - Push to `main` branch (automatic deployment)
 - Permissions: `write-all` (required for AWS operations and GitHub Pages fallback)
 
-**Environment:**
+**Environment (refer to `.github/workflows/deploy-s3.yml` for current values):**
 ```yaml
+# Example values – see .github/workflows/deploy-s3.yml for authoritative configuration
 AWS_REGION: us-east-1
 S3_BUCKET_NAME: ciacompliancemanager-frontend-us-east-1-172017021075
 CLOUDFRONT_STACK_NAME: ciacompliancemanager-frontend
@@ -1006,17 +1007,17 @@ flowchart TD
 
 **Deployment Performance Targets:**
 
-| Metric | Target | Measurement |
-|--------|--------|-------------|
-| **S3 Sync Time** | < 2 minutes | Excludes screenshots directory |
-| **Cache Header Application** | < 5 minutes | Per-file header updates |
-| **CloudFront Invalidation** | < 5 minutes | Global edge propagation |
-| **Total Deployment Time** | < 10 minutes | End-to-end workflow |
-| **Cache Hit Rate** | > 90% | CloudFront analytics (consult AWS Console for current values) |
-| **Global Latency (P50)** | < 100ms | Edge location proximity (measured via CloudFront reports) |
-| **Global Latency (P99)** | < 500ms | Even remote regions (measured via CloudFront reports) |
+| Metric | Objective (non-binding target) | Measurement Source |
+|--------|--------------------------------|--------------------|
+| **S3 Sync Time** | Maintain fast deployments for typical content sizes | GitHub Actions workflow duration statistics |
+| **Cache Header Application** | Ensure cache headers applied promptly after updates | GitHub Actions logs and S3 object metadata |
+| **CloudFront Invalidation** | Aim for global propagation in operationally acceptable timeframe | AWS CloudFront invalidation and performance reports |
+| **Total Deployment Time** | Support frequent, incremental changes with fast end-to-end deployment | GitHub Actions workflow run statistics |
+| **Cache Hit Rate** | Maintain high cache hit rate appropriate for current content mix | AWS CloudFront cache analytics (AWS Console) |
+| **Global Latency (P50)** | Optimize for low median latency for key assets from edge locations | AWS CloudFront performance reports |
+| **Global Latency (P99)** | Keep tail latency acceptable for remote regions given current routing | AWS CloudFront performance reports |
 
-**Note:** For current deployment timings, refer to GitHub Actions workflow run statistics. For CloudFront performance metrics, consult AWS CloudFront analytics dashboard.
+**Note:** The values above are illustrative, non-binding objectives. For authoritative metrics, consult GitHub Actions workflow run statistics and AWS CloudFront analytics dashboard.
 
 ### Future Enhancements
 

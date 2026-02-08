@@ -59,7 +59,7 @@ mindmap
       📊 RPO - Recovery Point
         💾 User Data: 0 (browser-based/local storage, no backend persistence)
         ⚙️ Configuration: 0 (simultaneous deployment)
-        🗄️ Historical Records: < 1 min (S3 replication)
+        🗄️ Historical Records: Asynchronous S3 CRR (monitor replication status)
       🔄 MTTR - Mean Time To Recover
         ☁️ CloudFront: < 5 min (automatic)
         📄 GitHub Pages DR: < 15 min (DNS switch)
@@ -549,7 +549,7 @@ gantt
 
 | Component               | Current MTTR | Target MTTR  | Improvement Strategy                            |
 | ----------------------- | ------------ | ------------ | ----------------------------------------------- |
-| CloudFront Distribution | < 5 minutes  | < 5 minutes  | CloudFront origin failover with Route53 health checks |
+| CloudFront Distribution | < 5 minutes  | < 5 minutes  | CloudFront origin failover; Route53 DNS failover to GitHub Pages DR |
 | S3 Primary Bucket       | < 5 minutes  | < 5 minutes  | Multi-region replication, versioning            |
 | GitHub Pages DR         | < 15 minutes | < 10 minutes | Automated DNS failover scripting                |
 | Application Deployment  | < 10 minutes | < 5 minutes  | Automated canary deployment and health checks   |
@@ -576,7 +576,7 @@ pie title Uptime Requirements by Component - AWS Architecture
 | User Data Access      | 99.9%          | 99.99%        | 8.77 hours                | Local storage (no backend dependency)       |
 | Export Functions      | 99%            | 99.5%         | 43.83 hours               | Client-side processing (browser-based)      |
 
-## 🛡️ GitHub-Specific Resilience Strategy
+## 🛡️ AWS + GitHub Pages DR Resilience Strategy
 
 ```mermaid
 flowchart TB
