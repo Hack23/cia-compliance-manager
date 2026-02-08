@@ -100,41 +100,41 @@ The project uses GitHub Actions for automation with the following workflows:
 
 ### Security Scanning Workflows
 
-3. **🔍 CodeQL Analysis** (`.github/workflows/codeql.yml`)
+4. **🔍 CodeQL Analysis** (`.github/workflows/codeql.yml`)
    - **Triggers:** Push to main, pull requests to main, weekly schedule (Mondays)
    - **Purpose:** Static Application Security Testing (SAST) for code vulnerabilities
    - **Key Features:** JavaScript/TypeScript analysis, security vulnerability detection
 
-4. **📦 Dependency Review** (`.github/workflows/dependency-review.yml`)
+5. **📦 Dependency Review** (`.github/workflows/dependency-review.yml`)
    - **Triggers:** Pull requests
    - **Purpose:** Software Composition Analysis (SCA) for dependency vulnerabilities
    - **Key Features:** PR comments with vulnerability details, blocks vulnerable dependencies
 
-5. **⭐ Scorecard Analysis** (`.github/workflows/scorecards.yml`)
+6. **⭐ Scorecard Analysis** (`.github/workflows/scorecards.yml`)
    - **Triggers:** Branch protection rule changes, weekly schedule (Tuesdays), push to main
    - **Purpose:** OSSF security scorecard for supply chain security assessment
    - **Key Features:** Branch protection checks, security best practices evaluation
 
 ### Quality & Performance Workflows
 
-6. **🔆 Lighthouse Performance** (`.github/workflows/lighthouse-performance.yml`)
+7. **🔆 Lighthouse Performance** (`.github/workflows/lighthouse-performance.yml`)
    - **Triggers:** Manual workflow dispatch
    - **Purpose:** Performance, accessibility, SEO, and best practices auditing
    - **Key Features:** Performance budgets, artifacts upload, temporary public reports
 
-7. **🔒 ZAP Scan** (`.github/workflows/zap-scan.yml`)
+8. **🔒 ZAP Scan** (`.github/workflows/zap-scan.yml`)
    - **Triggers:** Manual workflow dispatch
    - **Purpose:** Dynamic Application Security Testing (DAST) for deployed application
    - **Key Features:** OWASP ZAP full scan, runtime vulnerability detection
 
 ### Automation Workflows
 
-8. **🏷️ PR Labeler** (`.github/workflows/labeler.yml`)
+9. **🏷️ PR Labeler** (`.github/workflows/labeler.yml`)
    - **Triggers:** Pull request events (opened, synchronize, reopened, edited)
    - **Purpose:** Automated labeling of pull requests based on file changes
    - **Key Features:** Consistent PR categorization, improved workflow organization
 
-9. **🤖 Copilot Setup Steps** (`.github/workflows/copilot-setup-steps.yml`)
+10. **🤖 Copilot Setup Steps** (`.github/workflows/copilot-setup-steps.yml`)
    - **Triggers:** Manual dispatch, workflow file changes, pull requests affecting workflow
    - **Purpose:** GitHub Copilot workspace environment setup and validation
    - **Key Features:** Node.js 24 setup, dependency caching, environment validation
@@ -785,24 +785,20 @@ Uses **Harden-Runner v2.14.2** with strict egress policy:
 
 ```yaml
 egress-policy: block  # Default deny all outbound traffic
-allowed-endpoints:    # Explicit allowlist only
-  AWS Services:
-    - sts.us-east-1.amazonaws.com:443 (STS authentication)
-    - *.s3.us-east-1.amazonaws.com:443 (S3 sync)
-    - cloudfront.amazonaws.com:443 (CloudFront invalidation)
-    - cloudformation.us-east-1.amazonaws.com:443 (Stack queries)
-  GitHub:
-    - github.com:443
-    - api.github.com:443
-    - objects.githubusercontent.com:443
-  Dependencies:
-    - registry.npmjs.org:443
-    - fonts.googleapis.com:443
-    - fonts.gstatic.com:443
-  Security Tools:
-    - sonarcloud.io:443
-    - api.securityscorecards.dev:443
-    - app.fossa.io:443
+allowed-endpoints: >  # Explicit allowlist, newline-separated
+  sts.us-east-1.amazonaws.com:443
+  *.s3.us-east-1.amazonaws.com:443
+  cloudfront.amazonaws.com:443
+  cloudformation.us-east-1.amazonaws.com:443
+  github.com:443
+  api.github.com:443
+  objects.githubusercontent.com:443
+  registry.npmjs.org:443
+  fonts.googleapis.com:443
+  fonts.gstatic.com:443
+  sonarcloud.io:443
+  api.securityscorecards.dev:443
+  app.fossa.io:443
 ```
 
 **Security Benefits:**
@@ -1368,24 +1364,23 @@ flowchart LR
 
 ### Performance Metrics
 
-**Current Build Performance:**
-- **Build Time**: ~8 minutes average for full CI pipeline
-- **Test Execution**: ~3-4 minutes for unit and E2E tests
-- **Security Scans**: ~2-3 minutes for CodeQL and vulnerability scanning
-- **Total Pipeline**: ~15 minutes for complete PR validation
+**Build & Test Objectives:**
+- **Fast Feedback**: CI pipelines are optimized to provide rapid feedback on code changes
+- **Parallelization**: Build, test, and security steps run in parallel where possible to reduce total duration
+- **Live Timings**: For up-to-date pipeline durations, refer to GitHub Actions workflow run statistics in the repository
 
-**Current Test Coverage:**
-- **Line Coverage**: 83.26% (exceeds 80% target)
-- **Branch Coverage**: Comprehensive test suite
-- **E2E Coverage**: Critical user flows validated
-- **Component Tests**: Widget-level validation
+**Quality & Coverage Objectives:**
+- **Line Coverage Target**: Minimum 80% line coverage across services and components
+- **Branch & E2E Coverage**: Tests focus on critical user and security flows, including regression-prone areas
+- **Coverage Reports**: Detailed coverage metrics are published as part of CI artifacts and reports; consult those for current values
+- **Component Tests**: Widget-level tests validate core UI behavior and integration
 
-**Current Security Posture:**
-- **SLSA Level 3**: Build provenance and attestation
-- **Security Scanning**: CodeQL, Dependabot, OSSF Scorecard
-- **DAST Testing**: ZAP security scanning
-- **Supply Chain**: 100% dependency vulnerability monitoring
-- **Gate Coverage**: All PRs pass comprehensive security gates
+**Security Posture:**
+- **Build Integrity**: CI enforces SLSA-aligned build provenance and attestation
+- **Security Scanning**: Includes CodeQL analysis, dependency vulnerability scanning (e.g., Dependabot), and supply-chain checks (e.g., OSSF Scorecard)
+- **DAST Testing**: OWASP ZAP is used for dynamic application security testing in scheduled and pre-release workflows
+- **Supply Chain Monitoring**: Dependency and supply-chain risks are monitored continuously via CI security tooling
+- **Gate Coverage**: All pull requests must pass configured security and quality gates; see branch protection and CI checks for the authoritative list
 
 ## Future CI/CD Improvements
 

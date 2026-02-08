@@ -10,10 +10,10 @@
 </p>
 
 <p align="center">
-  <a href="#"><img src="https://img.shields.io/badge/Owner-CEO-0A66C2?style=for-the-badge" alt="Owner"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Version-1.0-555?style=for-the-badge" alt="Version"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Effective-2025--01--11-success?style=for-the-badge" alt="Effective Date"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Review-Semi_Annual-orange?style=for-the-badge" alt="Review Cycle"/></a>
+  <img src="https://img.shields.io/badge/Owner-CEO-0A66C2?style=for-the-badge" alt="Owner"/>
+  <img src="https://img.shields.io/badge/Version-1.0-555?style=for-the-badge" alt="Version"/>
+  <img src="https://img.shields.io/badge/Effective-2025--01--11-success?style=for-the-badge" alt="Effective Date"/>
+  <img src="https://img.shields.io/badge/Review-Semi_Annual-orange?style=for-the-badge" alt="Review Cycle"/>
 </p>
 
 **📋 Document Owner:** CEO | **📄 Version:** 1.0 | **📅 Last Updated:** 2025-01-11 (UTC)  
@@ -57,7 +57,7 @@ mindmap
         🔔 Important Services: < 15 min (GitHub Pages DR)
         📊 Standard Services: < 1 hour
       📊 RPO - Recovery Point
-        💾 User Data: 0 (real-time)
+        💾 User Data: 0 (browser-based/local storage, no backend persistence)
         ⚙️ Configuration: 0 (simultaneous deployment)
         🗄️ Historical Records: < 1 min (S3 replication)
       🔄 MTTR - Mean Time To Recover

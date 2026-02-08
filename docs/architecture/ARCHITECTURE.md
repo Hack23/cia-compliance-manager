@@ -1,6 +1,6 @@
 # 🏗️ CIA Compliance Manager Architecture
 
-**Version:** 1.0 | **Last Updated:** 2025-01-11 | **Status:** ✅ Production Ready
+**Version:** 1.0 | **Last Updated:** 2026-02-08 | **Status:** ✅ Production Ready
 
 This document provides a comprehensive view of the CIA Compliance Manager architecture using the C4 model, illustrating how components interact to deliver security assessment capabilities.
 
@@ -95,10 +95,10 @@ C4Container
     Person(developer, "Developer", "Maintains and extends platform")
     
     System_Boundary(ciaManager, "CIA Compliance Manager") {
-        Container(frontend, "Frontend Application", "React 19.2.0, TypeScript 5.9.3 (Strict)", "SPA with error boundaries, context API state management")
+        Container(frontend, "Frontend Application", "React 19.2.x, TypeScript 5.9.x (Strict)", "SPA with error boundaries, context API state management")
         ContainerDb(staticData, "Static Data", "TypeScript/JSON", "Security controls, frameworks, CIA triad data")
-        Container(buildSystem, "Build System", "Vite 7.2.4, esbuild", "Code splitting, tree-shaking, bundle optimization")
-        Container(testFramework, "Test Infrastructure", "Vitest 4.0.6, Cypress 15.7.0", "Unit tests (83.26% line coverage), E2E tests")
+        Container(buildSystem, "Build System", "Vite 7.x, esbuild", "Code splitting, tree-shaking, bundle optimization")
+        Container(testFramework, "Test Infrastructure", "Vitest 4.x, Cypress 15.x", "Unit tests (83.26% line coverage), E2E tests")
         Container(securityScan, "Security Scanner", "CodeQL, SonarCloud, Dependabot", "SAST, SCA, vulnerability detection")
         Container(deployment, "Deployment", "AWS CloudFront + S3, GitHub Pages DR", "Multi-region with SLSA Level 3 attestation")
     }
@@ -850,12 +850,12 @@ sequenceDiagram
 | ADR-003 | Service Layer with Hooks | Clean API between UI and business logic | Full TypeScript strict mode compliance |
 | ADR-004 | CIA Triad Organization | Aligns with industry-standard security model | Comprehensive testing coverage (83.26%) |
 | ADR-005 | Multiple Security Views | Addresses technical and business stakeholder needs | Performance optimized with code splitting |
-| ADR-006 | React 19.x Adoption | Leverage concurrent features, error boundaries | **NEW**: Automatic batching, improved rendering |
-| ADR-007 | TypeScript Strict Mode | Eliminate runtime type errors, improve maintainability | **NEW**: Zero `any` types, full null safety |
-| ADR-008 | Vite Build System | Fast development experience, optimized production builds | **NEW**: 175KB bundle, 8s build time |
-| ADR-009 | Comprehensive Testing | Ensure code quality and prevent regressions | **NEW**: 83.26% line coverage with Vitest 4.x |
-| ADR-010 | SLSA Level 3 Attestation | Supply chain security and build integrity | **NEW**: Public provenance verification |
-| ADR-011 | AWS CloudFront + S3 Deployment | Multi-region resilience, global CDN, production-grade infrastructure | **NEW**: CloudFront CDN, S3 multi-region, Route53 DNS, GitHub Pages DR |
+| ADR-006 | React 19.x Adoption | Leverage concurrent features, error boundaries | Automatic batching, improved rendering |
+| ADR-007 | TypeScript Strict Mode | Eliminate runtime type errors, improve maintainability | Zero `any` types, full null safety |
+| ADR-008 | Vite Build System | Fast development experience, optimized production builds | 175KB bundle, 8s build time |
+| ADR-009 | Comprehensive Testing | Ensure code quality and prevent regressions | 83.26% line coverage with Vitest 4.x |
+| ADR-010 | SLSA Level 3 Attestation | Supply chain security and build integrity | Public provenance verification |
+| ADR-011 | AWS CloudFront + S3 Deployment | Multi-region resilience, global CDN, production-grade infrastructure | CloudFront CDN, S3 multi-region, Route53 DNS, GitHub Pages DR |
 
 ### Key Quality Attributes (v1.0 Enhancements)
 
