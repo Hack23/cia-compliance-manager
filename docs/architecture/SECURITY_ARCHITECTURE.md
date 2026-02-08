@@ -686,7 +686,7 @@ The CIA Compliance Manager implements comprehensive AWS security controls across
 ```yaml
 Role: GithubWorkFlowRole
 ARN: arn:aws:iam::172017021075:role/GithubWorkFlowRole
-Account: 172017021075 (AWS Account ID - public, non-sensitive per AWS)
+Account: 172017021075
 Region: us-east-1 (Primary)
 
 Permissions:
