@@ -816,11 +816,11 @@ allowed-endpoints:    # Explicit allowlist only
 **Configuration:**
 ```yaml
 Role ARN: arn:aws:iam::172017021075:role/GithubWorkFlowRole
-Session Name: githubworkflowrolesessiont2 (as defined in workflow)
+Session Name: githubworkflowrolesessiont2
 Region: us-east-1
 ```
 
-> **Note:** The session name `githubworkflowrolesessiont2` matches the exact configuration in `.github/workflows/deploy-s3.yml` line 101. This is the production session identifier used for CloudTrail audit logging to track which workflow execution performed AWS actions. The naming convention is intentionally short and matches the deployed workflow configuration for audit trail consistency. While more descriptive names like `gh-workflow-deploy-session` could be considered, this would require updating the deployed workflow and audit trail tracking.
+> **Note:** This session name is configured in `.github/workflows/deploy-s3.yml` (line 101) for CloudTrail audit logging.
 
 **Authentication Flow:**
 1. GitHub Actions requests OIDC token from GitHub's token service

@@ -419,8 +419,6 @@ Permissions:
 Trust Policy: GitHub OIDC provider with repository condition
 ```
 
-> **Note:** AWS account IDs (172017021075) are not considered sensitive information per [AWS Security Best Practices](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-identifiers.html). They are required for resource ARNs and cannot be used alone to access resources without proper IAM credentials.
-
 #### **☁️ CloudFront Distribution Security**
 
 **Content Delivery & Security:**
