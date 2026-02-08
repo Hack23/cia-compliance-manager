@@ -475,7 +475,7 @@ Metadata (XML, JSON, TXT):
 **Configuration:**
 - **Primary**: ALIAS record to CloudFront distribution
 - **Disaster Recovery**: Can failover to GitHub Pages (< 15 min RTO)
-- **DNSSEC**: Not currently enabled (future consideration)
+- **DNSSEC**: Future enhancement under consideration
 - **Health Checks**: CloudFront inherent health monitoring
 - **TTL Strategy**: Balance between failover speed and query cost
 
@@ -970,7 +970,7 @@ flowchart TD
 CIA Compliance Manager implements applicable AWS FSBP controls for static content delivery:
 
 - **✅ IAM Security**: OIDC authentication for deployments (no long-lived credentials)
-- **✅ S3 Security**: SSE-S3 encryption, versioning, bucket policies, access logging
+- **✅ S3 Security**: SSE-S3 encryption, versioning, bucket policies
 - **✅ CloudFront Security**: TLS 1.3, AWS Shield Standard, security headers
 - **🚫 No AWS Config**: No AWS resources requiring configuration management
 - **🚫 No Security Hub**: No compute services generating security findings

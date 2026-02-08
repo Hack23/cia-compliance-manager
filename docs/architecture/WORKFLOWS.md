@@ -787,7 +787,7 @@ Uses **Harden-Runner v2.14.2** with strict egress policy:
 egress-policy: block  # Default deny all outbound traffic
 allowed-endpoints: >  # Explicit allowlist, newline-separated
   sts.us-east-1.amazonaws.com:443
-  *.s3.us-east-1.amazonaws.com:443
+  ciacompliancemanager-frontend-us-east-1-172017021075.s3.us-east-1.amazonaws.com:443
   cloudfront.amazonaws.com:443
   cloudformation.us-east-1.amazonaws.com:443
   github.com:443
@@ -803,7 +803,7 @@ allowed-endpoints: >  # Explicit allowlist, newline-separated
   # See .github/workflows/deploy-s3.yml for complete list (50+ endpoints)
 ```
 
-**Note:** The above shows key security-relevant endpoints. The complete allowlist in `.github/workflows/deploy-s3.yml` includes additional endpoints for build tools, security scanners, and infrastructure services.
+**Note:** The above shows key security-relevant endpoints only and is provided as an illustrative example. The complete authoritative allowlist in `.github/workflows/deploy-s3.yml` includes additional endpoints for build tools, security scanners, and infrastructure services. Do not copy this snippet for production use - always refer to the actual workflow file.
 
 **Security Benefits:**
 - ✅ Prevents data exfiltration from compromised dependencies
