@@ -52,17 +52,17 @@ mindmap
         🔍 Audit Failures
         ⚠️ Legal Consequences
     🎯 Recovery Objectives
-      ⏱️ RTO - Recovery Time
-        🚨 Critical Services: < 5 min (CloudFront)
-        🔔 Important Services: < 15 min (GitHub Pages DR)
-        📊 Standard Services: < 1 hour
-      📊 RPO - Recovery Point
+      ⏱️ RTO - Recovery Time (Objectives)
+        🚨 Critical Services: Target ~5 min (CloudFront origin failover + health checks + routing propagation)
+        🔔 Important Services: Target ~15 min (GitHub Pages DR via DNS switch + TTL propagation)
+        📊 Standard Services: Target < 1 hour
+      📊 RPO - Recovery Point (Objectives)
         💾 User Data: 0 (browser-based/local storage, no backend persistence)
-        ⚙️ Configuration: 0 (simultaneous deployment)
+        ⚙️ Configuration: Last successful CI/CD deployment
         🗄️ Historical Records: Asynchronous S3 CRR (monitor replication status)
-      🔄 MTTR - Mean Time To Recover
-        ☁️ CloudFront: < 5 min (automatic)
-        📄 GitHub Pages DR: < 15 min (DNS switch)
+      🔄 MTTR - Mean Time To Recover (Objectives)
+        ☁️ CloudFront: Target ~5 min (dependent on health check detection + routing)
+        📄 GitHub Pages DR: Target ~15 min (DNS switch + TTL/resolver propagation)
       ⬆️ Uptime Requirements
         ☁️ CloudFront: 99.9% (SLA)
         💾 S3 Multi-Region: 99.99% (SLA)
@@ -83,8 +83,8 @@ mindmap
         🔒 Least Privilege
     🔄 Disaster Recovery
       📄 GitHub Pages Fallback
-        🔄 Parallel Deployment
-        📊 < 15 min RTO (DNS)
+        🔄 Release-based Deployment (via .github/workflows/release.yml)
+        📊 Target ~15 min RTO (DNS switch + propagation)
         🌐 Alternative CDN
     🚀 Recovery Strategies
       💾 Data Backup & Recovery

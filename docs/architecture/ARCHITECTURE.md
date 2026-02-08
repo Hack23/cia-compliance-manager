@@ -665,32 +665,32 @@ C4Component
 #### **Multi-Region Resilience**
 - **Primary Region**: us-east-1 (N. Virginia)
 - **Replication Strategy**: Cross-region replication to secondary region
-- **RTO Objectives**: 
-  - CloudFront failover: < 5 minutes (automatic)
-  - GitHub Pages DR: < 15 minutes (Route53 DNS switch)
-- **RPO Objectives**: 
-  - Static Content: Aligns with S3 bucket RPO (deployment + CloudFront invalidation)
+- **RTO Objectives** (Non-Binding Targets): 
+  - CloudFront failover: target ~5 minutes when origin failover (origin groups) is configured with health checks; actual recovery time depends on health check detection + CloudFront routing propagation
+  - GitHub Pages DR: target ~15 minutes from successful `release.yml` DR deployment + Route53 DNS switch; actual cutover timing further constrained by DNS TTL and recursive resolver cache behavior
+- **RPO Objectives** (Non-Binding Targets): 
+  - Static Content: Aligns with S3 bucket RPO (deployment + CloudFront invalidation propagation)
   - S3 Multi-Region Replication: Asynchronous CRR; monitor replication metrics (RTC SLA if enabled)
-  - GitHub Pages DR: 0 (parallel deployment maintains separate copy)
+  - GitHub Pages DR: target near-zero data loss; deployment via `release.yml` maintains a separate copy (actual RPO depends on release frequency)
 
 #### **Cache Strategy**
 - **Static Assets**: 1-year cache with immutable flag for versioned assets
 - **HTML Content**: 1-hour cache with revalidation for content updates
 - **Metadata Files**: 1-day cache for sitemap.xml, robots.txt
 - **Performance**: Screenshots excluded from cache header updates for deployment speed
-- **Invalidation**: Automatic CloudFront cache invalidation after every deployment
+- **Invalidation**: Automatic CloudFront cache invalidation is triggered after each AWS deployment (propagation is eventual, typically within minutes)
 
 ### **Deployment Workflow**
 
-The deployment process is orchestrated by `.github/workflows/deploy-s3.yml`:
+The AWS deployment process is orchestrated by `.github/workflows/deploy-s3.yml`:
 
 1. **Build Phase**: TypeScript compilation, Vite bundling, asset optimization
 2. **AWS Authentication**: OIDC authentication with IAM role assumption
 3. **S3 Sync**: Upload all built assets to primary S3 bucket
 4. **Cache Header Configuration**: Apply optimized cache headers to all asset types
-5. **CloudFront Invalidation**: Invalidate CloudFront cache for immediate updates
-6. **GitHub Pages Deployment**: Parallel deployment to DR fallback (separate workflow)
-7. **Verification**: Post-deployment health checks and monitoring
+5. **CloudFront Invalidation**: Trigger CloudFront cache invalidation; propagation to edge locations is eventual (typically completed within minutes)
+6. **GitHub Pages Deployment (DR)**: Handled by `.github/workflows/release.yml` on tagged/manual releases to publish the static site copy to GitHub Pages as a DR fallback (not run on every `main` push)
+7. **Verification**: Post-deployment health checks and monitoring for the AWS-hosted deployment (GitHub Pages verification occurs within the release workflow)
 
 **Compliance Mapping:**
 - **ISO 27001 A.12.1**: Change management and deployment controls

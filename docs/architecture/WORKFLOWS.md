@@ -916,13 +916,24 @@ Content-Type: application/xml | application/json | text/plain
 CloudFrontDistId=$(aws cloudformation describe-stacks \
   --stack-name ciacompliancemanager-frontend \
   --query "Stacks[0].Outputs[?OutputKey=='CloudFrontDistributionId'].OutputValue" \
-  --output text)
+  --output text 2>/dev/null || echo "")
 
-# Fallback: Search distributions by S3 origin
-CloudFrontDistId=$(aws cloudfront list-distributions \
-  --output json | \
-  jq -r ".DistributionList.Items[] | select(.Origins.Items[].DomainName | contains(\"$S3_BUCKET_NAME\")) | .Id")
+# Fallback: Search distributions by S3 origin (with validation)
+if [ -z "$CloudFrontDistId" ]; then
+  CloudFrontDistId=$(aws cloudfront list-distributions \
+    --output json 2>/dev/null | \
+    jq -r ".DistributionList.Items[] | select(.Origins.Items[].DomainName | contains(\"$S3_BUCKET_NAME\")) | .Id" | \
+    head -n 1 || echo "")
+fi
+
+# Validate result
+if [ -z "$CloudFrontDistId" ] || [ "$CloudFrontDistId" = "None" ]; then
+  echo "❌ Error: Could not discover CloudFront distribution ID"
+  exit 1
+fi
 ```
+
+> **Note:** This snippet is schematic – always refer to `.github/workflows/deploy-s3.yml` for the authoritative implementation.
 
 **Cache Invalidation:**
 ```bash

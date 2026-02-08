@@ -725,16 +725,18 @@ Trust Relationship:
 - **DDoS Protection**: AWS Shield Standard (automatic)
 
 **Security Headers Applied:**
+
+*App-level (via `index.html` meta tags and `vite.config.ts` dev server):*
 ```http
 Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: https://fonts.gstatic.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;
 X-Content-Type-Options: nosniff
 X-Frame-Options: DENY
-Strict-Transport-Security: max-age=31536000; includeSubDomains
-Referrer-Policy: strict-origin-when-cross-origin
 Cross-Origin-Opener-Policy: same-origin
-Cross-Origin-Resource-Policy: same-origin
-Permissions-Policy: geolocation=(), microphone=(), camera=()
+Cross-Origin-Embedder-Policy: require-corp
+Referrer-Policy: strict-origin-when-cross-origin
 ```
+
+> **Note:** Additional headers like `Strict-Transport-Security`, `Cross-Origin-Resource-Policy`, and `Permissions-Policy` can be configured at the CloudFront distribution level via response headers policies if needed.
 
 **Cache & Performance:**
 - Edge location caching for global low-latency delivery
