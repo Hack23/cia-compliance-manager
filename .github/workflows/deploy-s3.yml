@@ -1,8 +1,8 @@
 name: Deploy
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
+  workflow_dispatch:
 permissions: write-all
 
 env:
@@ -86,126 +86,104 @@ jobs:
             ${{ runner.os }}-npm-minify-
             ${{ runner.os }}-npm-
 
-      - name: Cache Docker layers
-        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-docker-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-docker-
-
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@8df5847569e6427dd6c4fb1cf565c83acfa8afa7 # v6.0.0
         with:
           role-to-assume: arn:aws:iam::172017021075:role/GithubWorkFlowRole
           role-session-name: githubworkflowrolesessiont2
           aws-region: ${{ env.AWS_REGION }}
-      - name: Deploy to S3
+      - name: Deploy to S3 with proper cache headers
         run: |
-          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ --exclude ".git/*"
-      - name: Set cache headers S3
-        run: |
-          # Set cache headers for CSS files (1 year cache for versioned assets)
-          echo "🎨 Setting cache headers for CSS files..."
-          for css_file in $(aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/ --recursive | grep "\.css" | awk '{print $4}' | grep -v "^screenshots/"); do
-            if [ -n "$css_file" ]; then
-              aws s3 cp s3://${{ env.S3_BUCKET_NAME }}/$css_file s3://${{ env.S3_BUCKET_NAME }}/$css_file \
-                --metadata-directive REPLACE \
-                --cache-control "public, max-age=31536000, immutable" \
-                --content-type "text/css"
-              echo "✅ Updated cache headers for $css_file"
-            fi
-          done
-
-          # Set cache headers for JavaScript files (1 year cache for versioned assets)
-          echo "⚡ Setting cache headers for JavaScript files..."
-          for js_file in $(aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/ --recursive | grep "\.js" | awk '{print $4}' | grep -v "^screenshots/"); do
-            if [ -n "$js_file" ]; then
-              aws s3 cp s3://${{ env.S3_BUCKET_NAME }}/$js_file s3://${{ env.S3_BUCKET_NAME }}/$js_file \
-                --metadata-directive REPLACE \
-                --cache-control "public, max-age=31536000, immutable" \
-                --content-type "application/javascript"
-              echo "✅ Updated cache headers for $js_file"
-            fi
-          done
-
-          # Set cache headers for image files (1 year cache for static images)
-          # Note: Excluding screenshots/ directory for performance (large number of files, CloudFront handles caching)
-          echo "🖼️  Setting cache headers for image files (excluding screenshots)..."
-          for img_file in $(aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/ --recursive | grep -E "\.(webp|png|jpg|jpeg|gif|svg|ico)" | awk '{print $4}' | grep -v "^screenshots/"); do
-            if [ -n "$img_file" ]; then
-              # Determine content type based on file extension
-              case "$img_file" in
-                *.webp) content_type="image/webp" ;;
-                *.png) content_type="image/png" ;;
-                *.jpg|*.jpeg) content_type="image/jpeg" ;;
-                *.gif) content_type="image/gif" ;;
-                *.svg) content_type="image/svg+xml" ;;
-                *.ico) content_type="image/x-icon" ;;
-                *) content_type="application/octet-stream" ;;
-              esac
-              aws s3 cp s3://${{ env.S3_BUCKET_NAME }}/$img_file s3://${{ env.S3_BUCKET_NAME }}/$img_file \
-                --metadata-directive REPLACE \
-                --cache-control "public, max-age=31536000, immutable" \
-                --content-type "$content_type"
-              echo "✅ Updated cache headers for $img_file"
-            fi
-          done
-
-          # Set cache headers for HTML files (short cache - 1 hour for dynamic content)
-          echo "📄 Setting cache headers for HTML files..."
-          for html_file in $(aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/ --recursive | grep "\.html" | awk '{print $4}' | grep -v "^screenshots/"); do
-            if [ -n "$html_file" ]; then
-              aws s3 cp s3://${{ env.S3_BUCKET_NAME }}/$html_file s3://${{ env.S3_BUCKET_NAME }}/$html_file \
-                --metadata-directive REPLACE \
-                --cache-control "public, max-age=3600, must-revalidate" \
-                --content-type "text/html; charset=utf-8"
-              echo "✅ Updated cache headers for $html_file"
-            fi
-          done
-
-          # Set cache headers for metadata files (medium cache - 1 day)
-          echo "📋 Setting cache headers for metadata files..."
-          for meta_file in $(aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/ --recursive | grep -E "\.(xml|json|txt)" | awk '{print $4}' | grep -v "^screenshots/"); do
-            if [ -n "$meta_file" ]; then
-              # Determine content type based on file extension
-              case "$meta_file" in
-                *.xml) content_type="application/xml" ;;
-                *.json) content_type="application/json" ;;
-                *.txt) content_type="text/plain" ;;
-                *) content_type="text/plain" ;;
-              esac
-              aws s3 cp s3://${{ env.S3_BUCKET_NAME }}/$meta_file s3://${{ env.S3_BUCKET_NAME }}/$meta_file \
-                --metadata-directive REPLACE \
-                --cache-control "public, max-age=86400" \
-                --content-type "$content_type"
-              echo "✅ Updated cache headers for $meta_file"
-            fi
-          done
-
-          # Set cache headers for font files (1 year cache)
-          echo "🔤 Setting cache headers for font files..."
-          for font_file in $(aws s3 ls s3://${{ env.S3_BUCKET_NAME }}/ --recursive | grep -E "\.(woff|woff2|ttf|eot|otf)" | awk '{print $4}' | grep -v "^screenshots/"); do
-            if [ -n "$font_file" ]; then
-              # Determine content type based on file extension
-              case "$font_file" in
-                *.woff) content_type="font/woff" ;;
-                *.woff2) content_type="font/woff2" ;;
-                *.ttf) content_type="font/ttf" ;;
-                *.eot) content_type="application/vnd.ms-fontobject" ;;
-                *.otf) content_type="font/otf" ;;
-                *) content_type="application/octet-stream" ;;
-              esac
-              aws s3 cp s3://${{ env.S3_BUCKET_NAME }}/$font_file s3://${{ env.S3_BUCKET_NAME }}/$font_file \
-                --metadata-directive REPLACE \
-                --cache-control "public, max-age=31536000, immutable" \
-                --content-type "$content_type"
-              echo "✅ Updated cache headers for $font_file"
-            fi
-          done
-
-          echo "✅ Cache headers configuration completed for all asset types"
-          echo "ℹ️  Screenshots directory excluded for performance (CloudFront uses S3 default headers)"
+          # Deploy JS and CSS files with 1-year cache (versioned, immutable assets)
+          echo "⚡ Deploying JS and CSS files with immutable cache headers..."
+          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
+            --exclude "*" \
+            --include "*.js" \
+            --include "*.css" \
+            --cache-control "public, max-age=31536000, immutable" \
+            --size-only \
+            --exclude ".git/*" \
+            --exclude "screenshots/*"
+          
+          # Deploy font files with 1-year cache (static, immutable assets)
+          echo "🔤 Deploying font files with immutable cache headers..."
+          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
+            --exclude "*" \
+            --include "*.woff" \
+            --include "*.woff2" \
+            --include "*.ttf" \
+            --include "*.eot" \
+            --include "*.otf" \
+            --cache-control "public, max-age=31536000, immutable" \
+            --size-only \
+            --exclude ".git/*" \
+            --exclude "screenshots/*"
+          
+          # Deploy image files with 1-year cache (static, immutable assets)
+          echo "🖼️  Deploying image files with immutable cache headers..."
+          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
+            --exclude "*" \
+            --include "*.webp" \
+            --include "*.png" \
+            --include "*.jpg" \
+            --include "*.jpeg" \
+            --include "*.gif" \
+            --include "*.svg" \
+            --include "*.ico" \
+            --cache-control "public, max-age=31536000, immutable" \
+            --size-only \
+            --exclude ".git/*" \
+            --exclude "screenshots/*"
+          
+          # Deploy HTML files with short cache (1 hour, must revalidate)
+          echo "📄 Deploying HTML files with revalidation cache headers..."
+          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
+            --exclude "*" \
+            --include "*.html" \
+            --cache-control "public, max-age=3600, must-revalidate" \
+            --content-type "text/html; charset=utf-8" \
+            --size-only \
+            --exclude ".git/*" \
+            --exclude "screenshots/*"
+          
+          # Deploy metadata files with medium cache (1 day)
+          echo "📋 Deploying metadata files with 1-day cache headers..."
+          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
+            --exclude "*" \
+            --include "*.xml" \
+            --include "*.json" \
+            --include "*.txt" \
+            --cache-control "public, max-age=86400" \
+            --size-only \
+            --exclude ".git/*" \
+            --exclude "screenshots/*"
+          
+          # Deploy all remaining files not already handled (catch-all)
+          echo "📦 Deploying remaining files..."
+          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
+            --exclude ".git/*" \
+            --exclude "screenshots/*" \
+            --exclude "*.js" \
+            --exclude "*.css" \
+            --exclude "*.woff" \
+            --exclude "*.woff2" \
+            --exclude "*.ttf" \
+            --exclude "*.eot" \
+            --exclude "*.otf" \
+            --exclude "*.webp" \
+            --exclude "*.png" \
+            --exclude "*.jpg" \
+            --exclude "*.jpeg" \
+            --exclude "*.gif" \
+            --exclude "*.svg" \
+            --exclude "*.ico" \
+            --exclude "*.html" \
+            --exclude "*.xml" \
+            --exclude "*.json" \
+            --exclude "*.txt" \
+            --size-only
+          
+          echo "✅ Deployment completed with optimized cache headers"
 
       # Invalidate CloudFront cache to ensure latest content is served
       - name: Invalidate CloudFront
