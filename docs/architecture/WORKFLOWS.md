@@ -820,6 +820,8 @@ Session Name: githubworkflowrolesessiont2 (as defined in workflow)
 Region: us-east-1
 ```
 
+> **Note:** The session name `githubworkflowrolesessiont2` matches the exact configuration in `.github/workflows/deploy-s3.yml` line 101. This session identifier is used for CloudTrail audit logging to track which workflow execution performed AWS actions. The naming convention is intentionally short to comply with AWS session name length constraints while remaining unique for audit trail purposes.
+
 **Authentication Flow:**
 1. GitHub Actions requests OIDC token from GitHub's token service
 2. Token contains workflow identity (repository, workflow, branch)
