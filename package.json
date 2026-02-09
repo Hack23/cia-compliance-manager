@@ -62,7 +62,7 @@
     ]
   },
   "devDependencies": {
-    "@eslint/js": "9.39.2",
+    "@eslint/js": "10.0.1",
     "@tailwindcss/postcss": "4.1.18",
     "@testing-library/cypress": "^10.1.0",
     "@testing-library/jest-dom": "6.9.1",
@@ -87,7 +87,7 @@
     "cypress-real-events": "1.15.0",
     "cypress-wait-until": "3.0.2",
     "dependency-cruiser": "^17.3.8",
-    "eslint": "9.39.2",
+    "eslint": "10.0.0",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "7.0.1",
     "globals": "17.3.0",
