@@ -224,10 +224,6 @@ describe('Security: Input Validation', () => {
 });
 ```
 
-## ISMS Alignment
-
-This skill enforces requirements from:
-
 ### Hack23 Secure Development Policy
 - **Section 4.1**: Secure coding practices mandatory
 - **Section 4.3**: Security testing in all phases
