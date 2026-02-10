@@ -293,6 +293,645 @@ describe('Security: Input Validation', () => {
 → Log security events (auth failures, permission denials)
 → Implement log retention policies
 
+## 🔄 Secure Development Lifecycle (SDLC) Integration
+
+**RULE**: Security must be integrated into every phase of the development lifecycle.
+
+### 📋 Phase 1: Planning & Design
+
+**Security Activities**:
+- Threat modeling (STRIDE analysis)
+- Security requirements definition
+- Data classification and protection requirements
+- Architecture security review
+- Third-party component risk assessment
+
+**Deliverables**:
+```typescript
+// ✅ GOOD: Security requirements documented
+interface SecurityRequirements {
+  readonly authentication: {
+    readonly method: 'OAuth2' | 'JWT' | 'SAML';
+    readonly mfaRequired: boolean;
+    readonly sessionTimeout: number;  // seconds
+  };
+  readonly authorization: {
+    readonly model: 'RBAC' | 'ABAC';
+    readonly defaultDeny: boolean;
+  };
+  readonly dataProtection: {
+    readonly encryptionAtRest: boolean;
+    readonly encryptionInTransit: boolean;
+    readonly keyManagement: 'AWS_KMS' | 'Azure_KeyVault';
+  };
+  readonly auditLogging: {
+    readonly enabled: boolean;
+    readonly retentionDays: number;
+  };
+}
+
+const PROJECT_SECURITY_REQUIREMENTS: SecurityRequirements = {
+  authentication: {
+    method: 'OAuth2',
+    mfaRequired: true,
+    sessionTimeout: 3600,
+  },
+  authorization: {
+    model: 'RBAC',
+    defaultDeny: true,
+  },
+  dataProtection: {
+    encryptionAtRest: true,
+    encryptionInTransit: true,
+    keyManagement: 'AWS_KMS',
+  },
+  auditLogging: {
+    enabled: true,
+    retentionDays: 365,
+  },
+};
+```
+
+**Reference**: [Secure Development Policy - Phase 1: Planning & Design](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#phase-1-planning--design)
+
+### 💻 Phase 2: Development
+
+**Security Activities**:
+- Secure coding practices (OWASP Top 10 prevention)
+- Code review with security focus
+- Static Application Security Testing (SAST)
+- Dependency vulnerability scanning
+- Secret scanning and prevention
+
+**Secure Coding Standards**:
+```typescript
+// ✅ GOOD: Secure TypeScript patterns
+
+// 1. Input Validation
+import { z } from 'zod';
+
+const UserInputSchema = z.object({
+  email: z.string().email().max(254),
+  password: z.string().min(12).max(128),
+  displayName: z.string().min(1).max(100).regex(/^[a-zA-Z0-9\s]+$/),
+});
+
+function registerUser(input: unknown): Promise<User> {
+  // Validate input structure
+  const validated = UserInputSchema.parse(input);
+  
+  // Additional security checks
+  if (await isEmailBlacklisted(validated.email)) {
+    throw new Error('Email not allowed');
+  }
+  
+  // Hash password with bcrypt
+  const hashedPassword = await bcrypt.hash(validated.password, 12);
+  
+  return createUser({
+    ...validated,
+    password: hashedPassword,
+  });
+}
+
+// 2. SQL Injection Prevention
+import { sql } from 'kysely';
+
+// ❌ BAD: String concatenation
+const badQuery = `SELECT * FROM users WHERE email = '${email}'`;
+
+// ✅ GOOD: Parameterized queries
+const users = await db
+  .selectFrom('users')
+  .selectAll()
+  .where('email', '=', email)
+  .execute();
+
+// 3. XSS Prevention
+import DOMPurify from 'dompurify';
+
+function renderUserContent(html: string): string {
+  // Sanitize HTML before rendering
+  return DOMPurify.sanitize(html, {
+    ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'a'],
+    ALLOWED_ATTR: ['href'],
+  });
+}
+
+// 4. CSRF Protection
+import { generateToken, validateToken } from 'csrf';
+
+const csrfToken = generateToken(req);
+res.cookie('XSRF-TOKEN', csrfToken, {
+  httpOnly: false,  // JavaScript needs to read this
+  secure: true,
+  sameSite: 'strict',
+});
+
+// Validate on state-changing requests
+if (!validateToken(req.body._csrf, req.cookies['XSRF-TOKEN'])) {
+  throw new Error('CSRF validation failed');
+}
+
+// 5. Secure Session Management
+const sessionConfig = {
+  secret: process.env.SESSION_SECRET!,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: true,  // HTTPS only
+    sameSite: 'strict' as const,
+    maxAge: 3600000,  // 1 hour
+  },
+};
+```
+
+**Code Review Checklist**:
+- [ ] All user inputs validated
+- [ ] No hardcoded secrets or credentials
+- [ ] Parameterized queries used (no string concatenation)
+- [ ] Output encoding applied
+- [ ] Authentication and authorization implemented
+- [ ] Sensitive data encrypted
+- [ ] Error messages don't leak information
+- [ ] Security test cases included
+
+**Reference**: [Secure Development Policy - Phase 2: Development](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#phase-2-development)
+
+### 🧪 Phase 3: Security Testing
+
+**Security Testing Types**:
+
+#### 🕷️ Static Application Security Testing (SAST)
+```yaml
+# ✅ GOOD: CodeQL SAST configuration
+name: Security Scanning - SAST
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  codeql:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript, typescript
+          queries: security-and-quality
+      
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+      
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+```
+
+#### 🌐 Dynamic Application Security Testing (DAST)
+```typescript
+// ✅ GOOD: OWASP ZAP integration
+import { ZapClient } from 'zaproxy';
+
+async function runDAST(targetUrl: string): Promise<DastResults> {
+  const zap = new ZapClient({
+    apiKey: process.env.ZAP_API_KEY,
+    proxy: 'http://localhost:8080',
+  });
+  
+  // Spider the application
+  await zap.spider.scan(targetUrl);
+  await zap.spider.waitForComplete();
+  
+  // Active scan for vulnerabilities
+  await zap.ascan.scan(targetUrl);
+  await zap.ascan.waitForComplete();
+  
+  // Get alerts
+  const alerts = await zap.core.alerts();
+  
+  return {
+    targetUrl,
+    scanDate: new Date(),
+    alerts: alerts.filter(a => a.risk !== 'Informational'),
+  };
+}
+```
+
+#### 🔍 Software Composition Analysis (SCA)
+```bash
+# ✅ GOOD: Multi-tool dependency scanning
+npm audit --audit-level=high
+npm run snyk-test
+trivy fs --scanners vuln .
+```
+
+#### 🧪 Interactive Application Security Testing (IAST)
+```typescript
+// ✅ GOOD: Runtime security monitoring
+import { Contrast } from '@contrast/agent';
+
+if (process.env.NODE_ENV === 'test') {
+  Contrast.start({
+    apiKey: process.env.CONTRAST_API_KEY,
+    serviceKey: process.env.CONTRAST_SERVICE_KEY,
+    appName: 'cia-compliance-manager',
+  });
+}
+```
+
+#### 🎭 Penetration Testing
+```markdown
+# Penetration Testing Checklist
+
+## Pre-engagement
+- [ ] Scope defined and approved
+- [ ] Rules of engagement documented
+- [ ] Emergency contacts identified
+- [ ] Legal authorization obtained
+
+## Testing Phases
+- [ ] Reconnaissance (OSINT)
+- [ ] Vulnerability scanning
+- [ ] Exploitation attempts
+- [ ] Privilege escalation testing
+- [ ] Lateral movement testing
+- [ ] Data exfiltration simulation
+
+## Reporting
+- [ ] Executive summary
+- [ ] Technical findings (CVSS scored)
+- [ ] Proof of concept included
+- [ ] Remediation recommendations
+- [ ] Retest verification
+```
+
+**Reference**: [Secure Development Policy - Phase 3: Security Testing](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#phase-3-security-testing)
+
+### 🚀 Phase 4: Deployment
+
+**Secure Deployment Checklist**:
+```typescript
+// ✅ GOOD: Secure deployment configuration
+interface DeploymentSecurityConfig {
+  readonly environment: 'development' | 'staging' | 'production';
+  readonly securityHeaders: Record<string, string>;
+  readonly corsPolicy: {
+    readonly allowedOrigins: readonly string[];
+    readonly allowedMethods: readonly string[];
+  };
+  readonly rateLimiting: {
+    readonly enabled: boolean;
+    readonly maxRequests: number;
+    readonly windowMs: number;
+  };
+  readonly secretsManagement: {
+    readonly provider: 'AWS_SecretsManager' | 'Azure_KeyVault';
+    readonly rotationEnabled: boolean;
+  };
+}
+
+const PRODUCTION_CONFIG: DeploymentSecurityConfig = {
+  environment: 'production',
+  securityHeaders: {
+    'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+    'X-Content-Type-Options': 'nosniff',
+    'X-Frame-Options': 'DENY',
+    'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';",
+    'X-XSS-Protection': '1; mode=block',
+  },
+  corsPolicy: {
+    allowedOrigins: ['https://cia-compliance-manager.com'],
+    allowedMethods: ['GET', 'POST', 'PUT', 'DELETE'],
+  },
+  rateLimiting: {
+    enabled: true,
+    maxRequests: 100,
+    windowMs: 60000,  // 1 minute
+  },
+  secretsManagement: {
+    provider: 'AWS_SecretsManager',
+    rotationEnabled: true,
+  },
+};
+```
+
+**Deployment Security Gates**:
+- [ ] All security tests passed
+- [ ] No critical or high vulnerabilities
+- [ ] Secrets rotated and not in code
+- [ ] Security headers configured
+- [ ] TLS/SSL certificates valid
+- [ ] Least privilege IAM roles
+- [ ] Monitoring and alerting enabled
+
+**Reference**: [Secure Development Policy - Phase 4: Deployment](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#phase-4-deployment)
+
+### 🔧 Phase 5: Maintenance & Operations
+
+**Ongoing Security Activities**:
+```typescript
+// ✅ GOOD: Security monitoring and response
+interface SecurityMonitoring {
+  readonly metrics: {
+    readonly authFailures: number;
+    readonly rateLimitExceeded: number;
+    readonly suspiciousRequests: number;
+  };
+  readonly alerts: readonly SecurityAlert[];
+  readonly patchStatus: {
+    readonly lastUpdate: Date;
+    readonly pendingCritical: number;
+    readonly pendingHigh: number;
+  };
+}
+
+class SecurityOperations {
+  async monitorSecurityEvents(): Promise<SecurityMonitoring> {
+    const metrics = await this.collectSecurityMetrics();
+    const alerts = await this.getActiveAlerts();
+    const patchStatus = await this.checkPatchStatus();
+    
+    // Auto-response for critical threats
+    if (metrics.suspiciousRequests > 1000) {
+      await this.triggerIncidentResponse('potential_ddos');
+    }
+    
+    return { metrics, alerts, patchStatus };
+  }
+  
+  async performSecurityMaintenance(): Promise<void> {
+    // Regular security tasks
+    await this.rotateSecrets();
+    await this.updateDependencies();
+    await this.reviewAccessLogs();
+    await this.validateBackups();
+  }
+}
+```
+
+**Vulnerability Management SLA** (from [Vulnerability Management Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md)):
+- 🔴 **Critical**: 24 hours
+- 🟠 **High**: 7 days
+- 🟡 **Medium**: 30 days
+- 🟢 **Low**: 90 days
+
+**Reference**: [Secure Development Policy - Phase 5: Maintenance & Operations](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#phase-5-maintenance--operations)
+
+## 🤖 AI-Augmented Development Security Controls
+
+**CRITICAL**: GitHub Copilot custom agents are used extensively in Hack23's development process. These controls ensure AI-generated code maintains security standards.
+
+### 🔐 AI as Proposal Generator, Not Authority
+
+**RULE**: AI-generated code is a proposal that MUST be reviewed by humans for security.
+
+```typescript
+// ✅ GOOD: AI-generated code with human security review
+/**
+ * 🤖 COPILOT GENERATED - CEO REVIEW REQUIRED
+ * 
+ * Security Review Checklist:
+ * - [x] Input validation implemented
+ * - [x] No hardcoded secrets
+ * - [x] Error handling doesn't leak information
+ * - [x] Authentication required
+ * - [x] Authorization enforced
+ * - [x] Security tests included
+ * 
+ * Reviewed by: James Pether Sörling, CEO
+ * Review Date: 2026-02-10
+ */
+async function processPayment(amount: number, userId: string): Promise<PaymentResult> {
+  // AI-generated implementation with security controls
+  // ... (code validated by human reviewer)
+}
+```
+
+### 📋 PR Review Requirements for AI-Generated Code
+
+**MANDATORY**: All AI-generated PRs require CEO approval before merge.
+
+```yaml
+# ✅ GOOD: CODEOWNERS for AI agent PRs
+# .github/CODEOWNERS
+
+# AI agent branches require CEO review
+copilot/** @pethers
+
+# Security-critical paths
+src/auth/** @pethers
+src/services/** @pethers
+.github/workflows/** @pethers
+```
+
+### 🔧 Curator-Agent as Tooling Change
+
+**Context**: The `agent-curator` org-level agent maintains agent configurations, not application code.
+
+**Security Boundary**: Agent curator changes MUST NOT bypass security reviews for application code.
+
+### 🛡️ Security Requirements for AI Usage
+
+```typescript
+// ✅ GOOD: AI usage security policy
+interface AISecurityPolicy {
+  readonly dataProtection: {
+    readonly noPIIInPrompts: boolean;
+    readonly noSecretsInContext: boolean;
+    readonly ismsContextRequired: boolean;
+  };
+  readonly codeGeneration: {
+    readonly humanReviewRequired: boolean;
+    readonly securityTestsRequired: boolean;
+    readonly ceoApprovalForMerge: boolean;
+  };
+  readonly auditTrail: {
+    readonly gitHubLogsComplete: boolean;
+    readonly prDescriptionRequired: boolean;
+    readonly changeJustificationRequired: boolean;
+  };
+}
+
+const COPILOT_SECURITY_POLICY: AISecurityPolicy = {
+  dataProtection: {
+    noPIIInPrompts: true,
+    noSecretsInContext: true,
+    ismsContextRequired: true,  // Load ISMS policies as context
+  },
+  codeGeneration: {
+    humanReviewRequired: true,
+    securityTestsRequired: true,
+    ceoApprovalForMerge: true,
+  },
+  auditTrail: {
+    gitHubLogsComplete: true,
+    prDescriptionRequired: true,
+    changeJustificationRequired: true,
+  },
+};
+```
+
+**Reference**: 
+- [Secure Development Policy - AI-Augmented Development Controls](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#ai-augmented-development-controls)
+- [AI Governance Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/AI_Policy.md)
+- [OWASP LLM Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/OWASP_LLM_Security_Policy.md)
+
+## 📊 Testing Excellence Integration
+
+### 🎯 Unit Test Coverage Standards
+
+**MUST Requirements**:
+- 📊 80%+ overall test coverage
+- 📊 100% coverage for security-critical paths (authentication, authorization, data handling)
+- 📊 All edge cases and error scenarios tested
+
+```typescript
+// ✅ GOOD: Comprehensive security test coverage
+describe('UserAuthentication', () => {
+  describe('Security Tests', () => {
+    it('should reject invalid credentials', async () => {
+      await expect(
+        authenticateUser('user@example.com', 'wrong_password')
+      ).rejects.toThrow('Invalid credentials');
+    });
+    
+    it('should enforce rate limiting', async () => {
+      // Attempt 6 failed logins (limit is 5)
+      for (let i = 0; i < 6; i++) {
+        try {
+          await authenticateUser('user@example.com', 'wrong');
+        } catch (e) {
+          // Expected failures
+        }
+      }
+      
+      // 6th attempt should be rate limited
+      await expect(
+        authenticateUser('user@example.com', 'correct_password')
+      ).rejects.toThrow('Rate limit exceeded');
+    });
+    
+    it('should sanitize error messages', async () => {
+      try {
+        await authenticateUser('invalid-email', 'password');
+      } catch (error) {
+        // Should NOT reveal whether user exists
+        expect(error.message).not.toContain('user not found');
+        expect(error.message).toBe('Invalid credentials');
+      }
+    });
+    
+    it('should enforce session timeout', async () => {
+      const session = await createSession('user@example.com');
+      
+      // Fast-forward time
+      jest.advanceTimersByTime(3600000 + 1000);  // 1 hour + 1 second
+      
+      await expect(
+        validateSession(session.token)
+      ).rejects.toThrow('Session expired');
+    });
+  });
+});
+```
+
+### 🌐 End-to-End Testing Strategy
+
+**Security E2E Tests**:
+```typescript
+// ✅ GOOD: E2E security testing with Cypress
+describe('E2E Security Tests', () => {
+  it('should enforce authentication on protected routes', () => {
+    // Attempt to access protected route without auth
+    cy.visit('/dashboard', { failOnStatusCode: false });
+    
+    // Should redirect to login
+    cy.url().should('include', '/login');
+  });
+  
+  it('should prevent XSS attacks', () => {
+    const xssPayload = '<script>alert("XSS")</script>';
+    
+    cy.login('test@example.com', 'password');
+    cy.visit('/profile');
+    cy.get('[data-testid="display-name-input"]').type(xssPayload);
+    cy.get('[data-testid="save-button"]').click();
+    
+    // Verify script tag was sanitized
+    cy.get('[data-testid="display-name-display"]')
+      .should('not.contain', '<script>');
+  });
+  
+  it('should enforce CSRF protection', () => {
+    cy.login('test@example.com', 'password');
+    
+    // Attempt state-changing request without CSRF token
+    cy.request({
+      method: 'POST',
+      url: '/api/profile/update',
+      failOnStatusCode: false,
+      body: { name: 'Hacker' },
+      headers: {
+        // Missing CSRF token
+      },
+    }).then((response) => {
+      expect(response.status).to.eq(403);
+      expect(response.body.error).to.contain('CSRF');
+    });
+  });
+});
+```
+
+**Reference**: 
+- [Secure Development Policy - Testing Standards](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#unit-test-coverage--quality)
+- [Testing Excellence Skill](.github/skills/testing-excellence.md)
+
+## 🕷️ Advanced Security Testing Framework
+
+### 🐛 Bug Bounty Program Integration
+
+**SHOULD**: Maintain public vulnerability disclosure process.
+
+```markdown
+# Security Vulnerability Disclosure
+
+## Scope
+✅ In scope:
+- Web application (https://cia-compliance-manager.com)
+- API endpoints (https://api.cia-compliance-manager.com)
+- Open source repositories
+
+❌ Out of scope:
+- Third-party services
+- Social engineering
+- Physical attacks
+- DoS attacks
+
+## Reporting
+1. Email: security@hack23.com
+2. PGP key: [link]
+3. Response SLA: 24 hours
+
+## Rewards
+🔴 Critical: €500-€2,000
+🟠 High: €200-€500
+🟡 Medium: €50-€200
+🟢 Low: Recognition
+```
+
+**Reference**: [Vulnerability Management Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md)
+
+**When logging:**
+→ Never log passwords, tokens, or PII
+→ Log security events (auth failures, permission denials)
+→ Implement log retention policies
+
 ## Remember
 
 **Security is not optional. Security is not an afterthought. Security is built-in from the first line of code.**
