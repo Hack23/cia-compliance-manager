@@ -8,14 +8,56 @@ This skill ensures that all development activities comply with Hack23's ISMS pol
 
 ## Core Compliance Frameworks
 
-### Hack23 AB ISMS Public Policies
+### Hack23 AB ISMS Framework (Comprehensive)
 
-**Mandatory Policy Compliance**:
-1. [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md)
-2. [Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md)
-3. [Code Review Standards](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Code_Review_Standards.md)
-4. [Change Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md)
-5. [Incident Response Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Incident_Response_Plan.md)
+**Foundational Policies**:
+1. [🔐 Information Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md) - Overarching ISMS governance
+2. [📈 Information Security Strategy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Strategy.md) - AI-first operations and strategic direction
+3. [🏷️ CLASSIFICATION Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) - Business impact analysis methodology
+4. [📝 STYLE_GUIDE](https://github.com/Hack23/ISMS-PUBLIC/blob/main/STYLE_GUIDE.md) - Documentation standards
+
+**Core Security Policies**:
+1. [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) - Security-integrated SDLC
+2. [🎯 Threat Modeling Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md) - STRIDE and MITRE ATT&CK frameworks
+3. [🔑 Access Control Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Access_Control_Policy.md) - Zero-trust identity and access management
+4. [🚫 Segregation of Duties Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Segregation_of_Duties_Policy.md) - Role separation and compensating controls
+5. [🏷️ Data Classification Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Data_Classification_Policy.md) - Systematic information handling
+6. [🔐 Privacy Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Privacy_Policy.md) - GDPR compliance framework
+7. [🔒 Cryptography Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Cryptography_Policy.md) - Encryption standards
+8. [🌐 Network Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Network_Security_Policy.md) - Cloud-native network protection
+9. [🏠 Physical Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Physical_Security_Policy.md) - Home office security
+10. [📱 Mobile Device Management Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Mobile_Device_Management_Policy.md) - Endpoint protection
+11. [✅ Acceptable Use Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Acceptable_Use_Policy.md) - Behavioral expectations
+
+**AI & Innovation Governance**:
+1. [🤖 AI Governance Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/AI_Policy.md) - EU AI Act compliance and AI risk management
+2. [🛡️ OWASP LLM Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/OWASP_LLM_Security_Policy.md) - LLM-specific security controls
+3. [🔓 Open Source Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Open_Source_Policy.md) - Open source business strategy
+
+**Operational Procedures**:
+1. [🚨 Incident Response Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Incident_Response_Plan.md) - Security incident management
+2. [📝 Change Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md) - Risk-controlled changes
+3. [🔍 Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) - Systematic security testing
+4. [🔄 Business Continuity Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Business_Continuity_Plan.md) - Business resilience
+5. [🆘 Disaster Recovery Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Disaster_Recovery_Plan.md) - Technical system recovery
+6. [💾 Backup Recovery Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Backup_Recovery_Policy.md) - Data protection and recovery
+
+**Asset & Risk Management**:
+1. [💻 Asset Register](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Asset_Register.md) - Information asset inventory
+2. [📉 Risk Register](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Risk_Register.md) - Enterprise risk management
+3. [📊 Risk Assessment Methodology](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Risk_Assessment_Methodology.md) - Quantified risk analysis
+
+**Third Party & Supply Chain**:
+1. [🤝 Third Party Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Third_Party_Management.md) - Supplier risk governance
+2. [🔗 Supplier Security Posture (SUPPLIER.md)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/SUPPLIER.md) - Detailed vendor assessments
+3. [🌐 External Stakeholder Registry](https://github.com/Hack23/ISMS-PUBLIC/blob/main/External_Stakeholder_Registry.md) - Regulatory relationships
+
+**Compliance & Metrics**:
+1. [✅ Compliance Checklist](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Compliance_Checklist.md) - Multi-framework compliance tracking (240+ controls)
+2. [📋 CRA Conformity Assessment](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CRA_Conformity_Assessment_Process.md) - EU Cyber Resilience Act
+3. [📊 Security Metrics](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Security_Metrics.md) - Performance measurement
+4. [📈 ISMS Metrics Dashboard](https://github.com/Hack23/ISMS-PUBLIC/blob/main/ISMS_METRICS_DASHBOARD.md) - Operational KPI tracking
+5. [🌐 ISMS Transparency Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/ISMS_Transparency_Plan.md) - Public disclosure strategy
 
 ### ISO 27001:2022 Controls
 
