@@ -940,7 +940,92 @@ Every code change is a potential attack vector. Think like an attacker, code lik
 
 ## Related Resources
 
-- [Hack23 Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md)
-- [OWASP Top 10](https://owasp.org/www-project-top-ten/)
-- [CWE/SANS Top 25](https://cwe.mitre.org/top25/)
-- [NIST Secure Software Development Framework](https://csrc.nist.gov/Projects/ssdf)
+### 📚 Hack23 ISMS Framework
+- [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) - Comprehensive 95KB guide covering all SDLC phases
+- [🎯 Threat Modeling Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md) - STRIDE, MITRE ATT&CK, risk-based security design
+- [🔍 Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) - Security testing framework and SLA requirements
+- [📊 Risk Assessment Methodology](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Risk_Assessment_Methodology.md) - Risk quantification and prioritization
+- [🔒 Cryptography Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Cryptography_Policy.md) - Encryption standards and key management
+- [📊 Data Classification Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Data_Classification_Policy.md) - CIA Triad classification framework
+- [🤖 AI Governance Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/AI_Policy.md) - AI-first operations and GitHub Copilot governance
+- [🛡️ OWASP LLM Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/OWASP_LLM_Security_Policy.md) - LLM Top 10 2025 security controls
+- [📊 Security Metrics](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Security_Metrics.md) - KPIs for security program effectiveness
+- [🎯 CLASSIFICATION Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) - Business impact analysis
+- [🎯 STYLE_GUIDE](https://github.com/Hack23/ISMS-PUBLIC/blob/main/STYLE_GUIDE.md) - Documentation standards and emoji icons
+
+### 🎯 Related Skills
+- [Threat Modeling Skill](threat-modeling.md) - STRIDE framework, DFD, attack surface analysis
+- [ISMS Compliance Skill](isms-compliance.md) - Framework alignment (ISO 27001, NIST CSF, CIS)
+- [Data Protection Skill](data-protection.md) - Privacy by Design, GDPR compliance
+- [Testing Excellence Skill](testing-excellence.md) - Comprehensive testing pyramid
+- [Code Quality Excellence Skill](code-quality-excellence.md) - Quality-first development
+- [AI Governance Skill](ai-governance.md) - EU AI Act, OWASP LLM Top 10
+- [Compliance Frameworks Skill](compliance-frameworks.md) - Multi-framework compliance mapping
+
+### 🌐 External Standards & Resources
+- [OWASP Top 10 (2021)](https://owasp.org/www-project-top-ten/) - Most critical web application security risks
+- [OWASP ASVS 4.0](https://owasp.org/www-project-application-security-verification-standard/) - Application Security Verification Standard
+- [OWASP Testing Guide v4.2](https://owasp.org/www-project-web-security-testing-guide/) - Comprehensive security testing methodology
+- [CWE/SANS Top 25](https://cwe.mitre.org/top25/) - Most dangerous software weaknesses
+- [MITRE ATT&CK Framework](https://attack.mitre.org/) - Adversary tactics and techniques
+- [NIST Secure Software Development Framework (SSDF)](https://csrc.nist.gov/Projects/ssdf) - Security practices for SDLC
+- [ISO/IEC 27034](https://www.iso.org/standard/44378.html) - Application security standard
+- [CERT Secure Coding Standards](https://wiki.sei.cmu.edu/confluence/display/seccode) - Language-specific secure coding
+- [GitHub Security Best Practices](https://docs.github.com/en/code-security) - GitHub-native security features
+- [Snyk Vulnerability Database](https://snyk.io/vuln/) - Open source vulnerability intelligence
+
+## 🎯 Compliance Framework Mapping
+
+### ISO 27001:2022 Controls
+- **A.5.23**: Information security for use of cloud services
+- **A.8.25**: Secure development life cycle - Complete SDLC security integration
+- **A.8.26**: Application security requirements - Threat modeling and security requirements
+- **A.8.27**: Secure system architecture and engineering principles - Defense in depth
+- **A.8.28**: Secure coding - OWASP Top 10 prevention patterns
+- **A.8.29**: Security testing in development and acceptance - SAST, DAST, SCA, IAST, penetration testing
+- **A.8.30**: Outsourced development - Third-party component risk assessment
+- **A.8.31**: Separation of development, test and production environments
+- **A.8.32**: Change management - Security gates in deployment
+- **A.8.33**: Test information - Protection of test data
+
+### NIST Cybersecurity Framework 2.0
+- **GV.SC-01**: Cyber supply chain risk management processes identified
+- **ID.RA-01**: Asset vulnerabilities identified and documented
+- **PR.DS-02**: Data-in-transit protected - TLS/SSL enforcement
+- **PR.DS-05**: Protections against data leaks implemented - Secret scanning
+- **PR.DS-06**: Integrity checking mechanisms used - Code signing, checksums
+- **PR.IP-01**: Baseline configuration created and maintained - Secure defaults
+- **PR.IP-02**: System development life cycle managed - SDLC phases 1-5
+- **DE.CM-04**: Malicious code detected - SAST, DAST scanning
+- **RS.AN-05**: Processes established to receive, analyze and respond to vulnerabilities
+
+### CIS Controls v8.1
+- **Control 2**: Inventory and Control of Software Assets - Dependency tracking
+- **Control 3**: Data Protection - Encryption at rest and in transit
+- **Control 16**: Application Software Security
+  - 16.1: Establish and Maintain a Secure Application Development Process
+  - 16.2: Establish and Maintain a Process to Accept and Address Software Vulnerabilities
+  - 16.3: Perform Root Cause Analysis on Security Vulnerabilities
+  - 16.4: Establish and Manage an Inventory of Third-Party Software Components
+  - 16.5: Use Up-to-Date and Trusted Third-Party Software Components
+  - 16.6: Establish and Maintain a Severity Rating System and Process for Application Vulnerabilities
+  - 16.7: Use Standard Hardening Configuration Templates for Application Infrastructure
+  - 16.8: Separate Production and Non-Production Systems
+  - 16.9: Train Developers in Application Security Concepts and Secure Coding
+  - 16.10: Apply Secure Design Principles in Application Architectures
+  - 16.11: Leverage Vetted Modules or Services for Application Security Components
+  - 16.12: Implement Code-Level Security Checks
+  - 16.13: Conduct Application Penetration Testing
+  - 16.14: Conduct Threat Modeling
+- **Control 18**: Penetration Testing - Security validation
+
+### GDPR (General Data Protection Regulation)
+- **Article 25**: Data protection by design and by default - Privacy by Design principles
+- **Article 32**: Security of processing - Technical and organizational measures
+
+### NIS2 Directive (EU)
+- **Article 21**: Cybersecurity risk-management measures - Secure development practices
+
+### EU Cyber Resilience Act (CRA)
+- **Annex I, Part I**: Essential cybersecurity requirements - Secure by design, vulnerability handling
+- **Annex I, Part II**: Vulnerability handling requirements - Coordinated disclosure, patch management
