@@ -268,6 +268,43 @@ Framework for comprehensive product quality analysis across all dimensions.
 
 ---
 
+### 🤖 GitHub Agentic Workflows
+**File:** `github-agentic-workflows.md`
+
+Comprehensive guide for creating, securing, and operating GitHub Agentic Workflows that enable Continuous AI through secure, defensible, and auditable automation.
+
+**Core Principles:**
+- Continuous AI (systematic AI automation)
+- Agency with control (AI decisions within boundaries)
+- Defense-in-depth security
+- Safe outputs pattern (read-only AI, validated execution)
+- Model Context Protocol (MCP) integration
+- OWASP Top 10 for Agentic Applications 2026 compliance
+
+**Key Rules:**
+- ✅ **MUST**: Use safe outputs pattern (no write permissions for AI)
+- ✅ **MUST**: Enable threat detection
+- ✅ **MUST**: Use network controls
+- ✅ **MUST**: Validate all inputs
+- ✅ **MUST**: Follow least-privilege principle
+- ✅ **MUST**: Implement audit logging
+- ✅ **MUST**: Protect secrets
+- ✅ **MUST**: Test workflows in isolation
+- ✅ **MUST**: Follow OWASP Top 10 for Agentic Applications
+- ✅ **MUST**: Document threat models
+
+**Use Cases:**
+- Automated issue triage (IssueOps)
+- PR code review assistance
+- Daily documentation improvements (DailyOps)
+- Interactive slash commands (ChatOps)
+- Project board automation (ProjectOps)
+- Security scanning and analysis
+- Trend analysis and reporting (MemoryOps)
+- Multi-repository coordination
+
+---
+
 ## 🎯 How Skills Work
 
 ### Skills vs. Agents
@@ -314,7 +351,8 @@ Which skills should each agent follow?
 | **Code Review Agent** | Code Quality Excellence, Security by Design | Performance Optimization, Accessibility Excellence, ISMS Compliance |
 | **Documentation Agent** | Documentation Standards | Code Quality Excellence, UI/UX Design System |
 | **Security Compliance Agent** | Security by Design, ISMS Compliance | Code Quality Excellence, Testing Excellence |
-| **Product Task Agent** | Product Quality Analysis | All skills (holistic assessment) |
+| **Product Task Agent** | Product Quality Analysis, GitHub Agentic Workflows | All skills (holistic assessment) |
+| **DevOps/Automation Agents** | GitHub Agentic Workflows, Security by Design | ISMS Compliance, Testing Excellence |
 
 **All agents should be aware of all skills, but prioritize their primary skills.**
 
