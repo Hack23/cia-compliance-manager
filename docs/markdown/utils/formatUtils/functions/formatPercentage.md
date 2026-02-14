@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.17**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.18**](../../../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Function: formatPercentage()
 
-> **formatPercentage**(`value`, `decimalPlaces`): `string`
+> **formatPercentage**(`value`, `decimalPlaces?`): `string`
 
-Defined in: [utils/formatUtils.ts:65](https://github.com/Hack23/cia-compliance-manager/blob/64549ac2e28eb854ca1acff8c4df7f34bf49dfaa/src/utils/formatUtils.ts#L65)
+Defined in: [utils/formatUtils.ts:65](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/utils/formatUtils.ts#L65)
 
 Formats a decimal as a percentage
 
@@ -24,7 +24,7 @@ uptime, completion rates, or risk reduction percentages.
 
 Decimal value where 1.0 = 100% (e.g., 0.75 = 75%)
 
-### decimalPlaces
+### decimalPlaces?
 
 `number` = `0`
 

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.17**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.18**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **LINE\_HEIGHTS**: `object`
 
-Defined in: [constants/designTokens.ts:71](https://github.com/Hack23/cia-compliance-manager/blob/64549ac2e28eb854ca1acff8c4df7f34bf49dfaa/src/constants/designTokens.ts#L71)
+Defined in: [constants/designTokens.ts:71](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/constants/designTokens.ts#L71)
 
 Line heights for optimal readability
 

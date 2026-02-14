@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.17**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.18**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **splitShortcutKeys**(`keys`, `platform?`): `string`[]
 
-Defined in: [utils/keyboardUtils.ts:318](https://github.com/Hack23/cia-compliance-manager/blob/64549ac2e28eb854ca1acff8c4df7f34bf49dfaa/src/utils/keyboardUtils.ts#L318)
+Defined in: [utils/keyboardUtils.ts:318](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/utils/keyboardUtils.ts#L318)
 
 Split formatted shortcut into individual keys for badge display
 

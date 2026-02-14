@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.17**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.18**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **getSLAMetrics**: (`level`) => `object` = `getDefaultSLAMetrics`
 
-Defined in: [utils/riskUtils.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/64549ac2e28eb854ca1acff8c4df7f34bf49dfaa/src/utils/riskUtils.ts#L31)
+Defined in: [utils/riskUtils.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/utils/riskUtils.ts#L31)
 
 Get default SLA metrics for a security level
 

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.17**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.18**](../../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Function: useServiceData()
 
-> **useServiceData**\<`T`\>(`fetchFn`, `deps`): [`ServiceDataState`](../interfaces/ServiceDataState.md)\<`T`\>
+> **useServiceData**\<`T`\>(`fetchFn`, `deps?`): [`ServiceDataState`](../interfaces/ServiceDataState.md)\<`T`\>
 
-Defined in: [hooks/useServiceData.ts:89](https://github.com/Hack23/cia-compliance-manager/blob/64549ac2e28eb854ca1acff8c4df7f34bf49dfaa/src/hooks/useServiceData.ts#L89)
+Defined in: [hooks/useServiceData.ts:89](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/hooks/useServiceData.ts#L89)
 
 Custom hook for fetching service data with loading and error states
 
@@ -46,7 +46,7 @@ Type of data returned by the fetch function
 
 Synchronous function to fetch data
 
-### deps
+### deps?
 
 `DependencyList` = `[]`
 

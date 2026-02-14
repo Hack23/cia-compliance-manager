@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.17**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.18**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **SECURITY\_LEVELS**: `object`
 
-Defined in: [constants/securityLevels.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/64549ac2e28eb854ca1acff8c4df7f34bf49dfaa/src/constants/securityLevels.ts#L7)
+Defined in: [constants/securityLevels.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/constants/securityLevels.ts#L7)
 
 Maps human-readable security level values to consistent keys
 

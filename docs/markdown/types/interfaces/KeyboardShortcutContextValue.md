@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.17**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.18**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: KeyboardShortcutContextValue
 
-Defined in: [types/keyboard.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/64549ac2e28eb854ca1acff8c4df7f34bf49dfaa/src/types/keyboard.ts#L78)
+Defined in: [types/keyboard.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/types/keyboard.ts#L78)
 
 Keyboard shortcut context value
 
@@ -16,7 +16,7 @@ Keyboard shortcut context value
 
 > **isEnabled**: `boolean`
 
-Defined in: [types/keyboard.ts:89](https://github.com/Hack23/cia-compliance-manager/blob/64549ac2e28eb854ca1acff8c4df7f34bf49dfaa/src/types/keyboard.ts#L89)
+Defined in: [types/keyboard.ts:89](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/types/keyboard.ts#L89)
 
 Check if shortcuts are enabled
 
@@ -26,7 +26,7 @@ Check if shortcuts are enabled
 
 > **platform**: [`Platform`](../type-aliases/Platform.md)
 
-Defined in: [types/keyboard.ts:95](https://github.com/Hack23/cia-compliance-manager/blob/64549ac2e28eb854ca1acff8c4df7f34bf49dfaa/src/types/keyboard.ts#L95)
+Defined in: [types/keyboard.ts:95](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/types/keyboard.ts#L95)
 
 Get current platform
 
@@ -36,7 +36,7 @@ Get current platform
 
 > **registerShortcut**: (`shortcut`) => `void`
 
-Defined in: [types/keyboard.ts:83](https://github.com/Hack23/cia-compliance-manager/blob/64549ac2e28eb854ca1acff8c4df7f34bf49dfaa/src/types/keyboard.ts#L83)
+Defined in: [types/keyboard.ts:83](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/types/keyboard.ts#L83)
 
 Register a new shortcut
 
@@ -56,7 +56,7 @@ Register a new shortcut
 
 > **setEnabled**: (`enabled`) => `void`
 
-Defined in: [types/keyboard.ts:92](https://github.com/Hack23/cia-compliance-manager/blob/64549ac2e28eb854ca1acff8c4df7f34bf49dfaa/src/types/keyboard.ts#L92)
+Defined in: [types/keyboard.ts:92](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/types/keyboard.ts#L92)
 
 Enable/disable all shortcuts
 
@@ -76,7 +76,7 @@ Enable/disable all shortcuts
 
 > **setShowHelp**: (`show`) => `void`
 
-Defined in: [types/keyboard.ts:101](https://github.com/Hack23/cia-compliance-manager/blob/64549ac2e28eb854ca1acff8c4df7f34bf49dfaa/src/types/keyboard.ts#L101)
+Defined in: [types/keyboard.ts:101](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/types/keyboard.ts#L101)
 
 Set help modal visibility
 
@@ -96,7 +96,7 @@ Set help modal visibility
 
 > **shortcuts**: [`ShortcutMap`](../type-aliases/ShortcutMap.md)
 
-Defined in: [types/keyboard.ts:80](https://github.com/Hack23/cia-compliance-manager/blob/64549ac2e28eb854ca1acff8c4df7f34bf49dfaa/src/types/keyboard.ts#L80)
+Defined in: [types/keyboard.ts:80](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/types/keyboard.ts#L80)
 
 All registered shortcuts
 
@@ -106,7 +106,7 @@ All registered shortcuts
 
 > **showHelp**: `boolean`
 
-Defined in: [types/keyboard.ts:98](https://github.com/Hack23/cia-compliance-manager/blob/64549ac2e28eb854ca1acff8c4df7f34bf49dfaa/src/types/keyboard.ts#L98)
+Defined in: [types/keyboard.ts:98](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/types/keyboard.ts#L98)
 
 Toggle help modal visibility
 
@@ -116,7 +116,7 @@ Toggle help modal visibility
 
 > **unregisterShortcut**: (`id`) => `void`
 
-Defined in: [types/keyboard.ts:86](https://github.com/Hack23/cia-compliance-manager/blob/64549ac2e28eb854ca1acff8c4df7f34bf49dfaa/src/types/keyboard.ts#L86)
+Defined in: [types/keyboard.ts:86](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/types/keyboard.ts#L86)
 
 Unregister a shortcut by id
 

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.17**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.18**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **announceToScreenReader**: (`message`, `politeness`) => `void`
 
-Defined in: [utils/index.ts:49](https://github.com/Hack23/cia-compliance-manager/blob/64549ac2e28eb854ca1acff8c4df7f34bf49dfaa/src/utils/index.ts#L49)
+Defined in: [utils/index.ts:49](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/utils/index.ts#L49)
 
 Announce a message to screen readers using ARIA live region
 Uses a singleton live region to prevent duplicate announcements
@@ -21,7 +21,7 @@ Uses a singleton live region to prevent duplicate announcements
 
 Message to announce
 
-### politeness
+### politeness?
 
 ARIA live politeness level
 

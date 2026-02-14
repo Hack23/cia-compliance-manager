@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.17**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.18**](../../README.md)
 
 ***
 
