@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.18**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.19**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: UseKeyboardShortcutsOptions
 
-Defined in: [types/keyboard.ts:61](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/types/keyboard.ts#L61)
+Defined in: [types/keyboard.ts:61](https://github.com/Hack23/cia-compliance-manager/blob/9dce5e80857b65e14d60f220240eac83c6163399/src/types/keyboard.ts#L61)
 
 Props for keyboard shortcut hook
 
@@ -16,7 +16,7 @@ Props for keyboard shortcut hook
 
 > `optional` **enabled**: `boolean`
 
-Defined in: [types/keyboard.ts:66](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/types/keyboard.ts#L66)
+Defined in: [types/keyboard.ts:66](https://github.com/Hack23/cia-compliance-manager/blob/9dce5e80857b65e14d60f220240eac83c6163399/src/types/keyboard.ts#L66)
 
 Whether shortcuts are enabled
 
@@ -26,7 +26,7 @@ Whether shortcuts are enabled
 
 > `optional` **preventDefault**: `boolean`
 
-Defined in: [types/keyboard.ts:69](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/types/keyboard.ts#L69)
+Defined in: [types/keyboard.ts:69](https://github.com/Hack23/cia-compliance-manager/blob/9dce5e80857b65e14d60f220240eac83c6163399/src/types/keyboard.ts#L69)
 
 Prevent default browser behavior
 
@@ -36,7 +36,7 @@ Prevent default browser behavior
 
 > **shortcuts**: [`ShortcutMap`](../type-aliases/ShortcutMap.md)
 
-Defined in: [types/keyboard.ts:63](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/types/keyboard.ts#L63)
+Defined in: [types/keyboard.ts:63](https://github.com/Hack23/cia-compliance-manager/blob/9dce5e80857b65e14d60f220240eac83c6163399/src/types/keyboard.ts#L63)
 
 Map of shortcuts to register
 
@@ -46,6 +46,6 @@ Map of shortcuts to register
 
 > `optional` **stopPropagation**: `boolean`
 
-Defined in: [types/keyboard.ts:72](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/types/keyboard.ts#L72)
+Defined in: [types/keyboard.ts:72](https://github.com/Hack23/cia-compliance-manager/blob/9dce5e80857b65e14d60f220240eac83c6163399/src/types/keyboard.ts#L72)
 
 Stop event propagation

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.18**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.19**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **normalizeSecurityLevel**: (`level?`) => [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [utils/index.ts:139](https://github.com/Hack23/cia-compliance-manager/blob/2d08eaf26d0d9c6e1af02c3b8ecb25ccff2a6aff/src/utils/index.ts#L139)
+Defined in: [utils/index.ts:139](https://github.com/Hack23/cia-compliance-manager/blob/9dce5e80857b65e14d60f220240eac83c6163399/src/utils/index.ts#L139)
 
 Normalize any security level input to a valid SecurityLevel enum value
 
