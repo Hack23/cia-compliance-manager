@@ -133,13 +133,13 @@ template: |
 
   ## 🚀 Tech Stack
   
-  - ⚡ **Vite 7** - Lightning-fast build tool
-  - ⚛️ **React 19** - Modern UI framework with enhanced performance
-  - 🔷 **TypeScript 5.9** - Type-safe development
+  - ⚡ **Vite 7.3** - Lightning-fast build tool
+  - ⚛️ **React 19.2** - Modern UI framework with enhanced performance
+  - 🔷 **TypeScript 5.9.3** - Type-safe development
   - 📊 **Chart.js** - Interactive data visualization
   - 🧪 **Vitest** - Fast unit testing framework
   - 🌐 **Cypress** - End-to-end testing
-  - 📦 **Node.js 24** - Runtime environment (LTS until April 2028)
+  - 📦 **Node.js >= 20.0.0** - Runtime environment (see nodejs.org for LTS schedule)
   - 🎨 **Tailwind CSS 4** - Utility-first CSS framework
 
   ---
@@ -314,3 +314,28 @@ autolabeler:
       - '**/*.spec.*'
       - 'cypress/**/*'
       - '__tests__/**/*'
+  
+  # Version Control & Breaking Changes
+  - label: "major"
+    title:
+      - '/^major(\([^)]+\))?:/i'
+      - '/^breaking(\([^)]+\))?:/i'
+      - '/^BREAKING CHANGE:/i'
+      - '/\[breaking\]/i'
+  
+  - label: "breaking"
+    title:
+      - '/^breaking(\([^)]+\))?:/i'
+      - '/^BREAKING CHANGE:/i'
+      - '/\[breaking\]/i'
+  
+  # Dependencies Subcategories
+  - label: "javascript"
+    files:
+      - 'package.json'
+      - 'package-lock.json'
+  
+  - label: "github_actions"
+    files:
+      - '.github/workflows/**'
+      - '.github/actions/**'
