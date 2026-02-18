@@ -74,7 +74,7 @@ database:
               - "**/*.sql"
       - title: "database:*"
       - title: "db:*"
-      - body: "- [x] 📈 Analytics & Data"
+      - body: "- [x] 📈 Analytics & Visualization"
 
 # 🎨 UI/UX Improvements
 ui:

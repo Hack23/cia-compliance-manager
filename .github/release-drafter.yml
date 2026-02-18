@@ -140,7 +140,7 @@ template: |
   - 🧪 **Vitest** - Fast unit testing framework
   - 🌐 **Cypress** - End-to-end testing
   - 📦 **Node.js >= 20.0.0** - Runtime environment (see nodejs.org for LTS schedule)
-  - 🎨 **Tailwind CSS 4** - Utility-first CSS framework
+  - 🎨 **Tailwind CSS 4.1** - Utility-first CSS framework
 
   ---
 
