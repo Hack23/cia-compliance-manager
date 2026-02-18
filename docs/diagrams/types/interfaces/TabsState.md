@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.20**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.21**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: TabsState
 
-Defined in: [types/tabs.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/c2ee7b2fcb69460ebb29176ad9c216fcb0830779/src/types/tabs.ts#L45)
+Defined in: [types/tabs.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/types/tabs.ts#L45)
 
 State management for tabs
 
@@ -18,7 +18,7 @@ Represents the current state of a tab group.
 
 > **activeTab**: `string`
 
-Defined in: [types/tabs.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/c2ee7b2fcb69460ebb29176ad9c216fcb0830779/src/types/tabs.ts#L47)
+Defined in: [types/tabs.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/types/tabs.ts#L47)
 
 Currently active tab ID
 
@@ -28,6 +28,6 @@ Currently active tab ID
 
 > **tabs**: [`Tab`](Tab.md)[]
 
-Defined in: [types/tabs.ts:50](https://github.com/Hack23/cia-compliance-manager/blob/c2ee7b2fcb69460ebb29176ad9c216fcb0830779/src/types/tabs.ts#L50)
+Defined in: [types/tabs.ts:50](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/types/tabs.ts#L50)
 
 All tabs in the group

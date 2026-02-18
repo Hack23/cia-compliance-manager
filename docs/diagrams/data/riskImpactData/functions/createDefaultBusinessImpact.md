@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.20**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.21**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **createDefaultBusinessImpact**(`component`, `level`): [`BusinessImpactDetails`](../../../types/interfaces/BusinessImpactDetails.md)
 
-Defined in: [data/riskImpactData.ts:540](https://github.com/Hack23/cia-compliance-manager/blob/c2ee7b2fcb69460ebb29176ad9c216fcb0830779/src/data/riskImpactData.ts#L540)
+Defined in: [data/riskImpactData.ts:540](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/data/riskImpactData.ts#L540)
 
 Create a default business impact object with minimum required fields
 

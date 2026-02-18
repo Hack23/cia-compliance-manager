@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.20**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.21**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getValueCreationMetrics**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `Promise`\<[`ValueCreationMetrics`](../interfaces/ValueCreationMetrics.md)\>
 
-Defined in: [services/securityMetricsService.ts:1408](https://github.com/Hack23/cia-compliance-manager/blob/c2ee7b2fcb69460ebb29176ad9c216fcb0830779/src/services/securityMetricsService.ts#L1408)
+Defined in: [services/securityMetricsService.ts:1408](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/services/securityMetricsService.ts#L1408)
 
 Get value creation metrics based on security levels
 

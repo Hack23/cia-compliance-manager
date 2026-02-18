@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.20**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.21**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: MetricFormatters
 
-Defined in: [hooks/useFormattedMetrics.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/c2ee7b2fcb69460ebb29176ad9c216fcb0830779/src/hooks/useFormattedMetrics.ts#L22)
+Defined in: [hooks/useFormattedMetrics.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/hooks/useFormattedMetrics.ts#L22)
 
 Formatted metric functions
 
@@ -16,7 +16,7 @@ Formatted metric functions
 
 > **currency**: (`value`) => `string`
 
-Defined in: [hooks/useFormattedMetrics.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/c2ee7b2fcb69460ebb29176ad9c216fcb0830779/src/hooks/useFormattedMetrics.ts#L28)
+Defined in: [hooks/useFormattedMetrics.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/hooks/useFormattedMetrics.ts#L28)
 
 Format a number as currency
 
@@ -40,7 +40,7 @@ Formatted currency string
 
 > **number**: (`value`) => `string`
 
-Defined in: [hooks/useFormattedMetrics.ts:43](https://github.com/Hack23/cia-compliance-manager/blob/c2ee7b2fcb69460ebb29176ad9c216fcb0830779/src/hooks/useFormattedMetrics.ts#L43)
+Defined in: [hooks/useFormattedMetrics.ts:43](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/hooks/useFormattedMetrics.ts#L43)
 
 Format a number with locale-specific formatting
 
@@ -64,7 +64,7 @@ Formatted number string
 
 > **percentage**: (`value`, `decimalPlaces?`) => `string`
 
-Defined in: [hooks/useFormattedMetrics.ts:36](https://github.com/Hack23/cia-compliance-manager/blob/c2ee7b2fcb69460ebb29176ad9c216fcb0830779/src/hooks/useFormattedMetrics.ts#L36)
+Defined in: [hooks/useFormattedMetrics.ts:36](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/hooks/useFormattedMetrics.ts#L36)
 
 Format a decimal as percentage
 

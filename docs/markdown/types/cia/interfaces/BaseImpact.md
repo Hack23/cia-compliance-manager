@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.20**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.21**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BaseImpact
 
-Defined in: [types/cia.ts:343](https://github.com/Hack23/cia-compliance-manager/blob/c2ee7b2fcb69460ebb29176ad9c216fcb0830779/src/types/cia.ts#L343)
+Defined in: [types/cia.ts:343](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/types/cia.ts#L343)
 
 Base interface for CIA impacts
 
@@ -24,7 +24,7 @@ Common structure shared by all CIA component impact types.
 
 > **description**: `string`
 
-Defined in: [types/cia.ts:348](https://github.com/Hack23/cia-compliance-manager/blob/c2ee7b2fcb69460ebb29176ad9c216fcb0830779/src/types/cia.ts#L348)
+Defined in: [types/cia.ts:348](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/types/cia.ts#L348)
 
 Human-readable description of the impact
 
@@ -34,6 +34,6 @@ Human-readable description of the impact
 
 > **level**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:345](https://github.com/Hack23/cia-compliance-manager/blob/c2ee7b2fcb69460ebb29176ad9c216fcb0830779/src/types/cia.ts#L345)
+Defined in: [types/cia.ts:345](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/types/cia.ts#L345)
 
 Security level associated with this impact

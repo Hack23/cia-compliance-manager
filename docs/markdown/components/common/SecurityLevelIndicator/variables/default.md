@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.20**](../../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.21**](../../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **default**: `React.FC`\<`SecurityLevelIndicatorProps`\>
 
-Defined in: [components/common/SecurityLevelIndicator.tsx:34](https://github.com/Hack23/cia-compliance-manager/blob/c2ee7b2fcb69460ebb29176ad9c216fcb0830779/src/components/common/SecurityLevelIndicator.tsx#L34)
+Defined in: [components/common/SecurityLevelIndicator.tsx:34](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/components/common/SecurityLevelIndicator.tsx#L34)
 
 A simple indicator that displays a security level with appropriate color
 
