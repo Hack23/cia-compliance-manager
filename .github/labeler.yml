@@ -33,6 +33,15 @@ bug:
       - title: "bug:*"
       - body: "- [x] 🐛 Bug Fix"
 
+fix:
+  - any:
+      - changed-files:
+          - any-glob-to-any-file:
+              - "src/**/fix/**"
+              - "src/**/bug/**"
+      - title: "fix:*"
+      - body: "- [x] 🐛 Bug Fix"
+
 # 📈 Analytics and Visualization
 analytics:
   - any:
@@ -56,6 +65,17 @@ visualization:
       - title: "chart:*"
       - body: "- [x] 📈 Analytics & Visualization"
 
+database:
+  - any:
+      - changed-files:
+          - any-glob-to-any-file:
+              - "src/**/database/**"
+              - "src/**/db/**"
+              - "**/*.sql"
+      - title: "database:*"
+      - title: "db:*"
+      - body: "- [x] 📈 Analytics & Data"
+
 # 🎨 UI/UX Improvements
 ui:
   - any:
@@ -74,6 +94,28 @@ ui:
       - title: "ui:*"
       - title: "style:*"
       - title: "design:*"
+      - body: "- [x] 🎨 UI/UX Improvements"
+
+design:
+  - any:
+      - changed-files:
+          - any-glob-to-any-file:
+              - "src/**/theme/**"
+              - "src/**/*.styles.*"
+              - "public/**/*.svg"
+              - "public/**/*.png"
+      - title: "design:*"
+      - body: "- [x] 🎨 UI/UX Improvements"
+
+style:
+  - any:
+      - changed-files:
+          - any-glob-to-any-file:
+              - "src/**/*.css"
+              - "src/**/*.scss"
+              - "src/**/*.less"
+              - "src/**/*.styles.*"
+      - title: "style:*"
       - body: "- [x] 🎨 UI/UX Improvements"
 
 # 🏗️ Infrastructure & Performance
@@ -103,6 +145,31 @@ performance:
               - "src/**/optimize/**"
       - title: "perf:*"
       - title: "optimize:*"
+      - body: "- [x] 🏗️ Infrastructure & Performance"
+
+build:
+  - any:
+      - changed-files:
+          - any-glob-to-any-file:
+              - "**/vite.config.*"
+              - "**/tsconfig.json"
+              - "**/webpack.config.*"
+              - "**/rollup.config.*"
+              - "scripts/build/**"
+      - title: "build:*"
+      - title: "chore(build):*"
+      - body: "- [x] 🏗️ Infrastructure & Performance"
+
+config:
+  - any:
+      - changed-files:
+          - any-glob-to-any-file:
+              - "**/*.config.*"
+              - ".github/**/*.yml"
+              - ".github/**/*.yaml"
+              - "configs/**"
+      - title: "config:*"
+      - title: "chore(config):*"
       - body: "- [x] 🏗️ Infrastructure & Performance"
 
 # 🔄 Code Quality & Refactoring
@@ -183,6 +250,18 @@ dependencies:
       - title: "dependency:*"
       - title: "dependencies:*"
       - body: "- [x] 📦 Dependencies Update"
+
+javascript:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "package.json"
+          - "package-lock.json"
+
+github_actions:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/workflows/**"
+          - ".github/actions/**"
 
 # Coverage-driven labels (based on test coverage report)
 needs-tests:
@@ -316,3 +395,17 @@ security-high:
 
 security-very-high:
   - body: "- [x] Very High"
+
+# Version Control Labels
+major:
+  - any:
+      - title: "major:*"
+      - title: "breaking:*"
+      - title: "BREAKING CHANGE:*"
+      - body: "BREAKING CHANGE"
+
+breaking:
+  - any:
+      - title: "breaking:*"
+      - title: "BREAKING CHANGE:*"
+      - body: "BREAKING CHANGE"

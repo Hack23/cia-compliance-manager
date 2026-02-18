@@ -89,20 +89,74 @@ template: |
   # Highlights
   $CHANGES
 
-  ## Security Compliance
-  [![SLSA 3](https://slsa.dev/images/gh-badge-level3.svg)](https://github.com/Hack23/cia-compliance-manager/attestations/)
-  
-  ## Tech Stack
-  - ⚡ **Vite** - Fast build tool
-  - ⚛️ **React 19** - Modern UI framework
-  - 🔷 **TypeScript** - Type-safe development
-  - 📊 **Recharts** - Data visualization
-  - 🧪 **Vitest** - Unit testing
+  ---
 
-  ## Contributors
+  ## 🛡️ Security & Compliance
+  
+  ### Build Attestations & Supply Chain Security
+  [![SLSA 3](https://slsa.dev/images/gh-badge-level3.svg)](https://github.com/Hack23/cia-compliance-manager/attestations/)
+  [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compliance-manager/badge)](https://scorecard.dev/viewer/?uri=github.com/Hack23/cia-compliance-manager)
+  [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/10365/badge)](https://bestpractices.coreinfrastructure.org/projects/10365)
+  [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FHack23%2Fcia-compliance-manager.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FHack23%2Fcia-compliance-manager?ref=badge_shield)
+  
+  ### Hack23 ISMS Policies
+  [![Information Security Policy](https://img.shields.io/badge/ISMS-Information_Security_Policy-0A66C2?style=flat&logo=shield&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md)
+  [![Open Source Policy](https://img.shields.io/badge/ISMS-Open_Source_Policy-0A66C2?style=flat&logo=opensource&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Open_Source_Policy.md)
+  [![Secure Development](https://img.shields.io/badge/ISMS-Secure_Development_Policy-0A66C2?style=flat&logo=github&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md)
+  
+  ### Code Quality & Security Analysis
+  [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
+  [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
+  [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
+  [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
+
+  ---
+
+  ## 🧪 Testing & Evidence
+  
+  ### Test Reports & Coverage (Live Results)
+  [![Coverage](https://img.shields.io/badge/Coverage-Live%20Results-success?style=flat&logo=vitest&logoColor=white)](https://ciacompliancemanager.com/docs/coverage/)
+  [![Unit Tests](https://img.shields.io/badge/Unit%20Tests-Live%20Results-success?style=flat&logo=vitest&logoColor=white)](https://ciacompliancemanager.com/docs/test-results/)
+  [![E2E Tests](https://img.shields.io/badge/E2E%20Tests-Live%20Results-success?style=flat&logo=cypress&logoColor=white)](https://ciacompliancemanager.com/docs/cypress/mochawesome/)
+  [![Code Coverage](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
+  
+  ### Test Documentation
+  [![Test Plan](https://img.shields.io/badge/Unit_Test_Plan-Documentation-blue?style=flat&logo=markdown&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/UnitTestPlan.md)
+  [![E2E Plan](https://img.shields.io/badge/E2E_Test_Plan-Documentation-blue?style=flat&logo=markdown&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md)
+  [![Performance](https://img.shields.io/badge/Performance_Testing-Documentation-blue?style=flat&logo=lighthouse&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md)
+  
+  ### Compliance Evidence
+  [![Compliance Evidence](https://img.shields.io/badge/Compliance-Evidence_Catalog-success?style=flat&logo=shield&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/COMPLIANCE_EVIDENCE.md)
+  [![Accessibility](https://img.shields.io/badge/Accessibility-WCAG_2.1_AA-success?style=flat&logo=accessibility&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/ACCESSIBILITY_COMPLIANCE.md)
+
+  ---
+
+  ## 🚀 Tech Stack
+  
+  - ⚡ **Vite 7** - Lightning-fast build tool
+  - ⚛️ **React 19** - Modern UI framework with enhanced performance
+  - 🔷 **TypeScript 5.9** - Type-safe development
+  - 📊 **Chart.js** - Interactive data visualization
+  - 🧪 **Vitest** - Fast unit testing framework
+  - 🌐 **Cypress** - End-to-end testing
+  - 📦 **Node.js 24** - Runtime environment (LTS until April 2028)
+  - 🎨 **Tailwind CSS 4** - Utility-first CSS framework
+
+  ---
+
+  ## 🤝 Contributors
+  
   Thanks to $CONTRIBUTORS for their contributions to this release!
 
+  ---
+
+  ## 📋 Release Information
+  
   **Full Changelog**: https://github.com/Hack23/cia-compliance-manager/compare/$PREVIOUS_TAG...$RESOLVED_VERSION
+  
+  **Build Attestations**: [View SLSA Attestations](https://github.com/Hack23/cia-compliance-manager/attestations/)
+  
+  **Download**: [Release Assets](https://github.com/Hack23/cia-compliance-manager/releases/tag/$RESOLVED_VERSION)
 
 version-resolver:
   major:
