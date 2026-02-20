@@ -1,4 +1,13 @@
-# 💼 Future CIA Compliance Manager SWOT Analysis
+<p align="center">
+  <img src="https://hack23.com/icon-192.png" alt="Hack23 Logo" width="192" height="192">
+</p>
+
+<h1 align="center">💼 Future CIA Compliance Manager SWOT Analysis</h1>
+
+<p align="center">
+  <strong>🚀 Evolution Roadmap</strong><br>
+  <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Risk_Assessment_Methodology.md">Risk Assessment Methodology</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification Framework</a></em>
+</p>
 
 > **Version:** v2.0-DRAFT | **Based on:** v1.0 Baseline | **Last Updated:** 2025-11-23 | **Status:** 🚀 Evolution Roadmap
 

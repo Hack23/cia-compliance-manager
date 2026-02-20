@@ -1,4 +1,13 @@
-# 🔧 Future CIA Compliance Manager DevOps and CI/CD Workflows
+<p align="center">
+  <img src="https://hack23.com/icon-192.png" alt="Hack23 Logo" width="192" height="192">
+</p>
+
+<h1 align="center">🔧 Future CIA Compliance Manager DevOps and CI/CD Workflows</h1>
+
+<p align="center">
+  <strong>🚀 Evolution Roadmap</strong><br>
+  <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md">Change Management</a></em>
+</p>
 
 > **Version:** v2.0-DRAFT | **Based on:** v1.1 Baseline | **Last Updated:** 2026-01-11 | **Status:** 🚀 Evolution Roadmap
 

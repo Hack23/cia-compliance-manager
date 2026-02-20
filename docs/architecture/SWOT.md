@@ -1,3 +1,14 @@
+<p align="center">
+  <img src="https://hack23.com/icon-192.png" alt="Hack23 Logo" width="192" height="192">
+</p>
+
+<h1 align="center">📊 CIA Compliance Manager SWOT Analysis</h1>
+
+<p align="center">
+  <strong>💼 Strategic Analysis</strong><br>
+  <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Risk_Assessment_Methodology.md">Risk Assessment Methodology</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification Framework</a></em>
+</p>
+
 # 📊 CIA Compliance Manager SWOT Analysis (v1.0)
 
 This document provides a strategic analysis of the CIA Compliance Manager's strengths, weaknesses, opportunities, and threats as of version 1.0 (November 2025). This analysis reflects the achievement of v1.0 milestones and informs future strategic direction.
