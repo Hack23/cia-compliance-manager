@@ -165,6 +165,96 @@ src/components/     - common/*, charts/*, widgets/*
 
 ---
 
+### 🏗️ 10. C4 Architecture Documentation (MANDATORY)
+**File**: `.github/skills/c4-architecture-documentation.md`
+
+**Core Rules**:
+- ✅ **MUST**: Maintain complete C4 models (Context, Container, Component views)
+- ✅ **MUST**: Create both CURRENT and FUTURE state documentation
+- ✅ **MUST**: Maintain SECURITY_ARCHITECTURE.md and FUTURE_SECURITY_ARCHITECTURE.md
+- ✅ **MUST**: Use Mermaid for all diagrams
+- ✅ **SHOULD**: Update architecture docs when structure changes
+
+**Required Documentation Portfolio**:
+| Current State | Future State |
+|---|---|
+| ARCHITECTURE.md | FUTURE_ARCHITECTURE.md |
+| DATA_MODEL.md | FUTURE_DATA_MODEL.md |
+| FLOWCHART.md | FUTURE_FLOWCHART.md |
+| STATEDIAGRAM.md | FUTURE_STATEDIAGRAM.md |
+| MINDMAP.md | FUTURE_MINDMAP.md |
+| SWOT.md | FUTURE_SWOT.md |
+| SECURITY_ARCHITECTURE.md | FUTURE_SECURITY_ARCHITECTURE.md |
+
+**When to Apply**: Architecture changes, new components, security reviews, planning sessions.
+
+---
+
+### 🔄 11. Operations & Resilience (IMPORTANT)
+**File**: `.github/skills/operations-resilience.md`
+
+**Core Rules**:
+- ✅ **MUST**: Follow risk-controlled change processes with rollback procedures
+- ✅ **MUST**: Align backup/recovery with business impact (RTO/RPO)
+- ✅ **MUST**: Follow incident response SLAs (Critical 24h, High 7d, Medium 30d, Low 90d)
+- ✅ **SHOULD**: Test disaster recovery plans quarterly
+
+**When to Apply**: Change management, incident handling, resilience planning.
+
+---
+
+### 🏷️ 12. Classification & Access Control (IMPORTANT)
+**File**: `.github/skills/classification-framework.md`
+
+**Core Rules**:
+- ✅ **MUST**: Classify all data (Public, Internal, Confidential, Restricted)
+- ✅ **MUST**: Apply least privilege access control
+- ✅ **MUST**: Use approved cryptographic algorithms only
+- ✅ **MUST**: Never hardcode secrets - use vault/environment variables
+
+**When to Apply**: Data handling, authentication, access control, encryption decisions.
+
+---
+
+### 📊 13. Risk Assessment (IMPORTANT)
+**File**: `.github/skills/risk-assessment.md`
+
+**Core Rules**:
+- ✅ **MUST**: Use 5x5 risk matrix for all risk assessments
+- ✅ **MUST**: Maintain risk register with quarterly reviews
+- ✅ **MUST**: Follow vulnerability remediation SLAs
+- ✅ **SHOULD**: Assess supply chain and third-party risks
+
+**When to Apply**: Risk assessments, vulnerability triage, compliance audits.
+
+---
+
+### 🔌 14. MCP Server Integration (FOR AGENT DEVELOPMENT)
+**File**: `.github/skills/mcp-server-integration.md`
+
+**Core Rules**:
+- ✅ **MUST**: Use secrets-based authentication for MCP servers
+- ✅ **MUST**: Set both GITHUB_TOKEN and GITHUB_PERSONAL_ACCESS_TOKEN
+- ✅ **SHOULD**: Use Insiders API endpoint for experimental features
+- ✅ **SHOULD**: Document Copilot coding agent tools (base_ref, custom_instructions)
+
+**When to Apply**: Agent development, MCP configuration, Copilot tool integration.
+
+---
+
+### 🏛️ 15. Governance & Management (FOR ORGANIZATIONAL COMPLIANCE)
+**File**: `.github/skills/governance-management.md`
+
+**Core Rules**:
+- ✅ **MUST**: Maintain IT asset inventory with classification
+- ✅ **MUST**: Assess vendor/supplier security before onboarding
+- ✅ **MUST**: Collect audit evidence for compliance frameworks
+- ✅ **SHOULD**: Review policies on defined cycles
+
+**When to Apply**: Vendor management, asset tracking, policy governance, audits.
+
+---
+
 ## 🚨 Enforcement Rules (MUST/SHOULD/MAY Hierarchy)
 
 ### MUST (Critical - Block PR if Violated)
@@ -486,6 +576,18 @@ Use this checklist for every change:
 - **Code Quality Excellence**: `.github/skills/code-quality-excellence.md`
 - **ISMS Compliance**: `.github/skills/isms-compliance.md`
 - **Testing Excellence**: `.github/skills/testing-excellence.md`
+- **C4 Architecture Documentation**: `.github/skills/c4-architecture-documentation.md`
+- **Operations & Resilience**: `.github/skills/operations-resilience.md`
+- **Classification & Access Control**: `.github/skills/classification-framework.md`
+- **Risk Assessment**: `.github/skills/risk-assessment.md`
+- **MCP Server Integration**: `.github/skills/mcp-server-integration.md`
+- **Governance & Management**: `.github/skills/governance-management.md`
+- **GitHub Agentic Workflows**: `.github/skills/github-agentic-workflows.md`
+- **Open Source Governance**: `.github/skills/open-source-governance.md`
+- **AI Governance**: `.github/skills/ai-governance.md`
+- **Compliance Frameworks**: `.github/skills/compliance-frameworks.md`
+- **Data Protection**: `.github/skills/data-protection.md`
+- **Threat Modeling**: `.github/skills/threat-modeling.md`
 
 ### Agents (Task Execution)
 - **TypeScript React Agent**: `.github/agents/typescript-react-agent.md`
