@@ -31,12 +31,12 @@ The current v1.0 architecture is a **static React SPA** deployed on **GitHub Pag
 
 | **Time Frame** | **Monthly (USD)** | **Annual (USD)** |
 |----------------|-------------------|------------------|
-| **Total Infrastructure** | **$0.00** | **$0.00** |
+| **Total Infrastructure** | **$1.00** | **$12.00** |
 | **Security Tooling** | **$0.00** | **$0.00** |
 | **Development CI/CD** | **$0.00** | **$0.00** |
-| **Grand Total** | **$0.00** | **$0.00** |
+| **Grand Total** | **$1.00** | **$12.00** |
 
-> **Note:** CIA Compliance Manager v1.0 leverages entirely free-tier services for open source projects.
+> **Note:** CIA Compliance Manager v1.0 leverages free-tier services for open source projects, with the only recurring infrastructure cost being low-cost domain registration (approximately $1/month, $12/year).
 
 ---
 
@@ -47,13 +47,13 @@ The current v1.0 architecture is a **static React SPA** deployed on **GitHub Pag
 | **Hosting** | GitHub Pages | $0.00 | $0.00 | Free for public repos |
 | **CDN** | GitHub Pages CDN | $0.00 | $0.00 | Included with GitHub Pages |
 | **SSL/TLS** | Let's Encrypt (via GitHub) | $0.00 | $0.00 | Automatic HTTPS |
-| **DNS** | Custom domain | $12.00 | $12.00 | Annual domain renewal |
+| **DNS** | Custom domain | $1.00 | $12.00 | Annual domain renewal (~$1/mo averaged) |
 | **CI/CD** | GitHub Actions | $0.00 | $0.00 | Free for public repos |
 | **Code Scanning** | GitHub Advanced Security | $0.00 | $0.00 | Free for public repos |
 | **Dependency Scanning** | Dependabot | $0.00 | $0.00 | Free for all repos |
 | **SAST** | SonarCloud | $0.00 | $0.00 | Free for open source |
 | **SBOM** | GitHub SBOM + SLSA | $0.00 | $0.00 | Free for public repos |
-| **Total** | | **$12.00** | **$12.00** | |
+| **Total** | | **$1.00** | **$12.00** | |
 
 ---
 

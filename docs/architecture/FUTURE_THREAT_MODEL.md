@@ -133,7 +133,7 @@ graph TB
 
 | ID | Threat | Target | Likelihood | Impact | Risk | Mitigation |
 |----|--------|--------|------------|--------|------|------------|
-| FT-I1 | Cross-tenant data leakage | Multi-tenant data | Low | Critical | High | Row-level security, tenant isolation, query filtering |
+| FT-I1 | Cross-tenant data leakage | Multi-tenant data | Low | Critical | High | Tenant-partitioned keys, IAM condition keys (e.g., dynamodb:LeadingKeys), application-layer authorization and query filtering |
 | FT-I2 | API response data exposure | API endpoints | Medium | High | High | Response filtering, field-level access control |
 | FT-I3 | CloudWatch log data exposure | Monitoring | Low | Medium | Medium | Log group encryption, IAM access control |
 | FT-I4 | S3 bucket misconfiguration | Storage | Low | Critical | High | S3 Block Public Access, bucket policies, encryption |
@@ -189,10 +189,10 @@ graph TB
 
 | Rank | Risk | Score | Treatment |
 |------|------|-------|-----------|
-| 1 | Cross-tenant data leakage (FT-I1) | Critical | Mitigate: Row-level security, tenant isolation |
+| 1 | Cross-tenant data leakage (FT-I1) | Critical | Mitigate: DynamoDB partition-key scoping, IAM condition keys, app-layer tenant authorization |
 | 2 | Cross-tenant privilege escalation (FT-E3) | Critical | Mitigate: Tenant-scoped tokens, namespace isolation |
 | 3 | JWT token forgery/replay (FT-S2) | High | Mitigate: Short-lived tokens, PKCE, JWK rotation |
-| 4 | API Gateway DDoS (FT-D1) | High | Mitigate: WAF, rate limiting, CloudFront shield |
+| 4 | API Gateway DDoS (FT-D1) | High | Mitigate: WAF, rate limiting, AWS Shield (Standard/Advanced) + CloudFront |
 | 5 | Lambda execution role abuse (FT-E1) | High | Mitigate: Per-function least-privilege IAM roles |
 
 ---
@@ -215,7 +215,7 @@ graph TB
 | Encryption at rest | KMS + DynamoDB | [Cryptography](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Cryptography_Policy.md) |
 | Encryption in transit | TLS 1.3 | [Cryptography](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Cryptography_Policy.md) |
 | Data classification | DynamoDB tags + policies | [Data Classification](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Data_Classification_Policy.md) |
-| Tenant isolation | Row-level security | [Access Control](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Access_Control_Policy.md) |
+| Tenant isolation | DynamoDB partition-key scoping + IAM condition keys | [Access Control](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Access_Control_Policy.md) |
 
 ### Phase 3: Monitoring & Response (v2.2)
 
