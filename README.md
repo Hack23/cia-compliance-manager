@@ -12,6 +12,14 @@
 [![GitHub Release](https://img.shields.io/github/v/release/Hack23/cia-compliance-manager)](https://github.com/Hack23/cia-compliance-manager/releases) 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Hack23/cia-compliance-manager)
 
+**🔐 ISMS Framework Compliance:**
+[![Information Security Policy](https://img.shields.io/badge/ISMS-Information%20Security%20Policy-0066CC?style=flat-square&logo=shield&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md)
+[![Secure Development Policy](https://img.shields.io/badge/ISMS-Secure%20Development%20Policy-00AA00?style=flat-square&logo=code&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md)
+[![Threat Modeling](https://img.shields.io/badge/ISMS-Threat%20Modeling-FF6B6B?style=flat-square&logo=target&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md)
+[![Vulnerability Management](https://img.shields.io/badge/ISMS-Vulnerability%20Management-FFA500?style=flat-square&logo=bug&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md)
+[![Open Source Policy](https://img.shields.io/badge/ISMS-Open%20Source%20Policy-FFD700?style=flat-square&logo=open-source-initiative&logoColor=black)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Open_Source_Policy.md)
+[![Transparency Plan](https://img.shields.io/badge/ISMS-Transparency%20Plan-9370DB?style=flat-square&logo=eye&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/ISMS_Transparency_Plan.md)
+
 
 ## 🎯 **Purpose Statement**
 
@@ -1250,7 +1258,7 @@ Complete system design with 20+ architectural diagrams including C4 models, secu
 |----------|-------------|-------|
 | **C4 Architecture Models** | System context, containers, components, and deployment views | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md) |
 | **Security Architecture** | STRIDE threat analysis, attack trees, security patterns | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/SECURITY_ARCHITECTURE.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_SECURITY_ARCHITECTURE.md) |
-| **Threat Model** | Comprehensive threat analysis with STRIDE methodology | [View Threat Model](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/THREAT_MODEL.md) |
+| **Threat Model** | Comprehensive threat analysis with STRIDE methodology | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/THREAT_MODEL.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_THREAT_MODEL.md) |
 | **Data Models** | Entity relationships, data flows, classification | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/DATA_MODEL.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_DATA_MODEL.md) |
 | **State Diagrams** | System state transitions and workflows | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/STATEDIAGRAM.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_STATEDIAGRAM.md) |
 | **Process Flowcharts** | Assessment workflows and compliance processes | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FLOWCHART.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_FLOWCHART.md) |
@@ -1266,6 +1274,7 @@ Security implementation details, compliance mappings, and ISMS integration align
 | Document | Description | Link |
 |----------|-------------|------|
 | **Control Mapping** | Framework-to-ISMS-policy mappings (NIST, ISO, CIS) | [View Mapping](https://github.com/Hack23/cia-compliance-manager/blob/main/control-mapping.md) |
+| **ISMS Reference Mapping** | Complete ISMS policy reference mapping | [View Mapping](https://github.com/Hack23/cia-compliance-manager/blob/main/ISMS_REFERENCE_MAPPING.md) |
 | **ISMS Implementation** | Detailed security control implementation (790 lines) | [View Guide](https://github.com/Hack23/cia-compliance-manager/blob/main/ISMS_IMPLEMENTATION_GUIDE.md) |
 | **Traceability Matrix** | End-to-end control-to-evidence mapping (100+ controls) | [View Matrix](https://github.com/Hack23/cia-compliance-manager/blob/main/TRACEABILITY_MATRIX.md) |
 | **CRA Assessment** | EU Cyber Resilience Act compliance documentation | [View Assessment](https://github.com/Hack23/cia-compliance-manager/blob/main/CRA-ASSESSMENT.md) |
@@ -1316,8 +1325,10 @@ Technical reference documentation for developers and integrators.
 - [🏗️ Security Architecture](./docs/architecture/SECURITY_ARCHITECTURE.md) - Current security architecture with Mermaid diagrams
 - [🔮 Future Security Architecture](./docs/architecture/FUTURE_SECURITY_ARCHITECTURE.md) - Planned security enhancements
 - [🎯 Threat Model](./docs/architecture/THREAT_MODEL.md) - Comprehensive threat analysis
+- [🎯 Future Threat Model](./docs/architecture/FUTURE_THREAT_MODEL.md) - Future threat analysis for AWS evolution
 - [📋 Control Mapping](./control-mapping.md) - Framework-to-ISMS-policy mappings
 - [📊 ISMS Implementation Guide](./ISMS_IMPLEMENTATION_GUIDE.md) - Detailed security control implementation
+- [🗺️ ISMS Reference Mapping](./ISMS_REFERENCE_MAPPING.md) - Complete ISMS policy mapping
 - [🔍 Traceability Matrix](./TRACEABILITY_MATRIX.md) - End-to-end control-to-evidence mapping
 
 ### 🔄 Operational Security
