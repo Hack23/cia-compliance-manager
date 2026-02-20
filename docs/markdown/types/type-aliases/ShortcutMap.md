@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.21**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.22**](../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > **ShortcutMap** = `Record`\<`string`, [`KeyboardShortcut`](../interfaces/KeyboardShortcut.md)\>
 
-Defined in: [types/keyboard.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/types/keyboard.ts#L56)
+Defined in: [types/keyboard.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/83ec4592971af1db133b76cbdcec3934063462f5/src/types/keyboard.ts#L56)
 
 Keyboard shortcut map for registration

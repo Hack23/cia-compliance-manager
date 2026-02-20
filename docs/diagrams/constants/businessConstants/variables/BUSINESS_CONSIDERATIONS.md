@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.21**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.22**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **BUSINESS\_CONSIDERATIONS**: [`BusinessConsiderations`](../../../types/businessImpact/interfaces/BusinessConsiderations.md)
 
-Defined in: [constants/businessConstants.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/constants/businessConstants.ts#L25)
+Defined in: [constants/businessConstants.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/83ec4592971af1db133b76cbdcec3934063462f5/src/constants/businessConstants.ts#L25)
 
 Business considerations for security implementations

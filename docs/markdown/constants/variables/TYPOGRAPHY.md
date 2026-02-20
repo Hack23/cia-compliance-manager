@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.21**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.22**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **TYPOGRAPHY**: `object`
 
-Defined in: [constants/designTokens.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/constants/designTokens.ts#L41)
+Defined in: [constants/designTokens.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/83ec4592971af1db133b76cbdcec3934063462f5/src/constants/designTokens.ts#L41)
 
 Typography scale for consistent text hierarchy
 Sizes are in rem units for accessibility

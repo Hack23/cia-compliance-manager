@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.21**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.22**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **PLATFORM\_DETECTION**: `object`
 
-Defined in: [constants/keyboardShortcuts.ts:132](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/constants/keyboardShortcuts.ts#L132)
+Defined in: [constants/keyboardShortcuts.ts:132](https://github.com/Hack23/cia-compliance-manager/blob/83ec4592971af1db133b76cbdcec3934063462f5/src/constants/keyboardShortcuts.ts#L132)
 
 Platform detection strings
 

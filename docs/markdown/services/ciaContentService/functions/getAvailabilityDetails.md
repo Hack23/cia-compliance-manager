@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.21**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.22**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getAvailabilityDetails**(`level`): `Promise`\<[`CIADetails`](../../../types/interfaces/CIADetails.md)\>
 
-Defined in: [services/ciaContentService.ts:1544](https://github.com/Hack23/cia-compliance-manager/blob/88f0f4c85924bcbc12455a443cef3ddc741972e8/src/services/ciaContentService.ts#L1544)
+Defined in: [services/ciaContentService.ts:1544](https://github.com/Hack23/cia-compliance-manager/blob/83ec4592971af1db133b76cbdcec3934063462f5/src/services/ciaContentService.ts#L1544)
 
 Get availability details based on security level
 
