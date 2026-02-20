@@ -531,45 +531,14 @@ npm run snyk-test
 trivy fs --scanners vuln .
 ```
 
-#### 🧪 Interactive Application Security Testing (IAST)
-```typescript
-// ✅ GOOD: Runtime security monitoring
-import { Contrast } from '@contrast/agent';
+#### 🧪 IAST & Penetration Testing
 
-if (process.env.NODE_ENV === 'test') {
-  Contrast.start({
-    apiKey: process.env.CONTRAST_API_KEY,
-    serviceKey: process.env.CONTRAST_SERVICE_KEY,
-    appName: 'cia-compliance-manager',
-  });
-}
-```
+**IAST**: Use runtime security monitoring (e.g., Contrast agent) during test environments to detect vulnerabilities at execution time.
 
-#### 🎭 Penetration Testing
-```markdown
-# Penetration Testing Checklist
-
-## Pre-engagement
-- [ ] Scope defined and approved
-- [ ] Rules of engagement documented
-- [ ] Emergency contacts identified
-- [ ] Legal authorization obtained
-
-## Testing Phases
-- [ ] Reconnaissance (OSINT)
-- [ ] Vulnerability scanning
-- [ ] Exploitation attempts
-- [ ] Privilege escalation testing
-- [ ] Lateral movement testing
-- [ ] Data exfiltration simulation
-
-## Reporting
-- [ ] Executive summary
-- [ ] Technical findings (CVSS scored)
-- [ ] Proof of concept included
-- [ ] Remediation recommendations
-- [ ] Retest verification
-```
+**Penetration Testing Checklist**:
+- Pre-engagement: scope definition, rules of engagement, legal authorization
+- Testing: recon, vuln scanning, exploitation, privilege escalation, lateral movement, data exfiltration
+- Reporting: executive summary, CVSS-scored findings, PoC, remediation, retest
 
 **Reference**: [Secure Development Policy - Phase 3: Security Testing](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#phase-3-security-testing)
 
@@ -635,45 +604,10 @@ const PRODUCTION_CONFIG: DeploymentSecurityConfig = {
 ### 🔧 Phase 5: Maintenance & Operations
 
 **Ongoing Security Activities**:
-```typescript
-// ✅ GOOD: Security monitoring and response
-interface SecurityMonitoring {
-  readonly metrics: {
-    readonly authFailures: number;
-    readonly rateLimitExceeded: number;
-    readonly suspiciousRequests: number;
-  };
-  readonly alerts: readonly SecurityAlert[];
-  readonly patchStatus: {
-    readonly lastUpdate: Date;
-    readonly pendingCritical: number;
-    readonly pendingHigh: number;
-  };
-}
-
-class SecurityOperations {
-  async monitorSecurityEvents(): Promise<SecurityMonitoring> {
-    const metrics = await this.collectSecurityMetrics();
-    const alerts = await this.getActiveAlerts();
-    const patchStatus = await this.checkPatchStatus();
-    
-    // Auto-response for critical threats
-    if (metrics.suspiciousRequests > 1000) {
-      await this.triggerIncidentResponse('potential_ddos');
-    }
-    
-    return { metrics, alerts, patchStatus };
-  }
-  
-  async performSecurityMaintenance(): Promise<void> {
-    // Regular security tasks
-    await this.rotateSecrets();
-    await this.updateDependencies();
-    await this.reviewAccessLogs();
-    await this.validateBackups();
-  }
-}
-```
+- Monitor security metrics (auth failures, rate limit exceeded, suspicious requests)
+- Track patch status (pending critical/high vulnerabilities)
+- Auto-response for critical threats (e.g., trigger incident response for potential DDoS)
+- Regular maintenance: rotate secrets, update dependencies, review access logs, validate backups
 
 **Vulnerability Management SLA** (from [Vulnerability Management Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md)):
 - 🔴 **Critical**: 24 hours
@@ -738,44 +672,9 @@ src/services/** @pethers
 
 ### 🛡️ Security Requirements for AI Usage
 
-```typescript
-// ✅ GOOD: AI usage security policy
-interface AISecurityPolicy {
-  readonly dataProtection: {
-    readonly noPIIInPrompts: boolean;
-    readonly noSecretsInContext: boolean;
-    readonly ismsContextRequired: boolean;
-  };
-  readonly codeGeneration: {
-    readonly humanReviewRequired: boolean;
-    readonly securityTestsRequired: boolean;
-    readonly ceoApprovalForMerge: boolean;
-  };
-  readonly auditTrail: {
-    readonly gitHubLogsComplete: boolean;
-    readonly prDescriptionRequired: boolean;
-    readonly changeJustificationRequired: boolean;
-  };
-}
-
-const COPILOT_SECURITY_POLICY: AISecurityPolicy = {
-  dataProtection: {
-    noPIIInPrompts: true,
-    noSecretsInContext: true,
-    ismsContextRequired: true,  // Load ISMS policies as context
-  },
-  codeGeneration: {
-    humanReviewRequired: true,
-    securityTestsRequired: true,
-    ceoApprovalForMerge: true,
-  },
-  auditTrail: {
-    gitHubLogsComplete: true,
-    prDescriptionRequired: true,
-    changeJustificationRequired: true,
-  },
-};
-```
+**Data Protection**: No PII in prompts, no secrets in context, ISMS context required.
+**Code Generation**: Human review required, security tests required, CEO approval for merge.
+**Audit Trail**: GitHub logs complete, PR description required, change justification required.
 
 **Reference**: 
 - [Secure Development Policy - AI-Augmented Development Controls](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#ai-augmented-development-controls)
@@ -894,43 +793,13 @@ describe('E2E Security Tests', () => {
 
 ## 🕷️ Advanced Security Testing Framework
 
-### 🐛 Bug Bounty Program Integration
+### 🐛 Bug Bounty & Vulnerability Disclosure
 
-**SHOULD**: Maintain public vulnerability disclosure process.
-
-```markdown
-# Security Vulnerability Disclosure
-
-## Scope
-✅ In scope:
-- Web application (https://cia-compliance-manager.com)
-- API endpoints (https://api.cia-compliance-manager.com)
-- Open source repositories
-
-❌ Out of scope:
-- Third-party services
-- Social engineering
-- Physical attacks
-- DoS attacks
-
-## Reporting
-1. Email: security@hack23.com
-2. PGP key: [link]
-3. Response SLA: 24 hours
-
-## Rewards
-🔴 Critical: €500-€2,000
-🟠 High: €200-€500
-🟡 Medium: €50-€200
-🟢 Low: Recognition
-```
+**SHOULD**: Maintain public vulnerability disclosure process. Report to security@hack23.com (24h SLA). Rewards: Critical €500-€2K, High €200-€500, Medium €50-€200, Low: Recognition. Scope: web app, API, open source repos. Out of scope: third-party services, social engineering, physical/DoS attacks.
 
 **Reference**: [Vulnerability Management Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md)
 
-**When logging:**
-→ Never log passwords, tokens, or PII
-→ Log security events (auth failures, permission denials)
-→ Implement log retention policies
+**When logging:** Never log passwords/tokens/PII. Log security events (auth failures, permission denials). Implement log retention policies.
 
 ## Remember
 
@@ -977,55 +846,27 @@ Every code change is a potential attack vector. Think like an attacker, code lik
 ## 🎯 Compliance Framework Mapping
 
 ### ISO 27001:2022 Controls
-- **A.5.23**: Information security for use of cloud services
-- **A.8.25**: Secure development life cycle - Complete SDLC security integration
-- **A.8.26**: Application security requirements - Threat modeling and security requirements
-- **A.8.27**: Secure system architecture and engineering principles - Defense in depth
-- **A.8.28**: Secure coding - OWASP Top 10 prevention patterns
-- **A.8.29**: Security testing in development and acceptance - SAST, DAST, SCA, IAST, penetration testing
-- **A.8.30**: Outsourced development - Third-party component risk assessment
-- **A.8.31**: Separation of development, test and production environments
-- **A.8.32**: Change management - Security gates in deployment
-- **A.8.33**: Test information - Protection of test data
 
-### NIST Cybersecurity Framework 2.0
-- **GV.SC-01**: Cyber supply chain risk management processes identified
-- **ID.RA-01**: Asset vulnerabilities identified and documented
-- **PR.DS-02**: Data-in-transit protected - TLS/SSL enforcement
-- **PR.DS-05**: Protections against data leaks implemented - Secret scanning
-- **PR.DS-06**: Integrity checking mechanisms used - Code signing, checksums
-- **PR.IP-01**: Baseline configuration created and maintained - Secure defaults
-- **PR.IP-02**: System development life cycle managed - SDLC phases 1-5
-- **DE.CM-04**: Malicious code detected - SAST, DAST scanning
-- **RS.AN-05**: Processes established to receive, analyze and respond to vulnerabilities
+| Control | Description |
+|---------|-------------|
+| A.5.23 | Cloud services security |
+| A.8.25 | Secure development life cycle |
+| A.8.26 | Security requirements & threat modeling |
+| A.8.27 | Defense in depth architecture |
+| A.8.28 | Secure coding (OWASP Top 10) |
+| A.8.29 | Security testing (SAST/DAST/SCA/IAST/pentest) |
+| A.8.30 | Third-party component risk |
+| A.8.31 | Environment separation |
+| A.8.32 | Security gates in deployment |
+| A.8.33 | Test data protection |
+
+### NIST CSF 2.0
+GV.SC-01 (supply chain risk), ID.RA-01 (vulnerability docs), PR.DS-02 (data-in-transit/TLS), PR.DS-05 (data leak protection), PR.DS-06 (integrity/code signing), PR.IP-01 (secure defaults), PR.IP-02 (SDLC management), DE.CM-04 (malicious code detection), RS.AN-05 (vulnerability response)
 
 ### CIS Controls v8.1
-- **Control 2**: Inventory and Control of Software Assets - Dependency tracking
-- **Control 3**: Data Protection - Encryption at rest and in transit
-- **Control 16**: Application Software Security
-  - 16.1: Establish and Maintain a Secure Application Development Process
-  - 16.2: Establish and Maintain a Process to Accept and Address Software Vulnerabilities
-  - 16.3: Perform Root Cause Analysis on Security Vulnerabilities
-  - 16.4: Establish and Manage an Inventory of Third-Party Software Components
-  - 16.5: Use Up-to-Date and Trusted Third-Party Software Components
-  - 16.6: Establish and Maintain a Severity Rating System and Process for Application Vulnerabilities
-  - 16.7: Use Standard Hardening Configuration Templates for Application Infrastructure
-  - 16.8: Separate Production and Non-Production Systems
-  - 16.9: Train Developers in Application Security Concepts and Secure Coding
-  - 16.10: Apply Secure Design Principles in Application Architectures
-  - 16.11: Leverage Vetted Modules or Services for Application Security Components
-  - 16.12: Implement Code-Level Security Checks
-  - 16.13: Conduct Application Penetration Testing
-  - 16.14: Conduct Threat Modeling
-- **Control 18**: Penetration Testing - Security validation
+**Control 2** (software asset inventory), **Control 3** (data protection/encryption), **Control 16** (application security: 16.1-16.14 covering secure dev process, vulnerability management, root cause analysis, third-party components, hardening, env separation, developer training, secure design, code-level checks, pentesting, threat modeling), **Control 18** (penetration testing)
 
-### GDPR (General Data Protection Regulation)
-- **Article 25**: Data protection by design and by default - Privacy by Design principles
-- **Article 32**: Security of processing - Technical and organizational measures
-
-### NIS2 Directive (EU)
-- **Article 21**: Cybersecurity risk-management measures - Secure development practices
-
-### EU Cyber Resilience Act (CRA)
-- **Annex I, Part I**: Essential cybersecurity requirements - Secure by design, vulnerability handling
-- **Annex I, Part II**: Vulnerability handling requirements - Coordinated disclosure, patch management
+### Regulatory
+- **GDPR** Art.25 (privacy by design), Art.32 (security of processing)
+- **NIS2** Art.21 (cybersecurity risk management)
+- **EU CRA** Annex I Part I (secure by design), Part II (vulnerability handling/coordinated disclosure)

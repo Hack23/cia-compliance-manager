@@ -305,6 +305,157 @@ Comprehensive guide for creating, securing, and operating GitHub Agentic Workflo
 
 ---
 
+### 🏗️ C4 Architecture Documentation
+**File:** `c4-architecture-documentation.md`
+
+Defines the complete C4 architecture documentation portfolio required for all Hack23 projects.
+
+**Core Principles:**
+- C4 model methodology (Context, Container, Component views)
+- Current AND future state documentation
+- Security architecture with trust boundaries
+- Mermaid diagrams for all visualizations
+
+**Key Rules:**
+- ✅ **MUST**: Maintain ARCHITECTURE.md and FUTURE_ARCHITECTURE.md
+- ✅ **MUST**: Maintain SECURITY_ARCHITECTURE.md and FUTURE_SECURITY_ARCHITECTURE.md
+- ✅ **MUST**: Maintain DATA_MODEL.md, FLOWCHART.md, STATEDIAGRAM.md, MINDMAP.md, SWOT.md
+- ✅ **MUST**: Use Mermaid for all diagrams
+- ✅ **MUST**: Include defense-in-depth layers in security docs
+
+**Use Cases:**
+- Architecture planning and documentation
+- Security architecture reviews
+- C4 diagram creation
+- Future state roadmapping
+
+---
+
+### 🔄 Operations & Resilience
+**File:** `operations-resilience.md`
+
+Covers change management, backup/recovery, business continuity, disaster recovery, and incident response.
+
+**Core Principles:**
+- Risk-controlled change processes
+- Business impact-driven data protection
+- Multi-zone deployment and failover
+- Incident response lifecycle
+
+**Key Rules:**
+- ✅ **MUST**: Follow Change Advisory Board governance
+- ✅ **MUST**: Align RTO/RPO with business impact
+- ✅ **MUST**: Follow incident severity SLAs (Critical 24h, High 7d, Medium 30d, Low 90d)
+- ✅ **SHOULD**: Test DR plans quarterly
+
+**Use Cases:**
+- Change management decisions
+- Incident handling
+- Backup/recovery planning
+- Business continuity planning
+
+---
+
+### 🏷️ Classification & Access Control
+**File:** `classification-framework.md`
+
+Data classification, access control, cryptography, and secrets management.
+
+**Core Principles:**
+- 4-level classification (Public, Internal, Confidential, Restricted)
+- Least privilege access control
+- Approved cryptographic algorithms
+- Secret scanning and rotation
+
+**Key Rules:**
+- ✅ **MUST**: Classify all data before storage/processing
+- ✅ **MUST**: Apply RBAC with least privilege
+- ✅ **MUST**: Use AES-256/RSA-2048+ for encryption
+- ✅ **MUST**: Never hardcode secrets
+
+**Use Cases:**
+- Data handling decisions
+- Authentication/authorization design
+- Encryption implementation
+- Secrets management
+
+---
+
+### 📊 Risk Assessment
+**File:** `risk-assessment.md`
+
+Risk assessment frameworks, risk register management, and vulnerability management.
+
+**Core Principles:**
+- Quantified risk analysis (5x5 matrix)
+- Treatment planning (Accept, Mitigate, Transfer, Avoid)
+- Supply chain risk assessment
+- Quarterly risk reviews
+
+**Key Rules:**
+- ✅ **MUST**: Use 5x5 risk matrix
+- ✅ **MUST**: Maintain risk register
+- ✅ **MUST**: Follow vulnerability SLAs
+- ✅ **SHOULD**: Assess third-party risks
+
+**Use Cases:**
+- Risk assessments
+- Vulnerability triage
+- Compliance audits
+- Supplier evaluations
+
+---
+
+### 🔌 MCP Server Integration
+**File:** `mcp-server-integration.md`
+
+Model Context Protocol server configuration, Copilot coding agent tools, and agent patterns.
+
+**Core Principles:**
+- Secrets-based authentication
+- Canonical GitHub MCP configuration
+- Copilot coding agent integration
+- Stacked PRs and task chaining
+
+**Key Rules:**
+- ✅ **MUST**: Use secrets for MCP authentication
+- ✅ **MUST**: Configure both GITHUB_TOKEN and GITHUB_PERSONAL_ACCESS_TOKEN
+- ✅ **SHOULD**: Use Insiders API endpoint
+- ✅ **SHOULD**: Document base_ref and custom_instructions usage
+
+**Use Cases:**
+- MCP server configuration
+- Custom agent development
+- Copilot workflow automation
+- Multi-step task orchestration
+
+---
+
+### 🏛️ Governance & Management
+**File:** `governance-management.md`
+
+Asset management, supplier/vendor management, stakeholder governance, and policy lifecycle.
+
+**Core Principles:**
+- IT asset inventory and classification
+- Vendor security assessment
+- Evidence-based compliance
+- Policy lifecycle management
+
+**Key Rules:**
+- ✅ **MUST**: Maintain IT asset inventory
+- ✅ **MUST**: Assess vendor security before onboarding
+- ✅ **MUST**: Collect audit evidence
+- ✅ **SHOULD**: Review policies on defined cycles
+
+**Use Cases:**
+- Vendor evaluations
+- Asset tracking
+- Policy governance
+- Audit preparation
+
+---
+
 ## 🎯 How Skills Work
 
 ### Skills vs. Agents
@@ -349,10 +500,10 @@ Which skills should each agent follow?
 | **TypeScript React Agent** | Code Quality Excellence, UI/UX Design System | Performance Optimization, Accessibility Excellence |
 | **Testing Agent** | Testing Excellence | Code Quality Excellence, Accessibility Excellence |
 | **Code Review Agent** | Code Quality Excellence, Security by Design | Performance Optimization, Accessibility Excellence, ISMS Compliance |
-| **Documentation Agent** | Documentation Standards | Code Quality Excellence, UI/UX Design System |
-| **Security Compliance Agent** | Security by Design, ISMS Compliance | Code Quality Excellence, Testing Excellence |
-| **Product Task Agent** | Product Quality Analysis, GitHub Agentic Workflows | All skills (holistic assessment) |
-| **DevOps/Automation Agents** | GitHub Agentic Workflows, Security by Design | ISMS Compliance, Testing Excellence |
+| **Documentation Agent** | Documentation Standards, C4 Architecture Documentation | Code Quality Excellence, UI/UX Design System |
+| **Security Compliance Agent** | Security by Design, ISMS Compliance, Classification & Access Control | Risk Assessment, Threat Modeling, Data Protection |
+| **Product Task Agent** | Product Quality Analysis, GitHub Agentic Workflows, MCP Server Integration | All skills (holistic assessment) |
+| **DevOps/Automation Agents** | GitHub Agentic Workflows, Operations & Resilience, Security by Design | ISMS Compliance, Testing Excellence |
 
 **All agents should be aware of all skills, but prioritize their primary skills.**
 
