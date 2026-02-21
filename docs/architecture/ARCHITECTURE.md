@@ -1,4 +1,13 @@
-# 🏗️ CIA Compliance Manager Architecture
+<p align="center">
+  <img src="https://hack23.com/icon-192.png" alt="Hack23 Logo" width="192" height="192">
+</p>
+
+<h1 align="center">🏗️ CIA Compliance Manager Architecture</h1>
+
+<p align="center">
+  <strong>📐 C4 Model Architecture Documentation</strong><br>
+  <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification Framework</a></em>
+</p>
 
 **Version:** 1.0 | **Last Updated:** 2026-02-08 | **Status:** ✅ Production Ready
 

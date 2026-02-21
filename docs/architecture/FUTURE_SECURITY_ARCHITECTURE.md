@@ -1,4 +1,13 @@
-# 🛡️ CIA Compliance Manager Future Security Architecture
+<p align="center">
+  <img src="https://hack23.com/icon-192.png" alt="Hack23 Logo" width="192" height="192">
+</p>
+
+<h1 align="center">🛡️ CIA Compliance Manager Future Security Architecture</h1>
+
+<p align="center">
+  <strong>🚀 Security Evolution Roadmap</strong><br>
+  <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Network_Security_Policy.md">Network Security Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Access_Control_Policy.md">Access Control Policy</a></em>
+</p>
 
 > **Version:** v2.0-DRAFT | **Based on:** v1.0 Baseline | **Last Updated:** 2025-11-23 | **Status:** 🚀 Evolution Roadmap
 

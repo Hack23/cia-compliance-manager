@@ -1,6 +1,15 @@
-# 📊 Future CIA Compliance Manager Data Model
+<p align="center">
+  <img src="https://hack23.com/icon-192.png" alt="Hack23 Logo" width="192" height="192">
+</p>
 
-**Version:** 2.0-DRAFT | **Based on:** v1.0 Baseline | **Last Updated:** 2025-01-23 | **Status:** 🚀 Evolution Roadmap
+<h1 align="center">📊 Future CIA Compliance Manager Data Model</h1>
+
+<p align="center">
+  <strong>🚀 Evolution Roadmap</strong><br>
+  <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Data_Classification_Policy.md">Data Classification Policy</a></em>
+</p>
+
+**Version:** 2.0-DRAFT | **Based on:** v1.0 Baseline | **Last Updated:** 2025-11-22 | **Status:** 🚀 Evolution Roadmap
 
 This document outlines the comprehensive data architecture evolution for the CIA Compliance Manager, detailing how the data layer transforms from client-side TypeScript types into a robust, AWS-powered serverless data architecture with DynamoDB Global Tables, multi-region replication, and enterprise data management capabilities.
 

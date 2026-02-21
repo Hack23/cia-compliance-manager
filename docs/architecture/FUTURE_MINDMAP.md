@@ -1,4 +1,13 @@
-# 🧠 CIA Compliance Manager Future Architecture Mindmap
+<p align="center">
+  <img src="https://hack23.com/icon-192.png" alt="Hack23 Logo" width="192" height="192">
+</p>
+
+<h1 align="center">🧠 CIA Compliance Manager Future Architecture Mindmap</h1>
+
+<p align="center">
+  <strong>🚀 Evolution Roadmap</strong><br>
+  <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification Framework</a></em>
+</p>
 
 This document outlines the future vision and architecture evolution for the CIA Compliance Manager, focusing on enhanced context awareness, integration capabilities, and advanced analytics.
 

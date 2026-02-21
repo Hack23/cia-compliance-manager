@@ -1,4 +1,13 @@
-# 🔄 CIA Compliance Manager Process Flowcharts
+<p align="center">
+  <img src="https://hack23.com/icon-192.png" alt="Hack23 Logo" width="192" height="192">
+</p>
+
+<h1 align="center">🔄 CIA Compliance Manager Process Flowcharts</h1>
+
+<p align="center">
+  <strong>📐 Process Flow Documentation</strong><br>
+  <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md">Change Management</a></em>
+</p>
 
 > **Version:** v1.0 | **Last Updated:** 2025-11-22 | **Status:** Production
 

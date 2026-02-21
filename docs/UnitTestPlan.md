@@ -1,4 +1,13 @@
-# Unit Test Plan for CIA Compliance Manager
+<p align="center">
+  <img src="https://hack23.com/icon-192.png" alt="Hack23 Logo" width="192" height="192">
+</p>
+
+<h1 align="center">🧪 Unit Test Plan for CIA Compliance Manager</h1>
+
+<p align="center">
+  <strong>📋 Comprehensive Unit Testing Strategy</strong><br>
+  <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md">Vulnerability Management</a></em>
+</p>
 
 **🔐 ISMS Alignment:** This unit test plan implements [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) Section 4.3.1 - Unit Testing Requirements.
 
