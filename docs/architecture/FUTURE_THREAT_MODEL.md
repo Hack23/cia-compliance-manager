@@ -13,7 +13,7 @@
   <a><img src="https://img.shields.io/badge/Owner-CEO-0A66C2?style=for-the-badge" alt="Owner"/></a>
   <a><img src="https://img.shields.io/badge/Version-2.0--DRAFT-555?style=for-the-badge" alt="Version"/></a>
   <a><img src="https://img.shields.io/badge/Based_On-v1.0_Baseline-success?style=for-the-badge" alt="Based On"/></a>
-  <a><img src="https://img.shields.io/badge/Status-🚀_Evolution_Roadmap-orange?style=for-the-badge" alt="Status"/></a>
+  <a><img src="https://img.shields.io/badge/Status-%F0%9F%9A%80_Evolution_Roadmap-orange?style=for-the-badge" alt="Status"/></a>
 </p>
 
 **📋 Document Owner:** CEO | **📄 Version:** 2.0-DRAFT | **📅 Last Updated:** 2026-02-20 (UTC)

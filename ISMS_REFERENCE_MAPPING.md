@@ -1,6 +1,6 @@
-<div align="center">
-
-<img src="https://hack23.com/icon-192.png" alt="Hack23 AB Logo" width="192" height="192">
+<p align="center">
+  <img src="https://hack23.com/icon-192.png" alt="Hack23 AB Logo" width="192" height="192">
+</p>
 
 <h1 align="center">🔐 Hack23 AB — ISMS Reference Mapping</h1>
 
@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Owner-James_Pether_Sörling-blue?style=for-the-badge&logo=person&logoColor=white" alt="Owner">
+  <img src="https://img.shields.io/badge/Owner-James_Pether_S%C3%B6rling-blue?style=for-the-badge&logo=person&logoColor=white" alt="Owner">
   <img src="https://img.shields.io/badge/Version-1.0-green?style=for-the-badge&logo=semantic-release&logoColor=white" alt="Version">
   <img src="https://img.shields.io/badge/Effective-2026--02--20-orange?style=for-the-badge&logo=calendar&logoColor=white" alt="Effective Date">
   <img src="https://img.shields.io/badge/Review_Cycle-Quarterly-purple?style=for-the-badge&logo=refresh&logoColor=white" alt="Review Cycle">
@@ -22,8 +22,6 @@
   📊 <strong>Project: CIA Compliance Manager</strong> | 
   🔗 <strong>Public Repository</strong>
 </p>
-
-</div>
 
 ---
 
