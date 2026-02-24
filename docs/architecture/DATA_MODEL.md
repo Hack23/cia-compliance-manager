@@ -1549,18 +1549,70 @@ flowchart LR
 
 | File | Purpose | Key Exports |
 |------|---------|-------------|
-| `src/services/ciaContentService.ts` | CIA content provider | Content retrieval methods |
-| `src/services/complianceService.ts` | Compliance assessment | Framework evaluation |
-| `src/services/businessImpactService.ts` | Impact analysis | ROI calculation |
-| `src/services/securityMetricsService.ts` | Metrics calculation | Security scoring |
+| `src/services/ciaContentService.ts` | CIA content provider | `CIAContentService`, `createCIAContentService` |
+| `src/services/complianceService.ts` | Compliance assessment | `ComplianceService`, `createComplianceService` |
+| `src/services/businessImpactService.ts` | Impact analysis | `BusinessImpactService`, `createBusinessImpactService` |
+| `src/services/securityMetricsService.ts` | Metrics calculation | `SecurityMetricsService`, `createSecurityMetricsService` |
+| `src/services/securityResourceService.ts` | Security resources | `SecurityResourceService`, `createSecurityResourceService` |
+| `src/services/technicalImplementationService.ts` | Technical details | `createTechnicalImplementationService` |
+| `src/services/ComplianceServiceAdapter.ts` | Adapter pattern | `ComplianceServiceAdapter` |
+| `src/services/BaseService.ts` | Base service class | `BaseService` |
+| `src/services/errorService.ts` | Error management | `ErrorService`, `ErrorSeverity` |
+| `src/services/errors.ts` | Error types | `ServiceError`, `ServiceErrorCode` |
 | `src/services/dataProviders.ts` | Data provider pattern | `CIADataProvider` interface |
+
+### **Service Interface Definitions (src/types/services.ts)**
+
+```typescript
+/** Base service interface for all services */
+export interface IBaseService {
+  getComponentMetrics(level: SecurityLevel): IComponentMetrics;
+}
+
+/** CIA content service interface */
+export interface ICIAContentService extends IBaseService { /* ... */ }
+
+/** Compliance assessment service interface */
+export interface IComplianceService extends IBaseService { /* ... */ }
+
+/** Business impact analysis service interface */
+export interface IBusinessImpactService extends IBaseService { /* ... */ }
+
+/** Security metrics calculation service interface */
+export interface ISecurityMetricsService extends IBaseService { /* ... */ }
+
+/** Technical implementation details service interface */
+export interface ITechnicalImplementationService extends IBaseService { /* ... */ }
+
+/** Security resource recommendation service interface */
+export interface ISecurityResourceService extends IBaseService { /* ... */ }
+
+/** Service factory generic interface */
+export interface IServiceFactory<T extends IBaseService> { /* ... */ }
+
+/** Metrics interfaces */
+export interface IComponentMetrics { /* ... */ }
+export interface IImpactMetrics { /* ... */ }
+export interface ISecurityMetrics { /* ... */ }
+```
 
 ### **Hook Files**
 
 | File | Purpose | Key Exports |
 |------|---------|-------------|
 | `src/hooks/useCIADataProvider.ts` | Data provider hook | `useCIADataProvider` |
-| `src/hooks/useSecurityLevel.ts` | Security level management | State management |
+| `src/hooks/useSecurityLevelState.ts` | Security level management | `useSecurityLevelState` |
+| `src/hooks/useCIAContentService.ts` | CIA content access | `useCIAContentService` |
+| `src/hooks/useComplianceService.ts` | Compliance data access | `useComplianceService` |
+| `src/hooks/useBusinessImpact.ts` | Business impact analysis | `useBusinessImpact` |
+| `src/hooks/useSecurityMetricsService.ts` | Security metrics access | `useSecurityMetricsService` |
+| `src/hooks/useComponentDetails.ts` | Component details | `useComponentDetails` |
+| `src/hooks/useFormattedMetrics.ts` | Formatted metrics | `useFormattedMetrics` |
+| `src/hooks/useLocalStorage.ts` | localStorage persistence | `useLocalStorage` |
+| `src/hooks/useKeyboardShortcuts.ts` | Keyboard shortcuts | `useKeyboardShortcuts` |
+| `src/hooks/useResponsiveBreakpoint.ts` | Responsive breakpoints | `useResponsiveBreakpoint` |
+| `src/hooks/useTabs.ts` | Tab management | `useTabs` |
+| `src/hooks/useWidgetError.ts` | Widget error handling | `useWidgetError` |
 
 ---
 
@@ -1591,6 +1643,6 @@ For planned enhancements to the data model, see:
 **✅ Approved by:** Technical Lead  
 **📤 Distribution:** Public  
 **🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-lightgrey?style=flat-square)](https://github.com/Hack23/ISMS/blob/main/CLASSIFICATION.md#confidentiality-levels)  
-**📅 Effective Date:** 2025-01-22  
-**⏰ Next Review:** 2025-04-22  
+**📅 Effective Date:** 2026-02-24  
+**⏰ Next Review:** 2026-05-24  
 **🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS/blob/main/CLASSIFICATION.md)

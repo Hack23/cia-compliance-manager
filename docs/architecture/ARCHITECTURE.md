@@ -367,14 +367,14 @@ C4Component
 
 ## 🏗️ Build Pipeline Architecture (NEW in v1.0)
 
-The v1.0 build system leverages Vite 7.2.4 with advanced optimization techniques:
+The v1.0 build system leverages Vite 7.3.1 with advanced optimization techniques:
 
 ```mermaid
 C4Component
-    title Build Pipeline - Vite 7.2.4 with Optimization
+    title Build Pipeline - Vite 7.3.1 with Optimization
 
     Container_Boundary(buildPipeline, "Build System") {
-        Component(vite, "Vite 7.2.4", "Build Tool", "Lightning-fast HMR and optimized builds")
+        Component(vite, "Vite 7.3.1", "Build Tool", "Lightning-fast HMR and optimized builds")
         Component(esbuild, "esbuild", "Minifier", "Ultra-fast JavaScript minification")
         Component(rollup, "Rollup", "Bundler", "Advanced code splitting and tree-shaking")
         Component(tsCompiler, "TypeScript 5.9.3", "Compiler", "Strict mode compilation with full type checking")
