@@ -9,7 +9,7 @@
   <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification Framework</a></em>
 </p>
 
-**Version:** 1.0 | **Last Updated:** 2026-02-08 | **Status:** ✅ Production Ready
+**Version:** 1.1 | **Last Updated:** 2026-02-24 | **Status:** ✅ Production Ready
 
 This document provides a comprehensive view of the CIA Compliance Manager architecture using the C4 model, illustrating how components interact to deliver security assessment capabilities.
 
@@ -107,7 +107,7 @@ C4Container
         Container(frontend, "Frontend Application", "React 19.2.x, TypeScript 5.9.x (Strict)", "SPA with error boundaries, context API state management")
         ContainerDb(staticData, "Static Data", "TypeScript/JSON", "Security controls, frameworks, CIA triad data")
         Container(buildSystem, "Build System", "Vite 7.x, esbuild", "Code splitting, tree-shaking, bundle optimization")
-        Container(testFramework, "Test Infrastructure", "Vitest 4.x, Cypress 15.x", "Unit tests (exceeds 80% line coverage), E2E tests")
+        Container(testFramework, "Test Infrastructure", "Vitest 4.0.17, Cypress 15.10.0", "Unit tests (exceeds 80% line coverage), E2E tests")
         Container(securityScan, "Security Scanner", "CodeQL, SonarCloud, Dependabot", "SAST, SCA, vulnerability detection")
         Container(deployment, "Deployment", "AWS CloudFront + S3, GitHub Pages DR", "Multi-region with SLSA Level 3 attestation")
     }
@@ -132,7 +132,7 @@ C4Container
 | **Frontend Application** | React 19.2.x, TypeScript 5.9.x | User interface | Error boundaries, concurrent rendering, strict types |
 | **Static Data** | TypeScript/JSON | Data source | CIA triad controls, compliance frameworks |
 | **Build System** | Vite 7.x, esbuild | Build pipeline | Optimized bundle, code splitting, tree-shaking |
-| **Test Infrastructure** | Vitest 4.x, Cypress 15.x | Quality assurance | Exceeds 80% line coverage, component & E2E tests |
+| **Test Infrastructure** | Vitest 4.0.17, Cypress 15.10.0 | Quality assurance | Exceeds 80% line coverage, component & E2E tests |
 | **Security Scanner** | CodeQL, SonarCloud | Vulnerability detection | SAST, SCA, dependency scanning |
 | **Deployment** | AWS CloudFront + S3, GitHub Pages DR | Multi-region hosting | CloudFront CDN, S3 multi-region, SLSA Level 3, Route53 DNS |
 
@@ -146,7 +146,7 @@ C4Component
 
     Container_Boundary(frontend, "Frontend Application") {
         Component(errorBoundary, "Error Boundary", "react-error-boundary 6.0.0", "Application-wide error handling and recovery")
-        Component(appRoot, "App Root", "React 19.2.0", "Main application component with routing")
+        Component(appRoot, "App Root", "React 19.2.4", "Main application component with routing")
         
         Component(slWidget, "Security Level Widget", "React, TypeScript", "Core configuration widget for CIA security levels")
         
@@ -389,7 +389,7 @@ C4Component
     }
 
     Container_Boundary(output, "Build Artifacts") {
-        Component(reactChunk, "react-vendor.js", "21.5KB", "React 19.2.0 + React DOM")
+        Component(reactChunk, "react-vendor.js", "21.5KB", "React 19.2.4 + React DOM")
         Component(chartChunk, "chart.js", "21.5KB", "Chart.js 4.5.1 (lazy loaded)")
         Component(vendorChunk, "vendor.js", "~8KB", "Other dependencies")
         Component(appChunk, "app.js", "~124KB", "Application code")
@@ -425,15 +425,15 @@ C4Component
 
 ## 🧪 Testing Infrastructure (v1.0)
 
-Comprehensive testing architecture with Vitest and Cypress 15.x:
+Comprehensive testing architecture with Vitest 4.0.17 and Cypress 15.10.0:
 
 ```mermaid
 C4Component
     title Testing Infrastructure - v1.0
 
     Container_Boundary(testFramework, "Test Infrastructure") {
-        Component(vitest, "Vitest 4.0.6", "Unit Testing", "83.26% line coverage, fast execution")
-        Component(cypress, "Cypress 15.7.0", "E2E Testing", "Component tests, session handling")
+        Component(vitest, "Vitest 4.0.17", "Unit Testing", "83.26% line coverage, fast execution")
+        Component(cypress, "Cypress 15.10.0", "E2E Testing", "Component tests, session handling")
         Component(testingLibrary, "React Testing Library 16.3.0", "Component Testing", "User-centric testing")
         Component(jsdom, "jsdom 27.2.0", "DOM Simulation", "Browser environment simulation")
     }
@@ -445,9 +445,9 @@ C4Component
     }
 
     Container_Boundary(e2eTesting, "E2E Test Suite") {
-        Component(componentTests, "Component Tests", "Cypress 15.x", "Isolated component testing")
-        Component(integrationTests, "Integration Tests", "Cypress 15.x", "Multi-widget workflows")
-        Component(visualTests, "Visual Tests", "Cypress 15.x", "Screenshot regression testing")
+        Component(componentTests, "Component Tests", "Cypress 15.10.0", "Isolated component testing")
+        Component(integrationTests, "Integration Tests", "Cypress 15.10.0", "Multi-widget workflows")
+        Component(visualTests, "Visual Tests", "Cypress 15.10.0", "Screenshot regression testing")
         Component(mochawesome, "Mochawesome Reports", "Reporter", "HTML test result reports")
     }
 
@@ -481,13 +481,13 @@ Current coverage from latest build ([view full report](https://ciacompliancemana
 
 ### **Test Infrastructure Features**
 
-#### **Vitest 4.0.6 Enhancements**
+#### **Vitest 4.0.17 Enhancements**
 - **Parallel Test Execution**: Faster test runs with worker threads
 - **Watch Mode**: Interactive test development workflow
 - **Snapshot Testing**: UI component regression detection
 - **Coverage Thresholds**: Automated quality gates (80% minimum)
 
-#### **Cypress 15.7.0 Improvements**
+#### **Cypress 15.10.0 Improvements**
 - **Component Testing**: Isolated widget testing in real browser
 - **Session Handling**: Improved state persistence between tests
 - **Memory Management**: Experimental memory optimization
@@ -797,8 +797,8 @@ sequenceDiagram
 ### **Testing & Quality**
 | Technology | Version | Purpose | Key Features |
 |-----------|---------|---------|--------------|
-| **Vitest** | 4.0.6 | Unit Testing | 83.26% line coverage, parallel execution, watch mode |
-| **Cypress** | 15.7.0 | E2E Testing | Component tests, improved session handling, video/screenshot control |
+| **Vitest** | 4.0.17 | Unit Testing | 83.26% line coverage, parallel execution, watch mode |
+| **Cypress** | 15.10.0 | E2E Testing | Component tests, improved session handling, video/screenshot control |
 | **@testing-library/react** | 16.3.0 | Component Testing | User-centric testing patterns |
 | **jsdom** | 27.2.0 | DOM Simulation | Fast browser environment simulation |
 
@@ -862,7 +862,7 @@ sequenceDiagram
 | ADR-006 | React 19.x Adoption | Leverage concurrent features, error boundaries | Automatic batching, improved rendering |
 | ADR-007 | TypeScript Strict Mode | Eliminate runtime type errors, improve maintainability | Zero `any` types, full null safety |
 | ADR-008 | Vite Build System | Fast development experience, optimized production builds | 175KB bundle, 8s build time |
-| ADR-009 | Comprehensive Testing | Ensure code quality and prevent regressions | 83.26% line coverage with Vitest 4.x |
+| ADR-009 | Comprehensive Testing | Ensure code quality and prevent regressions | 83.26% line coverage with Vitest 4.0.17 |
 | ADR-010 | SLSA Level 3 Attestation | Supply chain security and build integrity | Public provenance verification |
 | ADR-011 | AWS CloudFront + S3 Deployment | Multi-region resilience, global CDN, production-grade infrastructure | CloudFront CDN, S3 multi-region, Route53 DNS, GitHub Pages DR |
 
@@ -1020,7 +1020,7 @@ The CIA Compliance Manager architecture delivers a comprehensive security assess
 - ✅ **TypeScript Strict Mode**: Complete type safety with zero `any` types
 - ✅ **Vite 7.x**: Fast builds and optimized bundles
 - ✅ **Comprehensive Testing**: Exceeds 80% line coverage target
-- ✅ **Cypress 15.x**: Advanced E2E and component testing
+- ✅ **Cypress 15.10.0**: Advanced E2E and component testing
 
 ### **Security & Compliance**
 - ✅ **SLSA Level 3**: Build provenance and supply chain integrity
