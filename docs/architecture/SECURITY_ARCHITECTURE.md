@@ -199,8 +199,9 @@ CIA Compliance Manager session handling:
 
 - **✅ Maximum Privacy**: No tracking or data collection
 - **✅ No Profiling**: Cannot build user behavior profiles
-- **❌ No Security Monitoring**: Cannot detect suspicious assessment activity
-- **❌ No Analytics**: No usage patterns for security analysis
+- **❌ No Client-Side Security Monitoring**: Cannot detect suspicious assessment activity within the SPA
+- **❌ No Client-Side Analytics**: No usage patterns for security analysis
+- **ℹ️ CI/CD Monitoring**: Security monitoring is performed at CI/CD and infrastructure levels (see [Monitoring & Analytics](#-monitoring--analytics))
 
 ## 🔍 Security Event Monitoring
 
@@ -234,8 +235,9 @@ CIA Compliance Manager security monitoring:
 
 - **✅ No Security Events**: No authentication to compromise
 - **✅ Minimal Attack Surface**: Static content only
-- **❌ No Threat Detection**: Cannot identify attacks
-- **❌ No Incident Response**: No system to detect incidents
+- **❌ No Client-Side Threat Detection**: Cannot identify attacks in the browser
+- **❌ No Client-Side Incident Response**: No runtime system to detect incidents
+- **ℹ️ CI/CD Detection**: Threat detection at build/deployment level (see [Threat Detection](#-threat-detection--investigation))
 
 ## 🌐 Network Security
 
