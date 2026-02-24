@@ -11,7 +11,7 @@
 
 <p align="center">
   <a><img src="https://img.shields.io/badge/Owner-CEO-0A66C2?style=for-the-badge" alt="Owner"/></a>
-  <a><img src="https://img.shields.io/badge/Version-1.0-555?style=for-the-badge" alt="Version"/></a>
+  <a><img src="https://img.shields.io/badge/Version-1.1-555?style=for-the-badge" alt="Version"/></a>
   <a><img src="https://img.shields.io/badge/Effective-2025--11--22-success?style=for-the-badge" alt="Effective Date"/></a>
   <a><img src="https://img.shields.io/badge/Review-Quarterly-orange?style=for-the-badge" alt="Review Cycle"/></a>
 </p>
@@ -41,13 +41,13 @@ This threat model demonstrates **🛡️ cybersecurity consulting expertise** th
 ### **🔍 Scope Definition**
 
 **v1.0 Release Architecture:**
-- 🌐 **React 19.2.0 Frontend**: Modern concurrent rendering with error boundaries
+- 🌐 **React 19.2.4 Frontend**: Modern concurrent rendering with error boundaries
 - 📊 **Static Data Files**: JSON configuration and compliance framework mappings
 - 🔧 **GitHub Pages Hosting**: CDN-based static content delivery with HTTPS
 - 🛡️ **GitHub Actions CI/CD**: SLSA Level 3 build provenance and attestations
 - 📦 **NPM Dependency Ecosystem**: 4 production dependencies with SBOM tracking
 - 🔍 **Client-Side Assessment Engine**: TypeScript 5.9.3 strict mode with type safety
-- 🧪 **Cypress 15.7.0 Testing**: Comprehensive E2E and component security testing
+- 🧪 **Cypress 15.10.0 Testing**: Comprehensive E2E and component security testing
 - 🛡️ **Content Security Policy**: Multi-layer XSS protection with strict CSP headers
 
 **Out of Scope:**
@@ -57,7 +57,8 @@ This threat model demonstrates **🛡️ cybersecurity consulting expertise** th
 
 **v1.0 Security Enhancements:**
 - ⚛️ **React 19.x**: Error boundaries, concurrent rendering, automatic batching
-- 🧪 **Cypress 15.x**: Enhanced testing with 83.26% coverage (>80% target)
+- 🧪 **Vitest 4.0.17**: Unit testing with 83.26% line coverage (>80% target)
+- 🧪 **Cypress 15.10.0**: Enhanced E2E and component security testing
 - 🔒 **SLSA Level 3**: Build provenance attestation and SBOM generation
 - 🛡️ **CSP Headers**: Comprehensive Content Security Policy implementation
 - 📦 **Bundle Optimization**: 175KB (< 180KB target, optimized via tree-shaking)
@@ -410,11 +411,11 @@ flowchart TD
 - **⚡ Availability Protection**: Critical widgets protected from DoS via isolated error handling
 - **🔄 Graceful Degradation**: Application remains functional when individual components fail
 
-### **🧪 Cypress 15.x Test Infrastructure Threat Analysis**
+### **🧪 Vitest & Cypress Test Infrastructure Threat Analysis**
 
 ```mermaid
 flowchart TD
-    subgraph "Cypress 15.x Security Testing Threats"
+    subgraph "Vitest & Cypress Security Testing Threats"
         A[🧪 Test Infrastructure] --> B[🔍 Test Data Exposure]
         A --> C[⚙️ Test Environment Tampering]
         A --> D[🔑 Test Credential Leakage]
@@ -442,7 +443,7 @@ flowchart TD
 | **3** | **Test Credential Leakage** | Extract authentication credentials from test code | N/A | No authentication = no credentials to leak | None - Client-side only |
 | **4** | **False Security Confidence** | Pass security tests despite vulnerabilities | High | 83.26% coverage + multiple test types (unit/component/E2E) | Medium - Continuous improvement |
 
-#### **✅ Cypress 15.x Security Testing Benefits**
+#### **✅ Vitest & Cypress Security Testing Benefits**
 
 - **🔍 Comprehensive Coverage**: 83.26% line coverage ensures security validation
 - **🧪 Multi-Layer Testing**: Unit + Component + E2E tests cover different attack vectors
@@ -1131,8 +1132,8 @@ The following security enhancements have been successfully implemented for v1.0 
    - ✅ Complete type safety with null checks
    - ✅ Compile-time vulnerability detection
 
-5. **✅ Cypress 15.x Testing Infrastructure — DEPLOYED**:
-   - ✅ 83.26% line coverage (>80% target exceeded)
+5. **✅ Vitest 4.0.17 & Cypress 15.10.0 Testing Infrastructure — DEPLOYED**:
+   - ✅ 83.26% line coverage with Vitest (>80% target exceeded)
    - ✅ Component testing for widget security
    - ✅ E2E testing for workflow security
    - ✅ Visual regression testing
@@ -1241,8 +1242,8 @@ flowchart TB
 | **📊 Error Boundary Coverage** | None | All Widgets | All Widgets + Global | ✅ **Target Exceeded** |
 | **🔒 TypeScript Strict Mode** | Partial | Complete | Zero `any` types | ✅ **Target Met** |
 | **📦 Bundle Size** | 188KB | <180KB | 175KB | ✅ **Target Met** |
-| **🧪 E2E Test Framework** | Cypress 13.x | Cypress 15.x | Cypress 15.7.0 | ✅ **Target Met** |
-| **⚛️ React Version** | React 18.x | React 19.x | React 19.2.0 | ✅ **Target Met** |
+| **🧪 E2E Test Framework** | Cypress 13.x | Cypress 15.x | Cypress 15.10.0 | ✅ **Target Met** |
+| **⚛️ React Version** | React 18.x | React 19.x | React 19.2.4 | ✅ **Target Met** |
 
 ### **🔄 Security Review Cycle**
 
@@ -1371,7 +1372,7 @@ The CIA Compliance Manager threat model exemplifies how systematic security anal
 **🏷️ Classification:** Public (Open Source Compliance Tool)
 
 **🔄 Version History:**
-- **v1.0 Update (2025-11-22)**: Updated for v1.0 release with React 19.x, Cypress 15.x, SLSA Level 3, CSP implementation
+- **v1.1 Update (2026-02-24)**: Updated versions (React 19.2.4, Vitest 4.0.17, Cypress 15.10.0), corrected test coverage attribution to Vitest
 - **v1.0 Initial (2025-09-19)**: Initial comprehensive threat model baseline
 
 **🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![AWS Well-Architected](https://img.shields.io/badge/AWS-Well_Architected-orange?style=flat-square&logo=amazon-aws&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![Hack23 Threat Modeling](https://img.shields.io/badge/Hack23-Threat_Modeling_Policy-purple?style=flat-square&logo=security&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md)
