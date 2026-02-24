@@ -9,7 +9,7 @@
   <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Network_Security_Policy.md">Network Security Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Access_Control_Policy.md">Access Control Policy</a></em>
 </p>
 
-**Version:** 1.0 | **Last Updated:** 2026-02-08 | **Status:** ✅ Production Ready
+**Version:** 1.1 | **Last Updated:** 2026-02-24 | **Status:** ✅ Production Ready
 
 This document outlines the comprehensive security architecture of the CIA Compliance Manager, detailing how the system protects data through multiple security layers.
 
@@ -199,8 +199,9 @@ CIA Compliance Manager session handling:
 
 - **✅ Maximum Privacy**: No tracking or data collection
 - **✅ No Profiling**: Cannot build user behavior profiles
-- **❌ No Security Monitoring**: Cannot detect suspicious assessment activity
-- **❌ No Analytics**: No usage patterns for security analysis
+- **❌ No Client-Side Security Monitoring**: Cannot detect suspicious assessment activity within the SPA
+- **❌ No Client-Side Analytics**: No usage patterns for security analysis
+- **ℹ️ CI/CD Monitoring**: Security monitoring is performed at CI/CD and infrastructure levels (see [Monitoring & Analytics](#-monitoring--analytics))
 
 ## 🔍 Security Event Monitoring
 
@@ -234,8 +235,9 @@ CIA Compliance Manager security monitoring:
 
 - **✅ No Security Events**: No authentication to compromise
 - **✅ Minimal Attack Surface**: Static content only
-- **❌ No Threat Detection**: Cannot identify attacks
-- **❌ No Incident Response**: No system to detect incidents
+- **❌ No Client-Side Threat Detection**: Cannot identify attacks in the browser
+- **❌ No Client-Side Incident Response**: No runtime system to detect incidents
+- **ℹ️ CI/CD Detection**: Threat detection at build/deployment level (see [Threat Detection](#-threat-detection--investigation))
 
 ## 🌐 Network Security
 
@@ -990,62 +992,77 @@ CIA Compliance Manager implements applicable AWS FSBP controls for static conten
 
 ## 🕵️ Threat Detection & Investigation
 
-**Current Status**: ❌ No Threat Detection - Frontend Only
+**Current Status**: ⚠️ CI/CD & Infrastructure-Level Detection
 
 ```mermaid
 flowchart TD
-    subgraph "No Threat Detection"
-        A[🔍 No Threat<br>Detection]
-        B[🔎 No Investigation<br>Tools]
-        C[⚠️ No Security<br>Findings]
+    subgraph "CI/CD Threat Detection"
+        A[🔍 Harden-Runner<br>Network Monitoring] --> B[🛡️ Egress Policy<br>Enforcement]
+        C[🔎 CodeQL<br>Analysis] --> D[⚠️ Security<br>Findings]
+        E[📦 Dependency<br>Review] --> F[🔒 Supply Chain<br>Validation]
     end
 
-    style A,B,C fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
+    subgraph "AWS Infrastructure"
+        G[☁️ CloudTrail<br>Logging] --> H[📊 Access<br>Auditing]
+    end
+
+    style A,C,E fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:white,font-weight:bold
+    style G fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Current Status
 
-CIA Compliance Manager threat detection:
+CIA Compliance Manager threat detection operates at CI/CD and infrastructure levels:
 
-- **🚫 No Threat Detection**: No monitoring infrastructure
-- **🚫 No Investigation Tools**: No forensic capabilities
-- **🚫 No Security Findings**: No security events to investigate
+- **✅ Harden-Runner**: Network monitoring with egress policy enforcement in CI/CD
+- **✅ CodeQL Analysis**: Automated code scanning for security vulnerabilities
+- **✅ Dependency Review**: Supply chain threat detection on every PR
+- **✅ CloudTrail Logging**: AWS infrastructure access auditing
+- **❌ No Client-Side Detection**: No runtime monitoring in the frontend application
 
 ### Security Implications
 
-- **✅ Minimal Threats**: Static content has limited threat vectors
-- **✅ No Data to Steal**: No persistent data to compromise
-- **❌ No Visibility**: Cannot detect client-side attacks
-- **❌ No Response**: No incident response capabilities
+- **✅ Build-Time Protection**: Threats detected during CI/CD pipeline execution
+- **✅ Supply Chain Monitoring**: Dependency vulnerabilities detected automatically
+- **✅ Infrastructure Logging**: AWS access events tracked via CloudTrail
+- **❌ No Client-Side Visibility**: Cannot detect runtime client-side attacks
 
 ## 🔎 Vulnerability Management
 
-**Current Status**: ❌ No Vulnerability Management - Static Content
+**Current Status**: ✅ Automated Vulnerability Scanning in CI/CD
 
 ```mermaid
 flowchart TD
-    subgraph "No Vulnerability Management"
-        A[🔎 No Vulnerability<br>Scanning]
-        B[📋 No CVE<br>Database]
-        C[🔧 No Patch<br>Management]
+    subgraph "Vulnerability Management Pipeline"
+        A[🔎 CodeQL<br>SAST Scanning] --> D[📊 Security<br>Findings]
+        B[📦 Dependabot<br>SCA Scanning] --> D
+        C[🔍 Dependency<br>Review] --> D
+        E[🌐 ZAP<br>DAST Scanning] --> D
+        F[📋 OSSF<br>Scorecard] --> D
     end
 
-    style A,B,C fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
+    D --> G[🔧 Automated<br>PR Creation]
+    D --> H[📋 Security<br>Advisories]
+
+    style A,B,C,E,F fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Current Status
 
-CIA Compliance Manager vulnerability management:
+CIA Compliance Manager implements comprehensive automated vulnerability management:
 
-- **🚫 No Scanning**: No server infrastructure to scan
-- **🚫 No CVE Tracking**: No operating systems or services to patch
-- **🚫 No Patch Management**: Static content requires no patching
+- **✅ CodeQL SAST**: Static application security testing on every PR and push
+- **✅ Dependabot SCA**: Automated dependency vulnerability detection and PR creation
+- **✅ Dependency Review**: Blocks PRs introducing vulnerable dependencies
+- **✅ ZAP DAST**: Dynamic application security testing against deployed application
+- **✅ OSSF Scorecard**: Supply chain security best practices monitoring
 
 ### Security Considerations
 
-- **✅ No Server Vulnerabilities**: No servers to exploit
-- **✅ No OS Patching**: No operating systems to maintain
-- **❌ Client-Side Risks**: Browser vulnerabilities outside our control
+- **✅ Automated Remediation**: Dependabot creates PRs for vulnerable dependencies
+- **✅ Multi-Layer Scanning**: SAST + SCA + DAST coverage
+- **✅ Supply Chain Security**: SLSA Level 3 with build provenance attestation
+- **❌ No Runtime Scanning**: No server-side vulnerability scanning (client-side SPA)
 - **❌ Dependency Risks**: Frontend dependencies need manual updates
 
 ## ⚡ Resilience & Operational Readiness
@@ -1109,63 +1126,76 @@ CIA Compliance Manager configuration management:
 
 ## 📊 Monitoring & Analytics
 
-**Current Status**: ❌ No Security Monitoring - Frontend Only
+**Current Status**: ⚠️ Infrastructure & CI/CD Level Monitoring
 
 ```mermaid
 flowchart TD
-    subgraph "No Security Monitoring"
-        A[📊 No Log Sources]
-        B[📈 No CloudWatch]
-        C[🔍 No Security Lake]
-        D[🚨 No Alerting]
+    subgraph "CI/CD Monitoring"
+        A[📊 GitHub Actions<br>Logs] --> E[📈 Build & Test<br>Metrics]
+        B[🔍 Harden-Runner<br>Telemetry] --> E
+        C[📋 Lighthouse<br>Performance] --> E
     end
 
-    style A,B,C,D fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
+    subgraph "AWS Monitoring"
+        D[☁️ CloudTrail<br>Access Logs] --> F[📊 S3 & CloudFront<br>Analytics]
+    end
+
+    style A,B,C fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:white,font-weight:bold
+    style D fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Current Status
 
-CIA Compliance Manager monitoring:
+CIA Compliance Manager monitoring operates at infrastructure and CI/CD levels:
 
-- **🚫 No Server Logs**: No server infrastructure to monitor
-- **🚫 No CloudWatch**: No AWS services to monitor
-- **🚫 No Security Analytics**: No security events to analyze
-- **🚫 No Alerting**: No monitoring system to generate alerts
+- **✅ GitHub Actions Logs**: Complete CI/CD pipeline execution tracking
+- **✅ Harden-Runner Telemetry**: Network egress monitoring in CI/CD
+- **✅ CloudTrail Logging**: AWS S3 and CloudFront access auditing
+- **✅ Lighthouse Performance**: Automated performance monitoring via CI/CD
+- **❌ No Client-Side Analytics**: No runtime application monitoring
 
 ### Monitoring Limitations
 
-- **❌ No Visibility**: Cannot monitor player behavior
-- **❌ No Analytics**: No usage patterns or security insights
-- **❌ No Alerting**: No early warning system for issues
+- **❌ No Client-Side Visibility**: Cannot monitor user behavior in the SPA
+- **❌ No Real-Time Alerting**: No real-time monitoring system for application issues
+- **❌ No Usage Analytics**: No client-side telemetry or usage pattern tracking
 
 ## 🤖 Automated Security Operations
 
-**Current Status**: ❌ No Automated Security Operations - Static Content
+**Current Status**: ✅ CI/CD Automated Security Operations
 
 ```mermaid
 flowchart TD
-    subgraph "No Automated Security Operations"
-        A[⏱️ No Maintenance<br>Windows]
-        B[🔄 No Patch<br>Management]
-        C[📊 No Security<br>Automation]
+    subgraph "Automated Security Operations"
+        A[📦 Dependabot<br>Auto-Updates] --> D[🔒 Automated<br>Security PRs]
+        B[🔍 CodeQL<br>Scheduled Scans] --> D
+        C[📋 Scorecard<br>Best Practices] --> D
     end
 
-    style A,B,C fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
+    subgraph "Build Automation"
+        E[🏗️ SLSA Level 3<br>Attestation] --> F[📦 SBOM<br>Generation]
+        G[🔐 Artifact<br>Signing] --> F
+    end
+
+    style A,B,C fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:white,font-weight:bold
+    style E,G fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Current Status
 
-CIA Compliance Manager automated operations:
+CIA Compliance Manager implements automated security operations via CI/CD:
 
-- **🚫 No Maintenance Windows**: No infrastructure to maintain
-- **🚫 No Patch Management**: No operating systems to patch
-- **🚫 No Security Automation**: No security operations to automate
+- **✅ Dependabot**: Automated dependency update PRs for security patches
+- **✅ CodeQL Scheduled Scans**: Automated weekly security scanning
+- **✅ SLSA Level 3 Attestation**: Automated build provenance on releases
+- **✅ SBOM Generation**: Automated software bill of materials
+- **✅ Artifact Signing**: Automated cryptographic signing of releases
 
 ### Operational Benefits
 
-- **✅ Zero Maintenance**: Static content requires no ongoing maintenance
-- **✅ No Downtime**: No maintenance windows or patches needed
-- **✅ Self-Healing**: CDN automatically handles edge location issues
+- **✅ Automated Patching**: Dependabot creates PRs for vulnerable dependencies
+- **✅ Continuous Scanning**: CodeQL and Scorecard run on every PR and schedule
+- **✅ Supply Chain Integrity**: SLSA Level 3 ensures build provenance
 
 ## 🔒 Application Security
 
@@ -1209,12 +1239,12 @@ CIA Compliance Manager application security:
 
 ## ⚛️ React 19.x Security Architecture
 
-**Current Status**: ✅ Implemented - React 19.2.0 with Enhanced Security
+**Current Status**: ✅ Implemented - React 19.2.4 with Enhanced Security
 
 ```mermaid
 flowchart TD
     subgraph "React 19.x Security Controls"
-        A[⚛️ React 19.2.0 Core] --> B[🛡️ Error Boundaries]
+        A[⚛️ React 19.2.4 Core] --> B[🛡️ Error Boundaries]
         A --> C[🔄 Concurrent Rendering]
         A --> D[📦 Automatic Batching]
         
@@ -1291,14 +1321,15 @@ flowchart LR
 - **Type Safety**: Compile-time detection of potential runtime errors
 - **Property Validation**: Ensures all security-critical properties are initialized
 
-## 🧪 Cypress 15.x Test Security Architecture
+## 🧪 Vitest & Cypress Test Security Architecture
 
-**Current Status**: ✅ Implemented - Cypress 15.7.0 with Enhanced Testing
+**Current Status**: ✅ Implemented - Vitest 4.0.17 + Cypress 15.10.0
 
 ```mermaid
 flowchart TD
-    subgraph "Cypress 15.x Security Testing"
-        A[🧪 Cypress 15.7.0] --> B[🔍 Component Testing]
+    subgraph "Vitest & Cypress Security Testing"
+        A[🧪 Vitest 4.0.17] --> B1[🔍 Unit Testing]
+        A1[🧪 Cypress 15.10.0] --> B[🔍 Component Testing]
         A --> C[🌐 E2E Testing]
         A --> D[📸 Visual Testing]
         
@@ -1316,7 +1347,7 @@ flowchart TD
     style H,I fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
 ```
 
-### Cypress 15.x Security Testing Features
+### Vitest & Cypress Security Testing Features
 
 #### 🔍 Component Testing Security
 
