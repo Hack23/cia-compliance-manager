@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.22**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.23**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **MetricCard**: `React.FC`\<`MetricCardProps`\>
 
-Defined in: [components/common/MetricCard.tsx:49](https://github.com/Hack23/cia-compliance-manager/blob/83ec4592971af1db133b76cbdcec3934063462f5/src/components/common/MetricCard.tsx#L49)
+Defined in: [components/common/MetricCard.tsx:49](https://github.com/Hack23/cia-compliance-manager/blob/eea5df051b2f33de27cf3c67b4e7f761c2c7959f/src/components/common/MetricCard.tsx#L49)
 
 Reusable card component for displaying key metrics
 

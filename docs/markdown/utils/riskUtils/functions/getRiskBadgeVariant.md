@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.22**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.23**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getRiskBadgeVariant**(`riskLevel`): `"success"` \| `"info"` \| `"warning"` \| `"error"` \| `"neutral"`
 
-Defined in: [utils/riskUtils.ts:322](https://github.com/Hack23/cia-compliance-manager/blob/83ec4592971af1db133b76cbdcec3934063462f5/src/utils/riskUtils.ts#L322)
+Defined in: [utils/riskUtils.ts:322](https://github.com/Hack23/cia-compliance-manager/blob/eea5df051b2f33de27cf3c67b4e7f761c2c7959f/src/utils/riskUtils.ts#L322)
 
 Get badge variant for risk level
 
