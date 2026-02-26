@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.23**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.24**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: WidgetContainerProps
 
-Defined in: [types/componentPropExports.ts:301](https://github.com/Hack23/cia-compliance-manager/blob/eea5df051b2f33de27cf3c67b4e7f761c2c7959f/src/types/componentPropExports.ts#L301)
+Defined in: [types/componentPropExports.ts:301](https://github.com/Hack23/cia-compliance-manager/blob/38f6f5c07abe26db22d63c793ea812e50d687ce5/src/types/componentPropExports.ts#L301)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:301](https://github.com/Hack23/cia-co
 
 > **children**: `ReactNode`
 
-Defined in: [types/componentPropExports.ts:302](https://github.com/Hack23/cia-compliance-manager/blob/eea5df051b2f33de27cf3c67b4e7f761c2c7959f/src/types/componentPropExports.ts#L302)
+Defined in: [types/componentPropExports.ts:302](https://github.com/Hack23/cia-compliance-manager/blob/38f6f5c07abe26db22d63c793ea812e50d687ce5/src/types/componentPropExports.ts#L302)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types/componentPropExports.ts:302](https://github.com/Hack23/cia-co
 
 > `optional` **className**: `string`
 
-Defined in: [types/componentPropExports.ts:303](https://github.com/Hack23/cia-compliance-manager/blob/eea5df051b2f33de27cf3c67b4e7f761c2c7959f/src/types/componentPropExports.ts#L303)
+Defined in: [types/componentPropExports.ts:303](https://github.com/Hack23/cia-compliance-manager/blob/38f6f5c07abe26db22d63c793ea812e50d687ce5/src/types/componentPropExports.ts#L303)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [types/componentPropExports.ts:303](https://github.com/Hack23/cia-co
 
 > `optional` **testId**: `string`
 
-Defined in: [types/componentPropExports.ts:304](https://github.com/Hack23/cia-compliance-manager/blob/eea5df051b2f33de27cf3c67b4e7f761c2c7959f/src/types/componentPropExports.ts#L304)
+Defined in: [types/componentPropExports.ts:304](https://github.com/Hack23/cia-compliance-manager/blob/38f6f5c07abe26db22d63c793ea812e50d687ce5/src/types/componentPropExports.ts#L304)

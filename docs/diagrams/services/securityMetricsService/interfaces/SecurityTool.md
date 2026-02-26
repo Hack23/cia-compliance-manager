@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.23**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.24**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityTool
 
-Defined in: [services/securityMetricsService.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/eea5df051b2f33de27cf3c67b4e7f761c2c7959f/src/services/securityMetricsService.ts#L14)
+Defined in: [services/securityMetricsService.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/38f6f5c07abe26db22d63c793ea812e50d687ce5/src/services/securityMetricsService.ts#L14)
 
 Represents a security tool recommendation
 
@@ -16,7 +16,7 @@ Represents a security tool recommendation
 
 > **example**: `string`
 
-Defined in: [services/securityMetricsService.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/eea5df051b2f33de27cf3c67b4e7f761c2c7959f/src/services/securityMetricsService.ts#L16)
+Defined in: [services/securityMetricsService.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/38f6f5c07abe26db22d63c793ea812e50d687ce5/src/services/securityMetricsService.ts#L16)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [services/securityMetricsService.ts:16](https://github.com/Hack23/ci
 
 > **name**: `string`
 
-Defined in: [services/securityMetricsService.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/eea5df051b2f33de27cf3c67b4e7f761c2c7959f/src/services/securityMetricsService.ts#L15)
+Defined in: [services/securityMetricsService.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/38f6f5c07abe26db22d63c793ea812e50d687ce5/src/services/securityMetricsService.ts#L15)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [services/securityMetricsService.ts:15](https://github.com/Hack23/ci
 
 > **purpose**: `string`
 
-Defined in: [services/securityMetricsService.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/eea5df051b2f33de27cf3c67b4e7f761c2c7959f/src/services/securityMetricsService.ts#L17)
+Defined in: [services/securityMetricsService.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/38f6f5c07abe26db22d63c793ea812e50d687ce5/src/services/securityMetricsService.ts#L17)
