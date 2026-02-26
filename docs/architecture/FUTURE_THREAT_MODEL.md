@@ -402,7 +402,7 @@ Following [Hack23 AB Threat Modeling Policy §4.1.4](https://github.com/Hack23/I
 
 ```mermaid
 mindmap
-  root)🎯 Future Threat Modeling Strategies(
+  root((🎯 Future Threat Modeling Strategies))
     (🎖️ Attacker-Centric)
       MITRE ATT&CK Cloud Matrix
       Kill Chain Disruption
