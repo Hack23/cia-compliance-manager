@@ -16,8 +16,8 @@
   <a><img src="https://img.shields.io/badge/Review-Quarterly-orange?style=for-the-badge" alt="Review Cycle"/></a>
 </p>
 
-**📋 Document Owner:** CEO | **📄 Version:** 1.0 | **📅 Last Updated:** 2025-11-22 (UTC)  
-**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2026-02-22  
+**📋 Document Owner:** CEO | **📄 Version:** 1.2 | **📅 Last Updated:** 2026-02-26 (UTC)  
+**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2026-05-22  
 **🏷️ Classification:** Public (Open Source Compliance Tool)
 
 ---
@@ -314,6 +314,50 @@ flowchart TD
     style PATH3 fill:#ffc107,color:#000
     style PATH4 fill:#9c27b0,color:#fff
 ```
+
+### **🔗 Kill Chain Disruption Analysis**
+
+Following [Hack23 AB Threat Modeling Policy §4.1.4](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md) — mapping defensive controls at every Kill Chain phase to ensure disruption-in-depth:
+
+| Kill Chain Phase | CIA Manager Attack Vector | Defensive Control | Detection Mechanism | Disruption Point |
+|-----------------|--------------------------|-------------------|--------------------|--------------------|
+| **1️⃣ Reconnaissance** | Scanning open source repo for secrets, enumerating build workflows | Public repo hardening, no secrets in code, `.gitignore` enforcement | GitHub secret scanning, push protection | [![Early](https://img.shields.io/badge/Disrupt-Early-green?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **2️⃣ Weaponization** | Crafting malicious NPM package or GitHub Action | SBOM generation, SLSA Level 3 provenance | Dependabot alerts, CodeQL analysis | [![Early](https://img.shields.io/badge/Disrupt-Early-green?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **3️⃣ Delivery** | Submitting poisoned PR, typosquatting package | Branch protection, required reviews, dependency pinning | PR review checks, harden-runner, OSSF Scorecard | [![Mid](https://img.shields.io/badge/Disrupt-Mid-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **4️⃣ Exploitation** | XSS via tampered component, CSP bypass attempt | Content Security Policy, React auto-escaping, TypeScript strict mode | CSP violation reports, error boundaries | [![Mid](https://img.shields.io/badge/Disrupt-Mid-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **5️⃣ Installation** | Persistence via browser extension or service worker | No service worker registration, CSP `worker-src 'none'` | Browser security model, SRI integrity checks | [![Mid](https://img.shields.io/badge/Disrupt-Mid-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **6️⃣ Command & Control** | Exfiltration channel via assessment data | CSP `connect-src 'self'`, no external API calls | CSP violation reports, network isolation | [![Late](https://img.shields.io/badge/Disrupt-Late-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **7️⃣ Actions on Objectives** | Compliance data manipulation, false assessments | Data integrity validation, algorithm verification, build attestations | Change detection, SLSA provenance verification | [![Late](https://img.shields.io/badge/Disrupt-Late-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+
+```mermaid
+flowchart LR
+    R[1. Recon] --> W[2. Weaponize] --> D[3. Deliver] --> E[4. Exploit] --> I[5. Install] --> C[6. C2] --> A[7. Actions]
+
+    R -.-|Secret scanning<br/>Push protection| B1[🛡️ Block]
+    W -.-|SBOM + SLSA<br/>Dependabot| B2[🛡️ Block]
+    D -.-|Branch protection<br/>PR reviews| B3[🛡️ Block]
+    E -.-|CSP + React escape<br/>TypeScript strict| B4[🛡️ Block]
+    I -.-|No service worker<br/>SRI checks| B5[🛡️ Block]
+    C -.-|CSP connect-src<br/>Network isolation| B6[🛡️ Block]
+    A -.-|Build attestations<br/>Integrity checks| B7[🛡️ Block]
+
+    style R fill:#e3f2fd,stroke:#1565c0
+    style W fill:#e8f5e9,stroke:#2e7d32
+    style D fill:#fff3e0,stroke:#e65100
+    style E fill:#fce4ec,stroke:#c62828
+    style I fill:#f3e5f5,stroke:#6a1b9a
+    style C fill:#fff8e1,stroke:#f57f17
+    style A fill:#ffebee,stroke:#b71c1c
+    style B1 fill:#c8e6c9,stroke:#388e3c
+    style B2 fill:#c8e6c9,stroke:#388e3c
+    style B3 fill:#c8e6c9,stroke:#388e3c
+    style B4 fill:#c8e6c9,stroke:#388e3c
+    style B5 fill:#c8e6c9,stroke:#388e3c
+    style B6 fill:#c8e6c9,stroke:#388e3c
+    style B7 fill:#c8e6c9,stroke:#388e3c
+```
+
+**Kill Chain Coverage Assessment:** 7/7 phases have at least one defensive control (100% phase coverage). Early-phase disruption (Reconnaissance, Weaponization) provides the strongest protection through supply chain security controls.
 
 ---
 
@@ -1367,11 +1411,12 @@ The CIA Compliance Manager threat model exemplifies how systematic security anal
 
 ---
 
-**📋 Document Owner:** CEO | **📄 Version:** 1.0 | **📅 Last Updated:** 2025-11-22 (UTC)  
+**📋 Document Owner:** CEO | **📄 Version:** 1.2 | **📅 Last Updated:** 2026-02-26 (UTC)  
 **🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2026-02-22  
 **🏷️ Classification:** Public (Open Source Compliance Tool)
 
 **🔄 Version History:**
+- **v1.2 Update (2026-02-26)**: Added Kill Chain Disruption Analysis section per ISMS Threat_Modeling.md §4.1.4 policy requirement
 - **v1.1 Update (2026-02-24)**: Updated versions (React 19.2.4, Vitest 4.0.17, Cypress 15.10.0), corrected test coverage attribution to Vitest
 - **v1.0 Initial (2025-09-19)**: Initial comprehensive threat model baseline
 
