@@ -16,7 +16,7 @@
   <a><img src="https://img.shields.io/badge/Status-%F0%9F%9A%80_Evolution_Roadmap-orange?style=for-the-badge" alt="Status"/></a>
 </p>
 
-**📋 Document Owner:** CEO | **📄 Version:** 2.0-DRAFT | **📅 Last Updated:** 2026-02-20 (UTC)
+**📋 Document Owner:** CEO | **📄 Version:** 2.0-DRAFT | **📅 Last Updated:** 2026-02-26 (UTC)
 **🔄 Review Cycle:** Quarterly | **🏷️ Classification:** Public (Open Source Compliance Platform)
 
 ---
@@ -241,6 +241,222 @@ graph TB
 | **CI/CD** | GitHub Actions | GitHub Actions + CodePipeline | ⬆️ Supply chain complexity |
 | **Monitoring** | Basic | GuardDuty + Security Hub | ⬇️ Improved detection |
 | **Encryption** | HTTPS only | KMS + at-rest encryption | ⬇️ Improved data protection |
+
+---
+
+## 💎 Crown Jewel Analysis — Future Architecture
+
+Following [Hack23 AB Asset-Centric Threat Modeling](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md#asset-centric-threat-modeling) methodology for the v2.0 serverless platform:
+
+| Rank | Crown Jewel | CIA Classification | Attack Attractiveness | Key Threat Agents | Primary Protection |
+|------|------------|-------------------|----------------------|------------------|-------------------|
+| **1** | **Tenant Assessment Data** (DynamoDB) | C: High, I: Critical, A: High | [![Very High](https://img.shields.io/badge/Attractiveness-Very_High-red?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Nation-State, Cybercriminals | KMS encryption, tenant-scoped partition keys, IAM condition policies |
+| **2** | **Authentication Credentials** (Cognito) | C: Critical, I: High, A: High | [![Very High](https://img.shields.io/badge/Attractiveness-Very_High-red?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Credential Stuffers, Phishers | MFA enforcement, PKCE flow, rate limiting |
+| **3** | **Compliance Framework Mappings** (S3) | C: Low, I: Critical, A: High | [![High](https://img.shields.io/badge/Attractiveness-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Competitors, Regulators | S3 Object Lock, versioning, integrity validation |
+| **4** | **Lambda Business Logic** | C: Medium, I: Critical, A: High | [![High](https://img.shields.io/badge/Attractiveness-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Malicious Contributors | Per-function IAM roles, code signing, dependency pinning |
+| **5** | **Audit Trail** (CloudTrail + S3) | C: Medium, I: Critical, A: Medium | [![Medium](https://img.shields.io/badge/Attractiveness-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Insider Threats | Immutable logging, log file integrity validation, separate account |
+
+---
+
+## 📊 Comprehensive Threat Agent Classification — Cloud Context
+
+Following [Hack23 AB Threat Agent Classification](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md#threat-agent-classification) methodology:
+
+| Threat Agent | Category | Motivation | Technical Capability | Cloud-Specific Tactics | Risk Level |
+|--------------|----------|-----------|---------------------|----------------------|------------|
+| **🏛️ Nation-State Actors** | External | Strategic data access, compliance intel | Very High | Cross-tenant exploitation, API abuse, persistence in Lambda | [![Critical](https://img.shields.io/badge/Risk-Critical-red?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **🏢 Commercial GRC Vendors** | External | Competitive intelligence, customer data | High | API enumeration, tenant impersonation, data exfiltration | [![High](https://img.shields.io/badge/Risk-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **💰 Cybercriminals** | External | Credential theft, ransomware | Medium | Credential stuffing Cognito, API abuse, DDoS | [![Medium](https://img.shields.io/badge/Risk-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **🎯 Malicious Insiders** | Internal | Data theft, sabotage | High | IAM privilege escalation, Lambda backdoors, CloudTrail evasion | [![High](https://img.shields.io/badge/Risk-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **🤝 Dependency Maintainers** | External | Supply chain compromise | Medium | Malicious Lambda layers, compromised SDKs | [![Medium](https://img.shields.io/badge/Risk-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+
+---
+
+## 🌐 ENISA Threat Landscape 2024 — Cloud Application
+
+Implementing [ENISA Threat Landscape 2024](https://www.enisa.europa.eu/publications/enisa-threat-landscape-2024) specific to the v2.0 serverless architecture:
+
+| ENISA Priority | Threat Category | Future Architecture Context | Specific Cloud Scenarios | Mitigation Strategy |
+|----------------|-----------------|----------------------------|------------------------|-------------------|
+| **1️⃣** | **⚡ Availability Threats** | API Gateway DDoS, Lambda exhaustion | Concurrency exhaustion, WAF bypass, throttle attacks | AWS Shield, WAF rate limiting, reserved concurrency |
+| **2️⃣** | **🔐 Ransomware** | DynamoDB data encryption by attacker | KMS key compromise, S3 object encryption | KMS key rotation, IAM least privilege, backup isolation |
+| **3️⃣** | **📊 Data Threats** | Cross-tenant data leakage | Partition key manipulation, IAM policy gaps | Tenant-scoped keys, application-layer authorization |
+| **4️⃣** | **🦠 Malware** | Malicious Lambda layers, compromised dependencies | Trojanized NPM packages in Lambda, malicious layers | Lambda layer pinning, SBOM for Lambda, Inspector scanning |
+| **5️⃣** | **🎭 Social Engineering** | Cognito credential phishing | Fake login pages, MFA bypass attempts | FIDO2/WebAuthn, phishing-resistant MFA |
+| **6️⃣** | **📰 Information Manipulation** | Assessment data tampering via API | Bulk assessment modification, framework corruption | Immutable audit trail, CloudTrail integrity validation |
+| **7️⃣** | **🔗 Supply Chain** | Lambda runtime and SDK compromise | Malicious AWS SDK versions, compromised build pipeline | CodePipeline integrity, Lambda code signing, SLSA provenance |
+
+---
+
+## 🌳 Attack Tree — Cloud Architecture
+
+```mermaid
+flowchart TD
+    GOAL[🎯 Compromise Cloud Assessment Platform]
+
+    GOAL --> PATH1[🔐 Authentication Attack]
+    GOAL --> PATH2[📊 Data Exfiltration]
+    GOAL --> PATH3[⚡ Service Disruption]
+    GOAL --> PATH4[🔗 Supply Chain Attack]
+
+    PATH1 --> A1[Credential Stuffing]
+    PATH1 --> A2[JWT Token Forgery]
+    PATH1 --> A3[OAuth2 Redirect Manipulation]
+    A1 --> A1M[🛡️ MFA + Rate Limiting]
+    A2 --> A2M[🛡️ Short-lived Tokens + JWK Rotation]
+    A3 --> A3M[🛡️ Strict URI Validation + PKCE]
+
+    PATH2 --> B1[Cross-Tenant Leakage]
+    PATH2 --> B2[API Response Exposure]
+    PATH2 --> B3[S3 Misconfiguration]
+    B1 --> B1M[🛡️ Partition-Key Scoping + IAM Conditions]
+    B2 --> B2M[🛡️ Field-Level Access Control]
+    B3 --> B3M[🛡️ S3 Block Public Access]
+
+    PATH3 --> C1[API Gateway DDoS]
+    PATH3 --> C2[Lambda Exhaustion]
+    C1 --> C1M[🛡️ WAF + Shield + CloudFront]
+    C2 --> C2M[🛡️ Reserved Concurrency]
+
+    PATH4 --> D1[Malicious Lambda Layer]
+    PATH4 --> D2[Compromised SDK]
+    D1 --> D1M[🛡️ Layer Pinning + Inspector]
+    D2 --> D2M[🛡️ Code Signing + SBOM]
+
+    style GOAL fill:#d32f2f,color:#fff
+    style PATH1 fill:#ff5722,color:#fff
+    style PATH2 fill:#ff9800,color:#fff
+    style PATH3 fill:#ffc107,color:#000
+    style PATH4 fill:#9c27b0,color:#fff
+```
+
+---
+
+## 🔗 Kill Chain Disruption Analysis — Cloud Architecture
+
+Following [Hack23 AB Threat Modeling Policy §4.1.4](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md):
+
+| Kill Chain Phase | Cloud Attack Vector | Defensive Control | Detection Mechanism | Disruption Point |
+|-----------------|---------------------|-------------------|--------------------|--------------------|
+| **1️⃣ Reconnaissance** | API endpoint enumeration, Cognito user pool discovery | WAF rules, API Gateway throttling, minimal error disclosure | CloudTrail API monitoring, GuardDuty reconnaissance detection | [![Early](https://img.shields.io/badge/Disrupt-Early-green?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **2️⃣ Weaponization** | Crafting credential stuffing lists, exploit development | CAPTCHA, account lockout policies, Cognito advanced security | GuardDuty threat intel, Security Hub findings | [![Early](https://img.shields.io/badge/Disrupt-Early-green?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **3️⃣ Delivery** | Phishing for Cognito credentials, malicious API requests | MFA enforcement, WAF OWASP rule set, input validation | Cognito sign-in monitoring, WAF blocked requests | [![Mid](https://img.shields.io/badge/Disrupt-Mid-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **4️⃣ Exploitation** | JWT manipulation, IDOR attacks, injection attempts | Token validation, IAM condition keys, parameterized queries | API Gateway access logs, Lambda error monitoring | [![Mid](https://img.shields.io/badge/Disrupt-Mid-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **5️⃣ Installation** | IAM persistence, Lambda backdoor, Cognito user creation | Least privilege IAM, Lambda code signing, admin API protection | CloudTrail IAM events, Config rule changes | [![Mid](https://img.shields.io/badge/Disrupt-Mid-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **6️⃣ Command & Control** | Outbound Lambda connections, DNS exfiltration | VPC Lambda with restricted egress, DNS firewall | VPC Flow Logs, GuardDuty C2 detection | [![Late](https://img.shields.io/badge/Disrupt-Late-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **7️⃣ Actions on Objectives** | Cross-tenant data access, assessment manipulation | Tenant isolation, audit trail integrity, backup isolation | CloudTrail data events, DynamoDB Streams monitoring | [![Late](https://img.shields.io/badge/Disrupt-Late-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+
+---
+
+## 🎯 Scenario-Centric Threat Modeling — Cloud Architecture
+
+### Misuse Case 1: Cross-Tenant Data Theft
+
+| Element | Description |
+|---------|-------------|
+| **👤 Threat Agent** | Commercial GRC Vendor (competitor) |
+| **🎯 Goal** | Access competitor client assessment data |
+| **📋 Pre-Conditions** | Valid tenant account, API access |
+| **🔄 Attack Flow** | 1. Enumerate API endpoints → 2. Manipulate tenant ID in requests → 3. Exploit IDOR vulnerability → 4. Exfiltrate assessment data |
+| **🛡️ Controls** | Tenant-scoped partition keys, IAM condition policies, application-layer authorization |
+| **🔍 Detection** | CloudTrail cross-tenant access patterns, API anomaly detection |
+
+### Misuse Case 2: Assessment Result Manipulation
+
+| Element | Description |
+|---------|-------------|
+| **👤 Threat Agent** | Malicious Insider with admin access |
+| **🎯 Goal** | Alter compliance assessment scores |
+| **📋 Pre-Conditions** | Admin Cognito credentials, Lambda access |
+| **🔄 Attack Flow** | 1. Authenticate with admin role → 2. Invoke assessment Lambda directly → 3. Modify DynamoDB assessment records → 4. Clear audit evidence |
+| **🛡️ Controls** | Immutable CloudTrail logging, DynamoDB Streams, separate audit account, MFA for admin actions |
+| **🔍 Detection** | DynamoDB Streams change detection, CloudTrail immutable logs, assessment integrity checksums |
+
+### Misuse Case 3: Service Denial via Resource Exhaustion
+
+| Element | Description |
+|---------|-------------|
+| **👤 Threat Agent** | Cybercriminal or competitor |
+| **🎯 Goal** | Deny service to legitimate users |
+| **📋 Pre-Conditions** | Public API endpoint access |
+| **🔄 Attack Flow** | 1. Identify rate limits → 2. Distribute requests across IPs → 3. Exhaust Lambda concurrency → 4. Cause API Gateway 429 errors |
+| **🛡️ Controls** | AWS Shield, WAF rate limiting, CloudFront distribution, reserved Lambda concurrency |
+| **🔍 Detection** | CloudWatch alarms for throttling, WAF blocked request metrics |
+
+---
+
+## 🎭 STRIDE → Control Mapping — Cloud Architecture
+
+| STRIDE Category | Example Threat | Primary AWS Control | Secondary Control | Monitoring |
+|----------------|----------------|---------------------|-------------------|------------|
+| **🎭 Spoofing** | Credential stuffing, JWT forgery | Cognito MFA + PKCE | WAF bot control, rate limiting | GuardDuty, Cognito sign-in events |
+| **🔧 Tampering** | API request manipulation, DynamoDB corruption | Input validation, KMS encryption | S3 Object Lock, Lambda code signing | CloudTrail data events, Config rules |
+| **❌ Repudiation** | Assessment action denial, admin tampering | CloudTrail immutable logging | DynamoDB Streams, separate audit account | CloudTrail integrity validation |
+| **📤 Information Disclosure** | Cross-tenant leakage, API data exposure | Tenant-scoped partition keys, IAM conditions | Field-level access control, VPC Lambda | CloudTrail, VPC Flow Logs |
+| **⚡ Denial of Service** | API DDoS, Lambda exhaustion | AWS Shield + WAF | Reserved concurrency, CloudFront | CloudWatch alarms, WAF metrics |
+| **⬆️ Elevation of Privilege** | IAM escalation, Cognito group abuse | Per-function least privilege IAM | Admin API protection, MFA | CloudTrail IAM events, Security Hub |
+
+---
+
+## 🎯 Multi-Strategy Threat Modeling — Future Architecture
+
+```mermaid
+mindmap
+  root)🎯 Future Threat Modeling Strategies(
+    (🎖️ Attacker-Centric)
+      MITRE ATT&CK Cloud Matrix
+      Kill Chain Disruption
+      Credential Attack Chains
+      API Exploitation Graphs
+    (🏗️ Asset-Centric)
+      Tenant Data Crown Jewels
+      Authentication Credentials
+      Compliance Framework Data
+      Audit Trail Integrity
+    (🏛️ Architecture-Centric)
+      STRIDE per Cloud Component
+      Trust Boundary Analysis
+      Multi-Tenant Isolation
+      Serverless DFD Threats
+    (🎯 Scenario-Centric)
+      Cross-Tenant Data Theft
+      Assessment Manipulation
+      Resource Exhaustion DDoS
+      Supply Chain Compromise
+    (⚖️ Risk-Centric)
+      Quantitative Risk Matrix
+      Business Impact Analysis
+      Compliance Risk Scoring
+      Cloud Cost Impact
+```
+
+---
+
+## 🔄 Continuous Validation & Assessment — Future Architecture
+
+### Assessment Lifecycle
+
+Following [Hack23 AB Workshop Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md#threat-modeling-workshop-framework):
+
+```mermaid
+flowchart LR
+    PRE[📋 Pre-Workshop Prep] --> ENUM[🎯 Cloud Asset Enumeration]
+    ENUM --> THREATS[🔍 Threat Identification<br/>STRIDE + ATT&CK Cloud]
+    THREATS --> MAP[⚖️ Risk & Compliance Mapping]
+    MAP --> PLAN[🛡️ AWS Control Plan]
+    PLAN --> INTEG[🔧 CI/CD + IaC Integration]
+    INTEG --> MON[📊 GuardDuty + Security Hub]
+    MON --> REVIEW[🔄 Quarterly Review]
+    REVIEW --> THREATS
+```
+
+| Assessment Type | Trigger | Frequency | Scope | Documentation Update |
+|----------------|---------|-----------|-------|---------------------|
+| **📅 Comprehensive Review** | Quarterly cycle | Quarterly | Complete cloud threat model | Full document revision |
+| **🔄 Delta Assessment** | New AWS service adoption | Per change | Modified cloud components | Incremental updates |
+| **🚨 Incident-Driven** | Security events, GuardDuty findings | As needed | Affected cloud services | Lessons learned integration |
+| **🎯 Threat Intelligence** | AWS security bulletins | Monthly | High-risk cloud scenarios | ATT&CK Cloud updates |
+| **🏗️ Architecture Review** | New tenant onboarding, scaling events | Per milestone | Multi-tenant isolation | Tenant isolation validation |
 
 ---
 
