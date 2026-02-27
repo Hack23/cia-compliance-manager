@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.24**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.25**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getButtonAriaProps**: (`label`, `options?`) => `object`
 
-Defined in: [utils/index.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/38f6f5c07abe26db22d63c793ea812e50d687ce5/src/utils/index.ts#L41)
+Defined in: [utils/index.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/59ebd29f77a54a25971ff7a3c0faf33a391bbcc5/src/utils/index.ts#L41)
 
 Generate ARIA props for a button
 

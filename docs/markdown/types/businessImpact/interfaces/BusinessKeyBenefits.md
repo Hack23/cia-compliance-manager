@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.24**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.25**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessKeyBenefits
 
-Defined in: [types/businessImpact.ts:265](https://github.com/Hack23/cia-compliance-manager/blob/38f6f5c07abe26db22d63c793ea812e50d687ce5/src/types/businessImpact.ts#L265)
+Defined in: [types/businessImpact.ts:265](https://github.com/Hack23/cia-compliance-manager/blob/59ebd29f77a54a25971ff7a3c0faf33a391bbcc5/src/types/businessImpact.ts#L265)
 
 Business benefits by security level
 
