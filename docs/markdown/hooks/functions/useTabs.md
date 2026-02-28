@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.25**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.26**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **useTabs**(`tabs`, `options?`): [`UseTabsReturn`](../../types/interfaces/UseTabsReturn.md)
 
-Defined in: [hooks/useTabs.ts:39](https://github.com/Hack23/cia-compliance-manager/blob/59ebd29f77a54a25971ff7a3c0faf33a391bbcc5/src/hooks/useTabs.ts#L39)
+Defined in: [hooks/useTabs.ts:39](https://github.com/Hack23/cia-compliance-manager/blob/5f2722b27ad5a860c0c32d7458a8ddb0e3dddde9/src/hooks/useTabs.ts#L39)
 
 Hook for managing tab state with keyboard navigation
 

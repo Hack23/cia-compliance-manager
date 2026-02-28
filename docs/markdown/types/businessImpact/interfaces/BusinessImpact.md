@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.25**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.26**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpact
 
-Defined in: [types/businessImpact.ts:177](https://github.com/Hack23/cia-compliance-manager/blob/59ebd29f77a54a25971ff7a3c0faf33a391bbcc5/src/types/businessImpact.ts#L177)
+Defined in: [types/businessImpact.ts:177](https://github.com/Hack23/cia-compliance-manager/blob/5f2722b27ad5a860c0c32d7458a8ddb0e3dddde9/src/types/businessImpact.ts#L177)
 
 Business impact structure
 
@@ -16,7 +16,7 @@ Business impact structure
 
 > **financial**: `object`
 
-Defined in: [types/businessImpact.ts:179](https://github.com/Hack23/cia-compliance-manager/blob/59ebd29f77a54a25971ff7a3c0faf33a391bbcc5/src/types/businessImpact.ts#L179)
+Defined in: [types/businessImpact.ts:179](https://github.com/Hack23/cia-compliance-manager/blob/5f2722b27ad5a860c0c32d7458a8ddb0e3dddde9/src/types/businessImpact.ts#L179)
 
 Financial impact details
 
@@ -38,7 +38,7 @@ Risk level
 
 > **legal**: `object`
 
-Defined in: [types/businessImpact.ts:206](https://github.com/Hack23/cia-compliance-manager/blob/59ebd29f77a54a25971ff7a3c0faf33a391bbcc5/src/types/businessImpact.ts#L206)
+Defined in: [types/businessImpact.ts:206](https://github.com/Hack23/cia-compliance-manager/blob/5f2722b27ad5a860c0c32d7458a8ddb0e3dddde9/src/types/businessImpact.ts#L206)
 
 Legal/regulatory impact details
 
@@ -60,7 +60,7 @@ Risk level
 
 > **operational**: `object`
 
-Defined in: [types/businessImpact.ts:188](https://github.com/Hack23/cia-compliance-manager/blob/59ebd29f77a54a25971ff7a3c0faf33a391bbcc5/src/types/businessImpact.ts#L188)
+Defined in: [types/businessImpact.ts:188](https://github.com/Hack23/cia-compliance-manager/blob/5f2722b27ad5a860c0c32d7458a8ddb0e3dddde9/src/types/businessImpact.ts#L188)
 
 Operational impact details
 
@@ -82,7 +82,7 @@ Risk level
 
 > **reputation**: `object`
 
-Defined in: [types/businessImpact.ts:197](https://github.com/Hack23/cia-compliance-manager/blob/59ebd29f77a54a25971ff7a3c0faf33a391bbcc5/src/types/businessImpact.ts#L197)
+Defined in: [types/businessImpact.ts:197](https://github.com/Hack23/cia-compliance-manager/blob/5f2722b27ad5a860c0c32d7458a8ddb0e3dddde9/src/types/businessImpact.ts#L197)
 
 Reputational impact details
 

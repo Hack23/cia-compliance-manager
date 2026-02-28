@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.25**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.26**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **ROIType** = `"NONE"` \| `"LOW"` \| `"MODERATE"` \| `"HIGH"` \| `"VERY_HIGH"`
 
-Defined in: [hooks/useCIAOptions.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/59ebd29f77a54a25971ff7a3c0faf33a391bbcc5/src/hooks/useCIAOptions.ts#L9)
+Defined in: [hooks/useCIAOptions.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/5f2722b27ad5a860c0c32d7458a8ddb0e3dddde9/src/hooks/useCIAOptions.ts#L9)
 
 ROI type representing different security level categories
 
