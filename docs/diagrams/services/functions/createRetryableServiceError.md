@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.27**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.28**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **createRetryableServiceError**(`message`, `retryAfter?`, `context?`): [`ServiceError`](../classes/ServiceError.md)
 
-Defined in: [services/errors.ts:316](https://github.com/Hack23/cia-compliance-manager/blob/941390918f346f297f13633b97ad67c12ed14d0e/src/services/errors.ts#L316)
+Defined in: [services/errors.ts:316](https://github.com/Hack23/cia-compliance-manager/blob/6c4bbd75cd3a4f379a2a2228e6a1be5ddc7ed98b/src/services/errors.ts#L316)
 
 Create a retryable error using ServiceError
 

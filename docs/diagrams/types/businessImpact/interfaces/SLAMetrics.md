@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.27**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.28**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SLAMetrics
 
-Defined in: [types/businessImpact.ts:160](https://github.com/Hack23/cia-compliance-manager/blob/941390918f346f297f13633b97ad67c12ed14d0e/src/types/businessImpact.ts#L160)
+Defined in: [types/businessImpact.ts:160](https://github.com/Hack23/cia-compliance-manager/blob/6c4bbd75cd3a4f379a2a2228e6a1be5ddc7ed98b/src/types/businessImpact.ts#L160)
 
 Service level agreement metrics
 
@@ -16,7 +16,7 @@ Service level agreement metrics
 
 > `optional` **mttr**: `string`
 
-Defined in: [types/businessImpact.ts:171](https://github.com/Hack23/cia-compliance-manager/blob/941390918f346f297f13633b97ad67c12ed14d0e/src/types/businessImpact.ts#L171)
+Defined in: [types/businessImpact.ts:171](https://github.com/Hack23/cia-compliance-manager/blob/6c4bbd75cd3a4f379a2a2228e6a1be5ddc7ed98b/src/types/businessImpact.ts#L171)
 
 Mean Time to Recover
 
@@ -26,7 +26,7 @@ Mean Time to Recover
 
 > `optional` **rpo**: `string`
 
-Defined in: [types/businessImpact.ts:168](https://github.com/Hack23/cia-compliance-manager/blob/941390918f346f297f13633b97ad67c12ed14d0e/src/types/businessImpact.ts#L168)
+Defined in: [types/businessImpact.ts:168](https://github.com/Hack23/cia-compliance-manager/blob/6c4bbd75cd3a4f379a2a2228e6a1be5ddc7ed98b/src/types/businessImpact.ts#L168)
 
 Recovery Point Objective
 
@@ -36,7 +36,7 @@ Recovery Point Objective
 
 > `optional` **rto**: `string`
 
-Defined in: [types/businessImpact.ts:165](https://github.com/Hack23/cia-compliance-manager/blob/941390918f346f297f13633b97ad67c12ed14d0e/src/types/businessImpact.ts#L165)
+Defined in: [types/businessImpact.ts:165](https://github.com/Hack23/cia-compliance-manager/blob/6c4bbd75cd3a4f379a2a2228e6a1be5ddc7ed98b/src/types/businessImpact.ts#L165)
 
 Recovery Time Objective
 
@@ -46,6 +46,6 @@ Recovery Time Objective
 
 > **uptime**: `string`
 
-Defined in: [types/businessImpact.ts:162](https://github.com/Hack23/cia-compliance-manager/blob/941390918f346f297f13633b97ad67c12ed14d0e/src/types/businessImpact.ts#L162)
+Defined in: [types/businessImpact.ts:162](https://github.com/Hack23/cia-compliance-manager/blob/6c4bbd75cd3a4f379a2a2228e6a1be5ddc7ed98b/src/types/businessImpact.ts#L162)
 
 Uptime target (e.g., "99.9%")

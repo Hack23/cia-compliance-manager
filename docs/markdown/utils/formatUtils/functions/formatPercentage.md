@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.27**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.28**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **formatPercentage**(`value`, `decimalPlaces?`): `string`
 
-Defined in: [utils/formatUtils.ts:65](https://github.com/Hack23/cia-compliance-manager/blob/941390918f346f297f13633b97ad67c12ed14d0e/src/utils/formatUtils.ts#L65)
+Defined in: [utils/formatUtils.ts:65](https://github.com/Hack23/cia-compliance-manager/blob/6c4bbd75cd3a4f379a2a2228e6a1be5ddc7ed98b/src/utils/formatUtils.ts#L65)
 
 Formats a decimal as a percentage
 
