@@ -2,7 +2,6 @@ import react from "@vitejs/plugin-react";
 import { readFileSync } from "fs";
 import path from "path";
 import { defineConfig } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
 import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig as defineVitestConfig } from "vitest/config";
 
@@ -22,8 +21,6 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     // Enable React features
     react(),
-    // Support for TypeScript paths
-    tsconfigPaths(),
     // Bundle size visualization (only in production builds)
     ...(mode === 'production' ? [visualizer({
       filename: "./build/stats.html",
@@ -53,10 +50,8 @@ export default defineConfig(({ mode }) => ({
   define: {
     APP_VERSION: JSON.stringify(packageJson.version),
   },
-  // Ensure proper JSX handling
-  esbuild: {
-    target: "es2022",
-    jsx: "automatic",
+  resolve: {
+    tsconfigPaths: true,
   },
   base: "./",
   build: {
@@ -67,8 +62,8 @@ export default defineConfig(({ mode }) => ({
     },
     // Set target for rollup
     target: "es2022",
-    // Remove terser configuration for now - use esbuild minification
-    minify: "esbuild",
+    // Remove terser configuration for now - use oxc minification
+    minify: "oxc",
     // Add chunk size reporting
     reportCompressedSize: true,
     rollupOptions: {
