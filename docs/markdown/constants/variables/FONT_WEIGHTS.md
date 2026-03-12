@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.28**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.29**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **FONT\_WEIGHTS**: `object`
 
-Defined in: [constants/designTokens.ts:61](https://github.com/Hack23/cia-compliance-manager/blob/6c4bbd75cd3a4f379a2a2228e6a1be5ddc7ed98b/src/constants/designTokens.ts#L61)
+Defined in: [constants/designTokens.ts:61](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/constants/designTokens.ts#L61)
 
 Font weights for text emphasis
 

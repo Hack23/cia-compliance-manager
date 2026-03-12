@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.28**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.29**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **calculateRiskScore**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `number`
 
-Defined in: [utils/riskUtils.ts:188](https://github.com/Hack23/cia-compliance-manager/blob/6c4bbd75cd3a4f379a2a2228e6a1be5ddc7ed98b/src/utils/riskUtils.ts#L188)
+Defined in: [utils/riskUtils.ts:188](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/utils/riskUtils.ts#L188)
 
 Calculate risk score from security levels
 
