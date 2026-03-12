@@ -40,7 +40,7 @@ Based on [Hack23 AB Classification Framework](https://github.com/Hack23/ISMS-PUB
 | **🔒 Integrity**       | [![High](https://img.shields.io/badge/I-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#integrity-levels)                | High       | Security compliance assessments must be accurate and trustworthy            |
 | **⚡ Availability**    | [![Standard](https://img.shields.io/badge/A-Standard-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#availability-levels) | Medium     | Compliance platform; tolerates maintenance windows for non-urgent use cases |
 
-**🎯 RTO/RPO Alignment:** Medium RTO (4-24hrs), Daily RPO acceptable for compliance assessment platform
+**🎯 RTO/RPO Alignment:** Standard RTO (<4 hours), Standard RPO (<8 hours) per [docs/architecture/BCPPlan.md](../docs/architecture/BCPPlan.md)
 
 ---
 
@@ -174,8 +174,8 @@ gantt
     axisFormat %Y-%m
 
     section Node.js Legacy Schedule
-    Node.js 20.x LTS           :done, node20lts, 2023-10-24, 2026-04-30
-    Node.js 22.x LTS           :done, node22lts, 2024-10-29, 2027-04-30
+    Node.js 20.x LTS           :crit, active, node20lts, 2023-10-24, 2026-04-30
+    Node.js 22.x LTS           :active, node22lts, 2024-10-29, 2027-04-30
     Node.js 24.x Current       :done, node24cur, 2025-04-22, 2025-10-28
     Node.js 24.x LTS           :active, node24lts, 2025-10-28, 2028-04-30
     Node.js 26.x Current       :node26cur, 2026-04-21, 2026-10-20
@@ -303,8 +303,8 @@ gantt
     axisFormat %Y
 
     section Runtime & Core
-    Node.js 20.x LTS          :done, node20, 2023-10-24, 2026-04-30
-    Node.js 22.x LTS          :done, node22, 2024-10-29, 2027-04-30
+    Node.js 20.x LTS          :crit, active, node20, 2023-10-24, 2026-04-30
+    Node.js 22.x LTS          :active, node22, 2024-10-29, 2027-04-30
     Node.js 24.x LTS          :active, node24, 2025-10-28, 2028-04-30
     Node.js 26.x LTS          :node26, 2026-10-20, 2029-04-30
     Node.js 27.x LTS (New Sched) :node27, 2027-10-01, 2030-04-30
