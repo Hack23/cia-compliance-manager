@@ -184,16 +184,16 @@ gantt
     section Node.js New Schedule (1 major/yr, all LTS)
     Node.js 27.x Alpha         :node27a, 2026-10-01, 2027-03-31
     Node.js 27.x Current       :node27cur, 2027-04-01, 2027-10-01
-    Node.js 27.x LTS           :node27lts, 2027-10-01, 2030-04-01
+    Node.js 27.x LTS           :node27lts, 2027-10-01, 2030-04-30
     Node.js 28.x Alpha         :node28a, 2027-10-01, 2028-03-31
     Node.js 28.x Current       :node28cur, 2028-04-01, 2028-10-01
-    Node.js 28.x LTS           :node28lts, 2028-10-01, 2031-04-01
+    Node.js 28.x LTS           :node28lts, 2028-10-01, 2031-04-30
 
     section CIA Compliance Manager Strategy
     Current Node 24.x Production :active, cm24prod, 2025-10-28, 2028-04-30
     Node.js 26.x LTS Production  :cm26prod, 2026-10-20, 2029-04-30
     Node.js 27.x Alpha CI Testing:cm27alpha, 2026-10-01, 2027-04-01
-    Node.js 27.x Production      :cm27prod, 2027-10-01, 2030-04-01
+    Node.js 27.x Production      :cm27prod, 2027-10-01, 2030-04-30
 
     section Critical Milestones
     Node.js 24 LTS EOL          :milestone, node24eol, 2028-04-30, 0d
@@ -307,8 +307,8 @@ gantt
     Node.js 22.x LTS          :done, node22, 2024-10-29, 2027-04-30
     Node.js 24.x LTS          :active, node24, 2025-10-28, 2028-04-30
     Node.js 26.x LTS          :node26, 2026-10-20, 2029-04-30
-    Node.js 27.x LTS (New Sched) :node27, 2027-10-01, 2030-04-01
-    Node.js 28.x LTS (New Sched) :node28, 2028-10-01, 2031-04-01
+    Node.js 27.x LTS (New Sched) :node27, 2027-10-01, 2030-04-30
+    Node.js 28.x LTS (New Sched) :node28, 2028-10-01, 2031-04-30
 
     section Frontend Framework
     React 19.x                :active, react19, 2024-12-05, 2027-12-31
