@@ -175,13 +175,13 @@ C4Container
     Container(apiGateway, "API Gateway", "AWS API Gateway", "RESTful and GraphQL APIs with authentication, rate limiting, and request validation")
     Container(authService, "Authentication Service", "AWS Cognito", "User authentication with MFA, SSO, and federated identity")
     
-    Container(assessmentFunctions, "Assessment Functions", "AWS Lambda (Node.js 20.x)", "Security assessment and CIA triad calculation logic")
-    Container(complianceFunctions, "Compliance Functions", "AWS Lambda (Node.js 20.x)", "Compliance framework mapping and gap analysis")
-    Container(businessImpactFunctions, "Business Impact Functions", "AWS Lambda (Node.js 20.x)", "ROI calculation and business impact analysis")
+    Container(assessmentFunctions, "Assessment Functions", "AWS Lambda (Node.js 24.x)", "Security assessment and CIA triad calculation logic")
+    Container(complianceFunctions, "Compliance Functions", "AWS Lambda (Node.js 24.x)", "Compliance framework mapping and gap analysis")
+    Container(businessImpactFunctions, "Business Impact Functions", "AWS Lambda (Node.js 24.x)", "ROI calculation and business impact analysis")
     Container(contextEngine, "Context Engine", "AWS Lambda (Python 3.12)", "Organization context analysis and recommendation adaptation")
     Container(recommendationEngine, "Recommendation Engine", "AWS Lambda + SageMaker", "ML-powered security recommendations")
     
-    Container(integrationFunctions, "Integration Functions", "AWS Lambda (Node.js 20.x)", "External system integrations and API connectors")
+    Container(integrationFunctions, "Integration Functions", "AWS Lambda (Node.js 24.x)", "External system integrations and API connectors")
     Container(eventBus, "Event Bus", "AWS EventBridge", "Event-driven architecture for real-time updates and notifications")
     Container(notificationService, "Notification Service", "AWS SNS + SES", "Email, SMS, and push notifications")
     
@@ -265,7 +265,7 @@ C4Container
 - **JWT Authorization**: Secure API access with fine-grained permissions
 
 #### **Compute Layer (AWS Lambda)**
-- **Assessment Functions**: Node.js 20.x for security calculations and analysis
+- **Assessment Functions**: Node.js 24.x for security calculations and analysis
 - **Compliance Functions**: Compliance framework mapping and gap analysis
 - **Context Engine**: Python 3.12 for ML-powered context analysis
 - **Integration Functions**: External system connectors and API integrations
@@ -905,7 +905,7 @@ The architectural evolution will follow a phased migration approach, leveraging 
   - Lambda proxy integration for business logic
   - Request validation and transformation
   - API keys and usage plans for rate limiting
-- **AWS Lambda Functions**: Node.js 20.x for core services
+- **AWS Lambda Functions**: Node.js 24.x for core services
   - Assessment calculation functions
   - Compliance mapping functions
   - Business impact analysis functions
