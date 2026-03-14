@@ -407,9 +407,12 @@ describe("BusinessImpactAnalysisWidget", () => {
     const widget = screen.getByTestId("business-impact-analysis-widget");
     expect(widget).toBeInTheDocument();
 
-    // Check if error is passed to WidgetContainer which should handle displaying it
-    // Our mock for WidgetContainer shows error.message if error is provided
-    expect(widget).toBeInTheDocument();
+    // Verify error message is displayed via WidgetContainer mock
+    const errorElement = screen.getByTestId(
+      "business-impact-analysis-widget-error",
+    );
+    expect(errorElement).toBeInTheDocument();
+    expect(errorElement.textContent).toContain("Test error");
   });
 
 
