@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.29**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.31**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getBusinessBenefitsForLevel**(`level`): [`BusinessKeyBenefit`](../../../types/businessImpact/interfaces/BusinessKeyBenefit.md)[]
 
-Defined in: [constants/businessConstants.ts:785](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/constants/businessConstants.ts#L785)
+Defined in: [constants/businessConstants.ts:785](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/constants/businessConstants.ts#L785)
 
 Get business benefits for a specific security level
 

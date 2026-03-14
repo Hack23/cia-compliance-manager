@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.29**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.31**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: WidgetActionsProps
 
-Defined in: [types/componentPropExports.ts:221](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/types/componentPropExports.ts#L221)
+Defined in: [types/componentPropExports.ts:221](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/types/componentPropExports.ts#L221)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:221](https://github.com/Hack23/cia-co
 
 > **actions**: `WidgetActionButtonProps`[]
 
-Defined in: [types/componentPropExports.ts:222](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/types/componentPropExports.ts#L222)
+Defined in: [types/componentPropExports.ts:222](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/types/componentPropExports.ts#L222)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types/componentPropExports.ts:222](https://github.com/Hack23/cia-co
 
 > `optional` **className**: `string`
 
-Defined in: [types/componentPropExports.ts:223](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/types/componentPropExports.ts#L223)
+Defined in: [types/componentPropExports.ts:223](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/types/componentPropExports.ts#L223)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [types/componentPropExports.ts:223](https://github.com/Hack23/cia-co
 
 > `optional` **testId**: `string`
 
-Defined in: [types/componentPropExports.ts:224](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/types/componentPropExports.ts#L224)
+Defined in: [types/componentPropExports.ts:224](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/types/componentPropExports.ts#L224)

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.29**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.31**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ROIEstimatesMap
 
-Defined in: [services/securityMetricsService.ts:170](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/services/securityMetricsService.ts#L170)
+Defined in: [services/securityMetricsService.ts:170](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/services/securityMetricsService.ts#L170)
 
 Interface for ROI estimates map
 
@@ -16,7 +16,7 @@ Interface for ROI estimates map
 
 > **HIGH**: `object`
 
-Defined in: [services/securityMetricsService.ts:192](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/services/securityMetricsService.ts#L192)
+Defined in: [services/securityMetricsService.ts:192](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/services/securityMetricsService.ts#L192)
 
 #### breakEvenPeriod?
 
@@ -44,7 +44,7 @@ Defined in: [services/securityMetricsService.ts:192](https://github.com/Hack23/c
 
 > **LOW**: `object`
 
-Defined in: [services/securityMetricsService.ts:178](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/services/securityMetricsService.ts#L178)
+Defined in: [services/securityMetricsService.ts:178](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/services/securityMetricsService.ts#L178)
 
 #### breakEvenPeriod?
 
@@ -72,7 +72,7 @@ Defined in: [services/securityMetricsService.ts:178](https://github.com/Hack23/c
 
 > **MODERATE**: `object`
 
-Defined in: [services/securityMetricsService.ts:185](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/services/securityMetricsService.ts#L185)
+Defined in: [services/securityMetricsService.ts:185](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/services/securityMetricsService.ts#L185)
 
 #### breakEvenPeriod?
 
@@ -100,7 +100,7 @@ Defined in: [services/securityMetricsService.ts:185](https://github.com/Hack23/c
 
 > **NONE**: `object`
 
-Defined in: [services/securityMetricsService.ts:171](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/services/securityMetricsService.ts#L171)
+Defined in: [services/securityMetricsService.ts:171](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/services/securityMetricsService.ts#L171)
 
 #### breakEvenPeriod?
 
@@ -128,7 +128,7 @@ Defined in: [services/securityMetricsService.ts:171](https://github.com/Hack23/c
 
 > **VERY\_HIGH**: `object`
 
-Defined in: [services/securityMetricsService.ts:199](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/services/securityMetricsService.ts#L199)
+Defined in: [services/securityMetricsService.ts:199](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/services/securityMetricsService.ts#L199)
 
 #### breakEvenPeriod?
 

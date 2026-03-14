@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.29**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.31**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **useCIAContentService**(): [`UseCIAContentServiceReturn`](../interfaces/UseCIAContentServiceReturn.md)
 
-Defined in: [hooks/useCIAContentService.ts:151](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/hooks/useCIAContentService.ts#L151)
+Defined in: [hooks/useCIAContentService.ts:151](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/hooks/useCIAContentService.ts#L151)
 
 Custom hook to access the CIA content service with loading and error states
 

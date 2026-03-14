@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.29**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.31**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **DEFAULT\_SECURITY\_LEVEL**: [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md) = `"Moderate"`
 
-Defined in: [utils/securityLevelUtils.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/utils/securityLevelUtils.ts#L31)
+Defined in: [utils/securityLevelUtils.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/utils/securityLevelUtils.ts#L31)
 
 Default security level used throughout the application

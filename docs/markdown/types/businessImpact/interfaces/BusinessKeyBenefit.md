@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.29**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.31**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessKeyBenefit
 
-Defined in: [types/businessImpact.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/types/businessImpact.ts#L250)
+Defined in: [types/businessImpact.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/types/businessImpact.ts#L250)
 
 Key business benefit
 
@@ -16,7 +16,7 @@ Key business benefit
 
 > **description**: `string`
 
-Defined in: [types/businessImpact.ts:259](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/types/businessImpact.ts#L259)
+Defined in: [types/businessImpact.ts:259](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/types/businessImpact.ts#L259)
 
 Description of the benefit
 
@@ -26,6 +26,6 @@ Description of the benefit
 
 > **title**: `string`
 
-Defined in: [types/businessImpact.ts:254](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/types/businessImpact.ts#L254)
+Defined in: [types/businessImpact.ts:254](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/types/businessImpact.ts#L254)
 
 Title of the benefit

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.29**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.31**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ComplianceImpact
 
-Defined in: [types/cia-services.ts:182](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/types/cia-services.ts#L182)
+Defined in: [types/cia-services.ts:182](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/types/cia-services.ts#L182)
 
 Compliance impact details
 
@@ -16,7 +16,7 @@ Compliance impact details
 
 > `optional` **frameworks**: `object`
 
-Defined in: [types/cia-services.ts:183](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/types/cia-services.ts#L183)
+Defined in: [types/cia-services.ts:183](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/types/cia-services.ts#L183)
 
 #### compliant
 
@@ -36,7 +36,7 @@ Defined in: [types/cia-services.ts:183](https://github.com/Hack23/cia-compliance
 
 > **remediationSteps**: `string`[]
 
-Defined in: [types/cia-services.ts:189](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/types/cia-services.ts#L189)
+Defined in: [types/cia-services.ts:189](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/types/cia-services.ts#L189)
 
 ***
 
@@ -44,4 +44,4 @@ Defined in: [types/cia-services.ts:189](https://github.com/Hack23/cia-compliance
 
 > **requirements**: `string`[]
 
-Defined in: [types/cia-services.ts:188](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/types/cia-services.ts#L188)
+Defined in: [types/cia-services.ts:188](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/types/cia-services.ts#L188)

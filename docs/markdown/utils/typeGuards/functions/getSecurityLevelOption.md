@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.29**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.31**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityLevelOption**\<`T`\>(`options`, `key`): `T` \| `undefined`
 
-Defined in: [utils/typeGuards.ts:216](https://github.com/Hack23/cia-compliance-manager/blob/6b0efc4a0e6dc19fe754f64606c6464995b0f7f5/src/utils/typeGuards.ts#L216)
+Defined in: [utils/typeGuards.ts:216](https://github.com/Hack23/cia-compliance-manager/blob/1c8bec6cbe09f80caaef8f0521c4e2e531753f04/src/utils/typeGuards.ts#L216)
 
 Helper function to safely access CIA options with string keys
 
