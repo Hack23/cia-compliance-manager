@@ -10,88 +10,82 @@ import { SecurityLevel } from "../../../types/cia";
 import { CIAComponentType } from "../../../types/cia-services";
 import BusinessImpactAnalysisWidget from "./BusinessImpactAnalysisWidget";
 
-// Define separate mocks for normal and error cases - hoisted to top of file
-const defaultMock = vi.hoisted(() => ({
-  useCIAContentService: () => ({
-    ciaContentService: {
-      getBusinessImpact: vi.fn().mockImplementation((component, level) => ({
-        summary: `${level} ${component} business impact summary`,
-        operational: {
-          description: `${level} ${component} operational impact`,
-          riskLevel: level === "None" ? "High Risk" : "Medium Risk",
-        },
-        financial: {
-          description: `${level} ${component} financial impact`,
-          riskLevel: level === "None" ? "High Risk" : "Low Risk",
-        },
-        regulatory:
-          component === "confidentiality"
-            ? {
-                description: `${level} regulatory impact`,
-                riskLevel: "Medium Risk",
-              }
-            : undefined,
-        reputational:
-          component === "confidentiality"
-            ? {
-                description: `${level} reputational impact`,
-                riskLevel: "Medium Risk",
-              }
-            : undefined,
-      })),
-      getRecommendations: vi
-        .fn()
-        .mockImplementation((component, level) => [
-          `${level} ${component} recommendation 1`,
-          `${level} ${component} recommendation 2`,
-        ]),
-      getComponentMetrics: vi.fn().mockImplementation((component, level) => ({
-        rto: component === "availability" ? `${level} RTO` : undefined,
-        rpo: component === "availability" ? `${level} RPO` : undefined,
-        mttr: component === "availability" ? `${level} MTTR` : undefined,
-        annualRevenueLoss:
-          component === "availability" ? "$100,000" : undefined,
-        uptime: component === "availability" ? "99.9%" : undefined,
-        validationMethod:
-          component === "integrity" ? `${level} Validation` : undefined,
-        protectionMethod:
-          component === "confidentiality" ? `${level} Protection` : undefined,
-      })),
-      getComponentDescription: vi
-        .fn()
-        .mockImplementation(
-          (component: CIAComponentType, level: SecurityLevel) =>
-            `${level} ${component} description`,
-        ),
-      calculateBusinessImpactLevel: vi
-        .fn()
-        .mockImplementation(() => "Medium Impact"),
-      getValuePoints: vi
-        .fn()
-        .mockImplementation((level) => [
-          `Value point 1 for ${level}`,
-          `Value point 2 for ${level}`,
-          `Value point 3 for ${level}`,
-        ]),
-      getStatusBadgeVariant: vi.fn().mockImplementation(() => "info"),
-    },
-    error: null,
-    isLoading: false,
-    refresh: vi.fn(),
-  }),
-}));
+// Create a configurable mock function for useCIAContentService
+const mockUseCIAContentService = vi.hoisted(() => vi.fn());
 
-const _errorMock = vi.hoisted(() => ({
-  useCIAContentService: () => ({
-    ciaContentService: null,
-    error: new Error("Test error"),
-    isLoading: false,
-    refresh: vi.fn(),
-  }),
-}));
+// Default service mock data
+const createDefaultServiceReturn = () => ({
+  ciaContentService: {
+    getBusinessImpact: vi.fn().mockImplementation((component, level) => ({
+      summary: `${level} ${component} business impact summary`,
+      operational: {
+        description: `${level} ${component} operational impact`,
+        riskLevel: level === "None" ? "High Risk" : "Medium Risk",
+      },
+      financial: {
+        description: `${level} ${component} financial impact`,
+        riskLevel: level === "None" ? "High Risk" : "Low Risk",
+      },
+      regulatory:
+        component === "confidentiality"
+          ? {
+              description: `${level} regulatory impact`,
+              riskLevel: "Medium Risk",
+            }
+          : undefined,
+      reputational:
+        component === "confidentiality"
+          ? {
+              description: `${level} reputational impact`,
+              riskLevel: "Medium Risk",
+            }
+          : undefined,
+    })),
+    getRecommendations: vi
+      .fn()
+      .mockImplementation((component, level) => [
+        `${level} ${component} recommendation 1`,
+        `${level} ${component} recommendation 2`,
+      ]),
+    getComponentMetrics: vi.fn().mockImplementation((component, level) => ({
+      rto: component === "availability" ? `${level} RTO` : undefined,
+      rpo: component === "availability" ? `${level} RPO` : undefined,
+      mttr: component === "availability" ? `${level} MTTR` : undefined,
+      annualRevenueLoss:
+        component === "availability" ? "$100,000" : undefined,
+      uptime: component === "availability" ? "99.9%" : undefined,
+      validationMethod:
+        component === "integrity" ? `${level} Validation` : undefined,
+      protectionMethod:
+        component === "confidentiality" ? `${level} Protection` : undefined,
+    })),
+    getComponentDescription: vi
+      .fn()
+      .mockImplementation(
+        (component: CIAComponentType, level: SecurityLevel) =>
+          `${level} ${component} description`,
+      ),
+    calculateBusinessImpactLevel: vi
+      .fn()
+      .mockImplementation(() => "Medium Impact"),
+    getValuePoints: vi
+      .fn()
+      .mockImplementation((level) => [
+        `Value point 1 for ${level}`,
+        `Value point 2 for ${level}`,
+        `Value point 3 for ${level}`,
+      ]),
+    getStatusBadgeVariant: vi.fn().mockImplementation(() => "info"),
+  },
+  error: null,
+  isLoading: false,
+  refresh: vi.fn(),
+});
 
-// Use defaultMock as the default
-vi.mock("../../../hooks/useCIAContentService", () => defaultMock);
+// Single module-level vi.mock - never call vi.mock() inside it()/beforeEach()
+vi.mock("../../../hooks/useCIAContentService", () => ({
+  useCIAContentService: mockUseCIAContentService,
+}));
 
 // Mock WidgetContainer with better error handling implementation
 vi.mock("../../../components/common/WidgetContainer", () => ({
@@ -171,6 +165,8 @@ describe("BusinessImpactAnalysisWidget", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    // Reset mock to default service return before each test
+    mockUseCIAContentService.mockReturnValue(createDefaultServiceReturn());
   });
 
   it("renders without crashing", async () => {
@@ -385,17 +381,15 @@ describe("BusinessImpactAnalysisWidget", () => {
     });
   });
 
-  // Test error state rendering - completely rewritten with proper syntax
+  // Test error state rendering - uses mockReturnValue to override per-test
   it("handles error states gracefully", async () => {
-    // Instead of trying to modify a read-only property, use vi.mock directly
-    vi.mock("../../../hooks/useCIAContentService", () => ({
-      useCIAContentService: vi.fn().mockReturnValue({
-        ciaContentService: null,
-        error: new Error("Test error"),
-        isLoading: false,
-        refresh: vi.fn(),
-      }),
-    }));
+    // Override mock to return error state for this test only
+    mockUseCIAContentService.mockReturnValue({
+      ciaContentService: null,
+      error: new Error("Test error"),
+      isLoading: false,
+      refresh: vi.fn(),
+    });
 
     // Render with error state mock
     await act(async () => {
@@ -413,22 +407,11 @@ describe("BusinessImpactAnalysisWidget", () => {
     const widget = screen.getByTestId("business-impact-analysis-widget");
     expect(widget).toBeInTheDocument();
 
-    // Log the actual content for debugging
-    console.log("Widget content:", widget.textContent);
-
     // Check if error is passed to WidgetContainer which should handle displaying it
     // Our mock for WidgetContainer shows error.message if error is provided
-    // Instead of checking for specific text patterns, check that the widget doesn't crash
     expect(widget).toBeInTheDocument();
-
-    // Reset the mock to the default implementation after test
-    vi.mock("../../../hooks/useCIAContentService", () => defaultMock);
   });
 
-  // For the remaining tests that expect normal behavior, restore the default mock
-  beforeEach(() => {
-    vi.mock("../../../hooks/useCIAContentService", () => defaultMock);
-  });
 
   // Additional coverage tests
   describe("Additional Coverage", () => {
