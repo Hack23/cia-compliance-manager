@@ -1093,13 +1093,13 @@ We welcome contributions to our documentation. Please see the [Contributing Guid
 | Data Visualization    | [Chart.js](https://www.npmjs.com/package/chart.js)                           | Active         | 4.x            | Community maintained, no formal EOL policy                                               |
 | UI/Styling            | [TailwindCSS](https://www.npmjs.com/package/tailwindcss)                     | Active         | 4.x            | Major versions typically maintained for 1-2 years                                        |
 |                       | [PostCSS](https://www.npmjs.com/package/postcss)                             | Active         | 8.x            | Community maintained, no formal EOL policy                                               |
-| Build Tools           | [Vite](https://www.npmjs.com/package/vite)                                   | Active         | 6.x            | [Follows semver](https://endoflife.date/vite), minor versions supported until next minor |
-| Testing               | [Vitest](https://www.npmjs.com/package/vitest)                               | Active         | 3.x            | Actively maintained with Vite compatibility                                              |
-|                       | [Cypress](https://www.npmjs.com/package/cypress)                             | Active         | 14.x           | [Regular updates](https://endoflife.date/cypress), typically supports N-1 version        |
+| Build Tools           | [Vite](https://www.npmjs.com/package/vite)                                   | Active         | 8.x            | [Follows semver](https://endoflife.date/vite), minor versions supported until next minor |
+| Testing               | [Vitest](https://www.npmjs.com/package/vitest)                               | Active         | 4.x            | Actively maintained with Vite compatibility                                              |
+|                       | [Cypress](https://www.npmjs.com/package/cypress)                             | Active         | 15.x           | [Regular updates](https://endoflife.date/cypress), typically supports N-1 version        |
 |                       | [Testing Library](https://www.npmjs.com/package/@testing-library/react)      | Active         | 16.x           | Community maintained, regular updates                                                    |
 | Development Utilities | [Cross-env](https://www.npmjs.com/package/cross-env)                         | Active         | 7.x            | Stable utility, minimal updates needed                                                   |
 |                       | [Start-server-and-test](https://www.npmjs.com/package/start-server-and-test) | Active         | 2.x            | Utility package, stable API                                                              |
-| Runtime Requirements  | Node.js                                                                      | Required       | ≥24.0.0        | [Node 24 EOL: April 2028](https://endoflife.date/nodejs)                                 |
+| Runtime Requirements  | Node.js                                                                      | Required       | ≥25.0.0        | [Node 25 EOL: ~April 2026](https://endoflife.date/nodejs)                                |
 |                       | npm                                                                          | Required       | ≥11.0.0        | Follows Node.js support lifecycle                                                        |
 
 ## Widgets
