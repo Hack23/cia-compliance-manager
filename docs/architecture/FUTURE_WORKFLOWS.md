@@ -32,10 +32,10 @@ The future enhancements build upon the robust v1.1 workflow foundation:
 
 **Future Node.js Roadmap (2026–2031):**
 
-| Version | Type | GA Date | LTS EOL | CI/CD Strategy |
-|---------|------|---------|---------|----------------|
+| Version | Type | GA Date | Support EOL | CI/CD Strategy |
+|---------|------|---------|-------------|----------------|
 | **25.x** (current) | Current (odd) | Oct 2025 | Apr 2026 | ✅ Production now |
-| **26.x** | LTS (even) | Apr 2026 | Apr 2029 | ⬆️ Upgrade immediately on release |
+| **26.x** | Current→LTS (even) | Apr 2026 (Current) / Oct 2026 (LTS) | Apr 2029 | ⬆️ Upgrade immediately on GA |
 | **27.x** | New schedule (all LTS) | Apr 2027 | Apr 2030 | 🔬 Alpha CI from Oct 2026 |
 | **28.x** | New schedule (all LTS) | Apr 2028 | Apr 2031 | 📋 Planned upgrade ~Apr 2028 |
 
