@@ -46,7 +46,6 @@ jobs:
       - name: Setup Web Test Environment (Chrome + Xvfb + Dependencies)
         run: |
           echo "🔧 Setting up complete Web test environment..."
-
           # Install system dependencies for Web rendering
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
@@ -62,13 +61,11 @@ jobs:
             libx11-xcb1 libxcomposite1 libxdamage1 \
             libxfixes3 libxrandr2 libxrender1 \
             libxshmfence1 xdg-utils wget libxkbcommon0 xkb-data
-
           # Install Google Chrome Stable for Web WebGL support
           wget -qO- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg
           echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
-
           # Setup D-Bus for Chrome
           sudo mkdir -p /var/run/dbus
           sudo dbus-daemon --system --fork || true
@@ -147,12 +144,6 @@ jobs:
         env:
           DISPLAY: ":99"
           PLAYWRIGHT_BROWSERS_PATH: "0"
-        
-      - name: Verify Cypress for Web Testing
-        run: |
-          npx cypress verify
-          npx cypress info
-          echo "✅ Cypress verified and ready for Web tests"
 
       - name: Display environment info
         run: |
