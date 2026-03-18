@@ -161,7 +161,7 @@ As [announced by the Node.js project](https://nodejs.org/en/blog/announcements/e
 
 > **Note:** The total **36-month support window** is measured from the April GA (Current) release: 6 months Current + 30 months LTS = 36 months. The preceding 6-month Alpha phase is a pre-release testing window and does not count toward the support timeline.
 
-> **Impact for CIA Compliance Manager:** We run **Node.js 25.x** across all CI/CD workflows (`engines.node >= 25.0.0`). Node.js 25 is an odd-numbered Current release (no LTS designation), serving as a bridge to **Node.js 26.x LTS** expected in April 2026. We plan to upgrade to Node.js 26.x immediately after its release (~April 2026). The primary change from the new schedule (starting Node.js 27.x) is that **every future Node.js release will become LTS**, simplifying our upgrade planning. Library authors should integrate Alpha releases into CI as early as possible to report bugs before they affect users.
+> **Impact for CIA Compliance Manager:** We run **Node.js 25.x** across all CI/CD workflows (`engines.node >= 25.0.0`). Node.js 25 is an odd-numbered Current release (no LTS designation), serving as a bridge to **Node.js 26.x (Current) GA expected April 2026; promoted to LTS in Oct 2026**. We plan to upgrade to Node.js 26.x immediately after its GA release (~April 2026). The primary change from the new schedule (starting Node.js 27.x) is that **every future Node.js release will become LTS**, simplifying our upgrade planning. Library authors should integrate Alpha releases into CI as early as possible to report bugs before they affect users.
 
 ### **🎯 Strategic Node.js Lifecycle Management**
 
@@ -192,7 +192,7 @@ gantt
 
     section CIA Compliance Manager Strategy
     Current Node 25.x Production :active, cm25prod, 2025-10-29, 2026-04-21
-    Node.js 26.x Production (LTS):cm26prod, 2026-04-21, 2029-04-30
+    Node.js 26.x Production (Current→LTS):cm26prod, 2026-04-21, 2029-04-30
     Node.js 27.x Alpha CI Testing:cm27alpha, 2026-10-01, 2027-04-01
     Node.js 27.x Production      :cm27prod, 2027-10-01, 2030-04-30
 
@@ -349,7 +349,7 @@ gantt
     Node.js 22.x LTS          :active, node22, 2024-10-29, 2027-04-30
     Node.js 24.x LTS          :active, node24, 2025-10-28, 2028-04-30
     Node.js 25.x Current      :active, node25, 2025-10-29, 2026-04-21
-    Node.js 26.x LTS          :node26, 2026-04-21, 2029-04-30
+    Node.js 26.x (Current→LTS):node26, 2026-04-21, 2029-04-30
     Node.js 27.x LTS (New Sched) :node27, 2027-10-01, 2030-04-30
     Node.js 28.x LTS (New Sched) :node28, 2028-10-01, 2031-04-30
 
