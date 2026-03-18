@@ -25,6 +25,19 @@ The future enhancements build upon the robust v1.1 workflow foundation:
 - ✅ **Comprehensive Security Scanning**: CodeQL, Dependency Review, Scorecard, ZAP, Lighthouse
 - ✅ **Automated PR Management**: Labeling, dependency review, test reporting
 - ✅ **Documentation Pipeline**: Integrated documentation generation and deployment
+- ✅ **Node.js 25.x Runtime**: All CI/CD workflows use `node-version: "25"` (`engines.node >= 25.0.0`)
+
+**Planned Immediate Upgrade (~April 2026):**
+- ⬆️ **Node.js 26.x**: Upgrade immediately after Node.js 26 release (expected April 2026, LTS October 2026)
+
+**Future Node.js Roadmap (2026–2031):**
+
+| Version | Type | GA Date | LTS EOL | CI/CD Strategy |
+|---------|------|---------|---------|----------------|
+| **25.x** (current) | Current (odd) | Oct 2025 | Apr 2026 | ✅ Production now |
+| **26.x** | LTS (even) | Apr 2026 | Apr 2029 | ⬆️ Upgrade immediately on release |
+| **27.x** | New schedule (all LTS) | Apr 2027 | Apr 2030 | 🔬 Alpha CI from Oct 2026 |
+| **28.x** | New schedule (all LTS) | Apr 2028 | Apr 2031 | 📋 Planned upgrade ~Apr 2028 |
 
 **Areas for Enhancement:**
 1. **ML Model Integration**: Add ML training and validation pipelines

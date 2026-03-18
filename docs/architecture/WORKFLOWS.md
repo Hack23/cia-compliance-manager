@@ -137,7 +137,7 @@ The project uses GitHub Actions for automation with the following workflows:
 10. **🤖 Copilot Setup Steps** (`.github/workflows/copilot-setup-steps.yml`)
    - **Triggers:** Manual dispatch, workflow file changes, pull requests affecting workflow
    - **Purpose:** GitHub Copilot workspace environment setup and validation
-   - **Key Features:** Node.js 24 setup, dependency caching, environment validation
+   - **Key Features:** Node.js 25 setup, dependency caching, environment validation
 
 ### 📊 Security Gates & Quality Thresholds
 
@@ -301,7 +301,7 @@ The test-and-report workflow is implemented with comprehensive job coordination:
 **Prepare Job Steps:**
 1. **Harden Runner**: StepSecurity runner hardening with egress policy audit
 2. **Repository Checkout**: Securely checks out code with proper permissions
-3. **Node.js Setup**: Sets up Node.js 24 environment with npm caching
+3. **Node.js Setup**: Sets up Node.js 25 environment with npm caching
 4. **Apt Package Caching**: Caches system packages for faster builds
 5. **Display Setup**: Configures xvfb and GUI dependencies for headless testing
 6. **Dependency Caching**: Multi-level caching (npm, Cypress binary)
@@ -310,7 +310,7 @@ The test-and-report workflow is implemented with comprehensive job coordination:
 
 **Build Validation Job Steps:**
 1. **Harden Runner**: Security hardening of the build environment
-2. **Environment Setup**: Node.js 24 with dependency caching
+2. **Environment Setup**: Node.js 25 with dependency caching
 3. **Dependency Installation**: Uses `npm ci` for clean install
 4. **Application Build**: Executes production build with `npm run build`
 5. **License Verification**: Runs `npm run test:licenses` to ensure compliance
@@ -572,7 +572,7 @@ prepare → build → release
 This job handles environment preparation, testing, and documentation generation:
 
 **Key Steps:**
-1. **Environment Setup**: Ubuntu latest with Node.js 24, dependency caching
+1. **Environment Setup**: Ubuntu latest with Node.js 25, dependency caching
 2. **Version Detection**: Extracts version from tag or workflow input
 3. **Display Configuration**: Sets up xvfb for headless Cypress testing
 4. **Dependency Installation**: Full `npm ci` with audit
@@ -595,7 +595,7 @@ This job creates the production build with full SLSA Level 3 attestation:
 
 **Key Steps:**
 1. **Repository Checkout**: Checks out the appropriate ref (tag or branch)
-2. **Environment Setup**: Node.js 24 with comprehensive caching
+2. **Environment Setup**: Node.js 25 with comprehensive caching
 3. **Dependency Installation**: Clean install with `npm ci`
 4. **Production Build**: Creates optimized build with version embedding
 5. **Artifact Creation**: Zips build directory for distribution
@@ -1200,7 +1200,7 @@ Each phase adds additional security and quality validation:
 
 **Key Steps:**
 1. **Checkout Repository**: Securely checks out code with proper permissions
-2. **Node.js Environment**: Sets up Node.js 24 with npm caching
+2. **Node.js Environment**: Sets up Node.js 25 with npm caching
 3. **Dependency Installation**: Installs project dependencies with `npm ci`
 4. **Environment Validation**: Displays Node, npm, and TypeScript versions
 5. **Build Artifact Caching**: Caches node_modules and dist directories for performance

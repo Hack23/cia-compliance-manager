@@ -316,7 +316,7 @@ Brief description (1-2 sentences)
 
 ### Prerequisites
 
-- Node.js 24+
+- Node.js 25+
 - npm 10+
 
 ### Installation
