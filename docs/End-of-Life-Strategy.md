@@ -192,8 +192,8 @@ gantt
 
     section CIA Compliance Manager Strategy
     Current Node 25.x Production :active, cm25prod, 2025-10-29, 2026-04-21
-    Node.js 26.x Production (Current→LTS):cm26prod, 2026-04-21, 2029-04-30
-    Node.js 27.x Alpha CI Testing:cm27alpha, 2026-10-01, 2027-04-01
+    Node.js 26.x Production (Current→LTS) :cm26prod, 2026-04-21, 2029-04-30
+    Node.js 27.x Alpha CI Testing :cm27alpha, 2026-10-01, 2027-04-01
     Node.js 27.x Production      :cm27prod, 2027-10-01, 2030-04-30
 
     section Critical Milestones
@@ -349,7 +349,7 @@ gantt
     Node.js 22.x LTS          :active, node22, 2024-10-29, 2027-04-30
     Node.js 24.x LTS          :active, node24, 2025-10-28, 2028-04-30
     Node.js 25.x Current      :active, node25, 2025-10-29, 2026-04-21
-    Node.js 26.x (Current→LTS):node26, 2026-04-21, 2029-04-30
+    Node.js 26.x (Current→LTS) :node26, 2026-04-21, 2029-04-30
     Node.js 27.x LTS (New Sched) :node27, 2027-10-01, 2030-04-30
     Node.js 28.x LTS (New Sched) :node28, 2028-10-01, 2031-04-30
 
@@ -374,7 +374,7 @@ gantt
     Cypress 15.x              :active, cypress15, 2025-01-01, 2026-06-01
 
     section Critical Milestones
-    Node.js 25 EOL/Node 26 Release:milestone, node25eol, 2026-04-21, 0d
+    Node.js 25 EOL/Node 26 Release :milestone, node25eol, 2026-04-21, 0d
     Node.js 20 EOL            :milestone, node20eol, 2026-04-30, 0d
     New Node.js Schedule Start :milestone, newschedstart, 2026-10-01, 0d
     Node.js 22 EOL            :milestone, node22eol, 2027-04-30, 0d
