@@ -1100,7 +1100,7 @@ We welcome contributions to our documentation. Please see the [Contributing Guid
 | Development Utilities | [Cross-env](https://www.npmjs.com/package/cross-env)                         | Active         | 7.x            | Stable utility, minimal updates needed                                                   |
 |                       | [Start-server-and-test](https://www.npmjs.com/package/start-server-and-test) | Active         | 2.x            | Utility package, stable API                                                              |
 | Runtime Requirements  | Node.js                                                                      | Required       | ≥25.0.0        | [Node 25 EOL: ~April 2026](https://endoflife.date/nodejs)                                |
-|                       | npm                                                                          | Required       | ≥11.0.0        | Follows Node.js support lifecycle                                                        |
+|                       | npm                                                                          | Required       | ≥10.0.0        | Follows Node.js support lifecycle                                                        |
 
 ## Widgets
 

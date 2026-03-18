@@ -82,16 +82,16 @@ mindmap
         📅 Current: Latest
         ⏰ EOL: Active (6-month cycles)
         🔄 Strict Mode Enabled
-      ⚡ Vite 7.3.1
+      ⚡ Vite 8.0.0
         📅 Current: Latest
         ⏰ EOL: Active (yearly)
-        🔄 ESBuild Integration
+        🔄 OXC/Rolldown Integration
     (🧪 Testing & Quality)
       🧪 Vitest 4.0.17
         📅 Current: Latest
         ⏰ EOL: Active
         🔄 Native ESM Support
-      🔧 Cypress 15.11.0
+      🔧 Cypress 15.12.0
         📅 Current: Latest
         ⏰ EOL: Active
         🔄 E2E Testing
@@ -125,7 +125,7 @@ mindmap
 | ----------------------- | ------------------------- | ------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **⚛️ React Framework**  | 19.2.4 (Latest)           | Major annually, Minor quarterly | ~2027-2028         | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
 | **📝 TypeScript**       | 5.9.3 (Latest)            | Major every 6 months            | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
-| **⚡ Vite Build Tool**  | 7.3.1 (Latest)            | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
+| **⚡ Vite Build Tool**  | 8.0.0 (Latest)            | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
 | **☕ Node.js Runtime**  | 25.x (Production)         | New: 1 major/year from 27.x    | Current EOL Apr 2026 → 26.x LTS | [![High](https://img.shields.io/badge/Complexity-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)     |
 | **🧪 Testing Stack**    | Vitest 4.x + Cypress 15.x | Major annually                  | Active development | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
 | **📊 Chart.js**         | 4.5.1 (Latest)            | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
@@ -244,7 +244,7 @@ gantt
 }%%
 flowchart TB
     subgraph PREPARATION["🔬 Pre-Migration Testing"]
-        COMPAT_TEST["🧪 Compatibility Testing<br/>• Vite 7+ compatibility<br/>• React 19 compatibility<br/>• TypeScript 5+ compatibility<br/>• Chart.js compatibility"]
+        COMPAT_TEST["🧪 Compatibility Testing<br/>• Vite 8+ compatibility<br/>• React 19 compatibility<br/>• TypeScript 5+ compatibility<br/>• Chart.js compatibility"]
         DEP_AUDIT["📦 Dependency Audit<br/>• NPM package compatibility<br/>• Native module rebuilds<br/>• Security vulnerability scan<br/>• License compliance check"]
         PERF_BASELINE["📊 Performance Baseline<br/>• Build time comparison<br/>• Runtime performance<br/>• Memory usage analysis<br/>• Bundle size impact"]
     end
@@ -287,13 +287,13 @@ flowchart TB
 |---------------|-------------|---------|-------------------|------------------|
 | **📦 Dependency Incompatibility** | [![Medium](https://img.shields.io/badge/Risk-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | [![High](https://img.shields.io/badge/Impact-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Early alpha CI testing + dependency audit | All dependencies compatible |
 | **⚡ Performance Regression** | [![Low](https://img.shields.io/badge/Risk-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | [![Medium](https://img.shields.io/badge/Impact-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Performance benchmarking | <5% performance degradation |
-| **🔧 Build System Changes** | [![Medium](https://img.shields.io/badge/Risk-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | [![Medium](https://img.shields.io/badge/Impact-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Vite + ESBuild compatibility testing | Build process unchanged |
+| **🔧 Build System Changes** | [![Medium](https://img.shields.io/badge/Risk-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | [![Medium](https://img.shields.io/badge/Impact-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Vite + OXC compatibility testing | Build process unchanged |
 | **🌐 Runtime API Changes** | [![Low](https://img.shields.io/badge/Risk-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | [![Low](https://img.shields.io/badge/Impact-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | API compatibility validation | All APIs function correctly |
 | **🔒 Security Control Impact** | [![Low](https://img.shields.io/badge/Risk-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | [![High](https://img.shields.io/badge/Impact-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Security scanning + attestation | Security posture maintained |
 
 ### **🚀 Node.js 26.x Upgrade Preparation (Immediate — ~April 2026)**
 
-> **🎯 Status:** Node.js 25.x is our current CI/CD runtime (`node-version: "25"`). Node.js 26.x is expected to be released in **April 2026** (approximately 4–6 weeks from today, March 2026). We will upgrade to Node.js 26.x **immediately after its official release** as it becomes the new even-numbered LTS candidate — following our "living on the edge" philosophy.
+> **🎯 Status:** Node.js 25.x is our current CI/CD runtime (`node-version: "25"`). Node.js 26.x is expected to be released in **April 2026**. We will upgrade to Node.js 26.x **immediately after its official release** as it becomes the new even-numbered LTS candidate — following our "living on the edge" philosophy.
 
 #### **📅 Node.js 26.x Upgrade Timeline**
 
@@ -309,7 +309,7 @@ flowchart TB
 
 - [ ] Monitor [Node.js 26 release notes](https://github.com/nodejs/node/blob/main/CHANGELOG.md) for breaking changes
 - [ ] Test CI pipeline against Node.js 26.x release candidate builds
-- [ ] Verify Vite 7+ compatibility with Node.js 26
+- [ ] Verify Vite 8+ compatibility with Node.js 26
 - [ ] Verify React 19 / TypeScript 5 / ESLint 9 compatibility
 - [ ] Run full test suite (`npm run test:coverage`) on Node.js 26
 - [ ] Validate Cypress 15 E2E tests on Node.js 26
@@ -359,8 +359,8 @@ gantt
     React 21.x (Future)       :react21, 2026-12-01, 2029-12-31
 
     section Build & Tooling
-    Vite 7.x                  :active, vite7, 2025-01-01, 2026-06-01
-    Vite 8.x (Future)         :vite8, 2026-01-01, 2027-06-01
+    Vite 8.x                  :active, vite8, 2026-01-01, 2027-06-01
+    Vite 9.x (Future)         :vite9, 2027-01-01, 2028-06-01
     TypeScript 5.x            :active, ts5, 2024-03-16, 2026-03-31
     TypeScript 6.x (Future)   :ts6, 2025-09-01, 2026-09-30
     TypeScript 7.x (Future)   :ts7, 2026-03-01, 2027-09-30
@@ -565,7 +565,7 @@ Should EOL conditions trigger migration, the successor platform will maintain **
 |-----------|----------------------------------|------------------|---------------------|
 | **⚛️ Frontend Framework** | React 19 + TypeScript 5 | React 22+ or Next.js 15+ | [![High](https://img.shields.io/badge/Complexity-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
 | **📊 Visualization Engine** | Chart.js 4.x | D3.js or Observable Plot | [![Very High](https://img.shields.io/badge/Complexity-Very_High-red?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
-| **🛠️ Build System** | Vite 7 + ESBuild | Rolldown, Turbopack, or Vite Next | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **🛠️ Build System** | Vite 8 + OXC/Rolldown | Turbopack or Vite Next | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
 | **📱 Platform Target** | Web-only | Progressive Web App + WebAssembly | [![High](https://img.shields.io/badge/Complexity-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
 | **☕ Runtime** | Node.js (build only) | Deno, Bun, or Next-gen Node.js | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
 
@@ -745,9 +745,9 @@ graph TB
         end
         
         subgraph TOOLS["🛠️ Build & Testing"]
-            VITE[📊 Vite Health<br/>Version: 7.3.1<br/>EOL: Active<br/>Status: ✅ Healthy]
+            VITE[📊 Vite Health<br/>Version: 8.0.0<br/>EOL: Active<br/>Status: ✅ Healthy]
             VITEST[📊 Vitest Health<br/>Version: 4.0.17<br/>EOL: Active<br/>Status: ✅ Healthy]
-            CYPRESS[📊 Cypress Health<br/>Version: 15.11.0<br/>EOL: Active<br/>Status: ✅ Healthy]
+            CYPRESS[📊 Cypress Health<br/>Version: 15.12.0<br/>EOL: Active<br/>Status: ✅ Healthy]
         end
         
         subgraph DEPS["📦 Dependencies"]
