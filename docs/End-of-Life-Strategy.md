@@ -72,7 +72,7 @@ mindmap
       🌐 Browser Runtime
         📅 Evergreen Updates
         ⏰ EOL: N/A (Auto-update)
-        🔄 ES2022+ Support
+        🔄 ES2024+ Support
     (⚛️ Frontend Framework)
       📦 React 19.2.4
         📅 Current: Latest
@@ -481,7 +481,7 @@ CIA Compliance Manager will be designated as EOL and archived in read-only state
 #### **🔴 Critical EOL Triggers (Immediate Retirement)**
 
 1. **🚨 Security Support Failure:** No security patches available for critical vulnerabilities in core dependencies
-2. **🌐 Browser Compatibility Loss:** Modern browsers no longer support required ES2022+ features
+2. **🌐 Browser Compatibility Loss:** Modern browsers no longer support required ES2024+ features
 3. **⚡ Performance Degradation:** Framework limitations causing unacceptable user experience
 4. **📦 Dependency Chain Collapse:** Critical dependencies (React, TypeScript, Vite) all reach EOL simultaneously
 
