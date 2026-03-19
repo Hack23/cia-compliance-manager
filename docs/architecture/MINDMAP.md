@@ -23,7 +23,7 @@
 
 ## 🎯 **Purpose**
 
-This mindmap provides a comprehensive visual mental model of the CIA Compliance Manager system architecture, illustrating component relationships, service dependencies, and feature organization for the v1.0 release. It serves as a conceptual framework for understanding how different parts of the system work together to deliver security assessment and compliance mapping capabilities.
+This mindmap provides a comprehensive visual mental model of the CIA Compliance Manager system architecture, illustrating component relationships, service dependencies, and feature organization for the v1.1.32 release. It serves as a conceptual framework for understanding how different parts of the system work together to deliver security assessment and compliance mapping capabilities.
 
 Per **[Secure Development Policy §10](https://github.com/Hack23/ISMS/blob/main/Secure_Development_Policy.md#-comprehensive-architecture-documentation-portfolio)**, this document maintains the system component inventory aligned with:
 - **ISO 27001 (A.8.1)**: System inventory maintained
@@ -86,13 +86,13 @@ This document uses consistent color schemes aligned with the **[ISMS Style Guide
 
 ---
 
-## 📊 **v1.0 System Overview**
+## 📊 **v1.1.32 System Overview**
 
 Complete system structure showing all major components and their relationships.
 
 ```mermaid
 mindmap
-  root((🎯 CIA Compliance<br/>Manager v1.0))
+  root((🎯 CIA Compliance<br/>Manager v1.1.32))
     (📊 Assessment Center)
       🔐 SecurityLevelWidget
         Configuration Hub
@@ -1087,7 +1087,7 @@ mindmap
 
 ---
 
-This mindmap visualizes the comprehensive v1.0 architecture of the CIA Compliance Manager system, providing clear mental models for understanding component relationships, service dependencies, technology stack integration, and feature organization. The diagrams use consistent color coding and hierarchical organization to facilitate quick comprehension and navigation of the system's structure.
+This mindmap visualizes the comprehensive v1.1.32 architecture of the CIA Compliance Manager system, providing clear mental models for understanding component relationships, service dependencies, technology stack integration, and feature organization. The diagrams use consistent color coding and hierarchical organization to facilitate quick comprehension and navigation of the system's structure.
 
 ---
 
