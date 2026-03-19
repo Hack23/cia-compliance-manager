@@ -153,19 +153,35 @@
     "./src/data/valueCreationData.ts"
   ],
   "entryPointStrategy": "expand",
-  "out": "./docs/markdown",
-  "name": "CIA Compliance Manager — Markdown Documentation",
+  "out": "./docs/api",
+  "name": "CIA Compliance Manager — Complete API Documentation",
   "includeVersion": true,
-  "excludePrivate": true,
-  "excludeProtected": true,
-  "plugin": ["typedoc-plugin-markdown"],
-  "theme": "markdown",
-  "readme": "./docs/markdown-overview.md",
-  "sort": ["visibility", "source-order", "alphabetical"],
-  "excludeInternal": true,
+  "excludePrivate": false,
+  "excludeProtected": false,
   "excludeExternals": true,
-  "githubPages": false,
-  "excludeTags": ["@internal"],
+  "plugin": ["typedoc-plugin-mermaid"],
+  "readme": "./docs/api-overview.md",
+  "theme": "default",
+  "tsconfig": "./tsconfig.json",
+  "sort": ["visibility", "source-order", "alphabetical"],
+  "visibilityFilters": {
+    "protected": true,
+    "private": false,
+    "inherited": true,
+    "external": false
+  },
+  "validation": {
+    "invalidLink": false,
+    "notExported": false
+  },
+  "searchInComments": true,
+  "navigationLinks": {
+    "GitHub": "https://github.com/Hack23/cia-compliance-manager",
+    "Live Demo": "https://ciacompliancemanager.com",
+    "Architecture": "https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md",
+    "Security": "https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/SECURITY_ARCHITECTURE.md",
+    "ISMS Policy": "https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md"
+  },
   "exclude": [
     "**/*.test.{ts,tsx}",
     "**/*.spec.{ts,tsx}",
@@ -223,6 +239,5 @@
     "Constants/UI",
     "Constants",
     "*"
-  ],
-  "tsconfig": "./tsconfig.json"
+  ]
 }
