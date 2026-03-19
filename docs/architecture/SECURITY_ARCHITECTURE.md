@@ -9,7 +9,7 @@
   <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Network_Security_Policy.md">Network Security Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Access_Control_Policy.md">Access Control Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md">Threat Modeling</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md">Vulnerability Management</a></em>
 </p>
 
-**Version:** 1.1.32 | **Last Updated:** 2025-07-15 | **Status:** ✅ Production Ready
+**Version:** 1.1.32 | **Last Updated:** 2026-03-19 | **Status:** ✅ Production Ready
 
 This document outlines the comprehensive security architecture of the CIA Compliance Manager, detailing how the system protects data through multiple security layers.
 

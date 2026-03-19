@@ -154,7 +154,7 @@
   ],
   "entryPointStrategy": "expand",
   "out": "./docs/api",
-  "name": "CIA Compliance Manager — Complete API Documentation",
+  "name": "CIA Compliance Manager - Complete API Documentation",
   "includeVersion": true,
   "excludePrivate": false,
   "excludeProtected": false,

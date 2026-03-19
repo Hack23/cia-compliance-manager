@@ -9,7 +9,7 @@
   <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md">Change Management</a></em>
 </p>
 
-> **Version:** v1.1.32 | **Last Updated:** 2025-07-14 | **Status:** Production
+> **Version:** v1.1.32 | **Last Updated:** 2026-03-19 | **Status:** Production
 
 This document illustrates the comprehensive state transitions and behavioral models of the CIA Compliance Manager application v1.1.32, showing how the system responds to user interactions, handles errors, and manages state across React 19.2.4 components.
 
