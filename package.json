@@ -108,7 +108,7 @@
     "typedoc-plugin-mermaid": "^1.12.0",
     "typescript": "5.9.3",
     "typescript-eslint": "8.54.0",
-    "vite": "^8.0.0",
+    "vite": "^8.0.1",
     "vitest": "^4.0.17"
   },
   "engines": {
