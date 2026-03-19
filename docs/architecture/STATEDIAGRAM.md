@@ -6,12 +6,12 @@
 
 <p align="center">
   <strong>📐 State Transition Documentation</strong><br>
-  <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md">Change Management</a></em>
+  <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md">Change Management</a></em>
 </p>
 
-> **Version:** v1.1 | **Last Updated:** 2026-02-24 | **Status:** Production
+> **Version:** v1.1.32 | **Last Updated:** 2025-07-14 | **Status:** Production
 
-This document illustrates the comprehensive state transitions and behavioral models of the CIA Compliance Manager application v1.0, showing how the system responds to user interactions, handles errors, and manages state across React 19.x components.
+This document illustrates the comprehensive state transitions and behavioral models of the CIA Compliance Manager application v1.1.32, showing how the system responds to user interactions, handles errors, and manages state across React 19.2.4 components.
 
 ## 📚 Related Documentation
 
@@ -31,11 +31,12 @@ This document illustrates the comprehensive state transitions and behavioral mod
 
 The CIA Compliance Manager implements a comprehensive state management architecture using:
 
-- **React 19.x State Hooks**: `useState`, `useCallback`, `useEffect` for component-level state
-- **Custom Hooks**: `useSecurityLevelState`, `useLocalStorage` for cross-cutting concerns
-- **Error Boundaries**: React class components with `componentDidCatch` for error recovery
-- **Suspense Boundaries**: React 19.x Suspense for lazy-loaded components
-- **LocalStorage Persistence**: State persistence across browser sessions
+- **React 19.2.4 State Hooks**: `useState`, `useCallback`, `useEffect` for component-level state
+- **Context Providers**: `SecurityLevelContext`, `ErrorContext`, `KeyboardShortcutContext` for cross-component state
+- **Custom Hooks (18)**: `useSecurityLevelState`, `useLocalStorage`, `useCIAContentService`, `useCIAOptions`, `useCIADataProvider`, `useComplianceService`, `useSecurityMetricsService`, `useBusinessImpact`, `useComponentDetails`, `useTechnicalDetailsData`, `useFormattedMetrics`, `useKeyboardShortcuts`, `useResponsiveBreakpoint`, `useSecuritySummaryData`, `useServiceData`, `useTabs`, `useWidgetError`
+- **Error Boundaries**: `WidgetErrorBoundary` class component with `componentDidCatch` for error recovery
+- **Suspense Boundaries**: React 19.2.4 Suspense for lazy-loaded components
+- **LocalStorage Persistence**: State persistence across browser sessions via `useLocalStorage`
 
 ### State Flow Architecture
 
@@ -64,7 +65,7 @@ graph LR
 
 ## 🔍 Application Core States
 
-The diagram below shows the main application states and transitions in v1.0, including error recovery paths:
+The diagram below shows the main application states and transitions in v1.1.32, including error recovery paths:
 
 ```mermaid
 stateDiagram-v2
@@ -276,7 +277,7 @@ setLevel('availability', 'Very High');
 // useEffect above automatically persists to localStorage
 ```
 
-## 🧩 Widget Component State Machine (v1.0)
+## 🧩 Widget Component State Machine (v1.1.32)
 
 Universal widget state machine showing standardized lifecycle for all assessment widgets:
 
@@ -389,7 +390,7 @@ stateDiagram-v2
 - **Loading**: Async operation in progress, user sees loading indicator
 - **DisplayingResults**: Valid data rendered, user can interact
 - **Error**: Recoverable error state with retry/reset options
-- **Suspending**: Lazy component loading (React 19.x Suspense)
+- **Suspending**: Lazy component loading (React 19.2.4 Suspense)
 - **Unmounting**: Component cleanup before removal
 
 **Transition Events:**
@@ -401,7 +402,7 @@ stateDiagram-v2
 - `User Clicks Reset`: Reset widget to initial state
 - `Component Unmounted`: React unmount lifecycle
 
-## 🛡️ React Error Boundary State Transitions (v1.0)
+## 🛡️ React Error Boundary State Transitions (v1.1.32)
 
 State machine for `WidgetErrorBoundary` component implementing React Error Boundary pattern:
 
@@ -522,9 +523,9 @@ interface WidgetErrorBoundaryProps {
 
 **Cross-Reference:** See [Error Handling Documentation](../ERROR_HANDLING.md) for detailed patterns and best practices.
 
-## 💤 React Suspense Boundary State (v1.0)
+## 💤 React Suspense Boundary State (v1.1.32)
 
-State machine for lazy-loaded components using React 19.x Suspense:
+State machine for lazy-loaded components using React 19.2.4 Suspense:
 
 ```mermaid
 stateDiagram-v2
@@ -1027,9 +1028,9 @@ stateDiagram-v2
     class SelectingAvailability availability
 ```
 
-**Note:** In v1.0, security level selection is handled inline within SecurityLevelWidget using standard form controls. This diagram represents the conceptual workflow, not a multi-page wizard.
+**Note:** In v1.1.32, security level selection is handled inline within SecurityLevelWidget using standard form controls. This diagram represents the conceptual workflow, not a multi-page wizard.
 
-## 📊 Summary: v1.0 State Management Architecture
+## 📊 Summary: v1.1.32 State Management Architecture
 
 ### State Transition Inventory
 
@@ -1046,15 +1047,38 @@ stateDiagram-v2
 
 **Total:** 63 distinct states, 104 state transitions
 
-### React 19.x Integration
+### React 19.2.4 Integration
 
-**Hooks Used:**
+**Context Providers (3):**
+- `SecurityLevelContext`: Provides CIA triad security level state and setters to the component tree
+- `ErrorContext`: Centralized error state management and error reporting across widgets
+- `KeyboardShortcutContext`: Manages keyboard shortcut registrations and navigation bindings
+
+**Built-in Hooks Used:**
 - `useState`: Component-level state (all widgets)
 - `useEffect`: Side effects, subscriptions, cleanup
 - `useCallback`: Memoized event handlers
 - `useMemo`: Performance optimization (not shown in diagrams)
 - `lazy()`: Code splitting for SecurityVisualizationWidget
-- Custom hooks: `useSecurityLevelState`, `useLocalStorage`, `useCIAContentService`
+
+**Custom Hooks (18):**
+- `useSecurityLevelState`: Manages CIA triad security level selections (None/Low/Moderate/High/Very High)
+- `useLocalStorage`: Persists state to localStorage with cross-tab synchronization
+- `useCIAContentService`: Retrieves CIA content data from the service layer
+- `useCIAOptions`: Provides security level options for selection controls
+- `useCIADataProvider`: Aggregated data provider for CIA triad information
+- `useComplianceService`: Integrates with compliance service for framework mapping
+- `useSecurityMetricsService`: Integrates with security metrics calculation service
+- `useBusinessImpact`: Calculates business impact based on security level selections
+- `useComponentDetails`: Manages component detail view state and data
+- `useTechnicalDetailsData`: Provides technical implementation details per security level
+- `useFormattedMetrics`: Formats raw metrics for display presentation
+- `useKeyboardShortcuts`: Registers and manages keyboard navigation shortcuts
+- `useResponsiveBreakpoint`: Detects viewport breakpoints for responsive design
+- `useSecuritySummaryData`: Aggregates data for the security summary widget
+- `useServiceData`: Generic hook for fetching data from service layer
+- `useTabs`: Manages tab selection state for tabbed interfaces
+- `useWidgetError`: Per-widget error handling and recovery state
 
 **Error Handling:**
 - Class component `WidgetErrorBoundary` for React error catching
@@ -1122,6 +1146,13 @@ stateDiagram-v2
 - Update when state management patterns change
 - Validate against actual implementation quarterly
 
+### ISMS Policy References
+
+| Policy | Link |
+|--------|------|
+| **Secure Development Policy** | [Secure_Development_Policy.md](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| **Information Classification** | [CLASSIFICATION.md](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+
 ---
 
-These comprehensive state diagrams provide a complete view of the CIA Compliance Manager v1.0 behavioral model, illustrating how the application transitions between states in response to user interactions, handles errors gracefully, manages async operations with Suspense, and persists critical state across sessions. The diagrams serve as authoritative documentation for developers, testers, and security auditors understanding system behavior.
+These comprehensive state diagrams provide a complete view of the CIA Compliance Manager v1.1.32 behavioral model, illustrating how the application transitions between states in response to user interactions, handles errors gracefully, manages async operations with Suspense, and persists critical state across sessions. The diagrams serve as authoritative documentation for developers, testers, and security auditors understanding system behavior.
