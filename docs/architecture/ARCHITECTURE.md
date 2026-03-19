@@ -9,7 +9,7 @@
   <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification Framework</a></em>
 </p>
 
-**Version:** 1.1 | **Last Updated:** 2026-02-24 | **Status:** ✅ Production Ready
+**Version:** 1.1.32 | **Last Updated:** 2026-03-19 | **Status:** ✅ Production Ready
 
 This document provides a comprehensive view of the CIA Compliance Manager architecture using the C4 model, illustrating how components interact to deliver security assessment capabilities.
 
@@ -94,11 +94,11 @@ C4Context
 
 ## 🏢 Container View
 
-The CIA Compliance Manager consists of several interconnected containers that provide its core functionality. The v1.0 architecture leverages modern React 19.x features, TypeScript strict mode, and comprehensive testing infrastructure.
+The CIA Compliance Manager consists of several interconnected containers that provide its core functionality. The v1.1.32 architecture leverages modern React 19.x features, TypeScript strict mode, and comprehensive testing infrastructure.
 
 ```mermaid
 C4Container
-    title Container Diagram - CIA Compliance Manager (v1.0)
+    title Container Diagram - CIA Compliance Manager (v1.1.32)
 
     Person(securityOfficer, "Security Officer", "Manages security levels and reviews assessment results")
     Person(developer, "Developer", "Maintains and extends platform")
@@ -106,8 +106,8 @@ C4Container
     System_Boundary(ciaManager, "CIA Compliance Manager") {
         Container(frontend, "Frontend Application", "React 19.2.x, TypeScript 5.9.x (Strict)", "SPA with error boundaries, context API state management")
         ContainerDb(staticData, "Static Data", "TypeScript/JSON", "Security controls, frameworks, CIA triad data")
-        Container(buildSystem, "Build System", "Vite 7.x, esbuild", "Code splitting, tree-shaking, bundle optimization")
-        Container(testFramework, "Test Infrastructure", "Vitest 4.0.17, Cypress 15.10.0", "Unit tests (exceeds 80% line coverage), E2E tests")
+        Container(buildSystem, "Build System", "Vite 8.x, esbuild", "Code splitting, tree-shaking, bundle optimization")
+        Container(testFramework, "Test Infrastructure", "Vitest 4.0.17, Cypress 15.12.0", "Unit tests (exceeds 80% line coverage), E2E tests")
         Container(securityScan, "Security Scanner", "CodeQL, SonarCloud, Dependabot", "SAST, SCA, vulnerability detection")
         Container(deployment, "Deployment", "AWS CloudFront + S3, GitHub Pages DR", "Multi-region with SLSA Level 3 attestation")
     }
@@ -125,27 +125,27 @@ C4Container
     UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
 ```
 
-### **Container Details (v1.0)**
+### **Container Details (v1.1.32)**
 
 | Container | Technology Stack | Purpose | Key Features |
 |-----------|-----------------|---------|--------------|
-| **Frontend Application** | React 19.2.x, TypeScript 5.9.x | User interface | Error boundaries, concurrent rendering, strict types |
+| **Frontend Application** | React 19.2.4, TypeScript 5.9.3 | User interface | Error boundaries, concurrent rendering, strict types |
 | **Static Data** | TypeScript/JSON | Data source | CIA triad controls, compliance frameworks |
-| **Build System** | Vite 7.x, esbuild | Build pipeline | Optimized bundle, code splitting, tree-shaking |
-| **Test Infrastructure** | Vitest 4.0.17, Cypress 15.10.0 | Quality assurance | Exceeds 80% line coverage, component & E2E tests |
+| **Build System** | Vite 8.x, esbuild | Build pipeline | Optimized bundle, code splitting, tree-shaking |
+| **Test Infrastructure** | Vitest 4.0.17, Cypress 15.12.0 | Quality assurance | Exceeds 80% line coverage, component & E2E tests |
 | **Security Scanner** | CodeQL, SonarCloud | Vulnerability detection | SAST, SCA, dependency scanning |
 | **Deployment** | AWS CloudFront + S3, GitHub Pages DR | Multi-region hosting | CloudFront CDN, S3 multi-region, SLSA Level 3, Route53 DNS |
 
 ## 🧩 Component View
 
-The frontend application is composed of specialized components organized by domain functionality. The v1.0 architecture implements comprehensive error handling, React Context API state management, and strict TypeScript typing.
+The frontend application is composed of specialized components organized by domain functionality. The v1.1.32 architecture implements comprehensive error handling, React Context API state management, and strict TypeScript typing.
 
 ```mermaid
 C4Component
-    title Component Diagram - Frontend Application (v1.0)
+    title Component Diagram - Frontend Application (v1.1.32)
 
     Container_Boundary(frontend, "Frontend Application") {
-        Component(errorBoundary, "Error Boundary", "react-error-boundary 6.0.0", "Application-wide error handling and recovery")
+        Component(errorBoundary, "Error Boundary", "react-error-boundary 6.1.1", "Application-wide error handling and recovery")
         Component(appRoot, "App Root", "React 19.2.4", "Main application component with routing")
         
         Component(slWidget, "Security Level Widget", "React, TypeScript", "Core configuration widget for CIA security levels")
@@ -202,10 +202,10 @@ C4Component
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
 
-### **v1.0 Component Architecture Highlights**
+### **v1.1.32 Component Architecture Highlights**
 
-#### **Error Handling (NEW in v1.0)**
-- **Error Boundary Component**: `react-error-boundary 6.0.0` for graceful error recovery
+#### **Error Handling**
+- **Error Boundary Component**: `react-error-boundary 6.1.1` for graceful error recovery
 - **Automatic Recovery**: Fallback UI with retry mechanisms
 - **Error Logging**: Comprehensive error tracking for debugging
 - **User-Friendly Messages**: Clear error communication
@@ -228,7 +228,7 @@ This diagram shows the detailed structure of the service layer with full TypeScr
 
 ```mermaid
 C4Component
-    title Component Diagram - Service Layer (v1.0)
+    title Component Diagram - Service Layer (v1.1.32)
 
     Container_Boundary(services, "Service Layer") {
         Component(baseService, "BaseService", "TypeScript Strict", "Base service with common functionality and type safety")
@@ -238,6 +238,7 @@ C4Component
         Component(securityMetricsService, "SecurityMetricsService", "TypeScript Strict", "Calculates security metrics and scores")
         Component(technicalImplService, "TechnicalImplementationService", "TypeScript Strict", "Provides implementation guidance")
         Component(securityResourceService, "SecurityResourceService", "TypeScript Strict", "Manages security resource references")
+        Component(errorService, "ErrorService", "TypeScript Strict", "Centralized error handling and reporting")
     }
 
     Container_Boundary(dataLayer, "Data Layer") {
@@ -252,6 +253,7 @@ C4Component
     Rel(securityMetricsService, baseService, "Extends")
     Rel(technicalImplService, baseService, "Extends")
     Rel(securityResourceService, baseService, "Extends")
+    Rel(errorService, baseService, "Extends")
     
     Rel(ciaContentService, businessImpactService, "Uses")
     Rel(ciaContentService, complianceService, "Uses")
@@ -266,7 +268,7 @@ C4Component
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
 
-### **TypeScript Strict Mode Implementation (v1.0)**
+### **TypeScript Strict Mode Implementation (v1.1.32)**
 
 All services implement comprehensive type safety:
 - **Zero `any` Types**: Complete elimination of type escape hatches
@@ -283,7 +285,7 @@ This diagram shows the structure of the widget components:
 
 ```mermaid
 C4Component
-    title Component Diagram - Widget Components
+    title Component Diagram - Widget Components (v1.1.32)
 
     Container_Boundary(widgets, "Widget Components") {
         Component(widgetBase, "WidgetContainer", "React, TypeScript", "Base container for all widgets")
@@ -291,12 +293,17 @@ C4Component
         Component(securityLevel, "SecurityLevelWidget", "React, TypeScript", "Core configuration widget")
         
         Component(securitySummary, "SecuritySummaryWidget", "React, TypeScript", "Overall security summary")
-        Component(businessImpact, "BusinessImpactAnalysisWidget", "React, TypeScript", "Business impact analysis")
+        Component(businessImpact, "BusinessImpactAnalysisWidget", "React, TypeScript", "Business impact analysis with tabbed views")
+        Component(secOverviewTab, "SecurityOverviewTab", "React, TypeScript", "Overview tab within business impact analysis")
+        Component(secBusinessTab, "SecurityBusinessTab", "React, TypeScript", "Business tab within business impact analysis")
+        Component(secComplianceTab, "SecurityComplianceTab", "React, TypeScript", "Compliance tab within business impact analysis")
+        Component(secImplTab, "SecurityImplementationTab", "React, TypeScript", "Implementation tab within business impact analysis")
         
         Component(complianceStatus, "ComplianceStatusWidget", "React, TypeScript", "Compliance status and mapping")
         Component(costEstimation, "CostEstimationWidget", "React, TypeScript", "Implementation cost estimates")
         Component(valueCreation, "ValueCreationWidget", "React, TypeScript", "Business value metrics")
         
+        Component(impactWidget, "ImpactWidget", "React, TypeScript", "Base impact analysis component")
         Component(confidentiality, "ConfidentialityImpactWidget", "React, TypeScript", "Confidentiality impact")
         Component(integrity, "IntegrityImpactWidget", "React, TypeScript", "Integrity impact")
         Component(availability, "AvailabilityImpactWidget", "React, TypeScript", "Availability impact")
@@ -304,20 +311,29 @@ C4Component
         Component(technicalDetails, "TechnicalDetailsWidget", "React, TypeScript", "Technical implementation details")
         Component(securityResources, "SecurityResourcesWidget", "React, TypeScript", "Security implementation resources")
         Component(securityVis, "SecurityVisualizationWidget", "React, TypeScript", "Security metrics visualization")
+        Component(ciaCompDetails, "CIAComponentDetails", "React, TypeScript", "Detailed CIA component breakdown")
+        Component(implGuidance, "ImplementationGuidancePanel", "React, TypeScript", "Step-by-step implementation guidance")
     }
 
     Rel(securitySummary, widgetBase, "Uses")
     Rel(businessImpact, widgetBase, "Uses")
+    Rel(businessImpact, secOverviewTab, "Contains")
+    Rel(businessImpact, secBusinessTab, "Contains")
+    Rel(businessImpact, secComplianceTab, "Contains")
+    Rel(businessImpact, secImplTab, "Contains")
     Rel(complianceStatus, widgetBase, "Uses")
     Rel(costEstimation, widgetBase, "Uses")
     Rel(valueCreation, widgetBase, "Uses")
-    Rel(confidentiality, widgetBase, "Uses")
-    Rel(integrity, widgetBase, "Uses")
-    Rel(availability, widgetBase, "Uses")
+    Rel(impactWidget, widgetBase, "Uses")
+    Rel(confidentiality, impactWidget, "Extends")
+    Rel(integrity, impactWidget, "Extends")
+    Rel(availability, impactWidget, "Extends")
     Rel(technicalDetails, widgetBase, "Uses")
     Rel(securityResources, widgetBase, "Uses")
     Rel(securityVis, widgetBase, "Uses")
     Rel(securityLevel, widgetBase, "Uses")
+    Rel(ciaCompDetails, widgetBase, "Uses")
+    Rel(implGuidance, widgetBase, "Uses")
 
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
@@ -365,16 +381,16 @@ C4Component
     UpdateLayoutConfig($c4ShapeInRow="5", $c4BoundaryInRow="1")
 ```
 
-## 🏗️ Build Pipeline Architecture (NEW in v1.0)
+## 🏗️ Build Pipeline Architecture
 
-The v1.0 build system leverages Vite 7.3.1 with advanced optimization techniques:
+The v1.1.32 build system leverages Vite 8.0.x with advanced optimization techniques:
 
 ```mermaid
 C4Component
-    title Build Pipeline - Vite 7.3.1 with Optimization
+    title Build Pipeline - Vite 8.0.x with Optimization
 
     Container_Boundary(buildPipeline, "Build System") {
-        Component(vite, "Vite 7.3.1", "Build Tool", "Lightning-fast HMR and optimized builds")
+        Component(vite, "Vite 8.0.x", "Build Tool", "Lightning-fast HMR and optimized builds")
         Component(esbuild, "esbuild", "Minifier", "Ultra-fast JavaScript minification")
         Component(rollup, "Rollup", "Bundler", "Advanced code splitting and tree-shaking")
         Component(tsCompiler, "TypeScript 5.9.3", "Compiler", "Strict mode compilation with full type checking")
@@ -413,7 +429,7 @@ C4Component
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
 
-### **Build Performance Metrics (v1.0)**
+### **Build Performance Metrics (v1.1.32)**
 
 | Metric | Value | Target | Status |
 |--------|-------|--------|---------|
@@ -423,19 +439,19 @@ C4Component
 | Build Time | ~8s | < 15s | ✅ Met |
 | HMR Update Time | <200ms | < 500ms | ✅ Met |
 
-## 🧪 Testing Infrastructure (v1.0)
+## 🧪 Testing Infrastructure (v1.1.32)
 
-Comprehensive testing architecture with Vitest 4.0.17 and Cypress 15.10.0:
+Comprehensive testing architecture with Vitest 4.0.17 and Cypress 15.12.0:
 
 ```mermaid
 C4Component
-    title Testing Infrastructure - v1.0
+    title Testing Infrastructure - v1.1.32
 
     Container_Boundary(testFramework, "Test Infrastructure") {
         Component(vitest, "Vitest 4.0.17", "Unit Testing", "83.26% line coverage, fast execution")
-        Component(cypress, "Cypress 15.10.0", "E2E Testing", "Component tests, session handling")
-        Component(testingLibrary, "React Testing Library 16.3.0", "Component Testing", "User-centric testing")
-        Component(jsdom, "jsdom 27.2.0", "DOM Simulation", "Browser environment simulation")
+        Component(cypress, "Cypress 15.12.0", "E2E Testing", "Component tests, session handling")
+        Component(testingLibrary, "React Testing Library 16.3.2", "Component Testing", "User-centric testing")
+        Component(jsdom, "jsdom 29.0.0", "DOM Simulation", "Browser environment simulation")
     }
 
     Container_Boundary(coverage, "Coverage Reporting") {
@@ -445,9 +461,9 @@ C4Component
     }
 
     Container_Boundary(e2eTesting, "E2E Test Suite") {
-        Component(componentTests, "Component Tests", "Cypress 15.10.0", "Isolated component testing")
-        Component(integrationTests, "Integration Tests", "Cypress 15.10.0", "Multi-widget workflows")
-        Component(visualTests, "Visual Tests", "Cypress 15.10.0", "Screenshot regression testing")
+        Component(componentTests, "Component Tests", "Cypress 15.12.0", "Isolated component testing")
+        Component(integrationTests, "Integration Tests", "Cypress 15.12.0", "Multi-widget workflows")
+        Component(visualTests, "Visual Tests", "Cypress 15.12.0", "Screenshot regression testing")
         Component(mochawesome, "Mochawesome Reports", "Reporter", "HTML test result reports")
     }
 
@@ -466,7 +482,7 @@ C4Component
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
 
-### **Test Coverage Metrics (v1.0)**
+### **Test Coverage Metrics (v1.1.32)**
 
 [![Coverage Report](https://img.shields.io/badge/Coverage_Report-Live_Results-success?style=flat-square&logo=vitest&logoColor=white)](https://ciacompliancemanager.com/coverage/index.html)
 
@@ -487,13 +503,13 @@ Current coverage from latest build ([view full report](https://ciacompliancemana
 - **Snapshot Testing**: UI component regression detection
 - **Coverage Thresholds**: Automated quality gates (80% minimum)
 
-#### **Cypress 15.10.0 Improvements**
+#### **Cypress 15.12.0 Improvements**
 - **Component Testing**: Isolated widget testing in real browser
 - **Session Handling**: Improved state persistence between tests
 - **Memory Management**: Experimental memory optimization
 - **Video/Screenshot Control**: Configurable artifact generation
 
-## 🔒 Security Scanning Integration (v1.0)
+## 🔒 Security Scanning Integration (v1.1.32)
 
 Multi-layered security validation in CI/CD pipeline:
 
@@ -539,7 +555,7 @@ C4Component
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
 
-### **Security Scanning Results (v1.0)**
+### **Security Scanning Results (v1.1.32)**
 
 | Scanner | Status | Findings | Action |
 |---------|--------|----------|--------|
@@ -550,7 +566,7 @@ C4Component
 | FOSSA | ✅ Passing | All licenses approved | N/A |
 | OpenSSF Scorecard | ✅ 7.5/10 | Supply chain secure | Continue monitoring |
 
-## 🚀 Deployment Architecture (v1.0)
+## 🚀 Deployment Architecture (v1.1.32)
 
 ### Multi-Region AWS CloudFront + S3 with GitHub Pages Disaster Recovery
 
@@ -651,7 +667,7 @@ C4Component
 - **Primary**: Routes to CloudFront distribution
 - **DR Failover**: Can route to GitHub Pages with DNS switch (< 15 min RTO)
 
-### **Deployment Features (v1.0)**
+### **Deployment Features (v1.1.32)**
 
 #### **SLSA Level 3 Compliance**
 - **Build Provenance**: Immutable record of build process
@@ -778,29 +794,39 @@ sequenceDiagram
 - 🏷️ **IAM Least Privilege**: Role limited to S3 sync and CloudFront invalidation
 - 📋 **Audit Trail**: All API calls logged to CloudTrail (account-level)
 
-## 📊 Technology Stack (v1.0)
+## 📊 Technology Stack (v1.1.32)
+
+### **Runtime Requirements**
+| Technology | Version | Purpose |
+|-----------|---------|---------|
+| **Node.js** | >=25.0.0 | Runtime environment |
 
 ### **Frontend Framework**
 | Technology | Version | Purpose | Key Features |
 |-----------|---------|---------|--------------|
-| **React** | 19.2.0 | UI Framework | Concurrent rendering, automatic batching, improved error boundaries |
-| **React-DOM** | 19.2.0 | DOM Renderer | Enhanced hydration, better SSR support |
-| **react-error-boundary** | 6.0.0 | Error Handling | Declarative error boundaries with recovery |
+| **React** | 19.2.4 | UI Framework | Concurrent rendering, automatic batching, improved error boundaries |
+| **React-DOM** | 19.2.4 | DOM Renderer | Enhanced hydration, better SSR support |
+| **react-error-boundary** | 6.1.1 | Error Handling | Declarative error boundaries with recovery |
+
+### **Styling**
+| Technology | Version | Purpose | Key Features |
+|-----------|---------|---------|--------------|
+| **TailwindCSS** | 4.x | Utility-first CSS | JIT compilation, responsive design, dark mode support |
 
 ### **Development Tools**
 | Technology | Version | Purpose | Key Features |
 |-----------|---------|---------|--------------|
 | **TypeScript** | 5.9.3 | Type System | Strict mode, full type safety, zero `any` types |
-| **Vite** | 7.2.4 | Build Tool | Lightning-fast HMR, optimized builds, esbuild integration |
+| **Vite** | 8.0.x | Build Tool | Lightning-fast HMR, optimized builds, esbuild integration |
 | **esbuild** | (via Vite) | Minifier | Ultra-fast JavaScript/TypeScript transpilation |
 
 ### **Testing & Quality**
 | Technology | Version | Purpose | Key Features |
 |-----------|---------|---------|--------------|
 | **Vitest** | 4.0.17 | Unit Testing | 83.26% line coverage, parallel execution, watch mode |
-| **Cypress** | 15.10.0 | E2E Testing | Component tests, improved session handling, video/screenshot control |
-| **@testing-library/react** | 16.3.0 | Component Testing | User-centric testing patterns |
-| **jsdom** | 27.2.0 | DOM Simulation | Fast browser environment simulation |
+| **Cypress** | 15.12.0 | E2E Testing | Component tests, improved session handling, video/screenshot control |
+| **@testing-library/react** | 16.3.2 | Component Testing | User-centric testing patterns |
+| **jsdom** | 29.0.0 | DOM Simulation | Fast browser environment simulation |
 
 ### **Security & Compliance**
 | Technology | Purpose | Features |
@@ -848,11 +874,11 @@ sequenceDiagram
 }
 ```
 
-## 📊 Key Architecture Decisions (Updated for v1.0)
+## 📊 Key Architecture Decisions (Updated for v1.1.32)
 
 ### Architecture Decision Records
 
-| ID | Decision | Rationale | v1.0 Enhancement |
+| ID | Decision | Rationale | Enhancement |
 |----|----------|-----------|------------------|
 | ADR-001 | Widget-Based UI Architecture | Enables modular development and clear separation of concerns | Added error boundary protection per widget |
 | ADR-002 | Static Data in TypeScript Files | Simplifies development, enables type safety without database | Enhanced with strict mode typing |
@@ -861,14 +887,14 @@ sequenceDiagram
 | ADR-005 | Multiple Security Views | Addresses technical and business stakeholder needs | Performance optimized with code splitting |
 | ADR-006 | React 19.x Adoption | Leverage concurrent features, error boundaries | Automatic batching, improved rendering |
 | ADR-007 | TypeScript Strict Mode | Eliminate runtime type errors, improve maintainability | Zero `any` types, full null safety |
-| ADR-008 | Vite Build System | Fast development experience, optimized production builds | 175KB bundle, 8s build time |
+| ADR-008 | Vite Build System | Fast development experience, optimized production builds | 175KB bundle, Vite 8.x |
 | ADR-009 | Comprehensive Testing | Ensure code quality and prevent regressions | 83.26% line coverage with Vitest 4.0.17 |
 | ADR-010 | SLSA Level 3 Attestation | Supply chain security and build integrity | Public provenance verification |
 | ADR-011 | AWS CloudFront + S3 Deployment | Multi-region resilience, global CDN, production-grade infrastructure | CloudFront CDN, S3 multi-region, Route53 DNS, GitHub Pages DR |
 
-### Key Quality Attributes (v1.0 Enhancements)
+### Key Quality Attributes (v1.1.32 Enhancements)
 
-| Quality Attribute | Support in v1.0 Architecture | Measurement |
+| Quality Attribute | Support in Architecture | Measurement |
 |-------------------|------------------------------|-------------|
 | **Modularity** | Widget-based organization with error boundaries | 13 independent widgets |
 | **Maintainability** | TypeScript strict mode, 83.26% test coverage | Zero `any` types |
@@ -1003,7 +1029,7 @@ This document is part of a comprehensive architecture documentation suite. For c
 - **[📋 CONTRIBUTION_GUIDELINES.md](CONTRIBUTION_GUIDELINES.md)** — Documentation contribution process
 
 ### **ISMS Integration**
-Per [Hack23 Secure Development Policy §10](https://github.com/Hack23/ISMS/blob/main/Secure_Development_Policy.md#-comprehensive-architecture-documentation-portfolio), this architecture documentation demonstrates:
+Per [Hack23 Secure Development Policy §10](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#-comprehensive-architecture-documentation-portfolio), this architecture documentation demonstrates:
 
 - **🏗️ System Design Transparency**: Complete C4 model with all architectural layers
 - **🔒 Security-by-Design**: Security architecture integrated from the start
@@ -1016,11 +1042,12 @@ Per [Hack23 Secure Development Policy §10](https://github.com/Hack23/ISMS/blob/
 The CIA Compliance Manager architecture delivers a comprehensive security assessment platform:
 
 ### **Technical Excellence**
-- ✅ **React 19.2.x**: Modern concurrent rendering and error boundaries
+- ✅ **React 19.2.4**: Modern concurrent rendering and error boundaries
 - ✅ **TypeScript Strict Mode**: Complete type safety with zero `any` types
-- ✅ **Vite 7.x**: Fast builds and optimized bundles
+- ✅ **Vite 8.x**: Fast builds and optimized bundles
 - ✅ **Comprehensive Testing**: Exceeds 80% line coverage target
-- ✅ **Cypress 15.10.0**: Advanced E2E and component testing
+- ✅ **Cypress 15.12.0**: Advanced E2E and component testing
+- ✅ **TailwindCSS 4.x**: Utility-first responsive styling
 
 ### **Security & Compliance**
 - ✅ **SLSA Level 3**: Build provenance and supply chain integrity
@@ -1037,3 +1064,37 @@ The CIA Compliance Manager architecture delivers a comprehensive security assess
 - ✅ **Build Speed**: ~8s production builds, <200ms HMR updates
 
 The architecture maintains simplicity, security, and performance as core principles. See [FUTURE_ARCHITECTURE.md](FUTURE_ARCHITECTURE.md) for planned enhancements towards context-aware security assessment with machine learning capabilities.
+
+## 📋 Documentation Portfolio
+
+This architecture documentation is maintained in accordance with the [Hack23 ISMS Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) and [Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md).
+
+### Required C4 Model Views (per ISMS Policy)
+
+| View | Section | Status |
+|------|---------|--------|
+| **System Context** | [System Context](#-system-context) | ✅ Complete |
+| **Container** | [Container View](#-container-view) | ✅ Complete |
+| **Component** | [Component View](#-component-view) | ✅ Complete |
+| **Service Layer** | [Service Component Diagram](#-service-component-diagram) | ✅ Complete |
+| **Widget Components** | [Widget Components Structure](#-widget-components-structure) | ✅ Complete |
+
+### Related Architecture Documents
+
+| Document | Type | Path |
+|----------|------|------|
+| System Architecture | Current | [SYSTEM_ARCHITECTURE.md](SYSTEM_ARCHITECTURE.md) |
+| Data Model | Current | [DATA_MODEL.md](DATA_MODEL.md) |
+| Security Architecture | Current | [SECURITY_ARCHITECTURE.md](SECURITY_ARCHITECTURE.md) |
+| Threat Model | Current | [THREAT_MODEL.md](THREAT_MODEL.md) |
+| State Diagrams | Behavioral | [STATEDIAGRAM.md](STATEDIAGRAM.md) |
+| Flowcharts | Behavioral | [FLOWCHART.md](FLOWCHART.md) |
+| Mindmaps | Conceptual | [MINDMAP.md](MINDMAP.md) |
+| SWOT Analysis | Business | [SWOT.md](SWOT.md) |
+| Future Architecture | Planning | [FUTURE_ARCHITECTURE.md](FUTURE_ARCHITECTURE.md) |
+| Future Security Architecture | Planning | [FUTURE_SECURITY_ARCHITECTURE.md](FUTURE_SECURITY_ARCHITECTURE.md) |
+
+### ISMS Policy References
+
+- 📜 [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) — Governs secure development lifecycle and architecture documentation requirements
+- 📜 [Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) — Data classification and handling guidelines
