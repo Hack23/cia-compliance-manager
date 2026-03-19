@@ -17,7 +17,7 @@
 </p>
 
 **📋 Document Owner:** CEO | **📄 Version:** 1.1.32 | **📅 Last Updated:** 2026-03-19 (UTC)  
-**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2025-10-14
+**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2026-06-19
 
 ---
 
@@ -25,7 +25,7 @@
 
 This mindmap provides a comprehensive visual mental model of the CIA Compliance Manager system architecture, illustrating component relationships, service dependencies, and feature organization for the v1.1.32 release. It serves as a conceptual framework for understanding how different parts of the system work together to deliver security assessment and compliance mapping capabilities.
 
-Per **[Secure Development Policy §10](https://github.com/Hack23/ISMS/blob/main/Secure_Development_Policy.md#-comprehensive-architecture-documentation-portfolio)**, this document maintains the system component inventory aligned with:
+Per **[Secure Development Policy §10](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#-comprehensive-architecture-documentation-portfolio)**, this document maintains the system component inventory aligned with:
 - **ISO 27001 (A.8.1)**: System inventory maintained
 - **NIST CSF (ID.AM-1)**: Physical devices and systems inventoried
 - **CIS Controls (2.1)**: Software inventory maintained
@@ -69,7 +69,7 @@ Per **[Secure Development Policy §10](https://github.com/Hack23/ISMS/blob/main/
 
 ## 🎨 **Mindmap Color Legend**
 
-This document uses consistent color schemes aligned with the **[ISMS Style Guide](https://github.com/Hack23/ISMS/blob/main/STYLE_GUIDE.md#mermaid-diagram-standards)**:
+This document uses consistent color schemes aligned with the **[ISMS Style Guide](https://github.com/Hack23/ISMS-PUBLIC/blob/main/STYLE_GUIDE.md#mermaid-diagram-standards)**:
 
 ### Classification Colors
 - **🔴 Critical/High** - `#D32F2F` (Red) - Core components, critical security controls
@@ -1094,7 +1094,7 @@ This mindmap visualizes the comprehensive v1.1.32 architecture of the CIA Compli
 **📋 Document Control:**  
 **✅ Approved by:** James Pether Sörling, CEO  
 **📤 Distribution:** Public  
-**🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-lightgrey?style=flat-square)](https://github.com/Hack23/ISMS/blob/main/CLASSIFICATION.md#confidentiality-levels)  
+**🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-lightgrey?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#confidentiality-levels)  
 **📅 Effective Date:** 2025-11-22  
-**⏰ Next Review:** 2026-02-22  
-**🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS/blob/main/CLASSIFICATION.md)
+**⏰ Next Review:** 2026-06-19  
+**🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)

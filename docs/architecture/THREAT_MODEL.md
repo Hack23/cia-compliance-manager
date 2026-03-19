@@ -17,7 +17,7 @@
 </p>
 
 **📋 Document Owner:** CEO | **📄 Version:** 1.1.32 | **📅 Last Updated:** 2026-03-19 (UTC)  
-**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2025-10-16  
+**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2026-06-19  
 **🏷️ Classification:** Public (Open Source Compliance Tool)
 
 ---
@@ -438,7 +438,7 @@ Following [Hack23 AB Quantitative Risk Assessment](https://github.com/Hack23/ISM
 | **💾 Browser Storage Data Theft** (localStorage exfiltration) | 3 | 2 | **6** | 🟡 Medium | CSP `connect-src 'self'`, no sensitive data stored | 2 |
 | **🎭 Social Engineering** (phishing contributors) | 3 | 2 | **6** | 🟡 Medium | Branch protection, required reviews, CODEOWNERS | 2 |
 | **⚡ CDN / Service Disruption** (CloudFront compromise) | 2 | 2 | **4** | 🟢 Low | AWS CloudFront + S3 redundancy, SRI integrity | 2 |
-| **🔍 Information Disclosure** (source map leakage) | 2 | 1 | **2** | 🟢 Low | Production source maps disabled, public codebase | 1 |
+| **🔍 Information Disclosure** (source map leakage) | 2 | 1 | **2** | 🟢 Low | Source maps enabled but public open-source codebase mitigates risk | 1 |
 
 **Aggregate Risk Posture:** 🟡 Medium — Primary risk vector is supply chain compromise, mitigated to acceptable levels through SLSA Level 3 attestations, SBOM generation, and automated dependency scanning.
 
@@ -620,7 +620,7 @@ flowchart TD
 
 | # | Threat | Attack Vector | Impact | v1.0 Mitigation | Residual Risk |
 |---|--------|---------------|--------|-----------------|---------------|
-| **1** | **Source Map Information Disclosure** | Extract sensitive code details from source maps | Low | No production source maps, development-only | Minimal - Public source |
+| **1** | **Source Map Information Disclosure** | Extract sensitive code details from source maps | Low | Source maps enabled; public open-source codebase mitigates impact | Minimal - Public source |
 | **2** | **Dead Code Elimination Bypass** | Exploit tree-shaking to include malicious code | Low | Vite tree-shaking + TypeScript validation | Low - Multi-layer verification |
 | **3** | **Bundle Size Manipulation** | Inject code to bypass 180KB target | Medium | Automated bundle size checks in CI/CD | Low - Build failure on oversize |
 | **4** | **Code Splitting Exploit** | Exploit dynamic imports for code injection | Medium | Static import verification + CSP protection | Low - Multiple protections |
@@ -628,7 +628,7 @@ flowchart TD
 #### **✅ Bundle Optimization Security**
 
 - **📦 175KB Bundle**: Achieved < 180KB target through aggressive tree-shaking
-- **🔍 No Source Maps in Production**: Development-only source maps prevent disclosure
+- **🔍 Source Maps**: Source maps are enabled in production (`build.sourcemap: true` in vite.config.ts); since this is a public open-source project, the risk of code disclosure is minimal
 - **✅ CI/CD Size Validation**: Automated checks prevent bundle size manipulation
 - **🚀 Tree-Shaking**: Dead code elimination reduces attack surface
 
@@ -1479,11 +1479,11 @@ The CIA Compliance Manager threat model exemplifies how systematic security anal
 ---
 
 **📋 Document Owner:** CEO | **📄 Version:** 1.1.32 | **📅 Last Updated:** 2026-03-19 (UTC)  
-**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2025-10-16  
+**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2026-06-19  
 **🏷️ Classification:** Public (Open Source Compliance Tool)
 
 **🔄 Version History:**
-- **v1.1.32 Update (2025-07-16)**: Added Quantitative Risk Assessment (Likelihood × Impact scoring), Continuous Threat Assessment process with SLAs, current maturity level indicator (Level 3), ISMS policy cross-references (Secure_Development_Policy, Vulnerability_Management)
+- **v1.1.32 Update (2026-03-19)**: Added Quantitative Risk Assessment (Likelihood × Impact scoring), Continuous Threat Assessment process with SLAs, current maturity level indicator (Level 3), ISMS policy cross-references (Secure_Development_Policy, Vulnerability_Management)
 - **v1.2 Update (2026-02-26)**: Added Kill Chain Disruption Analysis section per ISMS Threat_Modeling.md §4.1.4 policy requirement
 - **v1.1 Update (2026-02-24)**: Updated versions (React 19.2.4, Vitest 4.0.17, Cypress 15.10.0), corrected test coverage attribution to Vitest
 - **v1.0 Initial (2025-09-19)**: Initial comprehensive threat model baseline

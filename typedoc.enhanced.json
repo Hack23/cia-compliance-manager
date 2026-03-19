@@ -140,7 +140,6 @@
 
     "./src/contexts/ErrorContext.tsx",
     "./src/contexts/KeyboardShortcutContext.tsx",
-    "./src/contexts/SecurityLevelContext.tsx",
 
     "./src/data/security/index.ts",
     "./src/data/security/availabilityData.ts",

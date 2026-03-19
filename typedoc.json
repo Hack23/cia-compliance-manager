@@ -140,7 +140,6 @@
 
     "./src/contexts/ErrorContext.tsx",
     "./src/contexts/KeyboardShortcutContext.tsx",
-    "./src/contexts/SecurityLevelContext.tsx",
 
     "./src/data/security/index.ts",
     "./src/data/security/availabilityData.ts",
@@ -166,7 +165,7 @@
   "sort": ["visibility", "source-order", "alphabetical"],
   "visibilityFilters": {
     "protected": true,
-    "private": false,
+    "private": true,
     "inherited": true,
     "external": false
   },

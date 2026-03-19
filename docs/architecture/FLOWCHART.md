@@ -56,13 +56,13 @@ The following flowchart illustrates the enhanced v1.1.32 security level configur
 flowchart TD
     Start([User Opens Application]) --> InitContexts[Initialize Context Providers]
     
-    InitContexts --> SecurityCtx[SecurityLevelContext<br>CIA Triad Levels]
     InitContexts --> ErrorCtx[ErrorContext<br>Global Error Handling]
     InitContexts --> KeyboardCtx[KeyboardShortcutContext<br>Keyboard Navigation]
+    InitContexts --> SecurityState[useSecurityLevelState Hook<br>CIA Triad Levels]
     
-    SecurityCtx --> LoadState{Load Persisted<br>State?}
-    ErrorCtx --> LoadState
+    ErrorCtx --> LoadState{Load Persisted<br>State?}
     KeyboardCtx --> LoadState
+    SecurityState --> LoadState
     
     LoadState -->|localStorage Available| RestoreState[Restore Security Levels<br>from localStorage]
     LoadState -->|No State| InitDefaults[Initialize Default Levels<br>All Moderate]
@@ -90,7 +90,7 @@ flowchart TD
     ValidateA -->|Invalid| ShowErrorA[Show Validation Error]
     ShowErrorA --> UserInteract
     
-    UpdateC --> PropagateState[Propagate State via<br>SecurityLevelContext]
+    UpdateC --> PropagateState[Propagate State via<br>Props from useSecurityLevelState]
     UpdateI --> PropagateState
     UpdateA --> PropagateState
     
@@ -128,15 +128,15 @@ flowchart TD
     class UpdateC confidentiality
     class UpdateI integrity
     class UpdateA availability
-    class SecurityCtx,ErrorCtx,KeyboardCtx context
+    class SecurityState,ErrorCtx,KeyboardCtx context
 ```
 
 **Key v1.1.32 Enhancements:**
-- ✅ **Context Providers**: SecurityLevelContext, ErrorContext, and KeyboardShortcutContext
+- ✅ **Context Providers**: ErrorContext and KeyboardShortcutContext; security levels managed via `useSecurityLevelState` hook + props
 - ✅ **localStorage Persistence**: State survives browser sessions
 - ✅ **Input Validation**: Real-time validation of security level selections (None/Low/Moderate/High/Very High)
 - ✅ **WidgetErrorBoundary**: Per-widget error isolation with retry mechanisms
-- ✅ **State Propagation**: Automatic update across 4 widget groups (16 total widgets)
+- ✅ **State Propagation**: Automatic update across 4 widget groups (12 total widgets)
 - ✅ **Type Safety**: TypeScript validation at compile and runtime
 
 **Cross-Reference:** See [STATEDIAGRAM.md](STATEDIAGRAM.md#-securitylevelstate-hook-state-management) for detailed state machine.
@@ -1327,9 +1327,9 @@ flowchart TD
 - Custom hooks for reusable state logic
 
 **State Management:**
-- `SecurityLevelContext`: CIA triad levels (None/Low/Moderate/High/Very High)
 - `ErrorContext`: Global error handling and reporting
 - `KeyboardShortcutContext`: Keyboard navigation support
+- `useSecurityLevelState` + props: CIA triad levels (None/Low/Moderate/High/Very High)
 - `useState`: Component-level state
 - `useEffect`: Side effects and subscriptions
 - `useCallback`: Memoized event handlers

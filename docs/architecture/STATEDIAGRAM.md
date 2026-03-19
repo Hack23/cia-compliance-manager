@@ -32,8 +32,8 @@ This document illustrates the comprehensive state transitions and behavioral mod
 The CIA Compliance Manager implements a comprehensive state management architecture using:
 
 - **React 19.2.4 State Hooks**: `useState`, `useCallback`, `useEffect` for component-level state
-- **Context Providers**: `SecurityLevelContext`, `ErrorContext`, `KeyboardShortcutContext` for cross-component state
-- **Custom Hooks (18)**: `useSecurityLevelState`, `useLocalStorage`, `useCIAContentService`, `useCIAOptions`, `useCIADataProvider`, `useComplianceService`, `useSecurityMetricsService`, `useBusinessImpact`, `useComponentDetails`, `useTechnicalDetailsData`, `useFormattedMetrics`, `useKeyboardShortcuts`, `useResponsiveBreakpoint`, `useSecuritySummaryData`, `useServiceData`, `useTabs`, `useWidgetError`
+- **Context Providers**: `ErrorContext`, `KeyboardShortcutContext` for cross-component state; security levels managed via `useSecurityLevelState` hook + props
+- **Custom Hooks (17)**: `useSecurityLevelState`, `useLocalStorage`, `useCIAContentService`, `useCIAOptions`, `useCIADataProvider`, `useComplianceService`, `useSecurityMetricsService`, `useBusinessImpact`, `useComponentDetails`, `useTechnicalDetailsData`, `useFormattedMetrics`, `useKeyboardShortcuts`, `useResponsiveBreakpoint`, `useSecuritySummaryData`, `useServiceData`, `useTabs`, `useWidgetError`
 - **Error Boundaries**: `WidgetErrorBoundary` class component with `componentDidCatch` for error recovery
 - **Suspense Boundaries**: React 19.2.4 Suspense for lazy-loaded components
 - **LocalStorage Persistence**: State persistence across browser sessions via `useLocalStorage`
@@ -1049,10 +1049,12 @@ stateDiagram-v2
 
 ### React 19.2.4 Integration
 
-**Context Providers (3):**
-- `SecurityLevelContext`: Provides CIA triad security level state and setters to the component tree
+**Context Providers (2):**
 - `ErrorContext`: Centralized error state management and error reporting across widgets
 - `KeyboardShortcutContext`: Manages keyboard shortcut registrations and navigation bindings
+
+**State Hooks (via `useSecurityLevelState`):**
+- Security level state is managed in `CIAClassificationApp` via the `useSecurityLevelState` hook and propagated to child components via props
 
 **Built-in Hooks Used:**
 - `useState`: Component-level state (all widgets)
@@ -1061,7 +1063,7 @@ stateDiagram-v2
 - `useMemo`: Performance optimization (not shown in diagrams)
 - `lazy()`: Code splitting for SecurityVisualizationWidget
 
-**Custom Hooks (18):**
+**Custom Hooks (17):**
 - `useSecurityLevelState`: Manages CIA triad security level selections (None/Low/Moderate/High/Very High)
 - `useLocalStorage`: Persists state to localStorage with cross-tab synchronization
 - `useCIAContentService`: Retrieves CIA content data from the service layer
