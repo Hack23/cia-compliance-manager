@@ -1248,10 +1248,11 @@ classDiagram
     }
     
     class ErrorService {
-        +handleError(error, context)
+        +logError(error, context?, severity?)
         +getUserFriendlyMessage(error)
-        +logError(error, severity)
-        +isRecoverable(error)
+        +canRecover(error)
+        +getErrorSeverity(error)
+        +formatErrorForDisplay(error, includeDetails?)
     }
     
     class ServiceError {

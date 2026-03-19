@@ -152,7 +152,7 @@
     "./src/data/valueCreationData.ts"
   ],
   "entryPointStrategy": "expand",
-  "out": "./docs/api",
+  "out": "./docs/api-complete",
   "name": "CIA Compliance Manager - Complete API Documentation",
   "includeVersion": true,
   "excludePrivate": false,
