@@ -6,18 +6,18 @@
 
 <p align="center">
   <strong>🔐 Comprehensive Type-Safe Data Architecture</strong><br>
-  <em>🎯 v1.0 Data Structures and Entity Relationships</em>
+  <em>🎯 v1.1.32 Data Structures and Entity Relationships</em>
 </p>
 
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/Owner-Technical_Lead-0A66C2?style=for-the-badge" alt="Owner"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Version-1.1-555?style=for-the-badge" alt="Version"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Updated-2025--01--22-success?style=for-the-badge" alt="Last Updated"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Version-1.1.32-555?style=for-the-badge" alt="Version"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Updated-2025--07--14-success?style=for-the-badge" alt="Last Updated"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Review-Quarterly-orange?style=for-the-badge" alt="Review Cycle"/></a>
 </p>
 
-**📋 Document Owner:** Technical Lead | **📄 Version:** 1.1 | **📅 Last Updated:** 2026-02-24 (UTC)  
-**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2025-04-22
+**📋 Document Owner:** Technical Lead | **📄 Version:** 1.1.32 | **📅 Last Updated:** 2025-07-14 (UTC)  
+**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2025-10-14
 
 ---
 
@@ -41,13 +41,13 @@ This document embodies our **🌟 transparency principle** - making data structu
 - [🔄 Process Flowcharts](./FLOWCHART.md) - Security assessment workflows
 - [🧩 Widget Analysis](./WIDGET_ANALYSIS.md) - Detailed widget component analysis
 - [🚀 Future Data Model](./FUTURE_DATA_MODEL.md) - Future data architecture vision
-- [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS/blob/main/Secure_Development_Policy.md) - Architecture documentation requirements
+- [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) - Architecture documentation requirements
 
 ---
 
 ## 🌐 **Data Model Overview**
 
-The CIA Compliance Manager implements a comprehensive type-safe data model using TypeScript interfaces and types that define security assessments, business impacts, and compliance mappings. The v1.0 data model eliminates all `any` types and provides strict typing across 50+ interfaces supporting 36 widget components.
+The CIA Compliance Manager implements a comprehensive type-safe data model using TypeScript interfaces and types that define security assessments, business impacts, and compliance mappings. The v1.1.32 data model eliminates all `any` types and provides strict typing across 100+ interfaces supporting 36 widget components across 15 type definition files.
 
 ### **📊 Architecture Principles**
 
@@ -824,7 +824,7 @@ export interface CostBreakdown {
 
 ### **Base Widget Props Hierarchy**
 
-The v1.0 architecture implements a consistent prop hierarchy for all widgets:
+The v1.1.32 architecture implements a consistent prop hierarchy for all widgets:
 
 ```mermaid
 classDiagram
@@ -1247,6 +1247,20 @@ classDiagram
         +generateMockData()
     }
     
+    class ErrorService {
+        +handleError(error, context)
+        +getUserFriendlyMessage(error)
+        +logError(error, severity)
+        +isRecoverable(error)
+    }
+    
+    class ServiceError {
+        +code: ServiceErrorCode
+        +message: string
+        +context: Record
+        +cause?: Error
+    }
+    
     CIADataProvider <|.. DefaultDataProvider : implements
     CIADataProvider <|.. TestDataProvider : implements
     
@@ -1258,6 +1272,8 @@ classDiagram
     }
     
     useCIADataProvider --> CIADataProvider : uses
+    DefaultDataProvider --> ErrorService : reports errors
+    ServiceError <.. ErrorService : throws
 ```
 
 ---
@@ -1281,17 +1297,26 @@ flowchart TD
     Cache -->|Miss| Fetch[📡 Fetch Data]
     Fetch --> Cache
     
+    Service --> ErrorSvc[🛡️ Error Service]
+    ErrorSvc -->|Recoverable| Transform
+    ErrorSvc -->|Fatal| ErrorUI[⚠️ Error Display]
+    
+    Provider --> DataProv[📦 Data Providers]
+    DataProv --> StaticData[💾 Static Data Modules]
+    
     classDef user fill:#3498db,stroke:#2980b9,stroke-width:2px,color:#fff
     classDef state fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:#fff
     classDef service fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:#fff
     classDef data fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
     classDef ui fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:#fff
+    classDef error fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
     
     class Start,Selection user
     class State,Cache state
     class Provider,Service service
-    class Fetch,Transform data
+    class Fetch,Transform,DataProv,StaticData data
     class Widgets,Display ui
+    class ErrorSvc,ErrorUI error
 ```
 
 ### **Hook-Based State Management**
@@ -1475,16 +1500,22 @@ flowchart LR
 | Category                | Verified Count | Planned | Files                        |
 |------------------------|---------------|---------|------------------------------|
 | **Core Types**         | 13            | 2       | `cia.ts`, `cia-services.ts`  |
+| **CIA Utility**        | 5             | 0       | `cia.utility.ts`             |
 | **Widget Props**       | 19            | 0       | `widget-props.ts`            |
 | **Component Props**    | 30            | 0       | `componentPropExports.ts`    |
 | **Legacy Widget Types**| 15            | 0       | `widgets.ts`                 |
 | **Business Impact**    | 5             | 0       | `businessImpact.ts`          |
+| **Impact Assessment**  | 2             | 0       | `impact.ts`                  |
 | **Compliance**         | 8             | 0       | `compliance.ts`              |
-| **Risk**               | 4             | 0       | `risk.ts`                    |
+| **Risk**               | 2             | 0       | `risk.ts`                    |
 | **Security Resources** | 2             | 0       | `securityResources.ts`       |
-| **Total Interfaces**   | **96**        | **2**   | **8 files**                  |
+| **Keyboard Shortcuts** | 7             | 0       | `keyboard.ts`                |
+| **Tabs**               | 4             | 0       | `tabs.ts`                    |
+| **Service Interfaces** | 8             | 0       | `services.ts`                |
+| **Status Types**       | 2             | 0       | `common/StatusTypes.ts`      |
+| **Total Interfaces**   | **122**       | **2**   | **15 files**                 |
 
-> **Note:** The counts above reflect verified, implemented interfaces as of v1.0. Planned interfaces (`CostEstimationDetails`, `CostBreakdown`) are listed separately and marked as 🚀 Planned for v1.x. Some interfaces like `SecurityResource`, `TechnicalImplementationDetails`, and `CIADetails` have been updated to match actual implementation. Please refer to the respective type files for the most current definitions.
+> **Note:** The counts above reflect verified, implemented interfaces as of v1.1.32. Planned interfaces (`CostEstimationDetails`, `CostBreakdown`) are listed separately and marked as 🚀 Planned for v1.x. Some interfaces like `SecurityResource`, `TechnicalImplementationDetails`, and `CIADetails` have been updated to match actual implementation. Please refer to the respective type files for the most current definitions.
 
 ### **Widget Components**
 
@@ -1538,12 +1569,19 @@ flowchart LR
 |------|---------|-------------|-------|
 | `src/types/cia.ts` | Core CIA types | `SecurityLevel`, `CIAComponent`, type guards | 300+ |
 | `src/types/cia-services.ts` | Service interfaces | `CIADetails`, `BusinessImpactDetails`, `TechnicalImplementationDetails` | 400+ |
+| `src/types/cia.utility.ts` | CIA utility functions | `formatSecurityLevel`, `getSecurityLevelValue`, `calculateOverallSecurityLevel`, `calculateRiskLevel` | 150 |
 | `src/types/widget-props.ts` | Widget prop interfaces | 19 widget prop types | 820 |
 | `src/types/componentPropExports.ts` | Component props | 30 component prop types | 364 |
 | `src/types/widgets.ts` | Legacy widget types | Widget-specific interfaces | 500 |
 | `src/types/compliance.ts` | Compliance types | `ComplianceStatus`, `ComplianceFramework` | 150+ |
 | `src/types/businessImpact.ts` | Business impact | `BusinessImpact`, `SLAMetrics` | 100+ |
+| `src/types/impact.ts` | Impact assessment | `BusinessImpactDetails`, `BusinessImpactDetail` | 135 |
+| `src/types/risk.ts` | Risk assessment | `RiskLevelLiteral`, `RiskLevel` | 21 |
 | `src/types/securityResources.ts` | Resources | `SecurityResource` | 50+ |
+| `src/types/keyboard.ts` | Keyboard shortcuts | `KeyboardShortcut`, `ShortcutCategory`, `ShortcutMap`, `UseKeyboardShortcutsOptions` | 162 |
+| `src/types/tabs.ts` | Tab components | `Tab`, `TabsState`, `UseTabsOptions`, `UseTabsReturn` | 79 |
+| `src/types/services.ts` | Service interfaces | `IBaseService`, `ICIAContentService`, `IComplianceService`, `IServiceFactory` | 100+ |
+| `src/types/common/StatusTypes.ts` | Status types | `StatusType`, `StatusBadgeVariant` | 19 |
 
 ### **Service Layer Files**
 
@@ -1634,15 +1672,26 @@ For planned enhancements to the data model, see:
 - [🔄 Flowcharts](./FLOWCHART.md) - Process workflows
 - [🧩 Widget Analysis](./WIDGET_ANALYSIS.md) - Widget components
 - [🚀 Future Data Model](./FUTURE_DATA_MODEL.md) - Evolution roadmap
-- [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS/blob/main/Secure_Development_Policy.md) - Development requirements
-- [🏷️ Classification Framework](https://github.com/Hack23/ISMS/blob/main/CLASSIFICATION.md) - Data classification standards
+- [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) - Development requirements
+- [🏷️ Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) - Data classification standards
 
 ---
 
 **📋 Document Control:**  
 **✅ Approved by:** Technical Lead  
 **📤 Distribution:** Public  
-**🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-lightgrey?style=flat-square)](https://github.com/Hack23/ISMS/blob/main/CLASSIFICATION.md#confidentiality-levels)  
-**📅 Effective Date:** 2026-02-24  
-**⏰ Next Review:** 2026-05-24  
-**🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS/blob/main/CLASSIFICATION.md)
+**🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-lightgrey?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#confidentiality-levels)  
+**📅 Effective Date:** 2025-07-14  
+**⏰ Next Review:** 2025-10-14  
+**🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)
+
+---
+
+## 🏛️ **ISMS Policy References**
+
+This document aligns with the following ISMS policies maintained by Hack23:
+
+| Policy | Purpose | Link |
+|--------|---------|------|
+| **Secure Development Policy** | Secure SDLC requirements, architecture documentation, and code review standards | [Secure_Development_Policy.md](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| **Classification Framework** | Data classification levels, handling requirements, and labeling standards | [CLASSIFICATION.md](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
