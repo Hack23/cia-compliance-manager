@@ -6,10 +6,10 @@
 
 <p align="center">
   <strong>🔐 Defense-in-Depth Security Controls</strong><br>
-  <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Network_Security_Policy.md">Network Security Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Access_Control_Policy.md">Access Control Policy</a></em>
+  <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Network_Security_Policy.md">Network Security Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Access_Control_Policy.md">Access Control Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md">Threat Modeling</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md">Vulnerability Management</a></em>
 </p>
 
-**Version:** 1.1 | **Last Updated:** 2026-02-24 | **Status:** ✅ Production Ready
+**Version:** 1.1.32 | **Last Updated:** 2025-07-15 | **Status:** ✅ Production Ready
 
 This document outlines the comprehensive security architecture of the CIA Compliance Manager, detailing how the system protects data through multiple security layers.
 
@@ -72,6 +72,7 @@ This security architecture is continuously validated through automated security 
 - [🔄 Security Operations](#-security-operations)
 - [💰 Security Investment](#-security-investment)
 - [🏛️ CI/CD Security Architecture](#-cicd-security-architecture)
+- [📚 ISMS Policy References](#-isms-policy-references)
 - [📝 Conclusion](#-conclusion)
 
 ## 🔐 Security Documentation Map
@@ -1027,6 +1028,16 @@ CIA Compliance Manager threat detection operates at CI/CD and infrastructure lev
 - **✅ Infrastructure Logging**: AWS access events tracked via CloudTrail
 - **❌ No Client-Side Visibility**: Cannot detect runtime client-side attacks
 
+### Incident Response Process
+
+Per [ISMS Threat Modeling Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md), the following incident response workflow applies:
+
+1. **🔍 Detection**: Automated alerts from CodeQL, Dependabot, Harden-Runner, and OSSF Scorecard
+2. **📋 Triage**: GitHub Security Advisories reviewed and classified by severity
+3. **🔧 Remediation**: Automated PR creation for dependency fixes; manual review for code-level findings
+4. **✅ Verification**: CI/CD pipeline re-validates all security checks post-fix
+5. **📝 Documentation**: Security advisories and fix records maintained in GitHub Security tab
+
 ## 🔎 Vulnerability Management
 
 **Current Status**: ✅ Automated Vulnerability Scanning in CI/CD
@@ -1065,6 +1076,21 @@ CIA Compliance Manager implements comprehensive automated vulnerability manageme
 - **❌ No Runtime Scanning**: No server-side vulnerability scanning (client-side SPA)
 - **❌ Dependency Risks**: Frontend dependencies need manual updates
 
+### Vulnerability Remediation SLAs
+
+Per [ISMS Vulnerability Management Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md), the following remediation SLAs apply:
+
+| Severity | Remediation SLA | Escalation Path |
+|----------|-----------------|-----------------|
+| 🔴 **Critical** | **24 hours** | Immediate hotfix release; maintainer notified |
+| 🟠 **High** | **7 days** | Priority PR; security advisory published |
+| 🟡 **Medium** | **30 days** | Scheduled fix in next release cycle |
+| 🟢 **Low** | **90 days** | Backlog prioritization; addressed in maintenance |
+
+- **📊 Tracking**: All vulnerabilities tracked via GitHub Security Advisories and Dependabot alerts
+- **🔄 Automation**: Dependabot auto-creates PRs for dependency vulnerabilities within SLA windows
+- **📋 Reporting**: OSSF Scorecard provides continuous supply chain security posture assessment
+
 ## ⚡ Resilience & Operational Readiness
 
 **Current Status**: ❌ Not Applicable - Static Content Delivery
@@ -1097,32 +1123,43 @@ CIA Compliance Manager resilience:
 
 ## 📋 Configuration & Compliance Management
 
-**Current Status**: ❌ No Configuration Management - Static Content
+**Current Status**: ✅ Infrastructure-as-Code & Build-Time Configuration
 
 ```mermaid
 flowchart TD
-    subgraph "No Configuration Management"
-        A[⚙️ No AWS Config]
-        B[📝 No Resource<br>Inventory]
-        C[📊 No Compliance<br>Rules]
+    subgraph "Configuration Management"
+        A[⚙️ GitHub Actions<br>IaC Workflows] --> D[📊 Build-Time<br>Validation]
+        B[📝 Version-Controlled<br>Configuration] --> D
+        C[🔒 Dependabot<br>Dependency Config] --> D
     end
 
-    style A,B,C fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
+    subgraph "Compliance Checks"
+        D --> E[🔍 ESLint Security<br>Rules]
+        D --> F[📋 OSSF Scorecard<br>Assessment]
+        D --> G[🛡️ SLSA Level 3<br>Attestation]
+    end
+
+    style A,B,C fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:white,font-weight:bold
+    style E,F,G fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Current Status
 
 CIA Compliance Manager configuration management:
 
-- **🚫 No AWS Config**: No AWS resources to configure
-- **🚫 No Resource Inventory**: Only static files to manage
-- **🚫 No Compliance Rules**: No infrastructure compliance requirements
+- **✅ Infrastructure-as-Code**: All CI/CD pipelines defined in GitHub Actions YAML workflows
+- **✅ Version Control**: All configuration (Vite, TypeScript, ESLint, Tailwind) tracked in Git
+- **✅ Dependency Configuration**: Dependabot configured for automated dependency updates
+- **✅ Build-Time Validation**: TypeScript strict mode, ESLint rules, and security linting enforced at build
+- **✅ OSSF Scorecard**: Continuous compliance assessment against supply chain best practices
 
 ### Configuration Approach
 
-- **📦 Build-Time Configuration**: All configuration handled during build
-- **🔧 Static Configuration**: No runtime configuration changes
-- **✅ Version Control**: All configuration in source control
+- **📦 Build-Time Configuration**: All configuration resolved during CI/CD build process
+- **🔧 Immutable Deployments**: Static assets deployed as immutable artifacts to S3/CloudFront
+- **✅ Version Control**: All configuration tracked in source control with full audit trail
+- **🔒 Drift Prevention**: Immutable static deployments eliminate configuration drift
+- **📋 Compliance as Code**: Security policies enforced through automated CI/CD checks per [ISMS Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md)
 
 ## 📊 Monitoring & Analytics
 
@@ -1383,27 +1420,41 @@ flowchart TD
 
 ## 📜 Compliance Framework
 
-**Current Status**: ❌ No Formal Compliance - Open Source Assessment Tool
+**Current Status**: ✅ ISMS-Aligned Open Source Compliance
 
 ```mermaid
 graph TD
-    subgraph "No Formal Compliance"
-        A[🏛️ No Compliance<br>Framework]
-        B[🔍 No NIST CSF]
-        C[🔐 No ISO 27001]
-        D[📋 No Regulatory<br>Requirements]
+    subgraph "Compliance Framework Mapping"
+        A[🏛️ Hack23 ISMS<br>Policy Framework] --> B[🔐 Secure Development<br>Policy]
+        A --> C[🔍 Vulnerability<br>Management]
+        A --> D[📋 Open Source<br>Policy]
+        A --> E[🏷️ Classification<br>Framework]
     end
 
-    style A,B,C,D fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
+    subgraph "Standards Alignment"
+        F[📊 ISO 27001:2022] --> G[A.8.25 Secure Dev Lifecycle]
+        H[🛡️ NIST CSF 2.0] --> I[PR.DS Data Security]
+        J[📋 CIS Controls v8] --> K[Control 16 App Security]
+        L[🇪🇺 CRA] --> M[Conformity Assessment]
+    end
+
+    A --> F
+    A --> H
+    A --> J
+    A --> L
+
+    style A fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:white,font-weight:bold
+    style F,H,J,L fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Current Status
 
-CIA Compliance Manager compliance:
+CIA Compliance Manager compliance alignment:
 
-- **🚫 No Formal Framework**: No regulatory compliance requirements
-- **🚫 No NIST CSF**: Open source assessment tool with no compliance mandate
-- **🚫 No ISO 27001**: No certification requirements
+- **✅ ISMS Policy Compliance**: Follows [Hack23 ISMS Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md)
+- **✅ Open Source Governance**: Adheres to [Open Source Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Open_Source_Policy.md) for dependency and license management
+- **✅ Data Classification**: Implements [Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) — application handles Public data only
+- **✅ CRA Conformity**: Aligns with [CRA Conformity Assessment Process](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CRA_Conformity_Assessment_Process.md) for EU Cyber Resilience Act
 - **✅ Privacy by Design**: No personal data collection or storage
 
 ### Compliance Considerations
@@ -1411,6 +1462,8 @@ CIA Compliance Manager compliance:
 - **🎯 Assessment Tool**: Compliance assessment platform with no sensitive data
 - **🔒 Privacy First**: No assessment data collection reduces compliance burden
 - **🌍 Global Access**: No geographic restrictions or data residency requirements
+- **📊 SLSA Level 3**: Supply chain security attestation provides verifiable build provenance
+- **🛡️ OSSF Scorecard**: Continuous open source security best practices assessment
 
 ## 🛡️ Content Security Policy (CSP) Implementation
 
@@ -1922,6 +1975,21 @@ flowchart LR
 | **Compliance Evidence** | 40+ artifacts in 8 categories | Audit efficiency | [COMPLIANCE_EVIDENCE.md](../COMPLIANCE_EVIDENCE.md) |
 
 ---
+
+## 📚 ISMS Policy References
+
+This security architecture is governed by and aligns with the following [Hack23 ISMS](https://github.com/Hack23/ISMS-PUBLIC) policies:
+
+| Policy | Purpose | Relevance |
+|--------|---------|-----------|
+| [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) | Secure SDLC requirements | Governs CI/CD security, code review, and security testing practices |
+| [Threat Modeling](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md) | Threat identification and mitigation | Defines threat detection, incident response, and risk assessment processes |
+| [Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) | Vulnerability scanning and remediation | Establishes remediation SLAs (Critical 24h, High 7d, Medium 30d, Low 90d) |
+| [Open Source Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Open_Source_Policy.md) | Open source governance | Governs dependency management, license compliance, and supply chain security |
+| [CRA Conformity Assessment Process](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CRA_Conformity_Assessment_Process.md) | EU Cyber Resilience Act alignment | Ensures conformity with CRA requirements for software products |
+| [Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Data classification and handling | Defines data sensitivity levels and corresponding security controls |
+| [Network Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Network_Security_Policy.md) | Network security controls | Governs transport security, DNS security, and perimeter protection |
+| [Access Control Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Access_Control_Policy.md) | Identity and access management | Defines authentication and authorization requirements |
 
 ## 📝 Conclusion
 
