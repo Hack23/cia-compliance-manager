@@ -91,7 +91,7 @@
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "7.0.1",
     "globals": "17.4.0",
-    "jsdom": "29.0.0",
+    "jsdom": "29.0.1",
     "knip": "5.88.1",
     "license-compliance": "3.0.1",
     "madge": "^8.0.0",
