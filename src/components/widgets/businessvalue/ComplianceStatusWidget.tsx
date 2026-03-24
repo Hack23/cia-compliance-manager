@@ -145,24 +145,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
     serviceError,
   ]);
 
-  // Define a single helper function for framework status badges
-  const _getFrameworkStatusBadge = useCallback(
-    (framework: string): StatusType => {
-      if (!complianceStatus) return "neutral";
-
-      if (complianceStatus.compliantFrameworks.includes(framework)) {
-        return "success";
-      } else if (
-        complianceStatus.partiallyCompliantFrameworks.includes(framework)
-      ) {
-        return "warning";
-      } else {
-        return "error";
-      }
-    },
-    [complianceStatus]
-  );
-
   // Get status text
   const statusText = useMemo(
     () => getComplianceStatusText(),
@@ -244,26 +226,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
 
       // Return the default if available, otherwise return Moderate as a safe fallback
       return defaultLevels[framework]?.[component] || "Moderate";
-    },
-    [complianceService]
-  );
-
-  // Get framework description with error handling
-  const _getFrameworkDescription = useCallback(
-    (framework: string): string => {
-      if (!complianceService) return `${framework} requirements`;
-
-      try {
-        if (typeof complianceService.getFrameworkDescription === "function") {
-          const description =
-            complianceService.getFrameworkDescription(framework);
-          return description || `${framework} requirements`;
-        }
-        return `${framework} requirements`;
-      } catch (err) {
-        console.error(`Error getting description for ${framework}:`, err);
-        return `${framework} requirements`;
-      }
     },
     [complianceService]
   );
