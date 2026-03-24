@@ -41,9 +41,8 @@ const SecurityVisualizationWidget: React.FC<
   className = "",
   testId = SECURITY_VISUALIZATION_WIDGET_IDS.root,
 }) => {
-  // Get the security metrics service
-  const { securityMetricsService, error, isLoading } =
-    useSecurityMetricsService();
+  // Get error/loading state from the security metrics service
+  const { error, isLoading } = useSecurityMetricsService();
 
   // Calculate security score based on selected levels
   const securityScore = useMemo(() => {

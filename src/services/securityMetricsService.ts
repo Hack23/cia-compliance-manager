@@ -750,7 +750,10 @@ export class SecurityMetricsService extends BaseService implements ISecurityMetr
 
       return reductionMap[level] || 0;
     } catch (error) {
-      logger.warn(`Failed to calculate risk reduction for level: ${level}`);
+      logger.warn(`Failed to calculate risk reduction for level: ${level}`, {
+        level,
+        error,
+      });
       return 0;
     }
   }
@@ -790,7 +793,10 @@ export class SecurityMetricsService extends BaseService implements ISecurityMetr
       try {
         return this.dataProvider.getProtectionLevel(level);
       } catch (error) {
-        // Continue with default implementation
+        logger.warn(
+          "Failed to get protection level from data provider, using default implementation",
+          { level, error }
+        );
       }
     }
 
@@ -1073,7 +1079,10 @@ export class SecurityMetricsService extends BaseService implements ISecurityMetr
       try {
         return this.dataProvider.getDefaultSecurityIcon(level);
       } catch (error) {
-        // Continue with default implementation
+        logger.warn(
+          "Failed to get security icon from data provider, using default implementation",
+          { level, error }
+        );
       }
     }
 
@@ -1940,109 +1949,6 @@ function calculateAverageSecurityLevel(levels: SecurityLevel[]): SecurityLevel {
   if (avg < 2.5) return "Moderate";
   if (avg < 3.5) return "High";
   return "Very High";
-}
-
-function securityLevelToPercentage(level: SecurityLevel): number {
-  switch (level) {
-    case "None":
-      return 10;
-    case "Low":
-      return 30;
-    case "Moderate":
-      return 50;
-    case "High":
-      return 75;
-    case "Very High":
-      return 95;
-    default:
-      return 0;
-  }
-}
-
-function calculateMonitoringScore(
-  availabilityLevel: SecurityLevel,
-  integrityLevel: SecurityLevel,
-  confidentialityLevel: SecurityLevel
-): number {
-  const baseScore =
-    (securityLevelToPercentage(availabilityLevel) +
-      securityLevelToPercentage(integrityLevel) +
-      securityLevelToPercentage(confidentialityLevel)) /
-    3;
-
-  // Adjust based on level combinations
-  if (securityLevelToValue(confidentialityLevel) > 2) {
-    return Math.min(95, baseScore + 10);
-  }
-
-  return baseScore;
-}
-
-function calculateResilienceScore(availabilityLevel: SecurityLevel): number {
-  return Math.min(95, securityLevelToPercentage(availabilityLevel) + 5);
-}
-
-function calculateComplianceScore(
-  availabilityLevel: SecurityLevel,
-  integrityLevel: SecurityLevel,
-  confidentialityLevel: SecurityLevel
-): number {
-  const baseScore =
-    securityLevelToPercentage(availabilityLevel) * 0.3 +
-    securityLevelToPercentage(integrityLevel) * 0.3 +
-    securityLevelToPercentage(confidentialityLevel) * 0.4;
-
-  // Adjust for compliance requirements
-  if (securityLevelToValue(confidentialityLevel) < 2) {
-    return Math.max(10, baseScore - 15);
-  }
-
-  return baseScore;
-}
-
-function calculateOverallScore(
-  availabilityLevel: SecurityLevel,
-  integrityLevel: SecurityLevel,
-  confidentialityLevel: SecurityLevel
-): number {
-  const scores = [
-    securityLevelToPercentage(availabilityLevel),
-    securityLevelToPercentage(integrityLevel),
-    securityLevelToPercentage(confidentialityLevel),
-    calculateMonitoringScore(
-      availabilityLevel,
-      integrityLevel,
-      confidentialityLevel
-    ),
-    calculateResilienceScore(availabilityLevel),
-    calculateComplianceScore(
-      availabilityLevel,
-      integrityLevel,
-      confidentialityLevel
-    ),
-  ];
-
-  return Math.round(
-    scores.reduce((sum, score) => sum + score, 0) / scores.length
-  );
-}
-
-function calculateSecurityMaturity(
-  availabilityLevel: SecurityLevel,
-  integrityLevel: SecurityLevel,
-  confidentialityLevel: SecurityLevel
-): string {
-  const overallScore = calculateOverallScore(
-    availabilityLevel,
-    integrityLevel,
-    confidentialityLevel
-  );
-
-  if (overallScore < 20) return "Initial";
-  if (overallScore < 40) return "Developing";
-  if (overallScore < 60) return "Defined";
-  if (overallScore < 80) return "Managed";
-  return "Optimized";
 }
 
 function calculateImplementationComplexity(
