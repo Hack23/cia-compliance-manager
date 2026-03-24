@@ -4,7 +4,7 @@ import { StatusType } from "../../types/common/StatusTypes";
 // Single, unified interface definition to fix the "merged declaration" error
 export interface StatusBadgeProps {
   /**
-   * The status type (determines color)
+   * The status type (determines color when variant is not provided)
    */
   status: StatusType;
 
@@ -29,10 +29,31 @@ export interface StatusBadgeProps {
   size?: "sm" | "md" | "lg";
 
   /**
-   * Badge variant/color scheme
+   * Badge color scheme override. When provided and matches a known type,
+   * overrides the color derived from `status`. This allows callers to
+   * decouple the semantic status from the visual presentation.
+   *
+   * @example
+   * ```tsx
+   * // Color driven by status (default behavior)
+   * <StatusBadge status="success">OK</StatusBadge>
+   *
+   * // Color overridden by variant
+   * <StatusBadge status="info" variant="warning">Needs attention</StatusBadge>
+   * ```
    */
   variant?: "error" | "warning" | "info" | "success" | "neutral" | string;
 }
+
+/** Known variant values that map to specific color schemes */
+const KNOWN_VARIANTS = new Set<string>([
+  "error",
+  "warning",
+  "info",
+  "success",
+  "neutral",
+  "purple",
+]);
 
 /**
  * Displays a status badge with appropriate colors
@@ -49,11 +70,16 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({
   className = "",
   testId,
   size = "md", // Default to medium size
-  variant = "neutral",
+  variant,
 }) => {
-  // Determine color classes based on status
-  const getStatusClasses = () => {
-    switch (status) {
+  // Use variant as color key when explicitly provided and recognized,
+  // otherwise fall back to the status prop.
+  const colorKey: string =
+    variant && KNOWN_VARIANTS.has(variant) ? variant : status;
+
+  // Determine color classes based on resolved color key
+  const getStatusClasses = (): string => {
+    switch (colorKey) {
       case "success":
         return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300";
       case "info":
@@ -72,7 +98,7 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({
   };
 
   // Determine size classes
-  const getSizeClasses = () => {
+  const getSizeClasses = (): string => {
     switch (size) {
       case "sm":
         return "px-1.5 py-0.5 text-xs";
@@ -83,37 +109,15 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({
     }
   };
 
-  // Get appropriate color class based on status
-  const colorClass = getColorClass(status);
-
   return (
     <span
-      className={`font-medium rounded-md ${getStatusClasses()} ${getSizeClasses()} ${colorClass} ${className}`}
+      className={`font-medium rounded-md ${getStatusClasses()} ${getSizeClasses()} ${className}`}
       data-testid={testId}
     >
       {children}
     </span>
   );
 };
-
-/**
- * Get color class based on status type
- */
-function getColorClass(status: StatusType): string {
-  switch (status) {
-    case "error":
-      return "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-300";
-    case "warning":
-      return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-300";
-    case "info":
-      return "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300";
-    case "success":
-      return "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300";
-    case "neutral":
-    default:
-      return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300";
-  }
-}
 
 export default StatusBadge;
 // Use imported types rather than redefining them

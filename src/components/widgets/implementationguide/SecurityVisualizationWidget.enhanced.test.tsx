@@ -3,13 +3,7 @@ import type { Chart } from "chart.js";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { setupChartEnvironment } from "../../../tests/testUtils/chartTestUtils";
 import { mockWidgetProps } from "../../../utils/testUtils";
-import SecurityVisualizationWidget from "./SecurityVisualizationWidget"; // Fixed import syntax
-
-// Add proper Chart type declaration
-interface _ChartInstance {
-  destroy: () => void;
-  update: () => void;
-}
+import SecurityVisualizationWidget from "./SecurityVisualizationWidget";
 
 // Setup test environment
 setupChartEnvironment();
@@ -20,19 +14,9 @@ describe("SecurityVisualizationWidget Enhanced Tests", () => {
     testId: "security-visualization-widget",
   };
 
-  // Track chart data for testing
-  let mockChartData: unknown = null;
-  let mockChartOptions: unknown = null;
-
   beforeEach(() => {
-    // Reset mocks
-    mockChartData = null;
-    mockChartOptions = null;
-
     // Use Vitest to mock Chart with proper typing
-    (global as any).Chart = vi.fn((ctx, config) => {
-      mockChartData = config?.data;
-      mockChartOptions = config?.options;
+    (global as any).Chart = vi.fn((_ctx, _config) => {
       return {
         destroy: vi.fn(),
         update: vi.fn(),

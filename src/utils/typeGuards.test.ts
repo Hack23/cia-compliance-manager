@@ -742,7 +742,7 @@ describe("Type Guards", () => {
   describe("isUndefined", () => {
     it("returns true for undefined", () => {
       expect(isUndefined(undefined)).toBe(true);
-      let undefVar;
+      const undefVar: undefined = undefined;
       expect(isUndefined(undefVar)).toBe(true);
     });
 

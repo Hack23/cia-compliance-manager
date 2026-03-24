@@ -383,9 +383,9 @@ export class ComplianceServiceAdapter extends BaseService implements ICompliance
    * @returns True if the framework is applicable
    */
   public isFrameworkApplicable(
-    framework: string,
-    industry?: string,
-    region?: string
+    _framework: string,
+    _industry?: string,
+    _region?: string
   ): boolean {
     // For testing purposes, always return true
     // This ensures compatibility with all existing tests

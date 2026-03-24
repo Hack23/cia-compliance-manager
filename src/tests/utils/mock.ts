@@ -8,7 +8,6 @@
 
 import { vi } from "vitest";
 import { CIAContentService } from "../../services/ciaContentService";
-import { ComplianceService } from "../../services/complianceService";
 import { CIAComponent, SecurityLevel } from "../../types/cia";
 import { createCIAOptionsMock } from "../testMocks/ciaOptionsMocks";
 
