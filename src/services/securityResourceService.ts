@@ -6,7 +6,7 @@ import { ISecurityResourceService } from "../types/services";
 import { BaseService } from "./BaseService";
 
 // Add the interface extension to include the relevance property
-interface EnhancedSecurityResource extends SecurityResource {
+export interface EnhancedSecurityResource extends SecurityResource {
   relevance: number;
   score?: number;
 }

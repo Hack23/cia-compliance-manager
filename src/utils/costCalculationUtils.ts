@@ -26,7 +26,7 @@ export type Industry =
   | "technology"
   | "manufacturing";
 
-interface CostResult {
+export interface CostResult {
   capex: number;
   opex: number;
 }
