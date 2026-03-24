@@ -385,13 +385,6 @@ import {
 } from "./test-styles";
 
 /**
- * Command to apply test styles for better widget screenshots
- */
-Cypress.Commands.add("applyTestStyles", () => {
-  applyTestStyles();
-});
-
-/**
  * Command to make a widget visible and properly sized for screenshots
  */
 Cypress.Commands.add(

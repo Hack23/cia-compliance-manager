@@ -163,21 +163,11 @@ export function analyzeWidgets(): void {
   });
 }
 
-// Register commands once
+// Register debug commands that are NOT already in command-registry.ts
 function registerDebugCommands(): void {
-  // Register commands with proper typing
-  Cypress.Commands.add("debugFailure", (testName: string) => {
-    debugFailure(testName);
-    return cy.wrap(null);
-  });
-
-  Cypress.Commands.add("logVisibleElements", () => {
-    logVisibleElements();
-    return cy.wrap(null);
-  });
-
-  Cypress.Commands.add("logAllTestIds", () => {
-    logAllTestIds();
+  // Register debugFailure command that delegates to debugFailedTest
+  Cypress.Commands.add("debugFailure" as any, (testName: string) => {
+    debugFailedTest(testName);
     return cy.wrap(null);
   });
 
@@ -223,55 +213,12 @@ function registerDebugCommands(): void {
     return cy.wrap(null);
   });
 
-  // Fix: Register debugFailedTest command properly
-  Cypress.Commands.add("debugFailedTest", (testName: string) => {
-    debugFailedTest(testName);
-    return cy.wrap(null);
-  });
-
-  Cypress.Commands.add("analyzeWidgets", () => {
-    analyzeWidgets();
-    return cy.wrap(null);
-  });
+  // Note: debugFailedTest, analyzeWidgets, logVisibleElements, logAllTestIds
+  // are registered in command-registry.ts — do not re-register here
 }
 
 // Initialize commands
 registerDebugCommands();
-
-/**
- * Debug a failed test with enhanced logging and screenshots
- * This should be used in a test context, not directly in afterEach
- */
-Cypress.Commands.add("debugFailedTest", (testName: string) => {
-  cy.log(`Debugging failed test: ${testName}`);
-
-  // Take a screenshot of the current state
-  cy.screenshot(`debug-${testName.replace(/\s+/g, "-")}`);
-
-  // Log DOM structure
-  cy.document().then((doc) => {
-    cy.log(`Page title: ${doc.title}`);
-
-    // Log testids
-    const testIdElements = doc.querySelectorAll("[data-testid]");
-    cy.log(`Found ${testIdElements.length} elements with data-testid`);
-
-    Array.from(testIdElements)
-      .slice(0, 10)
-      .forEach((el) => {
-        cy.log(`Element with data-testid="${el.getAttribute("data-testid")}"`);
-      });
-
-    // Check for error messages
-    const errorElements = doc.querySelectorAll('.error, [role="alert"]');
-    if (errorElements.length > 0) {
-      cy.log(`Found ${errorElements.length} error elements`);
-      Array.from(errorElements).forEach((el) => {
-        cy.log(`Error element content: ${el.textContent}`);
-      });
-    }
-  });
-});
 
 // Add more debug helpers as needed
 

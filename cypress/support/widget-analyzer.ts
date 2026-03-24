@@ -87,10 +87,7 @@ export function analyzeAndDocumentWidgets(): void {
   });
 }
 
-/**
- * Run this command to log a comprehensive widget analysis to the console
- */
-Cypress.Commands.add("analyzeWidgetTestIds", analyzeAndDocumentWidgets);
+// Note: analyzeWidgetTestIds is registered in command-registry.ts — do not re-register here
 
 // Add type definitions
 declare global {
