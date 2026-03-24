@@ -6,6 +6,7 @@ import {
   TechnicalImplementationDetails,
 } from "../types/cia-services";
 import { ITechnicalImplementationService } from "../types/services";
+import logger from "../utils/logger";
 import { BaseService } from "./BaseService";
 
 /**
@@ -377,8 +378,11 @@ export class TechnicalImplementationService extends BaseService implements ITech
     if (typeof this.dataProvider.getDefaultExpertiseLevel === "function") {
       try {
         return this.dataProvider.getDefaultExpertiseLevel(level);
-      } catch (_error) {
-        // Continue with default implementation
+      } catch (error) {
+        logger.warn(
+          "Failed to get expertise level from data provider, using default implementation",
+          { level, error }
+        );
       }
     }
 

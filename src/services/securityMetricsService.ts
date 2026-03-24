@@ -749,8 +749,11 @@ export class SecurityMetricsService extends BaseService implements ISecurityMetr
       };
 
       return reductionMap[level] || 0;
-    } catch (_error) {
-      logger.warn(`Failed to calculate risk reduction for level: ${level}`);
+    } catch (error) {
+      logger.warn(`Failed to calculate risk reduction for level: ${level}`, {
+        level,
+        error,
+      });
       return 0;
     }
   }
@@ -789,8 +792,11 @@ export class SecurityMetricsService extends BaseService implements ISecurityMetr
     if (typeof this.dataProvider.getProtectionLevel === "function") {
       try {
         return this.dataProvider.getProtectionLevel(level);
-      } catch (_error) {
-        // Continue with default implementation
+      } catch (error) {
+        logger.warn(
+          "Failed to get protection level from data provider, using default implementation",
+          { level, error }
+        );
       }
     }
 
@@ -1072,8 +1078,11 @@ export class SecurityMetricsService extends BaseService implements ISecurityMetr
     if (typeof this.dataProvider.getDefaultSecurityIcon === "function") {
       try {
         return this.dataProvider.getDefaultSecurityIcon(level);
-      } catch (_error) {
-        // Continue with default implementation
+      } catch (error) {
+        logger.warn(
+          "Failed to get security icon from data provider, using default implementation",
+          { level, error }
+        );
       }
     }
 
