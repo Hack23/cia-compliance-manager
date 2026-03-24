@@ -202,6 +202,12 @@ describe('useLocalStorage', () => {
       // Value should be updated in React state despite localStorage failure
       expect(result.current[0]).toBe('new-value');
       
+      // Verify error was logged
+      expect(consoleSpy).toHaveBeenCalledWith(
+        expect.stringContaining('Error saving to localStorage key'),
+        expect.any(DOMException)
+      );
+      
       consoleSpy.mockRestore();
     });
 
