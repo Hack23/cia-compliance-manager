@@ -8,7 +8,7 @@
 
 > **getDefaultTechDescription**(`component`, `level`): `string`
 
-Defined in: [utils/technicalDetailsDefaults.ts:94](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/technicalDetailsDefaults.ts#L94)
+Defined in: [utils/technicalDetailsDefaults.ts:94](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/technicalDetailsDefaults.ts#L94)
 
 Gets default technical description for a CIA component at a specific security level
 

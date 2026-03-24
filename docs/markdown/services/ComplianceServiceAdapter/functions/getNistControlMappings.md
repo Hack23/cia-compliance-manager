@@ -8,7 +8,7 @@
 
 > **getNistControlMappings**(): [`ControlMapping`](../interfaces/ControlMapping.md)[]
 
-Defined in: [services/ComplianceServiceAdapter.ts:601](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/services/ComplianceServiceAdapter.ts#L601)
+Defined in: [services/ComplianceServiceAdapter.ts:601](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/services/ComplianceServiceAdapter.ts#L601)
 
 Get NIST 800-53 control mappings
 

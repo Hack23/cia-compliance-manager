@@ -1,13 +1,74 @@
 {
   "name": "cia-compliance-manager",
-  "version": "1.1.34",
-  "private": true,
+  "version": "1.1.35",
+  "description": "Security assessment widgets, hooks, and utilities for CIA triad compliance dashboards",
   "type": "module",
-  "dependencies": {
-    "chart.js": "^4.5.1",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "react-error-boundary": "^6.1.1"
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/types/index.js"
+    },
+    "./services": {
+      "types": "./dist/services/index.d.ts",
+      "import": "./dist/services/index.js"
+    },
+    "./hooks": {
+      "types": "./dist/hooks/index.d.ts",
+      "import": "./dist/hooks/index.js"
+    },
+    "./utils": {
+      "types": "./dist/utils/index.d.ts",
+      "import": "./dist/utils/index.js"
+    },
+    "./components": {
+      "types": "./dist/components/index.d.ts",
+      "import": "./dist/components/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "SECURITY.md"
+  ],
+  "sideEffects": false,
+  "keywords": [
+    "cia-triad",
+    "compliance",
+    "security",
+    "assessment",
+    "react",
+    "widgets",
+    "dashboard",
+    "confidentiality",
+    "integrity",
+    "availability",
+    "iso-27001",
+    "nist",
+    "risk-management",
+    "typescript"
+  ],
+  "author": "Hack23 AB",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hack23/cia-compliance-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hack23/cia-compliance-manager/issues"
+  },
+  "homepage": "https://github.com/Hack23/cia-compliance-manager#readme",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true,
+    "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "start": "vite",
@@ -39,15 +100,29 @@
     "test:ci": "cross-env CI=true vitest run --coverage",
     "cypress:open:with-server": "start-server-and-test 'vite --port 5173' http://localhost:5173 'cypress open'",
     "merge-test-reports": "node --experimental-json-modules ./cypress/support/plugins/merge-reports.js",
-    "docs": "typedoc --options typedoc.enhanced.json",
+    "docs": "typedoc --options typedoc.json",
     "docs:uml": "typedoc --options typedoc.uml.json",
-    "docs:markdown": "typedoc -options typedoc.markdown.json",
+    "docs:markdown": "typedoc --options typedoc.markdown.json",
     "docs:dependencies": "mkdir -p docs/dependencies && depcruise --config .dependency-cruiser.cjs --output-type dot src | dot -T svg > docs/dependencies/module-dependencies.svg || echo 'Dependency diagram generation failed - continuing' && touch docs/dependencies/module-dependencies.svg",
     "docs:diagrams": "node scripts/generate-architecture-diagrams.js",
     "docs:sitemap": "node generate-sitemaps.js",
     "docs:bundle": "npm run docs && npm run docs:uml && npm run docs:markdown && npm run docs:dependencies && npm run docs:diagrams",
     "test:e2e:report": "npm run test:e2e",
-    "knip": "knip"
+    "knip": "knip",
+    "build:lib": "vite build --config vite.config.lib.ts && tsc --project tsconfig.lib.json",
+    "prepublishOnly": "npm run lint && npm run knip && npm run test:ci && npm run build:lib",
+    "prepack": "npm run build:lib"
+  },
+  "peerDependencies": {
+    "chart.js": "^4.0.0",
+    "react": "^18.2.0 || ^19.0.0",
+    "react-dom": "^18.2.0 || ^19.0.0",
+    "react-error-boundary": "^6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "chart.js": {
+      "optional": true
+    }
   },
   "browserslist": {
     "production": [
@@ -107,7 +182,11 @@
     "typescript": "6.0.2",
     "typescript-eslint": "8.57.2",
     "vite": "^8.0.2",
-    "vitest": "^4.0.17"
+    "vitest": "^4.0.17",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-error-boundary": "^6.1.1",
+    "chart.js": "^4.5.1"
   },
   "engines": {
     "node": ">=25.0.0",

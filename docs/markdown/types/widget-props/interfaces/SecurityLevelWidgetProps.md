@@ -6,7 +6,7 @@
 
 # Interface: SecurityLevelWidgetProps
 
-Defined in: [types/widget-props.ts:432](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widget-props.ts#L432)
+Defined in: [types/widget-props.ts:432](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widget-props.ts#L432)
 
 Props for SecurityLevelWidget component
 
@@ -33,7 +33,7 @@ Allows users to select and view security level for CIA components.
 
 > `optional` **className?**: `string`
 
-Defined in: [types/widget-props.ts:124](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widget-props.ts#L124)
+Defined in: [types/widget-props.ts:124](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widget-props.ts#L124)
 
 Optional CSS class name for custom styling
 
@@ -56,7 +56,7 @@ Use Tailwind CSS classes or custom CSS classes.
 
 > `optional` **testId?**: `string`
 
-Defined in: [types/widget-props.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widget-props.ts#L135)
+Defined in: [types/widget-props.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widget-props.ts#L135)
 
 Optional test ID for automated testing
 
@@ -80,7 +80,7 @@ defined in testIds constants.
 
 > `optional` **children?**: `ReactNode`
 
-Defined in: [types/widget-props.ts:244](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widget-props.ts#L244)
+Defined in: [types/widget-props.ts:244](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widget-props.ts#L244)
 
 Optional children elements
 
@@ -94,7 +94,7 @@ Optional children elements
 
 > `optional` **onError?**: (`error`) => `void`
 
-Defined in: [types/widget-props.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widget-props.ts#L250)
+Defined in: [types/widget-props.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widget-props.ts#L250)
 
 Optional callback when widget encounters an error
 
@@ -120,7 +120,7 @@ Error that occurred
 
 > **availabilityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:325](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widget-props.ts#L325)
+Defined in: [types/widget-props.ts:325](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widget-props.ts#L325)
 
 Security level for availability component
 
@@ -134,7 +134,7 @@ Security level for availability component
 
 > **integrityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:330](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widget-props.ts#L330)
+Defined in: [types/widget-props.ts:330](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widget-props.ts#L330)
 
 Security level for integrity component
 
@@ -148,7 +148,7 @@ Security level for integrity component
 
 > **confidentialityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:335](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widget-props.ts#L335)
+Defined in: [types/widget-props.ts:335](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widget-props.ts#L335)
 
 Security level for confidentiality component
 
@@ -162,7 +162,7 @@ Security level for confidentiality component
 
 > `optional` **onAvailabilityChange?**: (`level`) => `void`
 
-Defined in: [types/widget-props.ts:437](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widget-props.ts#L437)
+Defined in: [types/widget-props.ts:437](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widget-props.ts#L437)
 
 Callback fired when availability level changes
 
@@ -184,7 +184,7 @@ New availability security level
 
 > `optional` **onIntegrityChange?**: (`level`) => `void`
 
-Defined in: [types/widget-props.ts:443](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widget-props.ts#L443)
+Defined in: [types/widget-props.ts:443](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widget-props.ts#L443)
 
 Callback fired when integrity level changes
 
@@ -206,7 +206,7 @@ New integrity security level
 
 > `optional` **onConfidentialityChange?**: (`level`) => `void`
 
-Defined in: [types/widget-props.ts:449](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widget-props.ts#L449)
+Defined in: [types/widget-props.ts:449](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widget-props.ts#L449)
 
 Callback fired when confidentiality level changes
 

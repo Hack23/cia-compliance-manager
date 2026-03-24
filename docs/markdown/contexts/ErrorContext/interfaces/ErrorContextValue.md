@@ -6,7 +6,7 @@
 
 # Interface: ErrorContextValue
 
-Defined in: [contexts/ErrorContext.tsx:61](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/contexts/ErrorContext.tsx#L61)
+Defined in: [contexts/ErrorContext.tsx:61](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/contexts/ErrorContext.tsx#L61)
 
 Error context value
 
@@ -16,7 +16,7 @@ Error context value
 
 > **errors**: [`ErrorEntry`](ErrorEntry.md)[]
 
-Defined in: [contexts/ErrorContext.tsx:63](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/contexts/ErrorContext.tsx#L63)
+Defined in: [contexts/ErrorContext.tsx:63](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/contexts/ErrorContext.tsx#L63)
 
 List of tracked errors
 
@@ -26,7 +26,7 @@ List of tracked errors
 
 > **addError**: (`error`, `context?`) => `void`
 
-Defined in: [contexts/ErrorContext.tsx:66](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/contexts/ErrorContext.tsx#L66)
+Defined in: [contexts/ErrorContext.tsx:66](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/contexts/ErrorContext.tsx#L66)
 
 Add an error to tracking
 
@@ -50,7 +50,7 @@ Add an error to tracking
 
 > **clearError**: (`id`) => `void`
 
-Defined in: [contexts/ErrorContext.tsx:69](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/contexts/ErrorContext.tsx#L69)
+Defined in: [contexts/ErrorContext.tsx:69](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/contexts/ErrorContext.tsx#L69)
 
 Clear a specific error
 
@@ -70,7 +70,7 @@ Clear a specific error
 
 > **clearAllErrors**: () => `void`
 
-Defined in: [contexts/ErrorContext.tsx:72](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/contexts/ErrorContext.tsx#L72)
+Defined in: [contexts/ErrorContext.tsx:72](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/contexts/ErrorContext.tsx#L72)
 
 Clear all errors
 
@@ -84,7 +84,7 @@ Clear all errors
 
 > **showToast**: (`config`) => `void`
 
-Defined in: [contexts/ErrorContext.tsx:75](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/contexts/ErrorContext.tsx#L75)
+Defined in: [contexts/ErrorContext.tsx:75](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/contexts/ErrorContext.tsx#L75)
 
 Show a toast notification
 
@@ -104,7 +104,7 @@ Show a toast notification
 
 > **hideToast**: () => `void`
 
-Defined in: [contexts/ErrorContext.tsx:78](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/contexts/ErrorContext.tsx#L78)
+Defined in: [contexts/ErrorContext.tsx:78](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/contexts/ErrorContext.tsx#L78)
 
 Hide the current toast
 
@@ -118,7 +118,7 @@ Hide the current toast
 
 > **getLatestError**: () => [`ErrorEntry`](ErrorEntry.md) \| `undefined`
 
-Defined in: [contexts/ErrorContext.tsx:81](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/contexts/ErrorContext.tsx#L81)
+Defined in: [contexts/ErrorContext.tsx:81](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/contexts/ErrorContext.tsx#L81)
 
 Get the most recent error
 

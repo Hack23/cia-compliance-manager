@@ -8,7 +8,7 @@
 
 > **meetsComplianceRequirements**(`level`, `framework`): `boolean`
 
-Defined in: [utils/securityLevelUtils.ts:590](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/securityLevelUtils.ts#L590)
+Defined in: [utils/securityLevelUtils.ts:590](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/securityLevelUtils.ts#L590)
 
 Determine if a security level meets compliance requirements for a specific framework
 

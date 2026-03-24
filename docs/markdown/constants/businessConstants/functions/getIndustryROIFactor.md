@@ -8,7 +8,7 @@
 
 > **getIndustryROIFactor**(`industry`): `number`
 
-Defined in: [constants/businessConstants.ts:797](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/constants/businessConstants.ts#L797)
+Defined in: [constants/businessConstants.ts:797](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/constants/businessConstants.ts#L797)
 
 Get ROI factor for a specific industry
 

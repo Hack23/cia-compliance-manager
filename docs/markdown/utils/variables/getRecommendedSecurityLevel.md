@@ -8,7 +8,7 @@
 
 > **getRecommendedSecurityLevel**: (`dataSensitivity`) => [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [utils/index.ts:130](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/index.ts#L130)
+Defined in: [utils/index.ts:133](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/index.ts#L133)
 
 Get recommended security level based on data sensitivity
 

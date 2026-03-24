@@ -8,7 +8,7 @@
 
 > **getStatusAriaProps**(`message`, `politeness?`): `object`
 
-Defined in: [utils/accessibility.ts:374](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/accessibility.ts#L374)
+Defined in: [utils/accessibility.ts:374](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/accessibility.ts#L374)
 
 Generate ARIA props for a status/live region
 

@@ -8,7 +8,7 @@
 
 > **createSecurityResourceService**(`dataProvider`): [`SecurityResourceService`](../classes/SecurityResourceService.md)
 
-Defined in: [services/securityResourceService.ts:281](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/services/securityResourceService.ts#L281)
+Defined in: [services/securityResourceService.ts:275](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/services/securityResourceService.ts#L275)
 
 Create SecurityResourceService with the provided data provider
 

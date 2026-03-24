@@ -8,7 +8,7 @@
 
 > **useKeyboardShortcuts**(`options`): `void`
 
-Defined in: [hooks/useKeyboardShortcuts.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/hooks/useKeyboardShortcuts.ts#L42)
+Defined in: [hooks/useKeyboardShortcuts.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/hooks/useKeyboardShortcuts.ts#L42)
 
 Custom hook for registering and handling keyboard shortcuts
 

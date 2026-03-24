@@ -8,7 +8,7 @@
 
 > **toErrorObject**: (`err`) => `Error`
 
-Defined in: [utils/index.ts:225](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/index.ts#L225)
+Defined in: [utils/index.ts:228](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/index.ts#L228)
 
 Converts any error value to an Error object
 

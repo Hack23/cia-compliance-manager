@@ -6,7 +6,7 @@
 
 # Interface: ErrorToastProps
 
-Defined in: [components/common/ErrorToast.tsx:36](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/ErrorToast.tsx#L36)
+Defined in: [components/common/ErrorToast.tsx:36](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/ErrorToast.tsx#L36)
 
 Props for ErrorToast component
 
@@ -16,7 +16,7 @@ Props for ErrorToast component
 
 > **message**: `string`
 
-Defined in: [components/common/ErrorToast.tsx:40](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/ErrorToast.tsx#L40)
+Defined in: [components/common/ErrorToast.tsx:40](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/ErrorToast.tsx#L40)
 
 Error message to display
 
@@ -26,7 +26,7 @@ Error message to display
 
 > `optional` **title?**: `string`
 
-Defined in: [components/common/ErrorToast.tsx:45](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/ErrorToast.tsx#L45)
+Defined in: [components/common/ErrorToast.tsx:45](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/ErrorToast.tsx#L45)
 
 Error title (optional)
 
@@ -36,7 +36,7 @@ Error title (optional)
 
 > **isVisible**: `boolean`
 
-Defined in: [components/common/ErrorToast.tsx:50](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/ErrorToast.tsx#L50)
+Defined in: [components/common/ErrorToast.tsx:50](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/ErrorToast.tsx#L50)
 
 Whether the toast is visible
 
@@ -46,7 +46,7 @@ Whether the toast is visible
 
 > **onDismiss**: () => `void`
 
-Defined in: [components/common/ErrorToast.tsx:55](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/ErrorToast.tsx#L55)
+Defined in: [components/common/ErrorToast.tsx:55](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/ErrorToast.tsx#L55)
 
 Callback when toast is dismissed
 
@@ -60,7 +60,7 @@ Callback when toast is dismissed
 
 > `optional` **autoHideDuration?**: `number`
 
-Defined in: [components/common/ErrorToast.tsx:61](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/ErrorToast.tsx#L61)
+Defined in: [components/common/ErrorToast.tsx:61](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/ErrorToast.tsx#L61)
 
 Auto-dismiss timeout in milliseconds
 
@@ -76,7 +76,7 @@ Auto-dismiss timeout in milliseconds
 
 > `optional` **position?**: [`ToastPosition`](../type-aliases/ToastPosition.md)
 
-Defined in: [components/common/ErrorToast.tsx:67](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/ErrorToast.tsx#L67)
+Defined in: [components/common/ErrorToast.tsx:67](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/ErrorToast.tsx#L67)
 
 Toast position
 
@@ -92,7 +92,7 @@ Toast position
 
 > `optional` **retry?**: () => `void`
 
-Defined in: [components/common/ErrorToast.tsx:73](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/ErrorToast.tsx#L73)
+Defined in: [components/common/ErrorToast.tsx:73](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/ErrorToast.tsx#L73)
 
 Optional retry callback function
 Aligns with ErrorMessage component API for consistency
@@ -107,6 +107,6 @@ Aligns with ErrorMessage component API for consistency
 
 > `optional` **testId?**: `string`
 
-Defined in: [components/common/ErrorToast.tsx:78](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/ErrorToast.tsx#L78)
+Defined in: [components/common/ErrorToast.tsx:78](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/ErrorToast.tsx#L78)
 
 Optional test ID for automated testing

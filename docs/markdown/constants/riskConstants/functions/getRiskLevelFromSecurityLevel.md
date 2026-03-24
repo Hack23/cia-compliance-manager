@@ -8,7 +8,7 @@
 
 > **getRiskLevelFromSecurityLevel**(`securityLevel`): `string`
 
-Defined in: [constants/riskConstants.ts:206](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/constants/riskConstants.ts#L206)
+Defined in: [constants/riskConstants.ts:206](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/constants/riskConstants.ts#L206)
 
 Get risk level from security level
 

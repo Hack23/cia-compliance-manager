@@ -8,7 +8,7 @@
 
 > **handleArrowKeyNavigation**(`event`, `currentIndex`, `totalItems`, `onIndexChange`, `orientation?`): `void`
 
-Defined in: [utils/accessibility.ts:448](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/accessibility.ts#L448)
+Defined in: [utils/accessibility.ts:448](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/accessibility.ts#L448)
 
 Handle keyboard navigation for arrow keys in a list or grid
 

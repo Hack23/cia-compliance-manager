@@ -8,7 +8,7 @@
 
 > **formatLargeNumber**: (`value`) => `string`
 
-Defined in: [utils/index.ts:92](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/index.ts#L92)
+Defined in: [utils/index.ts:95](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/index.ts#L95)
 
 Formats a large number with abbreviated suffixes (K, M, B)
 

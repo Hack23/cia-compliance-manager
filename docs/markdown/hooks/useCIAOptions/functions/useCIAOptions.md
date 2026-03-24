@@ -8,7 +8,7 @@
 
 > **useCIAOptions**(): [`UseCIAOptionsReturn`](../interfaces/UseCIAOptionsReturn.md)
 
-Defined in: [hooks/useCIAOptions.ts:417](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/hooks/useCIAOptions.ts#L417)
+Defined in: [hooks/useCIAOptions.ts:417](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/hooks/useCIAOptions.ts#L417)
 
 Custom hook for accessing CIA security level options and ROI estimates
 

@@ -6,7 +6,7 @@
 
 # Class: ErrorService
 
-Defined in: [services/errorService.ts:85](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/services/errorService.ts#L85)
+Defined in: [services/errorService.ts:85](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/services/errorService.ts#L85)
 
 Centralized Error Service
 
@@ -35,7 +35,7 @@ const canRetry = errorService.canRecover(error);
 
 > `static` **getInstance**(): `ErrorService`
 
-Defined in: [services/errorService.ts:91](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/services/errorService.ts#L91)
+Defined in: [services/errorService.ts:91](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/services/errorService.ts#L91)
 
 Get the singleton instance
 
@@ -49,7 +49,7 @@ Get the singleton instance
 
 > **logError**(`error`, `context?`, `severity?`): `void`
 
-Defined in: [services/errorService.ts:112](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/services/errorService.ts#L112)
+Defined in: [services/errorService.ts:112](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/services/errorService.ts#L112)
 
 Log an error with context
 
@@ -83,7 +83,7 @@ Error severity level
 
 > **getUserFriendlyMessage**(`error`): `string`
 
-Defined in: [services/errorService.ts:166](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/services/errorService.ts#L166)
+Defined in: [services/errorService.ts:166](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/services/errorService.ts#L166)
 
 Get a user-friendly error message
 
@@ -107,7 +107,7 @@ User-friendly error message
 
 > **canRecover**(`error`): `boolean`
 
-Defined in: [services/errorService.ts:261](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/services/errorService.ts#L261)
+Defined in: [services/errorService.ts:261](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/services/errorService.ts#L261)
 
 Check if an error can be recovered from
 
@@ -131,7 +131,7 @@ True if the error is recoverable
 
 > **getErrorSeverity**(`error`): [`ErrorSeverity`](../enumerations/ErrorSeverity.md)
 
-Defined in: [services/errorService.ts:312](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/services/errorService.ts#L312)
+Defined in: [services/errorService.ts:312](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/services/errorService.ts#L312)
 
 Get error severity based on error type
 
@@ -155,7 +155,7 @@ Error severity level
 
 > **formatErrorForDisplay**(`error`, `includeDetails?`): `string`
 
-Defined in: [services/errorService.ts:377](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/services/errorService.ts#L377)
+Defined in: [services/errorService.ts:377](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/services/errorService.ts#L377)
 
 Create a formatted error message for display
 

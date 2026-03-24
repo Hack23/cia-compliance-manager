@@ -83,6 +83,9 @@ export const {
   getRecommendedBudgetAllocation,
 } = costUtils;
 
+// Re-export CostResult type for npm consumers
+export type { CostResult } from "./costCalculationUtils";
+
 // Formatting utilities
 export const {
   formatBudgetPercentage,

@@ -6,7 +6,7 @@
 
 # Interface: IComplianceService
 
-Defined in: [types/services.ts:184](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/services.ts#L184)
+Defined in: [types/services.ts:184](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/services.ts#L184)
 
 Compliance Service interface
 
@@ -22,7 +22,7 @@ Provides compliance status checking and framework mapping
 
 > `readonly` **name**: `string`
 
-Defined in: [types/services.ts:82](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/services.ts#L82)
+Defined in: [types/services.ts:82](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/services.ts#L82)
 
 Service name for identification and logging
 
@@ -36,7 +36,7 @@ Service name for identification and logging
 
 > **validate**(`input`): `boolean`
 
-Defined in: [types/services.ts:90](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/services.ts#L90)
+Defined in: [types/services.ts:90](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/services.ts#L90)
 
 Validate input parameters (returns simple boolean)
 
@@ -64,7 +64,7 @@ True if valid, false otherwise
 
 > **handleError**(`error`): [`ServiceError`](../../../services/errors/classes/ServiceError.md)
 
-Defined in: [types/services.ts:98](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/services.ts#L98)
+Defined in: [types/services.ts:98](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/services.ts#L98)
 
 Handle errors consistently across services
 
@@ -92,7 +92,7 @@ Formatted ServiceError
 
 > **getComplianceStatus**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): [`ComplianceStatusDetails`](../../compliance/interfaces/ComplianceStatusDetails.md)
 
-Defined in: [types/services.ts:193](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/services.ts#L193)
+Defined in: [types/services.ts:193](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/services.ts#L193)
 
 Get compliance status for given security levels
 
@@ -128,7 +128,7 @@ Compliance status details
 
 > **getCompliantFrameworks**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `string`[]
 
-Defined in: [types/services.ts:207](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/services.ts#L207)
+Defined in: [types/services.ts:207](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/services.ts#L207)
 
 Get compliant frameworks for given security levels
 
@@ -164,7 +164,7 @@ Array of compliant framework names
 
 > **getFrameworkDescription**(`framework`): `string`
 
-Defined in: [types/services.ts:219](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/services.ts#L219)
+Defined in: [types/services.ts:219](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/services.ts#L219)
 
 Get description of a compliance framework
 
@@ -188,7 +188,7 @@ Framework description
 
 > **getComplianceGapAnalysis**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`, `framework?`): [`ComplianceGapAnalysis`](../../compliance/interfaces/ComplianceGapAnalysis.md)
 
-Defined in: [types/services.ts:230](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/services.ts#L230)
+Defined in: [types/services.ts:230](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/services.ts#L230)
 
 Get compliance gap analysis
 

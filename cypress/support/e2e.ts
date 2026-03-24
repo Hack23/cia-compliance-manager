@@ -1,24 +1,28 @@
 // Import all helper modules in the correct order
+// NOTE: Use require() for local support modules that register Cypress.Commands.
+// ES import hoisting in Cypress 15's webpack bundler can cause commands to be
+// registered before Cypress is fully initialized, resulting in
+// "cy.<command> is not a function" errors at runtime.
 import "@testing-library/cypress/add-commands";
 // Side-effect import: registers global "real" event commands (keyboard/mouse)
 // used by accessibility E2E tests (e.g., accessibility.cy.ts) for realistic
 // keyboard navigation simulation (Tab, Shift+Tab, Arrow keys, Home, End).
 // This enables WCAG 2.1 keyboard accessibility validation.
 import "cypress-real-events";
-import "./command-registry";
-import "./commands";
-import "./debug-helpers";
-import "./enhanced-commands";
-import "./global-test-setup";
-import "./screenshot-analysis";
-import "./screenshot-utils";
-import "./test-cleanup";
-import "./test-styles";
-import "./widget-analyzer";
-import "./widget-testing-template";
 
-// Import TEST_IDS constant
-import { TEST_IDS } from "./constants";
+// Load local support modules using require() to ensure correct execution order
+require("./command-registry");
+require("./commands");
+require("./debug-helpers");
+require("./enhanced-commands");
+require("./global-test-setup");
+require("./screenshot-analysis");
+require("./screenshot-utils");
+require("./test-cleanup");
+require("./test-styles");
+require("./widget-analyzer");
+require("./widget-testing-template");
+
 
 /**
  * This is a simplified Cypress support file that avoids common issues
@@ -91,24 +95,7 @@ if (Cypress.env("testingType") === "component") {
   });
 }
 
-// Custom commands that were defined in types but not implemented
-Cypress.Commands.add("selectSecurityLevelEnhanced", (category, level) => {
-  cy.get(`[data-testid="${TEST_IDS.SECURITY_LEVEL_CONTROLS}"]`)
-    .should("be.visible")
-    .within(() => {
-      const selectId =
-        category === "availability"
-          ? TEST_IDS.AVAILABILITY_SELECT
-          : category === "integrity"
-          ? TEST_IDS.INTEGRITY_SELECT
-          : TEST_IDS.CONFIDENTIALITY_SELECT;
-
-      cy.get(`[data-testid="${selectId}"]`).select(level);
-    });
-
-  // Wait for changes to be applied
-  cy.wait(300);
-});
+// Note: selectSecurityLevelEnhanced is registered in enhanced-commands.ts — do not re-register here
 
 // Add custom commands for working with test IDs
 Cypress.Commands.add("getByTestId", (testId) => {
@@ -122,93 +109,8 @@ Cypress.Commands.add("navigateToWidget", (widgetTestId) => {
     .should("be.visible");
 });
 
-// Set security levels command using enhanced selectors
-Cypress.Commands.add(
-  "setSecurityLevels",
-  (availability, integrity, confidentiality) => {
-    // Try multiple selector strategies in sequence
-    cy.log(
-      `Setting security levels: A:${availability}, I:${integrity}, C:${confidentiality}`
-    );
-
-    // First try with the standard selector
-    cy.get("body").then(($body) => {
-      // Check if standard selector exists
-      const hasControls =
-        $body.find('[data-testid="security-level-controls"]').length > 0;
-      const hasSelector =
-        $body.find('[data-testid="security-level-selector"]').length > 0;
-
-      if (hasControls) {
-        // Standard approach
-        cy.get(`[data-testid="security-level-controls"]`).within(() => {
-          if (availability) {
-            // Convert to string to fix typing issue
-            cy.get(`[data-testid="${TEST_IDS.AVAILABILITY_SELECT}"]`).select(
-              String(availability),
-              { force: true }
-            );
-          }
-          // ...remaining selects
-        });
-      } else if (hasSelector) {
-        // Alternative selector
-        cy.get(`[data-testid="security-level-selector"]`).within(() => {
-          // Find selects by index or other attributes
-          const selects = $body.find(
-            '[data-testid="security-level-selector"] select'
-          );
-          if (availability && selects.length >= 1) {
-            // Convert to string to fix typing issue
-            cy.get("select")
-              .eq(0)
-              .select(String(availability), { force: true });
-          }
-          if (integrity && selects.length >= 2) {
-            cy.get("select").eq(1).select(integrity, { force: true });
-          }
-          if (confidentiality && selects.length >= 3) {
-            cy.get("select").eq(2).select(confidentiality, { force: true });
-          }
-        });
-      } else {
-        // Last resort - find all selects on the page
-        cy.log(
-          "⚠️ Could not find security level container, trying direct select approach"
-        );
-        const selects = $body.find("select");
-        if (selects.length >= 3) {
-          // Assume first three selects are for CIA
-          if (availability)
-            cy.get("select").eq(0).select(availability, { force: true });
-          if (integrity)
-            cy.get("select").eq(1).select(integrity, { force: true });
-          if (confidentiality)
-            cy.get("select").eq(2).select(confidentiality, { force: true });
-        } else {
-          cy.log(
-            "❌ Could not find enough select elements to set security levels"
-          );
-          cy.screenshot("missing-security-controls", { capture: "viewport" });
-        }
-      }
-    });
-
-    // Wait for changes to apply
-    cy.wait(300);
-  }
-);
-
-// Ensure the app is loaded before starting tests
-Cypress.Commands.add("ensureAppLoaded", () => {
-  cy.get("body", { timeout: 10000 }).should("not.be.empty");
-  cy.contains("CIA Compliance Manager", { timeout: 5000 }).should("exist");
-});
-
-// Add text content verification command
-Cypress.Commands.add("containsText", (text) => {
-  cy.get("body").invoke("text").should("include", text);
-});
+// Note: setSecurityLevels, ensureAppLoaded, and containsText are registered in commands.ts
+// Do not re-register them here to avoid duplicate command errors
 
 // Add before each hooks for test setup
 beforeEach(() => {

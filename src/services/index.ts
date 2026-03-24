@@ -48,11 +48,8 @@ export {
   SecurityResourceService,
 } from "./securityResourceService";
 
-// Update to import SecurityResource from the correct location
-import { SecurityResource } from "../types/securityResources";
-
-// Export SecurityResource type
-export type { SecurityResource };
+// Re-export SecurityResource types (type-only to avoid runtime dependency)
+export type { EnhancedSecurityResource, SecurityResource } from "../types/securityResources";
 
 // Export error service
 export {

@@ -358,3 +358,78 @@ jobs:
           branch: main
           clean: false
           commit-message: "chore(release): deploy version ${{ needs.prepare.outputs.version }}"
+
+  publish-npm:
+    name: Publish npm Package
+    needs: [prepare, build, release]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # Required for npm provenance
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@fa2e9d605c4eeb9fcad4c99c224cee0c6c7f3594 # v2.16.0
+        with:
+          egress-policy: audit
+
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          ref: ${{ needs.prepare.outputs.version }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version: "25"
+          cache: "npm"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Cache dependencies
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build library package
+        run: npm run build:lib
+
+      - name: Verify package contents
+        run: |
+          echo "📦 Package contents preview:"
+          npm pack --dry-run
+          echo ""
+          echo "📋 Creating package tarball for verification..."
+          TARBALL=$(npm pack 2>/dev/null | tail -n 1)
+          if [ -z "$TARBALL" ] || [ ! -f "$TARBALL" ]; then
+            echo "❌ Failed to create package tarball"
+            exit 1
+          fi
+          echo "📋 Package files in $TARBALL:"
+          tar -tzf "$TARBALL" | head -30
+          rm -f "$TARBALL"
+
+      - name: Publish to npm with provenance
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
+
+      - name: Verify npm package
+        run: |
+          VERSION="${{ needs.prepare.outputs.version }}"
+          NPM_VERSION="${VERSION#v}"
+          echo "✅ Package published successfully!"
+          echo "📦 Package: cia-compliance-manager@${NPM_VERSION}"
+          echo "🔗 npm URL: https://www.npmjs.com/package/cia-compliance-manager"
+          echo ""
+          echo "To install:"
+          echo "  npm install cia-compliance-manager@${NPM_VERSION}"
+          echo ""
+          echo "To verify provenance:"
+          echo "  npm audit signatures"

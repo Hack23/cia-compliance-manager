@@ -378,18 +378,10 @@ import {
   screenshotWithIssues,
 } from "./screenshot-analysis";
 import {
-  applyTestStyles,
   forceDarkMode,
   forceLightMode,
   optimizeWidgetForScreenshot,
 } from "./test-styles";
-
-/**
- * Command to apply test styles for better widget screenshots
- */
-Cypress.Commands.add("applyTestStyles", () => {
-  applyTestStyles();
-});
 
 /**
  * Command to make a widget visible and properly sized for screenshots

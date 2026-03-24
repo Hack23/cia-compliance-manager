@@ -8,7 +8,7 @@
 
 > **formatDate**(`date`, `options?`): `string`
 
-Defined in: [utils/formatUtils.ts:345](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/formatUtils.ts#L345)
+Defined in: [utils/formatUtils.ts:345](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/formatUtils.ts#L345)
 
 Formats a date using the browser's local formatting
 

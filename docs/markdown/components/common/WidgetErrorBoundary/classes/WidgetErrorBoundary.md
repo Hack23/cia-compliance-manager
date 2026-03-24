@@ -6,7 +6,7 @@
 
 # Class: WidgetErrorBoundary
 
-Defined in: [components/common/WidgetErrorBoundary.tsx:90](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/WidgetErrorBoundary.tsx#L90)
+Defined in: [components/common/WidgetErrorBoundary.tsx:90](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/WidgetErrorBoundary.tsx#L90)
 
 Error boundary component for wrapping widgets
 
@@ -65,7 +65,7 @@ They do NOT catch errors in:
 
 > **new WidgetErrorBoundary**(`props`): `WidgetErrorBoundary`
 
-Defined in: [components/common/WidgetErrorBoundary.tsx:94](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/WidgetErrorBoundary.tsx#L94)
+Defined in: [components/common/WidgetErrorBoundary.tsx:94](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/WidgetErrorBoundary.tsx#L94)
 
 #### Parameters
 
@@ -87,7 +87,7 @@ Defined in: [components/common/WidgetErrorBoundary.tsx:94](https://github.com/Ha
 
 > `static` **getDerivedStateFromError**(`error`): `WidgetErrorBoundaryState`
 
-Defined in: [components/common/WidgetErrorBoundary.tsx:102](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/WidgetErrorBoundary.tsx#L102)
+Defined in: [components/common/WidgetErrorBoundary.tsx:102](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/WidgetErrorBoundary.tsx#L102)
 
 Update state when an error is caught
 
@@ -107,7 +107,7 @@ Update state when an error is caught
 
 > **componentDidCatch**(`error`, `errorInfo`): `void`
 
-Defined in: [components/common/WidgetErrorBoundary.tsx:109](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/WidgetErrorBoundary.tsx#L109)
+Defined in: [components/common/WidgetErrorBoundary.tsx:109](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/WidgetErrorBoundary.tsx#L109)
 
 Log error information and call optional callback
 
@@ -135,7 +135,7 @@ Log error information and call optional callback
 
 > **render**(): `ReactNode`
 
-Defined in: [components/common/WidgetErrorBoundary.tsx:131](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/WidgetErrorBoundary.tsx#L131)
+Defined in: [components/common/WidgetErrorBoundary.tsx:131](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/WidgetErrorBoundary.tsx#L131)
 
 #### Returns
 

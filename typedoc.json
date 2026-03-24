@@ -152,11 +152,11 @@
     "./src/data/valueCreationData.ts"
   ],
   "entryPointStrategy": "expand",
-  "out": "./docs/api-complete",
-  "name": "CIA Compliance Manager - Complete API Documentation",
+  "out": "./docs/api",
+  "name": "CIA Compliance Manager — API Documentation",
   "includeVersion": true,
-  "excludePrivate": false,
-  "excludeProtected": false,
+  "excludePrivate": true,
+  "excludeProtected": true,
   "excludeExternals": true,
   "plugin": ["typedoc-plugin-mermaid"],
   "readme": "./docs/api-overview.md",
@@ -164,8 +164,6 @@
   "tsconfig": "./tsconfig.json",
   "sort": ["visibility", "source-order", "alphabetical"],
   "visibilityFilters": {
-    "protected": true,
-    "private": true,
     "inherited": true,
     "external": false
   },
@@ -175,11 +173,25 @@
   },
   "searchInComments": true,
   "navigationLinks": {
-    "GitHub": "https://github.com/Hack23/cia-compliance-manager",
-    "Live Demo": "https://ciacompliancemanager.com",
-    "Architecture": "https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md",
-    "Security": "https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/SECURITY_ARCHITECTURE.md",
-    "ISMS Policy": "https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md"
+    "🏠 Home": "https://ciacompliancemanager.com",
+    "📦 GitHub": "https://github.com/Hack23/cia-compliance-manager",
+    "📦 npm": "https://www.npmjs.com/package/cia-compliance-manager",
+    "🛡️ ISMS": "https://github.com/Hack23/ISMS-PUBLIC"
+  },
+  "sidebarLinks": {
+    "🏛️ Architecture": "https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md",
+    "🔒 Security Architecture": "https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/SECURITY_ARCHITECTURE.md",
+    "🛡️ Threat Model": "https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/THREAT_MODEL.md",
+    "📊 Data Model": "https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/DATA_MODEL.md",
+    "🔄 Flowchart": "https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FLOWCHART.md",
+    "📈 State Diagram": "https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/STATEDIAGRAM.md",
+    "🧠 Mindmap": "https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/MINDMAP.md",
+    "💼 SWOT Analysis": "https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/SWOT.md",
+    "🚀 Future Architecture": "https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md",
+    "🔮 Future Security": "https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_SECURITY_ARCHITECTURE.md",
+    "📋 Secure Dev Policy": "https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md",
+    "📜 Information Security Policy": "https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md",
+    "🔓 Open Source Policy": "https://github.com/Hack23/ISMS-PUBLIC/blob/main/Open_Source_Policy.md"
   },
   "exclude": [
     "**/*.test.{ts,tsx}",

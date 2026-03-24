@@ -6,7 +6,7 @@
 
 # Interface: ComplianceStatusWidgetProps
 
-Defined in: [types/widgets.ts:270](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widgets.ts#L270)
+Defined in: [types/widgets.ts:270](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widgets.ts#L270)
 
 Props for ComplianceStatusWidget component
 
@@ -26,7 +26,7 @@ insights into compliance gaps and requirements. 📋
 
 > `optional` **className?**: `string`
 
-Defined in: [types/widgets.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widgets.ts#L56)
+Defined in: [types/widgets.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widgets.ts#L56)
 
 Optional CSS class name
 
@@ -40,7 +40,7 @@ Optional CSS class name
 
 > `optional` **testId?**: `string`
 
-Defined in: [types/widgets.ts:61](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widgets.ts#L61)
+Defined in: [types/widgets.ts:61](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widgets.ts#L61)
 
 Optional test ID for testing
 
@@ -54,7 +54,7 @@ Optional test ID for testing
 
 > `optional` **availabilityLevel?**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:274](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widgets.ts#L274)
+Defined in: [types/widgets.ts:274](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widgets.ts#L274)
 
 Availability security level (optional when securityLevel is provided)
 
@@ -64,7 +64,7 @@ Availability security level (optional when securityLevel is provided)
 
 > `optional` **integrityLevel?**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:279](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widgets.ts#L279)
+Defined in: [types/widgets.ts:279](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widgets.ts#L279)
 
 Integrity security level (optional when securityLevel is provided)
 
@@ -74,7 +74,7 @@ Integrity security level (optional when securityLevel is provided)
 
 > `optional` **confidentialityLevel?**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:284](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widgets.ts#L284)
+Defined in: [types/widgets.ts:284](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widgets.ts#L284)
 
 Confidentiality security level (optional when securityLevel is provided)
 
@@ -84,7 +84,7 @@ Confidentiality security level (optional when securityLevel is provided)
 
 > `optional` **securityLevel?**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:289](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widgets.ts#L289)
+Defined in: [types/widgets.ts:289](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widgets.ts#L289)
 
 Optional overall security level, used as fallback when individual levels aren't provided
 
@@ -98,6 +98,6 @@ Optional overall security level, used as fallback when individual levels aren't 
 
 > `optional` **refreshTrigger?**: `number`
 
-Defined in: [types/widgets.ts:294](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/widgets.ts#L294)
+Defined in: [types/widgets.ts:294](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/widgets.ts#L294)
 
 Optional refresh trigger to reload data

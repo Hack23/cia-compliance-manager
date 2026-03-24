@@ -1,15 +1,9 @@
 import defaultResources from "../data/securityResources";
 import { SecurityLevel } from "../types/cia";
 import { CIAComponentType, CIADataProvider } from "../types/cia-services";
-import { SecurityResource } from "../types/securityResources";
+import { EnhancedSecurityResource, SecurityResource } from "../types/securityResources";
 import { ISecurityResourceService } from "../types/services";
 import { BaseService } from "./BaseService";
-
-// Add the interface extension to include the relevance property
-interface EnhancedSecurityResource extends SecurityResource {
-  relevance: number;
-  score?: number;
-}
 
 /**
  * Service for security resource recommendations

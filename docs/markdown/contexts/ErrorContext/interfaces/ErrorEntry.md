@@ -6,7 +6,7 @@
 
 # Interface: ErrorEntry
 
-Defined in: [contexts/ErrorContext.tsx:27](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/contexts/ErrorContext.tsx#L27)
+Defined in: [contexts/ErrorContext.tsx:27](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/contexts/ErrorContext.tsx#L27)
 
 Error entry for tracking errors
 
@@ -16,7 +16,7 @@ Error entry for tracking errors
 
 > **id**: `string`
 
-Defined in: [contexts/ErrorContext.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/contexts/ErrorContext.tsx#L29)
+Defined in: [contexts/ErrorContext.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/contexts/ErrorContext.tsx#L29)
 
 Unique error ID
 
@@ -26,7 +26,7 @@ Unique error ID
 
 > **error**: `Error`
 
-Defined in: [contexts/ErrorContext.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/contexts/ErrorContext.tsx#L31)
+Defined in: [contexts/ErrorContext.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/contexts/ErrorContext.tsx#L31)
 
 Error object
 
@@ -36,7 +36,7 @@ Error object
 
 > **message**: `string`
 
-Defined in: [contexts/ErrorContext.tsx:33](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/contexts/ErrorContext.tsx#L33)
+Defined in: [contexts/ErrorContext.tsx:33](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/contexts/ErrorContext.tsx#L33)
 
 User-friendly error message
 
@@ -46,7 +46,7 @@ User-friendly error message
 
 > **timestamp**: `Date`
 
-Defined in: [contexts/ErrorContext.tsx:35](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/contexts/ErrorContext.tsx#L35)
+Defined in: [contexts/ErrorContext.tsx:35](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/contexts/ErrorContext.tsx#L35)
 
 Error timestamp
 
@@ -56,7 +56,7 @@ Error timestamp
 
 > **recoverable**: `boolean`
 
-Defined in: [contexts/ErrorContext.tsx:37](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/contexts/ErrorContext.tsx#L37)
+Defined in: [contexts/ErrorContext.tsx:37](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/contexts/ErrorContext.tsx#L37)
 
 Whether the error is recoverable
 
@@ -66,6 +66,6 @@ Whether the error is recoverable
 
 > `optional` **context?**: `Record`\<`string`, `unknown`\>
 
-Defined in: [contexts/ErrorContext.tsx:39](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/contexts/ErrorContext.tsx#L39)
+Defined in: [contexts/ErrorContext.tsx:39](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/contexts/ErrorContext.tsx#L39)
 
 Error context

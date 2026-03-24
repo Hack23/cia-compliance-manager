@@ -8,7 +8,7 @@
 
 > **getRiskColorClass**(`risk`): `string`
 
-Defined in: [utils/statusUtils.ts:81](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/statusUtils.ts#L81)
+Defined in: [utils/statusUtils.ts:81](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/statusUtils.ts#L81)
 
 Gets the appropriate Tailwind CSS color class for a risk level
 

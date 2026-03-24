@@ -8,7 +8,7 @@
 
 > **meetsContrastRequirement**(`foreground`, `background`, `isLargeText?`): `boolean`
 
-Defined in: [utils/accessibility.ts:585](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/accessibility.ts#L585)
+Defined in: [utils/accessibility.ts:585](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/accessibility.ts#L585)
 
 Check if element has sufficient color contrast
 Note: This is a simplified check. Use dedicated tools for comprehensive testing.

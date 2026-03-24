@@ -8,7 +8,7 @@
 
 > **createDataNotFoundError**(`message`, `context?`): [`ServiceError`](../classes/ServiceError.md)
 
-Defined in: [services/errors.ts:204](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/services/errors.ts#L204)
+Defined in: [services/errors.ts:204](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/services/errors.ts#L204)
 
 Create a data not found error
 

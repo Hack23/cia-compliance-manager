@@ -425,73 +425,6 @@ Cypress.Commands.add("ensureAppLoaded", () => {
 });
 
 /**
- * Helper command to ensure app is fully loaded before continuing
- */
-Cypress.Commands.add("ensureAppLoaded", (timeoutValue = 10000) => {
-  // Fix: Use number directly for timeout instead of timeoutValue
-  // Wait for key app elements to appear
-  cy.get("body").should("exist");
-
-  // Use a simpler approach without timeout object
-  // Check for dashboard or widgets
-  cy.get("body")
-    .contains('[data-testid="dashboard-grid"], [data-testid^="widget-"]')
-    .should("exist")
-    .then(() => {
-      cy.log("✅ Application loaded successfully");
-    });
-
-  // Check if select elements are present for setting security levels
-  cy.get("select").then(($selects) => {
-    if ($selects.length < 3) {
-      cy.log("⚠️ Warning: Not all security level selects found");
-    }
-  });
-});
-
-/**
- * Helper command to set security levels
- */
-Cypress.Commands.add(
-  "setSecurityLevels",
-  (availability, integrity, confidentiality) => {
-    cy.get("body").then(($body) => {
-      const selectCount = $body.find("select").length;
-
-      if (selectCount >= 3) {
-        // Set levels using dropdowns
-        if (availability !== undefined) {
-          cy.get("select").eq(0).select(availability, { force: true });
-        }
-        if (integrity !== undefined) {
-          cy.get("select").eq(1).select(integrity, { force: true });
-        }
-        if (confidentiality !== undefined) {
-          cy.get("select").eq(2).select(confidentiality, { force: true });
-        }
-      } else {
-        // Try another method - dispatch a custom event which the app listens for
-        cy.window().then((win) => {
-          win.document.dispatchEvent(
-            new CustomEvent("test:set-values", {
-              detail: {
-                availability,
-                integrity,
-                confidentiality,
-              },
-            })
-          );
-        });
-
-        cy.log(
-          `Set security levels via event: ${availability}, ${integrity}, ${confidentiality}`
-        );
-      }
-    });
-  }
-);
-
-/**
  * Custom command to select security levels with improved reliability
  */
 Cypress.Commands.add(
@@ -555,50 +488,6 @@ Cypress.Commands.add(
     cy.wait(1000);
   }
 );
-
-/**
- * Command to force dark mode instead of relying on theme toggle button
- */
-Cypress.Commands.add("forceDarkMode", () => {
-  cy.document().then((doc) => {
-    // Add dark mode class to HTML element
-    doc.documentElement.classList.add("dark");
-    doc.body.classList.add("dark");
-
-    // Set localStorage to persist the setting
-    localStorage.setItem("darkMode", "true");
-
-    // Create a custom event that the app might listen to
-    const themeChangeEvent = new CustomEvent("themeChange", {
-      detail: { theme: "dark" },
-    });
-    window.dispatchEvent(themeChangeEvent);
-
-    cy.log("Forced dark mode via DOM and localStorage");
-  });
-});
-
-/**
- * Command to force light mode
- */
-Cypress.Commands.add("forceLightMode", () => {
-  cy.document().then((doc) => {
-    // Remove dark mode class from HTML element
-    doc.documentElement.classList.remove("dark");
-    doc.body.classList.remove("dark");
-
-    // Set localStorage to persist the setting
-    localStorage.setItem("darkMode", "false");
-
-    // Create a custom event that the app might listen to
-    const themeChangeEvent = new CustomEvent("themeChange", {
-      detail: { theme: "light" },
-    });
-    window.dispatchEvent(themeChangeEvent);
-
-    cy.log("Forced light mode via DOM and localStorage");
-  });
-});
 
 /**
  * Command to toggle theme regardless of button presence
@@ -702,11 +591,7 @@ declare global {
   }
 }
 
-// Then register commands with proper types
-Cypress.Commands.add("findSecurityLevelControls", () => {
-  // Implementation
-  return cy.get('[data-testid="security-level-controls"]');
-});
+// findSecurityLevelControls is already registered at the top of this file
 
 // Define custom command types
 declare global {

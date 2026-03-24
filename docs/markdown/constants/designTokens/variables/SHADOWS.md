@@ -8,7 +8,7 @@
 
 > `const` **SHADOWS**: `object`
 
-Defined in: [constants/designTokens.ts:147](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/constants/designTokens.ts#L147)
+Defined in: [constants/designTokens.ts:147](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/constants/designTokens.ts#L147)
 
 Shadow depths for elevation hierarchy
 Use these to create visual depth and layering

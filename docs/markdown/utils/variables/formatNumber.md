@@ -8,7 +8,7 @@
 
 > **formatNumber**: (`value`, `decimalPlaces?`) => `string`
 
-Defined in: [utils/index.ts:93](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/index.ts#L93)
+Defined in: [utils/index.ts:96](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/index.ts#L96)
 
 Format a number with thousands separators and optional decimal places
 

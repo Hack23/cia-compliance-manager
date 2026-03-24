@@ -8,7 +8,7 @@
 
 > `const` **SecurityLevelWidget**: `React.FC`\<[`SecurityLevelWidgetProps`](../../types/widget-props/interfaces/SecurityLevelWidgetProps.md)\>
 
-Defined in: [components/widgets/assessmentcenter/SecurityLevelWidget.tsx:44](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/widgets/assessmentcenter/SecurityLevelWidget.tsx#L44)
+Defined in: [components/widgets/assessmentcenter/SecurityLevelWidget.tsx:44](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/widgets/assessmentcenter/SecurityLevelWidget.tsx#L44)
 
 Widget for configuring CIA triad security levels
 
