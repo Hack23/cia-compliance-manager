@@ -21,11 +21,13 @@
     "cypress-junit-reporter",
     "cypress-react-selector",
     "cypress-wait-until",
+    "glob",
     "madge",
     "mocha-junit-reporter",
     "mochawesome",
     "postcss",
     "typedoc-plugin-markdown",
+    "typedoc-plugin-mermaid",
     "react-error-boundary"
   ],
   "ignoreBinaries": [
@@ -37,9 +39,7 @@
     "types",
     "nsExports",
     "nsTypes",
-    "enumMembers",
-    "unresolved",
-    "unlisted"
+    "enumMembers"
   ],
   "ignoreExportsUsedInFile": true,
   "eslint": {
@@ -47,5 +47,6 @@
   },
   "typescript": {
     "config": ["tsconfig.json", "tsconfig.lib.json"]
-  }
+  },
+  "typedoc": false
 }
