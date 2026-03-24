@@ -1,6 +1,14 @@
 import react from "@vitejs/plugin-react";
+import { readFileSync } from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import { defineConfig } from "vite";
+
+// ESM-compatible __dirname replacement
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Read version from package.json for consistent versioning
+const pkg = JSON.parse(readFileSync("./package.json", "utf-8"));
 
 /**
  * Vite configuration for building the npm library package.
@@ -13,7 +21,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   plugins: [react()],
   define: {
-    APP_VERSION: JSON.stringify("library"),
+    APP_VERSION: JSON.stringify(pkg.version),
   },
   build: {
     outDir: "dist",

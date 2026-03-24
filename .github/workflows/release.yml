@@ -422,12 +422,14 @@ jobs:
 
       - name: Verify npm package
         run: |
+          VERSION="${{ needs.prepare.outputs.version }}"
+          NPM_VERSION="${VERSION#v}"
           echo "✅ Package published successfully!"
-          echo "📦 Package: cia-compliance-manager@${{ needs.prepare.outputs.version }}"
+          echo "📦 Package: cia-compliance-manager@${NPM_VERSION}"
           echo "🔗 npm URL: https://www.npmjs.com/package/cia-compliance-manager"
           echo ""
           echo "To install:"
-          echo "  npm install cia-compliance-manager@${{ needs.prepare.outputs.version }}"
+          echo "  npm install cia-compliance-manager@${NPM_VERSION}"
           echo ""
           echo "To verify provenance:"
           echo "  npm audit signatures"

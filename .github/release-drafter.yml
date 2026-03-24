@@ -97,7 +97,7 @@ template: |
   [![npm version](https://img.shields.io/npm/v/cia-compliance-manager?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/cia-compliance-manager)
 
   ```bash
-  npm install cia-compliance-manager@$RESOLVED_VERSION
+  npm install cia-compliance-manager
   ```
 
   **Verify provenance:** `npm audit signatures`

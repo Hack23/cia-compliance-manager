@@ -166,7 +166,7 @@ export function analyzeWidgets(): void {
 // Register debug commands that are NOT already in command-registry.ts
 function registerDebugCommands(): void {
   // Register debugFailure command that delegates to debugFailedTest
-  Cypress.Commands.add("debugFailure" as any, (testName: string) => {
+  Cypress.Commands.add("debugFailure", (testName: string) => {
     debugFailedTest(testName);
     return cy.wrap(null);
   });
@@ -226,6 +226,7 @@ registerDebugCommands();
 declare global {
   namespace Cypress {
     interface Chainable<Subject = any> {
+      debugFailure(testName: string): Chainable<null>;
       debugFailedTest(testName: string): Chainable<null>;
       analyzeWidgets(): Chainable<null>;
       logVisibleElements(): Chainable<null>;
