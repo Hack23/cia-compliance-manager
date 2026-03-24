@@ -49,10 +49,10 @@ export {
 } from "./securityResourceService";
 
 // Update to import SecurityResource from the correct location
-import { SecurityResource } from "../types/securityResources";
+import { EnhancedSecurityResource, SecurityResource } from "../types/securityResources";
 
-// Export SecurityResource type
-export type { SecurityResource };
+// Export SecurityResource types
+export type { EnhancedSecurityResource, SecurityResource };
 
 // Export error service
 export {

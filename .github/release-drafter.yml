@@ -196,7 +196,7 @@ template: |
   | `cia-compliance-manager-$RESOLVED_VERSION.zip` | Production build | SHA-256 checksum, SLSA attestation |
   | `cia-compliance-manager-$RESOLVED_VERSION.spdx.json` | SBOM (SPDX format) | SBOM attestation |
   | `*.intoto.jsonl` | SLSA attestations | `gh attestation verify` |
-  | npm package | `cia-compliance-manager@$RESOLVED_VERSION` | npm provenance |
+  | npm package | `cia-compliance-manager` | npm provenance |
 
   ---
 

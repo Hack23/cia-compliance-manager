@@ -7,8 +7,10 @@ import { defineConfig } from "vite";
 // ESM-compatible __dirname replacement
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Read version from package.json for consistent versioning
-const pkg = JSON.parse(readFileSync("./package.json", "utf-8")) as {
+// Read version from package.json for consistent versioning (absolute path for CI/monorepo robustness)
+const pkg = JSON.parse(
+  readFileSync(path.resolve(__dirname, "package.json"), "utf-8"),
+) as {
   version: string;
 };
 
