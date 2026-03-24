@@ -182,26 +182,17 @@ export function calculateSecurityROI(
   const costAvoidance = annualCostAvoidance * timeframeYears;
 
   // ROI calculation
-  let roi = 0;
-  if (securityCost > 0) {
-    roi = (costAvoidance - securityCost) / securityCost;
-  } else {
-    roi = costAvoidance > 0 ? Infinity : 0;
-  }
+  const roi = securityCost > 0
+    ? (costAvoidance - securityCost) / securityCost
+    : costAvoidance > 0 ? Infinity : 0;
 
   // ROI as percentage
   const roiPercentage = `${Math.round(roi * 100)}%`;
 
   // Payback period in months - Fix floating-point precision by rounding to 1 decimal
-  let paybackPeriodMonths = 0;
-  if (annualCostAvoidance > 0) {
-    // Use toFixed(1) and convert back to number to avoid floating-point precision issues
-    paybackPeriodMonths = Number(
-      ((securityCost / annualCostAvoidance) * 12).toFixed(1)
-    );
-  } else {
-    paybackPeriodMonths = Infinity;
-  }
+  const paybackPeriodMonths = annualCostAvoidance > 0
+    ? Number(((securityCost / annualCostAvoidance) * 12).toFixed(1))
+    : Infinity;
 
   return {
     roi,

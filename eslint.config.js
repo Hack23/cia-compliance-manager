@@ -86,6 +86,10 @@ export default [
     rules: {
       '@typescript-eslint/no-unused-vars': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
+      // Empty interfaces extending supertypes are common in declaration merging
+      '@typescript-eslint/no-empty-object-type': 'off',
+      // Triple-slash references are standard in .d.ts files
+      '@typescript-eslint/triple-slash-reference': 'off',
     },
   },
   
@@ -151,6 +155,31 @@ export default [
     },
   },
   
+  // Cypress files - allow idiomatic patterns
+  {
+    files: [
+      'cypress/**/*.ts',
+      'cypress/**/*.js',
+      'cypress.config.ts',
+    ],
+    rules: {
+      // Cypress uses global namespace augmentation for custom commands
+      '@typescript-eslint/no-namespace': 'off',
+      // Cypress support files use require() to control load order
+      '@typescript-eslint/no-require-imports': 'off',
+      // Chai-style assertions like expect(x).to.be.true are expressions
+      '@typescript-eslint/no-unused-expressions': 'off',
+      // Allow any in Cypress test/support code
+      '@typescript-eslint/no-explicit-any': 'off',
+      // Allow Function type in Cypress support shims
+      '@typescript-eslint/no-unsafe-function-type': 'off',
+      // Allow console in Cypress support/test files
+      'no-console': 'off',
+      // Allow hardcoded test IDs in Cypress tests
+      'local/no-hardcoded-testid': 'off',
+    },
+  },
+
   // Files to ignore
   {
     ignores: [

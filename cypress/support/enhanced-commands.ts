@@ -310,8 +310,9 @@ Cypress.Commands.add(
     selector: string,
     options: { timeout?: number; pollInterval?: number } = {}
   ) => {
-    // Change from const to let to allow reassignment
-    let { timeout = 5000, pollInterval = 200 } = options;
+    // Change from const to let to allow reassignment for timeout
+    let { timeout = 5000 } = options;
+    const { pollInterval = 200 } = options;
     let lastContent = "";
     let stableCount = 0;
 

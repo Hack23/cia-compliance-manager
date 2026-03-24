@@ -345,7 +345,7 @@ Cypress.Commands.add("ensureAppLoaded", () => {
       }
 
       // Try each strategy in order
-      let strategyPromise = cy.wrap(null);
+      const strategyPromise = cy.wrap(null);
 
       // Continue regardless of content check - just for logging
       cy.log("App loaded check complete");
