@@ -173,11 +173,36 @@ describe('useLocalStorage', () => {
   });
 
   describe('error handling', () => {
-    it.skip('handles localStorage.setItem errors gracefully', () => {
-      // Note: This test is skipped because it's difficult to test this specific error path
-      // The error handling is in place but testing it requires mocking at a very low level
-      // Real-world scenarios where setItem fails (quota exceeded) are handled gracefully
-      // State updates still work even if localStorage persistence fails
+    it('handles localStorage.setItem errors gracefully', () => {
+      // Mock setItem to throw QuotaExceededError
+      const errorMock = {
+        ...localStorageMock,
+        getItem: vi.fn(() => JSON.stringify('initial')),
+        setItem: vi.fn(() => {
+          throw new DOMException('The quota has been exceeded.', 'QuotaExceededError');
+        }),
+      };
+      
+      Object.defineProperty(window, 'localStorage', {
+        value: errorMock,
+        writable: true,
+      });
+      
+      const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      
+      const { result } = renderHook(() => 
+        useLocalStorage('test-key', 'fallback')
+      );
+      
+      // State updates should still work even if localStorage persistence fails
+      act(() => {
+        result.current[1]('new-value');
+      });
+      
+      // Value should be updated in React state despite localStorage failure
+      expect(result.current[0]).toBe('new-value');
+      
+      consoleSpy.mockRestore();
     });
 
     it('handles localStorage.getItem errors gracefully', () => {

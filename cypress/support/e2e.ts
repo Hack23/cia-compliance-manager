@@ -70,9 +70,6 @@ Cypress.on("uncaught:exception", (err, runnable) => {
   // Log error details for debugging
   console.error("Uncaught Exception:", err.message);
 
-  // Take a screenshot when an uncaught exception occurs
-  cy.screenshot(`uncaught-exception-${Date.now()}`);
-
   // Return false to prevent Cypress from failing the test
   return false;
 });
@@ -152,20 +149,12 @@ Cypress.on("fail", (error, runnable) => {
     error.message.includes("being clipped")
   ) {
     cy.log("Element visibility issue detected. Adding debug information...");
-    cy.screenshot(`debug-${runnable.title.replace(/\s+/g, "-")}`, {
-      capture: "viewport",
-    });
   }
   throw error;
 });
 
 // Add better logging for failures
 Cypress.on("fail", (error, runnable) => {
-  // Take enhanced screenshots on test failure
-  cy.screenshot(
-    `test-failure-${runnable.title.replace(/\s+/g, "-").toLowerCase()}`
-  );
-
   // Log detailed context information
   console.error("Test Failure:", {
     title: runnable.title,

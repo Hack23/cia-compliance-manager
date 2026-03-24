@@ -52,8 +52,6 @@ Cypress.Commands.add(
         return cy.get("select");
       } else {
         cy.log("❌ No select elements found on the page at all");
-        // Take a screenshot to aid debugging
-        cy.screenshot("security-controls-not-found", { capture: "viewport" });
 
         // Return an empty wrapper that won't break the test chain
         return cy.wrap(Cypress.$("<div>"));
@@ -161,11 +159,6 @@ Cypress.Commands.add(
 
       // Always wait for any updates to propagate - reduced wait time
       cy.wait(500);
-
-      // Take a screenshot to see the current state
-      cy.screenshot(
-        `security-level-${availability}-${integrity}-${confidentiality}`
-      );
     });
   }
 );
@@ -305,15 +298,6 @@ Cypress.on("fail", (error, runnable) => {
   // Log test failure with enhanced debug information
   cy.log(`Test failed: ${runnable.title}`);
 
-  // Take screenshots with more descriptive names
-  const testPath = Cypress.spec.relative.replace(/\.cy\.ts$/, "");
-  const screenshotName = `${testPath}/${runnable.title.replace(
-    /\s+/g,
-    "-"
-  )}-failure`;
-
-  cy.screenshot(screenshotName, { capture: "viewport" });
-
   // Log more details about the error
   cy.log(`Error name: ${error.name}`);
   cy.log(`Error message: ${error.message}`);
@@ -325,40 +309,6 @@ Cypress.on("fail", (error, runnable) => {
   ) {
     cy.log("Element visibility issue detected. Adding debug information...");
   }
-
-  // Log important DOM information
-  cy.document().then((doc) => {
-    cy.log(`Page title: ${doc.title}`);
-    cy.log(`Body classes: ${doc.body.className}`);
-    cy.log(
-      `Number of [data-testid] elements: ${
-        doc.querySelectorAll("[data-testid]").length
-      }`
-    );
-    cy.log(`URL at failure: ${doc.location.href}`);
-
-    // Check for any error messages in the DOM
-    const errorElements = doc.querySelectorAll(
-      '.error, [role="alert"], [class*="error"]'
-    );
-    if (errorElements.length > 0) {
-      cy.log(`Found ${errorElements.length} error elements in the DOM`);
-      Array.from(errorElements).forEach((el, i) => {
-        cy.log(`Error element ${i + 1}: ${el.textContent?.trim() || ""}`);
-      });
-    }
-  });
-
-  // Check for console errors
-  cy.window().then((win: Cypress.AUTWindow) => {
-    // If there are any console errors captured, log them
-    if (win.consoleErrors && win.consoleErrors.length) {
-      cy.log(`Found ${win.consoleErrors.length} console errors:`);
-      win.consoleErrors.forEach((err: string, i: number) => {
-        cy.log(`Console error ${i + 1}: ${err}`);
-      });
-    }
-  });
 
   // Throw the original error to fail the test
   throw error;
@@ -410,7 +360,6 @@ Cypress.Commands.add("ensureAppLoaded", () => {
         cy.log(
           "⚠️ No app-specific content found - app may not be properly loaded"
         );
-        cy.screenshot("app-load-issue");
       }
 
       // Try each strategy in order
@@ -419,9 +368,6 @@ Cypress.Commands.add("ensureAppLoaded", () => {
       // Continue regardless of content check - just for logging
       cy.log("App loaded check complete");
     });
-
-  // Take a screenshot to document the app state
-  cy.screenshot("app-loaded-state");
 });
 
 /**

@@ -42,9 +42,6 @@ export function setupTestEnvironment(): void {
     doc.body.classList.add("cypress-testing");
   });
 
-  // Take a screenshot of initial setup
-  cy.screenshot("test-environment-setup");
-
   // Wait for any final rendering
   cy.wait(500);
 }

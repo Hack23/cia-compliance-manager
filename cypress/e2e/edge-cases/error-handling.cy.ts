@@ -63,17 +63,20 @@ describe("Error Handling and Edge Cases", () => {
     it("should handle localStorage quota exceeded scenario", () => {
       cy.log("💾 Testing localStorage quota handling");
 
-      // Visit page with localStorage.setItem stubbed to throw QuotaExceededError
-      cy.visit("/", {
-        onBeforeLoad(win: WindowWithConsoleErrors) {
-          const quotaError = new DOMException(
+      // Override localStorage.setItem to simulate quota exceeded
+      // Using plain JS override instead of cy.stub to avoid interfering with Cypress internals
+      cy.window().then((win: WindowWithConsoleErrors) => {
+        win.localStorage.setItem = () => {
+          throw new DOMException(
             "The quota has been exceeded.",
             "QuotaExceededError"
           );
-          cy.stub(win.localStorage, "setItem").throws(quotaError);
-        },
+        };
       });
-      cy.ensureAppLoaded();
+
+      // Interact with the app - this should trigger localStorage writes that will fail
+      // The app should handle the error gracefully and remain functional
+      cy.get("select").eq(0).select(SECURITY_LEVELS.HIGH, { force: true });
 
       // Application should still function despite quota errors
       cy.get("body").should("be.visible");

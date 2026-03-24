@@ -84,9 +84,14 @@ export function useLocalStorage<T>(
       setStoredValue((prevValue) => {
         const valueToStore = value instanceof Function ? value(prevValue) : value;
         
-        // Save to local storage
+        // Save to local storage - wrapped in try/catch to handle QuotaExceededError
+        // and other storage errors without crashing the React state update
         if (typeof window !== 'undefined') {
-          window.localStorage.setItem(key, JSON.stringify(valueToStore));
+          try {
+            window.localStorage.setItem(key, JSON.stringify(valueToStore));
+          } catch (storageError) {
+            console.error(`Error saving to localStorage key "${key}":`, storageError);
+          }
         }
         
         return valueToStore;
