@@ -8,7 +8,6 @@ import { calculateROIEstimate } from "../../../utils/businessValueUtils";
 import { calculateBusinessImpactLevel } from "../../../utils/riskUtils";
 import { hasMethod, isNullish } from "../../../utils/typeGuards";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
-import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";

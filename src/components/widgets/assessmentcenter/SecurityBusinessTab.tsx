@@ -24,8 +24,8 @@ export interface SecurityBusinessTabProps {
  */
 export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
   businessMaturityLevel,
-  businessMaturityDescription,
-  securityScore,
+  businessMaturityDescription: _businessMaturityDescription,
+  securityScore: _securityScore,
   costDetails,
   testId,
   roiEstimate,

@@ -10,8 +10,6 @@ import { getImplementationComplexity } from "../../../utils/riskUtils";
 import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
 import { isArray, isNullish, isString } from "../../../utils/typeGuards";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
-import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
-import MetricCard from "../../common/MetricCard";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
@@ -164,7 +162,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
   }, [implementationComplexity]);
 
   // Calculate cost breakdown percentages for visualization
-  const costBreakdown = useMemo(() => {
+  const _costBreakdown = useMemo(() => {
     const totalComponentCost =
       availabilityCost.capex +
       availabilityCost.opex +
@@ -202,7 +200,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
   }, [availabilityCost, integrityCost, confidentialityCost]);
 
   // Calculate capex vs opex ratio
-  const costRatio = useMemo(() => {
+  const _costRatio = useMemo(() => {
     const total = totalCapex + totalOpex;
     return {
       capex: total > 0 ? ((totalCapex / total) * 100).toFixed(0) : "0",

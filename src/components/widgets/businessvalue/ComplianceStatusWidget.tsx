@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES, UI_DISPLAY_LIMITS } from "../../../constants/appConstants";
 import { COMPLIANCE_TEST_IDS } from "../../../constants/testIds";
-import { SECURITY_ICONS } from "../../../constants/uiConstants";
 import { useComplianceService } from "../../../hooks/useComplianceService";
 import { CIAComponent, SecurityLevel } from "../../../types/cia";
 import { StatusType } from "../../../types/common/StatusTypes";
@@ -9,7 +8,7 @@ import { ComplianceStatusDetails } from "../../../types/compliance";
 import { ComplianceStatusWidgetProps } from "../../../types/widget-props";
 import { isNullish } from "../../../utils/typeGuards";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
-import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
+import { cn } from "../../../utils/tailwindClassHelpers";
 import StatusBadge from "../../common/StatusBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
@@ -147,7 +146,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
   ]);
 
   // Define a single helper function for framework status badges
-  const getFrameworkStatusBadge = useCallback(
+  const _getFrameworkStatusBadge = useCallback(
     (framework: string): StatusType => {
       if (!complianceStatus) return "neutral";
 
@@ -250,7 +249,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
   );
 
   // Get framework description with error handling
-  const getFrameworkDescription = useCallback(
+  const _getFrameworkDescription = useCallback(
     (framework: string): string => {
       if (!complianceService) return `${framework} requirements`;
 

@@ -848,11 +848,14 @@ export function isArray(value: unknown): value is unknown[] {
 }
 
 /**
- * Type guard to check if a value is a function
+ * Type guard to check if a value is a function.
+ * Note: `typeof` returns "function" for both callables and class constructors,
+ * so the `Function` type is the correct predicate here.
  * @param value - Value to check
  * @returns True if the value is a function
  */
-export function isFunction(value: unknown): value is (...args: unknown[]) => unknown {
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type -- typeof check matches all function-like values including constructors
+export function isFunction(value: unknown): value is Function {
   return typeof value === "function";
 }
 

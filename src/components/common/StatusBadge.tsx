@@ -49,7 +49,7 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({
   className = "",
   testId,
   size = "md", // Default to medium size
-  variant = "neutral",
+  variant: _variant = "neutral",
 }) => {
   // Determine color classes based on status
   const getStatusClasses = () => {

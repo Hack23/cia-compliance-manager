@@ -377,7 +377,7 @@ export class TechnicalImplementationService extends BaseService implements ITech
     if (typeof this.dataProvider.getDefaultExpertiseLevel === "function") {
       try {
         return this.dataProvider.getDefaultExpertiseLevel(level);
-      } catch (error) {
+      } catch (_error) {
         // Continue with default implementation
       }
     }

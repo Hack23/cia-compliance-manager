@@ -2,9 +2,6 @@ import React from "react";
 import { SECURITY_SUMMARY_WIDGET_IDS } from "../../../constants/testIds";
 import { SecurityLevel } from "../../../types/cia";
 import { ComplianceStatusType } from "../../../types/compliance";
-import { getComplianceRequirementText } from "../../../utils/complianceTextUtils";
-import { getComplianceStatusText } from "../../../utils/statusUtils";
-import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 
 /**
  * Props for SecurityComplianceTab component
@@ -23,9 +20,9 @@ export interface SecurityComplianceTabProps {
  * Displays compliance status, framework alignment, and component requirements
  */
 export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
-  availabilityLevel,
-  integrityLevel,
-  confidentialityLevel,
+  availabilityLevel: _availabilityLevel,
+  integrityLevel: _integrityLevel,
+  confidentialityLevel: _confidentialityLevel,
   securityScore,
   complianceStatus,
   testId,

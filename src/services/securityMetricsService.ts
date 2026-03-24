@@ -749,7 +749,7 @@ export class SecurityMetricsService extends BaseService implements ISecurityMetr
       };
 
       return reductionMap[level] || 0;
-    } catch (error) {
+    } catch (_error) {
       logger.warn(`Failed to calculate risk reduction for level: ${level}`);
       return 0;
     }
@@ -789,7 +789,7 @@ export class SecurityMetricsService extends BaseService implements ISecurityMetr
     if (typeof this.dataProvider.getProtectionLevel === "function") {
       try {
         return this.dataProvider.getProtectionLevel(level);
-      } catch (error) {
+      } catch (_error) {
         // Continue with default implementation
       }
     }
@@ -1072,7 +1072,7 @@ export class SecurityMetricsService extends BaseService implements ISecurityMetr
     if (typeof this.dataProvider.getDefaultSecurityIcon === "function") {
       try {
         return this.dataProvider.getDefaultSecurityIcon(level);
-      } catch (error) {
+      } catch (_error) {
         // Continue with default implementation
       }
     }
@@ -2027,7 +2027,7 @@ function calculateOverallScore(
   );
 }
 
-function calculateSecurityMaturity(
+function _calculateSecurityMaturity(
   availabilityLevel: SecurityLevel,
   integrityLevel: SecurityLevel,
   confidentialityLevel: SecurityLevel

@@ -21,18 +21,18 @@ describe("SecurityVisualizationWidget Enhanced Tests", () => {
   };
 
   // Track chart data for testing
-  let mockChartData: unknown = null;
-  let mockChartOptions: unknown = null;
+  let _mockChartData: unknown = null;
+  let _mockChartOptions: unknown = null;
 
   beforeEach(() => {
     // Reset mocks
-    mockChartData = null;
-    mockChartOptions = null;
+    _mockChartData = null;
+    _mockChartOptions = null;
 
     // Use Vitest to mock Chart with proper typing
     (global as any).Chart = vi.fn((ctx, config) => {
-      mockChartData = config?.data;
-      mockChartOptions = config?.options;
+      _mockChartData = config?.data;
+      _mockChartOptions = config?.options;
       return {
         destroy: vi.fn(),
         update: vi.fn(),
