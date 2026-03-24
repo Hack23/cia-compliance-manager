@@ -30,10 +30,6 @@
     "./components": {
       "types": "./dist/components/index.d.ts",
       "import": "./dist/components/index.js"
-    },
-    "./constants": {
-      "types": "./dist/constants/index.d.ts",
-      "import": "./dist/constants/index.js"
     }
   },
   "files": [
@@ -112,7 +108,7 @@
     "merge-test-reports": "node --experimental-json-modules ./cypress/support/plugins/merge-reports.js",
     "docs": "typedoc --options typedoc.json",
     "docs:uml": "typedoc --options typedoc.uml.json",
-    "docs:markdown": "typedoc -options typedoc.markdown.json",
+    "docs:markdown": "typedoc --options typedoc.markdown.json",
     "docs:dependencies": "mkdir -p docs/dependencies && depcruise --config .dependency-cruiser.cjs --output-type dot src | dot -T svg > docs/dependencies/module-dependencies.svg || echo 'Dependency diagram generation failed - continuing' && touch docs/dependencies/module-dependencies.svg",
     "docs:diagrams": "node scripts/generate-architecture-diagrams.js",
     "docs:sitemap": "node generate-sitemaps.js",

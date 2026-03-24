@@ -164,8 +164,6 @@
   "tsconfig": "./tsconfig.json",
   "sort": ["visibility", "source-order", "alphabetical"],
   "visibilityFilters": {
-    "protected": false,
-    "private": false,
     "inherited": true,
     "external": false
   },
