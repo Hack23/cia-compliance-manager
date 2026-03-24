@@ -8,7 +8,9 @@ import { defineConfig } from "vite";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Read version from package.json for consistent versioning
-const pkg = JSON.parse(readFileSync("./package.json", "utf-8"));
+const pkg = JSON.parse(readFileSync("./package.json", "utf-8")) as {
+  version: string;
+};
 
 /**
  * Vite configuration for building the npm library package.
