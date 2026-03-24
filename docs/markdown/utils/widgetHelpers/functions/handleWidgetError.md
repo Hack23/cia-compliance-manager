@@ -8,7 +8,7 @@
 
 > **handleWidgetError**(`error`): `string`
 
-Defined in: [utils/widgetHelpers.ts:108](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/widgetHelpers.ts#L108)
+Defined in: [utils/widgetHelpers.ts:108](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/widgetHelpers.ts#L108)
 
 Handle widget errors and format error messages consistently
 

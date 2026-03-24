@@ -8,7 +8,7 @@
 
 > `const` **SecurityVisualizationWidget**: `React.FC`\<[`SecurityVisualizationWidgetProps`](../../types/widget-props/type-aliases/SecurityVisualizationWidgetProps.md)\>
 
-Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:35](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L35)
+Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:35](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L35)
 
 SecurityVisualizationWidget displays security metrics in visual form
 

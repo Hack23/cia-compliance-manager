@@ -8,6 +8,6 @@
 
 > `const` **SECURITY\_LEVEL\_COLOR\_MAP**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`SecurityLevelColorPair`](../../../colorConstants/interfaces/SecurityLevelColorPair.md)\>
 
-Defined in: [constants/securityLevels.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/constants/securityLevels.ts#L54)
+Defined in: [constants/securityLevels.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/constants/securityLevels.ts#L54)
 
 Color coding for security levels

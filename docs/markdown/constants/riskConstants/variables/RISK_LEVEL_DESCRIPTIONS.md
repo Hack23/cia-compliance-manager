@@ -8,6 +8,6 @@
 
 > `const` **RISK\_LEVEL\_DESCRIPTIONS**: `Record`\<`string`, `string`\>
 
-Defined in: [constants/riskConstants.ts:57](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/constants/riskConstants.ts#L57)
+Defined in: [constants/riskConstants.ts:57](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/constants/riskConstants.ts#L57)
 
 Risk level descriptions

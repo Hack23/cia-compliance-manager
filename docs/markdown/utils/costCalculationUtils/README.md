@@ -17,6 +17,10 @@ These utilities help organizations understand the financial implications
 of different security level choices. They provide consistent cost models
 that can be used for budgeting and ROI analysis. 💰
 
+## Interfaces
+
+- [CostResult](interfaces/CostResult.md)
+
 ## Type Aliases
 
 - [OrganizationSize](type-aliases/OrganizationSize.md)

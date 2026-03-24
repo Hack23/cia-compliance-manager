@@ -8,7 +8,7 @@
 
 > `const` **IMPLEMENTATION\_TIMEFRAMES**: `object`
 
-Defined in: [constants/costConstants.ts:117](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/constants/costConstants.ts#L117)
+Defined in: [constants/costConstants.ts:117](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/constants/costConstants.ts#L117)
 
 Time-to-implement estimates (in months) for each security level
 

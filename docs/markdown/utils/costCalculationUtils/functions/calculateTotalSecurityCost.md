@@ -8,7 +8,7 @@
 
 > **calculateTotalSecurityCost**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`, `orgSize?`, `industry?`): `object`
 
-Defined in: [utils/costCalculationUtils.ts:116](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/costCalculationUtils.ts#L116)
+Defined in: [utils/costCalculationUtils.ts:116](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/costCalculationUtils.ts#L116)
 
 Calculate total security costs across all CIA components
 
@@ -40,15 +40,15 @@ Calculate total security costs across all CIA components
 
 ### availabilityCost
 
-> **availabilityCost**: `CostResult`
+> **availabilityCost**: [`CostResult`](../interfaces/CostResult.md)
 
 ### integrityCost
 
-> **integrityCost**: `CostResult`
+> **integrityCost**: [`CostResult`](../interfaces/CostResult.md)
 
 ### confidentialityCost
 
-> **confidentialityCost**: `CostResult`
+> **confidentialityCost**: [`CostResult`](../interfaces/CostResult.md)
 
 ### totalCapex
 

@@ -8,7 +8,7 @@
 
 > **isSecurityLevelWidgetProps**(`value`): `value is SecurityLevelWidgetProps`
 
-Defined in: [utils/typeGuards.ts:513](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/typeGuards.ts#L513)
+Defined in: [utils/typeGuards.ts:513](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/typeGuards.ts#L513)
 
 Type guard for checking if a value is a SecurityLevelWidgetProps
 

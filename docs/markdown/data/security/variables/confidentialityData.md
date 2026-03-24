@@ -8,7 +8,7 @@
 
 > `const` **confidentialityData**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIADetails`](../../../types/cia-services/interfaces/CIADetails.md)\>
 
-Defined in: [data/security/confidentialityData.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/data/security/confidentialityData.ts#L14)
+Defined in: [data/security/confidentialityData.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/data/security/confidentialityData.ts#L14)
 
 Detailed confidentiality security options for each security level
 

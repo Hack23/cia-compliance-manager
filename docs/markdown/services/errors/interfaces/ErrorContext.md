@@ -6,7 +6,7 @@
 
 # Interface: ErrorContext
 
-Defined in: [services/errors.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/services/errors.ts#L54)
+Defined in: [services/errors.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/services/errors.ts#L54)
 
 Context information for errors
 
@@ -22,7 +22,7 @@ Additional context information
 
 > `optional` **service?**: `string`
 
-Defined in: [services/errors.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/services/errors.ts#L56)
+Defined in: [services/errors.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/services/errors.ts#L56)
 
 Service that generated the error
 
@@ -32,7 +32,7 @@ Service that generated the error
 
 > `optional` **method?**: `string`
 
-Defined in: [services/errors.ts:58](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/services/errors.ts#L58)
+Defined in: [services/errors.ts:58](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/services/errors.ts#L58)
 
 Method that generated the error
 
@@ -42,7 +42,7 @@ Method that generated the error
 
 > `optional` **component?**: `string`
 
-Defined in: [services/errors.ts:60](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/services/errors.ts#L60)
+Defined in: [services/errors.ts:60](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/services/errors.ts#L60)
 
 Component being processed
 
@@ -52,6 +52,6 @@ Component being processed
 
 > `optional` **level?**: `string`
 
-Defined in: [services/errors.ts:62](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/services/errors.ts#L62)
+Defined in: [services/errors.ts:62](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/services/errors.ts#L62)
 
 Security level being processed

@@ -8,6 +8,6 @@
 
 > `const` **errorService**: [`ErrorService`](../classes/ErrorService.md)
 
-Defined in: [services/errorService.ts:395](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/services/errorService.ts#L395)
+Defined in: [services/errorService.ts:395](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/services/errorService.ts#L395)
 
 Export singleton instance for convenient access

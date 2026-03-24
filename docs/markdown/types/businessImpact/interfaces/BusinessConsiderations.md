@@ -6,7 +6,7 @@
 
 # Interface: BusinessConsiderations
 
-Defined in: [types/businessImpact.ts:117](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/businessImpact.ts#L117)
+Defined in: [types/businessImpact.ts:117](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/businessImpact.ts#L117)
 
 Collection of business considerations by category
 
@@ -16,7 +16,7 @@ Collection of business considerations by category
 
 > **financial**: [`BusinessConsideration`](BusinessConsideration.md)[]
 
-Defined in: [types/businessImpact.ts:119](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/businessImpact.ts#L119)
+Defined in: [types/businessImpact.ts:119](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/businessImpact.ts#L119)
 
 Financial considerations
 
@@ -26,7 +26,7 @@ Financial considerations
 
 > **operational**: [`BusinessConsideration`](BusinessConsideration.md)[]
 
-Defined in: [types/businessImpact.ts:122](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/businessImpact.ts#L122)
+Defined in: [types/businessImpact.ts:122](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/businessImpact.ts#L122)
 
 Operational considerations
 
@@ -36,7 +36,7 @@ Operational considerations
 
 > **strategic**: [`BusinessConsideration`](BusinessConsideration.md)[]
 
-Defined in: [types/businessImpact.ts:125](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/businessImpact.ts#L125)
+Defined in: [types/businessImpact.ts:125](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/businessImpact.ts#L125)
 
 Strategic considerations
 
@@ -46,7 +46,7 @@ Strategic considerations
 
 > `optional` **compliance?**: [`BusinessConsideration`](BusinessConsideration.md)[]
 
-Defined in: [types/businessImpact.ts:128](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/businessImpact.ts#L128)
+Defined in: [types/businessImpact.ts:128](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/businessImpact.ts#L128)
 
 Compliance considerations
 
@@ -56,7 +56,7 @@ Compliance considerations
 
 > `optional` **reputational?**: [`BusinessConsideration`](BusinessConsideration.md)[]
 
-Defined in: [types/businessImpact.ts:131](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/businessImpact.ts#L131)
+Defined in: [types/businessImpact.ts:131](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/businessImpact.ts#L131)
 
 Reputational considerations
 
@@ -66,6 +66,6 @@ Reputational considerations
 
 > `optional` **regulatory?**: [`BusinessConsideration`](BusinessConsideration.md)[]
 
-Defined in: [types/businessImpact.ts:134](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/businessImpact.ts#L134)
+Defined in: [types/businessImpact.ts:134](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/businessImpact.ts#L134)
 
 Regulatory considerations

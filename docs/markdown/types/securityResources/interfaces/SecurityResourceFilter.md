@@ -6,7 +6,7 @@
 
 # Interface: SecurityResourceFilter
 
-Defined in: [types/securityResources.ts:106](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/securityResources.ts#L106)
+Defined in: [types/securityResources.ts:106](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/securityResources.ts#L106)
 
 Filter options for security resources
 
@@ -16,7 +16,7 @@ Filter options for security resources
 
 > `optional` **component?**: `string`
 
-Defined in: [types/securityResources.ts:110](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/securityResources.ts#L110)
+Defined in: [types/securityResources.ts:110](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/securityResources.ts#L110)
 
 Filter by CIA component
 
@@ -26,7 +26,7 @@ Filter by CIA component
 
 > `optional` **securityLevel?**: `string`
 
-Defined in: [types/securityResources.ts:115](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/securityResources.ts#L115)
+Defined in: [types/securityResources.ts:115](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/securityResources.ts#L115)
 
 Filter by security level
 
@@ -36,7 +36,7 @@ Filter by security level
 
 > `optional` **type?**: `string`
 
-Defined in: [types/securityResources.ts:120](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/securityResources.ts#L120)
+Defined in: [types/securityResources.ts:120](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/securityResources.ts#L120)
 
 Filter by resource type (Documentation, Tool, etc.)
 
@@ -46,7 +46,7 @@ Filter by resource type (Documentation, Tool, etc.)
 
 > `optional` **searchQuery?**: `string`
 
-Defined in: [types/securityResources.ts:125](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/securityResources.ts#L125)
+Defined in: [types/securityResources.ts:125](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/securityResources.ts#L125)
 
 Text search query
 
@@ -56,7 +56,7 @@ Text search query
 
 > `optional` **tags?**: `string`[]
 
-Defined in: [types/securityResources.ts:130](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/securityResources.ts#L130)
+Defined in: [types/securityResources.ts:130](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/securityResources.ts#L130)
 
 Filter by tags
 
@@ -66,7 +66,7 @@ Filter by tags
 
 > `optional` **includePremium?**: `boolean`
 
-Defined in: [types/securityResources.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/securityResources.ts#L135)
+Defined in: [types/securityResources.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/securityResources.ts#L135)
 
 Whether to include premium resources
 
@@ -76,7 +76,7 @@ Whether to include premium resources
 
 > `optional` **maxComplexity?**: `number`
 
-Defined in: [types/securityResources.ts:140](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/securityResources.ts#L140)
+Defined in: [types/securityResources.ts:140](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/securityResources.ts#L140)
 
 Maximum complexity level (1-5)
 
@@ -86,6 +86,6 @@ Maximum complexity level (1-5)
 
 > `optional` **minRating?**: `number`
 
-Defined in: [types/securityResources.ts:145](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/securityResources.ts#L145)
+Defined in: [types/securityResources.ts:145](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/securityResources.ts#L145)
 
 Minimum rating (0-5)

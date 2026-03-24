@@ -8,4 +8,4 @@
 
 > `const` **availabilityOptions**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIADetails`](../../../types/cia-services/interfaces/CIADetails.md)\> = `availabilityData`
 
-Defined in: [data/security/index.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/data/security/index.ts#L22)
+Defined in: [data/security/index.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/data/security/index.ts#L22)

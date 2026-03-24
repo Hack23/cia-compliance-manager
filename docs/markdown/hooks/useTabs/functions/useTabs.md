@@ -8,7 +8,7 @@
 
 > **useTabs**(`tabs`, `options?`): [`UseTabsReturn`](../../../types/tabs/interfaces/UseTabsReturn.md)
 
-Defined in: [hooks/useTabs.ts:39](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/hooks/useTabs.ts#L39)
+Defined in: [hooks/useTabs.ts:39](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/hooks/useTabs.ts#L39)
 
 Hook for managing tab state with keyboard navigation
 

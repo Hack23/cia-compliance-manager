@@ -6,7 +6,7 @@
 
 # Interface: CostResult
 
-Defined in: [utils/costCalculationUtils.ts:29](https://github.com/Hack23/cia-compliance-manager/blob/2f22c374961274dfc0698aa873509225b085645b/src/utils/costCalculationUtils.ts#L29)
+Defined in: [utils/costCalculationUtils.ts:29](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/costCalculationUtils.ts#L29)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [utils/costCalculationUtils.ts:29](https://github.com/Hack23/cia-com
 
 > **capex**: `number`
 
-Defined in: [utils/costCalculationUtils.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/2f22c374961274dfc0698aa873509225b085645b/src/utils/costCalculationUtils.ts#L30)
+Defined in: [utils/costCalculationUtils.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/costCalculationUtils.ts#L30)
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: [utils/costCalculationUtils.ts:30](https://github.com/Hack23/cia-com
 
 > **opex**: `number`
 
-Defined in: [utils/costCalculationUtils.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/2f22c374961274dfc0698aa873509225b085645b/src/utils/costCalculationUtils.ts#L31)
+Defined in: [utils/costCalculationUtils.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/costCalculationUtils.ts#L31)

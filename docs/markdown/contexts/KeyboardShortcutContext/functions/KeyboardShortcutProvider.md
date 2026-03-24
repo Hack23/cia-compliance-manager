@@ -8,7 +8,7 @@
 
 > **KeyboardShortcutProvider**(`__namedParameters`): `ReactElement`
 
-Defined in: [contexts/KeyboardShortcutContext.tsx:45](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/contexts/KeyboardShortcutContext.tsx#L45)
+Defined in: [contexts/KeyboardShortcutContext.tsx:45](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/contexts/KeyboardShortcutContext.tsx#L45)
 
 Provider component for keyboard shortcut context
 

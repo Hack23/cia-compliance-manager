@@ -8,7 +8,7 @@
 
 > `const` **StatusBadge**: `React.FC`\<[`StatusBadgeProps`](../common/StatusBadge/interfaces/StatusBadgeProps.md)\>
 
-Defined in: [components/common/StatusBadge.tsx:46](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/StatusBadge.tsx#L46)
+Defined in: [components/common/StatusBadge.tsx:46](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/StatusBadge.tsx#L46)
 
 Displays a status badge with appropriate colors
 

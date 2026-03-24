@@ -125,6 +125,12 @@ to ensure they're properly accessible throughout the application.
 
 ## References
 
+### CostResult
+
+Re-exports [CostResult](costCalculationUtils/interfaces/CostResult.md)
+
+***
+
 ### BUSINESS\_IMPACT\_CATEGORIES
 
 Re-exports [BUSINESS_IMPACT_CATEGORIES](../constants/riskConstants/variables/BUSINESS_IMPACT_CATEGORIES.md)

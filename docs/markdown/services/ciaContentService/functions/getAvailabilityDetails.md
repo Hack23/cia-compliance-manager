@@ -8,7 +8,7 @@
 
 > **getAvailabilityDetails**(`level`): `Promise`\<[`CIADetails`](../../../types/cia-services/interfaces/CIADetails.md)\>
 
-Defined in: [services/ciaContentService.ts:1544](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/services/ciaContentService.ts#L1544)
+Defined in: [services/ciaContentService.ts:1544](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/services/ciaContentService.ts#L1544)
 
 Get availability details based on security level
 

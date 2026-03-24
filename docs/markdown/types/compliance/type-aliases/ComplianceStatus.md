@@ -8,4 +8,4 @@
 
 > **ComplianceStatus** = [`ComplianceStatusDetails`](../interfaces/ComplianceStatusDetails.md)
 
-Defined in: [types/compliance.ts:86](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/compliance.ts#L86)
+Defined in: [types/compliance.ts:86](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/compliance.ts#L86)

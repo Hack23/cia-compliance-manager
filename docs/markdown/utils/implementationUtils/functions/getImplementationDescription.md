@@ -8,7 +8,7 @@
 
 > **getImplementationDescription**(`component`, `level`): `string`
 
-Defined in: [utils/implementationUtils.ts:64](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/implementationUtils.ts#L64)
+Defined in: [utils/implementationUtils.ts:64](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/implementationUtils.ts#L64)
 
 Gets implementation description for a CIA component at a specific security level
 

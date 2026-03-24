@@ -8,7 +8,7 @@
 
 > `const` **WidgetSection**: `React.FC`\<`WidgetSectionProps`\>
 
-Defined in: [components/common/WidgetSection.tsx:46](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/WidgetSection.tsx#L46)
+Defined in: [components/common/WidgetSection.tsx:46](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/WidgetSection.tsx#L46)
 
 Reusable section component for consistent widget layout
 

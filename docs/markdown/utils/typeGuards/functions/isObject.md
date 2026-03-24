@@ -8,7 +8,7 @@
 
 > **isObject**(`value`): value is Record\<string \| number \| symbol, unknown\>
 
-Defined in: [utils/typeGuards.ts:133](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/typeGuards.ts#L133)
+Defined in: [utils/typeGuards.ts:133](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/typeGuards.ts#L133)
 
 Type guard to check if a value is a non-null object
 

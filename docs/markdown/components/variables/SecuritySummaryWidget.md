@@ -8,7 +8,7 @@
 
 > `const` **SecuritySummaryWidget**: `React.FC`\<[`SecuritySummaryWidgetProps`](../../types/widget-props/type-aliases/SecuritySummaryWidgetProps.md)\>
 
-Defined in: [components/widgets/assessmentcenter/SecuritySummaryWidget.tsx:36](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx#L36)
+Defined in: [components/widgets/assessmentcenter/SecuritySummaryWidget.tsx:36](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx#L36)
 
 Displays a comprehensive executive summary of security posture with key metrics
 

@@ -6,7 +6,7 @@
 
 # Interface: LoadingSpinnerProps
 
-Defined in: [components/common/LoadingSpinner.tsx:6](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/LoadingSpinner.tsx#L6)
+Defined in: [components/common/LoadingSpinner.tsx:6](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/LoadingSpinner.tsx#L6)
 
 Props for LoadingSpinner component
 
@@ -16,7 +16,7 @@ Props for LoadingSpinner component
 
 > `optional` **size?**: `"sm"` \| `"md"` \| `"lg"`
 
-Defined in: [components/common/LoadingSpinner.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/LoadingSpinner.tsx#L11)
+Defined in: [components/common/LoadingSpinner.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/LoadingSpinner.tsx#L11)
 
 Size of the spinner
 
@@ -32,7 +32,7 @@ Size of the spinner
 
 > `optional` **testId?**: `string`
 
-Defined in: [components/common/LoadingSpinner.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/LoadingSpinner.tsx#L16)
+Defined in: [components/common/LoadingSpinner.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/LoadingSpinner.tsx#L16)
 
 Optional test ID for automated testing
 
@@ -42,6 +42,6 @@ Optional test ID for automated testing
 
 > `optional` **className?**: `string`
 
-Defined in: [components/common/LoadingSpinner.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/components/common/LoadingSpinner.tsx#L21)
+Defined in: [components/common/LoadingSpinner.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/components/common/LoadingSpinner.tsx#L21)
 
 Optional CSS class name

@@ -6,7 +6,7 @@
 
 # Interface: KeyboardShortcut
 
-Defined in: [types/keyboard.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/keyboard.ts#L30)
+Defined in: [types/keyboard.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/keyboard.ts#L30)
 
 Keyboard shortcut definition
 
@@ -16,7 +16,7 @@ Keyboard shortcut definition
 
 > **id**: `string`
 
-Defined in: [types/keyboard.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/keyboard.ts#L32)
+Defined in: [types/keyboard.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/keyboard.ts#L32)
 
 Unique identifier for the shortcut
 
@@ -26,7 +26,7 @@ Unique identifier for the shortcut
 
 > **keys**: `string`
 
-Defined in: [types/keyboard.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/keyboard.ts#L35)
+Defined in: [types/keyboard.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/keyboard.ts#L35)
 
 Key combination (e.g., 'ctrl+1', 'ctrl+shift+n')
 
@@ -36,7 +36,7 @@ Key combination (e.g., 'ctrl+1', 'ctrl+shift+n')
 
 > **description**: `string`
 
-Defined in: [types/keyboard.ts:38](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/keyboard.ts#L38)
+Defined in: [types/keyboard.ts:38](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/keyboard.ts#L38)
 
 Human-readable description of what the shortcut does
 
@@ -46,7 +46,7 @@ Human-readable description of what the shortcut does
 
 > **category**: [`ShortcutCategory`](../type-aliases/ShortcutCategory.md)
 
-Defined in: [types/keyboard.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/keyboard.ts#L41)
+Defined in: [types/keyboard.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/keyboard.ts#L41)
 
 Category for grouping shortcuts
 
@@ -56,7 +56,7 @@ Category for grouping shortcuts
 
 > **handler**: () => `void`
 
-Defined in: [types/keyboard.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/keyboard.ts#L44)
+Defined in: [types/keyboard.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/keyboard.ts#L44)
 
 Handler function to execute when shortcut is triggered
 
@@ -70,7 +70,7 @@ Handler function to execute when shortcut is triggered
 
 > `optional` **enabled?**: `boolean`
 
-Defined in: [types/keyboard.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/keyboard.ts#L47)
+Defined in: [types/keyboard.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/keyboard.ts#L47)
 
 Whether the shortcut is enabled
 
@@ -80,6 +80,6 @@ Whether the shortcut is enabled
 
 > `optional` **platformKeys?**: `Partial`\<`Record`\<[`Platform`](../type-aliases/Platform.md), `string`\>\>
 
-Defined in: [types/keyboard.ts:50](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/keyboard.ts#L50)
+Defined in: [types/keyboard.ts:50](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/keyboard.ts#L50)
 
 Platform-specific override (optional)

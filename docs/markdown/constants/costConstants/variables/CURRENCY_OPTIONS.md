@@ -8,7 +8,7 @@
 
 > `const` **CURRENCY\_OPTIONS**: `object`
 
-Defined in: [constants/costConstants.ts:107](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/constants/costConstants.ts#L107)
+Defined in: [constants/costConstants.ts:107](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/constants/costConstants.ts#L107)
 
 Currency formatting options
 

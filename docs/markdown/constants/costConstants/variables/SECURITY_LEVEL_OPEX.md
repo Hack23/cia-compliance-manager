@@ -8,7 +8,7 @@
 
 > `const` **SECURITY\_LEVEL\_OPEX**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), `number`\>
 
-Defined in: [constants/costConstants.ts:196](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/constants/costConstants.ts#L196)
+Defined in: [constants/costConstants.ts:196](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/constants/costConstants.ts#L196)
 
 OPEX cost ratio for each security level
 Used for calculating ongoing maintenance costs

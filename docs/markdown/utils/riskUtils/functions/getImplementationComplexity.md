@@ -8,7 +8,7 @@
 
 > **getImplementationComplexity**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `string`
 
-Defined in: [utils/riskUtils.ts:424](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/riskUtils.ts#L424)
+Defined in: [utils/riskUtils.ts:424](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/riskUtils.ts#L424)
 
 Determines the implementation complexity based on security levels
 

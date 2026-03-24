@@ -378,7 +378,6 @@ import {
   screenshotWithIssues,
 } from "./screenshot-analysis";
 import {
-  applyTestStyles,
   forceDarkMode,
   forceLightMode,
   optimizeWidgetForScreenshot,

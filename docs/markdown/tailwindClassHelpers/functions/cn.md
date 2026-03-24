@@ -8,7 +8,7 @@
 
 > **cn**(...`classes`): `string`
 
-Defined in: [utils/tailwindClassHelpers.ts:294](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/tailwindClassHelpers.ts#L294)
+Defined in: [utils/tailwindClassHelpers.ts:294](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/tailwindClassHelpers.ts#L294)
 
 Combine Tailwind classes with proper handling of conditionals
 

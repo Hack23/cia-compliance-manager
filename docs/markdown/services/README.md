@@ -119,6 +119,12 @@ Re-exports [SecurityResourceService](securityResourceService/classes/SecurityRes
 
 ***
 
+### EnhancedSecurityResource
+
+Re-exports [EnhancedSecurityResource](../types/securityResources/interfaces/EnhancedSecurityResource.md)
+
+***
+
 ### SecurityResource
 
 Re-exports [SecurityResource](../types/securityResources/interfaces/SecurityResource.md)

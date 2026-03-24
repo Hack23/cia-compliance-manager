@@ -8,7 +8,7 @@
 
 > **announceToScreenReader**: (`message`, `politeness`) => `void`
 
-Defined in: [utils/index.ts:49](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/index.ts#L49)
+Defined in: [utils/index.ts:49](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/index.ts#L49)
 
 Announce a message to screen readers using ARIA live region
 Uses a singleton live region to prevent duplicate announcements

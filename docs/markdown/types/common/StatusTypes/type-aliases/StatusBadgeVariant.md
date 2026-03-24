@@ -8,6 +8,6 @@
 
 > **StatusBadgeVariant** = [`StatusType`](StatusType.md)
 
-Defined in: [types/common/StatusTypes.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/types/common/StatusTypes.ts#L19)
+Defined in: [types/common/StatusTypes.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/types/common/StatusTypes.ts#L19)
 
 Alias for StatusType for backwards compatibility

@@ -8,7 +8,7 @@
 
 > **getDefaultComponentImpact**(`component`, `level`): [`BusinessImpactDetails`](../../../types/cia-services/interfaces/BusinessImpactDetails.md)
 
-Defined in: [utils/riskUtils.ts:514](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/riskUtils.ts#L514)
+Defined in: [utils/riskUtils.ts:514](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/riskUtils.ts#L514)
 
 Generates default component impact data when service data isn't available
 

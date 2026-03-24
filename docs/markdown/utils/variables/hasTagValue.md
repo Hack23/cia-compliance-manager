@@ -8,7 +8,7 @@
 
 > **hasTagValue**: (`obj`, `tagValue`) => `boolean`
 
-Defined in: [utils/index.ts:199](https://github.com/Hack23/cia-compliance-manager/blob/93d28e2dddb40364acafb5aab5b0a96fcc590cc8/src/utils/index.ts#L199)
+Defined in: [utils/index.ts:202](https://github.com/Hack23/cia-compliance-manager/blob/bf8189075bc86cb5a8999dce70d7c9c39852b616/src/utils/index.ts#L202)
 
 Checks if an object has a specific tag value
 
