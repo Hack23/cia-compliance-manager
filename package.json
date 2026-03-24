@@ -110,7 +110,7 @@
     "test:ci": "cross-env CI=true vitest run --coverage",
     "cypress:open:with-server": "start-server-and-test 'vite --port 5173' http://localhost:5173 'cypress open'",
     "merge-test-reports": "node --experimental-json-modules ./cypress/support/plugins/merge-reports.js",
-    "docs": "typedoc --options typedoc.enhanced.json",
+    "docs": "typedoc --options typedoc.json",
     "docs:uml": "typedoc --options typedoc.uml.json",
     "docs:markdown": "typedoc -options typedoc.markdown.json",
     "docs:dependencies": "mkdir -p docs/dependencies && depcruise --config .dependency-cruiser.cjs --output-type dot src | dot -T svg > docs/dependencies/module-dependencies.svg || echo 'Dependency diagram generation failed - continuing' && touch docs/dependencies/module-dependencies.svg",
