@@ -404,8 +404,15 @@ jobs:
           echo "📦 Package contents preview:"
           npm pack --dry-run
           echo ""
-          echo "📋 Package files:"
-          tar -tzf $(npm pack 2>/dev/null | tail -n 1) | head -30
+          echo "📋 Creating package tarball for verification..."
+          TARBALL=$(npm pack 2>/dev/null | tail -n 1)
+          if [ -z "$TARBALL" ] || [ ! -f "$TARBALL" ]; then
+            echo "❌ Failed to create package tarball"
+            exit 1
+          fi
+          echo "📋 Package files in $TARBALL:"
+          tar -tzf "$TARBALL" | head -30
+          rm -f "$TARBALL"
 
       - name: Publish to npm with provenance
         run: npm publish --provenance --access public
