@@ -1,0 +1,51 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "src/index.ts",
+    "src/App.tsx"
+  ],
+  "project": [
+    "src/**/*.{ts,tsx}"
+  ],
+  "ignore": [
+    "src/tests/**",
+    "src/constants/complianceConstants.ts",
+    "src/utils/complianceTextUtils.ts"
+  ],
+  "ignoreDependencies": [
+    "@tailwindcss/postcss",
+    "@types/fs-extra",
+    "@types/testing-library__jest-dom",
+    "@vitest/coverage-istanbul",
+    "autoprefixer",
+    "cypress-junit-reporter",
+    "cypress-react-selector",
+    "cypress-wait-until",
+    "madge",
+    "mocha-junit-reporter",
+    "mochawesome",
+    "postcss",
+    "typedoc-plugin-markdown",
+    "react-error-boundary"
+  ],
+  "ignoreBinaries": [
+    "dot"
+  ],
+  "exclude": [
+    "duplicates",
+    "exports",
+    "types",
+    "nsExports",
+    "nsTypes",
+    "enumMembers",
+    "unresolved",
+    "unlisted"
+  ],
+  "ignoreExportsUsedInFile": true,
+  "eslint": {
+    "config": ["eslint.config.js"]
+  },
+  "typescript": {
+    "config": ["tsconfig.json", "tsconfig.lib.json"]
+  }
+}
