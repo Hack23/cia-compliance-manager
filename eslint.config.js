@@ -1,7 +1,5 @@
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
-import reactPlugin from 'eslint-plugin-react';
-import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import globals from 'globals';
 import { createRequire } from 'module';
 
@@ -24,15 +22,8 @@ export default [
         ...globals.node,
       },
     },
-    settings: {
-      react: {
-        version: 'detect',
-      },
-    },
     plugins: {
       '@typescript-eslint': tseslint.plugin,
-      'react': reactPlugin,
-      'react-hooks': reactHooksPlugin,
       'local': {
         rules: localRules,
       },
@@ -41,11 +32,7 @@ export default [
       // Base rules for all files
       '@typescript-eslint/no-unused-vars': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
-      'react-hooks/exhaustive-deps': 'warn',
       'no-console': ['warn', { allow: ['warn', 'error'] }],
-      'react/react-in-jsx-scope': 'off',
-      'react/prop-types': 'off',
-      'react/display-name': 'off',
       // Custom rule: enforce test ID constants
       'local/no-hardcoded-testid': 'warn',
     },
@@ -69,7 +56,6 @@ export default [
     ],
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
-      'react-hooks/exhaustive-deps': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
       'no-console': 'off',
       'local/no-hardcoded-testid': 'off', // Allow hardcoded test IDs in tests
