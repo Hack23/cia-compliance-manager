@@ -48,9 +48,9 @@ if (typeof window !== "undefined" && window.process && !window.process.env) {
   };
 }
 
-// Handle uncaught exceptions to make tests more stable
+// Centralized uncaught exception handler — single handler to avoid duplicate logs
 Cypress.on("uncaught:exception", (err) => {
-  console.log("Uncaught exception:", err);
+  console.error("Uncaught exception:", err.message);
 
   // Check for "require is not defined" errors and provide actionable feedback
   if (err && err.message && err.message.includes("require is not defined")) {
@@ -62,15 +62,6 @@ Cypress.on("uncaught:exception", (err) => {
   }
 
   // Prevent test failure on uncaught exceptions for better debugging
-  return false;
-});
-
-// Add global error handler to log uncaught exceptions
-Cypress.on("uncaught:exception", (err, runnable) => {
-  // Log error details for debugging
-  console.error("Uncaught Exception:", err.message);
-
-  // Return false to prevent Cypress from failing the test
   return false;
 });
 
@@ -142,18 +133,7 @@ beforeEach(() => {
   cy.viewport(1280, 800);
 });
 
-// Handle test failures more gracefully
-Cypress.on("fail", (error, runnable) => {
-  if (
-    error.message.includes("not visible") ||
-    error.message.includes("being clipped")
-  ) {
-    cy.log("Element visibility issue detected. Adding debug information...");
-  }
-  throw error;
-});
-
-// Add better logging for failures
+// Centralized test failure handler — single handler to avoid inconsistent failure behavior
 Cypress.on("fail", (error, runnable) => {
   // Log detailed context information
   console.error("Test Failure:", {
@@ -162,7 +142,14 @@ Cypress.on("fail", (error, runnable) => {
     stack: error.stack,
   });
 
-  // Allow the error to continue to fail the test
+  if (
+    error.message.includes("not visible") ||
+    error.message.includes("being clipped")
+  ) {
+    cy.log("Element visibility issue detected. Adding debug information...");
+  }
+
+  // Re-throw to fail the test
   throw error;
 });
 

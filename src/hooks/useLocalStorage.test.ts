@@ -188,8 +188,6 @@ describe('useLocalStorage', () => {
         writable: true,
       });
       
-      const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-      
       const { result } = renderHook(() => 
         useLocalStorage('test-key', 'fallback')
       );
@@ -202,13 +200,11 @@ describe('useLocalStorage', () => {
       // Value should be updated in React state despite localStorage failure
       expect(result.current[0]).toBe('new-value');
       
-      // Verify error was logged
-      expect(consoleSpy).toHaveBeenCalledWith(
+      // Verify error was logged (console.error is already spied in beforeEach)
+      expect(console.error).toHaveBeenCalledWith(
         expect.stringContaining('Error saving to localStorage key'),
         expect.any(DOMException)
       );
-      
-      consoleSpy.mockRestore();
     });
 
     it('handles localStorage.getItem errors gracefully', () => {

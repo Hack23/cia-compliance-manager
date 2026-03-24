@@ -293,26 +293,8 @@ Cypress.Commands.add("containsText", (text: string): void => {
   cy.get("body").invoke("text").should("include", text);
 });
 
-// Enhanced error handling for test failures
-Cypress.on("fail", (error, runnable) => {
-  // Log test failure with enhanced debug information
-  cy.log(`Test failed: ${runnable.title}`);
-
-  // Log more details about the error
-  cy.log(`Error name: ${error.name}`);
-  cy.log(`Error message: ${error.message}`);
-
-  // For visibility issues, try to debug the element structure
-  if (
-    error.message.includes("not visible") ||
-    error.message.includes("not found")
-  ) {
-    cy.log("Element visibility issue detected. Adding debug information...");
-  }
-
-  // Throw the original error to fail the test
-  throw error;
-});
+// Note: The centralized Cypress.on("fail") handler is in e2e.ts
+// Do not register another fail handler here to avoid inconsistent failure behavior
 
 // Add placeholder implementations for other custom commands
 Cypress.Commands.add("startMeasurement", (name: string) => {
