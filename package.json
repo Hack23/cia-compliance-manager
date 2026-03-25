@@ -174,7 +174,7 @@
     "mochawesome-report-generator": "6.3.2",
     "postcss": "^8.5.8",
     "rollup-plugin-visualizer": "7.0.1",
-    "start-server-and-test": "^2.1.5",
+    "start-server-and-test": "^3.0.0",
     "tailwindcss": "^4.1.18",
     "typedoc": "^0.28.18",
     "typedoc-plugin-markdown": "^4.11.0",
