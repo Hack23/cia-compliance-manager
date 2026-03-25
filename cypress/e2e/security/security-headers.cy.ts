@@ -149,12 +149,12 @@ describe("Security Headers", () => {
           "X-Frame-Options HTTP header should be DENY"
         );
 
-        // CSP frame-ancestors must be present in the HTTP header
+        // CSP frame-ancestors must be set to 'none' in the HTTP header to prevent framing
         expect(headers).to.have.property("content-security-policy");
         const cspHeader = headers["content-security-policy"] as string;
         expect(cspHeader).to.include(
-          "frame-ancestors",
-          "CSP HTTP header should include frame-ancestors directive"
+          "frame-ancestors 'none'",
+          "CSP HTTP header should set frame-ancestors to 'none' for clickjacking protection"
         );
       });
     });
