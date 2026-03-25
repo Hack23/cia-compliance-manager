@@ -18,9 +18,11 @@ CIA Compliance Manager implements comprehensive security headers to protect agai
 ```html
 <meta 
   http-equiv="Content-Security-Policy" 
-  content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: https://fonts.gstatic.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;"
+  content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: https://fonts.gstatic.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;"
 />
 ```
+
+**Note:** The `frame-ancestors` directive is only valid when delivered via an HTTP header, not a meta tag. It is configured in `vite.config.ts` for development and CloudFront response headers for production.
 
 **Directives Explained:**
 
@@ -35,13 +37,18 @@ CIA Compliance Manager implements comprehensive security headers to protect agai
 | `object-src` | `'none'` | Block all plugins (Flash, Java, etc.) |
 | `base-uri` | `'self'` | Restrict base tag URLs to same origin |
 | `form-action` | `'self'` | Only allow form submissions to same origin |
-| `frame-ancestors` | `'none'` | Prevent site from being embedded in frames (clickjacking protection) |
 | `upgrade-insecure-requests` | - | Automatically upgrade HTTP requests to HTTPS |
+
+**HTTP-Header-Only Directives (configured in vite.config.ts and CloudFront):**
+
+| Directive | Value | Purpose |
+|-----------|-------|---------|
+| `frame-ancestors` | `'none'` | Prevent site from being embedded in frames (clickjacking protection) |
 
 **Security Benefits:**
 - ✅ Prevents XSS attacks by restricting script sources
 - ✅ Blocks malicious code injection
-- ✅ Prevents clickjacking through `frame-ancestors 'none'`
+- ✅ Prevents clickjacking through `frame-ancestors 'none'` (via HTTP headers)
 - ✅ Enforces HTTPS for all resources
 - ✅ Blocks dangerous plugins
 
@@ -57,13 +64,15 @@ CIA Compliance Manager implements comprehensive security headers to protect agai
 
 ### X-Frame-Options
 
-**Implementation:** Meta tag in `index.html`
+**Implementation:** HTTP header via `vite.config.ts` (development) and CloudFront response headers (production)
 
 **Purpose:** Prevents the application from being embedded in frames/iframes, protecting against clickjacking attacks.
 
-**Configuration:**
-```html
-<meta http-equiv="X-Frame-Options" content="DENY" />
+**Note:** X-Frame-Options can only be set via HTTP headers. Setting it via a `<meta>` tag is ignored by browsers.
+
+**Configuration (HTTP header):**
+```
+X-Frame-Options: DENY
 ```
 
 **Values:**
@@ -173,12 +182,15 @@ CIA Compliance Manager implements comprehensive security headers to protect agai
 
 GitHub Pages has **limited support** for custom HTTP headers. Our implementation strategy:
 
-**Primary Method:** Meta tags in `index.html`
-- ✅ CSP via meta tag
-- ✅ X-Frame-Options via meta tag
+**Primary Method:** Meta tags in `index.html` (where supported)
+- ✅ CSP via meta tag (except `frame-ancestors`, which requires HTTP header)
 - ✅ X-Content-Type-Options via meta tag
 - ✅ COOP/COEP via meta tags
 - ✅ Referrer-Policy via meta tag
+
+**HTTP Header-Only Directives:**
+- ⚠️ X-Frame-Options can only be set via HTTP header
+- ⚠️ CSP `frame-ancestors` can only be set via HTTP header
 
 **Limitations:**
 - ❌ HSTS (Strict-Transport-Security) cannot be set via meta tags
@@ -361,6 +373,8 @@ Multiple overlapping security controls:
 
 **Meta Tag Limitations:**
 - HSTS cannot be set via meta tags (requires server header)
+- X-Frame-Options cannot be set via meta tags (requires server header)
+- CSP `frame-ancestors` directive is ignored in meta tags (requires server header)
 - Some directives may not be supported in older browsers
 - Meta tags are parsed after HTML, providing less protection than HTTP headers
 

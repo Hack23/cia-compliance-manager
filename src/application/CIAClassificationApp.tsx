@@ -95,7 +95,7 @@ const CIAClassificationApp: React.FC = () => {
 
   // Log initial values for debugging
   useEffect(() => {
-    console.log("CIA App Security Levels:", {
+    logger.debug("Security levels initialized", {
       availability: levels.availability,
       integrity: levels.integrity,
       confidentiality: levels.confidentiality,
@@ -105,7 +105,7 @@ const CIAClassificationApp: React.FC = () => {
   // Create handler functions using the hook's setLevel method
   const handleAvailabilityChange = useCallback(
     (level: SecurityLevel) => {
-      console.log("CIAClassificationApp: Setting availability level to:", level);
+      logger.debug("Setting availability level", { level });
       setLevel("availability", level);
     },
     [setLevel]
@@ -113,7 +113,7 @@ const CIAClassificationApp: React.FC = () => {
 
   const handleIntegrityChange = useCallback(
     (level: SecurityLevel) => {
-      console.log("CIAClassificationApp: Setting integrity level to:", level);
+      logger.debug("Setting integrity level", { level });
       setLevel("integrity", level);
     },
     [setLevel]
@@ -121,10 +121,7 @@ const CIAClassificationApp: React.FC = () => {
 
   const handleConfidentialityChange = useCallback(
     (level: SecurityLevel) => {
-      console.log(
-        "CIAClassificationApp: Setting confidentiality level to:",
-        level
-      );
+      logger.debug("Setting confidentiality level", { level });
       setLevel("confidentiality", level);
     },
     [setLevel]

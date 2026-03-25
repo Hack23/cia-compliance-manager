@@ -9,11 +9,14 @@ export { SECURITY_LEVELS } from "../../src/constants/coreConstants";
 /**
  * Security header selectors for E2E testing
  * Used to validate security headers in meta tags
+ * 
+ * Note: X-Frame-Options and frame-ancestors are HTTP-header-only directives
+ * and cannot be set via meta tags. They are configured in vite.config.ts (dev)
+ * and CloudFront response headers (production).
  */
 export const SECURITY_HEADER_SELECTORS = {
   CSP: 'meta[http-equiv="Content-Security-Policy"]',
   X_CONTENT_TYPE_OPTIONS: 'meta[http-equiv="X-Content-Type-Options"]',
-  X_FRAME_OPTIONS: 'meta[http-equiv="X-Frame-Options"]',
   COOP: 'meta[http-equiv="Cross-Origin-Opener-Policy"]',
   COEP: 'meta[http-equiv="Cross-Origin-Embedder-Policy"]',
   REFERRER: 'meta[name="referrer"]',
@@ -26,10 +29,6 @@ export const SECURITY_LAYER_CONFIGS = [
   {
     name: "XSS Protection",
     selector: SECURITY_HEADER_SELECTORS.CSP,
-  },
-  {
-    name: "Clickjacking Protection",
-    selector: SECURITY_HEADER_SELECTORS.X_FRAME_OPTIONS,
   },
   {
     name: "MIME-Sniffing Protection",

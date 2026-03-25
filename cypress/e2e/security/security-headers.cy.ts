@@ -64,10 +64,8 @@ describe("Security Headers", () => {
             "form-action 'self'",
             "CSP should restrict form submissions to same origin"
           );
-          expect(cspContent).to.include(
-            "frame-ancestors 'none'",
-            "CSP should prevent site from being embedded in frames"
-          );
+          // Note: frame-ancestors is an HTTP-header-only CSP directive
+          // and is configured via vite.config.ts (dev) and CloudFront (production)
         });
     });
 
@@ -126,11 +124,11 @@ describe("Security Headers", () => {
     });
   });
 
-  describe("X-Frame-Options", () => {
-    it("should have X-Frame-Options meta tag set to DENY", () => {
-      cy.get(SECURITY_HEADER_SELECTORS.X_FRAME_OPTIONS)
-        .should("exist")
-        .and("have.attr", "content", "DENY");
+  describe("Clickjacking Protection", () => {
+    it("should not have X-Frame-Options as meta tag (HTTP header only)", () => {
+      // X-Frame-Options can only be set via HTTP headers, not meta tags
+      // Verify it is NOT present as a meta tag (which would be ignored by browsers)
+      cy.get('meta[http-equiv="X-Frame-Options"]').should("not.exist");
     });
   });
 
@@ -161,7 +159,6 @@ describe("Security Headers", () => {
       const requiredHeaders = [
         SECURITY_HEADER_SELECTORS.CSP,
         SECURITY_HEADER_SELECTORS.X_CONTENT_TYPE_OPTIONS,
-        SECURITY_HEADER_SELECTORS.X_FRAME_OPTIONS,
         SECURITY_HEADER_SELECTORS.COOP,
         SECURITY_HEADER_SELECTORS.COEP,
         SECURITY_HEADER_SELECTORS.REFERRER,
@@ -213,11 +210,10 @@ describe("Security Headers", () => {
         .find(SECURITY_HEADER_SELECTORS.CSP)
         .should("exist");
       cy.get("head")
-        .find(SECURITY_HEADER_SELECTORS.X_FRAME_OPTIONS)
-        .should("exist");
-      cy.get("head")
         .find(SECURITY_HEADER_SELECTORS.X_CONTENT_TYPE_OPTIONS)
         .should("exist");
+      // Note: X-Frame-Options is enforced via HTTP headers (vite.config.ts dev / CloudFront production)
+      // and should NOT be present as a meta tag
 
       cy.log("✅ Application Security Framework requirements met");
     });
