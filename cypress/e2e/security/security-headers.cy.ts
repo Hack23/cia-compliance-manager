@@ -64,8 +64,13 @@ describe("Security Headers", () => {
             "form-action 'self'",
             "CSP should restrict form submissions to same origin"
           );
-          // Note: frame-ancestors is an HTTP-header-only CSP directive
-          // and is configured via vite.config.ts (dev) and CloudFront (production)
+          // frame-ancestors is an HTTP-header-only CSP directive and must not
+          // appear in meta tags (browsers ignore it and emit a console warning).
+          // It is configured via vite.config.ts (dev) and CloudFront (production).
+          expect(cspContent).not.to.include(
+            "frame-ancestors",
+            "CSP meta tag must not contain frame-ancestors (HTTP-header-only directive)"
+          );
         });
     });
 
