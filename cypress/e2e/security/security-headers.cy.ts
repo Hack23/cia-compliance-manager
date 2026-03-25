@@ -135,6 +135,29 @@ describe("Security Headers", () => {
       // Verify it is NOT present as a meta tag (which would be ignored by browsers)
       cy.get('meta[http-equiv="X-Frame-Options"]').should("not.exist");
     });
+
+    it("should enforce clickjacking protection via HTTP response headers", () => {
+      // Verify X-Frame-Options and frame-ancestors are delivered as HTTP headers
+      // (configured in vite.config.ts for dev, CloudFront for production)
+      cy.request("/").then((response) => {
+        const headers = response.headers;
+
+        // X-Frame-Options must be DENY via HTTP header
+        expect(headers).to.have.property("x-frame-options");
+        expect(headers["x-frame-options"]).to.match(
+          /deny/i,
+          "X-Frame-Options HTTP header should be DENY"
+        );
+
+        // CSP frame-ancestors must be present in the HTTP header
+        expect(headers).to.have.property("content-security-policy");
+        const cspHeader = headers["content-security-policy"] as string;
+        expect(cspHeader).to.include(
+          "frame-ancestors",
+          "CSP HTTP header should include frame-ancestors directive"
+        );
+      });
+    });
   });
 
   describe("Cross-Origin Policies", () => {
