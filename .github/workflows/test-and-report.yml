@@ -52,6 +52,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        env:
+          # madge@8 peerOptional typescript ^5.4.4 conflicts with TS 6.0.2
+          NPM_CONFIG_LEGACY_PEER_DEPS: "true"
 
       - name: Cache Cypress binary
         uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
@@ -137,6 +140,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        env:
+          # madge@8 peerOptional typescript ^5.4.4 conflicts with TS 6.0.2
+          NPM_CONFIG_LEGACY_PEER_DEPS: "true"
 
       - name: Run unit tests with coverage
         run: xvfb-run --auto-servernum npm run test:ci
@@ -190,6 +196,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        env:
+          # madge@8 peerOptional typescript ^5.4.4 conflicts with TS 6.0.2
+          NPM_CONFIG_LEGACY_PEER_DEPS: "true"
 
       - name: Start app and run Cypress tests
         run: |

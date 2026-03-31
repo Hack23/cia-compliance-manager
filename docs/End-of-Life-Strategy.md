@@ -80,7 +80,7 @@ mindmap
         🔄 Concurrent Features
       📝 TypeScript 6.0.2
         📅 Current: Latest
-        ⏰ EOL: Active (6-month cycles)
+        ⏰ EOL: Active (quarterly cadence, majors ~yearly)
         🔄 Strict Mode Enabled
       ⚡ Vite 8.0.0
         📅 Current: Latest

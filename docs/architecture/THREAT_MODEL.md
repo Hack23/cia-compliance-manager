@@ -47,7 +47,7 @@ This threat model demonstrates **🛡️ cybersecurity consulting expertise** th
 - 🛡️ **GitHub Actions CI/CD**: SLSA Level 3 build provenance and attestations
 - 📦 **NPM Dependency Ecosystem**: 4 production dependencies with SBOM tracking
 - 🔍 **Client-Side Assessment Engine**: TypeScript 6.0.2 strict mode with type safety
-- 🧪 **Cypress 15.10.0 Testing**: Comprehensive E2E and component security testing
+- 🧪 **Cypress 15.13.0 Testing**: Comprehensive E2E and component security testing
 - 🛡️ **Content Security Policy**: Multi-layer XSS protection with strict CSP headers
 
 **Out of Scope:**
