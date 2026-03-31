@@ -40,12 +40,12 @@
       "import": "./dist/constants/index.js"
     },
     "./data": {
-      "types": "./dist/data/security/index.d.ts",
-      "import": "./dist/data/security/index.js"
+      "types": "./dist/data/index.d.ts",
+      "import": "./dist/data/index.js"
     },
     "./contexts": {
-      "types": "./dist/contexts/ErrorContext.d.ts",
-      "import": "./dist/contexts/ErrorContext.js"
+      "types": "./dist/contexts/index.d.ts",
+      "import": "./dist/contexts/index.js"
     }
   },
   "files": [

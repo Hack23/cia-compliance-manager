@@ -138,9 +138,11 @@
     "./src/constants/testIds.ts",
     "./src/constants/uiConstants.ts",
 
+    "./src/contexts/index.ts",
     "./src/contexts/ErrorContext.tsx",
     "./src/contexts/KeyboardShortcutContext.tsx",
 
+    "./src/data/index.ts",
     "./src/data/security/index.ts",
     "./src/data/security/availabilityData.ts",
     "./src/data/security/integrityData.ts",
