@@ -30,6 +30,22 @@
     "./components": {
       "types": "./dist/components/index.d.ts",
       "import": "./dist/components/index.js"
+    },
+    "./components/widgets": {
+      "types": "./dist/components/widgets/index.d.ts",
+      "import": "./dist/components/widgets/index.js"
+    },
+    "./constants": {
+      "types": "./dist/constants/index.d.ts",
+      "import": "./dist/constants/index.js"
+    },
+    "./data": {
+      "types": "./dist/data/security/index.d.ts",
+      "import": "./dist/data/security/index.js"
+    },
+    "./contexts": {
+      "types": "./dist/contexts/ErrorContext.d.ts",
+      "import": "./dist/contexts/ErrorContext.js"
     }
   },
   "files": [

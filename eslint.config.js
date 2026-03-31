@@ -15,7 +15,7 @@ export default [
   // Global settings for all files
   {
     languageOptions: {
-      ecmaVersion: 2022,
+      ecmaVersion: 2025,
       sourceType: 'module',
       globals: {
         ...globals.browser,

@@ -34,6 +34,14 @@ export { Hooks };
 import * as Utils from "./utils";
 export { Utils };
 
+// Re-export constants with namespacing
+import * as Constants from "./constants";
+export { Constants };
+
+// Re-export security data with namespacing
+import * as Data from "./data/security";
+export { Data };
+
 // Export the main app directly
 export { default as CIAClassificationApp } from "./application/CIAClassificationApp";
 

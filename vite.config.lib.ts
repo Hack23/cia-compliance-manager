@@ -30,7 +30,7 @@ export default defineConfig({
   build: {
     outDir: "dist",
     sourcemap: process.env.BUILD_DEBUG === "true",
-    target: "es2024",
+    target: "es2025",
     minify: process.env.BUILD_DEBUG !== "true",
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),

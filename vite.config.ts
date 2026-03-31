@@ -61,7 +61,7 @@ export default defineConfig(({ mode }) => ({
       include: [/node_modules/],
     },
     // Set target for rollup
-    target: "es2024",
+    target: "es2025",
     // Remove terser configuration for now - use oxc minification
     minify: "oxc",
     // Add chunk size reporting
