@@ -27,29 +27,7 @@ try {
   process.exit(0);
 }
 
-// Generate component dependency diagram using madge
-console.log("Generating component dependency diagram...");
-try {
-  execSync(
-    `npx madge --image docs/architecture/component-dependencies.svg --extensions ts,tsx --exclude 'node_modules|.*\\.test\\.tsx?$' src/components`,
-    { stdio: "inherit" }
-  );
-} catch (error) {
-  console.error("Error generating component dependencies:", error);
-}
-
-// Generate module dependency diagram
-console.log("Generating module dependency diagram...");
-try {
-  execSync(
-    `npx madge --image docs/architecture/module-dependencies.svg --extensions ts,tsx --exclude 'node_modules|.*\\.test\\.tsx?$' src`,
-    { stdio: "inherit" }
-  );
-} catch (error) {
-  console.error("Error generating module dependencies:", error);
-}
-
-// Generate trie visualization of project structure
+// Generate project structure visualization
 console.log("Generating project structure visualization...");
 try {
   const projectStructure = execSync(

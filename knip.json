@@ -22,7 +22,7 @@
     "cypress-react-selector",
     "cypress-wait-until",
     "glob",
-    "madge",
+
     "mocha-junit-reporter",
     "mochawesome",
     "postcss",
