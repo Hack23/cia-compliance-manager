@@ -107,7 +107,7 @@ C4Container
         Container(frontend, "Frontend Application", "React 19.2.x, TypeScript 6.0.x (Strict)", "SPA with error boundaries, context API state management")
         ContainerDb(staticData, "Static Data", "TypeScript/JSON", "Security controls, frameworks, CIA triad data")
         Container(buildSystem, "Build System", "Vite 8.x, esbuild", "Code splitting, tree-shaking, bundle optimization")
-        Container(testFramework, "Test Infrastructure", "Vitest 4.0.17, Cypress 15.12.0", "Unit tests (exceeds 80% line coverage), E2E tests")
+        Container(testFramework, "Test Infrastructure", "Vitest 4.1.2, Cypress 15.13.0", "Unit tests (exceeds 80% line coverage), E2E tests")
         Container(securityScan, "Security Scanner", "CodeQL, SonarCloud, Dependabot", "SAST, SCA, vulnerability detection")
         Container(deployment, "Deployment", "AWS CloudFront + S3, GitHub Pages DR", "Multi-region with SLSA Level 3 attestation")
     }
@@ -132,7 +132,7 @@ C4Container
 | **Frontend Application** | React 19.2.4, TypeScript 6.0.2 | User interface | Error boundaries, concurrent rendering, strict types |
 | **Static Data** | TypeScript/JSON | Data source | CIA triad controls, compliance frameworks |
 | **Build System** | Vite 8.x, esbuild | Build pipeline | Optimized bundle, code splitting, tree-shaking |
-| **Test Infrastructure** | Vitest 4.0.17, Cypress 15.12.0 | Quality assurance | Exceeds 80% line coverage, component & E2E tests |
+| **Test Infrastructure** | Vitest 4.1.2, Cypress 15.13.0 | Quality assurance | Exceeds 80% line coverage, component & E2E tests |
 | **Security Scanner** | CodeQL, SonarCloud | Vulnerability detection | SAST, SCA, dependency scanning |
 | **Deployment** | AWS CloudFront + S3, GitHub Pages DR | Multi-region hosting | CloudFront CDN, S3 multi-region, SLSA Level 3, Route53 DNS |
 
@@ -441,15 +441,15 @@ C4Component
 
 ## 🧪 Testing Infrastructure (v1.1.32)
 
-Comprehensive testing architecture with Vitest 4.0.17 and Cypress 15.12.0:
+Comprehensive testing architecture with Vitest 4.1.2 and Cypress 15.13.0:
 
 ```mermaid
 C4Component
     title Testing Infrastructure - v1.1.32
 
     Container_Boundary(testFramework, "Test Infrastructure") {
-        Component(vitest, "Vitest 4.0.17", "Unit Testing", "83.26% line coverage, fast execution")
-        Component(cypress, "Cypress 15.12.0", "E2E Testing", "Component tests, session handling")
+        Component(vitest, "Vitest 4.1.2", "Unit Testing", "83.26% line coverage, fast execution")
+        Component(cypress, "Cypress 15.13.0", "E2E Testing", "Component tests, session handling")
         Component(testingLibrary, "React Testing Library 16.3.2", "Component Testing", "User-centric testing")
         Component(jsdom, "jsdom 29.0.0", "DOM Simulation", "Browser environment simulation")
     }
@@ -461,9 +461,9 @@ C4Component
     }
 
     Container_Boundary(e2eTesting, "E2E Test Suite") {
-        Component(componentTests, "Component Tests", "Cypress 15.12.0", "Isolated component testing")
-        Component(integrationTests, "Integration Tests", "Cypress 15.12.0", "Multi-widget workflows")
-        Component(visualTests, "Visual Tests", "Cypress 15.12.0", "Screenshot regression testing")
+        Component(componentTests, "Component Tests", "Cypress 15.13.0", "Isolated component testing")
+        Component(integrationTests, "Integration Tests", "Cypress 15.13.0", "Multi-widget workflows")
+        Component(visualTests, "Visual Tests", "Cypress 15.13.0", "Screenshot regression testing")
         Component(mochawesome, "Mochawesome Reports", "Reporter", "HTML test result reports")
     }
 
@@ -497,13 +497,13 @@ Current coverage from latest build ([view full report](https://ciacompliancemana
 
 ### **Test Infrastructure Features**
 
-#### **Vitest 4.0.17 Enhancements**
+#### **Vitest 4.1.2 Enhancements**
 - **Parallel Test Execution**: Faster test runs with worker threads
 - **Watch Mode**: Interactive test development workflow
 - **Snapshot Testing**: UI component regression detection
 - **Coverage Thresholds**: Automated quality gates (80% minimum)
 
-#### **Cypress 15.12.0 Improvements**
+#### **Cypress 15.13.0 Improvements**
 - **Component Testing**: Isolated widget testing in real browser
 - **Session Handling**: Improved state persistence between tests
 - **Memory Management**: Experimental memory optimization
@@ -823,8 +823,8 @@ sequenceDiagram
 ### **Testing & Quality**
 | Technology | Version | Purpose | Key Features |
 |-----------|---------|---------|--------------|
-| **Vitest** | 4.0.17 | Unit Testing | 83.26% line coverage, parallel execution, watch mode |
-| **Cypress** | 15.12.0 | E2E Testing | Component tests, improved session handling, video/screenshot control |
+| **Vitest** | 4.1.2 | Unit Testing | 83.26% line coverage, parallel execution, watch mode |
+| **Cypress** | 15.13.0 | E2E Testing | Component tests, improved session handling, video/screenshot control |
 | **@testing-library/react** | 16.3.2 | Component Testing | User-centric testing patterns |
 | **jsdom** | 29.0.0 | DOM Simulation | Fast browser environment simulation |
 
@@ -888,7 +888,7 @@ sequenceDiagram
 | ADR-006 | React 19.x Adoption | Leverage concurrent features, error boundaries | Automatic batching, improved rendering |
 | ADR-007 | TypeScript Strict Mode | Eliminate runtime type errors, improve maintainability | Zero `any` types, full null safety |
 | ADR-008 | Vite Build System | Fast development experience, optimized production builds | 175KB bundle, Vite 8.x |
-| ADR-009 | Comprehensive Testing | Ensure code quality and prevent regressions | 83.26% line coverage with Vitest 4.0.17 |
+| ADR-009 | Comprehensive Testing | Ensure code quality and prevent regressions | 83.26% line coverage with Vitest 4.1.2 |
 | ADR-010 | SLSA Level 3 Attestation | Supply chain security and build integrity | Public provenance verification |
 | ADR-011 | AWS CloudFront + S3 Deployment | Multi-region resilience, global CDN, production-grade infrastructure | CloudFront CDN, S3 multi-region, Route53 DNS, GitHub Pages DR |
 
@@ -1046,7 +1046,7 @@ The CIA Compliance Manager architecture delivers a comprehensive security assess
 - ✅ **TypeScript Strict Mode**: Complete type safety with zero `any` types
 - ✅ **Vite 8.x**: Fast builds and optimized bundles
 - ✅ **Comprehensive Testing**: Exceeds 80% line coverage target
-- ✅ **Cypress 15.12.0**: Advanced E2E and component testing
+- ✅ **Cypress 15.13.0**: Advanced E2E and component testing
 - ✅ **TailwindCSS 4.x**: Utility-first responsive styling
 
 ### **Security & Compliance**
