@@ -33,6 +33,9 @@ This document provides comprehensive documentation of the CI/CD workflows implem
 
 This document details the continuous integration and deployment workflows used in the CIA Compliance Manager project. The workflows automate testing, security scanning, and release procedures to ensure code quality and security compliance.
 
+**Current Node.js version: 25**
+**Current TypeScript version: 6.0.2**
+
 ## 📚 Related Documents
 
 - [🏛️ Current Architecture](ARCHITECTURE.md) - C4 model showing current system structure

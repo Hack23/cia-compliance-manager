@@ -67,14 +67,14 @@ export function setupChartTest() {
     });
 
   // Mock browser APIs
-  global.ResizeObserver = class ResizeObserver {
+  globalThis.ResizeObserver = class ResizeObserver {
     constructor(_callback: ResizeObserverCallback) {}
     observe() {}
     unobserve() {}
     disconnect() {}
   };
 
-  global.requestAnimationFrame = vi.fn().mockImplementation((cb) => {
+  globalThis.requestAnimationFrame = vi.fn().mockImplementation((cb) => {
     cb(0);
     return 0;
   });

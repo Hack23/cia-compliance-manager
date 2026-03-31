@@ -223,7 +223,7 @@ template: |
 
   - ⚡ **Vite 8.x** — Lightning-fast build tool
   - ⚛️ **React 19.x** — Modern UI framework
-  - 🔷 **TypeScript 5.9** — Type-safe development
+  - 🔷 **TypeScript 6.0** — Type-safe development
   - 📊 **Chart.js 4.x** — Interactive data visualization
   - 🧪 **Vitest 4.x** — Fast unit testing framework
   - 🌐 **Cypress 15.x** — End-to-end testing

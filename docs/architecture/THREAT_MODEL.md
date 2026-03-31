@@ -46,7 +46,7 @@ This threat model demonstrates **🛡️ cybersecurity consulting expertise** th
 - 🔧 **GitHub Pages Hosting**: CDN-based static content delivery with HTTPS
 - 🛡️ **GitHub Actions CI/CD**: SLSA Level 3 build provenance and attestations
 - 📦 **NPM Dependency Ecosystem**: 4 production dependencies with SBOM tracking
-- 🔍 **Client-Side Assessment Engine**: TypeScript 5.9.3 strict mode with type safety
+- 🔍 **Client-Side Assessment Engine**: TypeScript 6.0.2 strict mode with type safety
 - 🧪 **Cypress 15.10.0 Testing**: Comprehensive E2E and component security testing
 - 🛡️ **Content Security Policy**: Multi-layer XSS protection with strict CSP headers
 

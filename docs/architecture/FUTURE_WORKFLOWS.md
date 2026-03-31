@@ -26,6 +26,7 @@ The future enhancements build upon the robust v1.1 workflow foundation:
 - ✅ **Automated PR Management**: Labeling, dependency review, test reporting
 - ✅ **Documentation Pipeline**: Integrated documentation generation and deployment
 - ✅ **Node.js 25.x Runtime**: All CI/CD workflows use `node-version: "25"` (`engines.node >= 25.0.0`)
+- ✅ **TypeScript 6.0.2**: Upgraded from 5.9.3 with TS6 breaking change fixes (`global` → `globalThis`, `ignoreDeprecations: "6.0"` for Cypress)
 
 **Planned Immediate Upgrade (~April 2026):**
 - ⬆️ **Node.js 26.x**: Upgrade immediately after Node.js 26 release (expected April 2026, LTS October 2026)
@@ -674,6 +675,33 @@ Key benefits of these enhancements include:
 - 🤖 Automated remediation reducing manual security work by 60%
 - 📈 Progressive deployment strategies enabling safer releases with quick rollback
 </div>
+
+---
+
+## TypeScript Upgrade Planning
+
+### Current State
+
+TypeScript **6.0.2** is in use. The `@typescript-eslint 8.58.0` peer dependency constraint is `typescript >=4.8.4 <6.1.0`.
+
+### TypeScript 6.1 Upgrade (Expected ~June 2026)
+
+When TypeScript 6.1 is released:
+
+1. **Check `@typescript-eslint` compatibility** — version 8.58.0 requires `<6.1.0`; a newer release will be needed
+2. **Update `@typescript-eslint`** to a version supporting TS 6.1
+3. **Update `package.json`** — change `typescript` to the new version
+4. **Run full validation** — `npm run build`, `npm run lint`, `npm run test`
+5. **Review breaking changes** — consult [TypeScript release notes](https://devblogs.microsoft.com/typescript/)
+
+### TypeScript 7.0 Upgrade (Expected ~2027)
+
+Major version upgrades may require:
+
+- Code changes for stricter type checking
+- `tsconfig.json` updates for new compiler options
+- `@typescript-eslint` major version upgrade
+- Dedicated PR with full test suite validation
 
 ---
 

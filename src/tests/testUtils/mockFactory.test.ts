@@ -34,7 +34,7 @@ describe("mockFactory utilities", () => {
     it("mocks ResizeObserver", () => {
       mockDOMAPIs();
 
-      expect(global.ResizeObserver).toBeDefined();
+      expect(globalThis.ResizeObserver).toBeDefined();
 
       const observer = new ResizeObserver(() => {});
       expect(observer).toHaveProperty("observe");
@@ -45,7 +45,7 @@ describe("mockFactory utilities", () => {
     it("mocks requestAnimationFrame", () => {
       mockDOMAPIs();
 
-      expect(global.requestAnimationFrame).toBeDefined();
+      expect(globalThis.requestAnimationFrame).toBeDefined();
 
       const callback = vi.fn();
       requestAnimationFrame(callback);

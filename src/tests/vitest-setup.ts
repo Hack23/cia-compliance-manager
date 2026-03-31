@@ -11,7 +11,7 @@ import { expect, vi } from "vitest";
 expect.extend(matchers);
 
 // Set up common mocks that all tests might need
-global.ResizeObserver = vi.fn().mockImplementation(() => ({
+globalThis.ResizeObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
@@ -38,7 +38,7 @@ HTMLCanvasElement.prototype.getContext = vi.fn().mockReturnValue({
 });
 
 // Mock intersection observer
-global.IntersectionObserver = vi.fn().mockImplementation(() => ({
+globalThis.IntersectionObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
@@ -88,7 +88,7 @@ console.error = (...args) => {
 };
 
 // Setup fetch mocks
-global.fetch = vi.fn();
+globalThis.fetch = vi.fn();
 
 // Setup localStorage mock
 class MockStorage {

@@ -104,7 +104,7 @@ C4Container
     Person(developer, "Developer", "Maintains and extends platform")
     
     System_Boundary(ciaManager, "CIA Compliance Manager") {
-        Container(frontend, "Frontend Application", "React 19.2.x, TypeScript 5.9.x (Strict)", "SPA with error boundaries, context API state management")
+        Container(frontend, "Frontend Application", "React 19.2.x, TypeScript 6.0.x (Strict)", "SPA with error boundaries, context API state management")
         ContainerDb(staticData, "Static Data", "TypeScript/JSON", "Security controls, frameworks, CIA triad data")
         Container(buildSystem, "Build System", "Vite 8.x, esbuild", "Code splitting, tree-shaking, bundle optimization")
         Container(testFramework, "Test Infrastructure", "Vitest 4.0.17, Cypress 15.12.0", "Unit tests (exceeds 80% line coverage), E2E tests")
@@ -129,7 +129,7 @@ C4Container
 
 | Container | Technology Stack | Purpose | Key Features |
 |-----------|-----------------|---------|--------------|
-| **Frontend Application** | React 19.2.4, TypeScript 5.9.3 | User interface | Error boundaries, concurrent rendering, strict types |
+| **Frontend Application** | React 19.2.4, TypeScript 6.0.2 | User interface | Error boundaries, concurrent rendering, strict types |
 | **Static Data** | TypeScript/JSON | Data source | CIA triad controls, compliance frameworks |
 | **Build System** | Vite 8.x, esbuild | Build pipeline | Optimized bundle, code splitting, tree-shaking |
 | **Test Infrastructure** | Vitest 4.0.17, Cypress 15.12.0 | Quality assurance | Exceeds 80% line coverage, component & E2E tests |
@@ -393,7 +393,7 @@ C4Component
         Component(vite, "Vite 8.0.x", "Build Tool", "Lightning-fast HMR and optimized builds")
         Component(esbuild, "esbuild", "Minifier", "Ultra-fast JavaScript minification")
         Component(rollup, "Rollup", "Bundler", "Advanced code splitting and tree-shaking")
-        Component(tsCompiler, "TypeScript 5.9.3", "Compiler", "Strict mode compilation with full type checking")
+        Component(tsCompiler, "TypeScript 6.0.2", "Compiler", "Strict mode compilation with full type checking")
         Component(visualizer, "Bundle Visualizer", "Analysis", "Bundle size analysis and optimization insights")
     }
 
@@ -904,7 +904,7 @@ sequenceDiagram
 | **Usability** | Consistent UI, error recovery, responsive design | Error boundaries active |
 | **Reliability** | Multi-region S3, CloudFront, GitHub Pages DR | Target 99.9% (CloudFront SLA – service credits) |
 | **Availability** | AWS multi-region, Route53 DNS failover | RTO targets: ~5–10 min (CloudFront), ~15 min (DR) |
-| **Type Safety** | TypeScript 5.9.x strict mode | 100% type coverage |
+| **Type Safety** | TypeScript 6.0.x strict mode | 100% type coverage |
 
 ## 🔍 Business View of Architecture 
 

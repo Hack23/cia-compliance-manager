@@ -11,7 +11,7 @@
 
 > **Version:** v1.1.32 | **Last Updated:** 2026-03-19 | **Status:** Production
 
-This document illustrates comprehensive process flows and workflows within the CIA Compliance Manager v1.1.32 application, showing how security assessment capabilities are delivered through React 19.x components (TypeScript 5.9, Vite 8.x, Tailwind CSS 4.x) with error handling, validation, and state management.
+This document illustrates comprehensive process flows and workflows within the CIA Compliance Manager v1.1.32 application, showing how security assessment capabilities are delivered through React 19.x components (TypeScript 6.0, Vite 8.x, Tailwind CSS 4.x) with error handling, validation, and state management.
 
 ## 📚 Related Documentation
 

@@ -72,7 +72,7 @@ describe("RadarChart Extended Tests", () => {
     });
 
     // Mock window.ResizeObserver with correct type
-    global.ResizeObserver = class ResizeObserver {
+    globalThis.ResizeObserver = class ResizeObserver {
       constructor(_callback: ResizeObserverCallback) {}
       observe() {}
       unobserve() {}
@@ -80,7 +80,7 @@ describe("RadarChart Extended Tests", () => {
     };
 
     // Mock requestAnimationFrame
-    global.requestAnimationFrame = vi.fn().mockImplementation((callback) => {
+    globalThis.requestAnimationFrame = vi.fn().mockImplementation((callback) => {
       callback(0);
       return 0;
     });

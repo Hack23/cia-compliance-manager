@@ -1341,7 +1341,7 @@ import WidgetErrorBoundary from './components/common/WidgetErrorBoundary';
 
 ```mermaid
 flowchart LR
-    subgraph "TypeScript 5.9.3 Strict Mode"
+    subgraph "TypeScript 6.0.2 Strict Mode"
         A[🔒 strictNullChecks] --> B[✅ Null Safety]
         C[🔒 noImplicitAny] --> D[✅ Type Safety]
         E[🔒 strictFunctionTypes] --> F[✅ Function Safety]

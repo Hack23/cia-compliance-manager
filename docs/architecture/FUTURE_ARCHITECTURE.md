@@ -17,7 +17,7 @@ This document outlines the comprehensive architectural evolution roadmap for the
 
 ### **v1.0 Achievements (Current State)**
 - ✅ **React 19.2.x**: Modern frontend with error boundaries and concurrent rendering
-- ✅ **TypeScript 5.9.x Strict Mode**: Complete type safety with zero `any` types
+- ✅ **TypeScript 6.0.x Strict Mode**: Complete type safety with zero `any` types
 - ✅ **>=80% Test Coverage Target Met**: Exceeds 80% target with comprehensive unit and E2E tests
 - ✅ **Bundle Size Budget Enforced (<180KB)**: Optimized bundle within 180KB target
 - ✅ **SLSA Level 3**: Build provenance and supply chain integrity
@@ -170,7 +170,7 @@ C4Container
 
   System_Boundary(ciaCM, "CIA Compliance Manager Platform") {
     Container(cloudFront, "CloudFront CDN", "AWS CloudFront + WAF", "Global content delivery with DDoS protection and WAF rules")
-    Container(webApp, "Web Application", "React 19.x, TypeScript 5.9", "SPA with error boundaries and AWS SDK integration")
+    Container(webApp, "Web Application", "React 19.x, TypeScript 6.0", "SPA with error boundaries and AWS SDK integration")
     
     Container(apiGateway, "API Gateway", "AWS API Gateway", "RESTful and GraphQL APIs with authentication, rate limiting, and request validation")
     Container(authService, "Authentication Service", "AWS Cognito", "User authentication with MFA, SSO, and federated identity")

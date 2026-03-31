@@ -37,7 +37,7 @@ export function mockDOMAPIs() {
   });
 
   // Mock ResizeObserver
-  global.ResizeObserver = class ResizeObserver {
+  globalThis.ResizeObserver = class ResizeObserver {
     constructor(_callback: ResizeObserverCallback) {}
     observe() {}
     unobserve() {}
@@ -45,7 +45,7 @@ export function mockDOMAPIs() {
   };
 
   // Mock requestAnimationFrame
-  global.requestAnimationFrame = (callback: FrameRequestCallback) => {
+  globalThis.requestAnimationFrame = (callback: FrameRequestCallback) => {
     callback(0);
     return 0;
   };

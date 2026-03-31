@@ -78,7 +78,7 @@ mindmap
         📅 Current: Latest
         ⏰ EOL: ~2027-2028
         🔄 Concurrent Features
-      📝 TypeScript 5.9.3
+      📝 TypeScript 6.0.2
         📅 Current: Latest
         ⏰ EOL: Active (6-month cycles)
         🔄 Strict Mode Enabled
@@ -124,7 +124,7 @@ mindmap
 | **Technology Category** | **Current Version**       | **Release Model**               | **EOL Timeline**   | **Migration Complexity**                                                                                                                                |
 | ----------------------- | ------------------------- | ------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **⚛️ React Framework**  | 19.2.4 (Latest)           | Major annually, Minor quarterly | ~2027-2028         | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
-| **📝 TypeScript**       | 5.9.3 (Latest)            | Major every 6 months            | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
+| **📝 TypeScript**       | 6.0.2 (Latest)            | Major every ~12 months          | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
 | **⚡ Vite Build Tool**  | 8.0.0 (Latest)            | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
 | **☕ Node.js Runtime**  | 25.x (Production)         | New: 1 major/year from 27.x    | Current EOL Apr 2026 → 26.x LTS | [![High](https://img.shields.io/badge/Complexity-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)     |
 | **🧪 Testing Stack**    | Vitest 4.x + Cypress 15.x | Major annually                  | Active development | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
@@ -244,7 +244,7 @@ gantt
 }%%
 flowchart TB
     subgraph PREPARATION["🔬 Pre-Migration Testing"]
-        COMPAT_TEST["🧪 Compatibility Testing<br/>• Vite 8+ compatibility<br/>• React 19 compatibility<br/>• TypeScript 5+ compatibility<br/>• Chart.js compatibility"]
+        COMPAT_TEST["🧪 Compatibility Testing<br/>• Vite 8+ compatibility<br/>• React 19 compatibility<br/>• TypeScript 6+ compatibility<br/>• Chart.js compatibility"]
         DEP_AUDIT["📦 Dependency Audit<br/>• NPM package compatibility<br/>• Native module rebuilds<br/>• Security vulnerability scan<br/>• License compliance check"]
         PERF_BASELINE["📊 Performance Baseline<br/>• Build time comparison<br/>• Runtime performance<br/>• Memory usage analysis<br/>• Bundle size impact"]
     end
@@ -290,6 +290,8 @@ flowchart TB
 | **🔧 Build System Changes** | [![Medium](https://img.shields.io/badge/Risk-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | [![Medium](https://img.shields.io/badge/Impact-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Vite + OXC compatibility testing | Build process unchanged |
 | **🌐 Runtime API Changes** | [![Low](https://img.shields.io/badge/Risk-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | [![Low](https://img.shields.io/badge/Impact-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | API compatibility validation | All APIs function correctly |
 | **🔒 Security Control Impact** | [![Low](https://img.shields.io/badge/Risk-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | [![High](https://img.shields.io/badge/Impact-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Security scanning + attestation | Security posture maintained |
+| **📝 TypeScript major upgrade breaks build** | [![Medium](https://img.shields.io/badge/Risk-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | [![High](https://img.shields.io/badge/Impact-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Test with `tsc --noEmit`, lint, and full test suite before merging | Build + lint + tests pass |
+| **📝 @typescript-eslint drops TS version support** | [![Medium](https://img.shields.io/badge/Risk-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | [![High](https://img.shields.io/badge/Impact-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Monitor peer dependency ranges; pin TypeScript if needed | Type-aware linting operational |
 
 ### **🚀 Node.js 26.x Upgrade Preparation (Immediate — ~April 2026)**
 
@@ -310,7 +312,7 @@ flowchart TB
 - [ ] Monitor [Node.js 26 release notes](https://github.com/nodejs/node/blob/main/CHANGELOG.md) for breaking changes
 - [ ] Test CI pipeline against Node.js 26.x release candidate builds
 - [ ] Verify Vite 8+ compatibility with Node.js 26
-- [ ] Verify React 19 / TypeScript 5 / ESLint 9 compatibility
+- [ ] Verify React 19 / TypeScript 6 / ESLint 9 compatibility
 - [ ] Run full test suite (`npm run test:coverage`) on Node.js 26
 - [ ] Validate Cypress 15 E2E tests on Node.js 26
 - [ ] Check all native/build tooling (knip, dependency-cruiser) compatibility
@@ -329,6 +331,51 @@ flowchart TB
 | **29.x** | New sched — Alpha→LTS | Oct 2028 (alpha) / Apr 2029 (GA) | Oct 2029 | Apr 2032 | 📋 Planned upgrade ~Apr 2029 |
 
 > **Note:** Starting with Node.js 27.x (new release schedule), **all releases become LTS** — no more odd/even distinction. Versions align with the calendar year of their GA release (27 GA in April 2027, 28 GA in April 2028).
+
+---
+
+## 📝 TypeScript Release Cadence
+
+Microsoft publishes TypeScript on a roughly quarterly schedule:
+
+- **Major versions** (e.g., 5.0 → 6.0) ship approximately once per year with breaking changes
+- **Minor versions** (e.g., 6.0 → 6.1) ship every 2–3 months with new features
+- **Patch versions** (e.g., 6.0.1 → 6.0.2) ship as needed for bug fixes
+
+### TypeScript Lifecycle Status
+
+| TypeScript | Release Date | Status | Support Until |
+|-----------|-------------|--------|---------------|
+| **6.0.2** | Mar 2026 | ✅ **Active — in use** | Until 7.0 release (~12 months) |
+| 5.9.x | Feb 2026 | Previous stable | Limited — security patches only |
+| 5.8.x | Dec 2025 | End of life | ❌ No support |
+
+> **Note:** TypeScript 6.0 is a major release with breaking changes including stricter module resolution with `moduleResolution: "bundler"`, removal of implicit `global` namespace, and stricter `NodeJS` namespace handling. The project uses `@typescript-eslint 8.58.0` which supports `typescript >=4.8.4 <6.1.0`.
+
+### TypeScript & Toolchain Version Matrix
+
+| Tool | Current Version | Peer Constraint | Upgrade Path |
+|------|----------------|-----------------|--------------
+| TypeScript | **6.0.2** | — | Follow quarterly releases |
+| @typescript-eslint | **8.58.0** | `typescript >=4.8.4 <6.1.0` | Must update before TS 6.1 |
+| Vite | **8.0.3** | — | Follow major releases |
+| Vitest | **4.1.2** | — | Keep aligned with Vite |
+
+### TypeScript Upgrade Policy
+
+1. **Upgrade to new patch versions immediately** — bug fixes only, no breaking changes.
+2. **Upgrade to new minor versions within 2 weeks** — validate `tsc --noEmit`, ESLint, and all tests pass.
+3. **Upgrade to new major versions within 1 month** — major versions may require code changes and `@typescript-eslint` compatibility updates.
+4. **Never use TypeScript versions unsupported by `@typescript-eslint`** — this would disable type-aware linting.
+
+### TypeScript Upgrade Triggers
+
+| Trigger | Action | Timeline |
+|---------|--------|----------|
+| New patch release (e.g., 6.0.3) | Update `package.json`, run full CI | Within 1 week |
+| New minor release (e.g., 6.1.0) | Verify `@typescript-eslint` compatibility first | Within 2 weeks |
+| New major release (e.g., 7.0.0) | Full compatibility assessment, dedicated PR | Within 1 month |
+| `@typescript-eslint` drops support | Upgrade `@typescript-eslint` or pin TypeScript | Within 24 hours |
 
 ---
 
@@ -361,9 +408,8 @@ gantt
     section Build & Tooling
     Vite 8.x                  :active, vite8, 2026-01-01, 2027-06-01
     Vite 9.x (Future)         :vite9, 2027-01-01, 2028-06-01
-    TypeScript 5.x            :active, ts5, 2024-03-16, 2026-03-31
-    TypeScript 6.x (Future)   :ts6, 2025-09-01, 2026-09-30
-    TypeScript 7.x (Future)   :ts7, 2026-03-01, 2027-09-30
+    TypeScript 6.x            :active, ts6, 2026-03-01, 2027-03-31
+    TypeScript 7.x (Future)   :ts7, 2027-03-01, 2028-03-31
 
     section Visualization & UI
     Chart.js 4.x              :active, chartjs4, 2024-01-01, 2027-12-31

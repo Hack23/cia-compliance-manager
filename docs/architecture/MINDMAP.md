@@ -605,7 +605,7 @@ mindmap
         Changelog Generation
         Tag-based Releases
     (🔧 Development Tools)
-      📝 TypeScript 5.9.3
+      📝 TypeScript 6.0.2
         Strict Mode
         Type Safety
         Zero Any Types
@@ -709,7 +709,7 @@ mindmap
         Error Handling
         Fallback UI
     (📝 Language & Types)
-      TypeScript 5.9.3
+      TypeScript 6.0.2
         Strict Mode Enabled
         Zero Any Types
         Type Safety
