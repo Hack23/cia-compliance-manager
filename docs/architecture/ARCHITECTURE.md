@@ -816,7 +816,7 @@ sequenceDiagram
 ### **Development Tools**
 | Technology | Version | Purpose | Key Features |
 |-----------|---------|---------|--------------|
-| **TypeScript** | 5.9.3 | Type System | Strict mode, full type safety, zero `any` types |
+| **TypeScript** | 6.0.2 | Type System | Strict mode, full type safety, zero `any` types |
 | **Vite** | 8.0.x | Build Tool | Lightning-fast HMR, optimized builds, esbuild integration |
 | **esbuild** | (via Vite) | Minifier | Ultra-fast JavaScript/TypeScript transpilation |
 

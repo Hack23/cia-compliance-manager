@@ -355,7 +355,7 @@ Microsoft publishes TypeScript on a roughly quarterly schedule:
 ### TypeScript & Toolchain Version Matrix
 
 | Tool | Current Version | Peer Constraint | Upgrade Path |
-|------|----------------|-----------------|--------------
+|------|----------------|-----------------|--------------|
 | TypeScript | **6.0.2** | — | Follow quarterly releases |
 | @typescript-eslint | **8.58.0** | `typescript >=4.8.4 <6.1.0` | Must update before TS 6.1 |
 | Vite | **8.0.3** | — | Follow major releases |
@@ -786,7 +786,7 @@ graph TB
     subgraph HEALTH["🏥 Technology Health Dashboard"]
         subgraph CORE["⚛️ Core Technologies"]
             REACT[📊 React Health<br/>Version: 19.2.4<br/>EOL: ~2027<br/>Status: ✅ Healthy]
-            TS[📊 TypeScript Health<br/>Version: 5.9.3<br/>EOL: Active<br/>Status: ✅ Healthy]
+            TS[📊 TypeScript Health<br/>Version: 6.0.2<br/>EOL: Active<br/>Status: ✅ Healthy]
             NODE[📊 Node.js Health<br/>Version: 25.x<br/>Current EOL: Apr 2026<br/>Status: ⚠️ Plan →26.x]
         end
         
