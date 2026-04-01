@@ -118,6 +118,8 @@ jobs:
       - name: Prepare coverage directory
         run: |
           mkdir -p docs/coverage docs/dependencies
+          # Prevent Jekyll/Liquid processing of documentation files
+          touch docs/.nojekyll
           echo "Coverage directory prepared at $(date)" > docs/coverage/build-info.txt
 
       # Generate documentation bundle
@@ -346,6 +348,8 @@ jobs:
         run: |
           mkdir -p docs
           unzip -o artifacts/build/cia-compliance-manager-${{ needs.prepare.outputs.version }}.zip -d docs/
+          # Prevent Jekyll/Liquid processing of documentation files
+          touch docs/.nojekyll
           # Create version marker for traceability
           echo "Version ${{ needs.prepare.outputs.version }} deployed at $(date)" > docs/version.txt
 
