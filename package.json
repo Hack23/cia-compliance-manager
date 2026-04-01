@@ -182,7 +182,7 @@
     "eslint": "10.1.0",
     "globals": "17.4.0",
     "jsdom": "29.0.1",
-    "knip": "6.1.1",
+    "knip": "6.2.0",
     "license-compliance": "3.0.1",
     "mocha-junit-reporter": "2.2.1",
     "mochawesome": "7.1.4",
