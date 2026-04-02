@@ -63,7 +63,7 @@ permissions:
   issues: read
 tools:
   github:
-    toolsets: [issues, labels]
+    toolsets: [default, labels]
 safe-outputs:
   add-labels:
     allowed: [bug, feature, enhancement, documentation]

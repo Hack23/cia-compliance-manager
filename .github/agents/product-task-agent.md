@@ -1,7 +1,7 @@
 ---
 name: product-task-agent
 description: Expert product task coordinator for CIA Compliance Manager, creating GitHub issues and optimizing quality, UX, and ISMS alignment
-tools: ["view", "edit", "create", "bash", "search_code", "custom-agent", "github-create_issue", "github-list_issues", "github-update_issue", "github-search_issues", "github-add_issue_comment", "playwright-browser_snapshot", "playwright-browser_take_screenshot", "playwright-browser_navigate", "playwright-browser_click"]
+tools: ["view", "edit", "create", "bash", "search_code", "custom-agent", "github-create_issue", "github-list_issues", "github-update_issue", "github-search_issues", "github-add_issue_comment", "playwright-browser_snapshot", "playwright-browser_take_screenshot", "playwright-browser_navigate", "playwright-browser_click", "assign_copilot_to_issue", "get_copilot_job_status"]
 ---
 
 # Product Task Agent

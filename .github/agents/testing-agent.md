@@ -24,8 +24,8 @@ Unit testing (Vitest), E2E testing (Cypress), component testing (React Testing L
 
 | Layer | Tool | Coverage Target | Location |
 |-------|------|----------------|----------|
-| Unit | Vitest | 80%+ (100% security paths) | `src/**/*.test.tsx` |
-| Integration | Vitest | 80%+ | `src/**/*.test.tsx` |
+| Unit | Vitest | 80%+ (100% security paths) | `src/**/*.test.{ts,tsx}` |
+| Integration | Vitest | 80%+ | `src/**/*.test.{ts,tsx}` |
 | E2E | Cypress | Critical flows | `cypress/e2e/*.cy.ts` |
 
 ## Testing Guidelines
