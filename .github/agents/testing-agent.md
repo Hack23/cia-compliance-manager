@@ -26,7 +26,7 @@ Unit testing (Vitest), E2E testing (Cypress), component testing (React Testing L
 |-------|------|----------------|----------|
 | Unit | Vitest | 80%+ (100% security paths) | `src/**/*.test.{ts,tsx}` |
 | Integration | Vitest | 80%+ | `src/**/*.test.{ts,tsx}` |
-| E2E | Cypress | Critical flows | `cypress/e2e/*.cy.ts` |
+| E2E | Cypress | Critical flows | `cypress/e2e/**/*.cy.ts` |
 
 ## Testing Guidelines
 
@@ -69,7 +69,7 @@ describe('ComponentName', () => {
 - **Services**: `vi.mock()` for service modules
 - **Data**: Use typed fixtures, not arbitrary data
 - **Components**: Mock complex children when testing parents
-- Service catch blocks must log errors with context via `logger.warn` before fallback
+- When a service catch block intentionally handles an error and continues with a fallback, ensure it logs the error with appropriate context using the established logging/error utilities from `src/services/`, rather than silently swallowing it.
 
 ### Commands
 ```bash

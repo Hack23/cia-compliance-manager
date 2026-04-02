@@ -57,7 +57,7 @@ src/data/        - Static data modules
 - Colocated tests (`Component.test.tsx` next to `Component.tsx`)
 - 80%+ test coverage for new code
 - No `eval()`, `innerHTML`, or unsanitized user content
-- Service catch blocks must log error context via `logger.warn`
+- Service catch blocks that swallow errors and return fallbacks must log relevant error context, following the existing error/logging patterns used in `src/services/*`
 
 ## Build & Lint
 ```bash
