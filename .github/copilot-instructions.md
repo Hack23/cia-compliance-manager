@@ -112,7 +112,7 @@ Performance benchmarks · Code complexity tracking · Bundle size analysis · Mu
 | Knip | 6.x | Dead code detection |
 | TailwindCSS | 4.x | Utility-first CSS |
 
-**Package**: ES module npm library with 10 subpath exports (types, services, hooks, utils, components, widgets, constants, data, contexts).
+**Package**: ES module npm library with 10 subpath exports (types, services, hooks, utils, components (including `components/widgets`), constants, data, contexts).
 
 ---
 

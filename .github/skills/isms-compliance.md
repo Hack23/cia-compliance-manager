@@ -501,7 +501,7 @@ npm run coverage          # Test coverage validation
 # Run before creating PR
 npm run build             # Build succeeds (includes TypeScript strict checks)
 npm run test:e2e          # E2E tests pass
-npm audit                 # Generate vulnerability report
+npm audit                 # Dependency vulnerability check
 ```
 
 ### Documentation Checks
