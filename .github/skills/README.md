@@ -4,14 +4,24 @@ Strategic, rule-based skills that guide all Copilot agents and development in th
 
 ## What Are Skills?
 
-Skills are **strategic principles** (the *what* and *why*) that define rules for code quality, security, testing, and compliance. Agents are **tactical executors** (the *how*) that apply these skills in specific domains.
+Skills are **strategic principles** (the *what* and *why*) that define rules for code quality, security, testing, and compliance. They are rule-based documents using a MUST/SHOULD/MAY hierarchy that all agents and developers follow.
+
+**Key distinction**: Skills define *what to do* (principles). Agents define *how to do it* (execution).
 
 | Aspect | Skills | Agents |
 |--------|--------|--------|
-| **Level** | Strategic | Tactical |
-| **Focus** | Principles & rules | Task execution |
-| **Scope** | Cross-cutting | Domain-specific |
+| **Level** | Strategic — high-level principles | Tactical — task execution |
+| **Scope** | Cross-cutting, apply everywhere | Domain-specific focus |
+| **Content** | Rules (MUST/SHOULD/MAY) | Instructions for specific tasks |
 | **Location** | `.github/skills/` | `.github/agents/` |
+| **Example** | "MUST validate all inputs" | "When reviewing code, check input validation" |
+
+### How Skills Work
+
+1. **Before code changes**: Developer or agent consults relevant skills
+2. **During implementation**: Skills rules guide decisions (no `any` types, 80%+ coverage, etc.)
+3. **Before commit**: Skills checklist validates compliance
+4. **During review**: Reviewers check against skill rules
 
 ## Available Skills
 

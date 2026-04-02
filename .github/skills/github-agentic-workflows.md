@@ -92,11 +92,16 @@ Supported AI engines (v0.45+):
 | **Copilot** (default) | Code analysis, GitHub operations | Well-integrated, uses Copilot CLI |
 | **Claude** | Complex reasoning, long context | Strong analytical capabilities |
 | **Codex** | Code generation | OpenAI-based |
-| **Gemini** | Multi-modal analysis | Google AI |
+| **Gemini** | Multi-modal analysis | Google AI, requires Gemini API access |
 
 ```yaml
 ---
 engine: copilot  # or 'claude', 'codex', 'gemini'
+# Note: Each engine may require specific API keys or permissions.
+# Copilot uses GitHub's built-in integration (default).
+# Claude requires Anthropic API access.
+# Codex requires OpenAI API access.
+# Gemini requires Google AI API access.
 ---
 ```
 
