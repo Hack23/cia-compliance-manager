@@ -67,7 +67,7 @@ Need coordination?
 2. **MUST** use explicit TypeScript types (no `any`)
 3. **MUST** maintain 80%+ test coverage
 4. **MUST** follow ISMS compliance requirements
-5. **MUST** run `npm run lint && npm run type-check && npm run test && npm run build` before committing
+5. **MUST** run `npm run lint && npm run test && npm run build` before committing
 
 ## Contributing
 

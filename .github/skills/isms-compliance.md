@@ -491,7 +491,6 @@ Requirements:
 ```bash
 # Run before committing
 npm run lint              # Code style compliance
-npm run type-check        # Type safety compliance
 npm run test              # Functional compliance
 npm run audit             # Dependency vulnerability check
 npm run coverage          # Test coverage validation

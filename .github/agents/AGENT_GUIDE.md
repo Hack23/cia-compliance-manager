@@ -57,7 +57,7 @@ Custom agents are specialized GitHub Copilot configurations providing domain-spe
 2. **Provide context** — Reference issues, error messages, or requirements
 3. **One task per invocation** — Keep requests focused
 4. **Check agent output** — Verify against project rules before committing
-5. **Run checks** — Always run `npm run lint && npm run type-check && npm run test && npm run build`
+5. **Run checks** — Always run `npm run lint && npm run test && npm run build`
 
 ## Key Project Rules (All Agents Follow)
 

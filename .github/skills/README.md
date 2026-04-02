@@ -75,7 +75,7 @@ Skills use MUST/SHOULD/MAY enforcement:
 
 1. **Before any code change**: Check relevant skills for rules
 2. **ALWAYS check reusability**: Search `src/types/`, `src/utils/`, `src/services/` before creating new code
-3. **Run checks**: `npm run lint && npm run type-check && npm run test && npm run build`
+3. **Run checks**: `npm run lint && npm run test && npm run build`
 4. **Verify compliance**: No `any` types, 80%+ coverage, JSDoc for public APIs
 
 ## Related

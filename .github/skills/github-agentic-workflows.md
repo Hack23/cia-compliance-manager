@@ -67,7 +67,7 @@ tools:
 safe-outputs:
   add-labels:
     allowed: [bug, feature, enhancement, documentation]
-  add-comment: {}
+  create-issue-comment: {}
 network: defaults
 strict: true
 ---

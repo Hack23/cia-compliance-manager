@@ -62,8 +62,7 @@ src/data/        - Static data modules
 ## Build & Lint
 ```bash
 npm run lint         # ESLint 10.x flat config
-npm run type-check   # TypeScript strict
-npm run build        # Vite production build
+npm run build        # Vite production build (includes TypeScript strict checks)
 npm run build:lib    # Library build (vite.config.lib.ts + tsconfig.lib.json)
 npm run knip         # Dead code detection
 ```

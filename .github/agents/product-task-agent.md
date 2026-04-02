@@ -95,10 +95,13 @@ TypeScript 6.0.2 · React 19.x · Vite 8 · Vitest 4.x · Cypress 15.x · Node �
 3. **Create Issues**: Detailed, actionable, with acceptance criteria
 4. **Coordinate**: Reference related issues, suggest agent assignments
 
-## Copilot Assignment
+## Copilot Assignment (MCP Tool Examples)
+
+These examples show how to use GitHub MCP tools to assign issues to Copilot coding agent:
 
 ### Assign to Copilot Coding Agent
 ```javascript
+// MCP tool: assign_copilot_to_issue
 assign_copilot_to_issue({
   owner: "Hack23", repo: "cia-compliance-manager",
   issue_number: ISSUE_NUMBER,
@@ -109,5 +112,6 @@ assign_copilot_to_issue({
 
 ### Track Progress
 ```javascript
+// MCP tool: get_copilot_job_status
 get_copilot_job_status({ owner: "Hack23", repo: "cia-compliance-manager", id: JOB_ID })
 ```

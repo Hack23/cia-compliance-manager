@@ -1,6 +1,6 @@
 # 🤖 GitHub Copilot Instructions for CIA Compliance Manager
 
-**Version**: 3.0 | **Package**: v1.1.43 | **Stack**: TypeScript 6.0.2, React 19.x, Vite 8, Node 25, ES2025
+**Version**: 3.0 | **Package**: v1.1.43 | **Stack**: TypeScript 6.0.2, React 19.x, Vite 8, Node >=25, ES2025
 
 ---
 
@@ -127,10 +127,9 @@ Performance benchmarks · Code complexity tracking · Bundle size analysis · Mu
 ### Before Committing (MANDATORY)
 ```bash
 npm run lint              # Fix all errors
-npm run type-check        # No TypeScript errors
 npm run test              # All tests pass
 npm run test:coverage     # Coverage ≥ 80%
-npm run build             # Build succeeds
+npm run build             # Build succeeds (includes TypeScript strict checks)
 ```
 
 ---
