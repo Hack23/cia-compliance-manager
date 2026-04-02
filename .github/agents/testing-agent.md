@@ -18,7 +18,7 @@ Read first: `README.md`, `.github/workflows/copilot-setup-steps.yml`, `.github/c
 TypeScript 6.0.2 · React 19.x · Vitest 4.x · Cypress 15.x · React Testing Library · Node ≥25 · ES2025
 
 ## Expertise
-Unit testing (Vitest), E2E testing (Cypress), component testing (React Testing Library), coverage analysis, accessibility testing (jest-axe), test architecture.
+Unit testing (Vitest), E2E testing (Cypress), component testing (React Testing Library), coverage analysis, accessibility testing (automated and manual), test architecture.
 
 ## Testing Framework
 

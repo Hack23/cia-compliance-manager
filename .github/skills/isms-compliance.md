@@ -499,10 +499,9 @@ npm run coverage          # Test coverage validation
 ### Pre-PR Checks
 ```bash
 # Run before creating PR
-npm run build             # Build succeeds
+npm run build             # Build succeeds (includes TypeScript strict checks)
 npm run test:e2e          # E2E tests pass
-npm run audit:report      # Generate vulnerability report
-npm run bundle-analysis   # Check bundle size compliance
+npm audit                 # Generate vulnerability report
 ```
 
 ### Documentation Checks
