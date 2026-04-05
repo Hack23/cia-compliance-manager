@@ -166,3 +166,5 @@ yarn-error.log*
 # ESLint
 .eslintcache
 test-results.xml
+light-mode-screenshot.png
+.playwright-mcp/
