@@ -10,9 +10,9 @@
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  height: 100% !important; /* Ensure widgets fill their containers */
-  max-height: none !important; /* Remove max-height restrictions */
-  min-height: 0 !important; /* Remove min-height restrictions */
+  height: 100%; /* Ensure widgets fill their containers */
+  max-height: none; /* Remove max-height restrictions */
+  min-height: 0; /* Remove min-height restrictions */
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -47,8 +47,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: auto !important;
-  min-height: auto !important;
+  height: auto;
+  min-height: auto;
 }
 
 .dark .widget-header,
@@ -101,9 +101,9 @@
 
 /* Ensure widget heights are consistent */
 .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3.gap-4.p-4 > div {
-  min-height: auto !important;
-  max-height: none !important;
-  height: auto !important;
+  min-height: auto;
+  max-height: none;
+  height: auto;
   display: flex;
   flex-direction: column;
 }
@@ -119,7 +119,7 @@
 .dark p,
 .dark li,
 .dark div:not(.widget-header):not([class*="bg-"]) {
-  color: var(--text-color) !important;
+  color: var(--text-color);
 }
 
 /* Fix section containers */
@@ -150,7 +150,7 @@
 .text-purple-700,
 .text-purple-800,
 span[class*="text-purple"] {
-  color: var(--color-confidentiality) !important;
+  color: var(--color-confidentiality);
 }
 
 .color-integrity,
@@ -158,7 +158,7 @@ span[class*="text-purple"] {
 .text-green-700,
 .text-green-800,
 span[class*="text-green"] {
-  color: var(--color-integrity) !important;
+  color: var(--color-integrity);
 }
 
 .color-availability,
@@ -166,7 +166,7 @@ span[class*="text-green"] {
 .text-blue-700,
 .text-blue-800,
 span[class*="text-blue"] {
-  color: var(--color-availability) !important;
+  color: var(--color-availability);
 }
 
 .dark .color-confidentiality,
@@ -174,7 +174,7 @@ span[class*="text-blue"] {
 .dark .text-purple-700,
 .dark .text-purple-800,
 .dark span[class*="text-purple"] {
-  color: var(--color-confidentiality-accent) !important;
+  color: var(--color-confidentiality-accent);
   text-shadow: 0 0 4px var(--color-confidentiality-glow);
 }
 
@@ -183,7 +183,7 @@ span[class*="text-blue"] {
 .dark .text-green-700,
 .dark .text-green-800,
 .dark span[class*="text-green"] {
-  color: var(--color-integrity-accent) !important;
+  color: var(--color-integrity-accent);
   text-shadow: 0 0 4px var(--color-integrity-glow);
 }
 
@@ -192,7 +192,7 @@ span[class*="text-blue"] {
 .dark .text-blue-700,
 .dark .text-blue-800,
 .dark span[class*="text-blue"] {
-  color: var(--color-availability-accent) !important;
+  color: var(--color-availability-accent);
   text-shadow: 0 0 4px var(--color-availability-glow);
 }
 
@@ -200,7 +200,7 @@ span[class*="text-blue"] {
 .dark [data-testid$="-badge"] {
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  background-color: rgba(0, 0, 0, 0.2) !important;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 /* Add these new styles for better overflow handling in widgets */
@@ -276,13 +276,13 @@ input:focus {
 
 /* Widget content area aligned with CIAClassificationApp structure */
 [data-testid^="widget-"]:where(:not([role="tabpanel"])) > div.p-4 {
-  padding: 0.75rem; /* Consistent padding without !important */
+  padding: 0.75rem; /* Consistent padding */
   flex: 1 1 auto;
   overflow-y: auto; /* Change to auto for better scrolling */
   overflow-x: hidden; /* Prevent horizontal scrolling */
   display: flex;
   flex-direction: column;
-  height: auto !important; /* Don't force a specific height */
+  height: auto; /* Don't force a specific height */
 }
 
 /* App title styling aligned with CIAClassificationApp structure */
@@ -337,7 +337,7 @@ input:focus {
   display: flex;
   flex-direction: column;
   height: auto; /* Allow height to adapt to content */
-  min-height: 300px; /* Minimum height without !important */
+  min-height: 300px; /* Minimum height */
   max-height: none; /* Remove maximum height restriction */
   overflow: visible; /* Allow content to be visible */
 }
@@ -388,33 +388,33 @@ input:focus {
 
 /* Widget size classes - consolidate sizes here */
 .widget-size-xs {
-  min-height: auto !important;
-  max-height: none !important;
-  height: auto !important;
+  min-height: auto;
+  max-height: none;
+  height: auto;
 }
 
 .widget-size-sm {
-  min-height: auto !important;
-  max-height: none !important;
-  height: auto !important;
+  min-height: auto;
+  max-height: none;
+  height: auto;
 }
 
 .widget-size-md {
-  min-height: auto !important;
-  max-height: none !important;
-  height: auto !important;
+  min-height: auto;
+  max-height: none;
+  height: auto;
 }
 
 .widget-size-lg {
-  min-height: auto !important;
-  max-height: none !important;
-  height: auto !important;
+  min-height: auto;
+  max-height: none;
+  height: auto;
 }
 
 .widget-size-xl {
-  min-height: auto !important;
-  max-height: none !important;
-  height: auto !important;
+  min-height: auto;
+  max-height: none;
+  height: auto;
 }
 
 /* Widget body with improved padding and scrolling behavior */
@@ -631,30 +631,30 @@ td {
 [data-testid="widget-value-creation"],
 [data-testid="widget-cost-estimation"],
 [data-testid="widget-compliance-status"] {
-  overflow-y: auto !important;
-  max-height: 100% !important;
-  padding-bottom: var(--spacing-md) !important;
+  overflow-y: auto;
+  max-height: 100%;
+  padding-bottom: var(--spacing-md);
 }
 
 /* Fix for radar chart container to prevent overflow */
 .radar-chart-container {
-  max-height: none !important; /* Remove height constraints */
-  overflow: hidden !important;
-  height: calc(100% - 20px) !important;
+  max-height: none; /* Remove height constraints */
+  overflow: hidden;
+  height: calc(100% - 20px);
 }
 
 /* Make canvas responsive */
 .radar-chart-container canvas {
-  max-width: 100% !important;
-  max-height: 100% !important;
-  width: auto !important;
-  height: auto !important;
-  object-fit: contain !important;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 
 /* Security level selector optimizations */
 [data-testid="widget-security-level"] select {
-  height: 28px !important; /* Reduced height */
+  height: 28px; /* Reduced height */
   padding: 0.2rem 0.4rem; /* Smaller padding */
 }
 
@@ -676,77 +676,77 @@ td {
 .info-card,
 .tech-metric-card,
 .resource-card {
-  padding: 0.75rem !important;
-  margin-bottom: 0.75rem !important;
-  min-height: 100px !important;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+  min-height: 100px;
 }
 
 /* Recommendation sections minimum height */
 [class*="recommendation"],
 .recommendation {
-  min-height: 40px !important;
-  display: block !important;
-  width: 100% !important;
-  margin-bottom: 0.5rem !important;
-  padding: 0.5rem !important;
+  min-height: 40px;
+  display: block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
 }
 
 /* Info button - smaller and consistent sizing */
 .info-button {
-  width: 18px !important;
-  height: 18px !important;
-  min-width: 18px !important;
-  min-height: 18px !important;
-  font-size: 10px !important;
-  padding: 0 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border-radius: 50% !important;
-  background-color: rgba(0, 0, 0, 0.05) !important;
-  border: 1px solid rgba(0, 0, 0, 0.1) !important;
-  color: var(--text-secondary) !important;
-  margin-left: 4px !important;
-  margin-top: 0px !important;
-  transition: all 0.2s !important;
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  min-height: 18px;
+  font-size: 10px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--text-secondary);
+  margin-left: 4px;
+  margin-top: 0px;
+  transition: all 0.2s;
 }
 
 .dark .info-button {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  color: var(--text-secondary) !important;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-secondary);
 }
 
 .info-button:hover {
-  transform: scale(1.1) !important;
-  box-shadow: 0 0 5px rgba(0, 204, 102, 0.3) !important;
-  color: var(--primary-color) !important;
-  border-color: var(--primary-color) !important;
-  background-color: rgba(0, 204, 102, 0.2) !important;
+  transform: scale(1.1);
+  box-shadow: 0 0 5px rgba(0, 204, 102, 0.3);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  background-color: rgba(0, 204, 102, 0.2);
 }
 
 .dark .info-button:hover {
-  color: var(--primary-color) !important;
-  border-color: var(--primary-color) !important;
-  background-color: rgba(0, 102, 51, 0.1) !important;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  background-color: rgba(0, 102, 51, 0.1);
 }
 
 /* Fix for empty content */
 .empty-content-placeholder {
-  min-height: 100px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  color: var(--text-secondary) !important;
-  font-style: italic !important;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-style: italic;
 }
 
 /* Card section containers */
 .section-container {
-  padding: 0.75rem !important;
-  margin-bottom: 1rem !important;
-  border-radius: 6px !important;
-  min-height: 50px !important;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  min-height: 50px;
 }
 
 /* Fix for specific impact widgets that tend to be overly tall */
@@ -818,26 +818,26 @@ td {
 
 /* Target actual DOM structure for widget headers - more compact */
 [data-testid$="-header"] {
-  padding: 0.35rem 0.6rem !important; /* Further reduced padding */
-  min-height: 30px !important; /* Set minimum height */
-  max-height: 38px !important; /* Limit maximum height */
-  border-bottom: 1px solid var(--border-color) !important;
+  padding: 0.35rem 0.6rem; /* Further reduced padding */
+  min-height: 30px; /* Set minimum height */
+  max-height: 38px; /* Limit maximum height */
+  border-bottom: 1px solid var(--border-color);
   background: linear-gradient(
     to right,
     rgba(0, 102, 51, 0.05),
     rgba(0, 136, 68, 0.02)
-  ) !important;
-  background-color: var(--header-bg) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  flex-shrink: 0 !important;
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 10 !important;
-  border-top-left-radius: 0.5rem !important;
-  border-top-right-radius: 0.5rem !important;
-  margin-bottom: 0 !important;
+  );
+  background-color: var(--header-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  margin-bottom: 0;
 }
 
 /* Card components */
@@ -1073,29 +1073,29 @@ textarea:focus {
 
 /* Info button styling */
 .info-button {
-  width: 18px !important;
-  height: 18px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border-radius: 50% !important;
-  background-color: rgba(0, 0, 0, 0.05) !important;
-  border: 1px solid rgba(0, 0, 0, 0.1) !important;
-  color: var(--text-secondary) !important;
-  margin-left: 4px !important;
-  margin-top: 0px !important;
-  transition: all 0.2s !important;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--text-secondary);
+  margin-left: 4px;
+  margin-top: 0px;
+  transition: all 0.2s;
 }
 
 .dark .info-button {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  color: var(--text-secondary) !important;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-secondary);
 }
 
 .info-button:hover {
-  transform: scale(1.1) !important;
-  box-shadow: 0 0 5px rgba(0, 204, 102, 0.3) !important;
+  transform: scale(1.1);
+  box-shadow: 0 0 5px rgba(0, 204, 102, 0.3);
 }
 
 /* Security cards with specialized styling */
@@ -1107,33 +1107,33 @@ textarea:focus {
 
 /* Unique card styling for each CIA component */
 .confidentiality-card {
-  border-left: 3px solid var(--color-confidentiality) !important;
+  border-left: 3px solid var(--color-confidentiality);
 }
 
 .dark .confidentiality-card {
-  border: 1px solid rgba(167, 66, 255, 0.3) !important;
-  border-left: 3px solid var(--color-confidentiality) !important;
-  box-shadow: 0 0 10px rgba(167, 66, 255, 0.15) !important;
+  border: 1px solid rgba(167, 66, 255, 0.3);
+  border-left: 3px solid var(--color-confidentiality);
+  box-shadow: 0 0 10px rgba(167, 66, 255, 0.15);
 }
 
 .integrity-card {
-  border-left: 3px solid var(--color-integrity) !important;
+  border-left: 3px solid var(--color-integrity);
 }
 
 .dark .integrity-card {
-  border: 1px solid rgba(0, 230, 118, 0.3) !important;
-  border-left: 3px solid var(--color-integrity) !important;
-  box-shadow: 0 0 10px rgba(0, 230, 118, 0.15) !important;
+  border: 1px solid rgba(0, 230, 118, 0.3);
+  border-left: 3px solid var(--color-integrity);
+  box-shadow: 0 0 10px rgba(0, 230, 118, 0.15);
 }
 
 .availability-card {
-  border-left: 3px solid var(--color-availability) !important;
+  border-left: 3px solid var(--color-availability);
 }
 
 .dark .availability-card {
-  border: 1px solid rgba(0, 204, 255, 0.3) !important;
-  border-left: 3px solid var(--color-availability) !important;
-  box-shadow: 0 0 10px rgba(0, 204, 255, 0.15) !important;
+  border: 1px solid rgba(0, 204, 255, 0.3);
+  border-left: 3px solid var(--color-availability);
+  box-shadow: 0 0 10px rgba(0, 204, 255, 0.15);
 }
 
 /* Widget content */
@@ -1174,18 +1174,18 @@ textarea:focus {
     to right,
     rgba(0, 136, 68, 0.05),
     rgba(0, 136, 68, 0.02)
-  ) !important;
-  background-color: var(--header-bg) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  flex-shrink: 0 !important;
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 10 !important;
-  border-top-left-radius: var(--border-radius) !important;
-  border-top-right-radius: var(--border-radius) !important;
-  margin-bottom: 0 !important;
+  );
+  background-color: var(--header-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  margin-bottom: 0;
 }
 
 .dark .widget-container-header {
@@ -1193,7 +1193,7 @@ textarea:focus {
     to right,
     rgba(0, 204, 255, 0.1),
     rgba(0, 204, 255, 0.02)
-  ) !important;
+  );
 }
 
 /* Ensure widget content text is visible in dark mode */
@@ -1208,7 +1208,7 @@ textarea:focus {
 .dark .metric-label,
 .dark .metric-value,
 .dark .impact-description {
-  color: var(--text-color) !important;
+  color: var(--text-color);
 }
 
 /* Fix Business Impact content visibility */
@@ -1228,13 +1228,13 @@ textarea:focus {
 /* Standardize widget content overflow handling */
 [data-testid^="widget-"]:where(:not([role="tabpanel"])) > div.p-4,
 .widget-body {
-  overflow-y: auto !important; /* Enable vertical scrolling */
-  overflow-x: hidden !important; /* Prevent horizontal scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
   scrollbar-width: thin; /* Firefox */
-  height: auto !important; /* Don't force a specific height */
-  padding: 1.25rem !important;
-  display: flex !important;
-  flex-direction: column !important;
+  height: auto; /* Don't force a specific height */
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Optimize scrollbars */
@@ -1305,149 +1305,149 @@ textarea:focus {
 
 /* Improve information hierarchy within widgets */
 .primary-info {
-  font-size: 1.125rem !important;
-  font-weight: 600 !important;
-  margin-bottom: 1rem !important;
-  padding: 0.75rem !important;
-  background: rgba(0, 102, 204, 0.05) !important;
-  border-radius: 0.5rem !important;
-  border-left: 3px solid var(--primary-color) !important;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: rgba(0, 102, 204, 0.05);
+  border-radius: 0.5rem;
+  border-left: 3px solid var(--primary-color);
 }
 
 .dark .primary-info {
-  background: rgba(0, 204, 255, 0.05) !important;
-  border-left: 3px solid var(--primary-color) !important;
+  background: rgba(0, 204, 255, 0.05);
+  border-left: 3px solid var(--primary-color);
 }
 
 .secondary-info {
-  font-size: 0.875rem !important;
-  margin-bottom: 0.75rem !important;
-  color: var(--text-secondary) !important;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
 }
 
 /* Consistent metric display for KPIs */
 .metrics-container {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
-  gap: 0.75rem !important;
-  margin: 1rem 0 !important;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0;
 }
 
 .metric-card {
-  display: flex !important;
-  flex-direction: column !important;
-  padding: 0.75rem !important;
-  background: rgba(0, 0, 0, 0.02) !important;
-  border: 1px solid rgba(0, 0, 0, 0.05) !important;
-  border-radius: 0.5rem !important;
-  text-align: center !important;
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 0.5rem;
+  text-align: center;
 }
 
 .dark .metric-card {
-  background: rgba(0, 0, 0, 0.2) !important;
-  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .metric-label {
-  font-size: 0.75rem !important;
-  color: var(--text-secondary) !important;
-  margin-bottom: 0.25rem !important;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
 }
 
 .metric-value {
-  font-size: 1.125rem !important;
-  font-weight: 600 !important;
-  font-family: var(--font-mono) !important;
+  font-size: 1.125rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
 }
 
 /* Better alerts and notices */
 .alert {
-  padding: 0.75rem 1rem !important;
-  border-radius: 0.5rem !important;
-  margin-bottom: 1rem !important;
-  font-size: 0.875rem !important;
-  position: relative !important;
-  padding-left: 2.5rem !important;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  position: relative;
+  padding-left: 2.5rem;
 }
 
 .alert::before {
-  position: absolute !important;
-  left: 0.75rem !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  font-size: 1rem !important;
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
 }
 
 .alert-info {
-  background: rgba(0, 102, 204, 0.05) !important;
-  border-left: 3px solid var(--primary-color) !important;
+  background: rgba(0, 102, 204, 0.05);
+  border-left: 3px solid var(--primary-color);
 }
 
 .alert-info::before {
-  content: "ℹ️" !important;
+  content: "ℹ️";
 }
 
 .alert-warning {
-  background: rgba(241, 196, 15, 0.1) !important;
-  border-left: 3px solid #f1c40f !important;
+  background: rgba(241, 196, 15, 0.1);
+  border-left: 3px solid #f1c40f;
 }
 
 .alert-warning::before {
-  content: "⚠️" !important;
+  content: "⚠️";
 }
 
 .alert-danger {
-  background: rgba(231, 76, 60, 0.1) !important;
-  border-left: 3px solid #e74c3c !important;
+  background: rgba(231, 76, 60, 0.1);
+  border-left: 3px solid #e74c3c;
 }
 
 .alert-danger::before {
-  content: "🛑" !important;
+  content: "🛑";
 }
 
 /* Enhanced CIA component styling for dark mode */
 .dark [data-testid="widget-availability-impact"] .section-container,
 .dark [data-testid="widget-availability-impact"] .metric-card {
-  border-color: rgba(0, 204, 255, 0.3) !important;
-  background-color: rgba(0, 204, 255, 0.05) !important;
+  border-color: rgba(0, 204, 255, 0.3);
+  background-color: rgba(0, 204, 255, 0.05);
 }
 
 .dark [data-testid="widget-integrity-impact"] .section-container,
 .dark [data-testid="widget-integrity-impact"] .metric-card {
-  border-color: rgba(0, 230, 118, 0.3) !important;
-  background-color: rgba(0, 230, 118, 0.05) !important;
+  border-color: rgba(0, 230, 118, 0.3);
+  background-color: rgba(0, 230, 118, 0.05);
 }
 
 .dark [data-testid="widget-confidentiality-impact"] .section-container,
 .dark [data-testid="widget-confidentiality-impact"] .metric-card {
-  border-color: rgba(167, 66, 255, 0.3) !important;
-  background-color: rgba(167, 66, 255, 0.05) !important;
+  border-color: rgba(167, 66, 255, 0.3);
+  background-color: rgba(167, 66, 255, 0.05);
 }
 
 /* Better security level indicator contrast */
 .dark .security-level-indicator.none {
-  background-color: #ff5252 !important;
-  box-shadow: 0 0 8px rgba(255, 82, 82, 0.5) !important;
+  background-color: #ff5252;
+  box-shadow: 0 0 8px rgba(255, 82, 82, 0.5);
 }
 
 .dark .security-level-indicator.low {
-  background-color: #ff9800 !important;
-  box-shadow: 0 0 8px rgba(255, 152, 0, 0.5) !important;
+  background-color: #ff9800;
+  box-shadow: 0 0 8px rgba(255, 152, 0, 0.5);
 }
 
 .dark .security-level-indicator.moderate {
-  background-color: #ffeb3b !important;
-  box-shadow: 0 0 8px rgba(255, 235, 59, 0.5) !important;
+  background-color: #ffeb3b;
+  box-shadow: 0 0 8px rgba(255, 235, 59, 0.5);
 }
 
 .dark .security-level-indicator.high {
-  background-color: #00e676 !important;
-  box-shadow: 0 0 8px rgba(0, 230, 118, 0.5) !important;
+  background-color: #00e676;
+  box-shadow: 0 0 8px rgba(0, 230, 118, 0.5);
 }
 
 .dark .security-level-indicator.very-high {
-  background-color: #00ccff !important;
-  box-shadow: 0 0 8px rgba(0, 204, 255, 0.5) !important;
+  background-color: #00ccff;
+  box-shadow: 0 0 8px rgba(0, 204, 255, 0.5);
 }
 
 /* Ensure optimal text visibility in dark mode */
@@ -1480,37 +1480,37 @@ textarea:focus {
 .dark [data-testid^="widget-"] h4,
 .dark [data-testid^="widget-"] h5,
 .dark [data-testid^="widget-"] h6 {
-  color: #ffffff !important;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5) !important;
-  font-weight: 600 !important;
+  color: #ffffff;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  font-weight: 600;
 }
 
 /* Enhance badge visibility in dark mode */
 .dark .status-badge {
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  background-color: rgba(0, 0, 0, 0.3) !important;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3) !important;
-  color: #e0e6ed !important;
-  padding: 0.35rem 0.75rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  color: #e0e6ed;
+  padding: 0.35rem 0.75rem;
 }
 
 /* Better contrast for links in dark mode */
 .dark a {
-  color: var(--primary-light) !important;
-  text-decoration: underline !important;
-  text-underline-offset: 2px !important;
+  color: var(--primary-light);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .dark a:hover {
-  text-decoration: none !important;
-  color: var(--accent-color) !important;
+  text-decoration: none;
+  color: var(--accent-color);
 }
 
 /* Ensure visibility in recommendation sections */
 .dark [data-testid^="widget-"] [data-testid$="-recommendation-0"],
 .dark [data-testid^="widget-"] [data-testid$="-recommendation-1"],
 .dark [data-testid^="widget-"] [data-testid$="-recommendation-2"] {
-  color: var(--text-color) !important;
+  color: var(--text-color);
 }
 
 /* App header styling consistency */
@@ -1548,26 +1548,26 @@ button.px-3.py-1.bg-blue-500.dark\:bg-blue-600.text-white.rounded-md.text-sm {
 
 .dark
   button.px-3.py-1.bg-blue-500.dark\:bg-blue-600.text-white.rounded-md.text-sm {
-  background-color: var(--primary-color) !important;
-  color: white !important;
+  background-color: var(--primary-color);
+  color: white;
   border: none;
   box-shadow: 0 0 6px rgba(0, 204, 255, 0.2);
 }
 
 /* App header styling - modernized, compact and 50% shorter */
 .app-header {
-  margin-bottom: 0.5rem !important;
-  border-radius: 0.5rem !important;
-  box-shadow: 0 2px 5px var(--shadow-color) !important;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 5px var(--shadow-color);
   background-image: linear-gradient(
     to right,
     rgba(0, 102, 51, 0.05),
     rgba(0, 136, 68, 0.02)
-  ) !important;
-  border-bottom: 1px solid var(--primary-color) !important;
-  height: auto !important;
-  min-height: 0 !important;
-  padding: 0.25rem 0.5rem !important;
+  );
+  border-bottom: 1px solid var(--primary-color);
+  height: auto;
+  min-height: 0;
+  padding: 0.25rem 0.5rem;
   transition: all 0.2s ease;
 }
 
@@ -1576,21 +1576,21 @@ button.px-3.py-1.bg-blue-500.dark\:bg-blue-600.text-white.rounded-md.text-sm {
     to right,
     rgba(0, 26, 37, 0.95),
     rgba(0, 20, 26, 0.98)
-  ) !important;
-  border-bottom: 1px solid var(--primary-color) !important;
-  box-shadow: 0 2px 8px rgba(0, 204, 102, 0.15) !important;
+  );
+  border-bottom: 1px solid var(--primary-color);
+  box-shadow: 0 2px 8px rgba(0, 204, 102, 0.15);
 }
 
 /* Reduce space while keeping font size */
 [data-testid="app-title"] {
-  margin-bottom: 0 !important;
-  line-height: 1.2 !important;
+  margin-bottom: 0;
+  line-height: 1.2;
 }
 
 /* Cyber nav - compact spacing but original font size */
 .cyber-nav {
-  margin-top: 0 !important;
-  line-height: 1 !important;
+  margin-top: 0;
+  line-height: 1;
 }
 
 /* Pulse dot - smaller */
@@ -1602,23 +1602,23 @@ button.px-3.py-1.bg-blue-500.dark\:bg-blue-600.text-white.rounded-md.text-sm {
 
 /* Theme toggle button - adjusted padding but original font size */
 .theme-toggle-btn {
-  padding: 0.15rem 0.5rem !important;
+  padding: 0.15rem 0.5rem;
 }
 
 /* App header styling - modernized and more compact */
 .app-header {
-  margin-bottom: 0.75rem !important;
-  border-radius: 0.5rem !important;
-  box-shadow: 0 4px 10px var(--shadow-color) !important;
+  margin-bottom: 0.75rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 10px var(--shadow-color);
   background-image: linear-gradient(
     to right,
     rgba(0, 102, 51, 0.05),
     rgba(0, 136, 68, 0.02)
-  ) !important;
-  border-bottom: 2px solid var(--primary-color) !important;
-  height: auto !important;
-  min-height: 0 !important;
-  padding: 0.5rem 0.75rem !important;
+  );
+  border-bottom: 2px solid var(--primary-color);
+  height: auto;
+  min-height: 0;
+  padding: 0.5rem 0.75rem;
   transition: all 0.3s ease;
 }
 
@@ -1627,9 +1627,9 @@ button.px-3.py-1.bg-blue-500.dark\:bg-blue-600.text-white.rounded-md.text-sm {
     to right,
     rgba(0, 26, 37, 0.95),
     rgba(0, 20, 26, 0.98)
-  ) !important;
-  border-bottom: 2px solid var(--primary-color) !important;
-  box-shadow: 0 4px 15px rgba(0, 204, 102, 0.15) !important;
+  );
+  border-bottom: 2px solid var(--primary-color);
+  box-shadow: 0 4px 15px rgba(0, 204, 102, 0.15);
 }
 
 /* Cooler navigation links */
@@ -1641,8 +1641,8 @@ button.px-3.py-1.bg-blue-500.dark\:bg-blue-600.text-white.rounded-md.text-sm {
 }
 
 .cyber-link {
-  color: var(--primary-color) !important;
-  text-decoration: none !important;
+  color: var(--primary-color);
+  text-decoration: none;
   position: relative;
   padding: 0.1rem 0.3rem;
   margin: 0 0.15rem;
@@ -1656,18 +1656,18 @@ button.px-3.py-1.bg-blue-500.dark\:bg-blue-600.text-white.rounded-md.text-sm {
   background: rgba(0, 102, 51, 0.1);
   text-shadow: 0 0 2px rgba(0, 204, 102, 0.4);
   transform: translateY(-1px);
-  color: var(--primary-light) !important;
+  color: var(--primary-light);
 }
 
 .dark .cyber-link {
-  color: var(--ingress-primary) !important;
+  color: var(--ingress-primary);
 }
 
 .dark .cyber-link:hover {
   background: rgba(0, 204, 102, 0.15);
   text-shadow: 0 0 5px rgba(0, 204, 102, 0.7);
   box-shadow: 0 0 10px rgba(0, 204, 102, 0.2);
-  color: var(--ingress-light) !important;
+  color: var(--ingress-light);
 }
 
 /* Pulsing status dot */
@@ -1818,21 +1818,21 @@ button.more-info:hover {
 
 /* App header styling - reduced height, better fit content */
 .app-header {
-  margin-bottom: 0.25rem !important;
-  border-radius: 0.5rem !important;
-  box-shadow: 0 2px 5px var(--shadow-color) !important;
+  margin-bottom: 0.25rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 5px var(--shadow-color);
   background-image: linear-gradient(
     to right,
     rgba(0, 102, 51, 0.05),
     rgba(0, 136, 68, 0.02)
-  ) !important;
-  border-bottom: 1px solid var(--primary-color) !important;
-  height: auto !important;
-  min-height: 0 !important;
-  padding: 0.15rem 0.25rem !important;
+  );
+  border-bottom: 1px solid var(--primary-color);
+  height: auto;
+  min-height: 0;
+  padding: 0.15rem 0.25rem;
   transition: all 0.2s ease;
-  display: flex !important;
-  align-items: center !important;
+  display: flex;
+  align-items: center;
 }
 
 .dark .app-header {
@@ -1840,36 +1840,36 @@ button.more-info:hover {
     to right,
     rgba(0, 26, 37, 0.95),
     rgba(0, 20, 26, 0.98)
-  ) !important;
-  border-bottom: 1px solid var(--ingress-primary) !important;
-  box-shadow: 0 2px 8px rgba(0, 204, 102, 0.15) !important;
+  );
+  border-bottom: 1px solid var(--ingress-primary);
+  box-shadow: 0 2px 8px rgba(0, 204, 102, 0.15);
 }
 
 /* Title and navigation text size increased by approximately 25% */
 [data-testid="app-title"] {
-  font-size: 1.25rem !important; /* Increased from 1rem/1.1rem */
-  line-height: 1 !important;
-  margin-bottom: 0 !important;
+  font-size: 1.25rem; /* Increased from 1rem/1.1rem */
+  line-height: 1;
+  margin-bottom: 0;
 }
 
 /* Cyber nav - increased font size */
 .cyber-nav {
-  margin-top: 0 !important;
-  line-height: 1 !important;
-  font-size: 0.875rem !important; /* Increased from 0.7rem */
+  margin-top: 0;
+  line-height: 1;
+  font-size: 0.875rem; /* Increased from 0.7rem */
 }
 
 /* Version tag - updated size */
 .version-tag {
-  font-size: 0.875rem !important; /* Increased from 0.7rem */
-  padding: 0rem 0.15rem !important;
-  line-height: 1 !important;
+  font-size: 0.875rem; /* Increased from 0.7rem */
+  padding: 0rem 0.15rem;
+  line-height: 1;
 }
 
 /* Theme toggle button - adjusted padding but original font size */
 .theme-toggle-btn {
-  padding: 0.15rem 0.35rem !important;
-  margin-left: 0.5rem !important;
+  padding: 0.15rem 0.35rem;
+  margin-left: 0.5rem;
 }
 
 /* Enhanced buttons for SecurityLevelWidget */
@@ -1877,49 +1877,49 @@ button.more-info:hover {
 button.details-button,
 button.more-info {
   /* Cool cybersecurity glass-morphism effect */
-  background: rgba(0, 10, 30, 0.2) !important;
-  backdrop-filter: blur(3px) !important;
-  border: 1px solid rgba(0, 204, 102, 0.3) !important;
-  color: var(--primary-color) !important;
-  font-family: var(--font-mono) !important;
-  padding: 0.35rem 0.75rem !important;
-  border-radius: 3px !important;
-  transition: all 0.2s ease !important;
-  font-size: 0.75rem !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.5px !important;
-  position: relative !important;
-  overflow: hidden !important;
-  box-shadow: 0 2px 10px rgba(0, 204, 102, 0.1) !important;
-  text-shadow: 0 0 3px rgba(0, 204, 102, 0.3) !important;
+  background: rgba(0, 10, 30, 0.2);
+  backdrop-filter: blur(3px);
+  border: 1px solid rgba(0, 204, 102, 0.3);
+  color: var(--primary-color);
+  font-family: var(--font-mono);
+  padding: 0.35rem 0.75rem;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 204, 102, 0.1);
+  text-shadow: 0 0 3px rgba(0, 204, 102, 0.3);
 }
 
 .security-level-selector button:hover,
 button.details-button:hover,
 button.more-info:hover {
-  border-color: rgba(0, 204, 102, 0.8) !important;
-  box-shadow: 0 0 15px rgba(0, 204, 102, 0.3) !important;
-  text-shadow: 0 0 8px rgba(0, 204, 102, 0.8) !important;
-  transform: translateY(-1px) !important;
+  border-color: rgba(0, 204, 102, 0.8);
+  box-shadow: 0 0 15px rgba(0, 204, 102, 0.3);
+  text-shadow: 0 0 8px rgba(0, 204, 102, 0.8);
+  transform: translateY(-1px);
 }
 
 .dark .security-level-selector button,
 .dark button.details-button,
 .dark button.more-info {
-  background: rgba(0, 20, 40, 0.4) !important;
-  border: 1px solid rgba(0, 204, 102, 0.4) !important;
-  color: var(--ingress-primary) !important;
-  text-transform: uppercase !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
-  text-shadow: 0 0 5px rgba(0, 204, 102, 0.5) !important;
+  background: rgba(0, 20, 40, 0.4);
+  border: 1px solid rgba(0, 204, 102, 0.4);
+  color: var(--ingress-primary);
+  text-transform: uppercase;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0 5px rgba(0, 204, 102, 0.5);
 }
 
 .dark .security-level-selector button:hover,
 .dark button.details-button:hover,
 .dark button.more-info:hover {
-  border-color: var(--ingress-primary) !important;
-  box-shadow: 0 0 15px rgba(0, 204, 102, 0.4) !important;
-  text-shadow: 0 0 10px rgba(0, 204, 102, 0.9) !important;
+  border-color: var(--ingress-primary);
+  box-shadow: 0 0 15px rgba(0, 204, 102, 0.4);
+  text-shadow: 0 0 10px rgba(0, 204, 102, 0.9);
 }
 
 /* Add cyberpunk scan line animation for hover */
@@ -1963,22 +1963,22 @@ button.more-info:hover::before {
 
 /* Ultra-compact app header - Now with 15% more height */
 .app-header {
-  margin-bottom: 0.25rem !important;
-  border-radius: 0.5rem !important;
-  box-shadow: 0 1px 3px var(--shadow-color) !important;
+  margin-bottom: 0.25rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px var(--shadow-color);
   background-image: linear-gradient(
     to right,
     rgba(0, 102, 51, 0.05),
     rgba(0, 136, 68, 0.02)
-  ) !important;
-  border-bottom: 1px solid var(--primary-color) !important;
-  height: auto !important;
-  min-height: 0 !important;
+  );
+  border-bottom: 1px solid var(--primary-color);
+  height: auto;
+  min-height: 0;
   /* Increase padding for more height */
-  padding-top: 0.25rem !important;
-  padding-bottom: 0.25rem !important;
-  line-height: 1.1 !important;
-  max-height: 2.3rem !important; /* 15% increase from 2rem */
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  line-height: 1.1;
+  max-height: 2.3rem; /* 15% increase from 2rem */
 }
 
 .dark .app-header {
@@ -1986,10 +1986,10 @@ button.more-info:hover::before {
     to right,
     rgba(0, 26, 37, 0.95),
     rgba(0, 20, 26, 0.98)
-  ) !important;
-  border-bottom: 1px solid var(--ingress-primary) !important;
+  );
+  border-bottom: 1px solid var(--ingress-primary);
   /* Cyber glow effect in dark mode */
-  box-shadow: 0 1px 5px rgba(0, 204, 102, 0.2) !important;
+  box-shadow: 0 1px 5px rgba(0, 204, 102, 0.2);
 }
 
 /* Improved dark mode button styling with cyber theme */
@@ -2001,20 +2001,20 @@ button.more-info:hover::before {
 .dark .security-level-selector button,
 .dark button.details-button,
 .dark button.more-info {
-  background: rgba(0, 20, 30, 0.7) !important;
-  color: var(--ingress-primary) !important;
-  border: 1px solid rgba(0, 204, 102, 0.4) !important;
-  box-shadow: 0 0 5px rgba(0, 204, 102, 0.2) !important;
-  text-shadow: 0 0 3px rgba(0, 204, 102, 0.5) !important;
-  transition: all 0.2s ease-in-out !important;
-  position: relative !important;
-  overflow: hidden !important;
-  font-family: var(--font-mono) !important;
-  letter-spacing: 0.5px !important;
-  backdrop-filter: blur(4px) !important;
-  text-transform: uppercase !important;
-  font-size: 0.7rem !important;
-  border-radius: 3px !important;
+  background: rgba(0, 20, 30, 0.7);
+  color: var(--ingress-primary);
+  border: 1px solid rgba(0, 204, 102, 0.4);
+  box-shadow: 0 0 5px rgba(0, 204, 102, 0.2);
+  text-shadow: 0 0 3px rgba(0, 204, 102, 0.5);
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(4px);
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  border-radius: 3px;
 }
 
 /* Enhanced hover effect for dark mode buttons */
@@ -2026,13 +2026,13 @@ button.more-info:hover::before {
 .dark .security-level-selector button:hover,
 .dark button.details-button:hover,
 .dark button.more-info:hover {
-  border-color: var(--ingress-primary) !important;
+  border-color: var(--ingress-primary);
   box-shadow: 0 0 10px rgba(0, 204, 102, 0.4),
-    inset 0 0 5px rgba(0, 204, 102, 0.2) !important;
-  text-shadow: 0 0 8px rgba(0, 204, 102, 0.7) !important;
-  color: #00ff99 !important;
-  transform: translateY(-1px) !important;
-  background: rgba(0, 30, 40, 0.8) !important;
+    inset 0 0 5px rgba(0, 204, 102, 0.2);
+  text-shadow: 0 0 8px rgba(0, 204, 102, 0.7);
+  color: #00ff99;
+  transform: translateY(-1px);
+  background: rgba(0, 30, 40, 0.8);
 }
 
 /* Cyberpunk scanner effect on hover */
@@ -2084,31 +2084,31 @@ button.more-info:hover::before {
 /* Enhance dark mode tabs with cyber styling */
 .dark .tab-button,
 .dark [role="tab"] {
-  background: rgba(0, 24, 36, 0.6) !important;
-  border: 1px solid rgba(0, 204, 102, 0.3) !important;
-  color: var(--ingress-primary) !important;
-  letter-spacing: 0.5px !important;
-  text-shadow: 0 0 3px rgba(0, 204, 102, 0.3) !important;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important;
-  overflow: hidden !important;
-  position: relative !important;
-  border-radius: 3px !important;
+  background: rgba(0, 24, 36, 0.6);
+  border: 1px solid rgba(0, 204, 102, 0.3);
+  color: var(--ingress-primary);
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 3px rgba(0, 204, 102, 0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  position: relative;
+  border-radius: 3px;
 }
 
 .dark .tab-button:hover,
 .dark [role="tab"]:hover {
-  background: rgba(0, 34, 46, 0.8) !important;
-  box-shadow: 0 0 8px rgba(0, 204, 102, 0.3) !important;
-  text-shadow: 0 0 5px rgba(0, 204, 102, 0.6) !important;
+  background: rgba(0, 34, 46, 0.8);
+  box-shadow: 0 0 8px rgba(0, 204, 102, 0.3);
+  text-shadow: 0 0 5px rgba(0, 204, 102, 0.6);
 }
 
 .dark .tab-button.active,
 .dark [role="tab"][aria-selected="true"] {
-  background: rgba(0, 40, 55, 0.9) !important;
-  border-color: var(--ingress-primary) !important;
-  color: #00ff99 !important;
-  text-shadow: 0 0 8px rgba(0, 204, 102, 0.7) !important;
-  box-shadow: 0 0 10px rgba(0, 204, 102, 0.3) !important;
+  background: rgba(0, 40, 55, 0.9);
+  border-color: var(--ingress-primary);
+  color: #00ff99;
+  text-shadow: 0 0 8px rgba(0, 204, 102, 0.7);
+  box-shadow: 0 0 10px rgba(0, 204, 102, 0.3);
 }
 
 /* Add corner accents to active tabs */
@@ -2145,14 +2145,14 @@ button.more-info:hover::before {
     135deg,
     rgba(0, 30, 45, 0.8),
     rgba(0, 40, 60, 0.9)
-  ) !important;
-  border: 1px solid rgba(0, 204, 102, 0.5) !important;
-  color: var(--ingress-primary) !important;
-  padding: 0.2rem 0.5rem !important;
-  font-size: 0.75rem !important;
-  letter-spacing: 0.5px !important;
-  box-shadow: 0 0 8px rgba(0, 204, 102, 0.2) !important;
-  text-shadow: 0 0 5px rgba(0, 204, 102, 0.5) !important;
+  );
+  border: 1px solid rgba(0, 204, 102, 0.5);
+  color: var(--ingress-primary);
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 8px rgba(0, 204, 102, 0.2);
+  text-shadow: 0 0 5px rgba(0, 204, 102, 0.5);
 }
 
 .dark .theme-toggle-btn:hover {
@@ -2160,11 +2160,11 @@ button.more-info:hover::before {
     135deg,
     rgba(0, 40, 55, 0.9),
     rgba(0, 50, 70, 1)
-  ) !important;
-  border-color: rgba(0, 255, 128, 0.8) !important;
-  color: #00ff99 !important;
-  box-shadow: 0 0 12px rgba(0, 204, 102, 0.4) !important;
-  text-shadow: 0 0 8px rgba(0, 204, 102, 0.7) !important;
+  );
+  border-color: rgba(0, 255, 128, 0.8);
+  color: #00ff99;
+  box-shadow: 0 0 12px rgba(0, 204, 102, 0.4);
+  text-shadow: 0 0 8px rgba(0, 204, 102, 0.7);
 }
 
 /* Security Summary Widget specific styles */
