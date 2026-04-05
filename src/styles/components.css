@@ -19,17 +19,17 @@
   transition: all 0.2s;
 }
 
-.dark [data-testid^="widget-"] {
+.dark [data-testid^="widget-"]:not([role="tabpanel"]) {
   background-color: var(--card-background);
   border: 1px solid var(--border-color);
 }
 
-[data-testid^="widget-"]:hover {
+[data-testid^="widget-"]:not([role="tabpanel"]):hover {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-.dark [data-testid^="widget-"]:hover {
+.dark [data-testid^="widget-"]:not([role="tabpanel"]):hover {
   box-shadow: 0 0 15px rgba(0, 204, 102, 0.2);
 }
 
