@@ -497,19 +497,6 @@
   min-height: 300px;
 }
 
-/* Custom grid gap utilities using design tokens */
-.gap-sm {
-  gap: 0.5rem;
-}
-
-.gap-md {
-  gap: 0.75rem;
-}
-
-.gap-lg {
-  gap: 1rem;
-}
-
 /* Fix for widgets in grid layout */
 .grid-widget {
   height: 100%;
