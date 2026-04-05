@@ -2,7 +2,7 @@
 
 /* Ensure hidden tab panels are never shown regardless of other selectors */
 [role="tabpanel"][hidden] {
-  display: none !important;
+  display: none;
 }
 
 /* Widget styles aligned with actual DOM structure */
