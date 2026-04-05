@@ -1,7 +1,12 @@
 /* Component-specific styles */
 
+/* Ensure hidden tab panels are never shown regardless of other selectors */
+[role="tabpanel"][hidden] {
+  display: none !important;
+}
+
 /* Widget styles aligned with actual DOM structure */
-[data-testid^="widget-"] {
+[data-testid^="widget-"]:not([role="tabpanel"]) {
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -2389,9 +2394,10 @@ button[role="tab"]:not([aria-selected="true"]) {
 }
 
 /* Tab panels should have consistent minimal padding - use semantic ARIA attributes */
-[data-testid^="widget-"] [role="tabpanel"],
-[data-testid="widget-security-summary"] [role="tabpanel"],
-[data-testid="widget-business-impact"] [role="tabpanel"] {
+/* Only apply padding to visible (not hidden) tab panels */
+[data-testid^="widget-"] [role="tabpanel"]:not([hidden]),
+[data-testid="widget-security-summary"] [role="tabpanel"]:not([hidden]),
+[data-testid="widget-business-impact"] [role="tabpanel"]:not([hidden]) {
   padding: 0.5rem 0;
 }
 
