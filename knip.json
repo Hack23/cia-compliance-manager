@@ -14,10 +14,6 @@
   ],
   "ignoreDependencies": [
     "@tailwindcss/postcss",
-    "@types/fs-extra",
-    "@types/testing-library__jest-dom",
-    "@vitest/coverage-istanbul",
-    "autoprefixer",
     "cypress-junit-reporter",
     "cypress-react-selector",
     "cypress-wait-until",
