@@ -26,14 +26,14 @@
 /* color utilities — customize dark appearance   */
 /* ============================================= */
 
-/* Border color dark mode overrides */
+/* Border color dark mode overrides — grouped by shared dark value */
 .dark .border-gray-100,
 .dark .border-gray-200 {
-  border-color: #374151;
+  border-color: #374151; /* gray-700 in dark mode */
 }
 .dark .border-gray-300,
 .dark .border-gray-700 {
-  border-color: #4b5563;
+  border-color: #4b5563; /* gray-600 in dark mode */
 }
 .dark .border-gray-600 {
   border-color: #6b7280;
@@ -42,7 +42,9 @@
   border-color: #4ade80;
 }
 
-/* Background color overrides using CSS custom properties */
+/* Background color overrides — var(--card-background) and var(--background-color)
+   are defined differently in light-theme.css and dark-theme.css, so both light
+   and dark selectors are needed to ensure the CSS variable resolves correctly */
 .bg-white,
 .bg-gray-800 {
   background-color: var(--card-background);
