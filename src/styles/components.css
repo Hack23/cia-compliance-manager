@@ -2321,11 +2321,7 @@ button.more-info:hover::before {
 
 /* Ensure tab gap is consistent within widgets without overriding Tailwind utilities */
 [data-testid^="widget-"] nav.flex,
-[data-testid^="widget-"] nav[role="tablist"],
-[data-testid="widget-security-summary"] nav.flex,
-[data-testid="widget-security-summary"] nav[role="tablist"],
-[data-testid="widget-business-impact"] nav.flex,
-[data-testid="widget-business-impact"] nav[role="tablist"] {
+[data-testid^="widget-"] nav[role="tablist"] {
   gap: 0.375rem; /* Consistent spacing between tabs */
 }
 
@@ -2382,22 +2378,15 @@ button[role="tab"]:not([aria-selected="true"]) {
 }
 
 /* Tab content area styling - reduce empty space */
-/* Use exact class selector instead of substring matching */
 [data-testid^="widget-"] .tab-content,
-[data-testid^="widget-"] div.tab-content,
-[data-testid="widget-security-summary"] .tab-content,
-[data-testid="widget-security-summary"] div.tab-content,
-[data-testid="widget-business-impact"] .tab-content,
-[data-testid="widget-business-impact"] div.tab-content {
+[data-testid^="widget-"] div.tab-content {
   padding: 0;
   margin-top: 0.75rem;
 }
 
 /* Tab panels should have consistent minimal padding - use semantic ARIA attributes */
 /* Only apply padding to visible (not hidden) tab panels */
-[data-testid^="widget-"] [role="tabpanel"]:not([hidden]),
-[data-testid="widget-security-summary"] [role="tabpanel"]:not([hidden]),
-[data-testid="widget-business-impact"] [role="tabpanel"]:not([hidden]) {
+[data-testid^="widget-"] [role="tabpanel"]:not([hidden]) {
   padding: 0.5rem 0;
 }
 
