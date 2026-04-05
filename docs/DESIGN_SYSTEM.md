@@ -26,7 +26,7 @@ Design System
 │   ├── Colors
 │   ├── Shadows
 │   └── Transitions
-├── TailwindCSS Configuration (tailwind.config.js)
+├── TailwindCSS Configuration (tailwind.config.ts)
 │   └── Extended theme with design tokens
 ├── CSS Variables (src/styles/variables.css)
 │   └── Runtime theming support
@@ -545,7 +545,7 @@ import { WIDGET_DESIGN } from '@/constants/designTokens';
 
 ### Files
 - **Design Tokens**: `src/constants/designTokens.ts`
-- **TailwindCSS Config**: `tailwind.config.js`
+- **TailwindCSS Config**: `tailwind.config.ts`
 - **CSS Variables**: `src/styles/variables.css`
 - **Widget Container**: `src/components/common/WidgetContainer.tsx`
 

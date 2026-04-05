@@ -227,7 +227,7 @@ curl -s https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compli
 | 📊 **Evidence Type** | 🎯 **Implementation** | ✅ **Current Status** | 🔗 **Evidence Location** |
 |---------------------|---------------------|---------------------|------------------------|
 | **Design Tokens** | Centralized token system | ✅ Implemented | [Design Tokens](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/designTokens.ts) |
-| **TailwindCSS Integration** | Extended theme configuration | ✅ Implemented | [tailwind.config.js](https://github.com/Hack23/cia-compliance-manager/blob/main/tailwind.config.js) |
+| **TailwindCSS Integration** | Extended theme configuration | ✅ Implemented | [tailwind.config.ts](https://github.com/Hack23/cia-compliance-manager/blob/main/tailwind.config.ts) |
 | **Consistent Spacing** | 8px grid system | ✅ Applied | [Design System](./DESIGN_SYSTEM.md) |
 | **Typography Scale** | Semantic font sizes | ✅ Implemented | [Design Tokens](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/designTokens.ts) |
 | **Color Palette** | Semantic color system | ✅ Defined | [Design Tokens](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/designTokens.ts) |
