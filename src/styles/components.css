@@ -243,7 +243,7 @@ input:focus {
 
 /* Widget header styling aligned with CIAClassificationApp structure */
 .border-b.border-gray-200.dark\:border-gray-700.px-4.py-3.flex.justify-between.items-center,
-[data-testid^="widget-"] > div:first-child {
+[data-testid^="widget-"]:not([role="tabpanel"]) > div:first-child {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -260,7 +260,7 @@ input:focus {
 }
 
 /* Reduce header text size and make it green */
-[data-testid^="widget-"] > div:first-child h3,
+[data-testid^="widget-"]:not([role="tabpanel"]) > div:first-child h3,
 .border-b.border-gray-200.dark\:border-gray-700.px-4.py-3.flex.justify-between.items-center
   h3 {
   margin: 0;
@@ -275,7 +275,7 @@ input:focus {
 }
 
 /* Widget content area aligned with CIAClassificationApp structure */
-[data-testid^="widget-"] > div.p-4 {
+[data-testid^="widget-"]:not([role="tabpanel"]) > div.p-4 {
   padding: 0.75rem; /* Consistent padding without !important */
   flex: 1 1 auto;
   overflow-y: auto; /* Change to auto for better scrolling */
@@ -1226,7 +1226,7 @@ textarea:focus {
 }
 
 /* Standardize widget content overflow handling */
-[data-testid^="widget-"] > div.p-4,
+[data-testid^="widget-"]:not([role="tabpanel"]) > div.p-4,
 .widget-body {
   overflow-y: auto !important; /* Enable vertical scrolling */
   overflow-x: hidden !important; /* Prevent horizontal scrolling */
@@ -1238,19 +1238,19 @@ textarea:focus {
 }
 
 /* Optimize scrollbars */
-[data-testid^="widget-"] > div.p-4::-webkit-scrollbar,
+[data-testid^="widget-"]:not([role="tabpanel"]) > div.p-4::-webkit-scrollbar,
 .widget-body::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
-[data-testid^="widget-"] > div.p-4::-webkit-scrollbar-thumb,
+[data-testid^="widget-"]:not([role="tabpanel"]) > div.p-4::-webkit-scrollbar-thumb,
 .widget-body::-webkit-scrollbar-thumb {
   background: var(--primary-color);
   border-radius: 3px;
 }
 
-.dark [data-testid^="widget-"] > div.p-4::-webkit-scrollbar-thumb,
+.dark [data-testid^="widget-"]:not([role="tabpanel"]) > div.p-4::-webkit-scrollbar-thumb,
 .dark .widget-body::-webkit-scrollbar-thumb {
   background: rgba(0, 204, 255, 0.5);
 }
