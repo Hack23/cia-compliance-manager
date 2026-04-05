@@ -1,21 +1,6 @@
-/* Utility classes */
-
-/* Flexbox utilities */
-.flex {
-  display: flex;
-}
-.flex-col {
-  flex-direction: column;
-}
-.items-center {
-  align-items: center;
-}
-.justify-center {
-  justify-content: center;
-}
-.justify-between {
-  justify-content: space-between;
-}
+/* Custom utility classes — project-specific overrides and effects */
+/* Standard TailwindCSS utilities (flex, grid, spacing, typography, etc.) */
+/* are provided by TailwindCSS v4 via @import "tailwindcss" in index.css */
 
 /* Improved content containers */
 .widget-content {
@@ -31,375 +16,67 @@
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-/* Sizing utilities */
-.w-full {
-  width: 100%;
-}
-.h-full {
-  height: 100%;
-}
-.max-h-\[250px\] {
-  max-height: 250px;
-}
-
-/* Spacing utilities */
-.p-1 {
-  padding: 0.25rem;
-}
-.p-2 {
-  padding: 0.5rem;
-}
-.p-3 {
-  padding: 0.75rem;
-}
-.p-4 {
-  padding: 1rem;
-}
-.p-5 {
-  padding: 1.25rem;
-}
-.p-6 {
-  padding: 1.5rem;
-}
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-.py-0\.5 {
-  padding-top: 0.125rem;
-  padding-bottom: 0.125rem;
-}
-.px-1\.5 {
-  padding-left: 0.375rem;
-  padding-right: 0.375rem;
-}
-.pl-3 {
-  padding-left: 0.75rem;
-}
-.pr-10 {
-  padding-right: 2.5rem;
-}
-.pt-4 {
-  padding-top: 1rem;
-}
-.pb-4 {
-  padding-bottom: 1rem;
-}
-
-/* Margin utilities */
-.mb-1 {
-  margin-bottom: 0.25rem;
-}
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-.mb-3 {
-  margin-bottom: 0.75rem;
-}
-.mb-4 {
-  margin-bottom: 1rem;
-}
-.mb-6 {
-  margin-bottom: 1.5rem;
-}
-.mr-2 {
-  margin-right: 0.5rem;
-}
-.ml-2 {
-  margin-left: 0.5rem;
-}
-.mt-1 {
-  margin-top: 0.25rem;
-}
-.mt-2 {
-  margin-top: 0.5rem;
-}
-.mt-4 {
-  margin-top: 1rem;
-}
-.mt-6 {
-  margin-top: 1.5rem;
-}
-
-/* Spacing utilities */
-.space-x-2 > * + * {
-  margin-left: 0.5rem;
-}
-.space-y-1 > * + * {
-  margin-top: 0.25rem;
-}
-.space-y-2 > * + * {
-  margin-top: 0.5rem;
-}
-.space-y-4 > * + * {
-  margin-top: 1rem;
-}
-.gap-4 {
-  gap: 1rem;
-}
-.gap-5 {
-  gap: 1.25rem;
-}
-.gap-6 {
-  gap: 1.5rem;
-}
-.pl-5 {
-  padding-left: 1.25rem;
-}
-
-/* Typography utilities */
-.text-center {
-  text-align: center;
-}
-.text-sm {
-  font-size: 0.875rem;
-}
-.text-lg {
-  font-size: 1.125rem;
-}
-.text-xl {
-  font-size: 1.25rem;
-}
-.text-2xl {
-  font-size: 1.5rem;
-}
-.font-medium {
-  font-weight: 500;
-}
-.font-semibold {
-  font-weight: 600;
-}
-.font-bold {
-  font-weight: 700;
-}
-.tracking-wide {
-  letter-spacing: 0.025em;
-}
-.uppercase {
-  text-transform: uppercase;
-}
-.italic {
-  font-style: italic;
-}
+/* Custom font-mono override — uses project-specific font */
 .font-mono {
   font-family: var(--font-mono);
 }
 
-/* Layout utilities */
-.grid {
-  display: grid;
-}
-.grid-cols-1 {
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-.grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-.max-w-7xl {
-  max-width: 100%; /* Changed from 80rem to 100% */
-}
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-.min-h-screen {
-  min-height: 100vh;
-}
+/* ============================================= */
+/* Dark mode overrides for standard Tailwind     */
+/* color utilities — customize dark appearance   */
+/* ============================================= */
 
-/* Border utilities */
-.border-t {
-  border-top-width: 1px;
-}
-.border-b {
-  border-bottom-width: 1px;
-}
-.border {
-  border-width: 1px;
-}
-.rounded-lg {
-  border-radius: 0.5rem;
-}
-.rounded-xl {
-  border-radius: 0.75rem;
-}
-.rounded-full {
-  border-radius: 9999px;
-}
-
-/* Border color utilities */
-.border-gray-100 {
-  border-color: #f3f4f6;
-}
-.dark .border-gray-100 {
-  border-color: #374151;
-}
-.border-gray-200 {
-  border-color: #e5e7eb;
-}
+/* Border color dark mode overrides */
+.dark .border-gray-100,
 .dark .border-gray-200 {
   border-color: #374151;
 }
-.border-gray-300 {
-  border-color: #d1d5db;
-}
-.dark .border-gray-300 {
-  border-color: #4b5563;
-}
-.border-gray-600 {
+.dark .border-gray-300,
+.dark .border-gray-700 {
   border-color: #4b5563;
 }
 .dark .border-gray-600 {
   border-color: #6b7280;
 }
-.border-gray-700 {
-  border-color: #374151;
-}
-.dark .border-gray-700 {
-  border-color: #4b5563;
-}
-.border-green-500 {
-  border-color: #22c55e;
-}
-.dark .border-green-500 {
-  border-color: #22c55e;
-}
 .dark .border-green-400 {
   border-color: #4ade80;
 }
 
-/* Shadow utilities */
-.shadow-lg {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-.shadow-sm {
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-}
-.shadow-md {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-.shadow {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-}
-
-/* Background color utilities */
-.bg-white {
+/* Background color overrides using CSS custom properties */
+.bg-white,
+.bg-gray-800 {
   background-color: var(--card-background);
 }
-.dark .bg-white {
+.dark .bg-white,
+.dark .bg-gray-800 {
   background-color: var(--card-background);
 }
-.bg-gray-50 {
-  background-color: #f9fafb;
+.bg-gray-100,
+.bg-gray-900 {
+  background-color: var(--background-color);
+}
+.dark .bg-gray-100,
+.dark .bg-gray-900 {
+  background-color: var(--background-color);
 }
 .dark .bg-gray-50 {
   background-color: #111827;
 }
-.bg-gray-100 {
-  background-color: var(--background-color);
-}
-.dark .bg-gray-100 {
-  background-color: var(--background-color);
-}
-.bg-gray-200 {
-  background-color: #e5e7eb;
-}
-.dark .bg-gray-200 {
-  background-color: #1f2937;
-}
-.bg-gray-700 {
-  background-color: #374151;
-}
+.dark .bg-gray-200,
 .dark .bg-gray-700 {
   background-color: #1f2937;
 }
-.bg-gray-800 {
-  background-color: var(--card-background);
-}
-.dark .bg-gray-800 {
-  background-color: var(--card-background);
-}
-.bg-gray-900 {
-  background-color: var(--background-color);
-}
-.dark .bg-gray-900 {
-  background-color: var(--background-color);
-}
 
-/* Color swatches for security levels */
-.bg-red-500 {
-  background-color: #ef4444;
-}
-.bg-orange-500 {
-  background-color: #f97316;
-}
-.bg-yellow-500 {
-  background-color: #eab308;
-}
-.bg-green-500 {
-  background-color: #22c55e;
-}
-.bg-blue-500 {
-  background-color: #3b82f6;
-}
-.bg-purple-400 {
-  background-color: #a855f7;
-}
-.bg-orange-300 {
-  background-color: #fdba74;
-}
-.bg-yellow-200 {
-  background-color: #fef08a;
-}
-.bg-red-400 {
-  background-color: #f87171;
-}
-
-/* Badge background colors */
-.bg-blue-100 {
-  background-color: #dbeafe;
-}
-.dark .bg-blue-100 {
-  background-color: #1e3a8a;
-}
-.bg-blue-600 {
-  background-color: #2563eb;
-}
-.dark .bg-blue-600 {
-  background-color: #2563eb;
-}
-.bg-blue-900 {
-  background-color: #1e3a8a;
-}
+/* Badge background dark mode overrides */
+.dark .bg-blue-100,
 .dark .bg-blue-900 {
   background-color: #1e3a8a;
 }
-.bg-green-100 {
-  background-color: #dcfce7;
-}
-.dark .bg-green-100 {
-  background-color: #065f46;
-}
-.bg-green-900 {
-  background-color: #14532d;
-}
+.dark .bg-green-100,
 .dark .bg-green-900 {
   background-color: #065f46;
 }
-.bg-purple-100 {
-  background-color: #f3e8ff;
-}
-.dark .bg-purple-100 {
-  background-color: #6b21a8;
-}
-.bg-purple-900 {
-  background-color: #581c87;
-}
+.dark .bg-purple-100,
 .dark .bg-purple-900 {
   background-color: #6b21a8;
 }
@@ -484,18 +161,12 @@
   color: var(--color-availability);
 }
 
-/* Text color utilities */
-.text-gray-300 {
-  color: #d1d5db;
-}
+/* Text color overrides using CSS custom properties */
 .text-gray-400 {
   color: var(--text-secondary);
 }
 .dark .text-gray-400 {
   color: #9ca3af;
-}
-.text-gray-500 {
-  color: #6b7280;
 }
 .dark .text-gray-500 {
   color: #6b7280;
@@ -505,9 +176,6 @@
 }
 .dark .text-gray-600 {
   color: var(--text-secondary);
-}
-.text-gray-700 {
-  color: #374151;
 }
 .dark .text-gray-700 {
   color: #d1d5db; /* Ensure visibility in dark mode */
@@ -822,43 +490,12 @@
   width: 100%;
 }
 
-/* Utility classes for layout fixes */
-
-/* Full height containers */
-.h-full {
-  height: 100%;
-}
-
-/* Flex utilities */
-.flex-col {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Overflow utilities */
-.overflow-auto {
-  overflow: auto;
-}
-
-.overflow-hidden {
-  overflow: hidden;
-}
-
-.overflow-visible {
-  overflow: visible;
-}
-
-/* Flex grow for content areas */
-.flex-grow {
-  flex-grow: 1;
-}
-
 /* Min-height utility for widgets that need it */
 .min-h-widget {
   min-height: 300px;
 }
 
-/* Grid gap utilities */
+/* Custom grid gap utilities using design tokens */
 .gap-sm {
   gap: 0.5rem;
 }
@@ -869,15 +506,6 @@
 
 .gap-lg {
   gap: 1rem;
-}
-
-/* Preserve aspect ratio for charts and visualizations */
-.aspect-square {
-  aspect-ratio: 1/1;
-}
-
-.aspect-video {
-  aspect-ratio: 16/9;
 }
 
 /* Fix for widgets in grid layout */
@@ -897,11 +525,6 @@
 /* Fix for content that should not scroll */
 .no-scroll {
   overflow: hidden;
-}
-
-/* Fix for content that should be visible beyond bounds */
-.overflow-visible {
-  overflow: visible;
 }
 
 /* Grid container specific utilities */

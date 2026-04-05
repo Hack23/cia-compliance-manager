@@ -1,6 +1,9 @@
 /* Main index.css - import all other CSS files here */
 /* Check for any loose variable declarations here too */
 
+/* TailwindCSS v4 — provides standard utility classes */
+@import "tailwindcss";
+
 /* Import other CSS files */
 @import "./styles/variables.css";
 @import "./styles/utilities.css";
