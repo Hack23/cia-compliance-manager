@@ -531,59 +531,6 @@
   background-color: rgba(167, 66, 255, 0.05) !important;
 }
 
-/* Ensure optimal text visibility in dark mode */
-.dark p, 
-.dark li, 
-.dark span:not([class*="icon"]),
-.dark div:not([class*="background"]):not([class*="gradient"]),
-.dark label,
-.dark td, 
-.dark th,
-.dark input, 
-.dark select, 
-.dark textarea,
-.dark [data-testid^="widget-"] p,
-.dark [data-testid^="widget-"] div,
-.dark [data-testid^="widget-"] span:not([class*="icon"]) {
-  color: var(--text-color) !important;
-}
-
-/* Stronger contrast for section headings */
-.dark h4, 
-.dark h5, 
-.dark h6,
-.dark [data-testid^="widget-"] h4,
-.dark [data-testid^="widget-"] h5,
-.dark [data-testid^="widget-"] h6 {
-  color: #ffffff !important;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5) !important;
-  font-weight: 600 !important;
-}
-
-/* Enhance badge visibility in dark mode */
-.dark .status-badge {
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  background-color: rgba(0, 0, 0, 0.3) !important;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3) !important;
-  color: #e0e6ed !important;
-  padding: 0.35rem 0.75rem !important;
-}
-
-/* Better contrast for links in dark mode */
-.dark a {
-  color: var(--primary-light) !important;
-  text-decoration: underline !important;
-  text-underline-offset: 2px !important;
-}
-
-.dark a:hover {
-  text-decoration: none !important;
-  color: var(--accent-color) !important;
-}
-
-/* Ensure visibility in recommendation sections */
-.dark [data-testid^="widget-"] [data-testid$="-recommendation-0"],
-.dark [data-testid^="widget-"] [data-testid$="-recommendation-1"],
-.dark [data-testid^="widget-"] [data-testid$="-recommendation-2"] {
-  color: var(--text-color) !important;
-}
+/* Dark mode text visibility, headings, badges, links, and recommendations
+ * are handled in components.css to avoid duplicate rules and !important conflicts.
+ * See components.css "Enhanced text visibility" section. */

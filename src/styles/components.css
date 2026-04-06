@@ -1430,10 +1430,10 @@ textarea:focus {
 }
 
 /* Enhanced text visibility for all text elements */
-/* Exclude elements with explicit CIA color classes to preserve accent colors */
+/* Exclude elements with explicit color classes to preserve badge/status accent colors */
 .dark p,
 .dark li,
-.dark span:not([class*="icon"]):not([class*="text-purple"]):not([class*="text-green"]):not([class*="text-blue"]):not([class*="color-"]),
+.dark span:not([class*="icon"]):not([class*="text-purple"]):not([class*="text-green"]):not([class*="text-blue"]):not([class*="text-red"]):not([class*="text-yellow"]):not([class*="text-orange"]):not([class*="color-"]):not(.status-badge):not(.security-badge),
 .dark div:not([class*="background"]):not([class*="gradient"]),
 .dark label,
 .dark td,
@@ -1443,8 +1443,8 @@ textarea:focus {
 .dark textarea,
 .dark [data-testid^="widget-"] p,
 .dark [data-testid^="widget-"] div,
-.dark [data-testid^="widget-"] span:not([class*="icon"]):not([class*="text-purple"]):not([class*="text-green"]):not([class*="text-blue"]):not([class*="color-"]) {
-  color: var(--text-color) !important;
+.dark [data-testid^="widget-"] span:not([class*="icon"]):not([class*="text-purple"]):not([class*="text-green"]):not([class*="text-blue"]):not([class*="text-red"]):not([class*="text-yellow"]):not([class*="text-orange"]):not([class*="color-"]):not(.status-badge):not(.security-badge) {
+  color: var(--text-color);
 }
 
 /* Stronger contrast for section headings */
