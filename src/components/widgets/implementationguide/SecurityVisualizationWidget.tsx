@@ -166,7 +166,7 @@ const SecurityVisualizationWidget: React.FC<
             role="group"
             aria-label="Security metrics"
           >
-            <div className={cn(WidgetClasses.flexRow, "justify-between items-center mb-md")}>
+            <div className={cn("flex justify-between items-center mb-md")}>
               <div>
                 <div className={cn(WidgetClasses.body)}>
                   Security Score
@@ -247,7 +247,7 @@ const SecurityVisualizationWidget: React.FC<
               className={cn("p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md")}
               data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('confidentiality-component')}
             >
-              <div className={cn(WidgetClasses.flexRow, "items-center justify-between mb-sm")}>
+              <div className={cn("flex items-center justify-between mb-sm")}>
                 <div className="text-body-lg font-medium text-primary-dark dark:text-primary-light">
                   Confidentiality
                 </div>
@@ -274,7 +274,7 @@ const SecurityVisualizationWidget: React.FC<
               className={cn("p-md bg-green-50 dark:bg-green-900/20 rounded-lg")}
               data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('integrity-component')}
             >
-              <div className={cn(WidgetClasses.flexRow, "items-center justify-between mb-sm")}>
+              <div className={cn("flex items-center justify-between mb-sm")}>
                 <div className="text-body-lg font-medium text-green-800 dark:text-green-300">
                   Integrity
                 </div>
@@ -301,7 +301,7 @@ const SecurityVisualizationWidget: React.FC<
               className={cn("p-md bg-blue-50 dark:bg-blue-900/20 rounded-lg")}
               data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('availability-component')}
             >
-              <div className={cn(WidgetClasses.flexRow, "items-center justify-between mb-sm")}>
+              <div className={cn("flex items-center justify-between mb-sm")}>
                 <div className="text-body-lg font-medium text-blue-800 dark:text-blue-300">
                   Availability
                 </div>

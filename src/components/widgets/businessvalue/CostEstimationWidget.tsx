@@ -210,7 +210,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         <div className={cn("grid grid-cols-1 sm:grid-cols-2 gap-xs mb-xs")}>
           {/* Implementation complexity */}
           <div className={cn("p-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded border border-neutral-light/20 dark:border-neutral-dark/20")}>
-            <div className={cn(WidgetClasses.flexRow, "justify-between items-center mb-xs")}>
+            <div className={cn("flex justify-between items-center mb-xs")}>
               <span className={cn(WidgetClasses.labelNormal)}>Complexity</span>
               <span className={cn("text-body-lg font-bold text-primary-dark dark:text-primary-light")}>
                 {implementationComplexity}
@@ -231,7 +231,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
 
           {/* Personnel requirements - Compact */}
           <div className={cn("p-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded border border-neutral-light/20 dark:border-neutral-dark/20")}>
-            <div className={cn(WidgetClasses.flexRow, "justify-between items-center mb-xs")}>
+            <div className={cn("flex justify-between items-center mb-xs")}>
               <span className={cn(WidgetClasses.labelNormal)}>Personnel</span>
               <span className={cn("text-body-lg font-bold text-info-dark dark:text-info-light")}>
                 {fteRequirements.total} FTE
@@ -249,7 +249,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
           <div className={cn("grid grid-cols-1 sm:grid-cols-3 gap-xs")}>
             {/* Confidentiality */}
             <div className={cn("p-xs bg-primary-light/10 dark:bg-primary-dark/20 rounded border border-primary-light/30 dark:border-primary-dark/30")}>
-              <div className={cn(WidgetClasses.flexRow, "items-center justify-between mb-xs")}>
+              <div className={cn("flex items-center justify-between mb-xs")}>
                 <span className={cn(WidgetClasses.labelNormal, "text-primary-dark dark:text-primary-light")}><span aria-hidden="true">🔒</span> Conf</span>
                 <SecurityLevelBadge
                   category=""
@@ -265,7 +265,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
 
             {/* Integrity */}
             <div className={cn("p-xs bg-success-light/10 dark:bg-success-dark/20 rounded border border-success-light/30 dark:border-success-dark/30")}>
-              <div className={cn(WidgetClasses.flexRow, "items-center justify-between mb-xs")}>
+              <div className={cn("flex items-center justify-between mb-xs")}>
                 <span className={cn(WidgetClasses.labelNormal, "text-success-dark dark:text-success-light")}><span aria-hidden="true">✓</span> Integ</span>
                 <SecurityLevelBadge
                   category=""
@@ -281,7 +281,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
 
             {/* Availability */}
             <div className={cn("p-xs bg-info-light/10 dark:bg-info-dark/20 rounded border border-info-light/30 dark:border-info-dark/30")}>
-              <div className={cn(WidgetClasses.flexRow, "items-center justify-between mb-xs")}>
+              <div className={cn("flex items-center justify-between mb-xs")}>
                 <span className={cn(WidgetClasses.labelNormal, "text-info-dark dark:text-info-light")}><span aria-hidden="true">⏱️</span> Avail</span>
                 <SecurityLevelBadge
                   category=""
@@ -304,7 +304,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
           </h3>
           <div className={cn("grid grid-cols-1 sm:grid-cols-2 gap-x-xs gap-y-xs text-caption text-neutral-dark dark:text-neutral-light")}>
             {expertiseRequired.map((expertise: string, index: number) => (
-              <div key={`expertise-${index}`} className={cn(WidgetClasses.flexRow, "items-start")}>
+              <div key={`expertise-${index}`} className={cn("flex items-start")}>
                 <span className={cn("text-info-dark dark:text-info-light mr-xs")}>•</span>
                 <span>{expertise}</span>
               </div>

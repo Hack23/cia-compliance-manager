@@ -335,7 +335,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           </div>
           <div className={cn("p-sm bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light/30 dark:border-info-dark/30")}>
             <div className={cn(WidgetClasses.labelNormal, "text-info-dark dark:text-info-light mb-xs")}>Security Level</div>
-            <div className={cn(WidgetClasses.flexRow, "items-center")}>
+            <div className={cn("flex items-center")}>
               <SecurityLevelIndicator level={securityScoreAsLevel} size="sm" />
               <span className={cn("text-body-lg font-bold text-info-dark dark:text-info-light ml-xs")}>{securityScore}</span>
             </div>
@@ -380,7 +380,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               <div className={cn("grid grid-cols-1 sm:grid-cols-2 gap-xs")}>
                 {valueMetrics.slice(0, UI_DISPLAY_LIMITS.MAX_PREVIEW_METRICS).map((metric, index) => (
                   <div key={index} className={cn("p-xs bg-white/50 dark:bg-gray-800/50 rounded")}>
-                    <div className={cn(WidgetClasses.flexRow, "items-center mb-xs")}>
+                    <div className={cn("flex items-center mb-xs")}>
                       <span className={cn("mr-xs")} aria-hidden="true">{metric.icon || "📈"}</span>
                       <span className={cn(WidgetClasses.labelNormal)}>{metric.category}</span>
                     </div>
@@ -424,7 +424,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
             >
               {/* Confidentiality */}
               <div className={cn("p-xs bg-primary-light/10 dark:bg-primary-dark/20 rounded")}>
-                <div className={cn(WidgetClasses.flexRow, "items-center mb-xs")}>
+                <div className={cn("flex items-center mb-xs")}>
                   <span className={cn("mr-xs")} aria-hidden="true">🔒</span>
                   <span className={cn(WidgetClasses.body, "font-medium text-primary-dark dark:text-primary-light")}>
                     Confidentiality ({confidentialityLevel})
@@ -439,7 +439,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 
               {/* Integrity */}
               <div className={cn("p-xs bg-success-light/10 dark:bg-success-dark/20 rounded")}>
-                <div className={cn(WidgetClasses.flexRow, "items-center mb-xs")}>
+                <div className={cn("flex items-center mb-xs")}>
                   <span className={cn("mr-xs")} aria-hidden="true">✓</span>
                   <span className={cn(WidgetClasses.body, "font-medium text-success-dark dark:text-success-light")}>
                     Integrity ({integrityLevel})
@@ -454,7 +454,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 
               {/* Availability */}
               <div className={cn("p-xs bg-info-light/10 dark:bg-info-dark/20 rounded")}>
-                <div className={cn(WidgetClasses.flexRow, "items-center mb-xs")}>
+                <div className={cn("flex items-center mb-xs")}>
                   <span className={cn("mr-xs")} aria-hidden="true">⏱️</span>
                   <span className={cn(WidgetClasses.body, "font-medium text-info-dark dark:text-info-light")}>
                     Availability ({availabilityLevel})
