@@ -9,42 +9,7 @@
   padding-left: 0.75rem; /* Reduced from 1rem */
 }
 
-/* Grid layout fixes - use CSS Grid properties directly */
-[data-testid="dashboard-grid"] {
-  display: grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: 0.75rem; /* Reduced from 1rem */
-  width: 100%;
-  margin: 0 auto;
-  padding: 0.75rem; /* Reduced from 1rem */
-  /* Add explicit grid-auto-rows property to ensure rows are created */
-  grid-auto-rows: minmax(250px, auto); /* Reduced from 300px */
-}
-
-/* Apply responsive grid columns - these override the base definition at breakpoints */
-@media (min-width: 640px) {
-  [data-testid="dashboard-grid"] {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.6rem; /* Reduced from default */
-  }
-}
-
-@media (min-width: 1024px) {
-  [data-testid="dashboard-grid"] {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.75rem; /* Moderate gap for larger screens */
-  }
-}
-
-/* Fix the direct children of the grid (the widget containers) */
-[data-testid="dashboard-grid"] > div {
-  height: 100%; /* Fill the grid cell */
-  min-height: 250px; /* Reduced from 300px */
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  margin-bottom: 0; /* Remove margin that could cause spacing issues */
-}
+/* Dashboard grid layout is defined in utilities.css (.dashboard-grid-container) */
 
 /* Fix individual widgets inside their containers */
 .bg-white.dark\:bg-gray-800.shadow-md.rounded-lg.overflow-hidden {
@@ -78,11 +43,6 @@
 /* IMPORTANT: DO NOT add any styling that would override grid-cols-* classes */
 
 /* Responsive adjustments - enhance but don't override Tailwind's responsive classes */
-@media (max-width: 640px) {
-  [data-testid="dashboard-grid"] > div {
-    margin-bottom: 0.5rem; /* Reduced spacing on mobile */
-  }
-}
 
 /* Fix widget container height issues */
 .widget-container {
