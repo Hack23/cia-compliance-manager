@@ -341,7 +341,7 @@ input:focus {
   height: auto;
   min-height: 250px; /* Consolidated: consistent with grid-auto-rows */
   max-height: none;
-  overflow: auto; /* Allow scrolling when content exceeds bounds */
+  overflow: hidden; /* Match widget container behavior and avoid nested scrollbars */
 }
 
 .dark .widget {
