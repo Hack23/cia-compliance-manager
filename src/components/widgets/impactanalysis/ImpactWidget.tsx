@@ -23,6 +23,7 @@ import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import { getCIAColors } from "../../../utils/ciaColorUtils";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import MetricCard from "../../common/MetricCard";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
@@ -304,13 +305,13 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
         error={error}
       >
         <div
-          className="p-sm space-y-sm"
+          className={cn(WidgetClasses.section, "p-sm space-y-sm")}
           role="region"
           aria-label={getWidgetAriaDescription(config.defaultTitle, config.ariaDescription)}
         >
           {/* Security level indicator */}
           <section
-            className="mb-sm"
+            className={cn("mb-sm")}
             aria-labelledby={`${component}-level-heading`}
           >
             <h3 id={`${component}-level-heading`} className="sr-only">
@@ -328,10 +329,10 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
           {/* Business Impact Analysis */}
           {businessImpact && (
             <section
-              className="mb-sm"
+              className={cn("mb-sm")}
               aria-labelledby={`${component}-business-impact-heading`}
             >
-              <h3 id={`${component}-business-impact-heading`} className="text-body-lg font-semibold text-gray-800 dark:text-gray-100 mb-sm">
+              <h3 id={`${component}-business-impact-heading`} className={cn(WidgetClasses.subheading, "font-semibold mb-sm")}>
                 Business Impact
               </h3>
               <BusinessImpactSection
@@ -353,7 +354,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
               testId={testIds.widgetIds.section("sla-metrics")}
             >
               <div
-                className="grid grid-cols-1 md:grid-cols-3 gap-sm mb-sm"
+                className={cn("grid grid-cols-1 md:grid-cols-3 gap-sm mb-sm")}
                 role="group"
                 aria-label="Service level agreement metrics"
               >
@@ -382,7 +383,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
                   testId={testIds.widgetIds.label("rpo")}
                 />
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-sm">
+              <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-sm")}>
                 <MetricCard
                   label="Service Level Agreement"
                   value={metrics.data.sla}
@@ -403,7 +404,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
               className="mb-sm"
               testId={testIds.widgetIds.section("metrics")}
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-sm">
+              <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-sm")}>
                 <MetricCard
                   label="Data Validation Controls"
                   value={metrics.data.validationLevel}
@@ -431,7 +432,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
                 className="mb-sm"
                 testId={testIds.widgetIds.section("data-protection")}
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-sm">
+                <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-sm")}>
                   <MetricCard
                     label="Data Classification"
                     value={metrics.data.dataClassification}
@@ -450,7 +451,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
                 className="mb-sm"
                 testId={testIds.widgetIds.section("privacy-impact")}
               >
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-sm">
+                <div className={cn("grid grid-cols-1 lg:grid-cols-2 gap-sm")}>
                   <MetricCard
                     label="Privacy Impact"
                     value={metrics.data.privacyImpact}
@@ -469,13 +470,13 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
             This maintains backward compatibility with the existing API.
           */}
           {showExtendedDetails && component === "integrity" && recommendations.length > 0 && (
-            <div className="mt-md">
-              <h3 className="text-lg font-medium mb-sm">Recommendations</h3>
-              <ul className="list-disc pl-5 space-y-sm">
+            <div className={cn("mt-md")}>
+              <h3 className={cn(WidgetClasses.subheading, "text-lg")}>Recommendations</h3>
+              <ul className={cn("list-disc pl-5 space-y-sm")}>
                 {recommendations.map((rec, index) => (
                   <li
                     key={index}
-                    className="text-sm text-gray-600 dark:text-gray-400"
+                    className={cn(WidgetClasses.body, "text-sm")}
                   >
                     {rec}
                   </li>

@@ -8,6 +8,7 @@ import { calculateROIEstimate } from "../../../utils/businessValueUtils";
 import { calculateBusinessImpactLevel } from "../../../utils/riskUtils";
 import { hasMethod, isNullish } from "../../../utils/typeGuards";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
@@ -316,7 +317,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         error={error}
       >
       <div 
-        className="p-md"
+        className={cn("p-md")}
         role="region"
         aria-label={getWidgetAriaDescription(
           "Business Value Creation",
@@ -324,33 +325,33 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         )}
       >
         {/* Summary cards at top - Compact 3-column grid (responsive) */}
-        <section className="grid grid-cols-1 sm:grid-cols-3 gap-sm mb-md" aria-label="Summary metrics">
-          <div className="p-sm bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light/30 dark:border-success-dark/30">
-            <div className="text-caption text-success-dark dark:text-success-light font-medium mb-xs">ROI</div>
-            <div className="text-heading font-bold text-success-dark dark:text-success-light" data-testid={VALUE_CREATION_WIDGET_IDS.value('roi')}>
+        <section className={cn("grid grid-cols-1 sm:grid-cols-3 gap-sm mb-md")} aria-label="Summary metrics">
+          <div className={cn("p-sm bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light/30 dark:border-success-dark/30")}>
+            <div className={cn(WidgetClasses.labelNormal, "text-success-dark dark:text-success-light mb-xs")}>ROI</div>
+            <div className={cn("text-heading font-bold text-success-dark dark:text-success-light")} data-testid={VALUE_CREATION_WIDGET_IDS.value('roi')}>
               {roiEstimate.value}
             </div>
-            <div className="text-caption text-success-dark/70 dark:text-success-light/70">{roiEstimate.description}</div>
+            <div className={cn("text-caption text-success-dark/70 dark:text-success-light/70")}>{roiEstimate.description}</div>
           </div>
-          <div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light/30 dark:border-info-dark/30">
-            <div className="text-caption text-info-dark dark:text-info-light font-medium mb-xs">Security Level</div>
-            <div className="flex items-center">
+          <div className={cn("p-sm bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light/30 dark:border-info-dark/30")}>
+            <div className={cn(WidgetClasses.labelNormal, "text-info-dark dark:text-info-light mb-xs")}>Security Level</div>
+            <div className={cn(WidgetClasses.flexRow, "items-center")}>
               <SecurityLevelIndicator level={securityScoreAsLevel} size="sm" />
-              <span className="text-body-lg font-bold text-info-dark dark:text-info-light ml-xs">{securityScore}</span>
+              <span className={cn("text-body-lg font-bold text-info-dark dark:text-info-light ml-xs")}>{securityScore}</span>
             </div>
           </div>
-          <div className="p-sm bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light/30 dark:border-primary-dark/30">
-            <div className="text-caption text-primary-dark dark:text-primary-light font-medium mb-xs">Value Metrics</div>
-            <div className="text-heading font-bold text-primary-dark dark:text-primary-light">
+          <div className={cn("p-sm bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light/30 dark:border-primary-dark/30")}>
+            <div className={cn(WidgetClasses.labelNormal, "text-primary-dark dark:text-primary-light mb-xs")}>Value Metrics</div>
+            <div className={cn("text-heading font-bold text-primary-dark dark:text-primary-light")}>
               {valueMetrics.length}
             </div>
-            <div className="text-caption text-primary-dark/70 dark:text-primary-light/70">Categories</div>
+            <div className={cn("text-caption text-primary-dark/70 dark:text-primary-light/70")}>Categories</div>
           </div>
         </section>
 
         {/* Collapsible sections */}
         {/* Value Overview */}
-        <div className="mb-sm">
+        <div className={cn("mb-sm")}>
           <button
             type="button"
             onClick={() => toggleSection("summary")}
@@ -360,35 +361,35 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
                 toggleSection("summary");
               }
             }}
-            className="w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors"
+            className={cn("w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors")}
             aria-expanded={expandedSection === "summary"}
             aria-controls="value-overview-content"
             aria-label="Toggle Value Overview section"
           >
-            <span className="text-body-lg font-medium"><span aria-hidden="true">📊</span> Value Overview</span>
-            <span className="text-body" aria-hidden="true">{expandedSection === "summary" ? "▼" : "▶"}</span>
+            <span className={cn(WidgetClasses.subheading, "text-body-lg mb-0")}><span aria-hidden="true">📊</span> Value Overview</span>
+            <span className={cn(WidgetClasses.body)} aria-hidden="true">{expandedSection === "summary" ? "▼" : "▶"}</span>
           </button>
           {expandedSection === "summary" && (
             <div
               id="value-overview-content"
-              className="p-sm mt-xs bg-info-light/5 dark:bg-info-dark/10 rounded-md border border-info-light/20 dark:border-info-dark/20"
+              className={cn("p-sm mt-xs bg-info-light/5 dark:bg-info-dark/10 rounded-md border border-info-light/20 dark:border-info-dark/20")}
             >
-              <p className="text-body text-neutral-dark dark:text-neutral-light mb-sm" data-testid={VALUE_CREATION_WIDGET_IDS.label('summary')}>
+              <p className={cn(WidgetClasses.body, "mb-sm")} data-testid={VALUE_CREATION_WIDGET_IDS.label('summary')}>
                 {getBusinessValueSummary()}
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-xs">
+              <div className={cn("grid grid-cols-1 sm:grid-cols-2 gap-xs")}>
                 {valueMetrics.slice(0, UI_DISPLAY_LIMITS.MAX_PREVIEW_METRICS).map((metric, index) => (
-                  <div key={index} className="p-xs bg-white/50 dark:bg-gray-800/50 rounded">
-                    <div className="flex items-center mb-xs">
-                      <span className="mr-xs" aria-hidden="true">{metric.icon || "📈"}</span>
-                      <span className="text-caption font-medium">{metric.category}</span>
+                  <div key={index} className={cn("p-xs bg-white/50 dark:bg-gray-800/50 rounded")}>
+                    <div className={cn(WidgetClasses.flexRow, "items-center mb-xs")}>
+                      <span className={cn("mr-xs")} aria-hidden="true">{metric.icon || "📈"}</span>
+                      <span className={cn(WidgetClasses.labelNormal)}>{metric.category}</span>
                     </div>
-                    <div className="text-body font-bold text-info-dark dark:text-info-light">{metric.value}</div>
+                    <div className={cn("text-body font-bold text-info-dark dark:text-info-light")}>{metric.value}</div>
                   </div>
                 ))}
               </div>
               {valueMetrics.length > UI_DISPLAY_LIMITS.MAX_PREVIEW_METRICS && (
-                <div className="text-caption text-neutral-dark/70 dark:text-neutral-light/70 mt-xs text-center">
+                <div className={cn("text-caption text-neutral-dark/70 dark:text-neutral-light/70 mt-xs text-center")}>
                   + {valueMetrics.length - UI_DISPLAY_LIMITS.MAX_PREVIEW_METRICS} more metric
                   {valueMetrics.length - UI_DISPLAY_LIMITS.MAX_PREVIEW_METRICS !== 1 ? "s" : ""}
                 </div>
@@ -398,7 +399,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         </div>
 
         {/* Component Value - Collapsible */}
-        <div className="mb-sm">
+        <div className={cn("mb-sm")}>
           <button
             type="button"
             onClick={() => toggleSection("components")}
@@ -408,28 +409,28 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
                 toggleSection("components");
               }
             }}
-            className="w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors"
+            className={cn("w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors")}
             aria-expanded={expandedSection === "components"}
             aria-controls="component-value-content"
             aria-label="Toggle Component Business Value section"
           >
-            <span className="text-body-lg font-medium"><span aria-hidden="true">🔒</span> Component Business Value</span>
-            <span className="text-body" aria-hidden="true">{expandedSection === "components" ? "▼" : "▶"}</span>
+            <span className={cn(WidgetClasses.subheading, "text-body-lg mb-0")}><span aria-hidden="true">🔒</span> Component Business Value</span>
+            <span className={cn(WidgetClasses.body)} aria-hidden="true">{expandedSection === "components" ? "▼" : "▶"}</span>
           </button>
           {expandedSection === "components" && (
             <div
               id="component-value-content"
-              className="p-sm mt-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 space-y-sm"
+              className={cn("p-sm mt-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 space-y-sm")}
             >
               {/* Confidentiality */}
-              <div className="p-xs bg-primary-light/10 dark:bg-primary-dark/20 rounded">
-                <div className="flex items-center mb-xs">
-                  <span className="mr-xs" aria-hidden="true">🔒</span>
-                  <span className="text-body font-medium text-primary-dark dark:text-primary-light">
+              <div className={cn("p-xs bg-primary-light/10 dark:bg-primary-dark/20 rounded")}>
+                <div className={cn(WidgetClasses.flexRow, "items-center mb-xs")}>
+                  <span className={cn("mr-xs")} aria-hidden="true">🔒</span>
+                  <span className={cn(WidgetClasses.body, "font-medium text-primary-dark dark:text-primary-light")}>
                     Confidentiality ({confidentialityLevel})
                   </span>
                 </div>
-                <ul className="text-caption text-neutral-dark dark:text-neutral-light space-y-xs pl-sm">
+                <ul className={cn("text-caption text-neutral-dark dark:text-neutral-light space-y-xs pl-sm")}>
                   {getComponentValueStatements("confidentiality", confidentialityLevel).map((statement, index) => (
                     <li key={index} data-testid={`confidentiality-value-item-${index}`}>• {statement}</li>
                   ))}
@@ -437,14 +438,14 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               </div>
 
               {/* Integrity */}
-              <div className="p-xs bg-success-light/10 dark:bg-success-dark/20 rounded">
-                <div className="flex items-center mb-xs">
-                  <span className="mr-xs" aria-hidden="true">✓</span>
-                  <span className="text-body font-medium text-success-dark dark:text-success-light">
+              <div className={cn("p-xs bg-success-light/10 dark:bg-success-dark/20 rounded")}>
+                <div className={cn(WidgetClasses.flexRow, "items-center mb-xs")}>
+                  <span className={cn("mr-xs")} aria-hidden="true">✓</span>
+                  <span className={cn(WidgetClasses.body, "font-medium text-success-dark dark:text-success-light")}>
                     Integrity ({integrityLevel})
                   </span>
                 </div>
-                <ul className="text-caption text-neutral-dark dark:text-neutral-light space-y-xs pl-sm">
+                <ul className={cn("text-caption text-neutral-dark dark:text-neutral-light space-y-xs pl-sm")}>
                   {getComponentValueStatements("integrity", integrityLevel).map((statement, index) => (
                     <li key={index} data-testid={`integrity-value-item-${index}`}>• {statement}</li>
                   ))}
@@ -452,14 +453,14 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               </div>
 
               {/* Availability */}
-              <div className="p-xs bg-info-light/10 dark:bg-info-dark/20 rounded">
-                <div className="flex items-center mb-xs">
-                  <span className="mr-xs" aria-hidden="true">⏱️</span>
-                  <span className="text-body font-medium text-info-dark dark:text-info-light">
+              <div className={cn("p-xs bg-info-light/10 dark:bg-info-dark/20 rounded")}>
+                <div className={cn(WidgetClasses.flexRow, "items-center mb-xs")}>
+                  <span className={cn("mr-xs")} aria-hidden="true">⏱️</span>
+                  <span className={cn(WidgetClasses.body, "font-medium text-info-dark dark:text-info-light")}>
                     Availability ({availabilityLevel})
                   </span>
                 </div>
-                <ul className="text-caption text-neutral-dark dark:text-neutral-light space-y-xs pl-sm">
+                <ul className={cn("text-caption text-neutral-dark dark:text-neutral-light space-y-xs pl-sm")}>
                   {getComponentValueStatements("availability", availabilityLevel).map((statement, index) => (
                     <li key={index} data-testid={`availability-value-item-${index}`}>• {statement}</li>
                   ))}
@@ -470,7 +471,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         </div>
 
         {/* Business Case - Collapsible */}
-        <div className="mb-sm">
+        <div className={cn("mb-sm")}>
           <button
             type="button"
             onClick={() => toggleSection("business-case")}
@@ -480,34 +481,34 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
                 toggleSection("business-case");
               }
             }}
-            className="w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors"
+            className={cn("w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors")}
             aria-expanded={expandedSection === "business-case"}
             aria-controls="business-case-content"
             aria-label="Toggle Investment Business Case section"
           >
-            <span className="text-body-lg font-medium"><span aria-hidden="true">💼</span> Investment Business Case</span>
-            <span className="text-body" aria-hidden="true">{expandedSection === "business-case" ? "▼" : "▶"}</span>
+            <span className={cn(WidgetClasses.subheading, "text-body-lg mb-0")}><span aria-hidden="true">💼</span> Investment Business Case</span>
+            <span className={cn(WidgetClasses.body)} aria-hidden="true">{expandedSection === "business-case" ? "▼" : "▶"}</span>
           </button>
           {expandedSection === "business-case" && (
             <div
               id="business-case-content"
-              className="p-sm mt-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 space-y-xs"
+              className={cn("p-sm mt-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 space-y-xs")}
             >
-              <div className="p-xs bg-info-light/10 dark:bg-info-dark/20 rounded">
-                <h5 className="text-caption font-medium mb-xs">Executive Summary</h5>
-                <p className="text-caption">
+              <div className={cn("p-xs bg-info-light/10 dark:bg-info-dark/20 rounded")}>
+                <h5 className={cn(WidgetClasses.labelNormal, "mb-xs")}>Executive Summary</h5>
+                <p className={cn("text-caption")}>
                   Our {securityScore.toLowerCase()} security investment strategy delivers business value through improved operational reliability, data integrity, and information protection.
                 </p>
               </div>
-              <div className="p-xs bg-success-light/10 dark:bg-success-dark/20 rounded">
-                <h5 className="text-caption font-medium mb-xs">Financial Value</h5>
-                <p className="text-caption">
+              <div className={cn("p-xs bg-success-light/10 dark:bg-success-dark/20 rounded")}>
+                <h5 className={cn(WidgetClasses.labelNormal, "mb-xs")}>Financial Value</h5>
+                <p className={cn("text-caption")}>
                   With an estimated ROI of {roiEstimate.value}, our security investments provide strong financial returns through risk reduction, operational improvements, and business enablement.
                 </p>
               </div>
-              <div className="p-xs bg-primary-light/10 dark:bg-primary-dark/20 rounded">
-                <h5 className="text-caption font-medium mb-xs">Strategic Value</h5>
-                <p className="text-caption">
+              <div className={cn("p-xs bg-primary-light/10 dark:bg-primary-dark/20 rounded")}>
+                <h5 className={cn(WidgetClasses.labelNormal, "mb-xs")}>Strategic Value</h5>
+                <p className={cn("text-caption")}>
                   Beyond direct financial returns, our security program creates strategic value by enabling digital initiatives, protecting our brand, and building customer trust.
                 </p>
               </div>
