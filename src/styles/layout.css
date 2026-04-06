@@ -22,12 +22,12 @@
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-/* Widget body should scroll if content overflows - with less padding */
+/* Widget body should scroll if content overflows */
 [data-testid^="widget-container"] > div:nth-child(2) {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 0.5rem; /* Added reduced padding */
+  padding: 0.75rem; /* Consistent widget body padding */
 }
 
 /* App header styling - more compact */
@@ -48,10 +48,10 @@
 .widget-container {
   display: flex;
   flex-direction: column;
-  overflow: visible;
+  overflow: hidden;
   height: auto;
-  min-height: 200px; /* Reduced from original */
-  max-height: 700px; /* Reduced from 800px */
+  min-height: 250px; /* Consolidated: single consistent value */
+  max-height: 700px;
 }
 
 /* Fix widget content scrolling */
@@ -59,7 +59,7 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 0.75rem; /* Reduced from 1rem */
+  padding: 0.75rem; /* Consistent widget body padding */
 }
 
 /* Fix scroll behavior - thinner and more subtle */
@@ -82,11 +82,11 @@
   flex-shrink: 0;
 }
 
-/* Fixed height for charts to prevent layout shifts - more compact */
+/* Responsive chart sizing - proportional constraints instead of forced heights */
 canvas.chart {
-  height: 250px !important; /* Reduced from 300px */
-  width: 100% !important;
-  max-height: 250px !important; /* Reduced from 300px */
+  width: 100%;
+  max-height: min(250px, 40vh);
+  aspect-ratio: 16 / 9;
 }
 
 /* Consistent widget padding - reduced */
@@ -136,7 +136,7 @@ canvas.chart {
   }
 
   canvas.chart {
-    height: 180px !important; /* Reduced from 200px */
+    max-height: min(180px, 35vh);
   }
 
   /* Further compact elements on small screens */

@@ -181,11 +181,11 @@ const CIAClassificationApp: React.FC = () => {
         {/* Ultra-compact app header with horizontal layout */}
         <div className="mb-2 px-2 py-0.5 bg-white dark:bg-gray-800 rounded-lg shadow-md flex justify-between items-center app-header">
           <div className="flex items-center">
-            <div className="w-5 h-5 flex items-center justify-center overflow-hidden mr-1.5">
+            <div className="flex items-center justify-center mr-1.5">
               <img
                 src="./icon-192.png"
                 alt="CIA Compliance Manager Logo"
-                style={{ transform: "scale(0.2)" }}
+                className="w-5 h-5 object-contain"
                 data-testid={APP_TEST_IDS.APP_LOGO}
               />
             </div>

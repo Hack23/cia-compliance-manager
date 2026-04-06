@@ -494,13 +494,13 @@
 
 /* Min-height utility for widgets that need it */
 .min-h-widget {
-  min-height: 300px;
+  min-height: 250px;
 }
 
 /* Fix for widgets in grid layout */
 .grid-widget {
   height: 100%;
-  min-height: 300px;
+  min-height: 250px;
   display: flex;
   flex-direction: column;
 }

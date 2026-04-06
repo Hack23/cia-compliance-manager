@@ -84,7 +84,7 @@
 .widget-body,
 .widget-container > div:nth-child(2),
 [data-testid^="widget-container"] > div:nth-child(2) {
-  padding: 1rem;
+  padding: 0.75rem;
   overflow-y: auto;
   flex: 1;
   background-color: white;
@@ -333,13 +333,13 @@ input:focus {
   border: 1px solid var(--border-color);
   box-shadow: 0 4px 8px var(--shadow-color);
   border-radius: var(--border-radius);
-  transition: transform 0.2s, box-shadow 0.2s; /* Prevents content from showing outside the container */
+  transition: transform 0.2s, box-shadow 0.2s;
   display: flex;
   flex-direction: column;
-  height: auto; /* Allow height to adapt to content */
-  min-height: 300px; /* Minimum height */
-  max-height: none; /* Remove maximum height restriction */
-  overflow: visible; /* Allow content to be visible */
+  height: auto;
+  min-height: 250px; /* Consolidated: consistent with grid-auto-rows */
+  max-height: none;
+  overflow: hidden; /* Contain content within widget bounds */
 }
 
 .dark .widget {
@@ -418,14 +418,12 @@ input:focus {
 }
 
 /* Widget body with improved padding and scrolling behavior */
-/* Reduced padding (0.5rem/8px) to minimize empty space while maintaining usability */
-/* Note: This overrides responsive Tailwind padding (p-md sm:p-lg) with fixed 8px for consistency */
-/* Design validated through testing - provides adequate whitespace on touch devices */
+/* Consistent 0.75rem padding across all widget bodies */
 .widget-body {
-  padding: 0.5rem; /* Further reduced from 0.75rem for less empty space */
+  padding: 0.75rem; /* Consolidated: consistent widget body padding */
   flex: 1 1 auto;
-  overflow-y: auto; /* Change to auto for better scrolling */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   max-height: calc(100% - 40px); /* Account for header height */
