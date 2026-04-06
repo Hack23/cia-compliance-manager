@@ -84,7 +84,8 @@
 
 /* Responsive chart sizing - proportional constraints instead of forced heights */
 /* max-height caps the chart size; aspect-ratio sets proportions within that cap */
-canvas.chart {
+/* Targets the actual canvas inside .radar-chart-container (RadarChart.tsx) */
+.radar-chart-container canvas {
   width: 100%;
   max-height: min(250px, 40vh);
   aspect-ratio: 16 / 9;
@@ -136,7 +137,7 @@ canvas.chart {
     max-height: none;
   }
 
-  canvas.chart {
+  .radar-chart-container canvas {
     max-height: min(180px, 35vh);
   }
 
