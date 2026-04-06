@@ -48,7 +48,7 @@
 .widget-container {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: auto;
   height: auto;
   min-height: 250px; /* Consolidated: single consistent value */
   max-height: 700px;
@@ -83,6 +83,7 @@
 }
 
 /* Responsive chart sizing - proportional constraints instead of forced heights */
+/* max-height caps the chart size; aspect-ratio sets proportions within that cap */
 canvas.chart {
   width: 100%;
   max-height: min(250px, 40vh);
