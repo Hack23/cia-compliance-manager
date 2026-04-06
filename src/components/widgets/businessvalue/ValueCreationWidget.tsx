@@ -366,7 +366,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
             aria-controls="value-overview-content"
             aria-label="Toggle Value Overview section"
           >
-            <span className={cn(WidgetClasses.subheading, "text-body-lg mb-0")}><span aria-hidden="true">📊</span> Value Overview</span>
+            <span className={cn("text-body-lg font-medium")}><span aria-hidden="true">📊</span> Value Overview</span>
             <span className={cn(WidgetClasses.body)} aria-hidden="true">{expandedSection === "summary" ? "▼" : "▶"}</span>
           </button>
           {expandedSection === "summary" && (
@@ -414,7 +414,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
             aria-controls="component-value-content"
             aria-label="Toggle Component Business Value section"
           >
-            <span className={cn(WidgetClasses.subheading, "text-body-lg mb-0")}><span aria-hidden="true">🔒</span> Component Business Value</span>
+            <span className={cn("text-body-lg font-medium")}><span aria-hidden="true">🔒</span> Component Business Value</span>
             <span className={cn(WidgetClasses.body)} aria-hidden="true">{expandedSection === "components" ? "▼" : "▶"}</span>
           </button>
           {expandedSection === "components" && (
@@ -486,7 +486,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
             aria-controls="business-case-content"
             aria-label="Toggle Investment Business Case section"
           >
-            <span className={cn(WidgetClasses.subheading, "text-body-lg mb-0")}><span aria-hidden="true">💼</span> Investment Business Case</span>
+            <span className={cn("text-body-lg font-medium")}><span aria-hidden="true">💼</span> Investment Business Case</span>
             <span className={cn(WidgetClasses.body)} aria-hidden="true">{expandedSection === "business-case" ? "▼" : "▶"}</span>
           </button>
           {expandedSection === "business-case" && (

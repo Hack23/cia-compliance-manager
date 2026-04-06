@@ -185,7 +185,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
           className={cn("grid grid-cols-1 sm:grid-cols-3 gap-xs mb-xs")}
           aria-labelledby="cost-summary-heading"
         >
-          <h3 id="cost-summary-heading" className={cn("sr-only")}>Cost Summary</h3>
+          <h3 id="cost-summary-heading" className="sr-only">Cost Summary</h3>
           <div className={cn("p-xs bg-info-light/10 dark:bg-info-dark/20 rounded border border-info-light/30 dark:border-info-dark/30")}>
             <div className={cn(WidgetClasses.labelNormal, "text-info-dark dark:text-info-light mb-xs")}>CAPEX</div>
             <div className={cn("text-heading font-bold text-info-dark dark:text-info-light leading-none")} data-testid={COST_ESTIMATION_WIDGET_IDS.label('capex')}>

@@ -330,7 +330,7 @@ const SecurityVisualizationWidget: React.FC<
 
         {/* Explanation section */}
         <div className={cn("p-md bg-blue-50 dark:bg-blue-900/20 rounded-lg mt-md")}>
-          <h3 className={cn(WidgetClasses.subheading)}>
+          <h3 className={cn("text-body-lg font-medium mb-sm")}>
             Security Visualization Key
           </h3>
           <p className={cn(WidgetClasses.body, "mb-sm")}>
