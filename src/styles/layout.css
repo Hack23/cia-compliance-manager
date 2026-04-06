@@ -29,7 +29,7 @@
   min-width: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 0.75rem; /* Consistent widget body padding */
+  padding: 0.75rem; /* Default widget body padding; reduced on small screens via @media (max-width: 768px) */
 }
 
 /* App header styling - more compact */
@@ -50,7 +50,7 @@
 .widget-container {
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  overflow: hidden;
   height: auto;
   min-height: 250px; /* Consolidated: single consistent value */
   max-height: 700px;
@@ -61,7 +61,7 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 0.75rem; /* Consistent widget body padding */
+  padding: 0.75rem; /* Default widget body padding; reduced on small screens via @media (max-width: 768px) */
 }
 
 /* Fix scroll behavior - thinner and more subtle */
