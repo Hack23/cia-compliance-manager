@@ -516,7 +516,7 @@
   overflow: hidden;
 }
 
-/* Grid container specific utilities — single source of truth for dashboard grid */
+/* Grid container specific utilities - single source of truth for dashboard grid */
 .dashboard-grid-container {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
