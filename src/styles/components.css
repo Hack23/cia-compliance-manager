@@ -87,6 +87,8 @@
   padding: 0.75rem;
   overflow-y: auto;
   flex: 1;
+  min-height: 0;
+  min-width: 0;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -1203,7 +1205,7 @@ textarea:focus {
   overflow-x: hidden; /* Prevent horizontal scrolling */
   scrollbar-width: thin; /* Firefox */
   height: auto; /* Don't force a specific height */
-  padding: 1.25rem;
+  padding: 0.75rem; /* Consistent widget body padding */
   display: flex;
   flex-direction: column;
 }
