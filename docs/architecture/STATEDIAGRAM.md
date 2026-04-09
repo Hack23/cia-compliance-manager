@@ -370,7 +370,7 @@ stateDiagram-v2
     
     Unmounting --> [*]
     
-    classDef idle fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef idle fill:#9E9E9E,stroke:#757575,stroke-width:2px,color:#ffffff
     classDef loading fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     classDef display fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff

@@ -202,11 +202,11 @@ flowchart TB
     COMPLIANCE_DATA -->|🎯 T9: Framework Corruption| SERVICES
     USER_DATA -->|🎯 T10: Privacy Violation| LOCAL_STORAGE
     
-    style TRUST_BOUNDARY_1 fill:#D32F2F,stroke:#D32F2F,stroke-width:3px,stroke-dasharray: 5 5
-    style TRUST_BOUNDARY_2 fill:#FF9800,stroke:#ff9800,stroke-width:3px,stroke-dasharray: 5 5
-    style TRUST_BOUNDARY_3 fill:#4CAF50,stroke:#4caf50,stroke-width:3px,stroke-dasharray: 5 5
-    style TRUST_BOUNDARY_4 fill:#2196F3,stroke:#2196f3,stroke-width:3px,stroke-dasharray: 5 5
-    style TRUST_BOUNDARY_5 fill:#7B1FA2,stroke:#7B1FA2,stroke-width:3px,stroke-dasharray: 5 5
+    style TRUST_BOUNDARY_1 fill:#D32F2F,stroke:#D32F2F,stroke-width:3px,stroke-dasharray: 5 5,color:#ffffff
+    style TRUST_BOUNDARY_2 fill:#FF9800,stroke:#ff9800,stroke-width:3px,stroke-dasharray: 5 5,color:#ffffff
+    style TRUST_BOUNDARY_3 fill:#4CAF50,stroke:#4caf50,stroke-width:3px,stroke-dasharray: 5 5,color:#ffffff
+    style TRUST_BOUNDARY_4 fill:#2196F3,stroke:#2196f3,stroke-width:3px,stroke-dasharray: 5 5,color:#ffffff
+    style TRUST_BOUNDARY_5 fill:#7B1FA2,stroke:#7B1FA2,stroke-width:3px,stroke-dasharray: 5 5,color:#ffffff
 ```
 
 ### **🎭 STRIDE per Element Analysis**

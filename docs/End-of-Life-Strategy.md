@@ -582,29 +582,7 @@ Should EOL conditions trigger migration, the successor platform will maintain **
 ### **📊 Technology Investment Strategy**
 
 ```mermaid
-%%{init: {
-  "theme": "neutral",
-  "themeVariables": {
-    "quadrant1Fill": "#1565C0",
-    "quadrant2Fill": "#2E7D32",
-    "quadrant3Fill": "#4CAF50",
-    "quadrant4Fill": "#FF9800",
-    "quadrantTitleFill": "#ffffff",
-    "quadrantPointFill": "#ffffff",
-    "quadrantPointTextFill": "#000000",
-    "quadrantXAxisTextFill": "#000000",
-    "quadrantYAxisTextFill": "#000000"
-  },
-  "quadrantChart": {
-    "chartWidth": 700,
-    "chartHeight": 700,
-    "pointLabelFontSize": 12,
-    "titleFontSize": 20,
-    "quadrantLabelFontSize": 16,
-    "xAxisLabelFontSize": 14,
-    "yAxisLabelFontSize": 14
-  }
-}}%%
+%%{init: {"theme": "neutral", "themeVariables": {"quadrant1Fill": "#1565C0", "quadrant2Fill": "#2E7D32", "quadrant3Fill": "#4CAF50", "quadrant4Fill": "#FF9800", "quadrantTitleFill": "#ffffff", "quadrantPointFill": "#ffffff", "quadrantPointTextFill": "#000000", "quadrantXAxisTextFill": "#000000", "quadrantYAxisTextFill": "#000000"}, "quadrantChart": {"chartWidth": 700, "chartHeight": 700, "pointLabelFontSize": 12, "titleFontSize": 20, "quadrantLabelFontSize": 16, "xAxisLabelFontSize": 14, "yAxisLabelFontSize": 14}}}%%
 quadrantChart
     title 🎯 Technology Investment vs Migration Complexity
     x-axis Low Migration Complexity --> High Migration Complexity

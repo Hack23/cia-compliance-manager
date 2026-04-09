@@ -335,11 +335,11 @@ graph TB
     L -->|No| J
     M --> H
     
-    style A fill:#2196F3
-    style I fill:#4CAF50
-    style M fill:#D32F2F
-    style C fill:#FFC107
-    style G fill:#FFC107
+    style A fill:#2196F3,color:#ffffff
+    style I fill:#4CAF50,color:#ffffff
+    style M fill:#D32F2F,color:#ffffff
+    style C fill:#FFC107,color:#000000
+    style G fill:#FFC107,color:#000000
 ```
 
 ---
