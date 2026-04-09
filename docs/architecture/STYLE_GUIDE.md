@@ -65,38 +65,38 @@ Use this enhanced color palette for all diagrams:
 ```mermaid
 graph TD
     subgraph "CIA Triad Colors"
-        C1[Confidentiality<br>#8e44ad]
-        I1[Integrity<br>#27ae60]
-        A1[Availability<br>#2980b9]
+        C1[Confidentiality<br>#4A148C]
+        I1[Integrity<br>#2E7D32]
+        A1[Availability<br>#1565C0]
     end
     
     subgraph "Architectural Elements"
-        A2[Core Components<br>#34495e]
-        A3[UI Elements<br>#e74c3c]
-        A4[Services<br>#3498db]
-        A5[Data Elements<br>#9b59b6]
+        A2[Core Components<br>#455A64]
+        A3[UI Elements<br>#D32F2F]
+        A4[Services<br>#2196F3]
+        A5[Data Elements<br>#7B1FA2]
     end
     
     subgraph "Status Colors"
-        S1[Success<br>#2ecc71]
-        S2[Warning<br>#f39c12]
-        S3[Critical<br>#c0392b]
-        S4[Neutral<br>#7f8c8d]
+        S1[Success<br>#4CAF50]
+        S2[Warning<br>#FF9800]
+        S3[Critical<br>#B71C1C]
+        S4[Neutral<br>#9E9E9E]
     end
     
-    style C1 fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
-    style I1 fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-    style A1 fill:#2980b9,stroke:#2471a3,stroke-width:2px,color:white
+    style C1 fill:#4A148C,stroke:#6c3483,stroke-width:2px,color:white
+    style I1 fill:#2E7D32,stroke:#1e8449,stroke-width:2px,color:white
+    style A1 fill:#1565C0,stroke:#2471a3,stroke-width:2px,color:white
     
-    style A2 fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
-    style A3 fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    style A4 fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    style A5 fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+    style A2 fill:#455A64,stroke:#2c3e50,stroke-width:2px,color:white
+    style A3 fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:white
+    style A4 fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white
+    style A5 fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:white
     
-    style S1 fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:white
-    style S2 fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:white
-    style S3 fill:#c0392b,stroke:#922b21,stroke-width:2px,color:white
-    style S4 fill:#7f8c8d,stroke:#626567,stroke-width:2px,color:white
+    style S1 fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:white
+    style S2 fill:#FF9800,stroke:#e67e22,stroke-width:2px,color:white
+    style S3 fill:#B71C1C,stroke:#922b21,stroke-width:2px,color:white
+    style S4 fill:#9E9E9E,stroke:#626567,stroke-width:2px,color:white
 ```
 
 #### Business & Value Colors
@@ -104,18 +104,18 @@ graph TD
 ```mermaid
 graph TD
     subgraph "Business & Value Colors"
-        B1[Financial<br>#f1c40f]
-        B2[Operational<br>#3498db]
-        B3[Reputational<br>#9b59b6]
+        B1[Financial<br>#FFC107]
+        B2[Operational<br>#2196F3]
+        B3[Reputational<br>#7B1FA2]
         B4[Strategic<br>#16a085]
-        B5[Regulatory<br>#e74c3c]
+        B5[Regulatory<br>#D32F2F]
     end
     
-    style B1 fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
-    style B2 fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    style B3 fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    style B4 fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    style B5 fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
+    style B1 fill:#FFC107,stroke:#FF9800,stroke-width:2px,color:black
+    style B2 fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white
+    style B3 fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:white
+    style B4 fill:#2E7D32,stroke:#2E7D32,stroke-width:2px,color:white
+    style B5 fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:white
 ```
 
 #### Color Usage Guide
@@ -150,9 +150,9 @@ C4Context
 
   UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
 
-  UpdateElementStyle(user, $fontColor="white", $bgColor="#e74c3c", $borderColor="#c0392b")
-  UpdateElementStyle(system, $fontColor="white", $bgColor="#34495e", $borderColor="#2c3e50")
-  UpdateElementStyle(external, $fontColor="white", $bgColor="#3498db", $borderColor="#2980b9")
+  UpdateElementStyle(user, $fontColor="white", $bgColor="#D32F2F", $borderColor="#B71C1C")
+  UpdateElementStyle(system, $fontColor="white", $bgColor="#455A64", $borderColor="#2c3e50")
+  UpdateElementStyle(external, $fontColor="white", $bgColor="#2196F3", $borderColor="#1565C0")
 ```
 
 #### Flowcharts

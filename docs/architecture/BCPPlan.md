@@ -55,7 +55,7 @@ mindmap
       ⏱️ RTO - Recovery Time (Objectives)
         🚨 Critical Services: Target ~5 min (CloudFront origin failover + health checks + routing propagation)
         🔔 Important Services: Target ~15 min (GitHub Pages DR via DNS switch + TTL propagation)
-        📊 Standard Services: Target < 1 hour
+        📊 Standard Services: Target under 1 hour
       📊 RPO - Recovery Point (Objectives)
         💾 User Data: 0 (browser-based/local storage, no backend persistence)
         ⚙️ Configuration: Last successful CI/CD deployment
@@ -165,7 +165,7 @@ graph TB
     end
 
     classDef critical fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
-    classDef high fill:#ffaa66,stroke:#333,stroke-width:2px;
+    classDef high fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff,stroke:#333,stroke-width:2px;
     classDef medium fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000
 
     class C1,CR2 critical;
@@ -214,7 +214,7 @@ flowchart TB
     CDN --> FE
 
     classDef github fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
-    classDef browser fill:#e1f5fe,stroke:#333,stroke-width:2px;
+    classDef browser fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff,stroke:#333,stroke-width:2px;
     classDef external fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
 
     class GHP,GHR,GHA,GHO github;
@@ -526,7 +526,7 @@ graph LR
     end
 
     classDef critical fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
-    classDef high fill:#ffaa66,stroke:#333,stroke-width:1px;
+    classDef high fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff,stroke:#333,stroke-width:1px;
     classDef medium fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000
     classDef standard fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
@@ -632,15 +632,15 @@ flowchart TB
         A -.-> GHR_M
     end
 
-    style GHP fill:#e1f5fe,stroke:#333,stroke-width:2px
-    style GHP_B fill:#e1f5fe,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
-    style GHR fill:#ffecb3,stroke:#333,stroke-width:2px
-    style GHR_M fill:#ffecb3,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
-    style GHA fill:#e8f5e9,stroke:#333,stroke-width:2px
+    style GHP fill:#2196F3,stroke:#333,stroke-width:2px
+    style GHP_B fill:#2196F3,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+    style GHR fill:#FFC107,stroke:#333,stroke-width:2px
+    style GHR_M fill:#FFC107,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+    style GHA fill:#4CAF50,stroke:#333,stroke-width:2px
 
-    style C fill:#f8bbd0,stroke:#333,stroke-width:2px
-    style I fill:#c8e6c9,stroke:#333,stroke-width:2px
-    style A fill:#bbdefb,stroke:#333,stroke-width:2px
+    style C fill:#D32F2F,stroke:#333,stroke-width:2px
+    style I fill:#4CAF50,stroke:#333,stroke-width:2px
+    style A fill:#2196F3,stroke:#333,stroke-width:2px
 ```
 
 ```mermaid
@@ -745,8 +745,8 @@ flowchart TD
         E --> E3[Restore from CDN Cache]
     end
 
-    style A fill:#ffcccc,stroke:#333,stroke-width:2px
-    style B fill:#ffffcc,stroke:#333,stroke-width:2px
+    style A fill:#D32F2F,stroke:#333,stroke-width:2px
+    style B fill:#FFC107,stroke:#333,stroke-width:2px
     style C,D,E fill:#ccffcc,stroke:#333,stroke-width:2px
     style C1,C2,C3,D1,D2,D3,E1,E2,E3 fill:#ccccff,stroke:#333,stroke-width:1px
 ```
@@ -894,8 +894,8 @@ flowchart TD
         F --> G[Post-Incident Analysis]
     end
 
-    style A fill:#ffcccc,stroke:#333,stroke-width:2px
-    style B fill:#ffffcc,stroke:#333,stroke-width:2px
+    style A fill:#D32F2F,stroke:#333,stroke-width:2px
+    style B fill:#FFC107,stroke:#333,stroke-width:2px
     style C1,C2,C3,C4 fill:#ccffcc,stroke:#333,stroke-width:2px
     style D1,D2,D3,D4 fill:#ccccff,stroke:#333,stroke-width:1px
     style E,F,G fill:#ffccff,stroke:#333,stroke-width:1px
@@ -906,19 +906,19 @@ mindmap
   root((📱 Communication<br>Plan))
     🚨 Incident Classification
       🔴 Critical (Complete Outage)
-        Initial notification: <15 min
+        Initial notification under 15 min
         Update frequency: Every 30 min
         All channels enabled
       🟠 Major (Partial Outage)
-        Initial notification: <30 min
+        Initial notification under 30 min
         Update frequency: Every 60 min
         Primary channels
       🟡 Moderate (Performance Issues)
-        Initial notification: <60 min
+        Initial notification under 60 min
         Update frequency: Every 4 hours
         Status page + email
       🔵 Minor (Isolated Issues)
-        Initial notification: <4 hours
+        Initial notification under 4 hours
         Update frequency: Daily
         Status page only
     📢 Communication Channels
@@ -990,10 +990,10 @@ flowchart TB
         I --> J[Document Recovery Process]
     end
 
-    style A fill:#ffcccc,stroke:#333,stroke-width:2px
-    style B,C,E fill:#ffffcc,stroke:#333,stroke-width:2px
+    style A fill:#D32F2F,stroke:#333,stroke-width:2px
+    style B,C,E fill:#FFC107,stroke:#333,stroke-width:2px
     style D,F1,F2,F3,G,H,I,J fill:#ccffcc,stroke:#333,stroke-width:1px
-    style R fill:#ff9999,stroke:#333,stroke-width:2px
+    style R fill:#D32F2F,stroke:#333,stroke-width:2px
 ```
 
 ```mermaid

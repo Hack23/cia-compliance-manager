@@ -93,11 +93,11 @@ flowchart TD
         M[🔄 Account Recovery] --> D
     end
 
-    style A fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style B,C fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style D,E,F fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style G,H fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
-    style I,J,K,L,M fill:#00BCD4,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style B,C fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style D,E,F fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style G,H fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
+    style I,J,K,L,M fill:#2196F3,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -159,11 +159,11 @@ flowchart TD
         M[🔍 Compliance Reporting] --> I
     end
 
-    style A fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style B,D fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
-    style C,F,G fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style E,I fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style H,J,K,L,M fill:#00BCD4,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style B,D fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
+    style C,F,G fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style E,I fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style H,J,K,L,M fill:#2196F3,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -222,11 +222,11 @@ flowchart TD
         N[📊 Performance Metrics] --> H
     end
 
-    style A fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style B,C fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style D,G fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
-    style E,I fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style F,H,J,K,L,M,N fill:#00BCD4,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style B,C fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style D,G fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
+    style E,I fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style F,H,J,K,L,M,N fill:#2196F3,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -286,10 +286,10 @@ flowchart TD
         Q[🔒 Account Lockout] --> R[🔐 Cognito]
     end
 
-    style A,C,D,E fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,F,G,H fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
-    style I,J,K,L,M,N fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style O,P,Q,R fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style A,C,D,E fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style B,F,G,H fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
+    style I,J,K,L,M,N fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style O,P,Q,R fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -355,11 +355,11 @@ graph TD
         O[🌍 Multi-Region S3] --> E
     end
 
-    style A fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style B fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style C,D fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
-    style E fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style F,G,H,I,J,K,L,M,N,O fill:#00BCD4,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style B fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style C,D fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
+    style E fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style F,G,H,I,J,K,L,M,N,O fill:#2196F3,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -462,9 +462,9 @@ graph TD
         H --> C
     end
 
-    style A fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,C fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style D,E,F,G,H fill:#00BCD4,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style B,C fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style D,E,F,G,H fill:#2196F3,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
 ```
 
 #### 🔌 VPC Endpoints Implementation
@@ -588,11 +588,11 @@ graph TD
         N[💾 AWS Backup] --> O[📁 Cross-Region Backup]
     end
 
-    style A fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,C fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style D,E,F,G fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
-    style H,I,J fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style K,L,M,N,O fill:#00BCD4,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style B,C fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style D,E,F,G fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
+    style H,I,J fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style K,L,M,N,O fill:#2196F3,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -669,10 +669,10 @@ flowchart TD
         Q --> T[🔒 Backup Encryption]
     end
 
-    style A,E fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,F,G,H fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style I,J,K,L fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
-    style M,N,O,P,Q,R,S,T fill:#00BCD4,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
+    style A,E fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D,F,G,H fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style I,J,K,L fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
+    style M,N,O,P,Q,R,S,T fill:#2196F3,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -751,8 +751,8 @@ graph TD
         S --> V[🚪 API Gateway]
     end
 
-    style A,E,J,O,S fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,F,G,H,I,K,L,M,N,P,Q,R,T,U,V fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,E,J,O,S fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D,F,G,H,I,K,L,M,N,P,Q,R,T,U,V fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -818,8 +818,8 @@ flowchart TD
         M --> Q[🔒 Encryption Controls]
     end
 
-    style A,D,G,J,M fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,C,E,F,H,I,K,L,N,O,P,Q fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,D,G,J,M fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style B,C,E,F,H,I,K,L,N,O,P,Q fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -899,8 +899,8 @@ flowchart TD
         N --> Q[📊 Threat Landscape]
     end
 
-    style A,D,G,J,N fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,C,E,F,H,I,K,L,M,O,P,Q fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,D,G,J,N fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style B,C,E,F,H,I,K,L,M,O,P,Q fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -970,8 +970,8 @@ flowchart TD
         P --> S[🎯 Access Restrictions]
     end
 
-    style A,E,H,L,P fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,F,G,I,J,K,M,N,O,Q,R,S fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,E,H,L,P fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D,F,G,I,J,K,M,N,O,Q,R,S fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -1041,8 +1041,8 @@ flowchart TD
         Q --> T[🔧 Recovery Validation]
     end
 
-    style A,E,I,M,Q fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,F,G,H,J,K,L,N,O,P,R,S,T fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,E,I,M,Q fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D,F,G,H,J,K,L,N,O,P,R,S,T fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -1183,8 +1183,8 @@ flowchart TD
         Q --> T[🛡️ Control Enhancement]
     end
 
-    style A,E,I,M,Q fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,F,G,H,J,K,L,N,O,P,R,S,T fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,E,I,M,Q fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D,F,G,H,J,K,L,N,O,P,R,S,T fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -1247,9 +1247,9 @@ flowchart TD
         O --> R[📋 Audit Logging]
     end
 
-    style A fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style E,F,G,H,I,J,K,L,M,N,O,P,Q,R fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style E,F,G,H,I,J,K,L,M,N,O,P,Q,R fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -1303,9 +1303,9 @@ flowchart TD
         J --> M[🔄 Continuous Improvement]
     end
 
-    style A fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,E fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style F,G,H,I,J,K,L,M fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D,E fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style F,G,H,I,J,K,L,M fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -1357,8 +1357,8 @@ flowchart TD
         O --> R[📊 Reporting]
     end
 
-    style A,E,H,K,O fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,F,G,I,J,L,M,N,P,Q,R fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,E,H,K,O fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D,F,G,I,J,L,M,N,P,Q,R fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -1419,8 +1419,8 @@ flowchart TD
         P --> R[📈 Reporting]
     end
 
-    style A,E,I,L,P fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,F,G,H,J,K,M,N,O,Q,R fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,E,I,L,P fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D,F,G,H,J,K,M,N,O,Q,R fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -1506,8 +1506,8 @@ flowchart TD
         P --> R[📈 Reporting]
     end
 
-    style A,E,I,L,P fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,F,G,H,J,K,M,N,O,Q,R fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,E,I,L,P fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D,F,G,H,J,K,M,N,O,Q,R fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation

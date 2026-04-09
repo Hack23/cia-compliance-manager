@@ -983,9 +983,9 @@ flowchart TD
     CreateInvalidation --> Complete[✅ Deployment Complete]
     
     style Start fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:white,font-weight:bold
-    style HardenRunner fill:#F44336,stroke:#C62828,stroke-width:2px,color:white,font-weight:bold
-    style AWSAuth fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
-    style S3Sync fill:#2979FF,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
+    style HardenRunner fill:#D32F2F,stroke:#C62828,stroke-width:2px,color:white,font-weight:bold
+    style AWSAuth fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
+    style S3Sync fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
     style CreateInvalidation fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:white,font-weight:bold
     style Complete fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:white,font-weight:bold
 ```
@@ -1287,7 +1287,7 @@ flowchart TD
     classDef issueNode fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     classDef processNode fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     classDef decisionNode fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
-    classDef actionNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
+    classDef actionNode fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff,stroke:#333,stroke-width:1.5px,color:black
     classDef successNode fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class Issue issueNode

@@ -103,10 +103,10 @@ flowchart TD
         H[⚠️ No Access Control<br/>No Authorization]
     end
 
-    style A fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style B fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style C fill:#FFD600,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
-    style D,E fill:#FF3D00,stroke:#BF360C,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style B fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style C fill:#FFC107,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
+    style D,E fill:#D32F2F,stroke:#BF360C,stroke-width:2px,color:white,font-weight:bold
     style F,G,H fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
 ```
 
@@ -143,9 +143,9 @@ flowchart TD
         G[⏱️ No Persistence]
     end
 
-    style A fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style B fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style C fill:#FF3D00,stroke:#BF360C,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style B fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style C fill:#D32F2F,stroke:#BF360C,stroke-width:2px,color:white,font-weight:bold
     style D,E,F,G fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
 ```
 
@@ -181,9 +181,9 @@ flowchart TD
         G[💾 No Storage]
     end
 
-    style A fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style B fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style C fill:#FF3D00,stroke:#BF360C,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style B fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style C fill:#D32F2F,stroke:#BF360C,stroke-width:2px,color:white,font-weight:bold
     style D,E,F,G fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
 ```
 
@@ -258,11 +258,11 @@ graph TD
         I[🔑 DNSSEC Validation] --> B
     end
 
-    style A fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style B fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style C fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style D fill:#FFD600,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
-    style E,F,G,H,I fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style B fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style C fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style D fill:#FFC107,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
+    style E,F,G,H,I fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Current Implementation
@@ -346,7 +346,7 @@ flowchart LR
         E[🛡️ Route53 Logs] --> F[📈 Security Metrics]
     end
 
-    style A,B,C,D,E,F fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,B,C,D,E,F fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Security Compliance
@@ -403,11 +403,11 @@ flowchart TB
     end
 
     style A fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:white,font-weight:bold
-    style B fill:#2979FF,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
+    style B fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
     style G,H fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:white,font-weight:bold
-    style I,J,K fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
-    style L,M,N fill:#F44336,stroke:#C62828,stroke-width:2px,color:white,font-weight:bold
-    style D,E,F fill:#00BCD4,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
+    style I,J,K fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
+    style L,M,N fill:#D32F2F,stroke:#C62828,stroke-width:2px,color:white,font-weight:bold
+    style D,E,F fill:#2196F3,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### AWS Security Architecture
@@ -563,7 +563,7 @@ graph TD
         E[🔄 No Application<br/>Servers]
     end
 
-    style A,B,C fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,B,C fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
     style D,E fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
 ```
 
@@ -597,8 +597,8 @@ flowchart TD
         F[🔄 No Data<br/>Rotation]
     end
 
-    style A fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style B,C fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style B,C fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
     style D,E,F fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
 ```
 
@@ -674,10 +674,10 @@ graph TD
         D -->|Origins from| H
     end
 
-    style A,B,C fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
-    style D,E,F,G fill:#2979FF,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
+    style A,B,C fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
+    style D,E,F,G fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
     style H,I,J,K fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:white,font-weight:bold
-    style L,M,N fill:#F44336,stroke:#C62828,stroke-width:2px,color:white,font-weight:bold
+    style L,M,N fill:#D32F2F,stroke:#C62828,stroke-width:2px,color:white,font-weight:bold
     style O,P,Q fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:white,font-weight:bold
 ```
 
@@ -975,7 +975,7 @@ flowchart TD
         G[🚫 No Inspector<br/>No instances to assess]
     end
 
-    style A,B,C fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,B,C fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
     style D,E,F,G fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
 ```
 
@@ -1103,7 +1103,7 @@ flowchart TD
         D[🚫 No Disaster<br>Recovery]
     end
 
-    style A,B fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,B fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
     style C,D fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
 ```
 
@@ -1250,7 +1250,7 @@ flowchart LR
         G[🚫 No Authorization]
     end
 
-    style A,B,C,D fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,B,C,D fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
     style E,F,G fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
 ```
 
@@ -1295,10 +1295,10 @@ flowchart TD
         J[🛡️ Custom WidgetErrorBoundary] --> B
     end
 
-    style A fill:#61DAFB,stroke:#00D8FF,stroke-width:2px,color:black,font-weight:bold
-    style B,C,D fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style E,F,G,H fill:#FFD600,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
-    style I,J fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#2196F3,stroke:#00D8FF,stroke-width:2px,color:black,font-weight:bold
+    style B,C,D fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style E,F,G,H fill:#FFC107,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
+    style I,J fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### React 19.x Security Features
@@ -1348,8 +1348,8 @@ flowchart LR
         G[🔒 strictPropertyInitialization] --> H[✅ Property Safety]
     end
 
-    style A,C,E,G fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style B,D,F,H fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,C,E,G fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style B,D,F,H fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 **Security Benefits:**
@@ -1378,10 +1378,10 @@ flowchart TD
         I[🔄 Session Handling] --> C
     end
 
-    style A fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style E,F,G fill:#FFD600,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
-    style H,I fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style E,F,G fill:#FFC107,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
+    style H,I fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Vitest & Cypress Security Testing Features
@@ -1487,10 +1487,10 @@ flowchart TD
         L[🔐 Cross-Origin Policies] --> A
     end
 
-    style A fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,E fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style F,G,H,I fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style J,K,L fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D,E fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style F,G,H,I fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style J,K,L fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### CSP Header Configuration
@@ -1557,9 +1557,9 @@ flowchart LR
         E --> F[🚫 Attack Blocked]
     end
 
-    style A fill:#FF3D00,stroke:#BF360C,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,E fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style F fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#D32F2F,stroke:#BF360C,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D,E fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style F fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
 ```
 
 **Defense-in-Depth XSS Protection:**
@@ -1589,10 +1589,10 @@ flowchart TD
         J[🔒 SHA-Pinned Actions] --> A
     end
 
-    style A fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style E,F,G fill:#FFD600,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
-    style H,I,J fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style E,F,G fill:#FFC107,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
+    style H,I,J fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### SLSA Level 3 Requirements Met
@@ -1635,8 +1635,8 @@ flowchart LR
         T4[🎭 Artifact Substitution] --> C4[🔐 Attestations]
     end
 
-    style T1,T2,T3,T4 fill:#FF3D00,stroke:#BF360C,stroke-width:2px,color:white,font-weight:bold
-    style C1,C2,C3,C4 fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style T1,T2,T3,T4 fill:#D32F2F,stroke:#BF360C,stroke-width:2px,color:white,font-weight:bold
+    style C1,C2,C3,C4 fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 **Mitigated Supply Chain Threats:**
@@ -1673,7 +1673,7 @@ flowchart TD
         I[🚫 No Infrastructure Layer]
     end
 
-    style A,B,C,D,E,F fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,B,C,D,E,F fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
     style G,H,I fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
 ```
 
@@ -1744,7 +1744,7 @@ flowchart TD
         G[🚫 No Operations Costs]
     end
 
-    style A,B,C,D fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,B,C,D fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
     style E,F,G fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
 ```
 
@@ -1819,9 +1819,9 @@ flowchart LR
     C --> F[🛡️ Security Alert Clarity]
     D --> G[🛡️ Security Status Visibility]
     
-    style A fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style E,F,G fill:#FFD600,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
+    style A fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style E,F,G fill:#FFC107,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
 ```
 
 **Implementation:**
@@ -1851,9 +1851,9 @@ flowchart LR
     C --> F[🛡️ Resource Efficiency]
     D --> G[🛡️ Anomaly Detection]
     
-    style A fill:#FF3D00,stroke:#BF360C,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style E,F,G fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#D32F2F,stroke:#BF360C,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style E,F,G fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 **Implementation:**
@@ -1890,9 +1890,9 @@ flowchart LR
     C --> F[🔒 Secure Logging]
     D --> G[🔒 No Info Disclosure]
     
-    style A fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style E,F,G fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style E,F,G fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 **Implementation:**
@@ -1924,9 +1924,9 @@ flowchart LR
     C --> F[🛡️ Tested Components]
     D --> G[🛡️ Predictable Behavior]
     
-    style A fill:#FFD600,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
-    style B,C,D fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style E,F,G fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A fill:#FFC107,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
+    style B,C,D fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style E,F,G fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 **Implementation:**

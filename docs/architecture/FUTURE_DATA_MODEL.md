@@ -183,12 +183,12 @@ flowchart LR
     
     LS -.->|Loads on startup| State
     
-    style User fill:#3498db,stroke:#2980b9,stroke-width:2px,color:#fff
-    style UI fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:#fff
-    style State fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:#fff
-    style LS fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
-    style Services fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:#fff
-    style Data fill:#1abc9c,stroke:#16a085,stroke-width:2px,color:#fff
+    style User fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#fff
+    style UI fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#fff
+    style State fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#fff
+    style LS fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#fff
+    style Services fill:#FF9800,stroke:#e67e22,stroke-width:2px,color:#fff
+    style Data fill:#2E7D32,stroke:#16a085,stroke-width:2px,color:#fff
 ```
 
 ## 🗄️ Persistence Layer Architecture (v2.0 Evolution)
@@ -221,10 +221,10 @@ flowchart TD
     DDB -->|Archive after 90 days| S3
     DDB -->|Audit Events| Audit
     
-    style IDB fill:#3498db,stroke:#2980b9,stroke-width:2px,color:#fff
-    style DDB fill:#FF9900,stroke:#FF6600,stroke-width:2px,color:#fff
-    style S3 fill:#569A31,stroke:#447026,stroke-width:2px,color:#fff
-    style Audit fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
+    style IDB fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#fff
+    style DDB fill:#FF9800,stroke:#FF6600,stroke-width:2px,color:#fff
+    style S3 fill:#2E7D32,stroke:#447026,stroke-width:2px,color:#fff
+    style Audit fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#fff
 ```
 
 ### **1. Client-Side Persistence: IndexedDB**
@@ -543,9 +543,9 @@ graph TB
     P3 <-.->|Automatic<br/>Replication| T3
     S3 <-.->|Automatic<br/>Replication| T3
     
-    style P1,P2,P3 fill:#FF9900,stroke:#FF6600,stroke-width:2px,color:#fff
-    style S1,S2,S3 fill:#FF9900,stroke:#FF6600,stroke-width:2px,color:#fff
-    style T1,T2,T3 fill:#FF9900,stroke:#FF6600,stroke-width:2px,color:#fff
+    style P1,P2,P3 fill:#FF9800,stroke:#FF6600,stroke-width:2px,color:#fff
+    style S1,S2,S3 fill:#FF9800,stroke:#FF6600,stroke-width:2px,color:#fff
+    style T1,T2,T3 fill:#FF9800,stroke:#FF6600,stroke-width:2px,color:#fff
 ```
 
 **Key Replication Features:**
@@ -1100,10 +1100,10 @@ flowchart TD
         Progress -->|If success| Complete[Mark Completed]
     end
     
-    style Deploy fill:#FF9900,stroke:#FF6600,stroke-width:2px,color:#fff
-    style StepFunc fill:#9146FF,stroke:#6B2EB8,stroke-width:2px,color:#fff
-    style Complete fill:#00C853,stroke:#007E33,stroke-width:2px,color:#fff
-    style Rollback fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
+    style Deploy fill:#FF9800,stroke:#FF6600,stroke-width:2px,color:#fff
+    style StepFunc fill:#7B1FA2,stroke:#6B2EB8,stroke-width:2px,color:#fff
+    style Complete fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:#fff
+    style Rollback fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#fff
 ```
 
 ### **Migration Execution Strategy**
@@ -1353,9 +1353,9 @@ flowchart TD
     SW -->|Update| IDB
     IDB -->|Refresh| UI
     
-    style IDB fill:#3498db,stroke:#2980b9,stroke-width:2px,color:#fff
-    style DDB fill:#FF9900,stroke:#FF6600,stroke-width:2px,color:#fff
-    style Conflict fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
+    style IDB fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#fff
+    style DDB fill:#FF9800,stroke:#FF6600,stroke-width:2px,color:#fff
+    style Conflict fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#fff
 ```
 
 #### **Conflict Resolution Strategy**
@@ -1580,9 +1580,9 @@ flowchart LR
     DDB3 -.->|Bidirectional<br/>Replication| DDB1
     DDB2 -.->|Bidirectional<br/>Replication| DDB3
     
-    style DDB1 fill:#FF9900,stroke:#FF6600,stroke-width:2px,color:#fff
-    style DDB2 fill:#FF9900,stroke:#FF6600,stroke-width:2px,color:#fff
-    style DDB3 fill:#FF9900,stroke:#FF6600,stroke-width:2px,color:#fff
+    style DDB1 fill:#FF9800,stroke:#FF6600,stroke-width:2px,color:#fff
+    style DDB2 fill:#FF9800,stroke:#FF6600,stroke-width:2px,color:#fff
+    style DDB3 fill:#FF9800,stroke:#FF6600,stroke-width:2px,color:#fff
 ```
 
 **Replication Characteristics:**
@@ -1625,9 +1625,9 @@ flowchart TD
     KMS -->|Data Key| DDB
     KMS -->|Data Key| S3
     
-    style KMS fill:#FF9900,stroke:#FF6600,stroke-width:2px,color:#fff
-    style DDB fill:#FF9900,stroke:#FF6600,stroke-width:2px,color:#fff
-    style S3 fill:#569A31,stroke:#447026,stroke-width:2px,color:#fff
+    style KMS fill:#FF9800,stroke:#FF6600,stroke-width:2px,color:#fff
+    style DDB fill:#FF9800,stroke:#FF6600,stroke-width:2px,color:#fff
+    style S3 fill:#2E7D32,stroke:#447026,stroke-width:2px,color:#fff
 ```
 
 ### **Encryption Implementation**
@@ -2265,10 +2265,10 @@ flowchart LR
     Announce --> Support
     Support --> EOL
     
-    style V1 fill:#3498db,stroke:#2980b9,stroke-width:2px,color:#fff
-    style Hybrid fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:#fff
-    style Validate fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:#fff
-    style EOL fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
+    style V1 fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#fff
+    style Hybrid fill:#FF9800,stroke:#e67e22,stroke-width:2px,color:#fff
+    style Validate fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#fff
+    style EOL fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#fff
 ```
 
 ### **Phase 1: Backend Foundation (Months 1-3)**

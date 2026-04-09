@@ -323,8 +323,8 @@ flowchart TD
         Q --> T[SNS Alerting]
     end
 
-    style A,E,I,M,Q fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,F,G,H,J,K,L,N,O,P,R,S,T fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,E,I,M,Q fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D,F,G,H,J,K,L,N,O,P,R,S,T fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 **Security Controls:**
@@ -356,8 +356,8 @@ flowchart LR
         M --> P[Synthetic Canaries]
     end
 
-    style A,E,I,M fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,F,G,H,J,K,L,N,O,P fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,E,I,M fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D,F,G,H,J,K,L,N,O,P fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 **Reliability Controls:**
@@ -388,8 +388,8 @@ flowchart TD
         M --> P[Eventual Consistency]
     end
 
-    style A,E,I,M fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,F,G,H,J,K,L,N,O,P fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,E,I,M fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D,F,G,H,J,K,L,N,O,P fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 **Performance Controls:**
@@ -420,8 +420,8 @@ flowchart LR
         M --> P[Lifecycle Policies]
     end
 
-    style A,E,I,M fill:#FFD600,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
-    style B,C,D,F,G,H,J,K,L,N,O,P fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,E,I,M fill:#FFC107,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
+    style B,C,D,F,G,H,J,K,L,N,O,P fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 **Cost Optimization Controls:**
@@ -452,8 +452,8 @@ flowchart TD
         M --> P[Regular Reviews]
     end
 
-    style A,E,I,M fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,F,G,H,J,K,L,N,O,P fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style A,E,I,M fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D,F,G,H,J,K,L,N,O,P fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
 ```
 
 **Operational Excellence Controls:**
@@ -507,8 +507,8 @@ graph TD
     D <-.->|Automatic<br/>Replication| L
     H <-.->|Automatic<br/>Replication| L
 
-    style A,E,I fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,F,G,H,J,K,L fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,E,I fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D,F,G,H,J,K,L fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### **Key Design Decisions**
@@ -580,9 +580,9 @@ flowchart TD
         K --> L
     end
 
-    style A,B,C fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style D,E,F,G fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style H,I,J,K,L fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+    style A,B,C fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style D,E,F,G fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
+    style H,I,J,K,L fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### **Resilience Policies**

@@ -51,15 +51,8 @@ Based on [Hack23 AB Classification Framework](https://github.com/Hack23/ISMS-PUB
 ```mermaid
 %%{
   init: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryColor': '#e8f5e9',
-      'primaryTextColor': '#2e7d32',
-      'lineColor': '#4caf50',
-      'secondaryColor': '#fff3e0',
-      'tertiaryColor': '#e3f2fd'
-    }
-  }
+    'theme': 'neutral',
+}
 }%%
 mindmap
   root)📊 CIA Compliance Manager Stack(
@@ -232,15 +225,8 @@ gantt
 ```mermaid
 %%{
   init: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryColor': '#e3f2fd',
-      'primaryTextColor': '#01579b',
-      'lineColor': '#2196f3',
-      'secondaryColor': '#f1f8e9',
-      'tertiaryColor': '#fff8e1'
-    }
-  }
+    'theme': 'neutral',
+}
 }%%
 flowchart TB
     subgraph PREPARATION["🔬 Pre-Migration Testing"]
@@ -275,10 +261,10 @@ flowchart TB
     STAGING_DEPLOY --> CANARY_RELEASE
     CANARY_RELEASE --> FULL_MIGRATION
 
-    style PREPARATION fill:#bbdefb
-    style ALPHA_CI fill:#e1bee7
-    style VALIDATION fill:#c8e6c9
-    style DEPLOYMENT fill:#ffecb3
+    style PREPARATION fill:#2196F3
+    style ALPHA_CI fill:#7B1FA2
+    style VALIDATION fill:#4CAF50
+    style DEPLOYMENT fill:#FFC107
 ```
 
 ### **📊 Node.js Migration Risk Assessment**
@@ -470,15 +456,8 @@ Aligned with [Hack23 AB's "Living on the Edge" Strategy](https://github.com/Hack
 ```mermaid
 %%{
   init: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryColor': '#f3e5f5',
-      'primaryTextColor': '#6a1b9a',
-      'lineColor': '#ba68c8',
-      'secondaryColor': '#e8f5e9',
-      'tertiaryColor': '#fff3e0'
-    }
-  }
+    'theme': 'neutral',
+}
 }%%
 flowchart LR
     subgraph MONITORING["📊 Daily Monitoring (09:00 CET)"]
@@ -502,9 +481,9 @@ flowchart LR
     REVIEW_ACTION --> AUTO_MERGE
     AUTO_MERGE --> ROLLBACK
 
-    style MONITORING fill:#e1bee7
-    style VALIDATION fill:#c8e6c9
-    style DEPLOYMENT fill:#ffecb3
+    style MONITORING fill:#7B1FA2
+    style VALIDATION fill:#4CAF50
+    style DEPLOYMENT fill:#FFC107
 ```
 
 ### **📋 Update Classification & Response Times**
@@ -550,15 +529,8 @@ CIA Compliance Manager will be designated as EOL and archived in read-only state
 ```mermaid
 %%{
   init: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryColor': '#ffcdd2',
-      'primaryTextColor': '#c62828',
-      'lineColor': '#f44336',
-      'secondaryColor': '#fff3e0',
-      'tertiaryColor': '#e8f5e9'
-    }
-  }
+    'theme': 'neutral',
+}
 }%%
 flowchart TD
     START[🎯 EOL Assessment Trigger] --> SECURITY{🔒 Security Support Available?}
@@ -590,11 +562,11 @@ flowchart TD
 
     PLAN_MIGRATION --> NEW_PLATFORM[🚀 New Platform Development<br/>Modern Technology Stack]
 
-    style CRITICAL fill:#ffcdd2,stroke:#d32f2f
-    style BUSINESS fill:#fff3e0,stroke:#f57c00
-    style TECHNICAL fill:#fff9c4,stroke:#fbc02d
-    style CONTINUE fill:#c8e6c9,stroke:#388e3c
-    style ARCHIVE fill:#f3e5f5,stroke:#7b1fa2
+    style CRITICAL fill:#D32F2F,stroke:#d32f2f
+    style BUSINESS fill:#FF9800,stroke:#f57c00
+    style TECHNICAL fill:#FFC107,stroke:#fbc02d
+    style CONTINUE fill:#4CAF50,stroke:#388e3c
+    style ARCHIVE fill:#7B1FA2,stroke:#7b1fa2
 ```
 
 ---
@@ -732,15 +704,8 @@ Integration with [Hack23 AB Security Metrics](https://github.com/Hack23/ISMS-PUB
 ```mermaid
 %%{
   init: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryColor': '#fff8e1',
-      'primaryTextColor': '#e65100',
-      'lineColor': '#ff9800',
-      'secondaryColor': '#e8f5e9',
-      'tertiaryColor': '#e3f2fd'
-    }
-  }
+    'theme': 'neutral',
+}
 }%%
 flowchart LR
     subgraph COLLECTION["📊 Data Collection"]
@@ -766,9 +731,9 @@ flowchart LR
     TREND_ANALYSIS --> DASHBOARD
     DASHBOARD --> ALERTS
 
-    style COLLECTION fill:#fff8e1
-    style ANALYSIS fill:#e8f5e9
-    style REPORTING fill:#e3f2fd
+    style COLLECTION fill:#FFC107
+    style ANALYSIS fill:#4CAF50
+    style REPORTING fill:#2196F3
 ```
 
 ---
@@ -822,10 +787,10 @@ graph TB
     TOOLS --> ALERTS
     DEPS --> ALERTS
     
-    style REACT fill:#61dafb,color:#000
-    style TS fill:#3178c6,color:#fff
-    style NODE fill:#339933,color:#fff
-    style VITE fill:#646cff,color:#fff
+    style REACT fill:#2196F3,color:#000
+    style TS fill:#1565C0,color:#fff
+    style NODE fill:#2E7D32,color:#fff
+    style VITE fill:#7B1FA2,color:#fff
     style SECURITY fill:#d32f2f,color:#fff
     style EOL fill:#ff9800,color:#fff
 ```

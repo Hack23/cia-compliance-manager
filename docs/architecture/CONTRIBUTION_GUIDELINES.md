@@ -92,9 +92,9 @@ C4Context
   Rel(system, externalSystem, "Gets data from")
 
   %% Style definitions with enhanced colors
-  UpdateElementStyle(user, $fontColor="white", $bgColor="#e74c3c", $borderColor="#c0392b")
-  UpdateElementStyle(system, $fontColor="white", $bgColor="#34495e", $borderColor="#2c3e50")
-  UpdateElementStyle(externalSystem, $fontColor="white", $bgColor="#3498db", $borderColor="#2980b9")
+  UpdateElementStyle(user, $fontColor="white", $bgColor="#D32F2F", $borderColor="#B71C1C")
+  UpdateElementStyle(system, $fontColor="white", $bgColor="#455A64", $borderColor="#2c3e50")
+  UpdateElementStyle(externalSystem, $fontColor="white", $bgColor="#2196F3", $borderColor="#1565C0")
 ```
 
 #### State Diagram Template

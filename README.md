@@ -772,10 +772,10 @@ C4Context
 
   UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
   
-  UpdateElementStyle(securityOfficer, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
-  UpdateElementStyle(businessStakeholder, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
-  UpdateElementStyle(complianceManager, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
-  UpdateElementStyle(technicalImplementer, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
+  UpdateElementStyle(securityOfficer, $fontColor="#333333", $bgColor="#2196F3", $borderColor="#86b5d9")
+  UpdateElementStyle(businessStakeholder, $fontColor="#333333", $bgColor="#2196F3", $borderColor="#86b5d9")
+  UpdateElementStyle(complianceManager, $fontColor="#333333", $bgColor="#2196F3", $borderColor="#86b5d9")
+  UpdateElementStyle(technicalImplementer, $fontColor="#333333", $bgColor="#2196F3", $borderColor="#86b5d9")
 
   UpdateElementStyle(ciaCM, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
   UpdateElementStyle(complianceFrameworks, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")

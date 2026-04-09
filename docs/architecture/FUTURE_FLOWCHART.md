@@ -247,7 +247,7 @@ flowchart TD
     classDef profile fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     classDef implement fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     classDef monitor fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
-    classDef monTypes fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
+    classDef monTypes fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,stroke:#333,stroke-width:1px,color:black
     classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     classDef analysis fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     classDef update fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
@@ -315,7 +315,7 @@ flowchart TD
 
     classDef profile fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     classDef context fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
-    classDef reqs fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
+    classDef reqs fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000,stroke:#333,stroke-width:1px,color:black
     classDef framework fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
     classDef mapping fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     classDef analysis fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff

@@ -57,10 +57,10 @@ graph LR
     H --> I[Error UI]
     I -.Retry.-> B
     
-    style A fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    style B fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    style H fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    style I fill:#e67e22,stroke:#d35400,stroke-width:2px,color:white
+    style A fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white
+    style B fill:#2E7D32,stroke:#2E7D32,stroke-width:2px,color:white
+    style H fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:white
+    style I fill:#FF9800,stroke:#d35400,stroke-width:2px,color:white
 ```
 
 ## 🔍 Application Core States
@@ -694,7 +694,7 @@ stateDiagram-v2
     classDef none fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
     classDef low fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     classDef moderate fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
-    classDef high fill:#e67e22,stroke:#d35400,stroke-width:2px,color:white
+    classDef high fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff,stroke:#d35400,stroke-width:2px,color:white
     classDef veryhigh fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
     
     class NoAccess,PublicData none

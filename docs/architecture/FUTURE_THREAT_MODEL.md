@@ -324,10 +324,10 @@ flowchart TD
     D2 --> D2M[🛡️ Code Signing + SBOM]
 
     style GOAL fill:#d32f2f,color:#fff
-    style PATH1 fill:#ff5722,color:#fff
+    style PATH1 fill:#D32F2F,color:#fff
     style PATH2 fill:#ff9800,color:#fff
     style PATH3 fill:#ffc107,color:#000
-    style PATH4 fill:#9c27b0,color:#fff
+    style PATH4 fill:#7B1FA2,color:#fff
 ```
 
 ---

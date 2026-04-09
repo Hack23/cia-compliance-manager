@@ -481,9 +481,9 @@ graph TB
     style CR fill:#4CAF50
     style CH fill:#FF9800
     style FF fill:#2196F3
-    style ED fill:#00BCD4
-    style APP fill:#9C27B0
-    style MR fill:#F44336
+    style ED fill:#2196F3
+    style APP fill:#7B1FA2
+    style MR fill:#D32F2F
     style HTML fill:#FFC107
 ```
 

@@ -480,17 +480,17 @@ flowchart TD
         S[Multi-Source Verification] --> T[Package Integrity]
     end
 
-    style A fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    style C fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    style E fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    style G fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    style I fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    style K fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    style A fill:#4CAF50,stroke:#333,stroke-width:1px,color:black
+    style C fill:#4CAF50,stroke:#333,stroke-width:1px,color:black
+    style E fill:#4CAF50,stroke:#333,stroke-width:1px,color:black
+    style G fill:#4CAF50,stroke:#333,stroke-width:1px,color:black
+    style I fill:#4CAF50,stroke:#333,stroke-width:1px,color:black
+    style K fill:#4CAF50,stroke:#333,stroke-width:1px,color:black
     
-    style M fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
-    style O fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
-    style Q fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
-    style S fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
+    style M fill:#FFC107,stroke:#333,stroke-width:1px,color:black
+    style O fill:#FFC107,stroke:#333,stroke-width:1px,color:black
+    style Q fill:#FFC107,stroke:#333,stroke-width:1px,color:black
+    style S fill:#FFC107,stroke:#333,stroke-width:1px,color:black
 ```
 
 While the current supply chain security controls provide good protection, some specific enhancements could further reduce risks:
