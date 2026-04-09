@@ -694,7 +694,7 @@ stateDiagram-v2
     classDef none fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
     classDef low fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     classDef moderate fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
-    classDef high fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff,stroke:#d35400,stroke-width:2px,color:white
+    classDef high fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     classDef veryhigh fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
     
     class NoAccess,PublicData none

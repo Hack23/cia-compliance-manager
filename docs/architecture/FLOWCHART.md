@@ -766,7 +766,7 @@ flowchart TD
     classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
     classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
-    classDef recovery fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#ffffff,stroke:#2E7D32,stroke-width:2px,color:white
+    classDef recovery fill:#2E7D32,stroke:#2E7D32,stroke-width:2px,color:white
     classDef success fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class Start,End startend
@@ -1080,7 +1080,7 @@ flowchart TD
     B5 --> U5
     
     classDef user fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
-    classDef browser fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#ffffff,stroke:#2E7D32,stroke-width:2px,color:white
+    classDef browser fill:#2E7D32,stroke:#2E7D32,stroke-width:2px,color:white
     classDef state fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
     classDef service fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
     classDef storage fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff

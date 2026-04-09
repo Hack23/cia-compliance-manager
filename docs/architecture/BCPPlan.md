@@ -165,12 +165,12 @@ graph TB
     end
 
     classDef critical fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
-    classDef high fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff,stroke:#333,stroke-width:2px;
+    classDef high fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     classDef medium fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000
 
-    class C1,CR2 critical;
-    class B1,B2,D1,D2,F1,G1,CR1,CR3,CR5,CR6 high;
-    class E1,E2,F2,CR4 medium;
+    class C1,CR2 critical
+    class B1,B2,D1,D2,F1,G1,CR1,CR3,CR5,CR6 high
+    class E1,E2,F2,CR4 medium
 ```
 
 #### 🔗 Process Dependencies
@@ -214,12 +214,12 @@ flowchart TB
     CDN --> FE
 
     classDef github fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
-    classDef browser fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff,stroke:#333,stroke-width:2px;
+    classDef browser fill:#2196F3,stroke:#333,stroke-width:2px,color:#ffffff
     classDef external fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
 
-    class GHP,GHR,GHA,GHO github;
-    class FE,LS,BEX browser;
-    class CDN external;
+    class GHP,GHR,GHA,GHO github
+    class FE,LS,BEX browser
+    class CDN external
 ```
 
 #### 🔝 Priority Matrix
@@ -412,10 +412,10 @@ graph TB
     classDef impact fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
     classDef consequence fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
 
-    class A1 process;
-    class B1,B2,B3 process;
-    class C1,C2,C3 impact;
-    class D1,D2,D3 consequence;
+    class A1 process
+    class B1,B2,B3 process
+    class C1,C2,C3 impact
+    class D1,D2,D3 consequence
 ```
 
 | Impact Category          | Description                                 | Affected Regulations                                                                                                                                                                   | Risk Level  |
@@ -526,7 +526,7 @@ graph LR
     end
 
     classDef critical fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
-    classDef high fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff,stroke:#333,stroke-width:1px;
+    classDef high fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     classDef medium fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000
     classDef standard fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
@@ -1389,10 +1389,10 @@ flowchart TD
     classDef moderate fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     classDef minor fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000
 
-    class C1,D1,E1 critical;
-    class C2,D2,E2 major;
-    class C3,D3,E3 moderate;
-    class C4,D4,E4 minor;
+    class C1,D1,E1 critical
+    class C2,D2,E2 major
+    class C3,D3,E3 moderate
+    class C4,D4,E4 minor
 ```
 
 ### 📞 Communication Matrix with GitHub-Specific Channels

@@ -1287,7 +1287,7 @@ flowchart TD
     classDef issueNode fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     classDef processNode fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     classDef decisionNode fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
-    classDef actionNode fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff,stroke:#333,stroke-width:1.5px,color:black
+    classDef actionNode fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     classDef successNode fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class Issue issueNode
