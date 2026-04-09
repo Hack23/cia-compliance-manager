@@ -60,7 +60,7 @@ graph LR
     style A fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white
     style B fill:#2E7D32,stroke:#2E7D32,stroke-width:2px,color:white
     style H fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:white
-    style I fill:#FF9800,stroke:#d35400,stroke-width:2px,color:white
+    style I fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:white
 ```
 
 ## 🔍 Application Core States

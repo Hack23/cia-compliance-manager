@@ -85,8 +85,8 @@ graph TD
     end
     
     style C1 fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:white
-    style I1 fill:#2E7D32,stroke:#1e8449,stroke-width:2px,color:white
-    style A1 fill:#1565C0,stroke:#2471a3,stroke-width:2px,color:white
+    style I1 fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:white
+    style A1 fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:white
     
     style A2 fill:#455A64,stroke:#2c3e50,stroke-width:2px,color:white
     style A3 fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:white

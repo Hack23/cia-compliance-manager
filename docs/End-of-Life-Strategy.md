@@ -546,11 +546,11 @@ flowchart TD
 
     PLAN_MIGRATION --> NEW_PLATFORM[🚀 New Platform Development<br/>Modern Technology Stack]
 
-    style CRITICAL fill:#D32F2F,stroke:#d32f2f
-    style BUSINESS fill:#FF9800,stroke:#f57c00
-    style TECHNICAL fill:#FFC107,stroke:#fbc02d
-    style CONTINUE fill:#4CAF50,stroke:#388e3c
-    style ARCHIVE fill:#7B1FA2,stroke:#7b1fa2
+    style CRITICAL fill:#D32F2F,stroke:#d32f2f,color:#ffffff
+    style BUSINESS fill:#FF9800,stroke:#f57c00,color:#ffffff
+    style TECHNICAL fill:#FFC107,stroke:#fbc02d,color:#000000
+    style CONTINUE fill:#4CAF50,stroke:#388e3c,color:#ffffff
+    style ARCHIVE fill:#7B1FA2,stroke:#7b1fa2,color:#ffffff
 ```
 
 ---

@@ -323,10 +323,10 @@ graph LR
     B -->|Static Assets| C[📦 Application Bundle]
     C -->|API Requests| D[🔒 External APIs]
     
-    style A fill:#4CAF50
-    style B fill:#2196F3
-    style C fill:#FF9800
-    style D fill:#7B1FA2
+    style A fill:#4CAF50,color:#ffffff
+    style B fill:#2196F3,color:#ffffff
+    style C fill:#FF9800,color:#000000
+    style D fill:#7B1FA2,color:#ffffff
 ```
 
 ### **Network Security Controls**
@@ -439,15 +439,15 @@ graph TD
     G --> H[🚀 Deploy]
     H --> I[📊 Monitoring]
     
-    style A fill:#4CAF50
-    style B fill:#2196F3
-    style C fill:#7B1FA2
-    style D fill:#D32F2F
-    style E fill:#4CAF50
-    style F fill:#FF9800
-    style G fill:#2196F3
-    style H fill:#7B1FA2
-    style I fill:#4CAF50
+    style A fill:#4CAF50,color:#ffffff
+    style B fill:#2196F3,color:#ffffff
+    style C fill:#7B1FA2,color:#ffffff
+    style D fill:#D32F2F,color:#ffffff
+    style E fill:#4CAF50,color:#ffffff
+    style F fill:#FF9800,color:#000000
+    style G fill:#2196F3,color:#ffffff
+    style H fill:#7B1FA2,color:#ffffff
+    style I fill:#4CAF50,color:#ffffff
 ```
 
 ### **Change Control Gates**
