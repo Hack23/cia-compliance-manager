@@ -407,7 +407,7 @@ flowchart TB
     style G,H fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:white,font-weight:bold
     style I,J,K fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
     style L,M,N fill:#D32F2F,stroke:#C62828,stroke-width:2px,color:white,font-weight:bold
-    style D,E,F fill:#2196F3,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
+    style D,E,F fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### AWS Security Architecture

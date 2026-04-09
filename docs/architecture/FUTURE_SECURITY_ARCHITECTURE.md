@@ -97,7 +97,7 @@ flowchart TD
     style B,C fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
     style D,E,F fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
     style G,H fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
-    style I,J,K,L,M fill:#2196F3,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
+    style I,J,K,L,M fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation

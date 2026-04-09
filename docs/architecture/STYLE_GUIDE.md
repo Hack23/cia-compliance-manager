@@ -65,7 +65,7 @@ Use this enhanced color palette for all diagrams:
 ```mermaid
 graph TD
     subgraph "CIA Triad Colors"
-        C1[Confidentiality<br>#4A148C]
+        C1[Confidentiality<br>#7B1FA2]
         I1[Integrity<br>#2E7D32]
         A1[Availability<br>#1565C0]
     end
@@ -80,11 +80,11 @@ graph TD
     subgraph "Status Colors"
         S1[Success<br>#4CAF50]
         S2[Warning<br>#FF9800]
-        S3[Critical<br>#B71C1C]
+        S3[Critical<br>#D32F2F]
         S4[Neutral<br>#9E9E9E]
     end
     
-    style C1 fill:#4A148C,stroke:#6c3483,stroke-width:2px,color:white
+    style C1 fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:white
     style I1 fill:#2E7D32,stroke:#1e8449,stroke-width:2px,color:white
     style A1 fill:#1565C0,stroke:#2471a3,stroke-width:2px,color:white
     
@@ -95,7 +95,7 @@ graph TD
     
     style S1 fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:white
     style S2 fill:#FF9800,stroke:#e67e22,stroke-width:2px,color:white
-    style S3 fill:#B71C1C,stroke:#922b21,stroke-width:2px,color:white
+    style S3 fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:white
     style S4 fill:#9E9E9E,stroke:#626567,stroke-width:2px,color:white
 ```
 
@@ -203,7 +203,7 @@ stateDiagram-v2
     
     note right of Success : Ready for export
     
-    classDef idle fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef idle fill:#9E9E9E,stroke:#757575,stroke-width:2px,color:#ffffff
     classDef processing fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     classDef success fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
