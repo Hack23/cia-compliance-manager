@@ -42,30 +42,50 @@ This document provides a strategic analysis of the CIA Compliance Manager's futu
 ## 📊 Strategic SWOT Overview
 
 ```mermaid
+%%{init: {
+  "theme": "neutral",
+  "themeVariables": {
+    "quadrant1Fill": "#2E7D32",
+    "quadrant2Fill": "#D32F2F",
+    "quadrant3Fill": "#1565C0",
+    "quadrant4Fill": "#FF9800",
+    "quadrantTitleFill": "#ffffff",
+    "quadrantPointFill": "#ffffff",
+    "quadrantPointTextFill": "#000000",
+    "quadrantXAxisTextFill": "#000000",
+    "quadrantYAxisTextFill": "#000000"
+  },
+  "quadrantChart": {
+    "chartWidth": 700,
+    "chartHeight": 700,
+    "pointLabelFontSize": 12,
+    "titleFontSize": 20,
+    "quadrantLabelFontSize": 16,
+    "xAxisLabelFontSize": 14,
+    "yAxisLabelFontSize": 14
+  }
+}}%%
 quadrantChart
-    title Future CIA Compliance Manager Strategic Positioning
-    x-axis Negative Impact --> Positive Impact
-    y-axis External Factors --> Internal Factors
-    quadrant-1 "Strengths"
-    quadrant-2 "Weaknesses"
-    quadrant-3 "Opportunities"
-    quadrant-4 "Threats"
-    
-    "Context-Aware Architecture": [0.8, 0.7]
-    "ML-Enhanced Recommendations": [0.9, 0.8]
-    "Integration Ecosystem": [0.7, 0.6]
-    
-    "Implementation Complexity": [-0.6, 0.7]
-    "ML Data Requirements": [-0.7, 0.8]
-    "Dependency on External Systems": [-0.5, 0.6]
-    
-    "Emerging Security Market": [0.9, -0.7]
-    "Regulatory Complexity Growth": [0.8, -0.8]
-    "AI/ML Adoption in Security": [0.7, -0.6]
-    
-    "Competitive Platform Growth": [-0.7, -0.7]
-    "AI/ML Expertise Scarcity": [-0.8, -0.6]
-    "Integration Standards Flux": [-0.6, -0.8]
+    title 🎯 Future CIA Compliance Manager Strategic SWOT
+    x-axis Internal Factors --> External Factors
+    y-axis Threats --> Opportunities
+    quadrant-1 STRENGTHS
+    quadrant-2 WEAKNESSES
+    quadrant-3 OPPORTUNITIES
+    quadrant-4 THREATS
+
+    "Context-Aware Architecture": [0.20, 0.85] radius: 8
+    "ML-Enhanced Recommendations": [0.15, 0.90] radius: 7
+    "Integration Ecosystem": [0.30, 0.75] radius: 7
+    "Implementation Complexity": [0.25, 0.20] radius: 8
+    "ML Data Requirements": [0.15, 0.25] radius: 7
+    "Dependency on External Systems": [0.35, 0.30] radius: 6
+    "Emerging Security Market": [0.75, 0.85] radius: 8
+    "Regulatory Complexity Growth": [0.85, 0.90] radius: 7
+    "AI/ML Adoption in Security": [0.70, 0.80] radius: 6
+    "Competitive Platform Growth": [0.75, 0.25] radius: 7
+    "AI/ML Expertise Scarcity": [0.85, 0.20] radius: 6
+    "Integration Standards Flux": [0.70, 0.15] radius: 6
 ```
 
 ## 💪 Strengths

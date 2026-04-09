@@ -65,17 +65,17 @@ flowchart TD
     C --> E([End])
     D --> E
 
-    %% Style definitions with enhanced colors
-    classDef start fill:#2980b9,stroke:#2471a3,stroke-width:2px,color:white,rx:25
-    classDef process fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
-    classDef decision fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef end fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:white,rx:25
+    %% Style definitions following ISMS Style Guide colors
+    classDef start fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef finish fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
 
     %% Apply styles
     class A start
     class B decision
     class C,D process
-    class E end
+    class E finish
 ```
 
 #### C4 Diagram Template
@@ -203,7 +203,11 @@ Brief introduction explaining the document's purpose (1-2 paragraphs).
 Section content with appropriate diagrams and explanations.
 
 ```mermaid
-// Diagram goes here
+flowchart TD
+    A[📋 Section Content] --> B[📊 Analysis]
+    B --> C[📝 Documentation]
+
+    classDef default fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
 ```
 
 ### 📊 Subsection 1.1 Title

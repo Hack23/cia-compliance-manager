@@ -423,56 +423,56 @@ timeline
 ```mermaid
 mindmap
   root((Recovery<br>Objectives))
-    ⏱️ RTO Targets (Objectives)
+    ⏱️ RTO Targets
       CloudFront Distribution
-        🚨 Target: ~5 min (health checks + routing propagation)
-        🔔 Manual Intervention: ~15 min (investigation + action)
-        ✨ DNS Failover to GitHub Pages: ~15 min (DNS switch + TTL propagation)
+        Target 5 min
+        Manual 15 min
+        DNS Failover 15 min
       S3 Multi-Region
-        🚨 Async CRR: Monitor replication lag (aspirational < 5 min with RTC)
-        🔔 Manual Failover: ~5 min (Route53 DNS adjustment)
-        ✨ GitHub Pages DR: ~15 min (DNS propagation)
+        Async CRR under 5 min
+        Manual Failover 5 min
+        GitHub Pages DR 15 min
       Security Assessment Engine
-        🚨 Critical: ~5 min (CloudFront delivery objective)
-        🔔 Enhanced: ~15 min (GitHub Pages DR objective)
-        ✨ Gold Standard: ~5 min (multi-edge with monitoring)
-      Dashboard & Visualizations
-        🚨 Critical: ~5 min (CloudFront delivery objective)
-        🔔 Enhanced: ~15 min (GitHub Pages DR objective)
-        ✨ Gold Standard: ~5 min (cached with monitoring)
-    📊 RPO Targets (Objectives)
-      Static Content (HTML/CSS/JS)
-        🚨 Critical: Last successful deployment (CI/CD workflow)
-        🔔 Enhanced: Last successful deployment to both platforms
-        ✨ Gold Standard: Last successful deployment + monitoring
+        Critical 5 min
+        Enhanced 15 min
+        Gold Standard 5 min
+      Dashboard and Visualizations
+        Critical 5 min
+        Enhanced 15 min
+        Gold Standard 5 min
+    📊 RPO Targets
+      Static Content
+        Last successful deployment
+        Dual platform deployment
+        Deployment with monitoring
       S3 Replicated Content
-        🚨 Critical: Async CRR (aspirational < 5 min with RTC + alerts)
-        🔔 Enhanced: Monitor replication lag (investigate if > 5 min)
-        ✨ Gold Standard: Observed low latency (RTC + monitoring in place)
+        Async CRR under 5 min
+        Monitor replication lag
+        Low latency with RTC
       CloudFront Cache
-        🚨 Critical: ≤ 15 min (invalidation + TTL propagation window)
-        🔔 Enhanced: ≤ 5 min typical (monitored invalidation completion)
-        ✨ Gold Standard: Within propagation window (typically minutes) with automated monitoring
+        15 min invalidation window
+        5 min typical
+        Automated monitoring
     🔄 MTTR Targets
       CloudFront Edge
-        🎯 Current: < 5 minutes
-        🎯 Target: < 5 minutes (automatic)
+        Current under 5 minutes
+        Target under 5 minutes
       S3 Primary
-        🎯 Current: < 5 minutes
-        🎯 Target: < 5 minutes (automatic)
+        Current under 5 minutes
+        Target under 5 minutes
       GitHub Pages DR
-        🎯 Current: < 15 minutes (DNS switch)
-        🎯 Target: < 10 minutes (automated DNS)
+        Current under 15 minutes
+        Target under 10 minutes
     ⬆️ Uptime Requirements
       CloudFront Distribution
-        🎯 Minimum: 99.9% (AWS SLA)
-        🎯 Target: 99.99% (multi-region)
+        Minimum 99.9 percent
+        Target 99.99 percent
       S3 Multi-Region
-        🎯 Minimum: 99.99% (AWS SLA)
-        🎯 Target: 99.999% (cross-region)
+        Minimum 99.99 percent
+        Target 99.999 percent
       GitHub Pages DR
-        🎯 Minimum: 99.5%
-        🎯 Target: 99.9%
+        Minimum 99.5 percent
+        Target 99.9 percent
 ```
 
 #### Recovery Time Objectives (RTO)

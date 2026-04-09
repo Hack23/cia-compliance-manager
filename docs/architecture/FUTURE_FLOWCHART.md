@@ -542,15 +542,15 @@ flowchart TD
     O -->|Yes| Q[Context Application]
     Q --> R[End Context Collection]
 
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef collection fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef params fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef processing fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef engine fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef model fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
-    classDef unified fill:#f9e4b7,stroke:#333,stroke-width:1px,color:black
-    classDef decision fill:#ff9966,stroke:#333,stroke-width:1px,color:black
-    classDef end fill:#66cccc,stroke:#333,stroke-width:1px,color:black
+    classDef start fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef collection fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef params fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef processing fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
+    classDef engine fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef model fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef unified fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000
+    classDef decision fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef finish fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
     
     class A,R start
     class B collection
@@ -560,7 +560,7 @@ flowchart TD
     class I,J,K,L model
     class M,N unified
     class O decision
-    class P,Q end
+    class P,Q finish
 ```
 
 ## 🔄 Automated Gap Analysis Workflow (v2.0)
