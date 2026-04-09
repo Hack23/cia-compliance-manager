@@ -107,7 +107,7 @@ graph TD
         B1[Financial<br>#FFC107]
         B2[Operational<br>#2196F3]
         B3[Reputational<br>#7B1FA2]
-        B4[Strategic<br>#16a085]
+        B4[Strategic<br>#2E7D32]
         B5[Regulatory<br>#D32F2F]
     end
     

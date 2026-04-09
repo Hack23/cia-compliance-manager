@@ -114,11 +114,7 @@ Following [Hack23 AB Asset-Centric Threat Modeling](https://github.com/Hack23/IS
 ### **🔐 Crown Jewel Analysis**
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'neutral',
-}
-}%%
+%%{init: {"theme": "neutral"}}%%
 flowchart TB
     subgraph CROWN_JEWELS["💎 Crown Jewels"]
         ASSESSMENT[🧠 Security Assessment Logic<br/>CIA Evaluation Algorithms]
@@ -164,11 +160,7 @@ flowchart TB
 Following [Architecture-Centric Threat Modeling](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md#architecture-centric-threat-modeling) methodology:
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'neutral',
-}
-}%%
+%%{init: {"theme": "neutral"}}%%
 flowchart TB
     subgraph TRUST_BOUNDARY_1["🌐 Internet Trust Boundary"]
         USER[👤 Security Professional]
@@ -256,11 +248,7 @@ Following [MITRE ATT&CK-Driven Analysis](https://github.com/Hack23/ISMS-PUBLIC/b
 ### **🌳 Attack Tree Analysis**
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'neutral',
-}
-}%%
+%%{init: {"theme": "neutral"}}%%
 flowchart TD
     GOAL[🎯 Compromise CIA Manager<br/>Assessment Integrity]
     
@@ -632,11 +620,7 @@ flowchart TD
 Aligned with [Security Architecture](SECURITY_ARCHITECTURE.md) implementation:
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'neutral',
-}
-}%%
+%%{init: {"theme": "neutral"}}%%
 flowchart TB
     subgraph PERIMETER["🌐 Perimeter Security"]
         DNSSEC[🛡️ DNSSEC + Route53]
@@ -711,11 +695,7 @@ flowchart TB
 Following [Hack23 AB Workshop Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md#threat-modeling-workshop-framework):
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'neutral',
-}
-}%%
+%%{init: {"theme": "neutral"}}%%
 flowchart LR
     PRE[📋 Pre-Workshop Prep] --> ENUM[🎯 Asset & Trust Boundary Enumeration]
     ENUM --> THREATS[🔍 Threat Identification<br/>STRIDE + MITRE ATT&CK]
@@ -805,11 +785,7 @@ Implementing [ENISA Threat Landscape 2024](https://www.enisa.europa.eu/publicati
 Following [Hack23 AB Comprehensive Threat Modeling Strategies](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md#comprehensive-threat-modeling-strategies--models):
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'neutral',
-}
-}%%
+%%{init: {"theme": "neutral"}}%%
 mindmap
   root)🎯 CIA Manager Threat Modeling Strategies(
     (🎖️ Attacker-Centric)
@@ -865,11 +841,7 @@ Following [Hack23 AB Scenario-Centric Modeling](https://github.com/Hack23/ISMS-P
 #### **👤 Compliance Persona-Based Threat Analysis**
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'neutral',
-}
-}%%
+%%{init: {"theme": "neutral"}}%%
 flowchart TD
     subgraph PERSONAS["👥 Compliance Threat Personas"]
         COMPETITIVE[🏢 Commercial Vendor<br/>High Resources, Market Protection]
@@ -1255,11 +1227,7 @@ After achieving v1.0 stability, these advanced security capabilities can be expl
 The CIA Compliance Manager implements comprehensive security testing aligned with threat scenarios:
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'neutral',
-}
-}%%
+%%{init: {"theme": "neutral"}}%%
 flowchart TB
     subgraph SECURITY_TESTING["🔒 Security Testing Framework"]
         STATIC[🔍 Static Analysis Security Testing]
@@ -1315,11 +1283,7 @@ flowchart TB
 ### **🔄 Security Review Cycle**
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'neutral',
-}
-}%%
+%%{init: {"theme": "neutral"}}%%
 timeline
     title Security Review and Validation Cycle
     section Monthly

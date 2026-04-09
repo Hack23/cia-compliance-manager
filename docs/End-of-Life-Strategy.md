@@ -49,11 +49,7 @@ Based on [Hack23 AB Classification Framework](https://github.com/Hack23/ISMS-PUB
 ### **🏗️ Core Technology Matrix**
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'neutral',
-}
-}%%
+%%{init: {"theme": "neutral"}}%%
 mindmap
   root)📊 CIA Compliance Manager Stack(
     (🖥️ Runtime)
@@ -223,11 +219,7 @@ gantt
 ### **🧪 Node.js Testing & Validation Strategy**
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'neutral',
-}
-}%%
+%%{init: {"theme": "neutral"}}%%
 flowchart TB
     subgraph PREPARATION["🔬 Pre-Migration Testing"]
         COMPAT_TEST["🧪 Compatibility Testing<br/>• Vite 8+ compatibility<br/>• React 19 compatibility<br/>• TypeScript 6+ compatibility<br/>• Chart.js compatibility"]
@@ -454,11 +446,7 @@ Aligned with [Hack23 AB's "Living on the Edge" Strategy](https://github.com/Hack
 ### **🔍 Automated Dependency Updates**
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'neutral',
-}
-}%%
+%%{init: {"theme": "neutral"}}%%
 flowchart LR
     subgraph MONITORING["📊 Daily Monitoring (09:00 CET)"]
         DEPENDABOT["🤖 Dependabot Scanning<br/>• NPM security advisories<br/>• Version compatibility<br/>• License compliance<br/>• OpenSSF Scorecard"]
@@ -527,11 +515,7 @@ CIA Compliance Manager will be designated as EOL and archived in read-only state
 ### **📊 EOL Decision Matrix**
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'neutral',
-}
-}%%
+%%{init: {"theme": "neutral"}}%%
 flowchart TD
     START[🎯 EOL Assessment Trigger] --> SECURITY{🔒 Security Support Available?}
 
@@ -702,11 +686,7 @@ Integration with [Hack23 AB Security Metrics](https://github.com/Hack23/ISMS-PUB
 ### **📋 Automated Reporting**
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'neutral',
-}
-}%%
+%%{init: {"theme": "neutral"}}%%
 flowchart LR
     subgraph COLLECTION["📊 Data Collection"]
         EOL_API["🌐 endoflife.date API<br/>• Version EOL dates<br/>• Support timelines<br/>• Release schedules"]
