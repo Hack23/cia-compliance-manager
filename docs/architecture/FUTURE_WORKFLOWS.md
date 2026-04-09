@@ -418,7 +418,7 @@ flowchart LR
 
     classDef core fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
     classDef security fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
-    classDef compliance fill:#C62828,stroke:#8E0000,stroke-width:2px,color:#ffffff
+    classDef compliance fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
     classDef dev fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#ffffff
     classDef ops fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
     classDef ml fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff

@@ -163,7 +163,7 @@ flowchart TD
     style B,D fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
     style C,F,G fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
     style E,I fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style H,J,K,L,M fill:#2196F3,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
+    style H,J,K,L,M fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -226,7 +226,7 @@ flowchart TD
     style B,C fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
     style D,G fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
     style E,I fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style F,H,J,K,L,M,N fill:#2196F3,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
+    style F,H,J,K,L,M,N fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -359,7 +359,7 @@ graph TD
     style B fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
     style C,D fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
     style E fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style F,G,H,I,J,K,L,M,N,O fill:#2196F3,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
+    style F,G,H,I,J,K,L,M,N,O fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -464,7 +464,7 @@ graph TD
 
     style A fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
     style B,C fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style D,E,F,G,H fill:#2196F3,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
+    style D,E,F,G,H fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
 ```
 
 #### 🔌 VPC Endpoints Implementation
@@ -592,7 +592,7 @@ graph TD
     style B,C fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
     style D,E,F,G fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
     style H,I,J fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-    style K,L,M,N,O fill:#2196F3,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
+    style K,L,M,N,O fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation
@@ -672,7 +672,7 @@ flowchart TD
     style A,E fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
     style B,C,D,F,G,H fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
     style I,J,K,L fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
-    style M,N,O,P,Q,R,S,T fill:#2196F3,stroke:#00838F,stroke-width:2px,color:white,font-weight:bold
+    style M,N,O,P,Q,R,S,T fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white,font-weight:bold
 ```
 
 ### Implementation

@@ -253,10 +253,10 @@ flowchart TB
     STAGING_DEPLOY --> CANARY_RELEASE
     CANARY_RELEASE --> FULL_MIGRATION
 
-    style PREPARATION fill:#2196F3
-    style ALPHA_CI fill:#7B1FA2
-    style VALIDATION fill:#4CAF50
-    style DEPLOYMENT fill:#FFC107
+    style PREPARATION fill:#2196F3,color:#ffffff
+    style ALPHA_CI fill:#7B1FA2,color:#ffffff
+    style VALIDATION fill:#4CAF50,color:#ffffff
+    style DEPLOYMENT fill:#FFC107,color:#000000
 ```
 
 ### **📊 Node.js Migration Risk Assessment**

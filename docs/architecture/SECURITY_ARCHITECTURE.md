@@ -1295,7 +1295,7 @@ flowchart TD
         J[🛡️ Custom WidgetErrorBoundary] --> B
     end
 
-    style A fill:#2196F3,stroke:#00D8FF,stroke-width:2px,color:black,font-weight:bold
+    style A fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff,font-weight:bold
     style B,C,D fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
     style E,F,G,H fill:#FFC107,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
     style I,J fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold

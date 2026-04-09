@@ -42,29 +42,7 @@ This document provides a strategic analysis of the CIA Compliance Manager's futu
 ## 📊 Strategic SWOT Overview
 
 ```mermaid
-%%{init: {
-  "theme": "neutral",
-  "themeVariables": {
-    "quadrant1Fill": "#2E7D32",
-    "quadrant2Fill": "#D32F2F",
-    "quadrant3Fill": "#1565C0",
-    "quadrant4Fill": "#FF9800",
-    "quadrantTitleFill": "#ffffff",
-    "quadrantPointFill": "#ffffff",
-    "quadrantPointTextFill": "#000000",
-    "quadrantXAxisTextFill": "#000000",
-    "quadrantYAxisTextFill": "#000000"
-  },
-  "quadrantChart": {
-    "chartWidth": 700,
-    "chartHeight": 700,
-    "pointLabelFontSize": 12,
-    "titleFontSize": 20,
-    "quadrantLabelFontSize": 16,
-    "xAxisLabelFontSize": 14,
-    "yAxisLabelFontSize": 14
-  }
-}}%%
+%%{init: {"theme":"neutral","themeVariables":{"quadrant1Fill":"#2E7D32","quadrant2Fill":"#D32F2F","quadrant3Fill":"#1565C0","quadrant4Fill":"#FF9800","quadrantTitleFill":"#ffffff","quadrantPointFill":"#ffffff","quadrantPointTextFill":"#000000","quadrantXAxisTextFill":"#000000","quadrantYAxisTextFill":"#000000"},"quadrantChart":{"chartWidth":700,"chartHeight":700,"pointLabelFontSize":12,"titleFontSize":20,"quadrantLabelFontSize":16,"xAxisLabelFontSize":14,"yAxisLabelFontSize":14}}}%%
 quadrantChart
     title 🎯 Future CIA Compliance Manager Strategic SWOT
     x-axis Internal Factors --> External Factors
@@ -267,29 +245,7 @@ mindmap
 ## 📊 Strategic Position Matrix
 
 ```mermaid
-%%{init: {
-  "theme": "neutral",
-  "themeVariables": {
-    "quadrant1Fill": "#2E7D32",
-    "quadrant2Fill": "#1565C0",
-    "quadrant3Fill": "#9E9E9E",
-    "quadrant4Fill": "#FF9800",
-    "quadrantTitleFill": "#ffffff",
-    "quadrantPointFill": "#ffffff",
-    "quadrantPointTextFill": "#000000",
-    "quadrantXAxisTextFill": "#000000",
-    "quadrantYAxisTextFill": "#000000"
-  },
-  "quadrantChart": {
-    "chartWidth": 700,
-    "chartHeight": 700,
-    "pointLabelFontSize": 12,
-    "titleFontSize": 20,
-    "quadrantLabelFontSize": 16,
-    "xAxisLabelFontSize": 14,
-    "yAxisLabelFontSize": 14
-  }
-}}%%
+%%{init: {"theme":"neutral","themeVariables":{"quadrant1Fill":"#2E7D32","quadrant2Fill":"#1565C0","quadrant3Fill":"#9E9E9E","quadrant4Fill":"#FF9800","quadrantTitleFill":"#ffffff","quadrantPointFill":"#ffffff","quadrantPointTextFill":"#000000","quadrantXAxisTextFill":"#000000","quadrantYAxisTextFill":"#000000"},"quadrantChart":{"chartWidth":700,"chartHeight":700,"pointLabelFontSize":12,"titleFontSize":20,"quadrantLabelFontSize":16,"xAxisLabelFontSize":14,"yAxisLabelFontSize":14}}}%%
 quadrantChart
     title 🎯 Strategic Positioning Relative to Market
     x-axis Traditional --> Innovative

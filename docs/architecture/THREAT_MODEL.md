@@ -146,9 +146,9 @@ flowchart TB
     CYBER_CRIME --> SUPPLY_CHAIN
     INSIDER --> CODE_INJECT
     
-    style ASSESSMENT fill:#D32F2F,stroke:#d32f2f,color:#000
-    style FRAMEWORKS fill:#D32F2F,stroke:#d32f2f,color:#000
-    style PIPELINE fill:#D32F2F,stroke:#d32f2f,color:#000
+    style ASSESSMENT fill:#D32F2F,stroke:#d32f2f,color:#ffffff
+    style FRAMEWORKS fill:#D32F2F,stroke:#d32f2f,color:#ffffff
+    style PIPELINE fill:#D32F2F,stroke:#d32f2f,color:#ffffff
 ```
 
 ---
@@ -352,29 +352,7 @@ Following [Risk-Centric Threat Modeling](https://github.com/Hack23/ISMS-PUBLIC/b
 ### **⚖️ Risk Heat Matrix**
 
 ```mermaid
-%%{init: {
-  "theme": "neutral",
-  "themeVariables": {
-    "quadrant1Fill": "#FF9800",
-    "quadrant2Fill": "#D32F2F",
-    "quadrant3Fill": "#4CAF50",
-    "quadrant4Fill": "#FFC107",
-    "quadrantTitleFill": "#ffffff",
-    "quadrantPointFill": "#ffffff",
-    "quadrantPointTextFill": "#000000",
-    "quadrantXAxisTextFill": "#000000",
-    "quadrantYAxisTextFill": "#000000"
-  },
-  "quadrantChart": {
-    "chartWidth": 700,
-    "chartHeight": 700,
-    "pointLabelFontSize": 12,
-    "titleFontSize": 20,
-    "quadrantLabelFontSize": 16,
-    "xAxisLabelFontSize": 14,
-    "yAxisLabelFontSize": 14
-  }
-}}%%
+%%{init: {"theme":"neutral","themeVariables":{"quadrant1Fill":"#FF9800","quadrant2Fill":"#D32F2F","quadrant3Fill":"#4CAF50","quadrant4Fill":"#FFC107","quadrantTitleFill":"#ffffff","quadrantPointFill":"#ffffff","quadrantPointTextFill":"#000000","quadrantXAxisTextFill":"#000000","quadrantYAxisTextFill":"#000000"},"quadrantChart":{"chartWidth":700,"chartHeight":700,"pointLabelFontSize":12,"titleFontSize":20,"quadrantLabelFontSize":16,"xAxisLabelFontSize":14,"yAxisLabelFontSize":14}}}%%
 quadrantChart
     title 🎯 CIA Manager Risk Heat Matrix
     x-axis Low Likelihood --> High Likelihood

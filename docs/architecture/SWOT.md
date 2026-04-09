@@ -43,29 +43,7 @@ This document provides a strategic analysis of the CIA Compliance Manager's stre
 **Strategic Focus:** This quadrant chart provides a visual representation of the CIA Compliance Manager's strengths, weaknesses, opportunities, and threats arranged by their internal/external nature and positive/negative impact.
 
 ```mermaid
-%%{init: {
-  "theme": "neutral",
-  "themeVariables": {
-    "quadrant1Fill": "#2E7D32",
-    "quadrant2Fill": "#D32F2F",
-    "quadrant3Fill": "#1565C0",
-    "quadrant4Fill": "#FF9800",
-    "quadrantTitleFill": "#ffffff",
-    "quadrantPointFill": "#ffffff",
-    "quadrantPointTextFill": "#000000",
-    "quadrantXAxisTextFill": "#000000",
-    "quadrantYAxisTextFill": "#000000"
-  },
-  "quadrantChart": {
-    "chartWidth": 700,
-    "chartHeight": 700,
-    "pointLabelFontSize": 12,
-    "titleFontSize": 20,
-    "quadrantLabelFontSize": 16,
-    "xAxisLabelFontSize": 14,
-    "yAxisLabelFontSize": 14
-  }
-}}%%
+%%{init: {"theme":"neutral","themeVariables":{"quadrant1Fill":"#2E7D32","quadrant2Fill":"#D32F2F","quadrant3Fill":"#1565C0","quadrant4Fill":"#FF9800","quadrantTitleFill":"#ffffff","quadrantPointFill":"#ffffff","quadrantPointTextFill":"#000000","quadrantXAxisTextFill":"#000000","quadrantYAxisTextFill":"#000000"},"quadrantChart":{"chartWidth":700,"chartHeight":700,"pointLabelFontSize":12,"titleFontSize":20,"quadrantLabelFontSize":16,"xAxisLabelFontSize":14,"yAxisLabelFontSize":14}}}%%
 quadrantChart
     title 🎯 CIA Compliance Manager SWOT Analysis
     x-axis Internal Factors --> External Factors
