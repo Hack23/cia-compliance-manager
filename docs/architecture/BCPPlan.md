@@ -747,8 +747,8 @@ flowchart TD
 
     style A fill:#D32F2F,stroke:#333,stroke-width:2px
     style B fill:#FFC107,stroke:#333,stroke-width:2px
-    style C,D,E fill:#ccffcc,stroke:#333,stroke-width:2px
-    style C1,C2,C3,D1,D2,D3,E1,E2,E3 fill:#ccccff,stroke:#333,stroke-width:1px
+    style C,D,E fill:#4CAF50,stroke:#333,stroke-width:2px
+    style C1,C2,C3,D1,D2,D3,E1,E2,E3 fill:#2196F3,stroke:#333,stroke-width:1px
 ```
 
 | Data Type               | GitHub Recovery Mechanism | Recovery Process              | Recovery Time |
@@ -896,9 +896,9 @@ flowchart TD
 
     style A fill:#D32F2F,stroke:#333,stroke-width:2px
     style B fill:#FFC107,stroke:#333,stroke-width:2px
-    style C1,C2,C3,C4 fill:#ccffcc,stroke:#333,stroke-width:2px
-    style D1,D2,D3,D4 fill:#ccccff,stroke:#333,stroke-width:1px
-    style E,F,G fill:#ffccff,stroke:#333,stroke-width:1px
+    style C1,C2,C3,C4 fill:#4CAF50,stroke:#333,stroke-width:2px
+    style D1,D2,D3,D4 fill:#2196F3,stroke:#333,stroke-width:1px
+    style E,F,G fill:#7B1FA2,stroke:#333,stroke-width:1px
 ```
 
 ```mermaid
@@ -992,7 +992,7 @@ flowchart TB
 
     style A fill:#D32F2F,stroke:#333,stroke-width:2px
     style B,C,E fill:#FFC107,stroke:#333,stroke-width:2px
-    style D,F1,F2,F3,G,H,I,J fill:#ccffcc,stroke:#333,stroke-width:1px
+    style D,F1,F2,F3,G,H,I,J fill:#4CAF50,stroke:#333,stroke-width:1px
     style R fill:#D32F2F,stroke:#333,stroke-width:2px
 ```
 
