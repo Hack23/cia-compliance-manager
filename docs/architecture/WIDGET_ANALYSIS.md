@@ -59,9 +59,9 @@ flowchart TD
     classDef core fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
     classDef assessment fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     classDef business fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
-    classDef confidentiality fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
-    classDef integrity fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
-    classDef availability fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef confidentiality fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
+    classDef integrity fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#ffffff
+    classDef availability fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
     classDef implementation fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class SLW core

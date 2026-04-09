@@ -72,14 +72,14 @@ graph TD
     G --> H[🔄 Continuous Improvement]
     H --> A
     
-    style A fill:#4CAF50
-    style B fill:#FF9800
-    style C fill:#2196F3
-    style D fill:#7B1FA2
-    style E fill:#D32F2F
-    style F fill:#2196F3
-    style G fill:#FFC107
-    style H fill:#4CAF50
+    style A fill:#4CAF50,color:#ffffff
+    style B fill:#FF9800,color:#ffffff
+    style C fill:#2196F3,color:#ffffff
+    style D fill:#7B1FA2,color:#ffffff
+    style E fill:#D32F2F,color:#ffffff
+    style F fill:#2196F3,color:#ffffff
+    style G fill:#FFC107,color:#000000
+    style H fill:#4CAF50,color:#ffffff
 ```
 
 ### **Control Implementation Evidence**
@@ -139,11 +139,11 @@ graph TD
     C --> D[🔒 Security Tests<br/>SAST/SCA/DAST]
     D --> E[⚡ Performance Tests<br/>Lighthouse 90+]
     
-    style A fill:#4CAF50
-    style B fill:#2196F3
-    style C fill:#FF9800
-    style D fill:#D32F2F
-    style E fill:#7B1FA2
+    style A fill:#4CAF50,color:#ffffff
+    style B fill:#2196F3,color:#ffffff
+    style C fill:#FF9800,color:#ffffff
+    style D fill:#D32F2F,color:#ffffff
+    style E fill:#7B1FA2,color:#ffffff
 ```
 
 ### **Unit Testing**
@@ -379,13 +379,13 @@ graph TD
     H --> I[✅ Verify]
     B -->|No| J[📊 Report Status]
     
-    style A fill:#4CAF50
-    style D fill:#D32F2F
-    style E fill:#FF9800
-    style F fill:#FFC107
-    style G fill:#2196F3
-    style H fill:#7B1FA2
-    style I fill:#4CAF50
+    style A fill:#4CAF50,color:#ffffff
+    style D fill:#D32F2F,color:#ffffff
+    style E fill:#FF9800,color:#ffffff
+    style F fill:#FFC107,color:#000000
+    style G fill:#2196F3,color:#ffffff
+    style H fill:#7B1FA2,color:#ffffff
+    style I fill:#4CAF50,color:#ffffff
 ```
 
 ### **Scanning Coverage**

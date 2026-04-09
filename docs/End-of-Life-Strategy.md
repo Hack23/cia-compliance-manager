@@ -469,9 +469,9 @@ flowchart LR
     REVIEW_ACTION --> AUTO_MERGE
     AUTO_MERGE --> ROLLBACK
 
-    style MONITORING fill:#7B1FA2
-    style VALIDATION fill:#4CAF50
-    style DEPLOYMENT fill:#FFC107
+    style MONITORING fill:#7B1FA2,color:#FFFFFF
+    style VALIDATION fill:#4CAF50,color:#FFFFFF
+    style DEPLOYMENT fill:#FFC107,color:#000000
 ```
 
 ### **📋 Update Classification & Response Times**
@@ -745,7 +745,7 @@ graph TB
     TOOLS --> ALERTS
     DEPS --> ALERTS
     
-    style REACT fill:#2196F3,color:#000
+    style REACT fill:#2196F3,color:#fff
     style TS fill:#1565C0,color:#fff
     style NODE fill:#2E7D32,color:#fff
     style VITE fill:#7B1FA2,color:#fff
