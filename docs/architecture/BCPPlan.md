@@ -164,9 +164,9 @@ graph TB
         G1 -.-> CR6[High: User data persistence]
     end
 
-    classDef critical fill:#ff6666,stroke:#333,stroke-width:2px,color:white;
+    classDef critical fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
     classDef high fill:#ffaa66,stroke:#333,stroke-width:2px;
-    classDef medium fill:#ffff66,stroke:#333,stroke-width:2px;
+    classDef medium fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000
 
     class C1,CR2 critical;
     class B1,B2,D1,D2,F1,G1,CR1,CR3,CR5,CR6 high;
@@ -213,9 +213,9 @@ flowchart TB
     FE --> BEX
     CDN --> FE
 
-    classDef github fill:#f5f5f5,stroke:#333,stroke-width:2px;
+    classDef github fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
     classDef browser fill:#e1f5fe,stroke:#333,stroke-width:2px;
-    classDef external fill:#f9e4b7,stroke:#333,stroke-width:2px;
+    classDef external fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
 
     class GHP,GHR,GHA,GHO github;
     class FE,LS,BEX browser;
@@ -225,20 +225,43 @@ flowchart TB
 #### 🔝 Priority Matrix
 
 ```mermaid
+%%{init: {
+  "theme": "neutral",
+  "themeVariables": {
+    "quadrant1Fill": "#D32F2F",
+    "quadrant2Fill": "#FF9800",
+    "quadrant3Fill": "#9E9E9E",
+    "quadrant4Fill": "#FFC107",
+    "quadrantTitleFill": "#ffffff",
+    "quadrantPointFill": "#ffffff",
+    "quadrantPointTextFill": "#000000",
+    "quadrantXAxisTextFill": "#000000",
+    "quadrantYAxisTextFill": "#000000"
+  },
+  "quadrantChart": {
+    "chartWidth": 700,
+    "chartHeight": 700,
+    "pointLabelFontSize": 12,
+    "titleFontSize": 20,
+    "quadrantLabelFontSize": 16,
+    "xAxisLabelFontSize": 14,
+    "yAxisLabelFontSize": 14
+  }
+}}%%
 quadrantChart
-    title Business Function Priority Matrix
+    title 📋 Business Function Priority Matrix
     x-axis Low Impact --> High Impact
     y-axis Low Urgency --> High Urgency
-    quadrant-1 "Prioritize"
-    quadrant-2 "Critical Action"
-    quadrant-3 "Monitor"
-    quadrant-4 "Contingent Effort"
-    "User Authentication": [0.9, 0.95]
-    "Security Assessment Engine": [0.8, 0.85]
-    "Security Dashboard": [0.7, 0.75]
-    "User Data & Settings": [0.8, 0.7]
-    "Reporting & Export": [0.7, 0.6]
-    "Compliance Mapping": [0.5, 0.4]
+    quadrant-1 PRIORITIZE
+    quadrant-2 CRITICAL ACTION
+    quadrant-3 MONITOR
+    quadrant-4 CONTINGENT EFFORT
+    "User Authentication": [0.90, 0.95]
+    "Security Assessment Engine": [0.80, 0.85]
+    "Security Dashboard": [0.70, 0.75]
+    "User Data and Settings": [0.80, 0.70]
+    "Reporting and Export": [0.70, 0.60]
+    "Compliance Mapping": [0.50, 0.40]
 ```
 
 ### 💰 Impact Quantification
@@ -385,9 +408,9 @@ graph TB
         C3 --> D3[Increased Compliance Costs]
     end
 
-    classDef process fill:#f5f5f5,stroke:#333,stroke-width:1px;
-    classDef impact fill:#ffeeee,stroke:#333,stroke-width:1px;
-    classDef consequence fill:#ffcccc,stroke:#333,stroke-width:1px;
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef impact fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef consequence fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
 
     class A1 process;
     class B1,B2,B3 process;
@@ -502,10 +525,10 @@ graph LR
         SD["Session Data: 60"]
     end
 
-    classDef critical fill:#ff6666,stroke:#333,stroke-width:1px,color:white;
+    classDef critical fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
     classDef high fill:#ffaa66,stroke:#333,stroke-width:1px;
-    classDef medium fill:#ffff66,stroke:#333,stroke-width:1px;
-    classDef standard fill:#66ccff,stroke:#333,stroke-width:1px;
+    classDef medium fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000
+    classDef standard fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class UA critical
     class US high
@@ -1361,10 +1384,10 @@ flowchart TD
     CH6 -.-> S2
     CH6 -.-> S3
 
-    classDef critical fill:#ff6666,stroke:#333,stroke-width:2px;
-    classDef major fill:#ff9966,stroke:#333,stroke-width:2px;
-    classDef moderate fill:#ffcc66,stroke:#333,stroke-width:2px;
-    classDef minor fill:#66ccff,stroke:#333,stroke-width:2px;
+    classDef critical fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef major fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef moderate fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef minor fill:#FFC107,stroke:#FFA000,stroke-width:2px,color:#000000
 
     class C1,D1,E1 critical;
     class C2,D2,E2 major;

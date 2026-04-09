@@ -105,15 +105,15 @@ flowchart TD
     M -->|No| N[Optimization Refinement]
     N --> L
 
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef context fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef params fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef engine fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef security fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef ml fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
-    classDef output fill:#f9e4b7,stroke:#333,stroke-width:1px,color:black
-    classDef decision fill:#ff9966,stroke:#333,stroke-width:1px,color:black
-    classDef monitoring fill:#66cccc,stroke:#333,stroke-width:1px,color:black
+    classDef start fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef context fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef params fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef engine fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef security fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef ml fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
+    classDef output fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef monitoring fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
 
     class A start
     class B,D,E context
@@ -177,14 +177,14 @@ flowchart TD
     
     W --> F
 
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef context fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef ml fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef output fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef implement fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef feedback fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
-    classDef retrain fill:#f9e4b7,stroke:#333,stroke-width:1px,color:black
-    classDef decision fill:#ff9966,stroke:#333,stroke-width:1px,color:black
+    classDef start fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef context fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef ml fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
+    classDef output fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef implement fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef feedback fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
+    classDef retrain fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     
     class A,B start
     class C,D,E context
@@ -243,14 +243,14 @@ flowchart TD
     N --> O[Continuous Improvement]
     O --> D
 
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef profile fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef implement fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef monitor fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
+    classDef start fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef profile fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef implement fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef monitor fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     classDef monTypes fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef decision fill:#ff9966,stroke:#333,stroke-width:1px,color:black
-    classDef analysis fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef update fill:#f9e4b7,stroke:#333,stroke-width:1px,color:black
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef analysis fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef update fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     
     class A start
     class B,L profile
@@ -313,15 +313,15 @@ flowchart TD
     R -->|No| S[Minor Compliance Adjustment]
     S --> N
 
-    classDef profile fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef context fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef profile fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef context fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     classDef reqs fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef framework fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef mapping fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef analysis fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
-    classDef output fill:#f9e4b7,stroke:#333,stroke-width:1px,color:black
-    classDef decision fill:#ff9966,stroke:#333,stroke-width:1px,color:black
-    classDef monitoring fill:#66cccc,stroke:#333,stroke-width:1px,color:black
+    classDef framework fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef mapping fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef analysis fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef output fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef monitoring fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     
     class A profile
     class B context
@@ -383,14 +383,14 @@ flowchart TD
     L --> M[Executive Dashboard]
     M --> N[Decision Support System]
 
-    classDef profile fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef context fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef params fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef engine fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef impact fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef analysis fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
-    classDef roi fill:#f9e4b7,stroke:#333,stroke-width:1px,color:black
-    classDef output fill:#66cccc,stroke:#333,stroke-width:1px,color:black
+    classDef profile fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef context fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef params fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef engine fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef impact fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef analysis fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef roi fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#ffffff
+    classDef output fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class A profile
     class B,D context
@@ -484,11 +484,11 @@ flowchart TD
     I4 -->|Cloud Resources| A
     A -->|Cloud Security Controls| I4
 
-    classDef ciacm fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef sectools fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
-    classDef grctools fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef itsystems fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef dataflow fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
+    classDef ciacm fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef sectools fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef grctools fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef itsystems fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef dataflow fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
     
     class A,B,C,D,E,F ciacm
     class G1,G2,G3,G4 sectools
@@ -611,12 +611,12 @@ flowchart TD
     AssignTasks --> TrackProgress[Enable Progress<br>Tracking]
     TrackProgress --> End([End])
     
-    classDef baseline fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
-    classDef ai fill:#d1c4e9,stroke:#333,stroke-width:2px,color:black
-    classDef analysis fill:#c8e6c9,stroke:#333,stroke-width:2px,color:black
-    classDef automation fill:#ffccbc,stroke:#333,stroke-width:2px,color:black
-    classDef decision fill:#f39c12,stroke:#333,stroke-width:2px,color:white
-    classDef output fill:#a5d6a7,stroke:#333,stroke-width:2px,color:black
+    classDef baseline fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
+    classDef ai fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
+    classDef analysis fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef automation fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef output fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class Start,End baseline
     class AIEngine,HistoricalMatch,SimilarOrgs,SuccessAnalysis ai
@@ -699,12 +699,12 @@ flowchart TD
     CreateVersion --> ReleaseLock
     ReleaseLock --> End([End])
     
-    classDef user fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
-    classDef lock fill:#ffccbc,stroke:#333,stroke-width:2px,color:black
-    classDef realtime fill:#c8e6c9,stroke:#333,stroke-width:2px,color:black
-    classDef conflict fill:#f39c12,stroke:#333,stroke-width:2px,color:white
-    classDef decision fill:#d1c4e9,stroke:#333,stroke-width:2px,color:black
-    classDef broadcast fill:#a5d6a7,stroke:#333,stroke-width:2px,color:black
+    classDef user fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef lock fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef realtime fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef conflict fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef broadcast fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
     
     class User1,User2,User1Edit,UserResolves user
     class CheckLock,AcquireLock,ReleaseLock lock
@@ -805,13 +805,13 @@ flowchart TD
     LogChange --> ContinueMonitor
     ContinueMonitor --> ParallelMonitor
     
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
-    classDef monitor fill:#c8e6c9,stroke:#333,stroke-width:2px,color:black
-    classDef decision fill:#d1c4e9,stroke:#333,stroke-width:2px,color:black
-    classDef trigger fill:#ffccbc,stroke:#333,stroke-width:2px,color:black
-    classDef critical fill:#e74c3c,stroke:#333,stroke-width:2px,color:white
-    classDef assessment fill:#a5d6a7,stroke:#333,stroke-width:2px,color:black
-    classDef approval fill:#f39c12,stroke:#333,stroke-width:2px,color:white
+    classDef start fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef monitor fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef trigger fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef critical fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef assessment fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef approval fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class Start start
     class EnableMonitoring,ContextWatch,ThreatWatch,ComplianceWatch,IntegrationWatch,ContinueMonitor monitor
@@ -928,13 +928,13 @@ flowchart TD
     
     MonitorSync --> End([End])
     
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
-    classDef config fill:#c8e6c9,stroke:#333,stroke-width:2px,color:black
-    classDef decision fill:#d1c4e9,stroke:#333,stroke-width:2px,color:black
-    classDef inbound fill:#a5d6a7,stroke:#333,stroke-width:2px,color:black
-    classDef outbound fill:#ffccbc,stroke:#333,stroke-width:2px,color:black
-    classDef error fill:#e74c3c,stroke:#333,stroke-width:2px,color:white
-    classDef success fill:#66bb6a,stroke:#333,stroke-width:2px,color:white
+    classDef start fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef config fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef inbound fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef outbound fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef success fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class Start,End start
     class SelectPlatform,ConfigureSIEM,ConfigureGRC,ConfigureITSM,ConfigureScanner,AuthSetup,TestConnection,ConfigureSync,SelectData config
@@ -1055,14 +1055,14 @@ flowchart TD
     ScheduleArchive --> End([End])
     NotifyAdmin --> End
     
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
-    classDef trigger fill:#c8e6c9,stroke:#333,stroke-width:2px,color:black
-    classDef template fill:#a5d6a7,stroke:#333,stroke-width:2px,color:black
-    classDef data fill:#ffccbc,stroke:#333,stroke-width:2px,color:black
-    classDef generation fill:#d1c4e9,stroke:#333,stroke-width:2px,color:black
-    classDef decision fill:#f39c12,stroke:#333,stroke-width:2px,color:white
-    classDef distribution fill:#66bb6a,stroke:#333,stroke-width:2px,color:white
-    classDef error fill:#e74c3c,stroke:#333,stroke-width:2px,color:white
+    classDef start fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef trigger fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef template fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
+    classDef data fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef generation fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef distribution fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
     
     class Start,End start
     class TriggerType,ScheduledReport,OnDemandReport,EventReport trigger
@@ -1186,14 +1186,14 @@ flowchart TD
     UpdateMetrics --> ArchiveNotif[Archive Notification<br>to DynamoDB]
     ArchiveNotif --> End([End])
     
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
-    classDef event fill:#c8e6c9,stroke:#333,stroke-width:2px,color:black
-    classDef priority fill:#ffccbc,stroke:#333,stroke-width:2px,color:black
-    classDef critical fill:#e74c3c,stroke:#333,stroke-width:2px,color:white
-    classDef decision fill:#d1c4e9,stroke:#333,stroke-width:2px,color:black
-    classDef channel fill:#a5d6a7,stroke:#333,stroke-width:2px,color:black
-    classDef tracking fill:#f39c12,stroke:#333,stroke-width:2px,color:white
-    classDef success fill:#66bb6a,stroke:#333,stroke-width:2px,color:white
+    classDef start fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef event fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef priority fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef critical fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef channel fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef tracking fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef success fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class Start,End start
     class EventType,CriticalEvent,AssessmentEvent,GapEvent,ApprovalEvent,DeadlineEvent event
@@ -1317,14 +1317,14 @@ flowchart TD
     
     ArchiveApproval --> End
     
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
-    classDef decision fill:#d1c4e9,stroke:#333,stroke-width:2px,color:black
-    classDef approval fill:#c8e6c9,stroke:#333,stroke-width:2px,color:black
-    classDef review fill:#a5d6a7,stroke:#333,stroke-width:2px,color:black
-    classDef rejection fill:#ffccbc,stroke:#333,stroke-width:2px,color:black
-    classDef escalation fill:#f39c12,stroke:#333,stroke-width:2px,color:white
-    classDef finalize fill:#66bb6a,stroke:#333,stroke-width:2px,color:white
-    classDef archive fill:#95a5a6,stroke:#333,stroke-width:2px,color:white
+    classDef start fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef approval fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef review fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
+    classDef rejection fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef escalation fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef finalize fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef archive fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
     
     class Start,End start
     class DetermineApproval,ApprovalType,ReviewAction,CheckTimeout,TimeoutAction,SubmitterAction,CheckStages,Stage2,FinalDecision decision

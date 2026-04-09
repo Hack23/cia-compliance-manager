@@ -109,16 +109,16 @@ flowchart TD
     ShowErrorUI -->|User Resets| InitDefaults
     
     %% Apply styles using class definitions
-    classDef startend fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white,rx:25
-    classDef process fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
-    classDef decision fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef validation fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:white
-    classDef error fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef success fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-    classDef confidentiality fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
-    classDef integrity fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-    classDef availability fill:#2980b9,stroke:#2471a3,stroke-width:2px,color:white
-    classDef context fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    classDef startend fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef validation fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef success fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef confidentiality fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef integrity fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef availability fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef context fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     
     class Start,ExportComplete startend
     class DisplayWidget,RestoreState,InitDefaults,PropagateState,PersistState,TriggerRerender,UpdateWidgets,GenerateExport,InitContexts process
@@ -196,13 +196,13 @@ flowchart TD
     UpdateLevels --> SecurityLevels
     
     %% Apply styles using class definitions
-    classDef input fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef process fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
-    classDef service fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    classDef decision fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef error fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef output fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-    classDef endnode fill:#95a5a6,stroke:#7f8c8d,stroke-width:2px,color:white
+    classDef input fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef service fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef output fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef endnode fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
     
     class SecurityLevels input
     class InitServices,Aggregate,GenerateOutput,CalcCostEstimates,GenRecommendations,CompileResults,UpdateWidgets process
@@ -265,9 +265,9 @@ flowchart LR
     Widgets --> UI
     
     %% Apply styles using class definitions
-    classDef ui fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef logic fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef data fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    classDef ui fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef logic fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
+    classDef data fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
     
     class UI,Widgets ui
     class Hooks,Services logic
@@ -321,12 +321,12 @@ flowchart TD
     UpdateLevels --> Start
     
     %% Apply styles
-    classDef startend fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white,rx:25
-    classDef process fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
-    classDef framework fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef mapping fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    classDef decision fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:white
-    classDef output fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
+    classDef startend fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef framework fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef mapping fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef output fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class Start,End startend
     class MapControls,CalculateGap,PrioritizeGaps,GenerateRoadmap,EstimateCosts,CalculateROI process
@@ -373,10 +373,10 @@ flowchart TD
     AddTests --> UnitTests
     
     %% Apply styles using class definitions
-    classDef start fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef process fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
-    classDef decision fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef endProcess fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    classDef start fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef endProcess fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
     
     class CodeChange start
     class UnitTests,IntegrationTests,UITests,CoverageMeasurement,AddTests process
@@ -472,15 +472,15 @@ flowchart TD
     ModifyLevels --> Start
     
     %% Apply styles
-    classDef startend fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white,rx:25
-    classDef process fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
-    classDef analysis fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    classDef decision fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:white
-    classDef impact fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef financial fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef operational fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef reputational fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
-    classDef regulatory fill:#e67e22,stroke:#d35400,stroke-width:2px,color:white
+    classDef startend fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef analysis fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef impact fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef financial fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef operational fill:#8D6E63,stroke:#5D4037,stroke-width:2px,color:#ffffff
+    classDef reputational fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef regulatory fill:#C62828,stroke:#8E0000,stroke-width:2px,color:#ffffff
     
     class Start,End startend
     class InitBIA,CalculateLosses,AssessDisruption,AssessBrandDamage,IdentifyRegulations,CombineImpacts,CalculateRisk,GenerateMatrix process
@@ -551,14 +551,14 @@ flowchart TD
     end
     
     %% Apply styles using class definitions
-    classDef core fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef assessment fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef cia fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef business fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
-    classDef implementation fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    classDef confidentiality fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
-    classDef integrity fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-    classDef availability fill:#2980b9,stroke:#2471a3,stroke-width:2px,color:white
+    classDef core fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef assessment fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef cia fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef business fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef implementation fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef confidentiality fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef integrity fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef availability fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     
     class SLW core
     class SSW,BIAW assessment
@@ -645,14 +645,14 @@ flowchart TD
     AdjustLevels --> Start
     
     %% Apply styles
-    classDef startend fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white,rx:25
-    classDef process fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
-    classDef calculation fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    classDef component fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef decision fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:white
-    classDef capex fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef opex fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef output fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
+    classDef startend fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef calculation fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef component fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef capex fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef opex fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef output fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class Start,End startend
     class InitCostCalc,GetSecurityLevel,CombineCosts,CalculateBreakdown,EstimateTimeline,CalculateROI,GenerateScenarios process
@@ -762,12 +762,12 @@ flowchart TD
     HealthCheck -->|Unhealthy| ErrorCaught
     
     %% Apply styles
-    classDef startend fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white,rx:25
-    classDef process fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
-    classDef error fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef decision fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:white
+    classDef startend fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     classDef recovery fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    classDef success fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
+    classDef success fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class Start,End startend
     class RenderAttempt,LogError,ShowErrorUI,ProvideOptions,IncrementRetry,ExponentialBackoff,ClearStorage,ReloadApp,CreateIssueURL,OpenInNewTab process
@@ -926,13 +926,13 @@ flowchart TD
     OfferRetry -->|No| End
     
     %% Apply styles
-    classDef startend fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white,rx:25
-    classDef process fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
-    classDef data fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    classDef decision fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:white
-    classDef error fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef success fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-    classDef metadata fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+    classDef startend fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef data fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef success fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef metadata fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
     
     class Start,End startend
     class GatherData,FormatData,GenerateDocument,AddMetadata,CompileDocument,PrepareDownload,CreateBlob,GenerateURL,TriggerDownload,CleanupURL process
@@ -1079,11 +1079,11 @@ flowchart TD
     SV5 --> B5
     B5 --> U5
     
-    classDef user fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef user fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     classDef browser fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    classDef state fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:white
-    classDef service fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef storage fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
+    classDef state fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
+    classDef service fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef storage fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
     
     class U1,U2,U3,U4,U5 user
     class B1,B2,B3,B4,B5 browser
@@ -1276,12 +1276,12 @@ flowchart TD
     Logout --> InvalidateToken[Invalidate Session<br>Token]
     InvalidateToken --> ClearSession
     
-    classDef startend fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white,rx:25
-    classDef process fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
-    classDef decision fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:white
-    classDef auth fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    classDef error fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef session fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+    classDef startend fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef auth fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef session fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
     
     class Start startend
     class LoadApp,CreateSession,StoreToken,SetExpiration,RenewSession,InvalidateToken,ClearSession process

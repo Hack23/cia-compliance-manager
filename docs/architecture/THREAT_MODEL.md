@@ -385,34 +385,46 @@ Following [Risk-Centric Threat Modeling](https://github.com/Hack23/ISMS-PUBLIC/b
 ### **⚖️ Risk Heat Matrix**
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryColor': '#fff',
-      'primaryTextColor': '#000',
-      'lineColor': '#333'
-    }
+%%{init: {
+  "theme": "neutral",
+  "themeVariables": {
+    "quadrant1Fill": "#FF9800",
+    "quadrant2Fill": "#D32F2F",
+    "quadrant3Fill": "#4CAF50",
+    "quadrant4Fill": "#FFC107",
+    "quadrantTitleFill": "#ffffff",
+    "quadrantPointFill": "#ffffff",
+    "quadrantPointTextFill": "#000000",
+    "quadrantXAxisTextFill": "#000000",
+    "quadrantYAxisTextFill": "#000000"
+  },
+  "quadrantChart": {
+    "chartWidth": 700,
+    "chartHeight": 700,
+    "pointLabelFontSize": 12,
+    "titleFontSize": 20,
+    "quadrantLabelFontSize": 16,
+    "xAxisLabelFontSize": 14,
+    "yAxisLabelFontSize": 14
   }
-}%%
+}}%%
 quadrantChart
     title 🎯 CIA Manager Risk Heat Matrix
     x-axis Low Likelihood --> High Likelihood
     y-axis Low Impact --> High Impact
-    quadrant-1 Monitor & Prepare
-    quadrant-2 Immediate Action Required
-    quadrant-3 Accept Risk
-    quadrant-4 Mitigate & Control
-    
-    "📦 Supply Chain Attack": [0.6, 0.95]
-    "🧠 Algorithm Manipulation": [0.4, 0.9]
-    "📊 Framework Poisoning": [0.3, 0.8]
-    "🏗️ Build Compromise": [0.5, 0.75]
-    "🌐 Client Tampering": [0.6, 0.6]
-    "💾 Privacy Violation": [0.4, 0.5]
-    "🎭 Social Engineering": [0.7, 0.4]
-    "⚡ Service Disruption": [0.8, 0.3]
-    "🔍 Info Disclosure": [0.5, 0.25]
+    quadrant-1 MONITOR AND PREPARE
+    quadrant-2 IMMEDIATE ACTION REQUIRED
+    quadrant-3 ACCEPT RISK
+    quadrant-4 MITIGATE AND CONTROL
+    "Supply Chain Attack": [0.60, 0.95] radius: 8
+    "Algorithm Manipulation": [0.40, 0.90] radius: 7
+    "Framework Poisoning": [0.30, 0.80] radius: 7
+    "Build Compromise": [0.50, 0.75] radius: 7
+    "Client Tampering": [0.60, 0.60] radius: 6
+    "Privacy Violation": [0.40, 0.50] radius: 6
+    "Social Engineering": [0.70, 0.40] radius: 6
+    "Service Disruption": [0.80, 0.30] radius: 6
+    "Info Disclosure": [0.50, 0.25] radius: 5
 ```
 
 ### **📐 Quantitative Risk Assessment**

@@ -269,8 +269,8 @@ flowchart TD
     valueCreation --> DefaultDP
     businessImpact --> DefaultDP
     
-    classDef files fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
-    classDef provider fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+    classDef files fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
+    classDef provider fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
     
     class confidentialityOpts,integrityOpts,availabilityOpts,frameworks,resources,roiData,valueCreation,businessImpact files
     class DefaultDP provider

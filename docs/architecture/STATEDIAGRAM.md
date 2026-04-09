@@ -156,12 +156,12 @@ stateDiagram-v2
     RetryingExport --> Exporting
     ExportError --> Reviewing: Cancel
     
-    classDef initial fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef process fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    classDef review fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
-    classDef export fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
-    classDef error fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef offline fill:#95a5a6,stroke:#7f8c8d,stroke-width:2px,color:white
+    classDef initial fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef review fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
+    classDef export fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef offline fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
     
     class Initializing initial
     class Ready,Assessing process
@@ -221,10 +221,10 @@ stateDiagram-v2
     
     Unmounting --> [*]
     
-    classDef init fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef ready fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-    classDef update fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:white
-    classDef unmount fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
+    classDef init fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef ready fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef update fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef unmount fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
     
     class Initializing,ApplyingInitialLevels init
     class Ready,Idle ready
@@ -370,12 +370,12 @@ stateDiagram-v2
     
     Unmounting --> [*]
     
-    classDef idle fill:#95a5a6,stroke:#7f8c8d,stroke-width:2px,color:white
-    classDef loading fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef display fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-    classDef error fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef suspense fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef unmount fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
+    classDef idle fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef loading fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef display fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef suspense fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
+    classDef unmount fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
     
     class Idle idle
     class Loading,Retrying loading
@@ -471,11 +471,11 @@ stateDiagram-v2
     
     Unmounting --> [*]
     
-    classDef monitoring fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    classDef error fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef display fill:#e67e22,stroke:#d35400,stroke-width:2px,color:white
-    classDef reset fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef unmount fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
+    classDef monitoring fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef display fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef reset fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef unmount fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
     
     class Monitoring,WatchingChildren monitoring
     class ErrorCaught,CapturingError,LoggingError error
@@ -603,11 +603,11 @@ stateDiagram-v2
     
     Unmounting --> [*]
     
-    classDef pending fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef fallback fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:white
-    classDef resolved fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-    classDef failed fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef unmount fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
+    classDef pending fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef fallback fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
+    classDef resolved fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef failed fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef unmount fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
     
     class Pending,InitiatingLazyLoad pending
     class ShowingFallback,DisplayingLoadingIndicator fallback
@@ -691,11 +691,11 @@ stateDiagram-v2
         LeastPrivilege --> ContextAwareAccess
     }
     
-    classDef none fill:#95a5a6,stroke:#7f8c8d,stroke-width:2px,color:white
-    classDef low fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef moderate fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
+    classDef none fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
+    classDef low fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef moderate fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     classDef high fill:#e67e22,stroke:#d35400,stroke-width:2px,color:white
-    classDef veryhigh fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
+    classDef veryhigh fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
     
     class NoAccess,PublicData none
     class BasicAccess,SimpleAuthentication low
@@ -803,12 +803,12 @@ stateDiagram-v2
     
     Disabled --> Pristine: Form Enabled
     
-    classDef pristine fill:#95a5a6,stroke:#7f8c8d,stroke-width:2px,color:white
-    classDef touched fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef valid fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-    classDef invalid fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef submit fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:white
-    classDef disabled fill:#7f8c8d,stroke:#5f6c7d,stroke-width:2px,color:white
+    classDef pristine fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef touched fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef valid fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef invalid fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef submit fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef disabled fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
     
     class Pristine,Untouched pristine
     class Touched,Active,AcceptingInput touched
@@ -894,8 +894,8 @@ stateDiagram-v2
         - Security Resources
     end note
     
-    classDef slw fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef aw fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef slw fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef aw fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
     
     class SecurityLevelWidget slw
     class AssessmentWidgets aw
@@ -953,9 +953,9 @@ stateDiagram-v2
         CheckingCacheValidity --> ShowingUnavailable: No Cache
     }
     
-    classDef online fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-    classDef offline fill:#e67e22,stroke:#d35400,stroke-width:2px,color:white
-    classDef checking fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef online fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef offline fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
+    classDef checking fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     
     class Online,FullFunctionality online
     class Offline,DisplayingOfflineBanner offline
@@ -1013,12 +1013,12 @@ stateDiagram-v2
     
     ProfileSelected --> EditingProfile: User Modifies Security Levels
     
-    classDef defaultState fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef editing fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    classDef selected fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-    classDef confidentiality fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
-    classDef integrity fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-    classDef availability fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef defaultState fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
+    classDef editing fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef selected fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef confidentiality fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef integrity fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef availability fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     
     class DefaultProfile defaultState
     class EditingProfile editing

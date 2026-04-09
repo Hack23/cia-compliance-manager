@@ -626,36 +626,45 @@ Should EOL conditions trigger migration, the successor platform will maintain **
 ### **📊 Technology Investment Strategy**
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryColor': '#e8f5e9',
-      'primaryTextColor': '#2e7d32',
-      'lineColor': '#4caf50',
-      'secondaryColor': '#e3f2fd',
-      'tertiaryColor': '#fff8e1'
-    }
+%%{init: {
+  "theme": "neutral",
+  "themeVariables": {
+    "quadrant1Fill": "#1565C0",
+    "quadrant2Fill": "#2E7D32",
+    "quadrant3Fill": "#4CAF50",
+    "quadrant4Fill": "#FF9800",
+    "quadrantTitleFill": "#ffffff",
+    "quadrantPointFill": "#ffffff",
+    "quadrantPointTextFill": "#000000",
+    "quadrantXAxisTextFill": "#000000",
+    "quadrantYAxisTextFill": "#000000"
+  },
+  "quadrantChart": {
+    "chartWidth": 700,
+    "chartHeight": 700,
+    "pointLabelFontSize": 12,
+    "titleFontSize": 20,
+    "quadrantLabelFontSize": 16,
+    "xAxisLabelFontSize": 14,
+    "yAxisLabelFontSize": 14
   }
-}%%
+}}%%
 quadrantChart
     title 🎯 Technology Investment vs Migration Complexity
     x-axis Low Migration Complexity --> High Migration Complexity
     y-axis Low Strategic Value --> High Strategic Value
-
-    quadrant-1 Research & Prototype
-    quadrant-2 Priority Investment
-    quadrant-3 Maintain Current
-    quadrant-4 Evaluate Alternatives
-
-    Node.js Runtime Upgrade: [0.3, 0.8]
-    React Framework Upgrade: [0.4, 0.9]
-    Chart.js Visualization Evolution: [0.7, 0.8]
-    Build System Modernization: [0.5, 0.6]
-    TypeScript Latest: [0.2, 0.7]
-    Testing Framework Update: [0.4, 0.5]
-    TailwindCSS Refinement: [0.3, 0.4]
-    PWA Implementation: [0.7, 0.8]
+    quadrant-1 RESEARCH AND PROTOTYPE
+    quadrant-2 PRIORITY INVESTMENT
+    quadrant-3 MAINTAIN CURRENT
+    quadrant-4 EVALUATE ALTERNATIVES
+    "Node.js Runtime Upgrade": [0.30, 0.80] radius: 8
+    "React Framework Upgrade": [0.40, 0.90] radius: 8
+    "Chart.js Visualization Evolution": [0.70, 0.80] radius: 7
+    "Build System Modernization": [0.50, 0.60] radius: 7
+    "TypeScript Latest": [0.20, 0.70] radius: 7
+    "Testing Framework Update": [0.40, 0.50] radius: 6
+    "TailwindCSS Refinement": [0.30, 0.40] radius: 6
+    "PWA Implementation": [0.70, 0.80] radius: 7
 ```
 
 ---

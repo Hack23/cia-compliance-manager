@@ -927,8 +927,8 @@ flowchart TD
     TDW[Technical Details Widget] --- IT[IT Implementation Team]
     SRW[Security Resources Widget] --- IT
     
-    classDef stakeholder fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
-    classDef widget fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef stakeholder fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#ffffff
+    classDef widget fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     
     class SO,CSO,ST,CO,CFO,CEO,IT stakeholder
     class SLW,SSW,BIAW,CIW,CSW,CEW,VCW,TDW,SRW widget
@@ -954,11 +954,11 @@ flowchart TD
     BV -->|through| CD[Competitive Differentiation]
     BV -->|through| CA[Compliance Assurance]
     
-    classDef input fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef process fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef output fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    classDef value fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef benefit fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
+    classDef input fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef output fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef value fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef benefit fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#ffffff
     
     class SL input
     class RA,CI,SC process

@@ -56,13 +56,13 @@ flowchart TD
     SLW --> SRW[Security Resources<br>Widget]
     SLW --> SVW[Security Visualization<br>Widget]
     
-    classDef core fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef assessment fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef business fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
-    classDef confidentiality fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
-    classDef integrity fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-    classDef availability fill:#2980b9,stroke:#2471a3,stroke-width:2px,color:white
-    classDef implementation fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    classDef core fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef assessment fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef business fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef confidentiality fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef integrity fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef availability fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef implementation fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class SLW core
     class SSW,BIAW assessment
@@ -116,8 +116,8 @@ flowchart LR
     SRW --> CIAContent & SecResources
     SVW --> SecMetrics
     
-    classDef widget fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef service fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef widget fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef service fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
     
     class SLW,SSW,BIAW,CIW,IIW,AIW,CSW,CEW,VCW,TDW,SRW,SVW widget
     class CIAContent,Compliance,SecMetrics,SecResources,TechImpl,BusImpact service
@@ -262,8 +262,8 @@ flowchart TD
     SLW -->|Changes| App
     App -->|Security Levels| OtherWidgets[Other Widget Components]
     
-    classDef app fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef widget fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef app fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef widget fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     
     class App app
     class SLW,OtherWidgets widget
@@ -329,8 +329,8 @@ flowchart LR
     Unit --> DataMocks
     Integration --> ServiceMocks
     
-    classDef test fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef mock fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    classDef test fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#ffffff
+    classDef mock fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
     
     class Unit,Integration,Visual test
     class ServiceMocks,DataMocks mock

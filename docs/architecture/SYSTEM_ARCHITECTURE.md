@@ -59,10 +59,10 @@ flowchart TD
     Hooks --> Utils
     Common --> Utils
     
-    classDef presentation fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef business fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef data fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef utility fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    classDef presentation fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef business fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef data fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef utility fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
     
     class UI,Widgets,Common presentation
     class Services,Hooks business
@@ -113,14 +113,14 @@ flowchart TB
     SLW --> SRW & SVW & TDW
     
     %% Apply styles using class definitions
-    classDef core fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef assessment fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef business fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
-    classDef impact fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef implementation fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    classDef confidentiality fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
-    classDef integrity fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-    classDef availability fill:#2980b9,stroke:#2471a3,stroke-width:2px,color:white
+    classDef core fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef assessment fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef business fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef impact fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef implementation fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef confidentiality fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef integrity fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef availability fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     
     %% Apply classes to nodes
     class SLW core
@@ -229,10 +229,10 @@ flowchart TD
     Services[Service Layer] --> CIADataProvider
     
     %% Style definitions
-    classDef interface fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white,stroke-dasharray:5 5
-    classDef provider fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef data fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
-    classDef service fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
+    classDef interface fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef provider fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef data fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef service fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
     
     %% Apply styles
     class CIADataProvider interface
@@ -347,9 +347,9 @@ flowchart TD
     useSecRes --> SecRes
     useTech --> Tech
     
-    classDef hook fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef service fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef component fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
+    classDef hook fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#ffffff
+    classDef service fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef component fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     
     class useCIA,useComp,useSecMetrics,useSecRes,useTech hook
     class CIA,Comp,SecMetrics,SecRes,Tech service
@@ -419,9 +419,9 @@ flowchart TD
     Unit & Component & Integration --> TestData
     Component & Integration --> TestIDs
     
-    classDef testType fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef testUtil fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef coverage fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    classDef testType fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#ffffff
+    classDef testUtil fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#ffffff
+    classDef coverage fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#ffffff
     
     class Unit,Component,Integration testType
     class Mocks,TestUtils,TestData,TestIDs testUtil

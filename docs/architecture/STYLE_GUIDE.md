@@ -168,10 +168,10 @@ flowchart TD
     D --> E
     E --> F([Complete])
 
-    classDef startNode fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white,rx:25
-    classDef processNode fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
-    classDef decisionNode fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef endNode fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:white,rx:25
+    classDef startNode fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef processNode fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef decisionNode fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef endNode fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
 
     class A startNode
     class B decisionNode
@@ -203,10 +203,10 @@ stateDiagram-v2
     
     note right of Success : Ready for export
     
-    classDef idle fill:#7f8c8d,stroke:#626567,color:white
-    classDef processing fill:#3498db,stroke:#2980b9,color:white
-    classDef success fill:#2ecc71,stroke:#27ae60,color:white
-    classDef error fill:#e74c3c,stroke:#c0392b,color:white
+    classDef idle fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef processing fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef success fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
     
     class Idle idle
     class Processing,Loading,Calculating,Generating processing

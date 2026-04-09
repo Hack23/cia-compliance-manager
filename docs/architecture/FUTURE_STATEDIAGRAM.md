@@ -287,12 +287,12 @@ stateDiagram-v2
     
     CollaborativeMode --> ContextReady: Exit Collaboration
     
-    classDef contextual fill:#00bcd4,stroke:#0097a7,stroke-width:2px,color:white
+    classDef contextual fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     classDef adaptive fill:#4caf50,stroke:#388e3c,stroke-width:2px,color:white
-    classDef intelligent fill:#9c27b0,stroke:#7b1fa2,stroke-width:2px,color:white
-    classDef error fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
+    classDef intelligent fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
+    classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
     classDef offline fill:#ff9800,stroke:#f57c00,stroke-width:2px,color:white
-    classDef sync fill:#03a9f4,stroke:#0288d1,stroke-width:2px,color:white
+    classDef sync fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     classDef collaborative fill:#ffc107,stroke:#ffa000,stroke-width:2px,color:black
     
     class ContextualInitializing,ContextReady contextual
@@ -871,10 +871,10 @@ stateDiagram-v2
     
     classDef monitoring fill:#2196f3,stroke:#1976d2,stroke-width:2px,color:white
     classDef preloading fill:#4caf50,stroke:#388e3c,stroke-width:2px,color:white
-    classDef ready fill:#8bc34a,stroke:#689f38,stroke-width:2px,color:white
+    classDef ready fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     classDef partial fill:#ffc107,stroke:#ffa000,stroke-width:2px,color:black
-    classDef error fill:#f44336,stroke:#d32f2f,stroke-width:2px,color:white
-    classDef cache fill:#9c27b0,stroke:#7b1fa2,stroke-width:2px,color:white
+    classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef cache fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
     
     class MonitoringUserBehavior,IdleMonitoring monitoring
     class PredictivePreloading preloading
@@ -1027,13 +1027,13 @@ stateDiagram-v2
     ErrorDetected --> Analytics: Log Error
     
     classDef normal fill:#4caf50,stroke:#388e3c,stroke-width:2px,color:white
-    classDef error fill:#ff5722,stroke:#e64a19,stroke-width:2px,color:white
+    classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
     classDef transient fill:#ff9800,stroke:#f57c00,stroke-width:2px,color:white
     classDef validation fill:#ffc107,stroke:#ffa000,stroke-width:2px,color:black
-    classDef system fill:#f44336,stroke:#d32f2f,stroke-width:2px,color:white
-    classDef degraded fill:#ff5252,stroke:#ff1744,stroke-width:2px,color:white
+    classDef system fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
+    classDef degraded fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
     classDef critical fill:#d32f2f,stroke:#b71c1c,stroke-width:2px,color:white
-    classDef analytics fill:#9c27b0,stroke:#7b1fa2,stroke-width:2px,color:white
+    classDef analytics fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
     
     class NormalOperation normal
     class ErrorDetected error
@@ -1214,12 +1214,12 @@ stateDiagram-v2
     classDef detection fill:#2196f3,stroke:#1976d2,stroke-width:2px,color:white
     classDef novice fill:#4caf50,stroke:#388e3c,stroke-width:2px,color:white
     classDef intermediate fill:#ff9800,stroke:#f57c00,stroke-width:2px,color:white
-    classDef expert fill:#f44336,stroke:#d32f2f,stroke-width:2px,color:white
-    classDef responsive fill:#9c27b0,stroke:#7b1fa2,stroke-width:2px,color:white
-    classDef personalization fill:#00bcd4,stroke:#0097a7,stroke-width:2px,color:white
+    classDef expert fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
+    classDef responsive fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef personalization fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
     classDef context fill:#ffc107,stroke:#ffa000,stroke-width:2px,color:black
-    classDef disclosure fill:#8bc34a,stroke:#689f38,stroke-width:2px,color:white
-    classDef ready fill:#03a9f4,stroke:#0288d1,stroke-width:2px,color:white
+    classDef disclosure fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef ready fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     
     class DetectingUserContext detection
     class NoviceUI novice
@@ -1394,10 +1394,10 @@ stateDiagram-v2
     classDef single fill:#4caf50,stroke:#388e3c,stroke-width:2px,color:white
     classDef collaborative fill:#2196f3,stroke:#1976d2,stroke-width:2px,color:white
     classDef conflict fill:#ff9800,stroke:#f57c00,stroke-width:2px,color:white
-    classDef presence fill:#9c27b0,stroke:#7b1fa2,stroke-width:2px,color:white
-    classDef transform fill:#00bcd4,stroke:#0097a7,stroke-width:2px,color:white
+    classDef presence fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef transform fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
     classDef locking fill:#ffc107,stroke:#ffa000,stroke-width:2px,color:black
-    classDef offline fill:#f44336,stroke:#d32f2f,stroke-width:2px,color:white
+    classDef offline fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
     
     class SingleUserMode single
     class CollaborativeMode,ActiveCollaboration collaborative
@@ -1652,13 +1652,13 @@ stateDiagram-v2
     
     classDef online fill:#4caf50,stroke:#388e3c,stroke-width:2px,color:white
     classDef transition fill:#ff9800,stroke:#f57c00,stroke-width:2px,color:white
-    classDef offline fill:#f44336,stroke:#d32f2f,stroke-width:2px,color:white
+    classDef offline fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
     classDef sync fill:#2196f3,stroke:#1976d2,stroke-width:2px,color:white
-    classDef conflict fill:#9c27b0,stroke:#7b1fa2,stroke-width:2px,color:white
-    classDef cache fill:#00bcd4,stroke:#0097a7,stroke-width:2px,color:white
+    classDef conflict fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef cache fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
     classDef freshness fill:#ffc107,stroke:#ffa000,stroke-width:2px,color:black
-    classDef success fill:#8bc34a,stroke:#689f38,stroke-width:2px,color:white
-    classDef failure fill:#ff5252,stroke:#ff1744,stroke-width:2px,color:white
+    classDef success fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef failure fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
     
     class OnlineWithSync online
     class TransitioningOffline,TransitioningOnline transition
@@ -1865,15 +1865,15 @@ stateDiagram-v2
     
     MonitoringOnly --> MLReady: Confidence Improved
     
-    classDef init fill:#9c27b0,stroke:#7b1fa2,stroke-width:2px,color:white
+    classDef init fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     classDef ready fill:#4caf50,stroke:#388e3c,stroke-width:2px,color:white
     classDef predict fill:#2196f3,stroke:#1976d2,stroke-width:2px,color:white
-    classDef validate fill:#00bcd4,stroke:#0097a7,stroke-width:2px,color:white
+    classDef validate fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     classDef learn fill:#ff9800,stroke:#f57c00,stroke-width:2px,color:white
     classDef train fill:#ffc107,stroke:#ffa000,stroke-width:2px,color:black
-    classDef deploy fill:#8bc34a,stroke:#689f38,stroke-width:2px,color:white
-    classDef anomaly fill:#f44336,stroke:#d32f2f,stroke-width:2px,color:white
-    classDef pattern fill:#03a9f4,stroke:#0288d1,stroke-width:2px,color:white
+    classDef deploy fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef anomaly fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef pattern fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
     classDef fallback fill:#9e9e9e,stroke:#757575,stroke-width:2px,color:white
     
     class MLInitializing init

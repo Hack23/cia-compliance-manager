@@ -187,8 +187,8 @@ flowchart LR
     AV --> AA
     OT --> CH
     
-    classDef practice fill:#3498db,stroke:#2980b9,stroke-width:1.5px,color:white
-    classDef implementation fill:#27ae60,stroke:#1e8449,stroke-width:1.5px,color:white
+    classDef practice fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#ffffff
+    classDef implementation fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class PH,PS,AV,AS,OT practice
     class HG,DS,AA,CH implementation
@@ -284,11 +284,11 @@ flowchart TD
     AddTests --> CodeChange
     
     %% Apply styles using class definitions
-    classDef start fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef process fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
-    classDef decision fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef endProcess fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    classDef parallel fill:#e67e22,stroke:#d35400,stroke-width:2px,color:white
+    classDef start fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef endProcess fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
+    classDef parallel fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
     
     class CodeChange start
     class PrepareJob,BuildValidation,UnitTests,E2ETests,CoverageMeasurement,UIValidation,Report,AddTests,FixBuild process
@@ -391,12 +391,12 @@ flowchart TD
     MergeDecision -->|Rejected| UpdateCode[Update Code]
     UpdateCode --> Tests
     
-    classDef pr fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef test fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
-    classDef security fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
-    classDef decision fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef merge fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:white
-    classDef review fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:black
+    classDef pr fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef test fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#ffffff
+    classDef security fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef merge fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef review fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
     
     class PR,UpdateCode pr
     class Tests,Report test
@@ -436,9 +436,9 @@ flowchart TD
     SBOM & ATT --> GHP
     VAR & COV & TST --> GHS
     
-    classDef security fill:#e74c3c,stroke:#c0392b,stroke-width:1.5px,color:white
-    classDef quality fill:#3498db,stroke:#2980b9,stroke-width:1.5px,color:white
-    classDef integration fill:#8e44ad,stroke:#6c3483,stroke-width:1.5px,color:white
+    classDef security fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef quality fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#ffffff
+    classDef integration fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
     
     class SBOM,ATT,VAR,LIC security
     class COV,TST,PERF,ACC quality
@@ -512,12 +512,12 @@ flowchart TB
     main -.-> |"tag created or manual trigger"| Release
 
     %% Enhanced color styling
-    classDef integration fill:#a0c8e0,stroke:#333,stroke-width:1.5px,color:black
-    classDef deployment fill:#86b5d9,stroke:#333,stroke-width:1.5px,color:black
-    classDef process fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
-    classDef trigger fill:#bbdefb,stroke:#333,stroke-width:1.5px,color:black
-    classDef security fill:#ffccbc,stroke:#333,stroke-width:1.5px,color:black
-    classDef audit fill:#ffecb3,stroke:#333,stroke-width:1.5px,color:black
+    classDef integration fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
+    classDef deployment fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef trigger fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef security fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef audit fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
 
     class PR,TestReport,DependencyReview,Labeler,PrepareJob,BuildValidation,UnitTests,E2ETests,ReportJob integration
     class CodeQL,Scorecard,LicenseCheck,LicenseCheck2 security
@@ -540,11 +540,11 @@ flowchart TD
     Pass -->|No| Fail[Fail Build]
 
     %% Enhanced styling with better visual hierarchy
-    classDef startNode fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
-    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1.5px,color:black
-    classDef checkNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
-    classDef decisionNode fill:#d1c4e9,stroke:#333,stroke-width:2px,color:black
-    classDef failNode fill:#ffccbc,stroke:#333,stroke-width:2px,color:black,font-weight:bold
+    classDef startNode fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef processNode fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef checkNode fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef decisionNode fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef failNode fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
 
     class Start startNode
     class Setup,Install,Continue processNode
@@ -664,13 +664,13 @@ flowchart TD
     PostDeploy --> ZAPScan[ZAP Security Scan]
 
     %% Enhanced styling with better visual hierarchy
-    classDef startNode fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
-    classDef prepareNode fill:#a0c8e0,stroke:#333,stroke-width:1.5px,color:black
-    classDef buildNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
-    classDef securityNode fill:#d1c4e9,stroke:#333,stroke-width:1.5px,color:black
-    classDef deployNode fill:#86b5d9,stroke:#333,stroke-width:1.5px,color:black
-    classDef endNode fill:#ffecb3,stroke:#333,stroke-width:2px,color:black
-    classDef auditNode fill:#ffccbc,stroke:#333,stroke-width:1.5px,color:black
+    classDef startNode fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef prepareNode fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef buildNode fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef securityNode fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef deployNode fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef endNode fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
+    classDef auditNode fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
 
     class Start,End startNode
     class Prepare,PrepareTests,PrepareDocs,PrepareDeployDocs prepareNode
@@ -1087,10 +1087,10 @@ flowchart TD
     ZAPScan --> Report5[Security Findings]
 
     %% Enhanced styling with improved grouping
-    classDef sourceNode fill:#a0c8e0,stroke:#333,stroke-width:2px,color:black
-    classDef scanNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
-    classDef reportNode fill:#d1c4e9,stroke:#333,stroke-width:1.5px,color:black,font-style:italic
-    classDef auditNode fill:#ffecb3,stroke:#333,stroke-width:1.5px,color:black
+    classDef sourceNode fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef scanNode fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef reportNode fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef auditNode fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
 
     class PR,Branch,Deploy sourceNode
     class DependencyReview,CodeQL,Scorecard,ZAPScan scanNode
@@ -1176,8 +1176,8 @@ flowchart LR
     Security --> Deploy[Deploy Preview]
     Deploy --> Audit[Audit & Verify]
     
-    classDef prNode fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
-    classDef phase fill:#95a5a6,stroke:#7f8c8d,stroke-width:2px,color:black
+    classDef prNode fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef phase fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     
     class PR prNode
     class Static,Build,Security,Deploy,Audit phase
@@ -1284,11 +1284,11 @@ flowchart TD
     Healthy -->|OK| Stable[System Stable]
     Healthy -->|Failed| Escalate[Escalate to Team]
     
-    classDef issueNode fill:#ffccbc,stroke:#333,stroke-width:2px,color:black
-    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1.5px,color:black
-    classDef decisionNode fill:#d1c4e9,stroke:#333,stroke-width:2px,color:black
+    classDef issueNode fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef processNode fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef decisionNode fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     classDef actionNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
-    classDef successNode fill:#a5d6a7,stroke:#333,stroke-width:2px,color:black
+    classDef successNode fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class Issue issueNode
     class Assess,VerifyHealth processNode
@@ -1352,9 +1352,9 @@ flowchart LR
     Review --> Update[Update Procedures]
     Update --> Monitor[Monitor Effectiveness]
     
-    classDef incidentNode fill:#ffccbc,stroke:#333,stroke-width:2px,color:black
-    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1.5px,color:black
-    classDef improveNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
+    classDef incidentNode fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef processNode fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef improveNode fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class Incident incidentNode
     class Log,Analyze,Document,Validate processNode

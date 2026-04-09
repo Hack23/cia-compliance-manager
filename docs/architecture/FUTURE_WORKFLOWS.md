@@ -124,13 +124,13 @@ flowchart TB
     MonitorHealth -.-> |"performance metrics"| ModelFeedback[Feedback Loop]
     ModelFeedback -.-> ModelTraining
 
-    classDef integration fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef deployment fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
-    classDef process fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef trigger fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef security fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
-    classDef ml fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef feedback fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
+    classDef integration fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
+    classDef deployment fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef trigger fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef security fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef ml fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
+    classDef feedback fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
 
     class PR,TestReport,DependencyReview,Labeler,CodeQL,Scorecard,LicenseCheck,SecurityQualityGate,ComplianceCheck,SecurityPosture integration
     class Release,BuildTest,Build,CreateRelease,DeployGHPages,LicenseCheck2,GenerateSBOM,Attestations,MonitorHealth deployment
@@ -171,11 +171,11 @@ flowchart TD
     P --> B
     Q --> N
 
-    classDef start fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef process fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef decision fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
-    classDef model fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef monitor fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
+    classDef start fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef model fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
+    classDef monitor fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     
     class A start
     class B,C,E,F,I,J,K process
@@ -234,12 +234,12 @@ flowchart TD
     Q --> R[Security Attestation]
     R --> S[Deploy with Security Context]
 
-    classDef commit fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef security fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
-    classDef decision fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef process fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef release fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
-    classDef report fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
+    classDef commit fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef security fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef release fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef report fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     
     class A,F,G commit
     class B,D1,D2,D3,D4,E1,E2,E3,H,J,M,O,Q,R,S security
@@ -292,13 +292,13 @@ flowchart TD
     V --> W[Analyze Operational Data]
     W --> X[Plan Next Iteration]
 
-    classDef trigger fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef analysis fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef decision fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
-    classDef build fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef deploy fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
-    classDef monitor fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef feedback fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef trigger fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef analysis fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef decision fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef build fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef deploy fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef monitor fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef feedback fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
     
     class A trigger
     class B,C,D,E analysis
@@ -416,12 +416,12 @@ flowchart LR
     
     D <--> MLR[ML Model Repository]
 
-    classDef core fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef security fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
-    classDef compliance fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef dev fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef ops fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef ml fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef core fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef security fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef compliance fill:#C62828,stroke:#8E0000,stroke-width:2px,color:#ffffff
+    classDef dev fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#ffffff
+    classDef ops fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
+    classDef ml fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
     
     class A core
     class B,S1,S2,S3 security

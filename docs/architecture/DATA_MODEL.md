@@ -1305,12 +1305,12 @@ flowchart TD
     Provider --> DataProv[📦 Data Providers]
     DataProv --> StaticData[💾 Static Data Modules]
     
-    classDef user fill:#3498db,stroke:#2980b9,stroke-width:2px,color:#fff
-    classDef state fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:#fff
-    classDef service fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:#fff
-    classDef data fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
-    classDef ui fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:#fff
-    classDef error fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
+    classDef user fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef state fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
+    classDef service fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef data fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef ui fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef error fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
     
     class Start,Selection user
     class State,Cache state
@@ -1483,9 +1483,9 @@ flowchart LR
     Recommendations --> Status[✅ Compliance Status]
     Status --> Display[📱 Widget Display]
     
-    classDef input fill:#3498db,stroke:#2980b9,stroke-width:2px,color:#fff
-    classDef process fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:#fff
-    classDef output fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:#fff
+    classDef input fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef output fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
     
     class Profile input
     class Assessment,Frameworks,Gap,Score,Recommendations process

@@ -170,12 +170,12 @@ flowchart TD
     K --> L[Feedback Loop]
     L --> C
 
-    classDef org fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef engine fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef context fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef assessment fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef output fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef feedback fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
+    classDef org fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#ffffff
+    classDef engine fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
+    classDef context fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef assessment fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef output fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef feedback fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#ffffff
     
     class A org
     class B,C,E,F engine

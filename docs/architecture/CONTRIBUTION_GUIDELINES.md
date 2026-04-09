@@ -114,9 +114,9 @@ stateDiagram-v2
     }
     
     %% Style definitions with enhanced colors
-    classDef defaultState fill:#34495e,stroke:#2c3e50,color:white
-    classDef activeState fill:#3498db,stroke:#2980b9,color:white
-    classDef terminalState fill:#2ecc71,stroke:#27ae60,color:white
+    classDef defaultState fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
+    classDef activeState fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef terminalState fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:#ffffff
     
     class StateA defaultState
     class StateB activeState
@@ -136,9 +136,9 @@ flowchart TD
     end
     
     %% Style definitions with enhanced colors
-    classDef confidentiality fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
-    classDef integrity fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-    classDef availability fill:#2980b9,stroke:#2471a3,stroke-width:2px,color:white
+    classDef confidentiality fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef integrity fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef availability fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     
     class C confidentiality
     class I integrity
@@ -156,11 +156,11 @@ flowchart TD
     SLW --> AIW[Availability<br>Impact Widget]
     
     %% Style definitions with enhanced colors
-    classDef control fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
-    classDef confidentiality fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
-    classDef integrity fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-    classDef availability fill:#2980b9,stroke:#2471a3,stroke-width:2px,color:white
-    classDef business fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
+    classDef control fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
+    classDef confidentiality fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#ffffff
+    classDef integrity fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
+    classDef availability fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
+    classDef business fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
     
     class SLW,SSW control
     class CIW confidentiality
