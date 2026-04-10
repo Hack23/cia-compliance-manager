@@ -215,7 +215,7 @@
     "react-dom": "19.2.5",
     "react-error-boundary": "6.1.1",
     "rollup-plugin-visualizer": "7.0.1",
-    "start-server-and-test": "3.0.0",
+    "start-server-and-test": "3.0.2",
     "tailwindcss": "4.2.2",
     "typedoc": "0.28.18",
     "typedoc-plugin-markdown": "4.11.0",
