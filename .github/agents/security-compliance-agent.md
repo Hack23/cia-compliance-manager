@@ -79,7 +79,69 @@ src/types/cia.ts                 - SecurityLevel type definitions
 ```
 
 ## ISMS Policies
+- [Information Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md) — Overarching ISMS governance
 - [Secure Development](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md)
-- [Information Security](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md)
+- [Open Source Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Open_Source_Policy.md)
+- [Threat Modeling](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md)
+- [Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md)
+- [Cryptography Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Cryptography_Policy.md)
 - [Access Control](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Access_Control_Policy.md)
-- [AI Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/AI_Policy.md)
+- [Data Classification](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Data_Classification_Policy.md)
+- [Privacy Policy (GDPR)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Privacy_Policy.md)
+- [Incident Response](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Incident_Response_Plan.md)
+- [Change Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md)
+- [AI Policy (EU AI Act)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/AI_Policy.md)
+- [OWASP LLM Security](https://github.com/Hack23/ISMS-PUBLIC/blob/main/OWASP_LLM_Security_Policy.md)
+- [CRA Conformity Assessment](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CRA_Conformity_Assessment_Process.md)
+
+## Secure SDLC Phase Gates (Secure Development Policy)
+
+Every change must satisfy the gate corresponding to its lifecycle phase:
+
+| Phase | Gate | Evidence |
+|-------|------|----------|
+| **Plan** | Threat model documented (STRIDE), policy mapping in issue | Issue body links policy + CIA impact |
+| **Design** | Architecture decision recorded, data classification assigned | Updated C4 diagrams / `docs/architecture/` |
+| **Build** | Static checks pass (`npm run lint`, strict TS, Knip) | CI green, `no any`, JSDoc for public APIs |
+| **Test** | 80%+ coverage, 100% on security-critical paths, a11y tests | Coverage report, Cypress E2E, `axe` checks |
+| **Review** | Peer + security review, CodeQL/Dependabot clean | PR approval, scan results |
+| **Release** | SBOM generated, provenance attested, CHANGELOG updated | `release.yml` artifacts, SLSA provenance |
+| **Operate** | Monitoring, vulnerability SLA tracking, incident ready | Dependabot, ZAP, incident runbook |
+
+## Information Security Policy Mapping
+
+All security review comments should cite the **specific clause** being enforced. Quick-reference mapping:
+
+| Policy Clause Focus | Skill / Check |
+|---------------------|---------------|
+| Information classification & handling | `classification-framework.md`, `data-protection.md` |
+| Access control & least privilege | `security-by-design.md` § auth |
+| Cryptography & key management | Approved algorithms only, no custom crypto |
+| Secure development & change management | Secure SDLC gates above, PR checks |
+| Vulnerability & patch management | Vulnerability SLAs (Crit 24h / High 7d / Med 30d / Low 90d) |
+| Logging, monitoring & audit | Non-sensitive logs, no PII in errors |
+| Third-party / supply chain | Dependabot, FOSSA, OpenSSF Scorecard |
+| Incident response | Follow Incident_Response_Plan.md runbook |
+
+## Copilot Coding Agent (Security Tasks)
+
+For security fixes use `assign_copilot_to_issue` or `create_pull_request_with_copilot` with explicit security guardrails in `custom_instructions`:
+
+```javascript
+assign_copilot_to_issue({
+  owner: "Hack23", repo: "cia-compliance-manager",
+  issue_number: ISSUE,
+  base_ref: "main",
+  custom_instructions: `
+    SECURITY TASK — MUST:
+    - Follow Secure_Development_Policy + Information_Security_Policy
+    - Apply defense in depth; validate inputs at boundaries
+    - 100% test coverage for modified security-critical code
+    - Add negative/abuse tests; assert safe error messages
+    - Update threat model in docs/architecture/SECURITY_ARCHITECTURE.md
+    - Map fix to ISO 27001 / NIST CSF / CIS controls in PR body
+  `
+})
+```
+
+Track with `get_copilot_job_status`. For stacked security remediation use `base_ref: "copilot/issue-<NNN>"` to build on a prior PR's branch.

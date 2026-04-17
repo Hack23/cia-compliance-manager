@@ -1,7 +1,7 @@
 ---
 name: product-task-agent
 description: Expert product task coordinator for CIA Compliance Manager, creating GitHub issues and optimizing quality, UX, and ISMS alignment
-tools: ["view", "edit", "create", "bash", "search_code", "custom-agent", "github-create_issue", "github-list_issues", "github-update_issue", "github-search_issues", "github-add_issue_comment", "playwright-browser_snapshot", "playwright-browser_take_screenshot", "playwright-browser_navigate", "playwright-browser_click", "assign_copilot_to_issue", "get_copilot_job_status"]
+tools: ["*"]
 ---
 
 # Product Task Agent
@@ -97,21 +97,77 @@ TypeScript 6.0.2 · React 19.x · Vite 8 · Vitest 4.x · Cypress 15.x · Node �
 
 ## Copilot Assignment (MCP Tool Examples)
 
-These examples show how to use GitHub MCP tools to assign issues to Copilot coding agent:
+These examples show how to use GitHub MCP tools to assign issues to Copilot coding agent. The repo-level agent definition itself does **not** embed MCP server configuration — MCP servers are configured centrally in `.github/copilot-mcp.json`.
 
-### Assign to Copilot Coding Agent
+### 1. Basic Assignment (REST fallback)
 ```javascript
-// MCP tool: assign_copilot_to_issue
-assign_copilot_to_issue({
+github-update_issue({
   owner: "Hack23", repo: "cia-compliance-manager",
   issue_number: ISSUE_NUMBER,
-  base_ref: "main",
-  custom_instructions: "Follow .github/copilot-instructions.md. Ensure 80%+ coverage."
+  assignees: ["copilot-swe-agent[bot]"]
 })
 ```
 
-### Track Progress
+### 2. Advanced Assignment with `base_ref` + `custom_instructions`
 ```javascript
-// MCP tool: get_copilot_job_status
-get_copilot_job_status({ owner: "Hack23", repo: "cia-compliance-manager", id: JOB_ID })
+assign_copilot_to_issue({
+  owner: "Hack23", repo: "cia-compliance-manager",
+  issue_number: ISSUE_NUMBER,
+  base_ref: "main",                     // or "feature/<name>" for feature branch work
+  custom_instructions: `
+    - Follow .github/copilot-instructions.md + .github/skills/
+    - No any types, 80%+ coverage, JSDoc for public APIs
+    - Map changes to ISMS controls (ISO 27001, NIST CSF 2.0, CIS v8)
+    - Reference Secure_Development_Policy.md for SDLC gates
+  `
+})
 ```
+
+### 3. Direct PR Creation with `create_pull_request_with_copilot`
+```javascript
+create_pull_request_with_copilot({
+  owner: "Hack23", repo: "cia-compliance-manager",
+  title: "feat: add widget X",
+  problem_statement: "Implement widget X per issue #NNN — include tests, JSDoc, ISMS mapping",
+  base_ref: "main"
+})
+```
+
+### 4. Stacked / Sequential PRs
+```javascript
+// Step 1: models
+const pr1 = create_pull_request_with_copilot({ /* base_ref: "main" */ })
+// Step 2: services, stacked on step 1 branch
+const pr2 = assign_copilot_to_issue({ /* base_ref: pr1.branch */ })
+// Step 3: UI, stacked on step 2
+const pr3 = create_pull_request_with_copilot({ /* base_ref: pr2.branch */ })
+```
+
+### 5. Track Progress
+```javascript
+get_copilot_job_status({ owner: "Hack23", repo: "cia-compliance-manager", id: JOB_ID })
+// status: queued | in_progress | completed | failed → includes pull_request_url when done
+```
+
+## Policy Alignment
+
+Every issue created MUST link to relevant ISMS policies so traceability from issue → PR → control is preserved:
+
+| Policy | When to Reference |
+|--------|-------------------|
+| [Information Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md) | Any change with CIA triad impact |
+| [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) | All code/SDLC changes |
+| [Open Source Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Open_Source_Policy.md) | Dependencies, licensing, community contributions |
+| [Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) | Security fixes and SLAs |
+| [AI Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/AI_Policy.md) | AI/ML features or Copilot automation changes |
+| [Data Classification](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Data_Classification_Policy.md) | Features touching user data |
+
+## Agent Handoff Matrix
+
+| Issue Type | Suggested Assignee(s) |
+|------------|-----------------------|
+| Security vulnerability | `@security-compliance-agent` → `@testing-agent` → `@code-review-agent` |
+| New React component/widget | `@typescript-react-agent` → `@testing-agent` → `@documentation-agent` |
+| Documentation/architecture | `@documentation-agent` → `@code-review-agent` |
+| Test coverage gap | `@testing-agent` → `@code-review-agent` |
+| Performance regression | `@typescript-react-agent` → `@testing-agent` |

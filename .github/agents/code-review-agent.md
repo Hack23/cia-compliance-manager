@@ -65,3 +65,35 @@ src/components/  - common/*, charts/*, widgets/*
 
 ## Feedback Style
 Be specific, actionable, and constructive. Reference existing code when suggesting reuse. Prioritize: 🔴 Security > 🟠 Type Safety > 🟡 Reusability > 🟢 Style.
+
+## Secure Development Policy Review Gates
+
+Every PR review MUST verify these gates from [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md):
+
+| Gate | Reviewer Check |
+|------|----------------|
+| **Threat model** | Sensitive logic has documented STRIDE analysis (PR body or `SECURITY_ARCHITECTURE.md`) |
+| **Input validation** | All boundaries validated + sanitized (prefer allowlists) |
+| **Secret hygiene** | No tokens, keys, PII in diff, logs, test fixtures, or source maps |
+| **Dependency hygiene** | New deps licence-compliant (Open Source Policy) and vulnerability-free |
+| **Tests as evidence** | 80%+ coverage, 100% on security-critical paths; negative/abuse tests present |
+| **ISMS mapping** | PR body cites applicable ISO 27001 / NIST CSF / CIS controls |
+| **Change management** | Breaking changes/migrations documented; CHANGELOG updated |
+
+## Policy Cross-Reference
+
+| When reviewing… | Cite this policy |
+|-----------------|------------------|
+| Any code change | [Information Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md), [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| New/updated dependency | [Open Source Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Open_Source_Policy.md), [Third Party Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Third_Party_Management.md) |
+| Crypto / key handling | [Cryptography Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Cryptography_Policy.md) |
+| Access / auth code | [Access Control Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Access_Control_Policy.md) |
+| Data handling change | [Data Classification](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Data_Classification_Policy.md), [Privacy Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Privacy_Policy.md) |
+| AI-assisted / generated code | [AI Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/AI_Policy.md), [OWASP LLM Security](https://github.com/Hack23/ISMS-PUBLIC/blob/main/OWASP_LLM_Security_Policy.md) |
+
+## Copilot Coding Agent Review Notes
+
+When a PR was produced by Copilot coding agent (via `assign_copilot_to_issue` or `create_pull_request_with_copilot`):
+- Verify the `custom_instructions` were honored (no `any`, 80%+ cov, policy mapping)
+- Check `base_ref` correctness for stacked PRs — no accidental cross-branch changes
+- Treat generated tests with the same rigor as human-authored tests
