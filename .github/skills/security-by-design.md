@@ -866,7 +866,25 @@ GV.SC-01 (supply chain risk), ID.RA-01 (vulnerability docs), PR.DS-02 (data-in-t
 ### CIS Controls v8.1
 **Control 2** (software asset inventory), **Control 3** (data protection/encryption), **Control 16** (application security: 16.1-16.14 covering secure dev process, vulnerability management, root cause analysis, third-party components, hardening, env separation, developer training, secure design, code-level checks, pentesting, threat modeling), **Control 18** (penetration testing)
 
-### Regulatory
-- **GDPR** Art.25 (privacy by design), Art.32 (security of processing)
-- **NIS2** Art.21 (cybersecurity risk management)
-- **EU CRA** Annex I Part I (secure by design), Part II (vulnerability handling/coordinated disclosure)
+## Information Security Policy Mapping (SDLC Phase Gates)
+
+This skill operationalizes [Information Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md) + [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) into concrete SDLC gates:
+
+| Phase | Gate (MUST) | Artifact |
+|-------|-------------|----------|
+| **Plan** | Threat model (STRIDE) + CIA impact + policy citation on issue | Issue body |
+| **Design** | Data classification, trust boundaries, crypto choices reviewed | ADR + updated `SECURITY_ARCHITECTURE.md` |
+| **Build** | Input validation at boundaries, no `any`, no secrets in source | CI: lint, strict TS, secret scanning |
+| **Test** | 80%+ cov (100% security-critical), negative/abuse tests, a11y | Vitest + Cypress reports |
+| **Review** | Peer + security review, CodeQL + Dependabot green | PR approvals, scan results |
+| **Release** | SBOM + SLSA provenance, CHANGELOG, version bump | Release artifacts |
+| **Operate** | Vulnerability SLA tracking (24h/7d/30d/90d), incident runbook ready | Dependabot, ZAP, Incident_Response_Plan |
+
+## Related Resources
+
+- [Information Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md)
+- [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md)
+- [Open Source Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Open_Source_Policy.md)
+- [Threat Modeling Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md)
+- [Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md)
+- [Cryptography Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Cryptography_Policy.md)

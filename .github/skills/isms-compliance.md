@@ -576,3 +576,21 @@ Every feature is a potential compliance requirement. Think frameworks, code cont
 - [NIST Cybersecurity Framework 2.0](https://www.nist.gov/cyberframework)
 - [CIS Controls v8](https://www.cisecurity.org/controls/)
 - [OWASP SAMM](https://owaspsamm.org/)
+
+## SDLC Phase → Policy Gate Matrix
+
+| SDLC Phase | Primary Policy | Required Evidence |
+|------------|----------------|-------------------|
+| **Plan / Intake** | Information Security Policy, Risk Assessment Methodology | Threat model, CIA impact, risk score on issue |
+| **Design** | Secure Development Policy, Data Classification Policy, Cryptography Policy | ADR, updated C4 + `SECURITY_ARCHITECTURE.md` |
+| **Build** | Secure Development Policy, Open Source Policy | CI green; no `any`; SBOM; license checks |
+| **Test** | Vulnerability Management, Privacy Policy | 80%+ cov, negative/abuse tests, privacy assertions |
+| **Review** | Segregation of Duties, Change Management | Peer + security review; independent CodeQL/Dependabot approval |
+| **Release** | Change Management, Backup Recovery Policy | Signed artifacts, SBOM, rollback plan |
+| **Operate** | Incident Response Plan, Vulnerability Management | Monitoring, SLA tracking (Crit 24h/High 7d/Med 30d/Low 90d) |
+| **Retire** | Data Classification Policy, Asset Register | Data deletion evidence, asset decommissioning |
+
+**Specialized policy gates**:
+- AI/ML features → [AI Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/AI_Policy.md) + [OWASP LLM Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/OWASP_LLM_Security_Policy.md)
+- Third-party / dependency changes → [Third Party Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Third_Party_Management.md) + [Open Source Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Open_Source_Policy.md)
+- CE-marked software releases → [CRA Conformity Assessment](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CRA_Conformity_Assessment_Process.md)

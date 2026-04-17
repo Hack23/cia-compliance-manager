@@ -83,7 +83,29 @@ Custom agents are specialized GitHub Copilot configurations providing domain-spe
 - **Agent definitions**: `.github/agents/*.md`
 - **Skills framework**: `.github/skills/README.md`
 - **Copilot instructions**: `.github/copilot-instructions.md`
-- **MCP configuration**: `.github/copilot-mcp.json`
+- **MCP configuration**: `.github/copilot-mcp.json` *(central config — repo-level agents do NOT embed MCP servers)*
+- **ISMS policies**: [Hack23/ISMS-PUBLIC](https://github.com/Hack23/ISMS-PUBLIC) — Information Security, Secure Development, Open Source, AI, Data Classification
+
+## Copilot Coding Agent Patterns
+
+### Assign issue → Copilot implements
+```
+assign_copilot_to_issue({ owner, repo, issue_number, base_ref, custom_instructions })
+```
+Use `custom_instructions` to inject `.github/copilot-instructions.md` highlights + policy pointers.
+
+### Create PR directly with Copilot
+```
+create_pull_request_with_copilot({ owner, repo, title, problem_statement, base_ref })
+```
+
+### Stacked / sequential PRs
+Pass the previous PR's branch in `base_ref` (e.g., `copilot/issue-1234`) to build dependent work.
+
+### Monitor progress
+```
+get_copilot_job_status({ owner, repo, id })
+```
 
 ---
 

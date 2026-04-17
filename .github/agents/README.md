@@ -73,9 +73,34 @@ Need coordination?
 
 When creating or modifying agents:
 - Follow [GitHub custom agents documentation](https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-custom-agents)
-- Include YAML frontmatter (`name`, `description`, `tools`)
+- Include YAML frontmatter (`name`, `description`, `tools: ["*"]`)
+- Repo-level agents **MUST NOT** include `mcp-servers` blocks — MCP servers are configured centrally in [`.github/copilot-mcp.json`](../copilot-mcp.json)
 - Reference relevant skills from `.github/skills/`
-- Keep agents focused and concise
+- Keep agents focused and concise — aim below ~200 lines per agent
+
+## Copilot Coding Agent Workflow
+
+Repo-level agents coordinate with Copilot coding agent using these MCP tools (configured in `.github/copilot-mcp.json`):
+
+| Tool | Purpose | Key Parameters |
+|------|---------|----------------|
+| `assign_copilot_to_issue` | Assign issue to Copilot coding agent | `base_ref`, `custom_instructions` |
+| `create_pull_request_with_copilot` | Create PR with Copilot implementing changes | `base_ref`, `problem_statement` |
+| `get_copilot_job_status` | Track progress | `id` (PR number / job id) |
+
+**Stacked PRs**: use `base_ref: "copilot/issue-<NNN>"` to build incremental changes on a prior Copilot PR branch.
+
+## Policy → Agent Matrix
+
+| ISMS Policy | Primary Agent | Supporting Agent |
+|-------------|--------------|------------------|
+| [Information Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md) | `@security-compliance-agent` | `@code-review-agent` |
+| [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) | `@security-compliance-agent` | `@typescript-react-agent`, `@testing-agent`, `@code-review-agent` |
+| [Open Source Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Open_Source_Policy.md) | `@code-review-agent` | `@security-compliance-agent` |
+| [Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) | `@security-compliance-agent` | `@testing-agent` |
+| [Data Classification](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Data_Classification_Policy.md) | `@security-compliance-agent` | `@typescript-react-agent` |
+| [AI Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/AI_Policy.md) / [OWASP LLM](https://github.com/Hack23/ISMS-PUBLIC/blob/main/OWASP_LLM_Security_Policy.md) | `@security-compliance-agent` | `@product-task-agent` |
+| [Change Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md) | `@product-task-agent` | `@documentation-agent` |
 
 ---
 

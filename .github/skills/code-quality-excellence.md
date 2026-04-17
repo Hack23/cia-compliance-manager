@@ -558,3 +558,17 @@ Every line of code is a liability. Make it count.
 - [Clean Code Principles](https://github.com/ryanmcdermott/clean-code-javascript)
 - [React Best Practices](https://react.dev/learn/thinking-in-react)
 - [Testing Best Practices](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
+
+## Policy Alignment
+
+Code quality is an ISMS control, not just aesthetics. Every rule in this skill traces to a policy:
+
+| Rule | Policy |
+|------|--------|
+| No `any` / explicit types / validated inputs | [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) — secure coding practices |
+| Reusability-first / check `src/` before creating | [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) — minimize attack surface |
+| 80%+ coverage (100% security-critical) | [Information Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md) + [Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) |
+| JSDoc + architecture docs | [ISMS transparency & audit evidence](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md) |
+| No secrets in source, no `eval`/`innerHTML` | [Information Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md) — information handling |
+| Approved dependencies only | [Open Source Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Open_Source_Policy.md) + [Third Party Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Third_Party_Management.md) |
+| Change management discipline | [Change Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md) |
