@@ -201,7 +201,7 @@
     "cypress-real-events": "1.15.0",
     "cypress-wait-until": "3.0.2",
     "dependency-cruiser": "17.3.10",
-    "eslint": "10.2.0",
+    "eslint": "10.2.1",
     "globals": "17.5.0",
     "jsdom": "29.0.2",
     "knip": "6.4.1",
