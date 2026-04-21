@@ -61,7 +61,7 @@ This threat model demonstrates **🛡️ cybersecurity consulting expertise** th
 - 🧪 **Cypress 15.14.0**: Enhanced E2E and component security testing
 - 🔒 **SLSA Level 3**: Build provenance attestation and SBOM generation
 - 🛡️ **CSP Headers**: Comprehensive Content Security Policy implementation
-- 📦 **Bundle Optimization**: per-chunk 600 KB gzip budget (< 180KB target, optimized via tree-shaking)
+- 📦 **Bundle Optimization**: per-chunk 600 KB gzip budget enforced via `budget.json` and build validation (tree-shaking, code splitting)
 - 🔐 **TypeScript Strict**: Zero `any` types, complete null safety
 
 ### **🔗 Policy Alignment**
@@ -580,12 +580,12 @@ flowchart TD
 |---|--------|---------------|--------|-----------------|---------------|
 | **1** | **Source Map Information Disclosure** | Extract sensitive code details from source maps | Low | Source maps enabled; public open-source codebase mitigates impact | Minimal - Public source |
 | **2** | **Dead Code Elimination Bypass** | Exploit tree-shaking to include malicious code | Low | Vite tree-shaking + TypeScript validation | Low - Multi-layer verification |
-| **3** | **Bundle Size Manipulation** | Inject code to bypass 180KB target | Medium | Automated bundle size checks in CI/CD | Low - Build failure on oversize |
+| **3** | **Bundle Size Manipulation** | Inject code that breaches the per-chunk gzip budget | Medium | Automated bundle size checks via `budget.json` in CI/CD | Low - Build failure on budget breach |
 | **4** | **Code Splitting Exploit** | Exploit dynamic imports for code injection | Medium | Static import verification + CSP protection | Low - Multiple protections |
 
 #### **✅ Bundle Optimization Security**
 
-- **📦 per-chunk 600 KB gzip budget Bundle**: Achieved < 180KB target through aggressive tree-shaking
+- **📦 Per-Chunk Gzip Budget**: All emitted chunks stay within the enforced 600 KB gzip budget (`budget.json`), backed by aggressive tree-shaking and code splitting
 - **🔍 Source Maps**: Source maps are enabled in production (`build.sourcemap: true` in vite.config.ts); since this is a public open-source project, the risk of code disclosure is minimal
 - **✅ CI/CD Size Validation**: Automated checks prevent bundle size manipulation
 - **🚀 Tree-Shaking**: Dead code elimination reduces attack surface
@@ -1255,7 +1255,7 @@ flowchart TB
 | **⚡ SLSA Supply Chain Level** | Level 1 | Level 3 | Level 3 (Provenance + SBOM) | ✅ **Target Met** |
 | **📊 Error Boundary Coverage** | None | All Widgets | All Widgets + Global | ✅ **Target Exceeded** |
 | **🔒 TypeScript Strict Mode** | Partial | Complete | Zero `any` types | ✅ **Target Met** |
-| **📦 Bundle Size** | 188KB | <180KB | per-chunk 600 KB gzip budget | ✅ **Target Met** |
+| **📦 Per-Chunk Gzip Budget** | Unbounded | `budget.json` enforced | 600 KB gzip per chunk | ✅ **Target Met** |
 | **🧪 E2E Test Framework** | Cypress 13.x | Cypress 15.x | Cypress 15.14.0 | ✅ **Target Met** |
 | **⚛️ React Version** | React 18.x | React 19.x | React 19.2.5 | ✅ **Target Met** |
 
@@ -1377,7 +1377,7 @@ The CIA Compliance Manager threat model exemplifies how systematic security anal
 **🔄 Version History:**
 - **v1.1.54 Update (2026-04-21)**: Added Quantitative Risk Assessment (Likelihood × Impact scoring), Continuous Threat Assessment process with SLAs, current maturity level indicator (Level 3), ISMS policy cross-references (Secure_Development_Policy, Vulnerability_Management)
 - **v1.2 Update (2026-02-26)**: Added Kill Chain Disruption Analysis section per ISMS Threat_Modeling.md §4.1.4 policy requirement
-- **v1.1 Update (2026-04-21)**: Updated versions (React 19.2.5, Vitest 4.1.4, Cypress 15.14.0), corrected test coverage attribution to Vitest
+- **v1.1 Update (2026-02-24)**: Updated versions (React 19.2.5, Vitest 4.1.4, Cypress 15.14.0), corrected test coverage attribution to Vitest
 - **v1.0 Initial (2025-09-19)**: Initial comprehensive threat model baseline
 
 **🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![AWS Well-Architected](https://img.shields.io/badge/AWS-Well_Architected-orange?style=flat-square&logo=amazon-aws&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![Hack23 Threat Modeling](https://img.shields.io/badge/Hack23-Threat_Modeling_Policy-purple?style=flat-square&logo=security&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md)

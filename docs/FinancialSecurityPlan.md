@@ -33,7 +33,7 @@ The current v1.1.54 delivery is a **static React 19 SPA** distributed across **t
 
 1. **Primary**: AWS CloudFront + S3 (production at `ciacompliancemanager.com`), deployed by `.github/workflows/deploy-s3.yml` using IAM OIDC and CloudFormation stack `ciacompliancemanager-frontend`
 2. **DR**: GitHub Pages (fallback hosting, deployed by `release.yml`)
-3. **Library**: npm registry (`cia-compliance-manager` package), published by the `publish-npm` job with `provenance: true`
+3. **Library**: npm registry (`cia-compliance-manager` package), published by the `publish-npm` job with `npm publish --provenance` (Sigstore-signed)
 
 ### Cash Flow Overview
 

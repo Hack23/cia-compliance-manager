@@ -87,7 +87,7 @@ The project uses GitHub Actions for automation with the following workflows:
    - **Triggers:** Manual workflow dispatch, version tags (v*)
    - **Jobs:** 4 jobs - `prepare`, `build`, `release`, `publish-npm`
    - **Purpose:** Builds, attests, and releases new versions with comprehensive security scanning, publishes docs to GitHub Pages (DR channel), and publishes the npm library package with provenance
-   - **Key Features:** SLSA Level 3 attestation, SBOM generation, automated documentation deployment, npm publish with `provenance: true`
+   - **Key Features:** SLSA Level 3 attestation, SBOM generation, automated documentation deployment, `npm publish --provenance` for Sigstore-signed supply-chain provenance
 
 2. **☁️ AWS S3 Deployment** (`.github/workflows/deploy-s3.yml`)
    - **Triggers:** Push to main branch
@@ -1389,7 +1389,7 @@ flowchart LR
 4. **TypeScript Strict Mode**: Zero `any` types with complete null safety, ES2025 target
 5. **Bundle Optimization**: Per-chunk 600 KB gzip budget enforced via `budget.json`; widget-domain chunking (`widgets-assessment`, `widgets-business`, `widgets-impact`, `widgets-implementation`, `widgets-visualization`, `chart`, `react-vendor`, `vendor`)
 6. **SLSA Level 3**: Enhanced supply chain security with build provenance and SBOM
-7. **Library Distribution**: Published to npm (`cia-compliance-manager`) with `provenance: true`, 10 subpath exports, separate `build:lib` config
+7. **Library Distribution**: Published to npm (`cia-compliance-manager`) with `npm publish --provenance`, 10 subpath exports, separate `build:lib` config
 8. **Security Architecture Documentation**: Comprehensive security and threat model updates
 
 **Q4 2024 Improvements:**

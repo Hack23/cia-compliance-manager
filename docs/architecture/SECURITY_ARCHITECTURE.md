@@ -1672,7 +1672,7 @@ The `cia-compliance-manager` npm package is published from the same CI pipeline 
 **Supply-chain guarantees for library consumers:**
 - Published artifact carries a Sigstore-signed provenance statement queryable at `npm view cia-compliance-manager --json` and on the npm web UI
 - Pre-publish gates (`lint`, `knip`, `test:ci`, `build:lib`) fail the publish on quality/security regressions
-- No manual publish credentials — `NPM_TOKEN` is scoped, short-lived, and never exposed to PRs
+- No manual publish credentials — `NPM_TOKEN` is scoped (least-privilege publish), stored as a GitHub Actions secret, and never exposed to PRs (rotated per [Cryptography Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Cryptography_Policy.md))
 - `files` manifest restricts the published tarball to `dist/`, `LICENSE`, `README.md` — source, tests, and `.env*` are never shipped
 
 

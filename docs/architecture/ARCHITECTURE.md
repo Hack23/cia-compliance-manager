@@ -417,7 +417,7 @@ The package advertises **10 subpath exports**, each with `import` and `types` co
 - `npm run build` — application build (`tsc && vite build`) using `vite.config.ts`, output to `build/`
 - `npm run build:lib` — library build (`vite build --config vite.config.lib.ts && tsc --project tsconfig.lib.json`), output to `dist/` with emitted `.d.ts` files
 
-The `prepublishOnly` script chains `lint → knip → test:ci → build:lib` before publishing to npm with `provenance: true`.
+The `prepublishOnly` script chains `lint → knip → test:ci → build:lib` before publishing to npm with `npm publish --provenance` (Sigstore-signed supply-chain provenance).
 
 ### **Peer Dependencies**
 
