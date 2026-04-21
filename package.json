@@ -180,7 +180,7 @@
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
-    "@tailwindcss/postcss": "4.2.2",
+    "@tailwindcss/postcss": "4.2.3",
     "@testing-library/cypress": "10.1.0",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.2",
@@ -216,7 +216,7 @@
     "react-error-boundary": "6.1.1",
     "rollup-plugin-visualizer": "7.0.1",
     "start-server-and-test": "3.0.2",
-    "tailwindcss": "4.2.2",
+    "tailwindcss": "4.2.3",
     "typedoc": "0.28.19",
     "typedoc-plugin-markdown": "4.11.0",
     "typedoc-plugin-mermaid": "1.12.0",
