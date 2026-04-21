@@ -9,7 +9,7 @@
   <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Network_Security_Policy.md">Network Security Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Access_Control_Policy.md">Access Control Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md">Threat Modeling</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md">Vulnerability Management</a></em>
 </p>
 
-**Version:** 1.1.32 | **Last Updated:** 2026-03-19 | **Status:** ✅ Production Ready
+**Version:** 1.1.54 | **Last Updated:** 2026-04-21 | **Status:** ✅ Production Ready
 
 This document outlines the comprehensive security architecture of the CIA Compliance Manager, detailing how the system protects data through multiple security layers.
 
@@ -1276,12 +1276,12 @@ CIA Compliance Manager application security:
 
 ## ⚛️ React 19.x Security Architecture
 
-**Current Status**: ✅ Implemented - React 19.2.4 with Enhanced Security
+**Current Status**: ✅ Implemented - React 19.2.5 with Enhanced Security
 
 ```mermaid
 flowchart TD
     subgraph "React 19.x Security Controls"
-        A[⚛️ React 19.2.4 Core] --> B[🛡️ Error Boundaries]
+        A[⚛️ React 19.2.5 Core] --> B[🛡️ Error Boundaries]
         A --> C[🔄 Concurrent Rendering]
         A --> D[📦 Automatic Batching]
         
@@ -1341,7 +1341,7 @@ import WidgetErrorBoundary from './components/common/WidgetErrorBoundary';
 
 ```mermaid
 flowchart LR
-    subgraph "TypeScript 6.0.2 Strict Mode"
+    subgraph "TypeScript 6.0.3 Strict Mode"
         A[🔒 strictNullChecks] --> B[✅ Null Safety]
         C[🔒 noImplicitAny] --> D[✅ Type Safety]
         E[🔒 strictFunctionTypes] --> F[✅ Function Safety]
@@ -1360,13 +1360,13 @@ flowchart LR
 
 ## 🧪 Vitest & Cypress Test Security Architecture
 
-**Current Status**: ✅ Implemented - Vitest 4.0.17 + Cypress 15.10.0
+**Current Status**: ✅ Implemented - Vitest 4.1.4 + Cypress 15.14.0
 
 ```mermaid
 flowchart TD
     subgraph "Vitest & Cypress Security Testing"
-        A[🧪 Vitest 4.0.17] --> B1[🔍 Unit Testing]
-        A1[🧪 Cypress 15.10.0] --> B[🔍 Component Testing]
+        A[🧪 Vitest 4.1.4] --> B1[🔍 Unit Testing]
+        A1[🧪 Cypress 15.14.0] --> B[🔍 Component Testing]
         A --> C[🌐 E2E Testing]
         A --> D[📸 Visual Testing]
         
@@ -1374,7 +1374,7 @@ flowchart TD
         C --> F[🔐 Workflow Security Tests]
         D --> G[⚠️ UI Security Validation]
         
-        H[📊 83.26% Coverage] --> A
+        H[📊 ≥80% (enforced) Coverage] --> A
         I[🔄 Session Handling] --> C
     end
 
@@ -1411,7 +1411,7 @@ flowchart TD
 
 | Test Type | Coverage | Security Focus | v1.0 Status |
 |-----------|----------|----------------|-------------|
-| **Unit Tests** | 83.26% line coverage | Input validation, type safety, business logic security | ✅ Target Exceeded (>80%) |
+| **Unit Tests** | ≥80% (enforced) line coverage | Input validation, type safety, business logic security | ✅ Target Exceeded (>80%) |
 | **Component Tests** | Widget-level coverage | XSS protection, error boundaries, state security | ✅ Comprehensive |
 | **E2E Tests** | Critical path coverage | Workflow security, session handling, integration | ✅ Comprehensive |
 | **Visual Tests** | UI security coverage | Security indicator visibility, error states | ✅ Implemented |
@@ -1654,6 +1654,26 @@ flowchart LR
 - SBOM available for dependency audit and compliance verification
 - Cryptographic signatures verifiable by any third party
 - Complete supply chain transparency for security professionals
+
+### 📦 npm Library Publication (v1.1.x)
+
+The `cia-compliance-manager` npm package is published from the same CI pipeline (`release.yml` → `publish-npm` job) with Sigstore-backed provenance, binding the published artifact to the originating commit, workflow run, and builder identity:
+
+```yaml
+# .github/workflows/release.yml (publish-npm job)
+- uses: actions/setup-node@… # Node 25, registry-url: https://registry.npmjs.org/
+- run: npm ci
+- run: npm run prepublishOnly  # lint + knip + test:ci + build:lib
+- run: npm publish --provenance --access public
+  env:
+    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+```
+
+**Supply-chain guarantees for library consumers:**
+- Published artifact carries a Sigstore-signed provenance statement queryable at `npm view cia-compliance-manager --json` and on the npm web UI
+- Pre-publish gates (`lint`, `knip`, `test:ci`, `build:lib`) fail the publish on quality/security regressions
+- No manual publish credentials — `NPM_TOKEN` is scoped, short-lived, and never exposed to PRs
+- `files` manifest restricts the published tarball to `dist/`, `LICENSE`, `README.md` — source, tests, and `.env*` are never shipped
 
 
 

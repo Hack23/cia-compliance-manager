@@ -9,11 +9,11 @@
   <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Risk_Assessment_Methodology.md">Risk Assessment Methodology</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification Framework</a></em>
 </p>
 
-**Version:** 1.1.32 | **Last Updated:** 2026-03-19 | **Status:** ✅ Production Ready
+**Version:** 1.1.54 | **Last Updated:** 2026-04-21 | **Status:** ✅ Production Ready
 
-## 📊 CIA Compliance Manager SWOT Analysis (v1.1.32)
+## 📊 CIA Compliance Manager SWOT Analysis (v1.1.54)
 
-This document provides a strategic analysis of the CIA Compliance Manager's strengths, weaknesses, opportunities, and threats as of version 1.1.32 (March 2026). This analysis reflects the current production state and informs future strategic direction.
+This document provides a strategic analysis of the CIA Compliance Manager's strengths, weaknesses, opportunities, and threats as of version 1.1.54 (March 2026). This analysis reflects the current production state and informs future strategic direction.
 
 ## 📚 Related Architecture Documentation
 
@@ -62,7 +62,7 @@ quadrantChart
     "SLSA Level 3 Supply Chain": [0.27, 0.86] radius: 8
     "Comprehensive CSP Headers": [0.18, 0.78] radius: 7
     "TypeScript Strict Mode": [0.28, 0.75] radius: 7
-    "175KB Optimized Bundle": [0.24, 0.72] radius: 7
+    "per-chunk 600 KB gzip budget Optimized Bundle": [0.24, 0.72] radius: 7
     "Bundle Size Optimization": [0.20, 0.22] radius: 6
     "GitHub Infrastructure Dependency": [0.15, 0.28] radius: 7
     "Complex Recovery Procedures": [0.25, 0.25] radius: 6
@@ -101,16 +101,17 @@ graph TD
         S3["Modular widget architecture"]
         S4["Visual security assessments"]
         S5["Business context documentation"]
-        S6["83.26% test coverage (Vitest 4.0.17)"]
+        S6["≥80% (enforced) test coverage (Vitest 4.1.4)"]
         S7["SLSA Level 3 supply chain security"]
         S8["Comprehensive CSP implementation"]
         S9["TypeScript strict mode (zero any)"]
-        S10["175KB optimized bundle"]
+        S10["per-chunk 600 KB gzip budget optimized bundle"]
+        S11["npm library (10 subpath exports) with Sigstore provenance"]
     end
 
     subgraph "Weaknesses (Internal, Negative)"
-        W1["Bundle size optimization needed"]
-        W2["GitHub infrastructure dependency"]
+        W1["Bundle size optimization ongoing"]
+        W2["Dual-channel deployment (AWS primary + GitHub Pages DR) increases ops surface"]
         W3["Complex recovery procedures"]
         W4["Limited runtime monitoring"]
         W5["No backend authentication"]
@@ -194,7 +195,7 @@ mindmap
       id9.1[Zero any types throughout codebase]
       id9.2[Complete null safety with strict checks]
       id9.3[Compile-time vulnerability detection]
-    id10(175KB Optimized Bundle)
+    id10(per-chunk 600 KB gzip budget Optimized Bundle)
       id10.1[Tree-shaking and dead code elimination]
       id10.2[Efficient code splitting]
       id10.3[Under 180KB target]
@@ -202,11 +203,11 @@ mindmap
 
 ### Current Strengths Analysis
 
-The CIA Compliance Manager v1.1.32 has achieved significant strengths that provide a robust foundation:
+The CIA Compliance Manager v1.1.54 has achieved significant strengths that provide a robust foundation:
 
 1. **Comprehensive CIA Security Framework**: The application fully implements the Confidentiality, Integrity, and Availability security triad with well-defined security levels and metrics for each component, providing a thorough approach to security assessment.
 
-2. **React 19.x with Error Boundaries**: v1.1.32 leverages React 19.2.4's advanced features including error boundaries for component isolation, concurrent rendering for performance security, and automatic batching for consistent state management, preventing cascade failures.
+2. **React 19.x with Error Boundaries**: v1.1.54 leverages React 19.2.5's advanced features including error boundaries for component isolation, concurrent rendering for performance security, and automatic batching for consistent state management, preventing cascade failures.
 
 3. **Modular Widget Architecture**: The application employs a consistent widget-based dashboard architecture with well-defined component hierarchies, clear separation of concerns, and reusable UI patterns that enhance maintainability.
 
@@ -214,15 +215,15 @@ The CIA Compliance Manager v1.1.32 has achieved significant strengths that provi
 
 5. **Business Context Documentation**: Components and services include "Business Perspective" documentation sections that explain their business value and purpose, helping engineers understand how technical implementations support business needs.
 
-6. **83.26% Test Coverage with Vitest 4.0.17**: v1.1.32 achieves 83.26% line coverage (exceeding the 80% target by 3.26%) using Vitest 4.0.17 for unit testing and Cypress 15.12.0 for comprehensive E2E testing.
+6. **≥80% (enforced) Test Coverage with Vitest 4.1.4**: v1.1.54 enforces ≥80% line coverage via Vitest `thresholds` configuration (lines/statements/functions: 80, branches: 75) using Vitest 4.1.4 for unit testing and Cypress 15.14.0 for comprehensive E2E testing.
 
 7. **SLSA Level 3 Supply Chain Security**: Implements build provenance attestation, SBOM generation, hermetic builds, and SHA-pinned actions, providing cryptographic proof of build integrity and complete dependency transparency.
 
-8. **Comprehensive CSP Implementation**: v1.1.32 includes 10+ Content Security Policy directives providing multi-layer XSS protection, frame-ancestors 'none' for clickjacking defense, and connect-src 'self' preventing data exfiltration.
+8. **Comprehensive CSP Implementation**: v1.1.54 includes 10+ Content Security Policy directives providing multi-layer XSS protection, frame-ancestors 'none' for clickjacking defense, and connect-src 'self' preventing data exfiltration.
 
 9. **TypeScript Strict Mode**: Achieves zero `any` types throughout the codebase with complete null safety (strictNullChecks), enabling compile-time vulnerability detection and preventing type confusion attacks.
 
-10. **175KB Optimized Bundle**: Through aggressive tree-shaking and efficient code splitting, v1.1.32 achieves a 175KB bundle size, meeting the <180KB target with 5KB to spare, reducing attack surface and improving performance.
+10. **per-chunk 600 KB gzip budget Optimized Bundle**: Through aggressive tree-shaking and efficient code splitting, v1.1.54 achieves a per-chunk 600 KB gzip budget bundle size, meeting the <180KB target with 5KB to spare, reducing attack surface and improving performance.
 
 ## Weaknesses
 
@@ -230,7 +231,7 @@ The CIA Compliance Manager v1.1.32 has achieved significant strengths that provi
 mindmap
   root((Weaknesses))
     id1(Bundle Size Optimization)
-      id1.1[Current 175KB close to 180KB limit]
+      id1.1[Current per-chunk 600 KB gzip budget close to 180KB limit]
       id1.2[Future features may challenge size budget]
       id1.3[Ongoing optimization required]
     id2(GitHub Infrastructure Dependency)
@@ -257,9 +258,9 @@ mindmap
 
 ### Current Weaknesses Analysis
 
-While v1.1.32 has addressed many previous weaknesses, several areas remain for future improvement:
+While v1.1.54 has addressed many previous weaknesses, several areas remain for future improvement:
 
-1. **Bundle Size Optimization**: At 175KB, the bundle is within the 180KB target with only 5KB margin. Future feature additions may challenge this limit, requiring ongoing optimization and careful feature evaluation.
+1. **Bundle Size Optimization**: At per-chunk 600 KB gzip budget, the bundle is within the 180KB target with only 5KB margin. Future feature additions may challenge this limit, requiring ongoing optimization and careful feature evaluation.
 
 2. **GitHub Infrastructure Dependency**: The system is heavily dependent on GitHub for hosting, CI/CD, and deployment, which may limit flexibility for organizations requiring self-hosted or alternative platform solutions.
 
@@ -316,7 +317,7 @@ mindmap
 
 ### Future Opportunities Analysis
 
-Looking beyond v1.1.32, several opportunities exist for growth and expansion:
+Looking beyond v1.1.54, several opportunities exist for growth and expansion:
 
 1. **Context-Aware Security**: Enhancing the platform with industry-specific security profiles, regulatory adaptation by region, and organization size-tailored controls would provide significant value to diverse users.
 
@@ -402,9 +403,9 @@ Several external threats could impact the project's success:
 
 9. **Platform Provider Lock-in**: Heavy reliance on GitHub infrastructure creates risks related to service disruptions, provider policy changes, and potential cost structure changes that could impact availability or operations.
 
-## v1.1.32 Achievements and Ongoing Focus Areas
+## v1.1.54 Achievements and Ongoing Focus Areas
 
-Based on the SWOT analysis and code examination, these areas were addressed and continue to be refined in v1.1.32:
+Based on the SWOT analysis and code examination, these areas were addressed and continue to be refined in v1.1.54:
 
 1. **Complete Widget Implementation** ✅:
    - All 12 widgets fully implemented across 4 categories (Assessment Center, Business Value, Impact Analysis, Implementation Guide)
@@ -483,9 +484,9 @@ While the current supply chain security controls provide good protection, some s
 
 5. **Simplified Recovery Procedures**: Streamline the current complex recovery procedures to enable faster response to supply chain incidents.
 
-## Post-v1.1.32 Strategic Direction
+## Post-v1.1.54 Strategic Direction
 
-After achieving v1.1.32 stability, these opportunities can be explored:
+After achieving v1.1.54 stability, these opportunities can be explored:
 
 1. **Context-Aware Security**: Develop industry-specific security profiles and organization size adaptations.
 
