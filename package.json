@@ -189,8 +189,8 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.1",
-    "@vitest/coverage-v8": "4.1.4",
-    "@vitest/ui": "4.1.4",
+    "@vitest/coverage-v8": "4.1.5",
+    "@vitest/ui": "4.1.5",
     "canvas": "3.2.3",
     "chart.js": "4.5.1",
     "cross-env": "10.1.0",
@@ -223,7 +223,7 @@
     "typescript": "6.0.3",
     "typescript-eslint": "8.59.0",
     "vite": "8.0.9",
-    "vitest": "4.1.4"
+    "vitest": "4.1.5"
   },
   "engines": {
     "node": ">=25.0.0",
