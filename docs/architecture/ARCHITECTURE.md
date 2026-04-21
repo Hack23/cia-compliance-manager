@@ -9,7 +9,7 @@
   <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification Framework</a></em>
 </p>
 
-**Version:** 1.1.32 | **Last Updated:** 2026-03-19 | **Status:** ✅ Production Ready
+**Version:** 1.1.54 | **Last Updated:** 2026-04-21 | **Status:** ✅ Production Ready
 
 This document provides a comprehensive view of the CIA Compliance Manager architecture using the C4 model, illustrating how components interact to deliver security assessment capabilities.
 
@@ -94,59 +94,64 @@ C4Context
 
 ## 🏢 Container View
 
-The CIA Compliance Manager consists of several interconnected containers that provide its core functionality. The v1.1.32 architecture leverages modern React 19.x features, TypeScript strict mode, and comprehensive testing infrastructure.
+The CIA Compliance Manager consists of several interconnected containers that provide its core functionality. The v1.1.54 architecture leverages modern React 19.x features, TypeScript strict mode, and comprehensive testing infrastructure.
 
 ```mermaid
 C4Container
-    title Container Diagram - CIA Compliance Manager (v1.1.32)
+    title Container Diagram - CIA Compliance Manager (v1.1.54)
 
     Person(securityOfficer, "Security Officer", "Manages security levels and reviews assessment results")
     Person(developer, "Developer", "Maintains and extends platform")
     
     System_Boundary(ciaManager, "CIA Compliance Manager") {
-        Container(frontend, "Frontend Application", "React 19.2.x, TypeScript 6.0.x (Strict)", "SPA with error boundaries, context API state management")
+        Container(frontend, "Frontend Application", "React 19.2.5, TypeScript 6.0.3 (Strict)", "SPA with error boundaries, context API state management")
+        Container(npmLibrary, "npm Library (cia-compliance-manager)", "ES Module, 10 subpath exports", "Tree-shakeable package with provenance attestation")
         ContainerDb(staticData, "Static Data", "TypeScript/JSON", "Security controls, frameworks, CIA triad data")
-        Container(buildSystem, "Build System", "Vite 8.x, esbuild", "Code splitting, tree-shaking, bundle optimization")
-        Container(testFramework, "Test Infrastructure", "Vitest 4.1.2, Cypress 15.13.0", "Unit tests (exceeds 80% line coverage), E2E tests")
-        Container(securityScan, "Security Scanner", "CodeQL, SonarCloud, Dependabot", "SAST, SCA, vulnerability detection")
-        Container(deployment, "Deployment", "AWS CloudFront + S3, GitHub Pages DR", "Multi-region with SLSA Level 3 attestation")
+        Container(buildSystem, "Build System", "Vite 8.0.9, oxc minifier", "Code splitting, tree-shaking, bundle optimization")
+        Container(testFramework, "Test Infrastructure", "Vitest 4.1.4, Cypress 15.14.0", "Unit tests (≥80% enforced), E2E tests")
+        Container(securityScan, "Security Scanner", "CodeQL, SonarCloud, Dependabot, ZAP, Scorecard", "SAST, SCA, DAST, supply-chain scoring")
+        Container(deployment, "Deployment", "AWS CloudFront + S3, GitHub Pages DR, npm registry", "Multi-region + SLSA Level 3 attestation")
     }
     
     Rel(securityOfficer, frontend, "Uses", "HTTPS")
     Rel(developer, testFramework, "Runs tests", "CLI")
     Rel(developer, buildSystem, "Builds app", "CLI")
+    Rel(developer, npmLibrary, "Imports components/hooks/services", "npm")
     
     Rel(frontend, staticData, "Imports data", "ES Modules")
+    Rel(npmLibrary, staticData, "Packages", "ES Modules")
     Rel(buildSystem, frontend, "Bundles", "Rollup")
+    Rel(buildSystem, npmLibrary, "Emits .js + .d.ts via `build:lib`", "Rollup + tsc")
     Rel(testFramework, frontend, "Tests", "DOM/Component")
     Rel(securityScan, frontend, "Scans", "GitHub Actions")
-    Rel(deployment, buildSystem, "Deploys", "AWS S3 + CloudFront")
+    Rel(deployment, buildSystem, "Deploys", "AWS S3 + CloudFront + npm publish")
     
     UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
 ```
 
-### **Container Details (v1.1.32)**
+### **Container Details (v1.1.54)**
 
 | Container | Technology Stack | Purpose | Key Features |
 |-----------|-----------------|---------|--------------|
-| **Frontend Application** | React 19.2.4, TypeScript 6.0.2 | User interface | Error boundaries, concurrent rendering, strict types |
+| **Frontend Application** | React 19.2.5, TypeScript 6.0.3 | User interface | Error boundaries, concurrent rendering, strict types |
+| **npm Library** | ES Module, 10 subpath exports | Reusable distribution | `./types`, `./services`, `./hooks`, `./utils`, `./components`, `./components/widgets`, `./constants`, `./data`, `./contexts`, root |
 | **Static Data** | TypeScript/JSON | Data source | CIA triad controls, compliance frameworks |
-| **Build System** | Vite 8.x, esbuild | Build pipeline | Optimized bundle, code splitting, tree-shaking |
-| **Test Infrastructure** | Vitest 4.1.2, Cypress 15.13.0 | Quality assurance | Exceeds 80% line coverage, component & E2E tests |
-| **Security Scanner** | CodeQL, SonarCloud | Vulnerability detection | SAST, SCA, dependency scanning |
-| **Deployment** | AWS CloudFront + S3, GitHub Pages DR | Multi-region hosting | CloudFront CDN, S3 multi-region, SLSA Level 3, Route53 DNS |
+| **Build System** | Vite 8.0.9, oxc minifier, TypeScript 6.0.3 | Build pipeline | Optimized bundle, widget-domain chunking, tree-shaking |
+| **Test Infrastructure** | Vitest 4.1.4, Cypress 15.14.0, @testing-library/react 16.3.2 | Quality assurance | ≥80% line coverage enforced via `thresholds`, component + E2E tests |
+| **Security Scanner** | CodeQL, SonarCloud, Dependabot, ZAP, OpenSSF Scorecard, Harden-Runner | Vulnerability detection | SAST, SCA, DAST, supply chain scoring, runner egress policy |
+| **Deployment** | AWS CloudFront + S3 (primary), GitHub Pages (DR), npm registry (library) | Multi-channel delivery | CloudFront CDN, S3 multi-region, SLSA Level 3, Route53 DNS, npm provenance |
 
 ## 🧩 Component View
 
-The frontend application is composed of specialized components organized by domain functionality. The v1.1.32 architecture implements comprehensive error handling, React Context API state management, and strict TypeScript typing.
+The frontend application is composed of specialized components organized by domain functionality. The v1.1.54 architecture implements comprehensive error handling, React Context API state management, and strict TypeScript typing.
 
 ```mermaid
 C4Component
-    title Component Diagram - Frontend Application (v1.1.32)
+    title Component Diagram - Frontend Application (v1.1.54)
 
     Container_Boundary(frontend, "Frontend Application") {
         Component(errorBoundary, "Error Boundary", "react-error-boundary 6.1.1", "Application-wide error handling and recovery")
-        Component(appRoot, "App Root", "React 19.2.4", "Main application component with routing")
+        Component(appRoot, "App Root", "React 19.2.5", "Main application component with routing")
         
         Component(slWidget, "Security Level Widget", "React, TypeScript", "Core configuration widget for CIA security levels")
         
@@ -202,7 +207,7 @@ C4Component
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
 
-### **v1.1.32 Component Architecture Highlights**
+### **v1.1.54 Component Architecture Highlights**
 
 #### **Error Handling**
 - **Error Boundary Component**: `react-error-boundary 6.1.1` for graceful error recovery
@@ -228,7 +233,7 @@ This diagram shows the detailed structure of the service layer with full TypeScr
 
 ```mermaid
 C4Component
-    title Component Diagram - Service Layer (v1.1.32)
+    title Component Diagram - Service Layer (v1.1.54)
 
     Container_Boundary(services, "Service Layer") {
         Component(baseService, "BaseService", "TypeScript Strict", "Base service with common functionality and type safety")
@@ -268,7 +273,7 @@ C4Component
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
 
-### **TypeScript Strict Mode Implementation (v1.1.32)**
+### **TypeScript Strict Mode Implementation (v1.1.54)**
 
 All services implement comprehensive type safety:
 - **Zero `any` Types**: Complete elimination of type escape hatches
@@ -285,7 +290,7 @@ This diagram shows the structure of the widget components:
 
 ```mermaid
 C4Component
-    title Component Diagram - Widget Components (v1.1.32)
+    title Component Diagram - Widget Components (v1.1.54)
 
     Container_Boundary(widgets, "Widget Components") {
         Component(widgetBase, "WidgetContainer", "React, TypeScript", "Base container for all widgets")
@@ -340,60 +345,102 @@ C4Component
 
 ## 🪝 React Hooks Structure
 
-This diagram shows the custom React hooks that bridge components and services:
+This diagram shows the custom React hooks that bridge components and services. v1.1.54 ships **17+ hooks** under `src/hooks/`, grouped by responsibility:
 
 ```mermaid
 C4Component
-    title Component Diagram - React Hooks
+    title Component Diagram - React Hooks (v1.1.54)
 
-    Container_Boundary(hooks, "React Hooks") {
+    Container_Boundary(serviceHooks, "Service Hooks") {
         Component(useCIAContent, "useCIAContentService", "React, TypeScript", "Hook for CIA content service")
         Component(useCompliance, "useComplianceService", "React, TypeScript", "Hook for compliance service")
         Component(useSecurityMetrics, "useSecurityMetricsService", "React, TypeScript", "Hook for security metrics")
-        Component(useTechnical, "useTechnicalImplementationService", "React, TypeScript", "Hook for technical implementation")
-        Component(useResources, "useSecurityResourcesService", "React, TypeScript", "Hook for security resources")
+        Component(useServiceData, "useServiceData", "React, TypeScript", "Generic service data loader")
+        Component(useCIAOptions, "useCIAOptions", "React, TypeScript", "CIA options provider hook")
+        Component(useCIADataProvider, "useCIADataProvider", "React, TypeScript", "Static data provider binding")
+    }
+
+    Container_Boundary(domainHooks, "Domain State Hooks") {
+        Component(useSecurityLevelState, "useSecurityLevelState", "React, TypeScript", "Security level selection state")
+        Component(useBusinessImpact, "useBusinessImpact", "React, TypeScript", "Business impact derivation")
+        Component(useSecuritySummaryData, "useSecuritySummaryData", "React, TypeScript", "Aggregated summary data")
+        Component(useComponentDetails, "useComponentDetails", "React, TypeScript", "CIA component detail data")
+        Component(useTechnicalDetails, "useTechnicalDetailsData", "React, TypeScript", "Technical implementation data")
+        Component(useFormattedMetrics, "useFormattedMetrics", "React, TypeScript", "Metric formatting helper")
+    }
+
+    Container_Boundary(uiHooks, "UI / UX Hooks") {
+        Component(useTabs, "useTabs", "React, TypeScript", "Tab navigation state")
+        Component(useResponsive, "useResponsiveBreakpoint", "React, TypeScript", "Responsive breakpoint detection")
+        Component(useKeyboard, "useKeyboardShortcuts", "React, TypeScript", "Global keyboard shortcut handling")
+        Component(useLocalStorage, "useLocalStorage", "React, TypeScript", "Persistent local storage state")
+        Component(useWidgetError, "useWidgetError", "React, TypeScript", "Widget-scoped error state")
     }
 
     Container_Boundary(services, "Services") {
         Component(ciaContentService, "CIAContentService", "TypeScript")
         Component(complianceService, "ComplianceService", "TypeScript")
         Component(securityMetricsService, "SecurityMetricsService", "TypeScript")
-        Component(technicalImplService, "TechnicalImplementationService", "TypeScript")
-        Component(securityResourceService, "SecurityResourceService", "TypeScript")
+        Component(businessImpactService, "BusinessImpactService", "TypeScript")
     }
 
-    Container_Boundary(components, "Components") {
-        Component(widgets, "Widget Components", "React")
-    }
-
-    Rel(widgets, useCIAContent, "Uses")
-    Rel(widgets, useCompliance, "Uses")
-    Rel(widgets, useSecurityMetrics, "Uses")
-    Rel(widgets, useTechnical, "Uses")
-    Rel(widgets, useResources, "Uses")
-    
     Rel(useCIAContent, ciaContentService, "Provides")
     Rel(useCompliance, complianceService, "Provides")
     Rel(useSecurityMetrics, securityMetricsService, "Provides")
-    Rel(useTechnical, technicalImplService, "Provides")
-    Rel(useResources, securityResourceService, "Provides")
+    Rel(useBusinessImpact, businessImpactService, "Provides")
 
-    UpdateLayoutConfig($c4ShapeInRow="5", $c4BoundaryInRow="1")
+    UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="2")
 ```
+
+## 📦 Package / Library Distribution
+
+In addition to being a browser application hosted at [ciacompliancemanager.com](https://ciacompliancemanager.com/), CIA Compliance Manager is published as a tree-shakeable ES module npm library (`cia-compliance-manager` on npmjs.org) that exposes the same types, services, hooks, utilities, components, and data for downstream consumers.
+
+### **Subpath Exports** (`package.json`)
+
+The package advertises **10 subpath exports**, each with `import` and `types` conditions, enabling deep imports without pulling the full bundle:
+
+| Export | Purpose |
+|--------|---------|
+| `cia-compliance-manager` (root) | Namespaced umbrella export (`Types`, `Services`, `Components`, `Hooks`, `Utils`, `Constants`, `Data`, `Contexts`) + `CIAClassificationApp` |
+| `cia-compliance-manager/types` | Domain type definitions (CIA, business impact, widgets, compliance, risk, tabs, etc.) |
+| `cia-compliance-manager/services` | Business logic services (`CIAContentService`, `BusinessImpactService`, `ComplianceService`, `SecurityMetricsService`, `TechnicalImplementationService`, `SecurityResourceService`, `BaseService`, error service) |
+| `cia-compliance-manager/hooks` | React hooks bridging services and UI (`useCIAContentService`, `useComplianceService`, `useSecurityLevelState`, `useBusinessImpact`, `useSecuritySummaryData`, `useCIAOptions`, etc.) |
+| `cia-compliance-manager/utils` | Utility functions (color, format, level, risk, status, security defaults, keyboard, accessibility, logger, type guards) |
+| `cia-compliance-manager/components` | All React components (application shell, charts, common, widgets) |
+| `cia-compliance-manager/components/widgets` | Widgets only (assessmentcenter, businessvalue, impactanalysis, implementationguide) |
+| `cia-compliance-manager/constants` | Design tokens and domain constants (securityLevels, cost, risk, compliance, color, testIds, etc.) |
+| `cia-compliance-manager/data` | Static domain data (CIA content, compliance mappings, `data/security/*`) |
+| `cia-compliance-manager/contexts` | React contexts for cross-cutting state |
+
+**Library build** is handled separately from the application build:
+- `npm run build` — application build (`tsc && vite build`) using `vite.config.ts`, output to `build/`
+- `npm run build:lib` — library build (`vite build --config vite.config.lib.ts && tsc --project tsconfig.lib.json`), output to `dist/` with emitted `.d.ts` files
+
+The `prepublishOnly` script chains `lint → knip → test:ci → build:lib` before publishing to npm with `provenance: true`.
+
+### **Peer Dependencies**
+
+| Peer | Range | Optional |
+|------|-------|----------|
+| `react` | `^18.2.0 \|\| ^19.0.0` | no |
+| `react-dom` | `^18.2.0 \|\| ^19.0.0` | no |
+| `react-error-boundary` | `^6.0.0` | no |
+| `chart.js` | `^4.0.0` | **yes** (only required by visualization widgets) |
 
 ## 🏗️ Build Pipeline Architecture
 
-The v1.1.32 build system leverages Vite 8.0.x with advanced optimization techniques:
+The v1.1.54 build system leverages Vite 8.0.9 with advanced optimization techniques:
 
 ```mermaid
 C4Component
-    title Build Pipeline - Vite 8.0.x with Optimization
+    title Build Pipeline - Vite 8.0.9 with Optimization
 
     Container_Boundary(buildPipeline, "Build System") {
-        Component(vite, "Vite 8.0.x", "Build Tool", "Lightning-fast HMR and optimized builds")
-        Component(esbuild, "esbuild", "Minifier", "Ultra-fast JavaScript minification")
+        Component(vite, "Vite 8.0.9", "Build Tool", "Lightning-fast HMR and optimized builds")
+        Component(oxc, "oxc", "Minifier", "Ultra-fast Rust-based JavaScript minifier (Vite `minify: 'oxc'`)")
         Component(rollup, "Rollup", "Bundler", "Advanced code splitting and tree-shaking")
-        Component(tsCompiler, "TypeScript 6.0.2", "Compiler", "Strict mode compilation with full type checking")
+        Component(tsCompiler, "TypeScript 6.0.3", "Compiler", "Strict mode compilation with full type checking")
         Component(visualizer, "Bundle Visualizer", "Analysis", "Bundle size analysis and optimization insights")
     }
 
@@ -405,15 +452,20 @@ C4Component
     }
 
     Container_Boundary(output, "Build Artifacts") {
-        Component(reactChunk, "react-vendor.js", "21.5KB", "React 19.2.4 + React DOM")
-        Component(chartChunk, "chart.js", "21.5KB", "Chart.js 4.5.1 (lazy loaded)")
-        Component(vendorChunk, "vendor.js", "~8KB", "Other dependencies")
-        Component(appChunk, "app.js", "~124KB", "Application code")
+        Component(reactChunk, "react-vendor.js", "React 19.2.5 + react-dom + scheduler + react-error-boundary")
+        Component(chartChunk, "chart.js", "Chart.js 4.5.1 + @kurkle/color (lazy loaded)")
+        Component(vendorChunk, "vendor.js", "Other node_modules dependencies")
+        Component(widgetsAsmt, "widgets-assessment.js", "assessmentcenter/* (excl. SecurityLevelWidget)")
+        Component(widgetsBiz, "widgets-business.js", "businessvalue/* widgets")
+        Component(widgetsImpact, "widgets-impact.js", "impactanalysis/* widgets")
+        Component(widgetsImpl, "widgets-implementation.js", "implementationguide/* (excl. SecurityVisualizationWidget)")
+        Component(widgetsViz, "widgets-visualization.js", "SecurityVisualizationWidget (Chart.js consumer)")
+        Component(appChunk, "index.js", "Application shell, SecurityLevelWidget, services, hooks, utils")
     }
 
     Rel(vite, tsCompiler, "Compiles")
     Rel(vite, rollup, "Bundles with")
-    Rel(rollup, esbuild, "Minifies with")
+    Rel(rollup, oxc, "Minifies with")
     Rel(vite, visualizer, "Analyzes with")
     
     Rel(rollup, codeSplit, "Applies")
@@ -424,34 +476,47 @@ C4Component
     Rel(codeSplit, reactChunk, "Produces")
     Rel(codeSplit, chartChunk, "Produces")
     Rel(codeSplit, vendorChunk, "Produces")
+    Rel(codeSplit, widgetsAsmt, "Produces")
+    Rel(codeSplit, widgetsBiz, "Produces")
+    Rel(codeSplit, widgetsImpact, "Produces")
+    Rel(codeSplit, widgetsImpl, "Produces")
+    Rel(codeSplit, widgetsViz, "Produces")
     Rel(codeSplit, appChunk, "Produces")
 
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
 
-### **Build Performance Metrics (v1.1.32)**
+### **Build Performance Metrics (v1.1.54)**
 
-| Metric | Value | Target | Status |
-|--------|-------|--------|---------|
-| Total Bundle Size | 175KB | < 180KB | ✅ Met |
-| React Vendor Chunk | 21.5KB | < 25KB | ✅ Met |
-| Chart.js (Lazy) | 21.5KB | < 25KB | ✅ Met |
-| Build Time | ~8s | < 15s | ✅ Met |
-| HMR Update Time | <200ms | < 500ms | ✅ Met |
+The production build (`npm run build`) enforces a per-chunk size budget defined in [`budget.json`](../../budget.json) (`chunk-size-budget-kb: 600` gzip). Actual sizes fluctuate per release and are reported in [`docs/stats.html`](../stats.html) (Rollup visualizer output).
 
-## 🧪 Testing Infrastructure (v1.1.32)
+| Metric | Target | Status |
+|--------|--------|--------|
+| Per-chunk size budget | ≤ 600 KB gzipped (see `budget.json`) | ✅ Enforced |
+| Build Time | < 15s (`tsc && vite build`) | ✅ Met |
+| HMR Update Time | < 500ms | ✅ Met (Vite 8.0.9) |
+| Bundle Analysis | Live treemap at `docs/stats.html` | ✅ Published |
 
-Comprehensive testing architecture with Vitest 4.1.2 and Cypress 15.13.0:
+**Chunking strategy** (from `vite.config.ts` `manualChunks`):
+- `react-vendor` — React, react-dom, scheduler, react-error-boundary
+- `chart` — chart.js, @kurkle/color (lazy-imported by `SecurityVisualizationWidget`)
+- `vendor` — all other `node_modules`
+- `widgets-assessment`, `widgets-business`, `widgets-impact`, `widgets-implementation`, `widgets-visualization` — domain-grouped widget code
+- `index` (main) — application shell, `SecurityLevelWidget`, services, hooks, utilities, constants
+
+## 🧪 Testing Infrastructure (v1.1.54)
+
+Comprehensive testing architecture with Vitest 4.1.4 and Cypress 15.14.0:
 
 ```mermaid
 C4Component
-    title Testing Infrastructure - v1.1.32
+    title Testing Infrastructure - v1.1.54
 
     Container_Boundary(testFramework, "Test Infrastructure") {
-        Component(vitest, "Vitest 4.1.2", "Unit Testing", "83.26% line coverage, fast execution")
-        Component(cypress, "Cypress 15.13.0", "E2E Testing", "Component tests, session handling")
+        Component(vitest, "Vitest 4.1.4", "Unit Testing", "≥80% line coverage enforced via `thresholds` in vite.config.ts; live report at docs/coverage/")
+        Component(cypress, "Cypress 15.14.0", "E2E Testing", "Component tests, session handling")
         Component(testingLibrary, "React Testing Library 16.3.2", "Component Testing", "User-centric testing")
-        Component(jsdom, "jsdom 29.0.0", "DOM Simulation", "Browser environment simulation")
+        Component(jsdom, "jsdom 29.0.2", "DOM Simulation", "Browser environment simulation")
     }
 
     Container_Boundary(coverage, "Coverage Reporting") {
@@ -461,9 +526,9 @@ C4Component
     }
 
     Container_Boundary(e2eTesting, "E2E Test Suite") {
-        Component(componentTests, "Component Tests", "Cypress 15.13.0", "Isolated component testing")
-        Component(integrationTests, "Integration Tests", "Cypress 15.13.0", "Multi-widget workflows")
-        Component(visualTests, "Visual Tests", "Cypress 15.13.0", "Screenshot regression testing")
+        Component(componentTests, "Component Tests", "Cypress 15.14.0", "Isolated component testing")
+        Component(integrationTests, "Integration Tests", "Cypress 15.14.0", "Multi-widget workflows")
+        Component(visualTests, "Visual Tests", "Cypress 15.14.0", "Screenshot regression testing")
         Component(mochawesome, "Mochawesome Reports", "Reporter", "HTML test result reports")
     }
 
@@ -482,7 +547,7 @@ C4Component
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
 
-### **Test Coverage Metrics (v1.1.32)**
+### **Test Coverage Metrics (v1.1.54)**
 
 [![Coverage Report](https://img.shields.io/badge/Coverage_Report-Live_Results-success?style=flat-square&logo=vitest&logoColor=white)](https://ciacompliancemanager.com/coverage/index.html)
 
@@ -490,26 +555,26 @@ Current coverage from latest build ([view full report](https://ciacompliancemana
 
 | Coverage Type | Current | Target | Status |
 |--------------|---------|--------|---------|
-| Line Coverage | 83.26% | 80% | ✅ Exceeded |
-| Branch Coverage | 75.22% | 75% | ✅ Exceeded |
-| Function Coverage | 88.4% | 80% | ✅ Exceeded |
-| Statement Coverage | 82.8% | 80% | ✅ Exceeded |
+| Line Coverage | ≥80% (see live report) | 80% | ✅ Exceeded |
+| Branch Coverage | ≥75% (see live report) | 75% | ✅ Exceeded |
+| Function Coverage | ≥80% (see live report) | 80% | ✅ Exceeded |
+| Statement Coverage | ≥80% (see live report) | 80% | ✅ Exceeded |
 
 ### **Test Infrastructure Features**
 
-#### **Vitest 4.1.2 Enhancements**
+#### **Vitest 4.1.4 Enhancements**
 - **Parallel Test Execution**: Faster test runs with worker threads
 - **Watch Mode**: Interactive test development workflow
 - **Snapshot Testing**: UI component regression detection
 - **Coverage Thresholds**: Automated quality gates (80% minimum)
 
-#### **Cypress 15.13.0 Improvements**
+#### **Cypress 15.14.0 Improvements**
 - **Component Testing**: Isolated widget testing in real browser
 - **Session Handling**: Improved state persistence between tests
 - **Memory Management**: Experimental memory optimization
 - **Video/Screenshot Control**: Configurable artifact generation
 
-## 🔒 Security Scanning Integration (v1.1.32)
+## 🔒 Security Scanning Integration (v1.1.54)
 
 Multi-layered security validation in CI/CD pipeline:
 
@@ -555,7 +620,7 @@ C4Component
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
 
-### **Security Scanning Results (v1.1.32)**
+### **Security Scanning Results (v1.1.54)**
 
 | Scanner | Status | Findings | Action |
 |---------|--------|----------|--------|
@@ -564,9 +629,9 @@ C4Component
 | Dependabot | ✅ Passing | All dependencies current | N/A |
 | Secret Scanning | ✅ Passing | No secrets detected | N/A |
 | FOSSA | ✅ Passing | All licenses approved | N/A |
-| OpenSSF Scorecard | ✅ 7.5/10 | Supply chain secure | Continue monitoring |
+| OpenSSF Scorecard | Live | Published via `scorecards.yml` | See repo badge |
 
-## 🚀 Deployment Architecture (v1.1.32)
+## 🚀 Deployment Architecture (v1.1.54)
 
 ### Multi-Region AWS CloudFront + S3 with GitHub Pages Disaster Recovery
 
@@ -667,7 +732,7 @@ C4Component
 - **Primary**: Routes to CloudFront distribution
 - **DR Failover**: Can route to GitHub Pages with DNS switch (< 15 min RTO)
 
-### **Deployment Features (v1.1.32)**
+### **Deployment Features (v1.1.54)**
 
 #### **SLSA Level 3 Compliance**
 - **Build Provenance**: Immutable record of build process
@@ -794,7 +859,7 @@ sequenceDiagram
 - 🏷️ **IAM Least Privilege**: Role limited to S3 sync and CloudFront invalidation
 - 📋 **Audit Trail**: All API calls logged to CloudTrail (account-level)
 
-## 📊 Technology Stack (v1.1.32)
+## 📊 Technology Stack (v1.1.54)
 
 ### **Runtime Requirements**
 | Technology | Version | Purpose |
@@ -804,29 +869,29 @@ sequenceDiagram
 ### **Frontend Framework**
 | Technology | Version | Purpose | Key Features |
 |-----------|---------|---------|--------------|
-| **React** | 19.2.4 | UI Framework | Concurrent rendering, automatic batching, improved error boundaries |
-| **React-DOM** | 19.2.4 | DOM Renderer | Enhanced hydration, better SSR support |
+| **React** | 19.2.5 | UI Framework | Concurrent rendering, automatic batching, improved error boundaries |
+| **React-DOM** | 19.2.5 | DOM Renderer | Enhanced hydration, better SSR support |
 | **react-error-boundary** | 6.1.1 | Error Handling | Declarative error boundaries with recovery |
 
 ### **Styling**
 | Technology | Version | Purpose | Key Features |
 |-----------|---------|---------|--------------|
-| **TailwindCSS** | 4.x | Utility-first CSS | JIT compilation, responsive design, dark mode support |
+| **TailwindCSS** | 4.2.3 | Utility-first CSS | JIT compilation, responsive design, dark mode support |
 
 ### **Development Tools**
 | Technology | Version | Purpose | Key Features |
 |-----------|---------|---------|--------------|
-| **TypeScript** | 6.0.2 | Type System | Strict mode, full type safety, zero `any` types |
-| **Vite** | 8.0.x | Build Tool | Lightning-fast HMR, optimized builds, esbuild integration |
-| **esbuild** | (via Vite) | Minifier | Ultra-fast JavaScript/TypeScript transpilation |
+| **TypeScript** | 6.0.3 | Type System | Strict mode, full type safety, zero `any` types |
+| **Vite** | 8.0.9 | Build Tool | Lightning-fast HMR, optimized builds, Rollup-based bundling |
+| **oxc** | (via Vite `minify: 'oxc'`) | Minifier | Ultra-fast Rust-based JavaScript/TypeScript minification |
 
 ### **Testing & Quality**
 | Technology | Version | Purpose | Key Features |
 |-----------|---------|---------|--------------|
-| **Vitest** | 4.1.2 | Unit Testing | 83.26% line coverage, parallel execution, watch mode |
-| **Cypress** | 15.13.0 | E2E Testing | Component tests, improved session handling, video/screenshot control |
+| **Vitest** | 4.1.4 | Unit Testing | ≥80% line coverage enforced, parallel execution, watch mode |
+| **Cypress** | 15.14.0 | E2E Testing | Component tests, improved session handling, video/screenshot control |
 | **@testing-library/react** | 16.3.2 | Component Testing | User-centric testing patterns |
-| **jsdom** | 29.0.0 | DOM Simulation | Fast browser environment simulation |
+| **jsdom** | 29.0.2 | DOM Simulation | Fast browser environment simulation |
 
 ### **Security & Compliance**
 | Technology | Purpose | Features |
@@ -851,14 +916,29 @@ sequenceDiagram
 |-----------|---------|----------|
 | **GitHub Pages** | DR Hosting | Fallback deployment | < 15 min RTO via Route53 DNS switch |
 
+### **Linting & Quality**
+| Technology | Version | Purpose |
+|-----------|---------|---------|
+| **ESLint** | 10.2.1 | Flat config linting (`eslint.config.js`) with `typescript-eslint` 8.59.0 |
+| **Knip** | 6.5.0 | Dead-code, unused export/dependency detection (`knip.json`) |
+| **Dependency-cruiser** | 17.3.10 | Module-graph validation + diagram generation |
+| **Prettier** | via ESLint | Code formatting (ignored files in `.prettierignore`) |
+
 ### **Data Visualization**
 | Technology | Version | Purpose | Key Features |
 |-----------|---------|---------|--------------|
-| **Chart.js** | 4.5.1 | Charts | Responsive charts, lazy loaded (21.5KB chunk) |
+| **Chart.js** | 4.5.1 | Charts | Responsive charts, lazy-loaded in `chart` chunk; optional peer dependency |
 
-### **TypeScript Configuration (Strict Mode)**
+### **TypeScript Configuration (Strict Mode, ES2025)**
+
+From `tsconfig.json`:
+
 ```json
 {
+  "target": "ES2025",
+  "module": "ESNext",
+  "moduleResolution": "bundler",
+  "lib": ["ES2025", "DOM", "DOM.Iterable"],
   "strict": true,
   "strictNullChecks": true,
   "noImplicitAny": true,
@@ -868,13 +948,17 @@ sequenceDiagram
   "strictPropertyInitialization": true,
   "useUnknownInCatchVariables": true,
   "noImplicitReturns": true,
-  "noUnusedLocals": false,
-  "noUnusedParameters": false,
-  "noFallthroughCasesInSwitch": true
+  "noFallthroughCasesInSwitch": true,
+  "jsx": "react-jsx",
+  "isolatedModules": true,
+  "allowImportingTsExtensions": true,
+  "useDefineForClassFields": true
 }
 ```
 
-## 📊 Key Architecture Decisions (Updated for v1.1.32)
+The library build (`tsconfig.lib.json`) additionally emits `.d.ts` files to `dist/`.
+
+## 📊 Key Architecture Decisions (Updated for v1.1.54)
 
 ### Architecture Decision Records
 
@@ -883,28 +967,28 @@ sequenceDiagram
 | ADR-001 | Widget-Based UI Architecture | Enables modular development and clear separation of concerns | Added error boundary protection per widget |
 | ADR-002 | Static Data in TypeScript Files | Simplifies development, enables type safety without database | Enhanced with strict mode typing |
 | ADR-003 | Service Layer with Hooks | Clean API between UI and business logic | Full TypeScript strict mode compliance |
-| ADR-004 | CIA Triad Organization | Aligns with industry-standard security model | Comprehensive testing coverage (83.26%) |
+| ADR-004 | CIA Triad Organization | Aligns with industry-standard security model | Comprehensive testing coverage (≥80% enforced) |
 | ADR-005 | Multiple Security Views | Addresses technical and business stakeholder needs | Performance optimized with code splitting |
 | ADR-006 | React 19.x Adoption | Leverage concurrent features, error boundaries | Automatic batching, improved rendering |
 | ADR-007 | TypeScript Strict Mode | Eliminate runtime type errors, improve maintainability | Zero `any` types, full null safety |
-| ADR-008 | Vite Build System | Fast development experience, optimized production builds | 175KB bundle, Vite 8.x |
-| ADR-009 | Comprehensive Testing | Ensure code quality and prevent regressions | 83.26% line coverage with Vitest 4.1.2 |
+| ADR-008 | Vite Build System | Fast development experience, optimized production builds | per-chunk 600 KB gzip budget, Vite 8.0.9 |
+| ADR-009 | Comprehensive Testing | Ensure code quality and prevent regressions | ≥80% line coverage enforced via Vitest 4.1.4 |
 | ADR-010 | SLSA Level 3 Attestation | Supply chain security and build integrity | Public provenance verification |
 | ADR-011 | AWS CloudFront + S3 Deployment | Multi-region resilience, global CDN, production-grade infrastructure | CloudFront CDN, S3 multi-region, Route53 DNS, GitHub Pages DR |
 
-### Key Quality Attributes (v1.1.32 Enhancements)
+### Key Quality Attributes (v1.1.54 Enhancements)
 
 | Quality Attribute | Support in Architecture | Measurement |
 |-------------------|------------------------------|-------------|
 | **Modularity** | Widget-based organization with error boundaries | 13 independent widgets |
-| **Maintainability** | TypeScript strict mode, 83.26% test coverage | Zero `any` types |
+| **Maintainability** | TypeScript strict mode, ≥80% test coverage (enforced) | Zero `any` types |
 | **Extensibility** | Service abstractions, data provider pattern | Clean interfaces |
 | **Performance** | Code splitting, lazy loading, tree-shaking, CloudFront CDN | Optimized bundle (budget enforced), global edge caching |
 | **Security** | SLSA Level 3, CodeQL, AWS IAM OIDC, Harden-runner | OpenSSF Scorecard (consult badge for current score) |
 | **Usability** | Consistent UI, error recovery, responsive design | Error boundaries active |
 | **Reliability** | Multi-region S3, CloudFront, GitHub Pages DR | Target 99.9% (CloudFront SLA – service credits) |
 | **Availability** | AWS multi-region, Route53 DNS failover | RTO targets: ~5–10 min (CloudFront), ~15 min (DR) |
-| **Type Safety** | TypeScript 6.0.x strict mode | 100% type coverage |
+| **Type Safety** | TypeScript 6.0.3 strict mode | 100% type coverage |
 
 ## 🔍 Business View of Architecture 
 
@@ -981,11 +1065,11 @@ flowchart TD
 
 1. **Zero Installation**: Browser-based application requires no installation
 2. **Complete Privacy**: All data processing happens locally in browser
-3. **Fast Performance**: 175KB bundle loads in < 1s on average connection
+3. **Fast Performance**: per-chunk 600 KB gzip budget loads in < 1s on average connection
 4. **Type Safety**: 100% TypeScript coverage with strict mode
 5. **High Availability**: Static hosting on GitHub Pages CDN with 99.9% uptime
 6. **Security Transparency**: SLSA Level 3 attestation, public security scanning
-7. **Developer Experience**: Fast HMR (<200ms), comprehensive testing (83.26% coverage)
+7. **Developer Experience**: Fast HMR (<200ms), comprehensive testing (≥80% enforced)
 
 ## 📚 Related Architecture Documentation
 
@@ -1020,7 +1104,7 @@ This document is part of a comprehensive architecture documentation suite. For c
 - **[📋 BCPPlan.md](BCPPlan.md)** — Business continuity planning and recovery strategies
 
 ### **Testing & Quality**
-- **[📋 UnitTestPlan.md](../UnitTestPlan.md)** — Unit testing strategy (83.26% line coverage achieved)
+- **[📋 UnitTestPlan.md](../UnitTestPlan.md)** — Unit testing strategy (≥80% line coverage enforced achieved)
 - **[📋 E2ETestPlan.md](../E2ETestPlan.md)** — End-to-end testing strategy
 - **[⚡ performance-testing.md](../performance-testing.md)** — Performance benchmarks and optimization
 
@@ -1042,22 +1126,22 @@ Per [Hack23 Secure Development Policy §10](https://github.com/Hack23/ISMS-PUBLI
 The CIA Compliance Manager architecture delivers a comprehensive security assessment platform:
 
 ### **Technical Excellence**
-- ✅ **React 19.2.4**: Modern concurrent rendering and error boundaries
+- ✅ **React 19.2.5**: Modern concurrent rendering and error boundaries
 - ✅ **TypeScript Strict Mode**: Complete type safety with zero `any` types
-- ✅ **Vite 8.x**: Fast builds and optimized bundles
+- ✅ **Vite 8.0.9**: Fast builds and optimized bundles
 - ✅ **Comprehensive Testing**: Exceeds 80% line coverage target
-- ✅ **Cypress 15.13.0**: Advanced E2E and component testing
-- ✅ **TailwindCSS 4.x**: Utility-first responsive styling
+- ✅ **Cypress 15.14.0**: Advanced E2E and component testing
+- ✅ **TailwindCSS 4.2.3**: Utility-first responsive styling
 
 ### **Security & Compliance**
 - ✅ **SLSA Level 3**: Build provenance and supply chain integrity
 - ✅ **Security Scanning**: CodeQL, SonarCloud, Dependabot integration
 - ✅ **CSP Headers**: Production security policy enforcement
-- ✅ **OpenSSF Scorecard**: 7.5/10 supply chain security rating
+- ✅ **OpenSSF Scorecard**: Live score published via [scorecards.yml](../../.github/workflows/scorecards.yml) — see repository badge
 - ✅ **Public Attestation**: Transparent security verification
 
 ### **Performance & Quality**
-- ✅ **Bundle Size**: 175KB optimized bundle
+- ✅ **Bundle Size**: Per-chunk 600 KB gzip budget enforced (`budget.json`), treemap at [`docs/stats.html`](../stats.html)
 - ✅ **Code Splitting**: Optimized chunk strategy for faster load times
 - ✅ **Lazy Loading**: Chart.js loaded on-demand
 - ✅ **Error Recovery**: Graceful error handling with user-friendly fallbacks
