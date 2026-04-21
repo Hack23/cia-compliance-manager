@@ -11,13 +11,13 @@
 
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/Owner-CEO-0A66C2?style=for-the-badge" alt="Owner"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Version-2.0-555?style=for-the-badge" alt="Version"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Effective-2026--03--12-success?style=for-the-badge" alt="Effective Date"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Version-2.1-555?style=for-the-badge" alt="Version"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Effective-2026--04--21-success?style=for-the-badge" alt="Effective Date"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Review-Annual-orange?style=for-the-badge" alt="Review Cycle"/></a>
 </p>
 
-**📋 Document Owner:** CEO | **📄 Version:** 2.0 | **📅 Last Updated:** 2026-03-12 (UTC)  
-**🔄 Review Cycle:** Annual | **⏰ Next Review:** 2027-03-12  
+**📋 Document Owner:** CEO | **📄 Version:** 2.1 | **📅 Last Updated:** 2026-04-21 (UTC)  
+**🔄 Review Cycle:** Annual | **⏰ Next Review:** 2027-04-21  
 **🏷️ Classification:** Public (Open Source Security Compliance Platform)
 
 ---
@@ -63,28 +63,28 @@ mindmap
         ⏰ EOL: N/A (Auto-update)
         🔄 ES2025+ Support
     (⚛️ Frontend Framework)
-      📦 React 19.2.4
+      📦 React 19.2.5
         📅 Current: Latest
         ⏰ EOL: ~2027-2028
         🔄 Concurrent Features
-      📝 TypeScript 6.0.2
+      📝 TypeScript 6.0.3
         📅 Current: Latest
         ⏰ EOL: Active (quarterly cadence, majors ~yearly)
         🔄 Strict Mode Enabled
-      ⚡ Vite 8.0.0
+      ⚡ Vite 8.0.9
         📅 Current: Latest
         ⏰ EOL: Active (yearly)
         🔄 OXC/Rolldown Integration
     (🧪 Testing & Quality)
-      🧪 Vitest 4.0.17
+      🧪 Vitest 4.1.4
         📅 Current: Latest
         ⏰ EOL: Active
         🔄 Native ESM Support
-      🔧 Cypress 15.12.0
+      🔧 Cypress 15.14.0
         📅 Current: Latest
         ⏰ EOL: Active
         🔄 E2E Testing
-      🔍 ESLint 9.39.2
+      🔍 ESLint 10.2.1
         📅 Current: Latest
         ⏰ EOL: Active
         🔄 Flat Config System
@@ -93,7 +93,7 @@ mindmap
         📅 Current: Latest
         ⏰ EOL: Long-term stable
         🔄 Security Assessment Charts
-      🎨 TailwindCSS 4.1.18
+      🎨 TailwindCSS 4.2.3
         📅 Current: Latest
         ⏰ EOL: Active development
         🔄 Utility-First CSS
@@ -112,13 +112,13 @@ mindmap
 
 | **Technology Category** | **Current Version**       | **Release Model**               | **EOL Timeline**   | **Migration Complexity**                                                                                                                                |
 | ----------------------- | ------------------------- | ------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **⚛️ React Framework**  | 19.2.4 (Latest)           | Major annually, Minor quarterly | ~2027-2028         | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
-| **📝 TypeScript**       | 6.0.2 (Latest)            | Major annually, minor quarterly | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
-| **⚡ Vite Build Tool**  | 8.0.0 (Latest)            | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
+| **⚛️ React Framework**  | 19.2.5 (Latest)           | Major annually, Minor quarterly | ~2027-2028         | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **📝 TypeScript**       | 6.0.3 (Latest)            | Major annually, minor quarterly | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
+| **⚡ Vite Build Tool**  | 8.0.9 (Latest)            | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
 | **☕ Node.js Runtime**  | 25.x (Production)         | New: 1 major/year from 27.x    | Current EOL Apr 2026 → 26.x LTS | [![High](https://img.shields.io/badge/Complexity-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)     |
 | **🧪 Testing Stack**    | Vitest 4.x + Cypress 15.x | Major annually                  | Active development | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
 | **📊 Chart.js**         | 4.5.1 (Latest)            | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
-| **🎨 TailwindCSS**      | 4.1.18 (Latest)           | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
+| **🎨 TailwindCSS**      | 4.2.3 (Latest)           | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
 
 ---
 
@@ -318,26 +318,26 @@ Microsoft publishes TypeScript on a roughly quarterly schedule:
 
 - **Major versions** (e.g., 5.0 → 6.0) ship approximately once per year with breaking changes
 - **Minor versions** (e.g., 6.0 → 6.1) ship every 2–3 months with new features
-- **Patch versions** (e.g., 6.0.1 → 6.0.2) ship as needed for bug fixes
+- **Patch versions** (e.g., 6.0.2 → 6.0.3) ship as needed for bug fixes
 
 ### TypeScript Lifecycle Status
 
 | TypeScript | Release Date | Status | Support Until |
 |-----------|-------------|--------|---------------|
-| **6.0.2** | Mar 2026 | ✅ **Active — in use** | Until 7.0 release (~12 months) |
+| **6.0.3** | Mar 2026 | ✅ **Active — in use** | Until 7.0 release (~12 months) |
 | 5.9.x | Feb 2026 | Previous stable | Limited — security patches only |
 | 5.8.x | Dec 2025 | End of life | ❌ No support |
 
-> **Note:** TypeScript 6.0 is a major release with breaking changes including stricter module resolution with `moduleResolution: "bundler"`, removal of implicit `global` namespace, and stricter `NodeJS` namespace handling. The project uses `@typescript-eslint 8.58.0` which supports `typescript >=4.8.4 <6.1.0`.
+> **Note:** TypeScript 6.0 is a major release with breaking changes including stricter module resolution with `moduleResolution: "bundler"`, removal of implicit `global` namespace, and stricter `NodeJS` namespace handling. The project uses `@typescript-eslint 8.59.0` which supports `typescript >=4.8.4 <6.1.0`.
 
 ### TypeScript & Toolchain Version Matrix
 
 | Tool | Current Version | Peer Constraint | Upgrade Path |
 |------|----------------|-----------------|--------------|
-| TypeScript | **6.0.2** | — | Follow quarterly releases |
-| @typescript-eslint | **8.58.0** | `typescript >=4.8.4 <6.1.0` | Must update before TS 6.1 |
-| Vite | **8.0.3** | — | Follow major releases |
-| Vitest | **4.1.2** | — | Keep aligned with Vite |
+| TypeScript | **6.0.3** | — | Follow quarterly releases |
+| @typescript-eslint | **8.59.0** | `typescript >=4.8.4 <6.1.0` | Must update before TS 6.1 |
+| Vite | **8.0.9** | — | Follow major releases |
+| Vitest | **4.1.4** | — | Keep aligned with Vite |
 
 ### TypeScript Upgrade Policy
 
@@ -717,20 +717,20 @@ flowchart LR
 graph TB
     subgraph HEALTH["🏥 Technology Health Dashboard"]
         subgraph CORE["⚛️ Core Technologies"]
-            REACT[📊 React Health<br/>Version: 19.2.4<br/>EOL: ~2027<br/>Status: ✅ Healthy]
-            TS[📊 TypeScript Health<br/>Version: 6.0.2<br/>EOL: Active<br/>Status: ✅ Healthy]
+            REACT[📊 React Health<br/>Version: 19.2.5<br/>EOL: ~2027<br/>Status: ✅ Healthy]
+            TS[📊 TypeScript Health<br/>Version: 6.0.3<br/>EOL: Active<br/>Status: ✅ Healthy]
             NODE[📊 Node.js Health<br/>Version: 25.x<br/>Current EOL: Apr 2026<br/>Status: ⚠️ Plan →26.x]
         end
         
         subgraph TOOLS["🛠️ Build & Testing"]
-            VITE[📊 Vite Health<br/>Version: 8.0.0<br/>EOL: Active<br/>Status: ✅ Healthy]
-            VITEST[📊 Vitest Health<br/>Version: 4.0.17<br/>EOL: Active<br/>Status: ✅ Healthy]
-            CYPRESS[📊 Cypress Health<br/>Version: 15.12.0<br/>EOL: Active<br/>Status: ✅ Healthy]
+            VITE[📊 Vite Health<br/>Version: 8.0.9<br/>EOL: Active<br/>Status: ✅ Healthy]
+            VITEST[📊 Vitest Health<br/>Version: 4.1.4<br/>EOL: Active<br/>Status: ✅ Healthy]
+            CYPRESS[📊 Cypress Health<br/>Version: 15.14.0<br/>EOL: Active<br/>Status: ✅ Healthy]
         end
         
         subgraph DEPS["📦 Dependencies"]
             CHART[📊 Chart.js Health<br/>Version: 4.5.1<br/>EOL: Stable<br/>Status: ✅ Healthy]
-            TAILWIND[📊 TailwindCSS Health<br/>Version: 4.1.18<br/>EOL: Active<br/>Status: ✅ Healthy]
+            TAILWIND[📊 TailwindCSS Health<br/>Version: 4.2.3<br/>EOL: Active<br/>Status: ✅ Healthy]
             OTHER[📊 Other Dependencies<br/>Count: 50+<br/>Vulnerabilities: 0<br/>Status: ✅ Healthy]
         end
     end
