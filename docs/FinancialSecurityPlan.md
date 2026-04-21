@@ -11,9 +11,13 @@
 
 <p align="center">
   <a><img src="https://img.shields.io/badge/Owner-CEO-0A66C2?style=for-the-badge" alt="Owner"/></a>
-  <a><img src="https://img.shields.io/badge/Version-1.0-555?style=for-the-badge" alt="Version"/></a>
+  <a><img src="https://img.shields.io/badge/Version-1.1-555?style=for-the-badge" alt="Version"/></a>
+  <a><img src="https://img.shields.io/badge/Updated-2026--04--21-success?style=for-the-badge" alt="Updated"/></a>
   <a><img src="https://img.shields.io/badge/Status-%E2%9C%85_Production-success?style=for-the-badge" alt="Status"/></a>
 </p>
+
+**📋 Document Owner:** CEO | **📄 Version:** 1.1 | **📅 Last Updated:** 2026-04-21 (UTC)  
+**🔄 Review Cycle:** Semi-Annual | **⏰ Next Review:** 2026-10-21
 
 ---
 
@@ -23,64 +27,82 @@ This document outlines the financial and security implementation plan for the CI
 
 ---
 
-## 💵 v1.0 Cost Summary — Static Frontend Deployment
+## 💵 v1.1.54 Cost Summary — AWS + GitHub Pages DR + npm Distribution
 
-The current v1.0 architecture is a **static React SPA** deployed on **GitHub Pages**, resulting in minimal infrastructure costs.
+The current v1.1.54 delivery is a **static React 19 SPA** distributed across **three channels**:
+
+1. **Primary**: AWS CloudFront + S3 (production at `ciacompliancemanager.com`), deployed by `.github/workflows/deploy-s3.yml` using IAM OIDC and CloudFormation stack `ciacompliancemanager-frontend`
+2. **DR**: GitHub Pages (fallback hosting, deployed by `release.yml`)
+3. **Library**: npm registry (`cia-compliance-manager` package), published by the `publish-npm` job with `provenance: true`
 
 ### Cash Flow Overview
 
 | **Time Frame** | **Monthly (USD)** | **Annual (USD)** |
 |----------------|-------------------|------------------|
-| **Total Infrastructure** | **$1.00** | **$12.00** |
-| **Security Tooling** | **$0.00** | **$0.00** |
-| **Development CI/CD** | **$0.00** | **$0.00** |
-| **Grand Total** | **$1.00** | **$12.00** |
+| **AWS Infrastructure** (CloudFront + S3 + Route53) | **~$2–5** | **~$24–60** |
+| **Domain Registration** | **$1** | **$12** |
+| **Security Tooling** | **$0** | **$0** (free OSS tiers) |
+| **Development CI/CD** | **$0** | **$0** (GitHub Actions public repo) |
+| **npm Publishing** | **$0** | **$0** (public package) |
+| **Grand Total (typical)** | **~$3–6** | **~$36–72** |
 
-> **Note:** CIA Compliance Manager v1.0 leverages free-tier services for open source projects, with the only recurring infrastructure cost being low-cost domain registration (approximately $1/month, $12/year).
+> **Note:** Actual AWS costs scale with traffic; the static SPA incurs minimal S3 storage and CloudFront egress charges. Dev-tier free quotas cover typical usage. Figures assume small-to-moderate traffic; [AWS CloudFront free tier](https://aws.amazon.com/cloudfront/pricing/) further reduces cost for the first 1 TB/month.
 
 ---
 
-### 🏗️ Infrastructure Cost Breakdown (v1.0)
+### 🏗️ Infrastructure Cost Breakdown (v1.1.54)
 
 | **Component** | **Service** | **Monthly (USD)** | **Annual (USD)** | **Notes** |
 |---------------|-------------|-------------------|------------------|-----------|
-| **Hosting** | GitHub Pages | $0.00 | $0.00 | Free for public repos |
-| **CDN** | GitHub Pages CDN | $0.00 | $0.00 | Included with GitHub Pages |
-| **SSL/TLS** | Let's Encrypt (via GitHub) | $0.00 | $0.00 | Automatic HTTPS |
-| **DNS** | Custom domain | $1.00 | $12.00 | Annual domain renewal (~$1/mo averaged) |
+| **Primary Hosting** | AWS S3 (`ciacompliancemanager-frontend-us-east-1-…`) | $0.50–1.00 | $6–12 | Static assets, versioned, encrypted at rest |
+| **Primary CDN** | AWS CloudFront | $1.00–3.00 | $12–36 | Global edge caching, HTTPS, security headers |
+| **DNS** | AWS Route 53 | $0.50 | $6 | Hosted zone + DNS queries |
+| **Domain** | Registrar (`ciacompliancemanager.com`) | $1.00 | $12 | Annual registration averaged |
+| **IaC** | AWS CloudFormation | $0.00 | $0.00 | Included; stack `ciacompliancemanager-frontend` |
+| **IAM OIDC** | AWS IAM (`GithubWorkFlowRole`) | $0.00 | $0.00 | No long-lived credentials |
+| **DR Hosting** | GitHub Pages | $0.00 | $0.00 | Free for public repos (DR channel) |
+| **Library Distribution** | npm Registry | $0.00 | $0.00 | Free public package |
 | **CI/CD** | GitHub Actions | $0.00 | $0.00 | Free for public repos |
-| **Code Scanning** | GitHub Advanced Security | $0.00 | $0.00 | Free for public repos |
+| **Code Scanning** | GitHub Advanced Security (CodeQL) | $0.00 | $0.00 | Free for public repos |
 | **Dependency Scanning** | Dependabot | $0.00 | $0.00 | Free for all repos |
 | **SAST** | SonarCloud | $0.00 | $0.00 | Free for open source |
-| **SBOM** | GitHub SBOM + SLSA | $0.00 | $0.00 | Free for public repos |
-| **Total** | | **$1.00** | **$12.00** | |
+| **SBOM + Attestation** | GitHub SBOM + SLSA Level 3 | $0.00 | $0.00 | Free for public repos |
+| **DAST** | OWASP ZAP (GitHub Action) | $0.00 | $0.00 | Free OSS scanner |
+| **Performance Audit** | Google Lighthouse CI | $0.00 | $0.00 | Free OSS |
+| **Supply Chain Score** | OpenSSF Scorecard | $0.00 | $0.00 | Free assessment |
+| **Total** | | **~$3–6** | **~$36–72** | |
 
 ---
 
 ## 🔐 Security Investment Analysis
 
-### Current Security Services (v1.0 — All Free Tier)
+### Current Security Services (v1.1.54 — All Free Tier)
 
 | **Security Service** | **Provider** | **Annual Cost** | **ISMS Policy Alignment** |
 |----------------------|-------------|-----------------|---------------------------|
-| **SAST Scanning** | SonarCloud | $0.00 | [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| **SAST Scanning** | SonarCloud + CodeQL | $0.00 | [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
 | **Dependency Scanning** | Dependabot + npm audit | $0.00 | [Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) |
-| **Secret Scanning** | GitHub Secret Scanning | $0.00 | [Cryptography Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Cryptography_Policy.md) |
-| **Code Scanning** | CodeQL | $0.00 | [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
-| **Supply Chain** | SLSA Level 3 + Scorecard | $0.00 | [Open Source Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Open_Source_Policy.md) |
+| **Secret Scanning** | GitHub Secret Scanning + push protection | $0.00 | [Cryptography Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Cryptography_Policy.md) |
+| **DAST** | OWASP ZAP (manual dispatch) | $0.00 | [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| **Supply Chain** | SLSA Level 3 attestation + OpenSSF Scorecard | $0.00 | [Open Source Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Open_Source_Policy.md) |
+| **CI Runner Hardening** | step-security/harden-runner | $0.00 | [Network Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Network_Security_Policy.md) |
 | **License Compliance** | FOSSA | $0.00 | [Open Source Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Open_Source_Policy.md) |
-| **E2E Testing** | Cypress (OSS) | $0.00 | [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| **E2E Testing** | Cypress 15.14.0 (OSS) | $0.00 | [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| **Unit/Component Testing** | Vitest 4.1.4 (OSS) | $0.00 | [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| **Dead-code Detection** | Knip 6.5.0 (OSS) | $0.00 | [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| **Package Provenance** | npm `--provenance` (Sigstore) | $0.00 | [Open Source Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Open_Source_Policy.md) |
 | **Total Security** | | **$0.00** | |
 
 ### Security ROI Metrics
 
 | **Metric** | **Value** | **Source** |
 |------------|-----------|-----------|
-| **Total Security Investment** | $0/year | Free OSS tooling |
-| **Vulnerability Detection Rate** | >95% | Automated scanning pipeline |
-| **Mean Time to Detect (MTTD)** | <24 hours | Automated CI/CD scanning |
-| **Code Coverage** | >80% | Vitest + Cypress |
-| **Supply Chain Score** | OpenSSF Scorecard | Automated assessment |
+| **Total Security Investment** | $0/year (tooling) + ~$36–72/year (AWS infra) | Free OSS tooling + minimal AWS hosting |
+| **Vulnerability Detection Rate** | >95% | Automated CodeQL + Dependabot + SonarCloud + ZAP |
+| **Mean Time to Detect (MTTD)** | <24 hours | Automated CI/CD scanning on every PR + weekly schedule |
+| **Line Coverage** | ≥80% (enforced) | Vitest thresholds in `vite.config.ts` |
+| **Supply Chain Score** | Live (see OpenSSF Scorecard badge) | `scorecards.yml` |
+| **SLSA Build Level** | Level 3 | `release.yml` attestations |
 
 ---
 
