@@ -9,9 +9,9 @@
   <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md">Change Management</a></em>
 </p>
 
-> **Version:** v1.1.32 | **Last Updated:** 2026-03-19 | **Status:** Production
+> **Version:** v1.1.54 | **Last Updated:** 2026-04-21 | **Status:** Production
 
-This document illustrates comprehensive process flows and workflows within the CIA Compliance Manager v1.1.32 application, showing how security assessment capabilities are delivered through React 19.x components (TypeScript 6.0, Vite 8.x, Tailwind CSS 4.x) with error handling, validation, and state management.
+This document illustrates comprehensive process flows and workflows within the CIA Compliance Manager v1.1.54 application, showing how security assessment capabilities are delivered through React 19.x components (TypeScript 6.0.3, Vite 8.0.9, TailwindCSS 4.2.3) with error handling, validation, and state management.
 
 ## 📚 Related Documentation
 
@@ -29,7 +29,7 @@ This document illustrates comprehensive process flows and workflows within the C
 
 ## 🎯 Process Flow Overview
 
-The CIA Compliance Manager implements v1.1.32 workflows for:
+The CIA Compliance Manager implements v1.1.54 workflows for:
 
 1. **Security Level Configuration**: Interactive CIA triad assessment with validation
 2. **Assessment Generation**: Real-time calculation of security metrics and business impact
@@ -48,9 +48,9 @@ Per **[Hack23 ISMS Secure Development Policy §10](https://github.com/Hack23/ISM
 - **CIS Controls (16.1)**: Application security processes defined ✅
 - **Process Transparency**: Public documentation of security workflows ✅
 
-## 🔍 Security Level Configuration Process (v1.1.32)
+## 🔍 Security Level Configuration Process (v1.1.54)
 
-The following flowchart illustrates the enhanced v1.1.32 security level configuration with real-time validation and error handling:
+The following flowchart illustrates the enhanced v1.1.54 security level configuration with real-time validation and error handling:
 
 ```mermaid
 flowchart TD
@@ -131,7 +131,7 @@ flowchart TD
     class SecurityState,ErrorCtx,KeyboardCtx context
 ```
 
-**Key v1.1.32 Enhancements:**
+**Key v1.1.54 Enhancements:**
 - ✅ **Context Providers**: ErrorContext and KeyboardShortcutContext; security levels managed via `useSecurityLevelState` hook + props
 - ✅ **localStorage Persistence**: State survives browser sessions
 - ✅ **Input Validation**: Real-time validation of security level selections (None/Low/Moderate/High/Very High)
@@ -141,7 +141,7 @@ flowchart TD
 
 **Cross-Reference:** See [STATEDIAGRAM.md](STATEDIAGRAM.md#-securitylevelstate-hook-state-management) for detailed state machine.
 
-## 🔄 Assessment Generation Process (v1.1.32)
+## 🔄 Assessment Generation Process (v1.1.54)
 
 This flowchart details the comprehensive assessment generation workflow with service layer integration:
 
@@ -274,7 +274,7 @@ flowchart LR
     class Providers,Data data
 ```
 
-## 📊 Compliance Framework Mapping Process (v1.1.32)
+## 📊 Compliance Framework Mapping Process (v1.1.54)
 
 This flowchart illustrates how security controls are mapped to compliance frameworks:
 
@@ -384,7 +384,7 @@ flowchart TD
     class MergeCode endProcess
 ```
 
-## 💼 Business Impact Analysis Workflow (v1.1.32)
+## 💼 Business Impact Analysis Workflow (v1.1.54)
 
 This comprehensive workflow shows how business impact is calculated across multiple dimensions:
 
@@ -567,7 +567,7 @@ flowchart TD
     class IG,TDW,SRW,SVW,CCD,IGP implementation
 ```
 
-## 💰 Cost Estimation Workflow (v1.1.32)
+## 💰 Cost Estimation Workflow (v1.1.54)
 
 This workflow shows the automated CAPEX/OPEX calculation process:
 
@@ -701,7 +701,7 @@ Where:
 
 **Cross-Reference:** See [STATEDIAGRAM.md](STATEDIAGRAM.md#-widget-interaction-states) for state management details.
 
-## 🛡️ Error Handling and Recovery Flow (v1.1.32)
+## 🛡️ Error Handling and Recovery Flow (v1.1.54)
 
 This comprehensive workflow shows React 19.x error boundary patterns with recovery mechanisms:
 
@@ -856,7 +856,7 @@ export class WidgetErrorBoundary extends Component<WidgetErrorBoundaryProps, Wid
 
 **Cross-Reference:** See [STATEDIAGRAM.md](STATEDIAGRAM.md#-react-error-boundary-state-transitions-v10) for error boundary state machine.
 
-## 📤 Data Export and Report Generation Workflow (v1.1.32)
+## 📤 Data Export and Report Generation Workflow (v1.1.54)
 
 This workflow shows the comprehensive export process for generating assessment reports:
 
@@ -901,7 +901,7 @@ flowchart TD
     
     AddMetadata --> MetadataFields[Add Metadata Fields]
     MetadataFields --> Timestamp[Timestamp:<br>ISO 8601 UTC]
-    MetadataFields --> Version[App Version:<br>v1.1.32]
+    MetadataFields --> Version[App Version:<br>v1.1.54]
     MetadataFields --> Classification[Classification:<br>CIA Levels]
     
     Timestamp --> CompileDocument[Compile Final<br>Document]
@@ -997,8 +997,8 @@ flowchart TD
     "title": "CIA Compliance Manager Assessment",
     "version": "1.0",
     "generated": "2025-11-22T15:24:45.034Z",
-    "tool": "CIA Compliance Manager v1.1.32",
-    "note": "Document describes v1.1.32 workflows; application version reflects current package.json",
+    "tool": "CIA Compliance Manager v1.1.54",
+    "note": "Document describes v1.1.54 workflows; application version reflects current package.json",
     "classification": {
       "confidentiality": "Moderate",
       "integrity": "High",
@@ -1010,7 +1010,7 @@ flowchart TD
 
 **Cross-Reference:** See [SECURITY_ARCHITECTURE.md](SECURITY_ARCHITECTURE.md#-data-protection) for data handling security controls.
 
-## 🏊 User-System Interaction Swim Lane Diagram (v1.1.32)
+## 🏊 User-System Interaction Swim Lane Diagram (v1.1.54)
 
 This swim lane diagram shows multi-actor interactions during a complete assessment workflow:
 
@@ -1109,7 +1109,7 @@ flowchart TD
 3. **Assessment**: App State → Services (parallel) → App State → Browser → User
 4. **Export**: User → App State → Services → Browser → User
 
-## 🔄 Widget Lifecycle and State Transitions (v1.1.32)
+## 🔄 Widget Lifecycle and State Transitions (v1.1.54)
 
 This diagram shows the complete lifecycle of assessment widgets:
 
@@ -1299,7 +1299,7 @@ flowchart TD
 - Token refresh: 24-hour max lifetime
 - Secure token storage (httpOnly cookies)
 
-## 📊 Summary: v1.1.32 Process Flow Architecture
+## 📊 Summary: v1.1.54 Process Flow Architecture
 
 ### Process Flow Inventory
 
@@ -1428,6 +1428,6 @@ flowchart TD
 
 ---
 
-**Document Status:** ✅ Complete | **Version:** v1.1.32 | **Last Updated:** 2026-03-19
+**Document Status:** ✅ Complete | **Version:** v1.1.54 | **Last Updated:** 2026-04-21
 
-These comprehensive process flowcharts provide complete documentation of the CIA Compliance Manager v1.1.32 workflows, illustrating how security assessment capabilities are delivered through well-defined processes with error handling, validation, and state management. The diagrams serve as authoritative documentation for developers, security professionals, and auditors understanding system operations per Hack23 ISMS requirements.
+These comprehensive process flowcharts provide complete documentation of the CIA Compliance Manager v1.1.54 workflows, illustrating how security assessment capabilities are delivered through well-defined processes with error handling, validation, and state management. The diagrams serve as authoritative documentation for developers, security professionals, and auditors understanding system operations per Hack23 ISMS requirements.

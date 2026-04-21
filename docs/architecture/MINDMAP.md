@@ -6,24 +6,24 @@
 
 <p align="center">
   <strong>🛡️ System Component Relationships and Architecture</strong><br>
-  <em>🎯 Visual Mental Model for v1.1.32 Platform Structure</em>
+  <em>🎯 Visual Mental Model for v1.1.54 Platform Structure</em>
 </p>
 
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/Owner-CEO-0A66C2?style=for-the-badge" alt="Owner"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Version-1.1.32-555?style=for-the-badge" alt="Version"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Version-1.1.54-555?style=for-the-badge" alt="Version"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Effective-2025--11--22-success?style=for-the-badge" alt="Effective Date"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Review-Quarterly-orange?style=for-the-badge" alt="Review Cycle"/></a>
 </p>
 
-**📋 Document Owner:** CEO | **📄 Version:** 1.1.32 | **📅 Last Updated:** 2026-03-19 (UTC)  
-**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2026-06-19
+**📋 Document Owner:** CEO | **📄 Version:** 1.1.54 | **📅 Last Updated:** 2026-04-21 (UTC)  
+**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2026-07-21
 
 ---
 
 ## 🎯 **Purpose**
 
-This mindmap provides a comprehensive visual mental model of the CIA Compliance Manager system architecture, illustrating component relationships, service dependencies, and feature organization for the v1.1.32 release. It serves as a conceptual framework for understanding how different parts of the system work together to deliver security assessment and compliance mapping capabilities.
+This mindmap provides a comprehensive visual mental model of the CIA Compliance Manager system architecture, illustrating component relationships, service dependencies, and feature organization for the v1.1.54 release. It serves as a conceptual framework for understanding how different parts of the system work together to deliver security assessment and compliance mapping capabilities.
 
 Per **[Secure Development Policy §10](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#-comprehensive-architecture-documentation-portfolio)**, this document maintains the system component inventory aligned with:
 - **ISO 27001 (A.8.1)**: System inventory maintained
@@ -86,13 +86,13 @@ This document uses consistent color schemes aligned with the **[ISMS Style Guide
 
 ---
 
-## 📊 **v1.1.32 System Overview**
+## 📊 **v1.1.54 System Overview**
 
 Complete system structure showing all major components and their relationships.
 
 ```mermaid
 mindmap
-  root((🎯 CIA Compliance<br/>Manager v1.1.32))
+  root((🎯 CIA Compliance<br/>Manager v1.1.54))
     (📊 Assessment Center)
       🔐 SecurityLevelWidget
         Configuration Hub
@@ -153,8 +153,8 @@ mindmap
         Type Guards
     (🧪 Testing)
       🔬 Unit Tests
-        Vitest 4.0.17
-        83.26% Coverage
+        Vitest 4.1.4
+        ≥80% (enforced) Coverage
       🌐 E2E Tests
         Cypress 15.10.0
         Critical Path Coverage
@@ -485,11 +485,11 @@ Testing organization and coverage strategy.
 mindmap
   root((🧪 Testing<br/>Infrastructure))
     (🔬 Unit Testing)
-      ⚡ Vitest 4.0.17
+      ⚡ Vitest 4.1.4
         Test Framework
         Coverage Reporting
       📊 Coverage Metrics
-        83.26% Line Coverage
+        ≥80% (enforced) Line Coverage
         80% Target Exceeded
         Branch Coverage
       🧩 Component Tests
@@ -564,7 +564,7 @@ mindmap
         Minification
       📊 Bundle Analysis
         Size Tracking
-        175KB Actual
+        per-chunk 600 KB gzip budget Actual
         180KB Target
       🎯 Performance
         Fast Builds
@@ -605,7 +605,7 @@ mindmap
         Changelog Generation
         Tag-based Releases
     (🔧 Development Tools)
-      📝 TypeScript 6.0.2
+      📝 TypeScript 6.0.3
         Strict Mode
         Type Safety
         Zero Any Types
@@ -613,7 +613,7 @@ mindmap
         Utility-First CSS
         Design System
         Responsive Design
-      ⚡ React 19.2.4
+      ⚡ React 19.2.5
         Concurrent Rendering
         Error Boundaries
         Automatic Batching
@@ -698,7 +698,7 @@ Core technology choices and their interconnections.
 mindmap
   root((💻 Technology<br/>Stack))
     (⚛️ Frontend Framework)
-      React 19.2.4
+      React 19.2.5
         Component Architecture
         Hooks API
         Concurrent Features
@@ -709,7 +709,7 @@ mindmap
         Error Handling
         Fallback UI
     (📝 Language & Types)
-      TypeScript 6.0.2
+      TypeScript 6.0.3
         Strict Mode Enabled
         Zero Any Types
         Type Safety
@@ -751,7 +751,7 @@ mindmap
         Fast Compilation
         Transpilation
     (🧪 Testing Framework)
-      Vitest 4.0.17
+      Vitest 4.1.4
         Unit Testing
         Coverage
       Cypress 15.10.0
@@ -1087,7 +1087,7 @@ mindmap
 
 ---
 
-This mindmap visualizes the comprehensive v1.1.32 architecture of the CIA Compliance Manager system, providing clear mental models for understanding component relationships, service dependencies, technology stack integration, and feature organization. The diagrams use consistent color coding and hierarchical organization to facilitate quick comprehension and navigation of the system's structure.
+This mindmap visualizes the comprehensive v1.1.54 architecture of the CIA Compliance Manager system, providing clear mental models for understanding component relationships, service dependencies, technology stack integration, and feature organization. The diagrams use consistent color coding and hierarchical organization to facilitate quick comprehension and navigation of the system's structure.
 
 ---
 
@@ -1096,5 +1096,5 @@ This mindmap visualizes the comprehensive v1.1.32 architecture of the CIA Compli
 **📤 Distribution:** Public  
 **🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-lightgrey?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#confidentiality-levels)  
 **📅 Effective Date:** 2025-11-22  
-**⏰ Next Review:** 2026-06-19  
+**⏰ Next Review:** 2026-07-21  
 **🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)
