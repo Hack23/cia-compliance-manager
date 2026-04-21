@@ -11,13 +11,13 @@
 
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/Owner-Security_Architect-0A66C2?style=for-the-badge" alt="Owner"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Version-1.2-555?style=for-the-badge" alt="Version"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Updated-2026--02--24-success?style=for-the-badge" alt="Last Updated"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Version-1.3-555?style=for-the-badge" alt="Version"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Updated-2026--04--21-success?style=for-the-badge" alt="Last Updated"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Review-Quarterly-orange?style=for-the-badge" alt="Review Cycle"/></a>
 </p>
 
-**📋 Document Owner:** Security Architect | **📄 Version:** 1.2 | **📅 Last Updated:** 2026-02-24 (UTC)  
-**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2026-05-24
+**📋 Document Owner:** Security Architect | **📄 Version:** 1.3 | **📅 Last Updated:** 2026-04-21 (UTC)  
+**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2026-07-21
 
 ---
 
@@ -34,7 +34,7 @@ This document provides comprehensive documentation of the CI/CD workflows implem
 This document details the continuous integration and deployment workflows used in the CIA Compliance Manager project. The workflows automate testing, security scanning, and release procedures to ensure code quality and security compliance.
 
 **Current Node.js version: 25**
-**Current TypeScript version: 6.0.2**
+**Current TypeScript version: 6.0.3**
 
 ## 📚 Related Documents
 
@@ -85,9 +85,9 @@ The project uses GitHub Actions for automation with the following workflows:
 
 1. **🚀 Build, Attest and Release** (`.github/workflows/release.yml`)
    - **Triggers:** Manual workflow dispatch, version tags (v*)
-   - **Jobs:** 3 jobs - prepare, build, release
-   - **Purpose:** Builds, attests, and releases new versions with comprehensive security scanning
-   - **Key Features:** SLSA Level 3 attestation, SBOM generation, automated documentation deployment
+   - **Jobs:** 4 jobs - `prepare`, `build`, `release`, `publish-npm`
+   - **Purpose:** Builds, attests, and releases new versions with comprehensive security scanning, publishes docs to GitHub Pages (DR channel), and publishes the npm library package with provenance
+   - **Key Features:** SLSA Level 3 attestation, SBOM generation, automated documentation deployment, npm publish with `provenance: true`
 
 2. **☁️ AWS S3 Deployment** (`.github/workflows/deploy-s3.yml`)
    - **Triggers:** Push to main branch
@@ -640,6 +640,25 @@ This job publishes the release and deploys the application:
 - Preservation of documentation
 - Version tracking with timestamp markers
 - Zero-downtime deployment via GitHub Pages atomic updates
+
+**4. Publish npm Job** (`publish-npm`, depends on `release`)
+
+This job publishes the `cia-compliance-manager` package to the npm registry with supply-chain provenance:
+
+**Key Steps:**
+1. **Harden Runner**: `step-security/harden-runner` with egress audit policy
+2. **Checkout + Setup Node 25** with `registry-url: https://registry.npmjs.org/`
+3. **`npm ci`**: Deterministic install from `package-lock.json`
+4. **`npm run prepublishOnly`**: Chains `lint → knip → test:ci → build:lib` (library build via `vite build --config vite.config.lib.ts && tsc --project tsconfig.lib.json` emitting `dist/`)
+5. **`npm publish --provenance --access public`**: Publishes with SLSA-style provenance attestation
+6. **Environment**: `NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}`
+
+**Library Build Characteristics:**
+- Output directory: `dist/`
+- Format: ES module, tree-shakeable
+- Type definitions: emitted via `tsconfig.lib.json` (`emitDeclarationOnly: true`)
+- 10 subpath exports declared in `package.json#exports`: `.`, `./types`, `./services`, `./hooks`, `./utils`, `./components`, `./components/widgets`, `./constants`, `./data`, `./contexts`
+- Peer dependencies: `react`, `react-dom`, `react-error-boundary`, `chart.js` (optional)
 
 ```mermaid
 flowchart TD
@@ -1363,14 +1382,15 @@ flowchart LR
 
 ### Recent Improvements
 
-**v1.0 Release Achievements (November 2025):**
-1. **React 19.x Migration**: Upgraded to React 19.2.4 with error boundaries and concurrent rendering
-2. **Test Coverage**: Achieved 83.26% line coverage (>80% target) with Vitest 4.0.17 for unit testing and Cypress 15.10.0 for E2E testing
+**v1.1.x Release Achievements:**
+1. **React 19.x Migration**: Upgraded to React 19.2.5 with error boundaries and concurrent rendering
+2. **Test Coverage**: ≥80% line coverage enforced via Vitest 4.1.4 `thresholds` (`lines: 80, statements: 80, functions: 80, branches: 75`); E2E coverage via Cypress 15.14.0
 3. **Comprehensive CSP**: Implemented 10+ Content Security Policy directives for XSS protection
-4. **TypeScript Strict Mode**: Achieved zero `any` types with complete null safety
-5. **Bundle Optimization**: Optimized to 175KB (< 180KB target) through tree-shaking
+4. **TypeScript Strict Mode**: Zero `any` types with complete null safety, ES2025 target
+5. **Bundle Optimization**: Per-chunk 600 KB gzip budget enforced via `budget.json`; widget-domain chunking (`widgets-assessment`, `widgets-business`, `widgets-impact`, `widgets-implementation`, `widgets-visualization`, `chart`, `react-vendor`, `vendor`)
 6. **SLSA Level 3**: Enhanced supply chain security with build provenance and SBOM
-7. **Security Architecture Documentation**: Comprehensive security and threat model updates
+7. **Library Distribution**: Published to npm (`cia-compliance-manager`) with `provenance: true`, 10 subpath exports, separate `build:lib` config
+8. **Security Architecture Documentation**: Comprehensive security and threat model updates
 
 **Q4 2024 Improvements:**
 1. **Cypress Test Optimization**: Reduced E2E test time from 4.5 to 2.7 minutes through parallel execution
@@ -1441,6 +1461,6 @@ For details on the future architecture direction, see [FUTURE_ARCHITECTURE.md](F
 **✅ Approved by:** Security Architect, Hack23 AB  
 **📤 Distribution:** Public  
 **🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-green?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#confidentiality-levels)  
-**📅 Effective Date:** 2026-01-11  
-**⏰ Next Review:** 2026-04-11  
+**📅 Effective Date:** 2026-04-21  
+**⏰ Next Review:** 2026-07-21  
 **🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)
