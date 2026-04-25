@@ -2333,7 +2333,7 @@ button[role="tab"]:not([aria-selected="true"]) {
   --widget-subtle-surface: #f8fafc;
   --widget-header-surface: linear-gradient(135deg, #f8fafc 0%, #eef6ff 100%);
   --widget-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
-  --widget-tab-min-width: 8rem; /* Fits labels like "Business Value" without crowding. */
+  --widget-tab-min-width: 5.25rem; /* Keeps 4 compact tabs usable inside narrow dashboard widgets. */
 }
 
 .dark {
@@ -2423,6 +2423,9 @@ button[role="tab"]:not([aria-selected="true"]) {
   padding: 1rem;
   line-height: 1.45;
   background: var(--widget-surface);
+  container-type: inline-size;
+  container-name: widget-body;
+  max-height: none;
   scrollbar-color: rgba(100, 116, 139, 0.38) transparent;
 }
 
@@ -2502,7 +2505,9 @@ button[role="tab"] {
   flex: 1 1 var(--widget-tab-min-width);
   min-width: 0;
   min-height: 40px;
-  padding: 0.55rem 0.75rem;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
   border: 1px solid var(--widget-inner-border);
   border-radius: 0.5rem;
   background: var(--widget-subtle-surface);
@@ -2519,11 +2524,141 @@ button[role="tab"][aria-selected="true"] {
 button[role="tab"] > div {
   justify-content: center;
   min-width: 0;
+  gap: 0.25rem;
+}
+
+button[role="tab"] > div > span:not([aria-hidden="true"]) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 [role="tabpanel"]:not([hidden]) {
   min-width: 0;
 }
+
+/* Container-aware widget grids: viewport breakpoints are too wide for 3-col dashboard cells. */
+.widget-body .grid.grid-cols-1.md\:grid-cols-2,
+.widget-body .grid.grid-cols-1.sm\:grid-cols-2,
+[data-testid^="widget-container"] .grid.grid-cols-1.md\:grid-cols-2,
+[data-testid^="widget-container"] .grid.grid-cols-1.sm\:grid-cols-2 {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.widget-body .grid.grid-cols-1.sm\:grid-cols-3,
+.widget-body .grid.grid-cols-1.md\:grid-cols-3,
+[data-testid^="widget-container"] .grid.grid-cols-1.sm\:grid-cols-3,
+[data-testid^="widget-container"] .grid.grid-cols-1.md\:grid-cols-3 {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.widget-body .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-5,
+[data-testid^="widget-container"] .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-5 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@container widget-body (min-width: 360px) {
+  .widget-body .grid.grid-cols-1.sm\:grid-cols-2,
+  [data-testid^="widget-container"] .grid.grid-cols-1.sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container widget-body (min-width: 560px) {
+  .widget-body .grid.grid-cols-1.md\:grid-cols-2,
+  [data-testid^="widget-container"] .grid.grid-cols-1.md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container widget-body (min-width: 520px) {
+  .widget-body .grid.grid-cols-1.sm\:grid-cols-3,
+  .widget-body .grid.grid-cols-1.md\:grid-cols-3,
+  [data-testid^="widget-container"] .grid.grid-cols-1.sm\:grid-cols-3,
+  [data-testid^="widget-container"] .grid.grid-cols-1.md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .widget-body .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-5,
+  [data-testid^="widget-container"] .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.widget-body button.w-full,
+[data-testid^="widget-container"] button.w-full {
+  min-height: 44px;
+  font-weight: 500;
+}
+
+.widget-body p,
+.widget-body li,
+.widget-body h3,
+.widget-body h4,
+.widget-body h5,
+[data-testid^="widget-container"] p,
+[data-testid^="widget-container"] li {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.widget-container,
+[data-testid^="widget-container"] {
+  position: relative;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.widget-container::before,
+[data-testid^="widget-container"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 60%);
+  opacity: 0.6;
+  z-index: 0;
+}
+
+.dark .widget-container::before,
+.dark [data-testid^="widget-container"]::before {
+  background: linear-gradient(180deg, rgba(43, 138, 255, 0.08), rgba(43, 138, 255, 0) 60%);
+  opacity: 1;
+}
+
+.widget-container > *,
+[data-testid^="widget-container"] > * {
+  position: relative;
+  z-index: 1;
+}
+
+[data-testid="widget-container-widget-confidentiality-impact"],
+[data-testid="widget-container-widget-integrity-impact"],
+[data-testid="widget-container-widget-availability-impact"],
+[data-testid="widget-container-widget-security-level"],
+[data-testid="widget-container-widget-business-impact"],
+[data-testid="widget-container-widget-security-summary"],
+[data-testid="widget-container-widget-value-creation"],
+[data-testid="widget-container-widget-cost-estimation"],
+[data-testid="widget-container-widget-compliance-status"],
+[data-testid="widget-container-widget-technical-details"],
+[data-testid="widget-container-widget-security-visualization"],
+[data-testid="widget-container-widget-security-resources"] {
+  border-top: 3px solid var(--accent-stripe, var(--primary-color));
+}
+
+[data-testid="widget-container-widget-confidentiality-impact"] { --accent-stripe: #7b1fa2; }
+[data-testid="widget-container-widget-integrity-impact"] { --accent-stripe: #2e7d32; }
+[data-testid="widget-container-widget-availability-impact"] { --accent-stripe: #1565c0; }
+[data-testid="widget-container-widget-security-level"],
+[data-testid="widget-container-widget-security-summary"] { --accent-stripe: var(--primary-color); }
+[data-testid="widget-container-widget-value-creation"],
+[data-testid="widget-container-widget-cost-estimation"],
+[data-testid="widget-container-widget-business-impact"],
+[data-testid="widget-container-widget-compliance-status"] { --accent-stripe: #f59e0b; }
+[data-testid="widget-container-widget-technical-details"],
+[data-testid="widget-container-widget-security-visualization"],
+[data-testid="widget-container-widget-security-resources"] { --accent-stripe: #0d9488; }
 
 @media (max-width: 768px) {
   .dashboard-grid-container {
@@ -2545,6 +2680,6 @@ button[role="tab"] > div {
   }
 
   button[role="tab"] {
-    flex-basis: 100%;
+    flex-basis: calc(50% - 0.5rem);
   }
 }
