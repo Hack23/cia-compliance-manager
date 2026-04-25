@@ -2172,7 +2172,8 @@ button.more-info:hover::before {
 /* Simplified approach: use semantic .widget-tab class for explicit styling */
 /* Also support standard role="tab" for accessibility */
 .widget-tab,
-button[role="tab"] {
+.widget-container button[role="tab"],
+[data-testid^="widget-container"] button[role="tab"] {
   position: relative;
   overflow: hidden;
   padding: 0.75rem 1rem; /* Consistent comfortable padding */
@@ -2187,7 +2188,8 @@ button[role="tab"] {
 
 /* Hover state for all tabs - using CSS variables */
 .widget-tab:hover,
-button[role="tab"]:hover {
+.widget-container button[role="tab"]:hover,
+[data-testid^="widget-container"] button[role="tab"]:hover {
   background-color: var(--primary-bg-hover);
   transform: translateY(-1px);
 }
@@ -2195,7 +2197,8 @@ button[role="tab"]:hover {
 /* Active/Selected tab state - Light theme - using aria-selected for semantics */
 .widget-tab[aria-selected="true"],
 .widget-tab.active,
-button[role="tab"][aria-selected="true"] {
+.widget-container button[role="tab"][aria-selected="true"],
+[data-testid^="widget-container"] button[role="tab"][aria-selected="true"] {
   border-bottom-color: var(--primary-color);
   color: var(--primary-color);
   font-weight: 600;
@@ -2205,7 +2208,8 @@ button[role="tab"][aria-selected="true"] {
 /* Active/Selected tab state - Dark theme - using CSS variables */
 .dark .widget-tab[aria-selected="true"],
 .dark .widget-tab.active,
-.dark button[role="tab"][aria-selected="true"] {
+.dark .widget-container button[role="tab"][aria-selected="true"],
+.dark [data-testid^="widget-container"] button[role="tab"][aria-selected="true"] {
   border-bottom-color: var(--primary-color);
   color: var(--primary-light);
   font-weight: 600;
@@ -2216,7 +2220,8 @@ button[role="tab"][aria-selected="true"] {
 
 /* Inactive tab colors using theme-specific --text-secondary CSS variable */
 .widget-tab:not([aria-selected="true"]),
-button[role="tab"]:not([aria-selected="true"]) {
+.widget-container button[role="tab"]:not([aria-selected="true"]),
+[data-testid^="widget-container"] button[role="tab"]:not([aria-selected="true"]) {
   color: var(--text-secondary);
 }
 
@@ -2368,7 +2373,7 @@ button[role="tab"]:not([aria-selected="true"]) {
   border: 1px solid var(--widget-shell-border);
   border-radius: 0.75rem;
   box-shadow: var(--widget-shadow);
-  min-height: 0;
+  min-height: 250px;
   max-height: none;
   height: auto;
 }
@@ -2415,7 +2420,7 @@ button[role="tab"]:not([aria-selected="true"]) {
 .widget-container > div:nth-child(2),
 [data-testid^="widget-container"] > div:nth-child(2) {
   gap: 0.75rem;
-  padding: 1rem;
+  padding: 0.75rem;
   line-height: 1.45;
   background: var(--widget-surface);
   container-type: inline-size;
@@ -2489,14 +2494,22 @@ button[role="tab"]:not([aria-selected="true"]) {
   box-shadow: none;
 }
 
-[role="tablist"] {
+.widget-container [role="tablist"],
+[data-testid^="widget-container"] [role="tablist"] {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   border-bottom-color: var(--widget-inner-border);
 }
 
-button[role="tab"] {
+.widget-container [role="tablist"] > * + *,
+[data-testid^="widget-container"] [role="tablist"] > * + * {
+  margin-left: 0;
+  margin-inline-start: 0;
+}
+
+.widget-container button[role="tab"],
+[data-testid^="widget-container"] button[role="tab"] {
   flex: 1 1 var(--widget-tab-min-width);
   min-width: 0;
   min-height: 44px;
@@ -2510,26 +2523,30 @@ button[role="tab"] {
   box-shadow: none;
 }
 
-button[role="tab"][aria-selected="true"] {
+.widget-container button[role="tab"][aria-selected="true"],
+[data-testid^="widget-container"] button[role="tab"][aria-selected="true"] {
   border-color: var(--primary-border-hover);
   background: var(--primary-bg-active);
   box-shadow: none;
 }
 
-button[role="tab"] > div {
+.widget-container button[role="tab"] > div,
+[data-testid^="widget-container"] button[role="tab"] > div {
   justify-content: center;
   min-width: 0;
   gap: 0.25rem;
 }
 
-button[role="tab"] > div > span:not([aria-hidden="true"]) {
+.widget-container button[role="tab"] > div > span:not([aria-hidden="true"]),
+[data-testid^="widget-container"] button[role="tab"] > div > span:not([aria-hidden="true"]) {
   white-space: normal;
   overflow: visible;
   text-overflow: clip;
   overflow-wrap: break-word;
 }
 
-[role="tabpanel"]:not([hidden]) {
+.widget-container [role="tabpanel"]:not([hidden]),
+[data-testid^="widget-container"] [role="tabpanel"]:not([hidden]) {
   min-width: 0;
 }
 
@@ -2707,25 +2724,14 @@ button[role="tab"] > div > span:not([aria-hidden="true"]) {
 }
 
 @media (max-width: 768px) {
-  .dashboard-grid-container {
-    gap: 0.75rem;
-    padding: 0.75rem;
-    grid-auto-rows: auto;
-  }
-
-  .grid-widget-container,
-  .widget-container,
-  [data-testid^="widget-container"] {
-    min-height: 0;
-  }
-
   .widget-body,
   .widget-container > div:nth-child(2),
   [data-testid^="widget-container"] > div:nth-child(2) {
     padding: 0.75rem;
   }
 
-  button[role="tab"] {
+  .widget-container button[role="tab"],
+  [data-testid^="widget-container"] button[role="tab"] {
     flex-basis: calc(50% - 0.5rem);
   }
 }

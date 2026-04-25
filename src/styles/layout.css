@@ -22,7 +22,7 @@
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-/* Widget body should scroll if content overflows */
+/* Widget body grows with content; the page handles long-dashboard scrolling. */
 [data-testid^="widget-container"] > div:nth-child(2) {
   flex: 1;
   min-height: 0;
@@ -56,7 +56,7 @@
   max-height: none;
 }
 
-/* Fix widget content sizing */
+/* Widget body grows with content; the page handles long-dashboard scrolling. */
 .widget-body {
   flex: 1;
   overflow-y: visible;
@@ -195,7 +195,7 @@
 }
 
 
-/* Final radar chart sizing guard: Chart.js inline canvas dimensions must not overflow widgets. */
+/* Radar chart sizing is centralized here so theme files do not override it. */
 .widget-body .radar-values {
   display: flex;
   flex-wrap: wrap;
@@ -209,8 +209,9 @@
 }
 
 .widget-body .radar-chart-container canvas {
-  width: 100% !important;
-  height: min(250px, 40vh) !important;
-  max-height: min(250px, 40vh) !important;
+  width: 100%;
+  height: auto;
+  max-height: min(250px, 40vh);
+  aspect-ratio: 16 / 9;
   object-fit: contain;
 }

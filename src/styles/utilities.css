@@ -522,8 +522,8 @@
   gap: 0.75rem;
   width: 100%;
   padding: 0.75rem;
-  /* Let rich widgets grow to content height instead of creating nested scroll panes. */
-  grid-auto-rows: auto;
+  /* Preserve the 250px widget baseline while allowing rich widgets to grow naturally. */
+  grid-auto-rows: minmax(250px, auto);
   align-items: start;
 }
 
@@ -551,7 +551,7 @@
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   overflow: visible;
   height: auto;
-  min-height: 0;
+  min-height: 250px;
   display: flex;
   flex-direction: column;
   align-self: start;

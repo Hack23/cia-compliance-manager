@@ -334,24 +334,3 @@ button.lightbutton:hover:active {
 [data-testid^="widget-container"] {
   overflow: visible;
 }
-
-
-/* Final radar chart sizing guard: Chart.js inline canvas dimensions must not overflow widgets. */
-.widget-body .radar-values {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.widget-body .radar-chart-container {
-  height: auto;
-  max-height: none;
-  overflow: visible;
-}
-
-.widget-body .radar-chart-container canvas {
-  width: 100% !important;
-  height: min(250px, 40vh) !important;
-  max-height: min(250px, 40vh) !important;
-  object-fit: contain;
-}
