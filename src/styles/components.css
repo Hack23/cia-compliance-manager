@@ -2342,9 +2342,6 @@ button[role="tab"]:not([aria-selected="true"]) {
   --widget-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
   --widget-tab-min-width: 5.25rem; /* Minimum usable tab width for compact widget layouts. */
   --widget-tab-font-size: 0.78rem;
-  --widget-grid-breakpoint-sm: 360px;
-  --widget-grid-breakpoint-md: 520px;
-  --widget-grid-breakpoint-lg: 560px;
   --widget-accent-confidentiality: #7b1fa2;
   --widget-accent-integrity: #2e7d32;
   --widget-accent-availability: #1565c0;
@@ -2520,7 +2517,7 @@ button[role="tab"]:not([aria-selected="true"]) {
 button[role="tab"] {
   flex: 1 1 var(--widget-tab-min-width);
   min-width: 0;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0.45rem 0.6rem;
   font-size: var(--widget-tab-font-size);
   letter-spacing: 0.01em;
@@ -2568,7 +2565,7 @@ button[role="tab"] > div > span:not([aria-hidden="true"]) {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-/* Keep container thresholds synchronized with --widget-grid-breakpoint-sm (360px), --widget-grid-breakpoint-md (520px), and --widget-grid-breakpoint-lg (560px); var() is invalid in container conditions. */
+/* Container threshold values are authoritative here because var() is invalid in container conditions. */
 @container widget-body (min-width: 360px) {
   :is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1.sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
