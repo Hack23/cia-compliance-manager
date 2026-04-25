@@ -2340,7 +2340,7 @@ button[role="tab"]:not([aria-selected="true"]) {
   --widget-subtle-surface: #f8fafc;
   --widget-header-surface: linear-gradient(135deg, #f8fafc 0%, #eef6ff 100%);
   --widget-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
-  --widget-tab-min-width: 5.25rem; /* Keeps 4 compact tabs usable inside narrow dashboard widgets. */
+  --widget-tab-min-width: 5.25rem; /* Minimum usable tab width for compact widget layouts. */
   --widget-tab-font-size: 0.78rem;
   --widget-grid-breakpoint-sm: 360px;
   --widget-grid-breakpoint-md: 520px;
@@ -2559,43 +2559,34 @@ button[role="tab"] > div > span:not([aria-hidden="true"]) {
  * grids respond to the widget body width. Standard Tailwind behavior remains
  * unchanged outside widget containers.
  */
-.widget-body .grid.grid-cols-1:is(.md\:grid-cols-2, .sm\:grid-cols-2),
-[data-testid^="widget-container"] .grid.grid-cols-1:is(.md\:grid-cols-2, .sm\:grid-cols-2),
-.widget-body .grid.grid-cols-1:is(.sm\:grid-cols-3, .md\:grid-cols-3),
-[data-testid^="widget-container"] .grid.grid-cols-1:is(.sm\:grid-cols-3, .md\:grid-cols-3) {
+:is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1:is(.md\:grid-cols-2, .sm\:grid-cols-2),
+:is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1:is(.sm\:grid-cols-3, .md\:grid-cols-3) {
   grid-template-columns: minmax(0, 1fr);
 }
 
-.widget-body .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-5,
-[data-testid^="widget-container"] .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-5 {
+:is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-5 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-/* Keep numeric values synchronized with --widget-grid-breakpoint-*; var() is invalid in container conditions. */
+/* Keep container thresholds synchronized with --widget-grid-breakpoint-sm (360px), --widget-grid-breakpoint-md (520px), and --widget-grid-breakpoint-lg (560px); var() is invalid in container conditions. */
 @container widget-body (min-width: 360px) {
-  .widget-body .grid.grid-cols-1.sm\:grid-cols-2,
-  [data-testid^="widget-container"] .grid.grid-cols-1.sm\:grid-cols-2 {
+  :is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1.sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @container widget-body (min-width: 560px) {
-  .widget-body .grid.grid-cols-1.md\:grid-cols-2,
-  [data-testid^="widget-container"] .grid.grid-cols-1.md\:grid-cols-2 {
+  :is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1.md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @container widget-body (min-width: 520px) {
-  .widget-body .grid.grid-cols-1.sm\:grid-cols-3,
-  .widget-body .grid.grid-cols-1.md\:grid-cols-3,
-  [data-testid^="widget-container"] .grid.grid-cols-1.sm\:grid-cols-3,
-  [data-testid^="widget-container"] .grid.grid-cols-1.md\:grid-cols-3 {
+  :is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1:is(.sm\:grid-cols-3, .md\:grid-cols-3) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .widget-body .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-5,
-  [data-testid^="widget-container"] .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-5 {
+  :is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
