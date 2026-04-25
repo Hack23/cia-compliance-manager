@@ -522,6 +522,7 @@
   gap: 0.75rem;
   width: 100%;
   padding: 0.75rem;
+  /* Let rich widgets grow to content height instead of creating nested scroll panes. */
   grid-auto-rows: auto;
   align-items: start;
 }

@@ -217,7 +217,7 @@ const BusinessImpactAnalysisWidget: React.FC<
         className={cn(WidgetClasses.card, "bg-gray-50 dark:bg-gray-800 mb-sm")}
         data-testid={BUSINESS_IMPACT_WIDGET_IDS.section(`impact-${category.toLowerCase()}`)}
       >
-        <div className="flex flex-wrap justify-between items-start gap-xs mb-sm">
+        <div className="flex flex-wrap justify-start items-start gap-sm mb-sm">
           <h3 className={cn(WidgetClasses.subheading, "flex min-w-0 items-start")}>
             <span className="mr-sm" aria-hidden="true">{icons[category] || "📊"}</span>
             {category} Impact

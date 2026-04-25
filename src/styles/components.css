@@ -2548,7 +2548,7 @@ button[role="tab"] > div > span:not([aria-hidden="true"]) {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-/* Container threshold values are authoritative here because var() is invalid in container conditions. */
+/* Container threshold values are authoritative here; CSS custom properties are not interoperable in container conditions across the browser baseline yet. */
 /* 360px: sm:grid-cols-2 summary pairs get about 170px per card in mobile/full-width widgets. */
 @container widget-body (min-width: 360px) {
   :is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1.sm\:grid-cols-2 {

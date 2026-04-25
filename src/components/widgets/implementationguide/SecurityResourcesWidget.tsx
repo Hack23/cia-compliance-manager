@@ -274,6 +274,8 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   // Determine total pages
   const totalPages = Math.ceil(filteredResources.length / resourcesPerPage);
 
+  const securityLevelRowClass = "flex flex-wrap justify-between gap-xs";
+
   // Get implementation guides - component-specific guidance
   const implementationGuides = useMemo(() => {
     try {
@@ -434,15 +436,15 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
               <div className={cn(WidgetClasses.card, "bg-gray-50 dark:bg-gray-800 shadow-none")}>
                 <p className={cn(WidgetClasses.body, "mb-sm font-medium")}>Selected Security Levels:</p>
                 <dl className={cn(WidgetClasses.labelNormal, "mb-sm")}>
-                  <div className="flex flex-wrap justify-between gap-xs">
+                  <div className={securityLevelRowClass}>
                     <dt>Confidentiality:</dt>
                     <dd className="font-medium">{confidentialityLevel}</dd>
                   </div>
-                  <div className="flex flex-wrap justify-between gap-xs mb-xs">
+                  <div className={cn(securityLevelRowClass, "mb-xs")}>
                     <dt>Integrity:</dt>
                     <dd className="font-medium">{integrityLevel}</dd>
                   </div>
-                  <div className="flex flex-wrap justify-between gap-xs mb-xs">
+                  <div className={cn(securityLevelRowClass, "mb-xs")}>
                     <dt>Availability:</dt>
                     <dd className="font-medium">{availabilityLevel}</dd>
                   </div>
