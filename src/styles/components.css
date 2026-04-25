@@ -2334,6 +2334,11 @@ button[role="tab"]:not([aria-selected="true"]) {
   --widget-header-surface: linear-gradient(135deg, #f8fafc 0%, #eef6ff 100%);
   --widget-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
   --widget-tab-min-width: 5.25rem; /* Keeps 4 compact tabs usable inside narrow dashboard widgets. */
+  --widget-accent-confidentiality: #7b1fa2;
+  --widget-accent-integrity: #2e7d32;
+  --widget-accent-availability: #1565c0;
+  --widget-accent-business: #f59e0b;
+  --widget-accent-implementation: #0d9488;
 }
 
 .dark {
@@ -2598,7 +2603,7 @@ button[role="tab"] > div > span:not([aria-hidden="true"]) {
 .widget-body h5,
 [data-testid^="widget-container"] p,
 [data-testid^="widget-container"] li {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   word-break: break-word;
 }
 
@@ -2647,18 +2652,18 @@ button[role="tab"] > div > span:not([aria-hidden="true"]) {
   border-top: 3px solid var(--accent-stripe, var(--primary-color));
 }
 
-[data-testid="widget-container-widget-confidentiality-impact"] { --accent-stripe: #7b1fa2; }
-[data-testid="widget-container-widget-integrity-impact"] { --accent-stripe: #2e7d32; }
-[data-testid="widget-container-widget-availability-impact"] { --accent-stripe: #1565c0; }
+[data-testid="widget-container-widget-confidentiality-impact"] { --accent-stripe: var(--widget-accent-confidentiality); }
+[data-testid="widget-container-widget-integrity-impact"] { --accent-stripe: var(--widget-accent-integrity); }
+[data-testid="widget-container-widget-availability-impact"] { --accent-stripe: var(--widget-accent-availability); }
 [data-testid="widget-container-widget-security-level"],
 [data-testid="widget-container-widget-security-summary"] { --accent-stripe: var(--primary-color); }
 [data-testid="widget-container-widget-value-creation"],
 [data-testid="widget-container-widget-cost-estimation"],
 [data-testid="widget-container-widget-business-impact"],
-[data-testid="widget-container-widget-compliance-status"] { --accent-stripe: #f59e0b; }
+[data-testid="widget-container-widget-compliance-status"] { --accent-stripe: var(--widget-accent-business); }
 [data-testid="widget-container-widget-technical-details"],
 [data-testid="widget-container-widget-security-visualization"],
-[data-testid="widget-container-widget-security-resources"] { --accent-stripe: #0d9488; }
+[data-testid="widget-container-widget-security-resources"] { --accent-stripe: var(--widget-accent-implementation); }
 
 @media (max-width: 768px) {
   .dashboard-grid-container {
