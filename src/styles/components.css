@@ -2604,7 +2604,6 @@ button[role="tab"] > div > span:not([aria-hidden="true"]) {
 [data-testid^="widget-container"] p,
 [data-testid^="widget-container"] li {
   overflow-wrap: break-word;
-  word-break: break-word;
 }
 
 .widget-container,
