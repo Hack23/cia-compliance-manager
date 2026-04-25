@@ -2666,6 +2666,7 @@ button.more-info:hover::before {
 
 
 
+/* Grid replaces WidgetClasses.flexRow here so gap and columns use one layout model. */
 .security-resources-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
