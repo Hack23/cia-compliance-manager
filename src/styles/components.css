@@ -2445,13 +2445,9 @@ button[role="tab"]:not([aria-selected="true"]) {
 .widget-body .section-container,
 .widget-body .content-section,
 .widget-body .metric-card,
-.widget-body .security-card,
-.widget-body section[class*="border"],
 [data-testid^="widget-container"] .section-container,
 [data-testid^="widget-container"] .content-section,
-[data-testid^="widget-container"] .metric-card,
-[data-testid^="widget-container"] .security-card,
-[data-testid^="widget-container"] section[class*="border"] {
+[data-testid^="widget-container"] .metric-card {
   border-color: var(--widget-inner-border);
   background-color: var(--widget-subtle-surface);
 }
