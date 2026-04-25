@@ -2321,6 +2321,13 @@ button[role="tab"]:not([aria-selected="true"]) {
 
 /* ========== Dashboard widget UX refinements ========== */
 /* Keep widget cards readable without the previous nested blue-outline effect. */
+/**
+ * Widget design tokens used by the dashboard refinement rules below.
+ * Neutral shell tokens keep surfaces readable while preserving semantic status
+ * colors for badges, risk levels, and CIA component text. Accent tokens are
+ * decorative 3px top borders only; they complement labels/icons and are not
+ * the sole source of meaning, preserving accessibility for color-blind users.
+ */
 :root {
   /*
    * Widget UI tokens intentionally use neutral slate colors so security-level
@@ -2542,18 +2549,16 @@ button[role="tab"] > div > span:not([aria-hidden="true"]) {
   min-width: 0;
 }
 
-/* Container-aware widget grids: viewport breakpoints are too wide for 3-col dashboard cells. */
-.widget-body .grid.grid-cols-1.md\:grid-cols-2,
-.widget-body .grid.grid-cols-1.sm\:grid-cols-2,
-[data-testid^="widget-container"] .grid.grid-cols-1.md\:grid-cols-2,
-[data-testid^="widget-container"] .grid.grid-cols-1.sm\:grid-cols-2 {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.widget-body .grid.grid-cols-1.sm\:grid-cols-3,
-.widget-body .grid.grid-cols-1.md\:grid-cols-3,
-[data-testid^="widget-container"] .grid.grid-cols-1.sm\:grid-cols-3,
-[data-testid^="widget-container"] .grid.grid-cols-1.md\:grid-cols-3 {
+/**
+ * Container-aware widget grids. Dashboard cells can be much narrower than
+ * viewport breakpoints, so these scoped overrides make Tailwind responsive
+ * grids respond to the widget body width. Standard Tailwind behavior remains
+ * unchanged outside widget containers.
+ */
+.widget-body .grid.grid-cols-1:is(.md\:grid-cols-2, .sm\:grid-cols-2),
+[data-testid^="widget-container"] .grid.grid-cols-1:is(.md\:grid-cols-2, .sm\:grid-cols-2),
+.widget-body .grid.grid-cols-1:is(.sm\:grid-cols-3, .md\:grid-cols-3),
+[data-testid^="widget-container"] .grid.grid-cols-1:is(.sm\:grid-cols-3, .md\:grid-cols-3) {
   grid-template-columns: minmax(0, 1fr);
 }
 
