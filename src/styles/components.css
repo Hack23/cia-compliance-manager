@@ -2502,6 +2502,7 @@ button.more-info:hover::before {
   border-bottom-color: var(--widget-inner-border);
 }
 
+/* Reset TabContainer space-x margins so wrapped widget tabs rely only on gap spacing. */
 .widget-container [role="tablist"] > * + *,
 [data-testid^="widget-container"] [role="tablist"] > * + * {
   margin-inline-start: 0;

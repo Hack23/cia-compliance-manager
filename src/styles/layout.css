@@ -210,7 +210,7 @@
 
 .widget-body .radar-chart-container canvas {
   width: 100%;
-  /* 100% width drives a 16:9 calculated height, capped to avoid oversized Chart.js inline dimensions. */
+  /* 16:9 sets preferred proportions; max-height intentionally caps tall charts in narrow widgets even if that compresses the ratio. */
   max-height: min(250px, 40vh);
   aspect-ratio: 16 / 9;
   object-fit: contain;
