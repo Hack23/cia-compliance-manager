@@ -341,10 +341,10 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
           </p>
         </section>
 
-        <div className={WidgetClasses.flexRow}>
+        <div className={cn(WidgetClasses.flexRow, "security-resources-layout")}>
           {/* Filters and search - left column on larger screens */}
           <aside 
-            className="md:w-1/4"
+            className="security-resources-sidebar"
             aria-label="Resource filters and search"
           >
             <div className="mb-md">
@@ -434,15 +434,15 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
               <div className={cn(WidgetClasses.card, "bg-gray-50 dark:bg-gray-800 shadow-none")}>
                 <p className={cn(WidgetClasses.body, "mb-sm font-medium")}>Selected Security Levels:</p>
                 <dl className={cn(WidgetClasses.labelNormal, "mb-sm")}>
-                  <div className="flex justify-between">
+                  <div className="flex flex-wrap justify-between gap-xs">
                     <dt>Confidentiality:</dt>
                     <dd className="font-medium">{confidentialityLevel}</dd>
                   </div>
-                  <div className="flex justify-between mb-xs">
+                  <div className="flex flex-wrap justify-between gap-xs mb-xs">
                     <dt>Integrity:</dt>
                     <dd className="font-medium">{integrityLevel}</dd>
                   </div>
-                  <div className="flex justify-between mb-xs">
+                  <div className="flex flex-wrap justify-between gap-xs mb-xs">
                     <dt>Availability:</dt>
                     <dd className="font-medium">{availabilityLevel}</dd>
                   </div>
@@ -457,7 +457,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
           </aside>
 
           {/* Resources grid - right column on larger screens */}
-          <div className="md:w-3/4">
+          <div className="security-resources-list">
             {/* Resources list */}
             <div className="mb-md">
               <div className="flex justify-between items-center mb-sm">

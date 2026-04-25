@@ -27,7 +27,7 @@
   flex: 1;
   min-height: 0;
   min-width: 0;
-  overflow-y: auto;
+  overflow-y: visible;
   overflow-x: hidden;
   padding: 0.75rem; /* Default widget body padding; reduced on small screens via @media (max-width: 768px) */
 }
@@ -53,13 +53,13 @@
   overflow: hidden;
   height: auto;
   min-height: 250px; /* Consolidated: single consistent value */
-  max-height: 700px;
+  max-height: none;
 }
 
-/* Fix widget content scrolling */
+/* Fix widget content sizing */
 .widget-body {
   flex: 1;
-  overflow-y: auto;
+  overflow-y: visible;
   overflow-x: hidden;
   padding: 0.75rem; /* Default widget body padding; reduced on small screens via @media (max-width: 768px) */
 }
@@ -159,4 +159,58 @@
     font-size: 0.85rem; /* Smaller font on mobile */
     line-height: 1.3; /* Tighter line height */
   }
+}
+
+/* Final widget sizing guard: dashboard cards must grow with content, not create nested scroll panes. */
+.grid-widget-container,
+.widget-container,
+[data-testid^="widget-container"] {
+  height: auto;
+  align-self: start;
+  overflow: visible;
+}
+
+.widget-container > .widget-body,
+[data-testid^="widget-container"] > .widget-body,
+[data-testid^="widget-container"] > div:nth-child(2) {
+  flex: 0 0 auto;
+  height: auto;
+  overflow-y: visible;
+  overflow-x: hidden;
+}
+
+/* Width guard: widgets should fill their dashboard grid cell while keeping auto height. */
+.grid-widget-container,
+.widget-container,
+[data-testid^="widget-container"] {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Avoid CSS overflow axis coercion: hidden x + visible y computes to auto y in browsers. */
+.widget-container > .widget-body,
+[data-testid^="widget-container"] > .widget-body,
+[data-testid^="widget-container"] > div:nth-child(2) {
+  overflow: visible;
+}
+
+
+/* Final radar chart sizing guard: Chart.js inline canvas dimensions must not overflow widgets. */
+.widget-body .radar-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.widget-body .radar-chart-container {
+  height: auto;
+  max-height: none;
+  overflow: visible;
+}
+
+.widget-body .radar-chart-container canvas {
+  width: 100% !important;
+  height: min(250px, 40vh) !important;
+  max-height: min(250px, 40vh) !important;
+  object-fit: contain;
 }

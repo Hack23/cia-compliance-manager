@@ -260,7 +260,7 @@ const CIAClassificationApp: React.FC = () => {
         </div>
 
         {/* Container with defined width to ensure grid fits properly */}
-        <div className="w-full max-w-[1600px] mx-auto">
+        <div className="w-full max-w-[2200px] mx-auto">
           <div
             data-testid={APP_TEST_IDS.DASHBOARD_GRID}
             className="dashboard-grid-container"

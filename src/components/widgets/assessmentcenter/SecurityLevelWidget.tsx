@@ -262,7 +262,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           </div>
         )}
 
-        <div className={WidgetClasses.grid2Cols}>
+        <div className={cn(WidgetClasses.grid2Cols, "security-level-config-layout")}>
           {/* Security level selectors */}
           <div>
             <h3 className={WidgetClasses.heading}>

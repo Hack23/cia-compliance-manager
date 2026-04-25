@@ -6,11 +6,11 @@
 }
 
 /* Widget styles aligned with actual DOM structure */
-[data-testid^="widget-"]:where(:not([role="tabpanel"])) {
+[data-testid^="widget-container"] {
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  height: 100%; /* Ensure widgets fill their containers */
+  height: auto; /* Let cards size to content instead of stretching grid rows */
   max-height: none; /* Remove max-height restrictions */
   min-height: 0; /* Remove min-height restrictions */
   display: flex;
@@ -19,17 +19,17 @@
   transition: all 0.2s;
 }
 
-.dark [data-testid^="widget-"]:where(:not([role="tabpanel"])) {
+.dark [data-testid^="widget-container"] {
   background-color: var(--card-background);
   border: 1px solid var(--border-color);
 }
 
-[data-testid^="widget-"]:where(:not([role="tabpanel"])):hover {
+[data-testid^="widget-container"]:hover {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-.dark [data-testid^="widget-"]:where(:not([role="tabpanel"])):hover {
+.dark [data-testid^="widget-container"]:hover {
   box-shadow: 0 0 15px rgba(0, 204, 102, 0.2);
 }
 
@@ -85,7 +85,7 @@
 .widget-container > div:nth-child(2),
 [data-testid^="widget-container"] > div:nth-child(2) {
   padding: 0.75rem;
-  overflow-y: auto;
+  overflow-y: visible;
   flex: 1;
   min-height: 0;
   min-width: 0;
@@ -205,10 +205,10 @@ span[class*="text-blue"] {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-/* Add these new styles for better overflow handling in widgets */
+/* Widget body children must size to content; constrained max-height caused tab panels to clip. */
 .widget-body > div,
 [data-testid^="widget-container"] > div:nth-child(2) > div {
-  max-height: 100%;
+  max-height: none;
 }
 
 /* Fix for tables and data layout within widgets */
@@ -245,7 +245,7 @@ input:focus {
 
 /* Widget header styling aligned with CIAClassificationApp structure */
 .border-b.border-gray-200.dark\:border-gray-700.px-4.py-3.flex.justify-between.items-center,
-[data-testid^="widget-"]:where(:not([role="tabpanel"])) > div:first-child {
+[data-testid^="widget-container"] > div:first-child {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -262,7 +262,7 @@ input:focus {
 }
 
 /* Reduce header text size and make it green */
-[data-testid^="widget-"]:where(:not([role="tabpanel"])) > div:first-child h3,
+[data-testid^="widget-container"] > div:first-child h3,
 .border-b.border-gray-200.dark\:border-gray-700.px-4.py-3.flex.justify-between.items-center
   h3 {
   margin: 0;
@@ -277,7 +277,7 @@ input:focus {
 }
 
 /* Widget content area aligned with CIAClassificationApp structure */
-[data-testid^="widget-"]:where(:not([role="tabpanel"])) > div.p-4 {
+[data-testid^="widget-container"] > div.p-4 {
   padding: 0.75rem; /* Consistent padding */
   flex: 1 1 auto;
   overflow-y: auto; /* Change to auto for better scrolling */
@@ -424,7 +424,7 @@ input:focus {
 .widget-body {
   padding: 0.75rem; /* Consolidated: consistent widget body padding */
   flex: 1 1 auto;
-  overflow-y: auto;
+  overflow-y: visible;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
@@ -455,7 +455,6 @@ input:focus {
 /* Ensure text elements have minimum height/width */
 .technical-value,
 .metric-value,
-[class*="value"],
 .value {
   min-height: 20px;
   min-width: 60px;
@@ -1170,7 +1169,7 @@ textarea:focus {
 }
 
 /* Ensure widget content text is visible in dark mode */
-.dark [data-testid^="widget-"] .widget-body {
+.dark [data-testid^="widget-container"] .widget-body {
   color: var(--text-color);
 }
 
@@ -1199,9 +1198,9 @@ textarea:focus {
 }
 
 /* Standardize widget content overflow handling */
-[data-testid^="widget-"]:where(:not([role="tabpanel"])) > div.p-4,
+[data-testid^="widget-container"] > div.p-4,
 .widget-body {
-  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-y: visible; /* Let widgets expand; page-level scrolling handles long content */
   overflow-x: hidden; /* Prevent horizontal scrolling */
   scrollbar-width: thin; /* Firefox */
   height: auto; /* Don't force a specific height */
@@ -1211,19 +1210,19 @@ textarea:focus {
 }
 
 /* Optimize scrollbars */
-[data-testid^="widget-"]:where(:not([role="tabpanel"])) > div.p-4::-webkit-scrollbar,
+[data-testid^="widget-container"] > div.p-4::-webkit-scrollbar,
 .widget-body::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
-[data-testid^="widget-"]:where(:not([role="tabpanel"])) > div.p-4::-webkit-scrollbar-thumb,
+[data-testid^="widget-container"] > div.p-4::-webkit-scrollbar-thumb,
 .widget-body::-webkit-scrollbar-thumb {
   background: var(--primary-color);
   border-radius: 3px;
 }
 
-.dark [data-testid^="widget-"]:where(:not([role="tabpanel"])) > div.p-4::-webkit-scrollbar-thumb,
+.dark [data-testid^="widget-container"] > div.p-4::-webkit-scrollbar-thumb,
 .dark .widget-body::-webkit-scrollbar-thumb {
   background: rgba(0, 204, 255, 0.5);
 }
@@ -1441,9 +1440,9 @@ textarea:focus {
 .dark input,
 .dark select,
 .dark textarea,
-.dark [data-testid^="widget-"] p,
-.dark [data-testid^="widget-"] div,
-.dark [data-testid^="widget-"] span:not([class*="icon"]):not([class*="text-purple"]):not([class*="text-green"]):not([class*="text-blue"]):not([class*="text-red"]):not([class*="text-yellow"]):not([class*="text-orange"]):not([class*="color-"]):not(.status-badge):not(.security-badge) {
+.dark [data-testid^="widget-container"] p,
+.dark [data-testid^="widget-container"] div,
+.dark [data-testid^="widget-container"] span:not([class*="icon"]):not([class*="text-purple"]):not([class*="text-green"]):not([class*="text-blue"]):not([class*="text-red"]):not([class*="text-yellow"]):not([class*="text-orange"]):not([class*="color-"]):not(.status-badge):not(.security-badge) {
   color: var(--text-color);
 }
 
@@ -1451,9 +1450,9 @@ textarea:focus {
 .dark h4,
 .dark h5,
 .dark h6,
-.dark [data-testid^="widget-"] h4,
-.dark [data-testid^="widget-"] h5,
-.dark [data-testid^="widget-"] h6 {
+.dark [data-testid^="widget-container"] h4,
+.dark [data-testid^="widget-container"] h5,
+.dark [data-testid^="widget-container"] h6 {
   color: #ffffff;
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
   font-weight: 600;
@@ -1481,9 +1480,9 @@ textarea:focus {
 }
 
 /* Ensure visibility in recommendation sections */
-.dark [data-testid^="widget-"] [data-testid$="-recommendation-0"],
-.dark [data-testid^="widget-"] [data-testid$="-recommendation-1"],
-.dark [data-testid^="widget-"] [data-testid$="-recommendation-2"] {
+.dark [data-testid^="widget-container"] [data-testid$="-recommendation-0"],
+.dark [data-testid^="widget-container"] [data-testid$="-recommendation-1"],
+.dark [data-testid^="widget-container"] [data-testid$="-recommendation-2"] {
   color: var(--text-color);
 }
 
@@ -2164,8 +2163,8 @@ button.more-info:hover::before {
 }
 
 /* Ensure tab gap is consistent within widgets without overriding Tailwind utilities */
-[data-testid^="widget-"] nav.flex,
-[data-testid^="widget-"] nav[role="tablist"] {
+[data-testid^="widget-container"] nav.flex,
+[data-testid^="widget-container"] nav[role="tablist"] {
   gap: 0.375rem; /* Consistent spacing between tabs */
 }
 
@@ -2222,15 +2221,15 @@ button[role="tab"]:not([aria-selected="true"]) {
 }
 
 /* Tab content area styling - reduce empty space */
-[data-testid^="widget-"] .tab-content,
-[data-testid^="widget-"] div.tab-content {
+[data-testid^="widget-container"] .tab-content,
+[data-testid^="widget-container"] div.tab-content {
   padding: 0;
   margin-top: 0.75rem;
 }
 
 /* Tab panels should have consistent minimal padding - use semantic ARIA attributes */
 /* Only apply padding to visible (not hidden) tab panels */
-[data-testid^="widget-"] [role="tabpanel"]:not([hidden]) {
+[data-testid^="widget-container"] [role="tabpanel"]:not([hidden]) {
   padding: 0.5rem 0;
 }
 
@@ -2363,32 +2362,15 @@ button[role="tab"]:not([aria-selected="true"]) {
   --widget-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
 }
 
-.dashboard-grid-container {
-  gap: 1rem;
-  padding: 1rem;
-  grid-auto-rows: minmax(320px, auto);
-}
-
-.grid-widget-container {
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-  overflow: visible;
-  min-height: 320px;
-}
-
-.dark .grid-widget-container {
-  background: transparent;
-}
-
 .widget-container,
 [data-testid^="widget-container"] {
   background: var(--widget-surface);
   border: 1px solid var(--widget-shell-border);
   border-radius: 0.75rem;
   box-shadow: var(--widget-shadow);
-  min-height: 320px;
+  min-height: 0;
   max-height: none;
+  height: auto;
 }
 
 .widget-container:hover,
@@ -2666,17 +2648,75 @@ button[role="tab"] > div > span:not([aria-hidden="true"]) {
 [data-testid="widget-container-widget-security-visualization"],
 [data-testid="widget-container-widget-security-resources"] { --accent-stripe: var(--widget-accent-implementation); }
 
+
+
+.security-resources-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.security-resources-sidebar,
+.security-resources-list {
+  min-width: 0;
+  width: 100%;
+}
+
+.security-resources-sidebar dd,
+.security-resources-sidebar dt {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+@container widget-body (min-width: 760px) {
+  .security-resources-layout {
+    grid-template-columns: minmax(14rem, 0.28fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+/* Rich first-row widgets need more horizontal space than generic viewport breakpoints provide. */
+.security-level-config-layout,
+.business-impact-card-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@container widget-body (min-width: 680px) {
+  .security-level-config-layout {
+    grid-template-columns: minmax(16rem, 0.9fr) minmax(0, 1.1fr);
+  }
+
+  .business-impact-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.widget-body [data-testid^="widget-"]:not([data-testid^="widget-container"]),
+[data-testid^="widget-container"] [data-testid^="widget-"]:not([data-testid^="widget-container"]) {
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  overflow: visible;
+}
+
+.widget-body section,
+.widget-body [role="region"],
+[data-testid^="widget-container"] section,
+[data-testid^="widget-container"] [role="region"] {
+  min-height: 0;
+}
+
 @media (max-width: 768px) {
   .dashboard-grid-container {
     gap: 0.75rem;
     padding: 0.75rem;
-    grid-auto-rows: minmax(280px, auto);
+    grid-auto-rows: auto;
   }
 
   .grid-widget-container,
   .widget-container,
   [data-testid^="widget-container"] {
-    min-height: 280px;
+    min-height: 0;
   }
 
   .widget-body,

@@ -443,8 +443,7 @@
 }
 
 .metric-value,
-.value-text,
-[class*="value"] {
+.value-text {
   font-size: 1.125rem !important;
   font-weight: 600 !important;
   color: var(--text-color) !important;
@@ -523,8 +522,10 @@
   gap: 0.75rem;
   width: 100%;
   padding: 0.75rem;
-  grid-auto-rows: minmax(250px, auto);
+  grid-auto-rows: auto;
+  align-items: start;
 }
+
 
 /* Responsive breakpoints for dashboard grid */
 @media (min-width: 640px) {
@@ -536,8 +537,14 @@
 
 @media (min-width: 1024px) {
   .dashboard-grid-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1900px) {
+  .dashboard-grid-container {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.75rem;
   }
 }
 
@@ -547,11 +554,12 @@
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  overflow: hidden;
-  height: 100%;
-  min-height: 250px;
+  overflow: visible;
+  height: auto;
+  min-height: 0;
   display: flex;
   flex-direction: column;
+  align-self: start;
 }
 
 /* Dark mode styles for grid widget containers */
