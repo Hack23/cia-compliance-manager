@@ -2541,9 +2541,10 @@ button[role="tab"] > div {
 }
 
 button[role="tab"] > div > span:not([aria-hidden="true"]) {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  overflow-wrap: break-word;
 }
 
 [role="tabpanel"]:not([hidden]) {
@@ -2566,18 +2567,14 @@ button[role="tab"] > div > span:not([aria-hidden="true"]) {
 }
 
 /* Container threshold values are authoritative here because var() is invalid in container conditions. */
+/* 360px: compact summary pairs can use two columns without crowding. */
 @container widget-body (min-width: 360px) {
   :is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1.sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@container widget-body (min-width: 560px) {
-  :is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1.md\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
+/* 520px: metric and overview grids have enough room for three/five compact columns. */
 @container widget-body (min-width: 520px) {
   :is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1:is(.sm\:grid-cols-3, .md\:grid-cols-3) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2585,6 +2582,13 @@ button[role="tab"] > div > span:not([aria-hidden="true"]) {
 
   :is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* 560px: detail-heavy two-column widgets wait longer to avoid text collisions. */
+@container widget-body (min-width: 560px) {
+  :is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1.md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
