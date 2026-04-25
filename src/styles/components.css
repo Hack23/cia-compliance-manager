@@ -2504,7 +2504,6 @@ button.more-info:hover::before {
 
 .widget-container [role="tablist"] > * + *,
 [data-testid^="widget-container"] [role="tablist"] > * + * {
-  margin-left: 0;
   margin-inline-start: 0;
 }
 
