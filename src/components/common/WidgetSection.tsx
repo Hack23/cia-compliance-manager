@@ -68,7 +68,7 @@ export const WidgetSection: React.FC<WidgetSectionProps> = ({
 
   return (
     <section
-      className={`p-sm border rounded-md shadow-sm ${variantClasses[variant]} ${className}`}
+      className={`p-sm border rounded-md ${variantClasses[variant]} ${className}`}
       data-testid={testId}
       aria-labelledby={headingId}
     >

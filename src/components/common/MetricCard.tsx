@@ -101,7 +101,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
 
   return (
     <div
-      className={`p-sm border rounded-md shadow-sm ${colors.container} ${className}`}
+      className={`p-sm border rounded-md ${colors.container} ${className}`}
       data-testid={testId}
       aria-label={ariaLabel || `${label}: ${value}${unit || ''}`}
     >
