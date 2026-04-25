@@ -2322,6 +2322,10 @@ button[role="tab"]:not([aria-selected="true"]) {
 /* ========== Dashboard widget UX refinements ========== */
 /* Keep widget cards readable without the previous nested blue-outline effect. */
 :root {
+  /*
+   * Widget UI tokens intentionally use neutral slate colors so security-level
+   * semantic colors remain reserved for risk, CIA component, and status cues.
+   */
   --widget-shell-border: rgba(15, 23, 42, 0.14);
   --widget-inner-border: rgba(15, 23, 42, 0.12);
   --widget-muted-border: rgba(100, 116, 139, 0.18);
@@ -2329,6 +2333,7 @@ button[role="tab"]:not([aria-selected="true"]) {
   --widget-subtle-surface: #f8fafc;
   --widget-header-surface: linear-gradient(135deg, #f8fafc 0%, #eef6ff 100%);
   --widget-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  --widget-tab-min-width: 8rem; /* Fits labels like "Business Value" without crowding. */
 }
 
 .dark {
@@ -2452,10 +2457,18 @@ button[role="tab"]:not([aria-selected="true"]) {
   background-color: var(--widget-subtle-surface);
 }
 
-.widget-body [class*="border-blue"]:not([class*="border-l"]),
-.widget-body [class*="border-info"]:not([class*="border-l"]),
-[data-testid^="widget-container"] [class*="border-blue"]:not([class*="border-l"]),
-[data-testid^="widget-container"] [class*="border-info"]:not([class*="border-l"]) {
+.widget-body [class~="border-blue-200"]:not([class*="border-l"]),
+.widget-body [class~="border-blue-300"]:not([class*="border-l"]),
+.widget-body [class~="border-blue-400"]:not([class*="border-l"]),
+.widget-body [class~="border-info"]:not([class*="border-l"]),
+.widget-body [class~="border-info-light"]:not([class*="border-l"]),
+.widget-body [class~="border-info-dark"]:not([class*="border-l"]),
+[data-testid^="widget-container"] [class~="border-blue-200"]:not([class*="border-l"]),
+[data-testid^="widget-container"] [class~="border-blue-300"]:not([class*="border-l"]),
+[data-testid^="widget-container"] [class~="border-blue-400"]:not([class*="border-l"]),
+[data-testid^="widget-container"] [class~="border-info"]:not([class*="border-l"]),
+[data-testid^="widget-container"] [class~="border-info-light"]:not([class*="border-l"]),
+[data-testid^="widget-container"] [class~="border-info-dark"]:not([class*="border-l"]) {
   border-color: var(--widget-inner-border);
 }
 
@@ -2486,7 +2499,7 @@ button[role="tab"]:not([aria-selected="true"]) {
 }
 
 button[role="tab"] {
-  flex: 1 1 8rem;
+  flex: 1 1 var(--widget-tab-min-width);
   min-width: 0;
   min-height: 40px;
   padding: 0.55rem 0.75rem;
