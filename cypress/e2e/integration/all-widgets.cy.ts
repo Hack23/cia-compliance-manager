@@ -171,18 +171,33 @@ describe('All Widgets Integration', () => {
     });
 
     it('should have accessible labels on security level selectors', () => {
-      // Check that selectors exist and are visible (they have labels via their parent label elements)
-      cy.get(securityLevelWidget.availabilitySelect)
-        .should('exist')
-        .and('be.visible');
-      
-      cy.get(securityLevelWidget.integritySelect)
-        .should('exist')
-        .and('be.visible');
-      
-      cy.get(securityLevelWidget.confidentialitySelect)
-        .should('exist')
-        .and('be.visible');
+      const selectorLabels = [
+        {
+          selector: securityLevelWidget.availabilitySelect,
+          labelFor: 'availability-select',
+          label: 'Availability',
+        },
+        {
+          selector: securityLevelWidget.integritySelect,
+          labelFor: 'integrity-select',
+          label: 'Integrity',
+        },
+        {
+          selector: securityLevelWidget.confidentialitySelect,
+          labelFor: 'confidentiality-select',
+          label: 'Confidentiality',
+        },
+      ];
+
+      selectorLabels.forEach(({ selector, labelFor, label }) => {
+        cy.get(selector)
+          .should('exist')
+          .and('have.attr', 'id', labelFor);
+
+        cy.get(`label[for="${labelFor}"]`)
+          .should('exist')
+          .and('contain.text', label);
+      });
     });
   });
 
