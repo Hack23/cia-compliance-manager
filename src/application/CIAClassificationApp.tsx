@@ -260,7 +260,7 @@ const CIAClassificationApp: React.FC = () => {
         </div>
 
         {/* Full-window dashboard grid. The viewport-fit layout (≥1024px) sizes
-            rows so all 4 widget rows fit without page scroll; widgets use internal scrolling. */}
+            each three-widget row to fill the screen; widgets use internal scrolling. */}
         <div className="w-full mx-auto">
           <div
             data-testid={APP_TEST_IDS.DASHBOARD_GRID}

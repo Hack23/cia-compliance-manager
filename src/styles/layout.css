@@ -195,10 +195,10 @@
 }
 
 /*
- * Desktop / laptop viewport-fit dashboard:
- * utilities.css defines the 3-column grid and 4 equal rows at this breakpoint.
+ * Desktop / laptop row-by-row viewport dashboard:
+ * utilities.css defines the 3-column grid and full-height rows at this breakpoint.
  * Because layout.css is imported later, the matching widget sizing overrides
- * live here so the grid rows can shrink to fit one viewport while each widget
+ * live here so each focused grid row fills the viewport while each widget
  * body scrolls internally.
  */
 @media (min-width: 1024px) and (min-height: 700px) {
