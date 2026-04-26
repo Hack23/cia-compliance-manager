@@ -16,6 +16,38 @@ describe("ResourceCard Component", () => {
     tags: ["tag1", "tag2", "tag3"],
   };
 
+  const accentCases: Array<{
+    name: string;
+    component: SecurityResource["component"];
+    borderClass: string;
+    badgeClass: string;
+  }> = [
+    {
+      name: "confidentiality",
+      component: "confidentiality",
+      borderClass: "border-l-purple-500",
+      badgeClass: "bg-purple-100",
+    },
+    {
+      name: "integrity",
+      component: "integrity",
+      borderClass: "border-l-green-500",
+      badgeClass: "bg-green-100",
+    },
+    {
+      name: "availability",
+      component: "availability",
+      borderClass: "border-l-blue-500",
+      badgeClass: "bg-blue-100",
+    },
+    {
+      name: "general",
+      component: undefined,
+      borderClass: "border-l-gray-300",
+      badgeClass: "bg-gray-100",
+    },
+  ];
+
   it("renders without crashing", () => {
     render(<ResourceCard resource={mockResource} />);
 
@@ -87,39 +119,7 @@ describe("ResourceCard Component", () => {
     expect(screen.getByText("+2")).toBeInTheDocument();
   });
 
-  it.each(
-    [
-      {
-        name: "confidentiality",
-        component: "confidentiality",
-        borderClass: "border-l-purple-500",
-        badgeClass: "bg-purple-100",
-      },
-      {
-        name: "integrity",
-        component: "integrity",
-        borderClass: "border-l-green-500",
-        badgeClass: "bg-green-100",
-      },
-      {
-        name: "availability",
-        component: "availability",
-        borderClass: "border-l-blue-500",
-        badgeClass: "bg-blue-100",
-      },
-      {
-        name: "general",
-        component: undefined,
-        borderClass: "border-l-gray-300",
-        badgeClass: "bg-gray-100",
-      },
-    ] satisfies Array<{
-      name: string;
-      component: SecurityResource["component"];
-      borderClass: string;
-      badgeClass: string;
-    }>
-  )("applies $name accent classes", ({ component, borderClass, badgeClass }) => {
+  it.each(accentCases)("applies $name accent classes", ({ component, borderClass, badgeClass }) => {
     const testId = `resource-${component ?? "general"}`;
     render(
       <ResourceCard
