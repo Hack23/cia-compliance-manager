@@ -2733,9 +2733,22 @@ button.more-info:hover::before {
     display: none;
   }
 
+  /* Explicit display value (instead of `revert`) for predictable cross-browser behaviour. */
   .security-resources-sidebar-panel[hidden] {
-    display: revert;
+    display: block;
   }
+}
+
+/* Reusable two-line clamp utility used by ResourceCard for title + description.
+ * Replaces inline -webkit-line-clamp styles to deduplicate logic and keep
+ * presentation owned by the stylesheet. */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
 }
 
 /* Rich first-row widgets need more horizontal space than generic viewport breakpoints provide. */

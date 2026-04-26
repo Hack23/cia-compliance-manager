@@ -96,14 +96,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
     >
       <div className="flex justify-between items-start gap-sm mb-xs">
         <h3
-          className="text-body font-semibold text-gray-800 dark:text-gray-100 leading-snug min-w-0 flex-1"
-          style={{
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-            wordBreak: "break-word",
-          }}
+          className="line-clamp-2 text-body font-semibold text-gray-800 dark:text-gray-100 leading-snug min-w-0 flex-1"
           title={resource.title}
         >
           {resource.title}
@@ -117,13 +110,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
       </div>
 
       <p
-        className="text-xs text-gray-600 dark:text-gray-300 mb-xs leading-snug"
-        style={{
-          display: "-webkit-box",
-          WebkitLineClamp: 2,
-          WebkitBoxOrient: "vertical",
-          overflow: "hidden",
-        }}
+        className="line-clamp-2 text-xs text-gray-600 dark:text-gray-300 mb-xs leading-snug"
       >
         {truncateText(resource.description || "", 100)}
       </p>
