@@ -382,7 +382,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                 "security-resources-sidebar-panel",
                 !showFilters && "hidden"
               )}
-              aria-hidden={!showFilters}
+              aria-hidden={!showFilters ? "true" : "false"}
             >
             <div className="mb-md">
               <label
