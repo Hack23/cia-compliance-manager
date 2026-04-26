@@ -89,6 +89,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === " ") {
+          // Space scrolls the page on focusable non-button elements; prevent it to match native button activation.
           e.preventDefault();
           handleClick();
         } else if (e.key === "Enter") {
