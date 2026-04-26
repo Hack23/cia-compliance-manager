@@ -1,5 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SecurityLevel } from "../../../types/cia";
 import { EnhancedSecurityResource } from "../../../types/securityResources";
 import SecurityResourcesWidget from "./SecurityResourcesWidget";
@@ -107,6 +107,8 @@ vi.mock("../../../components/common/ResourceCard", () => ({
 }));
 
 describe("SecurityResourcesWidget", () => {
+  const originalViewportWidth = window.innerWidth;
+
   // Default props for the component
   const defaultProps = {
     availabilityLevel: "Moderate" as SecurityLevel,
@@ -118,6 +120,33 @@ describe("SecurityResourcesWidget", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
+
+  afterEach(() => {
+    vi.useRealTimers();
+    Object.defineProperty(window, "innerWidth", {
+      configurable: true,
+      value: originalViewportWidth,
+      writable: true,
+    });
+  });
+
+  const setViewportWidth = (width: number): void => {
+    Object.defineProperty(window, "innerWidth", {
+      configurable: true,
+      value: width,
+      writable: true,
+    });
+  };
+
+  const getFiltersPanel = (): HTMLElement => {
+    const panel = document.getElementById(`${defaultProps.testId}-filters-panel`);
+
+    if (!panel) {
+      throw new Error("Expected filters panel to be rendered");
+    }
+
+    return panel;
+  };
 
   it("renders without crashing", () => {
     render(<SecurityResourcesWidget {...defaultProps} />);
@@ -146,6 +175,69 @@ describe("SecurityResourcesWidget", () => {
       "placeholder",
       expect.stringContaining("Search")
     );
+  });
+
+  it("expands filters on mount for wide layouts", async () => {
+    setViewportWidth(800);
+
+    render(<SecurityResourcesWidget {...defaultProps} />);
+
+    await waitFor(() => {
+      expect(getFiltersPanel()).toHaveAttribute("aria-hidden", "false");
+    });
+  });
+
+  it("registers and cleans up the resize listener", () => {
+    const addListener = vi.spyOn(window, "addEventListener");
+    const removeListener = vi.spyOn(window, "removeEventListener");
+
+    const { unmount } = render(<SecurityResourcesWidget {...defaultProps} />);
+    const resizeListener = addListener.mock.calls.find(
+      ([eventName]) => eventName === "resize"
+    )?.[1];
+
+    expect(resizeListener).toBeTypeOf("function");
+
+    unmount();
+
+    expect(removeListener).toHaveBeenCalledWith("resize", resizeListener);
+  });
+
+  it("debounces wide-layout filter expansion on resize", () => {
+    vi.useFakeTimers();
+    setViewportWidth(500);
+
+    render(<SecurityResourcesWidget {...defaultProps} />);
+    expect(getFiltersPanel()).toHaveAttribute("aria-hidden", "true");
+
+    setViewportWidth(800);
+    fireEvent(window, new Event("resize"));
+    expect(getFiltersPanel()).toHaveAttribute("aria-hidden", "true");
+
+    act(() => {
+      vi.advanceTimersByTime(149);
+    });
+    expect(getFiltersPanel()).toHaveAttribute("aria-hidden", "true");
+
+    act(() => {
+      vi.advanceTimersByTime(1);
+    });
+    expect(getFiltersPanel()).toHaveAttribute("aria-hidden", "false");
+  });
+
+  it("clears pending resize timers on unmount", () => {
+    vi.useFakeTimers();
+    setViewportWidth(500);
+
+    const { unmount } = render(<SecurityResourcesWidget {...defaultProps} />);
+
+    setViewportWidth(800);
+    fireEvent(window, new Event("resize"));
+    expect(vi.getTimerCount()).toBe(1);
+
+    unmount();
+
+    expect(vi.getTimerCount()).toBe(0);
   });
 
   it("displays resources filtered by security level", () => {
