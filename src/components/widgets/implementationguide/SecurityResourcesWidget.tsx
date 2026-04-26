@@ -22,6 +22,7 @@ import ImplementationGuidancePanel from "./ImplementationGuidancePanel";
 // Constants for top resources filtering
 const TOP_RESOURCES_PERCENTAGE = 0.5; // 50%
 const MIN_TOP_RESOURCES = 5;
+const WIDE_LAYOUT_BREAKPOINT = 760;
 
 /**
  * Helper function to extract relevance score from a security resource
@@ -109,7 +110,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
       return true;
     }
 
-    return window.innerWidth >= 760;
+    return window.innerWidth >= WIDE_LAYOUT_BREAKPOINT;
   });
 
   // Update resourcesPerPage when maxItems changes
@@ -119,12 +120,11 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
   React.useEffect(() => {
     const expandFiltersForWideLayout = (): void => {
-      if (window.innerWidth >= 760) {
+      if (window.innerWidth >= WIDE_LAYOUT_BREAKPOINT) {
         setShowFilters(true);
       }
     };
 
-    expandFiltersForWideLayout();
     window.addEventListener("resize", expandFiltersForWideLayout);
 
     return (): void => {
