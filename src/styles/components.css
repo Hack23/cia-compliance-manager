@@ -2732,6 +2732,12 @@ button.more-info:hover::before {
   .security-resources-sidebar-toggle {
     display: none;
   }
+
+  /* Force the sidebar panel visible in wide layouts even if React applies
+     Tailwind's `hidden` class before the resize effect expands it. */
+  .security-resources-sidebar-panel {
+    display: block !important;
+  }
 }
 
 /* Reusable two-line clamp utility used by ResourceCard for title + description.

@@ -88,7 +88,10 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
+        if (e.key === " ") {
+          e.preventDefault();
+          handleClick();
+        } else if (e.key === "Enter") {
           handleClick();
         }
       }}

@@ -576,12 +576,10 @@
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  overflow: hidden; /* clip widget body so internal scroll is visible at rounded corners */
   height: auto;
   min-height: 250px;
   display: flex;
   flex-direction: column;
-  align-self: stretch;
   /* min-height: 0 below 1024px is unchanged; the desktop override drops it
      so the row can shrink to fit `grid-auto-rows`. */
 }

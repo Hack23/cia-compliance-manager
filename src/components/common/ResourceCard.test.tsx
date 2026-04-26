@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { createEvent, fireEvent, render, screen } from "@testing-library/react";
 import ResourceCard from "./ResourceCard";
 import { SecurityResource } from "../../types/securityResources";
 
@@ -174,9 +174,13 @@ describe("ResourceCard Component", () => {
     render(<ResourceCard resource={mockResource} onClick={mockOnClick} />);
 
     const card = screen.getByTestId("resource-item");
-    fireEvent.keyDown(card, { key: " " });
+    const spaceEvent = createEvent.keyDown(card, { key: " " });
+    const preventDefault = vi.spyOn(spaceEvent, "preventDefault");
+
+    fireEvent(card, spaceEvent);
 
     expect(mockOnClick).toHaveBeenCalledWith(mockResource);
+    expect(preventDefault).toHaveBeenCalled();
   });
 
   it("does not trigger action on other keyboard keys", () => {

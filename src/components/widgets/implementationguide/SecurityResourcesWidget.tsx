@@ -102,14 +102,35 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [resourcesPerPage, setResourcesPerPage] = useState(maxItems);
   // Sidebar visibility - collapsed by default in narrow widget cells, expanded in wide ones.
-  // Container queries keep the sidebar visible above 760px (see CSS), but on narrow
-  // dashboard cells users can opt-in via this toggle.
-  const [showFilters, setShowFilters] = useState(false);
+  // Container queries hide the toggle above 760px (see CSS), so wide layouts must
+  // start expanded and re-expand if the viewport grows from a narrow layout.
+  const [showFilters, setShowFilters] = useState<boolean>(() => {
+    if (typeof window === "undefined") {
+      return true;
+    }
+
+    return window.innerWidth >= 760;
+  });
 
   // Update resourcesPerPage when maxItems changes
   React.useEffect(() => {
     setResourcesPerPage(maxItems);
   }, [maxItems]);
+
+  React.useEffect(() => {
+    const expandFiltersForWideLayout = (): void => {
+      if (window.innerWidth >= 760) {
+        setShowFilters(true);
+      }
+    };
+
+    expandFiltersForWideLayout();
+    window.addEventListener("resize", expandFiltersForWideLayout);
+
+    return (): void => {
+      window.removeEventListener("resize", expandFiltersForWideLayout);
+    };
+  }, []);
 
   // Calculate security resources with proper error handling and type safety
   const securityResources = useMemo((): SecurityResource[] => {
