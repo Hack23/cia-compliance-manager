@@ -87,47 +87,50 @@ describe("ResourceCard Component", () => {
     expect(screen.getByText("+2")).toBeInTheDocument();
   });
 
-  it("applies CIA component accent classes", () => {
-    const cases: Array<{
-      component: SecurityResource["component"];
-      borderClass: string;
-      badgeClass: string;
-    }> = [
+  it.each(
+    [
       {
+        name: "confidentiality",
         component: "confidentiality",
         borderClass: "border-l-purple-500",
         badgeClass: "bg-purple-100",
       },
       {
+        name: "integrity",
         component: "integrity",
         borderClass: "border-l-green-500",
         badgeClass: "bg-green-100",
       },
       {
+        name: "availability",
         component: "availability",
         borderClass: "border-l-blue-500",
         badgeClass: "bg-blue-100",
       },
       {
+        name: "general",
         component: undefined,
         borderClass: "border-l-gray-300",
         badgeClass: "bg-gray-100",
       },
-    ];
+    ] satisfies Array<{
+      name: string;
+      component: SecurityResource["component"];
+      borderClass: string;
+      badgeClass: string;
+    }>
+  )("applies $name accent classes", ({ component, borderClass, badgeClass }) => {
+    const testId = `resource-${component ?? "general"}`;
+    render(
+      <ResourceCard
+        resource={{ ...mockResource, component }}
+        testId={testId}
+      />
+    );
 
-    cases.forEach(({ component, borderClass, badgeClass }) => {
-      const testId = `resource-${component ?? "general"}`;
-      render(
-        <ResourceCard
-          resource={{ ...mockResource, component }}
-          testId={testId}
-        />
-      );
-
-      const card = screen.getByTestId(testId);
-      expect(card).toHaveClass(borderClass);
-      expect(card.querySelector("span[title]")).toHaveClass(badgeClass);
-    });
+    const card = screen.getByTestId(testId);
+    expect(card).toHaveClass(borderClass);
+    expect(card.querySelector("span[title]")).toHaveClass(badgeClass);
   });
 
   it("opens URL in new tab when clicked without custom onClick", () => {
