@@ -105,13 +105,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   // Sidebar visibility - collapsed by default in narrow widget cells, expanded in wide ones.
   // Container queries hide the toggle above 760px (see CSS), so wide layouts must
   // start expanded and re-expand if the viewport grows from a narrow layout.
-  const [showFilters, setShowFilters] = useState<boolean>(() => {
-    if (typeof window === "undefined") {
-      return true;
-    }
-
-    return window.innerWidth >= WIDE_LAYOUT_BREAKPOINT;
-  });
+  const [showFilters, setShowFilters] = useState(false);
 
   // Update resourcesPerPage when maxItems changes
   React.useEffect(() => {
@@ -119,19 +113,34 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   }, [maxItems]);
 
   React.useEffect(() => {
+    let resizeTimer: number | undefined;
+
     const expandFiltersForWideLayout = (): void => {
-      if (window.innerWidth >= WIDE_LAYOUT_BREAKPOINT) {
-        setShowFilters(true);
+      if (resizeTimer !== undefined) {
+        window.clearTimeout(resizeTimer);
       }
+
+      resizeTimer = window.setTimeout((): void => {
+        if (window.innerWidth >= WIDE_LAYOUT_BREAKPOINT) {
+          setShowFilters(true);
+        }
+      }, 150);
     };
+
+    if (window.innerWidth >= WIDE_LAYOUT_BREAKPOINT) {
+      setShowFilters(true);
+    }
 
     window.addEventListener("resize", expandFiltersForWideLayout);
 
     return (): void => {
       window.removeEventListener("resize", expandFiltersForWideLayout);
+
+      if (resizeTimer !== undefined) {
+        window.clearTimeout(resizeTimer);
+      }
     };
   }, []);
-
   // Calculate security resources with proper error handling and type safety
   const securityResources = useMemo((): SecurityResource[] => {
     try {
