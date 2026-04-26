@@ -107,7 +107,10 @@ vi.mock("../../../components/common/ResourceCard", () => ({
 }));
 
 describe("SecurityResourcesWidget", () => {
-  const originalViewportWidth = window.innerWidth;
+  const originalViewportWidthDescriptor = Object.getOwnPropertyDescriptor(
+    window,
+    "innerWidth"
+  );
 
   // Default props for the component
   const defaultProps = {
@@ -123,11 +126,16 @@ describe("SecurityResourcesWidget", () => {
 
   afterEach(() => {
     vi.useRealTimers();
-    Object.defineProperty(window, "innerWidth", {
-      configurable: true,
-      value: originalViewportWidth,
-      writable: true,
-    });
+
+    if (originalViewportWidthDescriptor) {
+      Object.defineProperty(
+        window,
+        "innerWidth",
+        originalViewportWidthDescriptor
+      );
+    } else {
+      Reflect.deleteProperty(window, "innerWidth");
+    }
   });
 
   const setViewportWidth = (width: number): void => {
@@ -142,7 +150,9 @@ describe("SecurityResourcesWidget", () => {
     const panel = document.getElementById(`${defaultProps.testId}-filters-panel`);
 
     if (!panel) {
-      throw new Error("Expected filters panel to be rendered");
+      throw new Error(
+        `Expected filters panel "${defaultProps.testId}-filters-panel" to be rendered`
+      );
     }
 
     return panel;

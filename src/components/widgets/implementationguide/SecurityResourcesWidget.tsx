@@ -108,17 +108,18 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   const [showFilters, setShowFilters] = useState(false);
 
   // Update resourcesPerPage when maxItems changes
-  /**
-   * Keeps filter visibility synchronized with the responsive sidebar layout.
-   * The `window` guard keeps SSR/test environments safe, while wide layouts
-   * auto-expand because the container query hides the toggle at 760px and above.
-   * Resize updates are debounced by 150ms to avoid repeated state updates during
-   * continuous drag-resizing without making the sidebar feel delayed.
-   */
   useEffect(() => {
     setResourcesPerPage(maxItems);
   }, [maxItems]);
 
+  /**
+   * Synchronizes filter panel expansion with the responsive sidebar contract.
+   *
+   * Dependencies: none; registers one `resize` listener after mount.
+   * Behavior: expands filters for wide layouts because the container query hides
+   * the toggle at 760px and above, but does not auto-collapse user-opened filters.
+   * Cleanup: removes the resize listener and clears any pending 150ms debounce timer.
+   */
   useEffect(() => {
     if (typeof window === "undefined") {
       return undefined;
