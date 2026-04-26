@@ -91,8 +91,12 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
         if (e.key === " ") {
           // Space scrolls the page on focusable non-button elements; prevent it to match native button activation.
           e.preventDefault();
-          handleClick();
         } else if (e.key === "Enter") {
+          handleClick();
+        }
+      }}
+      onKeyUp={(e) => {
+        if (e.key === " " && !e.repeat) {
           handleClick();
         }
       }}

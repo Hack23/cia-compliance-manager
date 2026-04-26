@@ -419,13 +419,13 @@ input:focus {
   height: auto;
 }
 
-/* Widget body with improved padding and scrolling behavior */
-/* NOTE: Canonical widget-body rules (padding, container queries, scrollbars,
- * background) live in the consolidated block near line 2419 (`.widget-body,
- * .widget-container > div:nth-child(2), [data-testid^="widget-container"] > div:nth-child(2)`).
- * The earlier blocks here historically duplicated those rules and have been
- * removed to avoid drift. The structural rule (flex column, header sibling)
- * is still defined at the top of this file. */
+/* NOTE: Widget-body responsibilities are currently split across this file.
+ * An earlier `.widget-body` rule near the top still defines baseline
+ * widget-body behavior, while the consolidated block near line 2419
+ * (`.widget-body, .widget-container > div:nth-child(2),
+ * [data-testid^="widget-container"] > div:nth-child(2)`) remains the
+ * canonical location for the shared consolidated padding/container-query/
+ * scrollbar/background rules. Keep both locations aligned to avoid drift. */
 
 /* Ensure inner container uses full space */
 .widget-content-wrapper {

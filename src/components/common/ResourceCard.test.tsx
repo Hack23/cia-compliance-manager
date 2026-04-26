@@ -169,7 +169,7 @@ describe("ResourceCard Component", () => {
     expect(mockOnClick).toHaveBeenCalledWith(mockResource);
   });
 
-  it("handles keyboard Space key", () => {
+  it("prevents page scrolling on keyboard Space keydown", () => {
     const mockOnClick = vi.fn();
     render(<ResourceCard resource={mockResource} onClick={mockOnClick} />);
 
@@ -179,8 +179,29 @@ describe("ResourceCard Component", () => {
 
     fireEvent(card, spaceEvent);
 
-    expect(mockOnClick).toHaveBeenCalledWith(mockResource);
+    expect(mockOnClick).not.toHaveBeenCalled();
     expect(preventDefault).toHaveBeenCalled();
+  });
+
+  it("handles keyboard Space keyup once", () => {
+    const mockOnClick = vi.fn();
+    render(<ResourceCard resource={mockResource} onClick={mockOnClick} />);
+
+    const card = screen.getByTestId("resource-item");
+    fireEvent.keyUp(card, { key: " " });
+
+    expect(mockOnClick).toHaveBeenCalledOnce();
+    expect(mockOnClick).toHaveBeenCalledWith(mockResource);
+  });
+
+  it("ignores repeated keyboard Space keyup events", () => {
+    const mockOnClick = vi.fn();
+    render(<ResourceCard resource={mockResource} onClick={mockOnClick} />);
+
+    const card = screen.getByTestId("resource-item");
+    fireEvent.keyUp(card, { key: " ", repeat: true });
+
+    expect(mockOnClick).not.toHaveBeenCalled();
   });
 
   it("does not trigger action on other keyboard keys", () => {
