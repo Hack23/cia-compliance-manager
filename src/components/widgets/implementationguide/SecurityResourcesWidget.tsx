@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { SECURITY_RESOURCES_WIDGET_IDS } from "../../../constants/testIds";
 import { SECURITY_RESOURCES_TEST_IDS } from "../../../constants/testIds";
@@ -108,11 +108,15 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   const [showFilters, setShowFilters] = useState(false);
 
   // Update resourcesPerPage when maxItems changes
-  React.useEffect(() => {
+  useEffect(() => {
     setResourcesPerPage(maxItems);
   }, [maxItems]);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return undefined;
+    }
+
     let resizeTimer: number | undefined;
 
     const expandFiltersForWideLayout = (): void => {
