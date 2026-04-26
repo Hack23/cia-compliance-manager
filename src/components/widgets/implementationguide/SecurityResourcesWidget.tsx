@@ -347,13 +347,10 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
         <div className="security-resources-layout">
           {/* Filters and search - left column on larger screens.
-              Sidebar contents collapse on narrow dashboard cells to reduce vertical space;
-              they auto-expand at the container-query breakpoint (see security-resources-sidebar). */}
+              Sidebar contents can collapse to reduce vertical space; the toggle is hidden
+              once the sidebar shares horizontal space with the resource list. */}
           <aside 
-            className={cn(
-              "security-resources-sidebar",
-              showFilters ? "is-open" : "is-collapsed"
-            )}
+            className="security-resources-sidebar"
             aria-label="Resource filters and search"
           >
             <button
@@ -381,8 +378,11 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
             <div
               id={`${testId}-filters-panel`}
-              className="security-resources-sidebar-panel"
-              hidden={!showFilters}
+              className={cn(
+                "security-resources-sidebar-panel",
+                !showFilters && "hidden"
+              )}
+              aria-hidden={!showFilters}
             >
             <div className="mb-md">
               <label

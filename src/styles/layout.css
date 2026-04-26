@@ -161,7 +161,7 @@
   }
 }
 
-/* Final widget sizing guard: dashboard cards must grow with content, not create nested scroll panes. */
+/* Final widget sizing guard: by default dashboard cards grow with content, not nested scroll panes. */
 .grid-widget-container,
 .widget-container,
 [data-testid^="widget-container"] {
@@ -194,6 +194,40 @@
   overflow: visible;
 }
 
+/*
+ * Desktop / laptop viewport-fit dashboard:
+ * utilities.css defines the 3-column grid and 4 equal rows at this breakpoint.
+ * Because layout.css is imported later, the matching widget sizing overrides
+ * live here so the grid rows can shrink to fit one viewport while each widget
+ * body scrolls internally.
+ */
+@media (min-width: 1024px) and (min-height: 700px) {
+  .grid-widget-container {
+    align-self: stretch;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .grid-widget-container .widget-container,
+  .grid-widget-container [data-testid^="widget-container"] {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .grid-widget-container .widget-container > .widget-body,
+  .grid-widget-container [data-testid^="widget-container"] > .widget-body,
+  .grid-widget-container [data-testid^="widget-container"] > div:nth-child(2) {
+    flex: 1 1 auto;
+    height: 0;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
 
 /* Radar chart sizing is centralized here so theme files do not override it. */
 .widget-body .radar-values {
@@ -202,9 +236,9 @@
   gap: 0.5rem;
 }
 
-/* Wrapper sets the bounding box; container clips any overflow so Chart.js
-   resize ticks cannot bleed into the next section (e.g. Component Details).
-   Width cap keeps the chart legible inside narrow dashboard cells. */
+/* Wrapper sets the chart bounding box. The container below clips overflow so
+   Chart.js resize ticks cannot bleed into the next section (e.g. Component
+   Details). Width cap keeps the chart legible inside narrow dashboard cells. */
 .radar-chart-wrapper {
   width: 100%;
   max-width: 460px;
