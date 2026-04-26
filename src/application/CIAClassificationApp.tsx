@@ -259,8 +259,9 @@ const CIAClassificationApp: React.FC = () => {
           </div>
         </div>
 
-        {/* 2200px cap keeps three-column dashboard cells roomy after the 900px grid breakpoint. */}
-        <div className="w-full max-w-[2200px] mx-auto">
+        {/* Full-window dashboard grid. The viewport-fit layout (≥1024px) sizes
+            rows so all 4 widget rows fit without page scroll; widgets use internal scrolling. */}
+        <div className="w-full mx-auto dashboard-grid-wrapper">
           <div
             data-testid={APP_TEST_IDS.DASHBOARD_GRID}
             className="dashboard-grid-container"

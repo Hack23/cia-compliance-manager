@@ -543,18 +543,56 @@
   }
 }
 
+/*
+ * Desktop / laptop viewport-fit layout (≥1024px and tall enough for 4 rows).
+ * Goal: 12 widgets → 3 cols × 4 rows, all visible in one viewport without
+ * page scrolling. Each widget scrolls internally instead.
+ *
+ * Vertical budget breakdown (viewport height):
+ *   - outer p-4 padding (top+bottom)         : 32px
+ *   - app header (mb-2 + py-0.5 + content)   : ~36px
+ *   - dashboard-grid-container padding (×2)  : 24px (0.75rem * 2)
+ *   - 3 inter-row gaps × 1rem                : 48px
+ *   --------------------------------------------
+ *   Total chrome                             : ~140px
+ * Row height target: calc((100dvh - 140px) / 4)
+ *
+ * `100dvh` (dynamic viewport units) accounts for mobile browser chrome that
+ * shows/hides on scroll; on desktop browsers it equals `100vh`.
+ *
+ * Min row height of 220px guarantees readable widgets on short laptops
+ * (e.g. 768px viewport), where exact viewport-fit isn't possible — those
+ * users get a slightly taller dashboard than viewport which they can scroll.
+ */
+@media (min-width: 1024px) and (min-height: 700px) {
+  .dashboard-grid-container {
+    grid-auto-rows: minmax(220px, calc((100dvh - 140px) / 4));
+  }
+}
+
 /* Grid widget container utility to ensure consistent styling */
 .grid-widget-container {
   background-color: white;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  overflow: visible;
+  overflow: hidden; /* clip widget body so internal scroll is visible at rounded corners */
   height: auto;
   min-height: 250px;
   display: flex;
   flex-direction: column;
-  align-self: start;
+  align-self: stretch;
+  /* min-height: 0 below 1024px is unchanged; the desktop override drops it
+     so the row can shrink to fit `grid-auto-rows`. */
+}
+
+/* Desktop viewport-fit: row height is enforced by grid-auto-rows, so the
+   widget container must be allowed to shrink below its 250px content. */
+@media (min-width: 1024px) and (min-height: 700px) {
+  .grid-widget-container {
+    min-height: 0;
+    height: 100%;
+  }
 }
 
 /* Dark mode styles for grid widget containers */

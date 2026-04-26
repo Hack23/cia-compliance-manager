@@ -2439,6 +2439,32 @@ button.more-info:hover::before {
   border-radius: 999px;
 }
 
+/*
+ * Desktop / laptop viewport-fit: when the dashboard grid forces 4 rows into
+ * one viewport (see utilities.css ≥1024px / ≥700px height media query), the
+ * widget body must scroll internally instead of overflowing the row. This
+ * override is scoped to that exact breakpoint so smaller viewports keep the
+ * existing page-scroll behaviour.
+ */
+@media (min-width: 1024px) and (min-height: 700px) {
+  .widget-body,
+  .widget-container > div:nth-child(2),
+  [data-testid^="widget-container"] > div:nth-child(2) {
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  /* Make the WidgetContainer fill its grid row so the body can take the
+     remaining height after the header. */
+  .grid-widget-container > .widget-container,
+  .grid-widget-container > [data-testid^="widget-container"] {
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .widget-body .shadow-sm,
 .widget-body .shadow-md,
 .widget-body .shadow-lg,
