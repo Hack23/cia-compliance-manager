@@ -117,21 +117,24 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
       return undefined;
     }
 
-    let resizeTimer: number | undefined;
+    let resizeTimer: ReturnType<typeof setTimeout> | undefined;
+
+    const isWideLayout = (): boolean =>
+      window.innerWidth >= WIDE_LAYOUT_BREAKPOINT;
 
     const expandFiltersForWideLayout = (): void => {
       if (resizeTimer !== undefined) {
-        window.clearTimeout(resizeTimer);
+        clearTimeout(resizeTimer);
       }
 
-      resizeTimer = window.setTimeout((): void => {
-        if (window.innerWidth >= WIDE_LAYOUT_BREAKPOINT) {
+      resizeTimer = setTimeout((): void => {
+        if (isWideLayout()) {
           setShowFilters(true);
         }
       }, 150);
     };
 
-    if (window.innerWidth >= WIDE_LAYOUT_BREAKPOINT) {
+    if (isWideLayout()) {
       setShowFilters(true);
     }
 
@@ -141,7 +144,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
       window.removeEventListener("resize", expandFiltersForWideLayout);
 
       if (resizeTimer !== undefined) {
-        window.clearTimeout(resizeTimer);
+        clearTimeout(resizeTimer);
       }
     };
   }, []);
