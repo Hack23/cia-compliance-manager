@@ -202,10 +202,23 @@
   gap: 0.5rem;
 }
 
+/* Wrapper sets the bounding box; container clips any overflow so Chart.js
+   resize ticks cannot bleed into the next section (e.g. Component Details).
+   Width cap keeps the chart legible inside narrow dashboard cells. */
+.radar-chart-wrapper {
+  width: 100%;
+  max-width: 460px;
+  margin-inline: auto;
+}
+
 .widget-body .radar-chart-container {
   height: auto;
   max-height: none;
-  overflow: visible;
+  overflow: hidden;
+  position: relative;
+  /* Reserve a small gutter so the chart's bottom axis label ("Confidentiality"/"Availability")
+     does not collide with the next section heading. */
+  padding-bottom: 0.5rem;
 }
 
 .widget-body .radar-chart-container canvas {
@@ -214,4 +227,5 @@
   max-height: min(250px, 40vh);
   aspect-ratio: 16 / 9;
   object-fit: contain;
+  display: block;
 }

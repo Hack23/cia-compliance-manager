@@ -225,9 +225,11 @@ const SecurityVisualizationWidget: React.FC<
         <div className={cn(WidgetClasses.section)}>
           <h3 className={cn(WidgetClasses.subheading)}>Security Components</h3>
 
-          {/* Reuse the RadarChart component with responsive container */}
+          {/* Reuse the RadarChart component - sizing is centralized in layout.css
+              via .radar-chart-container / canvas rules to prevent the chart from
+              overflowing into the Component Details section below. */}
           <div className={cn(WidgetClasses.cardWhite, "p-md border-neutral-light dark:border-neutral-dark")}>
-            <div className="w-full aspect-square max-h-[400px] mx-auto">
+            <div className="radar-chart-wrapper mx-auto">
               <RadarChart
                 availabilityLevel={availabilityLevel}
                 integrityLevel={integrityLevel}

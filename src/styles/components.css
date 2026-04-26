@@ -420,16 +420,12 @@ input:focus {
 }
 
 /* Widget body with improved padding and scrolling behavior */
-/* Consistent 0.75rem padding across all widget bodies */
-.widget-body {
-  padding: 0.75rem; /* Consolidated: consistent widget body padding */
-  flex: 1 1 auto;
-  overflow-y: visible;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  max-height: calc(100% - 40px); /* Account for header height */
-}
+/* NOTE: Canonical widget-body rules (padding, container queries, scrollbars,
+ * background) live in the consolidated block near line 2419 (`.widget-body,
+ * .widget-container > div:nth-child(2), [data-testid^="widget-container"] > div:nth-child(2)`).
+ * The earlier blocks here historically duplicated those rules and have been
+ * removed to avoid drift. The structural rule (flex column, header sibling)
+ * is still defined at the top of this file. */
 
 /* Ensure inner container uses full space */
 .widget-content-wrapper {
@@ -1197,16 +1193,18 @@ textarea:focus {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Standardize widget content overflow handling */
+/* Standardize widget content overflow handling.
+ * NOTE: Padding, container queries, and scrollbar styling for `.widget-body`
+ * are owned by the consolidated block near line ~2419. This rule keeps only
+ * the page-level overflow + scrollbar appearance for the legacy `div.p-4`
+ * variant used by a few inline widgets, and the matching scrollbar styling
+ * used by `.widget-body`. */
 [data-testid^="widget-container"] > div.p-4,
 .widget-body {
   overflow-y: visible; /* Let widgets expand; page-level scrolling handles long content */
   overflow-x: hidden; /* Prevent horizontal scrolling */
   scrollbar-width: thin; /* Firefox */
   height: auto; /* Don't force a specific height */
-  padding: 0.75rem; /* Consistent widget body padding */
-  display: flex;
-  flex-direction: column;
 }
 
 /* Optimize scrollbars */
@@ -2591,6 +2589,38 @@ button.more-info:hover::before {
   }
 }
 
+/*
+ * lg:grid-cols-* responds to widget-body width (not viewport). Dashboard cells
+ * are usually 360-560px wide even on large monitors, so Tailwind's lg: (1024px)
+ * breakpoint is far too eager and was producing cramped cards in
+ * SecurityVisualizationWidget, SecurityResourcesWidget, ImplementationGuidancePanel,
+ * and CIAComponentDetails. Reset to single column, then re-introduce columns
+ * based on the widget body width.
+ */
+:is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1.lg\:grid-cols-2,
+:is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1.lg\:grid-cols-3,
+:is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* 520px: two-column detail / resource grids get about 240px per column. */
+@container widget-body (min-width: 520px) {
+  :is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1.lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  :is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* 760px: three CIA component cards get about 240px each before titles wrap. */
+@container widget-body (min-width: 760px) {
+  :is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1.lg\:grid-cols-3,
+  :is(.widget-body, [data-testid^="widget-container"]) .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 .widget-body button.w-full,
 [data-testid^="widget-container"] button.w-full {
   min-height: 44px;
@@ -2686,10 +2716,25 @@ button.more-info:hover::before {
   overflow-wrap: break-word;
 }
 
+/* Toggle button is only useful in narrow / single-column layouts. */
+.security-resources-sidebar-toggle {
+  cursor: pointer;
+}
+
 @container widget-body (min-width: 760px) {
   .security-resources-layout {
     grid-template-columns: minmax(14rem, 0.28fr) minmax(0, 1fr);
     align-items: start;
+  }
+
+  /* In wide layouts the sidebar is always visible alongside the resource list,
+     so hide the toggle and force the panel open even when React state says collapsed. */
+  .security-resources-sidebar-toggle {
+    display: none;
+  }
+
+  .security-resources-sidebar-panel[hidden] {
+    display: revert;
   }
 }
 

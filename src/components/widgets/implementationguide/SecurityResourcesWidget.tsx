@@ -101,6 +101,10 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [resourcesPerPage, setResourcesPerPage] = useState(maxItems);
+  // Sidebar visibility - collapsed by default in narrow widget cells, expanded in wide ones.
+  // Container queries keep the sidebar visible above 760px (see CSS), but on narrow
+  // dashboard cells users can opt-in via this toggle.
+  const [showFilters, setShowFilters] = useState(false);
 
   // Update resourcesPerPage when maxItems changes
   React.useEffect(() => {
@@ -342,11 +346,44 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
         </section>
 
         <div className="security-resources-layout">
-          {/* Filters and search - left column on larger screens */}
+          {/* Filters and search - left column on larger screens.
+              Sidebar contents collapse on narrow dashboard cells to reduce vertical space;
+              they auto-expand at the container-query breakpoint (see security-resources-sidebar). */}
           <aside 
-            className="security-resources-sidebar"
+            className={cn(
+              "security-resources-sidebar",
+              showFilters ? "is-open" : "is-collapsed"
+            )}
             aria-label="Resource filters and search"
           >
+            <button
+              type="button"
+              onClick={() => setShowFilters((v) => !v)}
+              aria-expanded={showFilters}
+              aria-controls={`${testId}-filters-panel`}
+              className={cn(
+                "security-resources-sidebar-toggle",
+                "w-full flex items-center justify-between px-sm py-xs mb-sm rounded-md",
+                "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200",
+                "hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors",
+                WidgetClasses.focusVisible
+              )}
+              data-testid={`${testId}-toggle-filters`}
+            >
+              <span className="flex items-center gap-xs text-sm font-medium">
+                <span aria-hidden="true">⚙️</span>
+                Filters &amp; Guidelines
+              </span>
+              <span aria-hidden="true" className="text-xs">
+                {showFilters ? "▲" : "▼"}
+              </span>
+            </button>
+
+            <div
+              id={`${testId}-filters-panel`}
+              className="security-resources-sidebar-panel"
+              hidden={!showFilters}
+            >
             <div className="mb-md">
               <label
                 htmlFor="resource-search"
@@ -454,6 +491,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                 </p>
               </div>
             </section>
+            </div>
           </aside>
 
           {/* Resources grid - right column on larger screens */}

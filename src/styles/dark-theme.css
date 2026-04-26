@@ -202,11 +202,11 @@
   letter-spacing: 0.5px;
 }
 
-.dark .widget-title,
-.dark h1,
-.dark h2,
-.dark h3,
-.dark h4 {
+/* Cyber-styled headings are intentionally limited to widget header titles
+ * and the global `.widget-title` element. Inside widget content (h1-h4),
+ * use plain readable typography so card titles, section headings, and
+ * implementation steps don't all become uppercase Orbitron labels. */
+.dark .widget-title {
   font-family: "Orbitron", sans-serif;
   color: var(--ingress-primary);
   text-transform: uppercase;
