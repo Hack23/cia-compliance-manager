@@ -17,7 +17,7 @@
 </p>
 
 **Document Owner:** Security Team | **Version:** 2.0 | **Last Updated:** 2025-01-10 (UTC)  
-**Review Cycle:** Quarterly | **Next Review:** 2025-04-10
+**Review Cycle:** Quarterly | **Next Review:** 2026-07-28
 
 ---
 
@@ -422,6 +422,6 @@ This control mapping is part of Hack23 AB's comprehensive Information Security M
 **Distribution:** Public  
 **Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-lightgrey?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#confidentiality-levels)  
 **Effective Date:** 2025-01-10 (UTC)  
-**Next Review:** 2025-04-10  
+**Next Review:** 2026-07-28  
 **Framework Compliance:** NIST 800-53 Rev. 5, NIST CSF 2.0, ISO 27001:2022, CIS Controls v8.1  
 **ISMS Integration:** Complete traceability to [Hack23 AB ISMS](https://github.com/Hack23/ISMS-PUBLIC)

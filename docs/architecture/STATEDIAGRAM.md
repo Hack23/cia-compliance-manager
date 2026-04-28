@@ -9,9 +9,9 @@
   <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md">Change Management</a></em>
 </p>
 
-> **Version:** v1.1.54 | **Last Updated:** 2026-04-21 | **Status:** Production
+> **Version:** v1.1.59 | **Last Updated:** 2026-04-28 | **Status:** Production
 
-This document illustrates the comprehensive state transitions and behavioral models of the CIA Compliance Manager application v1.1.54, showing how the system responds to user interactions, handles errors, and manages state across React 19.2.5 components.
+This document illustrates the comprehensive state transitions and behavioral models of the CIA Compliance Manager application v1.1.59, showing how the system responds to user interactions, handles errors, and manages state across React 19.2.5 components.
 
 ## 📚 Related Documentation
 
@@ -65,7 +65,7 @@ graph LR
 
 ## 🔍 Application Core States
 
-The diagram below shows the main application states and transitions in v1.1.54, including error recovery paths:
+The diagram below shows the main application states and transitions in v1.1.59, including error recovery paths:
 
 ```mermaid
 stateDiagram-v2
@@ -277,7 +277,7 @@ setLevel('availability', 'Very High');
 // useEffect above automatically persists to localStorage
 ```
 
-## 🧩 Widget Component State Machine (v1.1.54)
+## 🧩 Widget Component State Machine (v1.1.59)
 
 Universal widget state machine showing standardized lifecycle for all assessment widgets:
 
@@ -402,7 +402,7 @@ stateDiagram-v2
 - `User Clicks Reset`: Reset widget to initial state
 - `Component Unmounted`: React unmount lifecycle
 
-## 🛡️ React Error Boundary State Transitions (v1.1.54)
+## 🛡️ React Error Boundary State Transitions (v1.1.59)
 
 State machine for `WidgetErrorBoundary` component implementing React Error Boundary pattern:
 
@@ -523,7 +523,7 @@ interface WidgetErrorBoundaryProps {
 
 **Cross-Reference:** See [Error Handling Documentation](../ERROR_HANDLING.md) for detailed patterns and best practices.
 
-## 💤 React Suspense Boundary State (v1.1.54)
+## 💤 React Suspense Boundary State (v1.1.59)
 
 State machine for lazy-loaded components using React 19.2.5 Suspense:
 
@@ -1028,9 +1028,9 @@ stateDiagram-v2
     class SelectingAvailability availability
 ```
 
-**Note:** In v1.1.54, security level selection is handled inline within SecurityLevelWidget using standard form controls. This diagram represents the conceptual workflow, not a multi-page wizard.
+**Note:** In v1.1.59, security level selection is handled inline within SecurityLevelWidget using standard form controls. This diagram represents the conceptual workflow, not a multi-page wizard.
 
-## 📊 Summary: v1.1.54 State Management Architecture
+## 📊 Summary: v1.1.59 State Management Architecture
 
 ### State Transition Inventory
 
@@ -1157,4 +1157,4 @@ stateDiagram-v2
 
 ---
 
-These comprehensive state diagrams provide a complete view of the CIA Compliance Manager v1.1.54 behavioral model, illustrating how the application transitions between states in response to user interactions, handles errors gracefully, manages async operations with Suspense, and persists critical state across sessions. The diagrams serve as authoritative documentation for developers, testers, and security auditors understanding system behavior.
+These comprehensive state diagrams provide a complete view of the CIA Compliance Manager v1.1.59 behavioral model, illustrating how the application transitions between states in response to user interactions, handles errors gracefully, manages async operations with Suspense, and persists critical state across sessions. The diagrams serve as authoritative documentation for developers, testers, and security auditors understanding system behavior.

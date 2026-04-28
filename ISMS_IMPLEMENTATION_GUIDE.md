@@ -17,7 +17,7 @@
 </p>
 
 **Document Owner:** Security Team | **Version:** 1.0 | **Last Updated:** 2025-01-10 (UTC)  
-**Review Cycle:** Quarterly | **Next Review:** 2025-04-10
+**Review Cycle:** Quarterly | **Next Review:** 2026-07-28
 
 ---
 
@@ -785,7 +785,7 @@ We continuously monitor and improve our ISMS implementation through:
 **📤 Distribution:** Public  
 **🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-lightgrey?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#confidentiality-levels)  
 **📅 Effective Date:** 2025-01-10  
-**⏰ Next Review:** 2025-04-10  
+**⏰ Next Review:** 2026-07-28  
 **🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![AWS Well-Architected](https://img.shields.io/badge/AWS-Well_Architected-orange?style=flat-square&logo=amazon-aws&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)  
 **📊 ISMS Alignment:** Complete alignment with [Hack23 AB ISMS](https://github.com/Hack23/ISMS-PUBLIC)  
 **✅ Compliance Status:** All applicable ISMS policies implemented and evidenced

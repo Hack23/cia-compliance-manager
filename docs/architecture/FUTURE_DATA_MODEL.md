@@ -9,7 +9,7 @@
   <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Data_Classification_Policy.md">Data Classification Policy</a></em>
 </p>
 
-**Version:** 2.0-DRAFT | **Based on:** v1.0 Baseline | **Last Updated:** 2025-11-22 | **Status:** 🚀 Evolution Roadmap
+**Version:** 2.0-DRAFT | **Based on:** v1.1.59 Baseline | **Last Updated:** 2026-04-28 | **Status:** 🚀 Evolution Roadmap
 
 This document outlines the comprehensive data architecture evolution for the CIA Compliance Manager, detailing how the data layer transforms from client-side TypeScript types into a robust, AWS-powered serverless data architecture with DynamoDB Global Tables, multi-region replication, and enterprise data management capabilities.
 
@@ -2767,5 +2767,5 @@ This Future Data Model document outlines the comprehensive evolution of the CIA 
 **📤 Distribution:** Public  
 **🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-lightgrey?style=flat-square)](https://github.com/Hack23/ISMS/blob/main/CLASSIFICATION.md#confidentiality-levels)  
 **📅 Effective Date:** 2025-01-23  
-**⏰ Next Review:** 2025-04-23  
+**⏰ Next Review:** 2026-07-28  
 **🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS/blob/main/CLASSIFICATION.md)

@@ -16,7 +16,7 @@
   <a><img src="https://img.shields.io/badge/Status-%E2%9C%85_Production-success?style=for-the-badge" alt="Status"/></a>
 </p>
 
-**📋 Document Owner:** CEO | **📄 Version:** 1.1 | **📅 Last Updated:** 2026-04-21 (UTC)  
+**📋 Document Owner:** CEO | **📄 Version:** 1.2 | **📅 Last Updated:** 2026-04-28 (UTC)  
 **🔄 Review Cycle:** Semi-Annual | **⏰ Next Review:** 2026-10-21
 
 ---
@@ -27,9 +27,9 @@ This document outlines the financial and security implementation plan for the CI
 
 ---
 
-## 💵 v1.1.54 Cost Summary — AWS + GitHub Pages DR + npm Distribution
+## 💵 v1.1.59 Cost Summary — AWS + GitHub Pages DR + npm Distribution
 
-The current v1.1.54 delivery is a **static React 19 SPA** distributed across **three channels**:
+The current v1.1.59 delivery is a **static React 19 SPA** distributed across **three channels**:
 
 1. **Primary**: AWS CloudFront + S3 (production at `ciacompliancemanager.com`), deployed by `.github/workflows/deploy-s3.yml` using IAM OIDC and CloudFormation stack `ciacompliancemanager-frontend`
 2. **DR**: GitHub Pages (fallback hosting, deployed by `release.yml`)
@@ -50,7 +50,7 @@ The current v1.1.54 delivery is a **static React 19 SPA** distributed across **t
 
 ---
 
-### 🏗️ Infrastructure Cost Breakdown (v1.1.54)
+### 🏗️ Infrastructure Cost Breakdown (v1.1.59)
 
 | **Component** | **Service** | **Monthly (USD)** | **Annual (USD)** | **Notes** |
 |---------------|-------------|-------------------|------------------|-----------|
@@ -76,7 +76,7 @@ The current v1.1.54 delivery is a **static React 19 SPA** distributed across **t
 
 ## 🔐 Security Investment Analysis
 
-### Current Security Services (v1.1.54 — All Free Tier)
+### Current Security Services (v1.1.59 — All Free Tier)
 
 | **Security Service** | **Provider** | **Annual Cost** | **ISMS Policy Alignment** |
 |----------------------|-------------|-----------------|---------------------------|

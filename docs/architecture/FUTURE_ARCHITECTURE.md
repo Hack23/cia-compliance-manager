@@ -9,7 +9,7 @@
   <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification Framework</a></em>
 </p>
 
-**Version:** 2.0-DRAFT | **Based on:** v1.0 Baseline | **Last Updated:** 2025-11-22 | **Status:** 🚀 Evolution Roadmap
+**Version:** 2.0-DRAFT | **Based on:** v1.1.59 Baseline | **Last Updated:** 2026-04-28 | **Status:** 🚀 Evolution Roadmap
 
 This document outlines the comprehensive architectural evolution roadmap for the CIA Compliance Manager, detailing how the system will transform from a frontend-only assessment tool into a fully-featured, AWS-powered serverless security posture management platform with enterprise capabilities.
 

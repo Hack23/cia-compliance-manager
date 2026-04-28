@@ -9,7 +9,7 @@
   <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md">Change Management</a></em>
 </p>
 
-> **Version:** v2.0-DRAFT | **Based on:** v1.0 Baseline | **Last Updated:** 2025-11-23 | **Status:** 🚀 Evolution Roadmap
+> **Version:** v2.0-DRAFT | **Based on:** v1.1.59 Baseline | **Last Updated:** 2026-04-28 | **Status:** 🚀 Evolution Roadmap
 
 This document illustrates the enhanced state transitions and behavioral models planned for the future evolution of the CIA Compliance Manager from v1.0 baseline. These diagrams depict context-aware state management, intelligent state transitions, adaptive UI behaviors, and advanced error recovery patterns for post-v1.0 development.
 

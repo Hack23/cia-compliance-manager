@@ -9,7 +9,7 @@
   <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification Framework</a></em>
 </p>
 
-**Version:** 1.1.54 | **Last Updated:** 2026-04-21 | **Status:** ✅ Production Ready
+**Version:** 1.1.59 | **Last Updated:** 2026-04-28 | **Status:** ✅ Production Ready
 
 This document provides a comprehensive view of the CIA Compliance Manager architecture using the C4 model, illustrating how components interact to deliver security assessment capabilities.
 
@@ -94,11 +94,11 @@ C4Context
 
 ## 🏢 Container View
 
-The CIA Compliance Manager consists of several interconnected containers that provide its core functionality. The v1.1.54 architecture leverages modern React 19.x features, TypeScript strict mode, and comprehensive testing infrastructure.
+The CIA Compliance Manager consists of several interconnected containers that provide its core functionality. The v1.1.59 architecture leverages modern React 19.x features, TypeScript strict mode, and comprehensive testing infrastructure.
 
 ```mermaid
 C4Container
-    title Container Diagram - CIA Compliance Manager (v1.1.54)
+    title Container Diagram - CIA Compliance Manager (v1.1.59)
 
     Person(securityOfficer, "Security Officer", "Manages security levels and reviews assessment results")
     Person(developer, "Developer", "Maintains and extends platform")
@@ -129,7 +129,7 @@ C4Container
     UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
 ```
 
-### **Container Details (v1.1.54)**
+### **Container Details (v1.1.59)**
 
 | Container | Technology Stack | Purpose | Key Features |
 |-----------|-----------------|---------|--------------|
@@ -143,11 +143,11 @@ C4Container
 
 ## 🧩 Component View
 
-The frontend application is composed of specialized components organized by domain functionality. The v1.1.54 architecture implements comprehensive error handling, React Context API state management, and strict TypeScript typing.
+The frontend application is composed of specialized components organized by domain functionality. The v1.1.59 architecture implements comprehensive error handling, React Context API state management, and strict TypeScript typing.
 
 ```mermaid
 C4Component
-    title Component Diagram - Frontend Application (v1.1.54)
+    title Component Diagram - Frontend Application (v1.1.59)
 
     Container_Boundary(frontend, "Frontend Application") {
         Component(errorBoundary, "Error Boundary", "react-error-boundary 6.1.1", "Application-wide error handling and recovery")
@@ -207,7 +207,7 @@ C4Component
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
 
-### **v1.1.54 Component Architecture Highlights**
+### **v1.1.59 Component Architecture Highlights**
 
 #### **Error Handling**
 - **Error Boundary Component**: `react-error-boundary 6.1.1` for graceful error recovery
@@ -233,7 +233,7 @@ This diagram shows the detailed structure of the service layer with full TypeScr
 
 ```mermaid
 C4Component
-    title Component Diagram - Service Layer (v1.1.54)
+    title Component Diagram - Service Layer (v1.1.59)
 
     Container_Boundary(services, "Service Layer") {
         Component(baseService, "BaseService", "TypeScript Strict", "Base service with common functionality and type safety")
@@ -273,7 +273,7 @@ C4Component
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
 
-### **TypeScript Strict Mode Implementation (v1.1.54)**
+### **TypeScript Strict Mode Implementation (v1.1.59)**
 
 All services implement comprehensive type safety:
 - **Zero `any` Types**: Complete elimination of type escape hatches
@@ -290,7 +290,7 @@ This diagram shows the structure of the widget components:
 
 ```mermaid
 C4Component
-    title Component Diagram - Widget Components (v1.1.54)
+    title Component Diagram - Widget Components (v1.1.59)
 
     Container_Boundary(widgets, "Widget Components") {
         Component(widgetBase, "WidgetContainer", "React, TypeScript", "Base container for all widgets")
@@ -345,11 +345,11 @@ C4Component
 
 ## 🪝 React Hooks Structure
 
-This diagram shows the custom React hooks that bridge components and services. v1.1.54 ships **17+ hooks** under `src/hooks/`, grouped by responsibility:
+This diagram shows the custom React hooks that bridge components and services. v1.1.59 ships **17+ hooks** under `src/hooks/`, grouped by responsibility:
 
 ```mermaid
 C4Component
-    title Component Diagram - React Hooks (v1.1.54)
+    title Component Diagram - React Hooks (v1.1.59)
 
     Container_Boundary(serviceHooks, "Service Hooks") {
         Component(useCIAContent, "useCIAContentService", "React, TypeScript", "Hook for CIA content service")
@@ -430,7 +430,7 @@ The `prepublishOnly` script chains `lint → knip → test:ci → build:lib` bef
 
 ## 🏗️ Build Pipeline Architecture
 
-The v1.1.54 build system leverages Vite 8.0.9 with advanced optimization techniques:
+The v1.1.59 build system leverages Vite 8.0.9 with advanced optimization techniques:
 
 ```mermaid
 C4Component
@@ -486,7 +486,7 @@ C4Component
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
 
-### **Build Performance Metrics (v1.1.54)**
+### **Build Performance Metrics (v1.1.59)**
 
 The production build (`npm run build`) enforces a per-chunk size budget defined in [`budget.json`](../../budget.json) (`chunk-size-budget-kb: 600` gzip). Actual sizes fluctuate per release and are reported in [`docs/stats.html`](../stats.html) (Rollup visualizer output).
 
@@ -504,13 +504,13 @@ The production build (`npm run build`) enforces a per-chunk size budget defined 
 - `widgets-assessment`, `widgets-business`, `widgets-impact`, `widgets-implementation`, `widgets-visualization` — domain-grouped widget code
 - `index` (main) — application shell, `SecurityLevelWidget`, services, hooks, utilities, constants
 
-## 🧪 Testing Infrastructure (v1.1.54)
+## 🧪 Testing Infrastructure (v1.1.59)
 
 Comprehensive testing architecture with Vitest 4.1.4 and Cypress 15.14.0:
 
 ```mermaid
 C4Component
-    title Testing Infrastructure - v1.1.54
+    title Testing Infrastructure - v1.1.59
 
     Container_Boundary(testFramework, "Test Infrastructure") {
         Component(vitest, "Vitest 4.1.4", "Unit Testing", "≥80% line coverage enforced via `thresholds` in vite.config.ts; live report at docs/coverage/")
@@ -547,7 +547,7 @@ C4Component
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
 
-### **Test Coverage Metrics (v1.1.54)**
+### **Test Coverage Metrics (v1.1.59)**
 
 [![Coverage Report](https://img.shields.io/badge/Coverage_Report-Live_Results-success?style=flat-square&logo=vitest&logoColor=white)](https://ciacompliancemanager.com/coverage/index.html)
 
@@ -574,7 +574,7 @@ Current coverage from latest build ([view full report](https://ciacompliancemana
 - **Memory Management**: Experimental memory optimization
 - **Video/Screenshot Control**: Configurable artifact generation
 
-## 🔒 Security Scanning Integration (v1.1.54)
+## 🔒 Security Scanning Integration (v1.1.59)
 
 Multi-layered security validation in CI/CD pipeline:
 
@@ -620,7 +620,7 @@ C4Component
     UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
 
-### **Security Scanning Results (v1.1.54)**
+### **Security Scanning Results (v1.1.59)**
 
 | Scanner | Status | Findings | Action |
 |---------|--------|----------|--------|
@@ -631,7 +631,7 @@ C4Component
 | FOSSA | ✅ Passing | All licenses approved | N/A |
 | OpenSSF Scorecard | Live | Published via `scorecards.yml` | See repo badge |
 
-## 🚀 Deployment Architecture (v1.1.54)
+## 🚀 Deployment Architecture (v1.1.59)
 
 ### Multi-Region AWS CloudFront + S3 with GitHub Pages Disaster Recovery
 
@@ -732,7 +732,7 @@ C4Component
 - **Primary**: Routes to CloudFront distribution
 - **DR Failover**: Can route to GitHub Pages with DNS switch (< 15 min RTO)
 
-### **Deployment Features (v1.1.54)**
+### **Deployment Features (v1.1.59)**
 
 #### **SLSA Level 3 Compliance**
 - **Build Provenance**: Immutable record of build process
@@ -859,7 +859,7 @@ sequenceDiagram
 - 🏷️ **IAM Least Privilege**: Role limited to S3 sync and CloudFront invalidation
 - 📋 **Audit Trail**: All API calls logged to CloudTrail (account-level)
 
-## 📊 Technology Stack (v1.1.54)
+## 📊 Technology Stack (v1.1.59)
 
 ### **Runtime Requirements**
 | Technology | Version | Purpose |
@@ -958,7 +958,7 @@ From `tsconfig.json`:
 
 The library build (`tsconfig.lib.json`) additionally emits `.d.ts` files to `dist/`.
 
-## 📊 Key Architecture Decisions (Updated for v1.1.54)
+## 📊 Key Architecture Decisions (Updated for v1.1.59)
 
 ### Architecture Decision Records
 
@@ -976,7 +976,7 @@ The library build (`tsconfig.lib.json`) additionally emits `.d.ts` files to `dis
 | ADR-010 | SLSA Level 3 Attestation | Supply chain security and build integrity | Public provenance verification |
 | ADR-011 | AWS CloudFront + S3 Deployment | Multi-region resilience, global CDN, production-grade infrastructure | CloudFront CDN, S3 multi-region, Route53 DNS, GitHub Pages DR |
 
-### Key Quality Attributes (v1.1.54 Enhancements)
+### Key Quality Attributes (v1.1.59 Enhancements)
 
 | Quality Attribute | Support in Architecture | Measurement |
 |-------------------|------------------------------|-------------|

@@ -11,7 +11,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Owner-James_Pether_S%C3%B6rling-blue?style=for-the-badge&logo=person&logoColor=white" alt="Owner">
-  <img src="https://img.shields.io/badge/Version-1.0-green?style=for-the-badge&logo=semantic-release&logoColor=white" alt="Version">
+  <img src="https://img.shields.io/badge/Version-1.1.59-green?style=for-the-badge&logo=semantic-release&logoColor=white" alt="Version">
   <img src="https://img.shields.io/badge/Effective-2026--02--20-orange?style=for-the-badge&logo=calendar&logoColor=white" alt="Effective Date">
   <img src="https://img.shields.io/badge/Review_Cycle-Quarterly-purple?style=for-the-badge&logo=refresh&logoColor=white" alt="Review Cycle">
 </p>
@@ -301,7 +301,7 @@ When adding new security features or documentation:
 **Distribution:** Public (GitHub Repository)
 **Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-lightgrey?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#confidentiality-levels)
 **Effective Date:** 2026-02-20
-**Next Review:** 2026-05-20 (Quarterly)
+**Next Review:** 2026-07-28 (Quarterly)
 
 ---
 

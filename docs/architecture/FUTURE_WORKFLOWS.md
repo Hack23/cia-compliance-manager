@@ -9,7 +9,7 @@
   <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md">Change Management</a></em>
 </p>
 
-> **Version:** v2.0-DRAFT | **Based on:** v1.1 Baseline | **Last Updated:** 2026-01-11 | **Status:** 🚀 Evolution Roadmap
+> **Version:** v2.0-DRAFT | **Based on:** v1.1.59 Baseline | **Last Updated:** 2026-04-28 | **Status:** 🚀 Evolution Roadmap
 
 This document outlines the future vision for CI/CD and DevOps workflows that will support the CIA Compliance Manager as it evolves from v1.1 baseline into a context-aware security posture management platform. These enhanced workflows will incorporate machine learning model training, automated security validation, and continuous adaptation capabilities.
 
@@ -731,6 +731,6 @@ Major version upgrades may require:
 **✅ Status:** Draft - Future Vision Document  
 **📤 Distribution:** Public  
 **🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-green?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#confidentiality-levels)  
-**📅 Baseline Version:** v1.1 (2026-01-11)  
+**📅 Baseline Version:** v1.1.59 (2026-04-28)  
 **⏰ Target Timeline:** 2026-2027  
 **🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)

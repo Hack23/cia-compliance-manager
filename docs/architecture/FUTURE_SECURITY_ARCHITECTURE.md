@@ -9,7 +9,7 @@
   <em>🔗 <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md">Secure Development Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Network_Security_Policy.md">Network Security Policy</a> · <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/Access_Control_Policy.md">Access Control Policy</a></em>
 </p>
 
-> **Version:** v2.0-DRAFT | **Based on:** v1.0 Baseline | **Last Updated:** 2025-11-23 | **Status:** 🚀 Evolution Roadmap
+> **Version:** v2.0-DRAFT | **Based on:** v1.1.59 Baseline | **Last Updated:** 2026-04-28 | **Status:** 🚀 Evolution Roadmap
 
 This document outlines the comprehensive future security architecture for the CIA Compliance Manager as it evolves from v1.0 baseline into a full-stack multi-tenant security assessment, compliance mapping, and analytics SaaS platform leveraging AWS cloud infrastructure, user accounts, and advanced security services.
 
