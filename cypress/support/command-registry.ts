@@ -14,7 +14,6 @@ import {
   captureFullPageModes,
   captureWidgetThemes,
 } from "./screenshot-utils";
-import { deprecatedTestFiles } from "./test-cleanup";
 import { applyTestStyles, forceDarkMode, forceLightMode } from "./test-styles";
 import { analyzeAndDocumentWidgets } from "./widget-analyzer";
 import { findWidgetFlexibly } from "./widget-testing-template";
@@ -78,17 +77,6 @@ function registerAllCommands(): void {
   (Cypress.Commands as any).add("applyTestTheme", (theme: "light" | "dark") => {
     applyTestTheme(theme);
     // Return implicitly
-  });
-
-  // Standard commands that are in the interface
-  Cypress.Commands.add("checkForDeprecatedTests", () => {
-    cy.log(`Deprecated test files to check: ${deprecatedTestFiles.join(", ")}`);
-    // No explicit return needed
-  });
-
-  Cypress.Commands.add("findUnconvertedWidgetTests", () => {
-    cy.log("Checking for unconverted tests...");
-    // No explicit return needed
   });
 
   // Use cast for custom commands not in the interface

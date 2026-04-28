@@ -29,37 +29,6 @@ export function getByTestId(testId: string): string {
 }
 
 /**
- * Get widget container by widget name
- * 
- * @deprecated This helper is deprecated for widgets using WidgetContainer.
- * WidgetContainer prefixes test IDs with 'widget-container-', so this function
- * will not work correctly for most widgets.
- * 
- * Instead, use the specific widget selector objects (e.g., costEstimationWidget.root,
- * securityLevelWidget.root) which account for the WidgetContainer prefix pattern.
- */
-export function widgetSelector(widgetName: string): string {
-  return getByTestId(`widget-${widgetName}`);
-}
-
-/**
- * Common widget state selectors
- * 
- * Note: These helpers work for non-WidgetContainer components.
- * For widgets using WidgetContainer, state test IDs follow different patterns:
- *   - loading: `widget-container-loading-container-${testId}`
- *   - error: `widget-container-error-${testId}`
- * 
- * Consider using widget-specific selectors or checking the actual DOM structure.
- */
-export const widgetState = {
-  loading: (widgetName: string) => getByTestId(`${widgetName}-loading`),
-  error: (widgetName: string) => getByTestId(`${widgetName}-error`),
-  content: (widgetName: string) => getByTestId(`${widgetName}-content`),
-  empty: (widgetName: string) => getByTestId(`${widgetName}-empty`),
-};
-
-/**
  * Security Level Widget Selectors
  * Widget uses WidgetContainer with testId="widget-security-level"
  * Widget file: SecurityLevelWidget.tsx
@@ -268,35 +237,6 @@ export const securityVisualizationWidget = {
 };
 
 /**
- * Common app-level selectors
- */
-export const app = {
-  container: '[data-testid="app-container"]',
-  dashboardGrid: '[data-testid="dashboard-grid"]',
-  themeToggle: '[data-testid="theme-toggle"]',
-  loadingIndicator: '[data-testid="loading-indicator"]',
-  errorBoundary: '[data-testid="error-boundary"]',
-};
-
-/**
- * All widget selectors in one place for iteration
- */
-export const allWidgets = {
-  'security-level': securityLevelWidget,
-  'security-summary': securitySummaryWidget,
-  'cost-estimation': costEstimationWidget,
-  'value-creation': valueCreationWidget,
-  'compliance-status': complianceStatusWidget,
-  'business-impact': businessImpactWidget,
-  'availability-impact': availabilityImpactWidget,
-  'integrity-impact': integrityImpactWidget,
-  'confidentiality-impact': confidentialityImpactWidget,
-  'technical-details': technicalDetailsWidget,
-  'security-resources': securityResourcesWidget,
-  'security-visualization': securityVisualizationWidget,
-};
-
-/**
  * Widget list for testing all widgets
  */
 export const widgetNames = [
@@ -313,5 +253,3 @@ export const widgetNames = [
   'security-resources',
   'security-visualization',
 ] as const;
-
-export type WidgetName = typeof widgetNames[number];

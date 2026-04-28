@@ -63,43 +63,6 @@ Create a test ID selector.
 getByTestId('my-element')  // Returns: '[data-testid="my-element"]'
 ```
 
-#### `widgetSelector(widgetName: string)`
-Create a widget container selector.
-
-```typescript
-widgetSelector('cost-estimation')  // Returns: '[data-testid="widget-cost-estimation"]'
-```
-
-#### `widgetState`
-Common widget state selectors.
-
-```typescript
-widgetState.loading('cost-estimation')  // Returns: '[data-testid="cost-estimation-loading"]'
-widgetState.error('cost-estimation')    // Returns: '[data-testid="cost-estimation-error"]'
-widgetState.content('cost-estimation')  // Returns: '[data-testid="cost-estimation-content"]'
-```
-
-### Widget Iteration
-
-#### `allWidgets`
-Object containing all widget selectors for iteration:
-
-```typescript
-import { allWidgets } from './support/selectors';
-
-// Iterate through all widgets
-Object.entries(allWidgets).forEach(([name, selectors]) => {
-  cy.get(selectors.root).should('exist');
-});
-
-// Or use specific widget selectors
-Object.values(allWidgets).forEach(widget => {
-  cy.get(widget.root).should('be.visible');
-});
-```
-
-**Note**: The `widgetSelector()` helper function is deprecated for WidgetContainer-based widgets. Use specific widget selector objects instead.
-
 ## Examples
 
 ### Testing a Single Widget
@@ -121,16 +84,17 @@ describe('Cost Estimation Widget', () => {
 ### Testing Multiple Widgets
 
 ```typescript
-import { allWidgets } from '../../support/selectors';
+import {
+  securityLevelWidget,
+  costEstimationWidget,
+} from '../../support/selectors';
 
-describe('All Widgets', () => {
-  it('should render all widgets', () => {
+describe('Widgets', () => {
+  it('should render widgets', () => {
     cy.visit('/');
-    
-    // Use specific widget selectors that account for WidgetContainer prefix
-    Object.values(allWidgets).forEach(widget => {
-      cy.get(widget.root).should('exist');
-    });
+
+    cy.get(securityLevelWidget.root).should('exist');
+    cy.get(costEstimationWidget.root).should('exist');
   });
 });
 ```
@@ -162,9 +126,8 @@ When a new widget is added:
 
 1. Import its test IDs from `src/constants/testIds.ts`
 2. Create a selector object following the naming pattern
-3. Add to `allWidgets` object
-4. Add to `widgetNames` array
-5. Export the new selector object
+3. Add to `widgetNames` array
+4. Export the new selector object
 
 Example:
 
@@ -175,12 +138,6 @@ export const newWidget = {
   root: getByTestId(NEW_WIDGET_TEST_IDS.WIDGET),
   element1: getByTestId(NEW_WIDGET_TEST_IDS.ELEMENT1),
   element2: getByTestId(NEW_WIDGET_TEST_IDS.ELEMENT2),
-};
-
-// Add to allWidgets
-export const allWidgets = {
-  // ... existing widgets
-  'new-widget': newWidget,
 };
 
 // Add to widgetNames

@@ -18,7 +18,6 @@ require("./enhanced-commands");
 require("./global-test-setup");
 require("./screenshot-analysis");
 require("./screenshot-utils");
-require("./test-cleanup");
 require("./test-styles");
 require("./widget-analyzer");
 require("./widget-testing-template");
