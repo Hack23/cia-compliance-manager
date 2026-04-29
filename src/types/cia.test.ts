@@ -32,7 +32,6 @@ describe("CIA Types", () => {
     // Create a minimal valid CIADetails object
     const details: CIADetails = {
       description: "Test",
-      impact: "Test impact",
       technical: "Test technical",
       businessImpact: "Test business impact",
       recommendations: [],

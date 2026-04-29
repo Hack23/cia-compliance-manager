@@ -122,7 +122,6 @@ describe("Application Constants", () => {
     const mockOptions: Record<string, CIADetails> = {
       None: {
         description: "None description",
-        impact: "None impact",
         technical: "None technical",
         businessImpact: "None business impact",
         recommendations: [],
@@ -133,7 +132,6 @@ describe("Application Constants", () => {
       },
       Low: {
         description: "Low description",
-        impact: "Low impact",
         technical: "Low technical",
         businessImpact: "Low business impact",
         recommendations: ["Low recommendation"],
@@ -144,7 +142,6 @@ describe("Application Constants", () => {
       },
       Moderate: {
         description: "Moderate description",
-        impact: "Moderate impact",
         technical: "Moderate technical",
         businessImpact: "Moderate business impact",
         recommendations: ["Moderate recommendation"],
@@ -155,7 +152,6 @@ describe("Application Constants", () => {
       },
       High: {
         description: "High description",
-        impact: "High impact",
         technical: "High technical",
         businessImpact: "High business impact",
         recommendations: ["High recommendation"],
@@ -166,7 +162,6 @@ describe("Application Constants", () => {
       },
       "Very High": {
         description: "Very High description",
-        impact: "Very High impact",
         technical: "Very High technical",
         businessImpact: "Very High business impact",
         recommendations: ["Very High recommendation"],
@@ -199,14 +194,14 @@ describe("Application Constants", () => {
       expect(result.VERY_HIGH).toBe("Very High description");
     });
 
-    it("maps impact field correctly", () => {
-      const result = mapOptionsToConstants(mockOptions, "impact");
+    it("maps businessImpact field correctly", () => {
+      const result = mapOptionsToConstants(mockOptions, "businessImpact");
 
-      expect(result.NONE).toBe("None impact");
-      expect(result.LOW).toBe("Low impact");
-      expect(result.MODERATE).toBe("Moderate impact");
-      expect(result.HIGH).toBe("High impact");
-      expect(result.VERY_HIGH).toBe("Very High impact");
+      expect(result.NONE).toBe("None business impact");
+      expect(result.LOW).toBe("Low business impact");
+      expect(result.MODERATE).toBe("Moderate business impact");
+      expect(result.HIGH).toBe("High business impact");
+      expect(result.VERY_HIGH).toBe("Very High business impact");
     });
 
     it("maps technical field correctly", () => {

@@ -257,7 +257,6 @@ describe("CIADetails Interface", () => {
   it("should handle undefined optional fields gracefully", () => {
     const minimalDetails: CIADetails = {
       description: "Test",
-      impact: "Test",
       technical: "Test",
       businessImpact: "Test",
       capex: 100,
