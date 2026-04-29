@@ -2,7 +2,6 @@
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "entry": [
     "src/index.ts",
-    "src/index.tsx",
     "src/App.tsx",
     "src/types/index.ts",
     "src/services/index.ts",
@@ -16,13 +15,8 @@
     "eslint-local-rules.cjs",
     "scripts/**/*.{js,mjs,cjs,ts}",
     "cypress/e2e/**/*.cy.{ts,tsx}",
-    "cypress/support/e2e.ts",
     "cypress/plugins/**/*.{ts,js}",
-    "src/**/*.test.{ts,tsx}",
-    "src/tests/setup-tests.ts",
-    "src/tests/vitest-setup.ts",
-    "src/tests/vitest-extensions.d.ts",
-    "src/vitest.d.ts"
+    "src/**/*.test.{ts,tsx}"
   ],
   "project": [
     "src/**/*.{ts,tsx,js,jsx}",
