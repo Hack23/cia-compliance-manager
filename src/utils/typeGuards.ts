@@ -91,9 +91,11 @@ export function isConfidentialityDetail(
   const detail = obj as Partial<ConfidentialityDetail>;
   return (
     typeof detail.description === "string" &&
+    typeof detail.technical === "string" &&
     typeof detail.businessImpact === "string" &&
     typeof detail.protectionMethod === "string" &&
-    Array.isArray(detail.recommendations)
+    Array.isArray(detail.recommendations) &&
+    detail.recommendations.every((item) => typeof item === "string")
   );
 }
 

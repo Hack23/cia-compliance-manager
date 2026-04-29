@@ -18,6 +18,46 @@ import { applyTestStyles, forceDarkMode, forceLightMode } from "./test-styles";
 import { analyzeAndDocumentWidgets } from "./widget-analyzer";
 import { findWidgetFlexibly } from "./widget-testing-template";
 
+// Type augmentations for the custom commands registered below.
+// Keep these collocated with the registrations so the implementations and the
+// `Cypress.Commands.add` call signatures stay in sync without `any` casts.
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      /** Apply test-only stylesheet overrides (see ./test-styles). */
+      applyTestStyles(): Chainable<void>;
+      /**
+       * Find a widget using a series of fallback selectors.
+       * @param widgetId Widget id or partial test id
+       */
+      findWidgetFlexibly(widgetId: string): Chainable<JQuery<HTMLElement>>;
+      /** Analyze and document widgets present in the DOM. */
+      analyzeWidgetTestIds(): Chainable<void>;
+      /**
+       * Capture screenshots of a widget across light/dark themes.
+       * @param widgetName Widget name used to label captures
+       */
+      captureWidgetThemes(widgetName: string): Chainable<void>;
+      /**
+       * Capture full-page screenshots in light/dark modes.
+       * @param pageName Page name used to label captures
+       */
+      captureFullPageModes(pageName: string): Chainable<void>;
+      /** Capture screenshots of all widgets in a single pass. */
+      captureAllWidgets(): Chainable<void>;
+      /** Set up the global Cypress test environment. */
+      setupTestEnvironment(): Chainable<void>;
+      /**
+       * Apply a specific theme to the test environment.
+       * @param theme "light" or "dark"
+       */
+      applyTestTheme(theme: "light" | "dark"): Chainable<void>;
+      /** Log a confirmation that custom commands were registered. */
+      logRegisteredCommands(): Chainable<void>;
+    }
+  }
+}
+
 // Register all commands in one place
 function registerAllCommands(): void {
   // Debug helpers - these have proper types already
@@ -43,47 +83,39 @@ function registerAllCommands(): void {
     // No explicit return needed as it will implicitly return void
   });
 
-  // We need to cast these commands that aren't in the Chainable interface
-  // by using as any while ensuring types are properly defined in command-types.d.ts
-  (Cypress.Commands as any).add("findWidgetFlexibly", (widgetId: string) => {
+  // Custom commands typed via the `declare global` block above; registered
+  // through the standard `Cypress.Commands.add` API without `any` casts.
+  Cypress.Commands.add("findWidgetFlexibly", (widgetId: string) => {
     return findWidgetFlexibly(widgetId);
   });
 
-  (Cypress.Commands as any).add("analyzeWidgetTestIds", () => {
+  Cypress.Commands.add("analyzeWidgetTestIds", () => {
     analyzeAndDocumentWidgets();
-    // Return implicitly
   });
 
-  (Cypress.Commands as any).add("captureWidgetThemes", (widgetName: string) => {
+  Cypress.Commands.add("captureWidgetThemes", (widgetName: string) => {
     captureWidgetThemes(widgetName);
-    // Return implicitly
   });
 
-  (Cypress.Commands as any).add("captureFullPageModes", (pageName: string) => {
+  Cypress.Commands.add("captureFullPageModes", (pageName: string) => {
     captureFullPageModes(pageName);
-    // Return implicitly
   });
 
-  (Cypress.Commands as any).add("captureAllWidgets", () => {
+  Cypress.Commands.add("captureAllWidgets", () => {
     captureAllWidgetsSimple();
-    // Return implicitly
   });
 
-  (Cypress.Commands as any).add("setupTestEnvironment", () => {
+  Cypress.Commands.add("setupTestEnvironment", () => {
     setupTestEnvironment();
-    // Return implicitly
   });
 
-  (Cypress.Commands as any).add("applyTestTheme", (theme: "light" | "dark") => {
+  Cypress.Commands.add("applyTestTheme", (theme: "light" | "dark") => {
     applyTestTheme(theme);
-    // Return implicitly
   });
 
-  // Use cast for custom commands not in the interface
-  (Cypress.Commands as any).add("logRegisteredCommands", () => {
+  Cypress.Commands.add("logRegisteredCommands", () => {
     // Don't access internal _commands property
     cy.log("Custom commands registered successfully");
-    // Return implicitly
   });
 }
 
