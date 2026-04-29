@@ -360,14 +360,17 @@ describe("riskUtils", () => {
   describe("getHighestImpactArea", () => {
     it("should identify operational as highest impact", () => {
       const availImpact = {
+        summary: "availImpact",
         operational: { riskLevel: "High Risk", description: "High operational risk" },
         financial: { riskLevel: "Low Risk", description: "Low financial risk" },
       };
       const integImpact = {
+        summary: "integImpact",
         operational: { riskLevel: "Low Risk", description: "Low operational risk" },
         financial: { riskLevel: "Low Risk", description: "Low financial risk" },
       };
       const confImpact = {
+        summary: "confImpact",
         reputational: { riskLevel: "Low Risk", description: "Low reputational risk" },
         regulatory: { riskLevel: "Low Risk", description: "Low regulatory risk" },
       };
@@ -382,14 +385,17 @@ describe("riskUtils", () => {
 
     it("should identify financial as highest impact", () => {
       const availImpact = {
+        summary: "availImpact",
         operational: { riskLevel: "Low Risk", description: "Low operational risk" },
         financial: { riskLevel: "High Risk", description: "High financial risk" },
       };
       const integImpact = {
+        summary: "integImpact",
         operational: { riskLevel: "Low Risk", description: "Low operational risk" },
         financial: { riskLevel: "Low Risk", description: "Low financial risk" },
       };
       const confImpact = {
+        summary: "confImpact",
         reputational: { riskLevel: "Low Risk", description: "Low reputational risk" },
         regulatory: { riskLevel: "Low Risk", description: "Low regulatory risk" },
       };
@@ -404,14 +410,17 @@ describe("riskUtils", () => {
 
     it("should return minimal for no high impact areas", () => {
       const availImpact = {
+        summary: "availImpact",
         operational: { riskLevel: "Low Risk", description: "Low operational risk" },
         financial: { riskLevel: "Low Risk", description: "Low financial risk" },
       };
       const integImpact = {
+        summary: "integImpact",
         operational: { riskLevel: "Low Risk", description: "Low operational risk" },
         financial: { riskLevel: "Low Risk", description: "Low financial risk" },
       };
       const confImpact = {
+        summary: "confImpact",
         reputational: { riskLevel: "Low Risk", description: "Low reputational risk" },
         regulatory: { riskLevel: "Low Risk", description: "Low regulatory risk" },
       };
@@ -426,14 +435,17 @@ describe("riskUtils", () => {
 
     it("should handle multiple high impact areas", () => {
       const availImpact = {
+        summary: "availImpact",
         operational: { riskLevel: "High Risk", description: "High operational risk" },
         financial: { riskLevel: "High Risk", description: "High financial risk" },
       };
       const integImpact = {
+        summary: "integImpact",
         operational: { riskLevel: "High Risk", description: "High operational risk" },
         financial: { riskLevel: "Low Risk", description: "Low financial risk" },
       };
       const confImpact = {
+        summary: "confImpact",
         reputational: { riskLevel: "Low Risk", description: "Low reputational risk" },
         regulatory: { riskLevel: "Low Risk", description: "Low regulatory risk" },
       };
@@ -449,14 +461,17 @@ describe("riskUtils", () => {
 
     it("should return multiple for more than 2 high impact areas", () => {
       const availImpact = {
+        summary: "availImpact",
         operational: { riskLevel: "High Risk", description: "High operational risk" },
         financial: { riskLevel: "High Risk", description: "High financial risk" },
       };
       const integImpact = {
+        summary: "integImpact",
         operational: { riskLevel: "High Risk", description: "High operational risk" },
         financial: { riskLevel: "High Risk", description: "High financial risk" },
       };
       const confImpact = {
+        summary: "confImpact",
         reputational: { riskLevel: "Low Risk", description: "Low reputational risk" },
         regulatory: { riskLevel: "Low Risk", description: "Low regulatory risk" },
       };

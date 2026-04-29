@@ -119,7 +119,12 @@ export interface BusinessImpactDetail {
  * Business impact details
  */
 export interface BusinessImpactDetails {
-  summary?: string; // Optional summary property
+  /**
+   * Summary of the overall business impact assessment.
+   *
+   * Required to align with runtime validation in `isBusinessImpactDetails`.
+   */
+  summary: string;
   financial?: BusinessImpactDetail;
   operational?: BusinessImpactDetail;
   reputational?: BusinessImpactDetail;

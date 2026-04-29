@@ -271,9 +271,11 @@ export interface BusinessKeyBenefits {
  */
 export interface BusinessImpactDetails {
   /**
-   * Summary of the overall business impact
+   * Summary of the overall business impact.
+   *
+   * Required to align with runtime validation in `isBusinessImpactDetails`.
    */
-  summary?: string;
+  summary: string;
 
   /**
    * Financial impact details

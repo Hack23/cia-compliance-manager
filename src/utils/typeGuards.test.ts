@@ -208,8 +208,9 @@ describe("Type Guard Utilities", () => {
 
     it("isConfidentialityDetail validates confidentiality details", () => {
       const validDetail = {
-        impact: "Test impact",
+        description: "Test description",
         businessImpact: "Test business impact",
+        protectionMethod: "Encryption",
         recommendations: [],
       };
 
@@ -217,10 +218,16 @@ describe("Type Guard Utilities", () => {
 
       // Missing required fields
       expect(
-        isConfidentialityDetail({ ...validDetail, impact: undefined }),
+        isConfidentialityDetail({ ...validDetail, description: undefined }),
       ).toBe(false);
       expect(
         isConfidentialityDetail({ ...validDetail, businessImpact: undefined }),
+      ).toBe(false);
+      expect(
+        isConfidentialityDetail({
+          ...validDetail,
+          protectionMethod: undefined,
+        }),
       ).toBe(false);
       expect(
         isConfidentialityDetail({ ...validDetail, recommendations: undefined }),
