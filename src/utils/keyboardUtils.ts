@@ -58,7 +58,7 @@ export function resetPlatformCache(): void {
  * Detect the current platform
  * 
  * Uses modern navigator.userAgentData when available, with fallback to
- * deprecated navigator.platform for older browsers.
+ * the older navigator.platform property for browsers that don't support it.
  * Result is cached for performance.
  * 
  * @returns The detected platform
@@ -109,7 +109,7 @@ export function detectPlatform(): Platform {
     }
   }
   
-  // Fallback to deprecated platform property for older browsers
+  // Fallback to navigator.platform for browsers without userAgentData support
   const platform = window.navigator.platform.toUpperCase();
   
   if (platform.indexOf(PLATFORM_DETECTION.MAC) >= 0) {

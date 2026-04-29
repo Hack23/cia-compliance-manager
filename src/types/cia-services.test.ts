@@ -69,7 +69,7 @@ describe("CIADetails Interface", () => {
   it("should work with CIADetails interface", () => {
     // Create object using CIADetails
     const details: CIADetails = {
-      description: "Using deprecated interface",
+      description: "Standard interface usage",
       technical: "Technical details",
       businessImpact: "Business impact details",
       capex: 200,
@@ -84,7 +84,7 @@ describe("CIADetails Interface", () => {
     };
 
     // Should work the same as CIADetails
-    expect(details.description).toBe("Using deprecated interface");
+    expect(details.description).toBe("Standard interface usage");
     expect(details.technical).toBe("Technical details");
     expect(details.businessImpact).toBe("Business impact details");
   });
@@ -143,20 +143,9 @@ describe("CIADetails Interface", () => {
         riskLevel: "Low Risk", 
         meanTimeToRecover: "4 hours" 
       },
-      // Keep legacy properties
-      financialImpact: { 
-        description: "Financial impact description", 
-        riskLevel: "Medium Risk", 
-        annualRevenueLoss: "$100,000" 
-      },
-      operationalImpact: { 
-        description: "Operational impact description", 
-        riskLevel: "Low Risk", 
-        meanTimeToRecover: "4 hours" 
-      },
-      reputationalImpact: { 
-        description: "Reputational impact description", 
-        riskLevel: "High Risk" 
+      reputational: {
+        description: "Reputational impact description",
+        riskLevel: "High Risk"
       },
       strategic: { 
         description: "Strategic impact description", 
@@ -504,15 +493,10 @@ describe("Supporting Types", () => {
         description: "Financial impact",
         riskLevel: "Medium",
       },
-      financialImpact: {
-        description: "Financial impact",
-        riskLevel: "Medium",
-      },
     };
 
     // Use the properly defined variable
-    const financial =
-      testImpactDetails.financial ?? testImpactDetails.financialImpact;
+    const financial = testImpactDetails.financial;
     expect(financial?.riskLevel).toBeDefined();
   });
 });

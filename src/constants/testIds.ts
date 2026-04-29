@@ -123,25 +123,6 @@ export function createWidgetTestId(widgetName: string): WidgetTestIds {
 }
 
 /**
- * Create a context-specific test ID by combining a component prefix with an element ID
- * @deprecated Use createTestId() or createWidgetTestId() instead for consistency
- */
-export const createContextualTestId = (
-  componentPrefix: string,
-  elementId: string
-): string => {
-  return `${componentPrefix}-${elementId}`;
-};
-
-/**
- * Helper to create a test ID with a prefix
- * @deprecated Use createTestId() instead for consistency
- */
-export const getTestId = (prefix: string, id: string): string => {
-  return `${prefix}-${id}`;
-};
-
-/**
  * Dynamic test ID creation functions for various component types
  */
 export const createDynamicTestId = {
@@ -1138,7 +1119,6 @@ export const TEST_IDS = {
   ...VALUE_CREATION_TEST_IDS,
   ...COMPLIANCE_TEST_IDS,
   createDynamicTestId,
-  getTestId,
   TEST_HELPERS,
   costEstimation: {
     container: "cost-estimation-container",

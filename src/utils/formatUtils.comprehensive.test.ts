@@ -7,7 +7,6 @@ import { describe, expect, it } from "vitest";
 import {
   formatBudgetPercentage,
   formatCurrency,
-  formatCurrencyWithOptions,
   formatDate,
   formatLargeNumber,
   formatNumber,
@@ -104,7 +103,7 @@ describe("formatUtils - Comprehensive Coverage", () => {
       expect(result).toMatch(/1,000\.00/);
     });
 
-    it("should support backward compatible string options", () => {
+    it("should support positional currency-code form", () => {
       const result = formatCurrency(1000, "EUR", "de-DE");
       expect(result).toContain("1");
     });
@@ -120,20 +119,6 @@ describe("formatUtils - Comprehensive Coverage", () => {
         maximumFractionDigits: 2,
       });
       expect(result).toMatch(/1,234\.56/);
-    });
-  });
-
-  describe("formatCurrencyWithOptions", () => {
-    it("should be an alias for formatCurrency", () => {
-      expect(formatCurrencyWithOptions).toBe(formatCurrency);
-    });
-
-    it("should format with options", () => {
-      const result = formatCurrencyWithOptions(1000, {
-        locale: "en-US",
-        currency: "USD",
-      });
-      expect(result).toMatch(/1,000/);
     });
   });
 

@@ -2,9 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   asSecurityLevel,
   createCompoundTestId,
-  createContextualTestId,
   createDynamicTestId,
-  getTestId,
   TEST_HELPERS,
 } from "./testIds";
 
@@ -13,24 +11,6 @@ describe("testIds utility functions", () => {
     it("joins prefix and suffix with hyphen", () => {
       expect(createCompoundTestId("button", "submit")).toBe("button-submit");
       expect(createCompoundTestId("form", "login")).toBe("form-login");
-    });
-  });
-
-  describe("createContextualTestId", () => {
-    it("creates component-specific test IDs", () => {
-      expect(createContextualTestId("dashboard", "header")).toBe(
-        "dashboard-header"
-      );
-      expect(createContextualTestId("widget", "content")).toBe(
-        "widget-content"
-      );
-    });
-  });
-
-  describe("getTestId", () => {
-    it("creates a hyphenated test ID from prefix and id", () => {
-      expect(getTestId("button", "submit")).toBe("button-submit");
-      expect(getTestId("form", "login")).toBe("form-login");
     });
   });
 

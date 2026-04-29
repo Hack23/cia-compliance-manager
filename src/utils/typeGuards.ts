@@ -90,7 +90,6 @@ export function isConfidentialityDetail(
 
   const detail = obj as Partial<ConfidentialityDetail>;
   return (
-    typeof detail.impact === "string" &&
     typeof detail.businessImpact === "string" &&
     Array.isArray(detail.recommendations)
   );
@@ -571,9 +570,6 @@ export function isBusinessImpactDetails(
     "reputational",
     "strategic",
     "regulatory",
-    "financialImpact",
-    "operationalImpact",
-    "reputationalImpact",
   ].some((prop) => hasProperty(value, prop) && isObject(value[prop]));
 
   return hasAnyImpact;

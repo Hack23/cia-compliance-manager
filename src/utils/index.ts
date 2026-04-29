@@ -90,7 +90,6 @@ export type { CostResult } from "./costCalculationUtils";
 export const {
   formatBudgetPercentage,
   formatCurrency,
-  formatCurrencyWithOptions,
   formatDate,
   formatLargeNumber,
   formatNumber,

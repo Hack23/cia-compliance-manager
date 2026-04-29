@@ -127,15 +127,6 @@ function enhanceAvailabilityOptions(
           description: `Reputational impact for ${securityLevel} availability`,
           riskLevel: getRiskLevelForSecurityLevel(securityLevel),
         },
-        // Add legacy property names to match tests
-        financialImpact: {
-          description: `Financial impact for ${securityLevel} availability`,
-          riskLevel: getRiskLevelForSecurityLevel(securityLevel),
-        },
-        operationalImpact: {
-          description: `Operational impact for ${securityLevel} availability`,
-          riskLevel: getRiskLevelForSecurityLevel(securityLevel),
-        },
       },
       // Add technical implementation details
       technicalImplementation: {
@@ -194,15 +185,6 @@ function enhanceIntegrityOptions(
         },
         reputational: {
           description: `Reputational impact for ${securityLevel} integrity`,
-          riskLevel: getRiskLevelForSecurityLevel(securityLevel),
-        },
-        // Add legacy property names to match tests
-        financialImpact: {
-          description: `Financial impact for ${securityLevel} integrity`,
-          riskLevel: getRiskLevelForSecurityLevel(securityLevel),
-        },
-        operationalImpact: {
-          description: `Operational impact for ${securityLevel} integrity`,
           riskLevel: getRiskLevelForSecurityLevel(securityLevel),
         },
       },
@@ -265,20 +247,6 @@ function enhanceConfidentialityOptions(
           description: `Reputational impact for ${securityLevel} confidentiality`,
           riskLevel: getRiskLevelForSecurityLevel(securityLevel),
           reputationalImpact: `Reputational impact details for ${securityLevel} confidentiality`,
-        },
-        // Add legacy property names to match tests
-        financialImpact: {
-          description: `Financial impact for ${securityLevel} confidentiality`,
-          riskLevel: getRiskLevelForSecurityLevel(securityLevel),
-        },
-        operationalImpact: {
-          description: `Operational impact for ${securityLevel} confidentiality`,
-          riskLevel: getRiskLevelForSecurityLevel(securityLevel),
-        },
-        reputationalImpact: {
-          // Add this property to fix the test
-          description: `Reputational impact for ${securityLevel} confidentiality`,
-          riskLevel: getRiskLevelForSecurityLevel(securityLevel),
         },
       },
       // Add technical implementation details

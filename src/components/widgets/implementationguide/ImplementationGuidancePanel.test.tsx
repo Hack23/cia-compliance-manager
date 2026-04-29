@@ -309,7 +309,7 @@ describe("ImplementationGuidancePanel", () => {
       screen.getByText(/Maintaining consistent controls/)
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/Integration with legacy systems/)
+      screen.getByText(/Integration with existing systems/)
     ).toBeInTheDocument();
     expect(
       screen.getByText(/Building security expertise/)

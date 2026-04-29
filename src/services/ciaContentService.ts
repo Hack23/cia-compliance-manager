@@ -1547,7 +1547,6 @@ export const getAvailabilityDetails = async (
   // This would normally fetch from an API, but for now we'll return mock data
   return {
     description: `Availability at ${level} level ensures system uptime meets business requirements.`,
-    impact: `Impact on business operations at ${level} level is manageable.`,
     technical: `Technical considerations for ${level} availability include redundancy and failover systems.`,
     businessImpact: `Business impact at ${level} availability level involves potential downtime costs.`,
     uptime: getUptimeForLevel(level),
@@ -1580,7 +1579,6 @@ export const getIntegrityDetails = async (
   // This would normally fetch from an API, but for now we'll return mock data
   return {
     description: `Integrity at ${level} level ensures data accuracy and trustworthiness.`,
-    impact: `Impact on data quality at ${level} level is within acceptable parameters.`,
     technical: `Technical considerations for ${level} integrity include access controls and validation mechanisms.`,
     businessImpact: `Business impact at ${level} integrity level involves data quality assurance.`,
     recommendations: [
@@ -1603,7 +1601,6 @@ export const getConfidentialityDetails = async (
   // This would normally fetch from an API, but for now we'll return mock data
   return {
     description: `Confidentiality at ${level} level ensures sensitive information is protected from unauthorized access.`,
-    impact: `Impact on data protection at ${level} level provides appropriate safeguards.`,
     technical: `Technical considerations for ${level} confidentiality include encryption and access controls.`,
     businessImpact: `Business impact at ${level} confidentiality level involves privacy compliance and data protection.`,
     recommendations: [

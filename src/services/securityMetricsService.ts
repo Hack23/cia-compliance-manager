@@ -134,11 +134,6 @@ export interface SecurityMetrics {
   integrity: ComponentMetrics;
   confidentiality: ComponentMetrics;
 
-  // Legacy numeric properties
-  availabilityScore?: number;
-  integrityScore?: number;
-  confidentialityScore?: number;
-
   // Impact metrics
   impactMetrics: ImpactMetrics;
 

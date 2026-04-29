@@ -72,32 +72,32 @@ export function formatPercentage(value: number, decimalPlaces: number = 0): stri
 
 /**
  * Formats a number as currency with proper thousands separators
- * 
+ *
  * Provides flexible currency formatting with support for different locales
- * and currencies. Handles both object-style and legacy string-style parameters
- * for backward compatibility.
- * 
+ * and currencies. Accepts either an options object or a positional currency
+ * code with optional locale.
+ *
  * @param value - The numeric value to format as currency
- * @param options - Formatting options object or currency code string (for backward compatibility)
+ * @param options - Formatting options object or currency code string
  * @param options.locale - Locale string for regional formatting (e.g., 'en-US', 'sv-SE')
  * @param options.currency - Currency code (e.g., 'USD', 'EUR', 'SEK')
  * @param options.minimumFractionDigits - Minimum decimal places to show
  * @param options.maximumFractionDigits - Maximum decimal places to show
- * @param locale - Optional locale for backward compatibility with string options
+ * @param locale - Optional locale when using the positional currency-code form
  * @returns Formatted currency string with symbol and separators
- * 
+ *
  * @example
  * ```typescript
  * // Object-style options (recommended)
  * formatCurrency(1234.56)                                    // "$1,235" (default: USD, 0 decimals)
  * formatCurrency(1234.56, { currency: 'EUR' })              // "€1,235"
- * formatCurrency(1234.56, { 
+ * formatCurrency(1234.56, {
  *   currency: 'USD',
  *   minimumFractionDigits: 2,
  *   maximumFractionDigits: 2
  * })                                                         // "$1,234.56"
- * 
- * // Legacy string-style options (backward compatible)
+ *
+ * // Positional string-style options
  * formatCurrency(1234.56, 'SEK', 'sv-SE')                   // "1 235 kr"
  * formatCurrency(50000, 'USD')                              // "$50,000"
  * ```
@@ -118,7 +118,7 @@ export function formatCurrency(
   let minFractionDigits = 0;
   let maxFractionDigits = 0;
 
-  // Handle backward compatibility with string options
+  // Handle positional string form: formatCurrency(value, 'USD', 'en-US')
   if (typeof options === 'string') {
     currencyCode = options;
     if (locale) {
@@ -141,9 +141,6 @@ export function formatCurrency(
     maximumFractionDigits: maxFractionDigits
   }).format(value);
 }
-
-// For backward compatibility, re-export this function
-export const formatCurrencyWithOptions = formatCurrency;
 
 /**
  * Format security level for display

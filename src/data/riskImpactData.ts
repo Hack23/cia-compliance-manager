@@ -32,9 +32,9 @@ export interface RiskImpact {
   frameworks?: string[];
   /** Competitive business impact (optional) */
   competitiveImpact?: string;
-  /** Financial impact details (legacy, optional) */
+  /** Financial impact details (optional) */
   financialImpact?: string;
-  /** Operational impact details (legacy, optional) */
+  /** Operational impact details (optional) */
   operationalImpact?: string;
   /** Reputational impact details (optional) */
   reputationalImpact?: string;

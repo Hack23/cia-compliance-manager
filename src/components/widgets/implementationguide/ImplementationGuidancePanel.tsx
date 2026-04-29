@@ -143,7 +143,7 @@ const ImplementationGuidancePanel: React.FC<ImplementationGuidancePanelProps> = 
           <ul className="list-disc list-inside space-y-xs text-body text-gray-600 dark:text-gray-400 pl-md">
             <li>Balancing security with usability and performance</li>
             <li>Maintaining consistent controls across different environments</li>
-            <li>Integration with legacy systems and applications</li>
+            <li>Integration with existing systems and applications</li>
             <li>Building security expertise and awareness across teams</li>
             <li>Allocating sufficient resources for ongoing maintenance</li>
           </ul>

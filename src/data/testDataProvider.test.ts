@@ -70,10 +70,10 @@ describe("TestDataProvider", () => {
         const availOption = dataProvider.availabilityOptions[level];
         expect(availOption.businessImpactDetails).toBeDefined();
         expect(
-          availOption.businessImpactDetails?.financialImpact,
+          availOption.businessImpactDetails?.financial,
         ).toBeDefined();
         expect(
-          availOption.businessImpactDetails?.operationalImpact,
+          availOption.businessImpactDetails?.operational,
         ).toBeDefined();
       });
     });
@@ -176,7 +176,7 @@ describe("TestDataProvider", () => {
         const confidentialityOption =
           dataProvider.confidentialityOptions[level];
         expect(
-          confidentialityOption.businessImpactDetails?.reputationalImpact,
+          confidentialityOption.businessImpactDetails?.reputational,
         ).toBeDefined();
       });
     });
@@ -273,19 +273,19 @@ describe("TestDataProvider", () => {
         // Check availability risk level
         expect(
           dataProvider.availabilityOptions[level].businessImpactDetails
-            ?.financialImpact?.riskLevel,
+            ?.financial?.riskLevel,
         ).toBe(expectedRiskLevel);
 
         // Check integrity risk level
         expect(
           dataProvider.integrityOptions[level].businessImpactDetails
-            ?.financialImpact?.riskLevel,
+            ?.financial?.riskLevel,
         ).toBe(expectedRiskLevel);
 
         // Check confidentiality risk level
         expect(
           dataProvider.confidentialityOptions[level].businessImpactDetails
-            ?.reputationalImpact?.riskLevel,
+            ?.reputational?.riskLevel,
         ).toBe(expectedRiskLevel);
       });
     });

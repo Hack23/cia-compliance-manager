@@ -26,7 +26,6 @@ import {
   // Formatting utilities
   formatBudgetPercentage,
   formatCurrency,
-  formatCurrencyWithOptions,
   formatDate,
   formatError,
   formatLargeNumber,
@@ -278,7 +277,6 @@ describe("Utils Index - Function Exports", () => {
   it("exports all formatting functions", () => {
     expect(formatBudgetPercentage).toBeDefined();
     expect(formatCurrency).toBeDefined();
-    expect(formatCurrencyWithOptions).toBeDefined();
     expect(formatDate).toBeDefined();
     expect(formatLargeNumber).toBeDefined();
     expect(formatNumber).toBeDefined();

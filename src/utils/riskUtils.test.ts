@@ -5,23 +5,18 @@ import {
   calculateBusinessImpactLevel,
   calculateCombinedRiskLevel,
   calculateRiskScore,
-  createBusinessImpact,
   formatRiskLevel,
   getDefaultBusinessImpact,
-  getErrorRate,
   getFormattedRiskLevel,
   getHighestImpactArea,
   getImplementationComplexity,
-  getPrivacyImpact,
   getRiskBadgeVariant,
   getRiskLevelFromImpactLevel,
   getRiskLevelFromSecurityLevel,
   getRiskScoreFromSecurityLevel,
   getRiskSeverityDescription,
   getSecurityLevelColorClass,
-  getSLAMetrics,
   getStatusBadgeForRiskLevel,
-  getValidationLevel,
   parseRiskLevel,
   securityLevelToValue,
 } from "./riskUtils";
@@ -120,43 +115,6 @@ describe("riskUtils", () => {
       expect(result.financial).toBeDefined();
       expect(result.operational).toBeDefined();
       expect(result.reputational).toBeDefined();
-    });
-  });
-
-  describe("legacy function mappings", () => {
-    it("should export getSLAMetrics", () => {
-      const metrics = getSLAMetrics("High");
-      expect(metrics).toBeDefined();
-      expect(metrics.uptime).toBeDefined();
-      expect(metrics.rto).toBeDefined();
-      expect(metrics.rpo).toBeDefined();
-    });
-
-    it("should export getPrivacyImpact", () => {
-      const impact = getPrivacyImpact("High");
-      expect(impact).toBeDefined();
-      expect(impact).toContain("Privacy");
-    });
-
-    it("should export getValidationLevel", () => {
-      const validation = getValidationLevel("High");
-      expect(validation).toBeDefined();
-      expect(typeof validation).toBe("string");
-      expect(validation).toBe("Enhanced");
-    });
-
-    it("should export getErrorRate", () => {
-      const errorRate = getErrorRate("High");
-      expect(errorRate).toBeDefined();
-      expect(typeof errorRate).toBe("string");
-      expect(errorRate).toBe("< 1%");
-    });
-
-    it("should export createBusinessImpact", () => {
-      const impact = createBusinessImpact("availability", "Moderate");
-      expect(impact).toBeDefined();
-      expect(impact.summary).toContain("availability");
-      expect(impact.summary).toContain("Moderate");
     });
   });
 

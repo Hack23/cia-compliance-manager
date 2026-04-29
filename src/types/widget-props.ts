@@ -167,8 +167,7 @@ export type SecurityWidgetProps = WithSecurityLevelProps & CommonWidgetProps;
  * Provides a foundation for components that need to display or
  * interact with security levels across all CIA components.
  * 
- * This interface has been cleaned up to remove deprecated properties.
- * All components should now use specific level properties.
+ * Components should use specific level properties.
  * 
  * @example
  * ```typescript

@@ -27,13 +27,6 @@ export {
   getDefaultValidationLevel,
 };
 
-// Legacy function mapping for backward compatibility
-export const getSLAMetrics = getDefaultSLAMetrics;
-export const getPrivacyImpact = getDefaultPrivacyImpact;
-export const getValidationLevel = getDefaultValidationLevel;
-export const getErrorRate = getDefaultErrorRate;
-export const createBusinessImpact = createDefaultBusinessImpact;
-
 /**
  * Get default business impact details
  */
