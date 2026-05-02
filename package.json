@@ -200,7 +200,7 @@
     "cypress-react-selector": "3.0.0",
     "cypress-real-events": "1.15.0",
     "cypress-wait-until": "3.0.2",
-    "dependency-cruiser": "17.3.10",
+    "dependency-cruiser": "17.4.0",
     "eslint": "10.3.0",
     "globals": "17.6.0",
     "jsdom": "29.1.1",
