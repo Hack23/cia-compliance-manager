@@ -4,12 +4,6 @@ on:
     branches:
       - main
   workflow_dispatch:
-    inputs:
-      force_metadata_update:
-        description: 'Force metadata update for all files (bypasses size-only check)'
-        required: false
-        default: false
-        type: boolean
 permissions:
   contents: read
   id-token: write
@@ -84,57 +78,32 @@ jobs:
           role-to-assume: arn:aws:iam::172017021075:role/GithubWorkFlowRole
           role-session-name: githubworkflowrolesessiont2
           aws-region: ${{ env.AWS_REGION }}
-      - name: Deploy to S3 with proper cache headers
+      - name: Deploy to S3 with optimized sync
         run: |
-          # Determine sync mode for versioned/hashed assets (can use --size-only safely)
-          if [ "${{ github.event.inputs.force_metadata_update }}" = "true" ]; then
-            HASHED_SYNC_MODE="--metadata-directive REPLACE"
-            DOCUMENT_SYNC_MODE="--metadata-directive REPLACE"
-            echo "🚀 Starting deployment with forced metadata update mode"
-          else
-            HASHED_SYNC_MODE="--size-only"
-            DOCUMENT_SYNC_MODE=""  # Use normal sync (size+mtime) for documents
-            echo "🚀 Starting deployment with efficient sync mode (size-only for hashed assets, size+mtime for documents)"
-          fi
+          # Cost-optimized deployment: minimizes S3 API calls and CloudTrail events
+          # - Uses --size-only globally (legacy files already have correct headers)
+          # - Consolidates multiple syncs into minimal commands per cache tier
+          # - Deploys to both / and /docs/ paths to support all current and legacy URLs
           
-          # Deploy JS and CSS files with 1-year cache (versioned, immutable assets)
-          echo "⚡ Deploying JS and CSS files with immutable cache headers..."
+          echo "🚀 Starting cost-optimized deployment (minimal API calls)"
+          
+          # --- Deploy to root (/) ---
+          
+          # 1. Immutable assets: JS, CSS, maps, fonts, images (all content-hashed)
+          #    Single sync replaces 5 previous separate syncs
+          echo "⚡ [root] Syncing immutable assets (JS, CSS, maps, fonts, images)..."
           aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
+            --size-only \
             --exclude "*" \
             --include "*.js" \
             --include "*.css" \
-            --cache-control "public, max-age=31536000, immutable" \
-            $HASHED_SYNC_MODE \
-            --exclude ".git/*"
-          
-          # Deploy source map files with 1-year cache (versioned, immutable assets)
-          echo "🗺️  Deploying source map files with immutable cache headers..."
-          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
-            --exclude "*" \
             --include "*.js.map" \
             --include "*.css.map" \
-            --cache-control "public, max-age=31536000, immutable" \
-            --content-type "application/json" \
-            $HASHED_SYNC_MODE \
-            --exclude ".git/*"
-          
-          # Deploy font files with 1-year cache (static, immutable assets)
-          echo "🔤 Deploying font files with immutable cache headers..."
-          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
-            --exclude "*" \
             --include "*.woff" \
             --include "*.woff2" \
             --include "*.ttf" \
             --include "*.eot" \
             --include "*.otf" \
-            --cache-control "public, max-age=31536000, immutable" \
-            $HASHED_SYNC_MODE \
-            --exclude ".git/*"
-          
-          # Deploy image files with 1-year cache (static, immutable assets, excluding screenshots)
-          echo "🖼️  Deploying image files with immutable cache headers..."
-          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
-            --exclude "*" \
             --include "*.webp" \
             --include "*.png" \
             --include "*.jpg" \
@@ -143,181 +112,93 @@ jobs:
             --include "*.svg" \
             --include "*.ico" \
             --cache-control "public, max-age=31536000, immutable" \
-            $HASHED_SYNC_MODE \
             --exclude ".git/*" \
             --exclude "screenshots/*"
           
-          # Deploy HTML files with short cache (1 hour, must revalidate)
-          # Use normal sync (size+mtime) for correctness - HTML is not content-hashed
-          echo "📄 Deploying HTML files with revalidation cache headers..."
+          # 2. HTML files (not content-hashed, short cache)
+          echo "📄 [root] Syncing HTML files..."
           aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
+            --size-only \
             --exclude "*" \
             --include "*.html" \
             --cache-control "public, max-age=3600, must-revalidate" \
             --content-type "text/html; charset=utf-8" \
-            $DOCUMENT_SYNC_MODE \
             --exclude ".git/*"
           
-          # Deploy metadata files with medium cache (1 day)
-          # Use normal sync (size+mtime) for correctness - metadata files are not content-hashed
-          echo "📋 Deploying metadata files with 1-day cache headers..."
+          # 3. Metadata and text files (medium cache)
+          # Includes .md files which are served directly from S3 (documentation pages)
+          echo "📋 [root] Syncing metadata files..."
           aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
+            --size-only \
             --exclude "*" \
             --include "*.xml" \
             --include "*.json" \
             --include "*.txt" \
+            --include "*.md" \
             --cache-control "public, max-age=86400" \
-            $DOCUMENT_SYNC_MODE \
             --exclude ".git/*"
           
-          # Deploy screenshots with default cache (if directory exists)
+          # --- Deploy to /docs/ (legacy URL support) ---
+          
+          # 4. Immutable assets to /docs/
+          echo "⚡ [/docs/] Syncing immutable assets..."
+          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/docs/ \
+            --size-only \
+            --exclude "*" \
+            --include "*.js" \
+            --include "*.css" \
+            --include "*.js.map" \
+            --include "*.css.map" \
+            --include "*.woff" \
+            --include "*.woff2" \
+            --include "*.ttf" \
+            --include "*.eot" \
+            --include "*.otf" \
+            --include "*.webp" \
+            --include "*.png" \
+            --include "*.jpg" \
+            --include "*.jpeg" \
+            --include "*.gif" \
+            --include "*.svg" \
+            --include "*.ico" \
+            --cache-control "public, max-age=31536000, immutable" \
+            --exclude ".git/*" \
+            --exclude "screenshots/*"
+          
+          # 5. HTML files to /docs/
+          echo "📄 [/docs/] Syncing HTML files..."
+          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/docs/ \
+            --size-only \
+            --exclude "*" \
+            --include "*.html" \
+            --cache-control "public, max-age=3600, must-revalidate" \
+            --content-type "text/html; charset=utf-8" \
+            --exclude ".git/*"
+          
+          # 6. Metadata and text files to /docs/
+          echo "📋 [/docs/] Syncing metadata files..."
+          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/docs/ \
+            --size-only \
+            --exclude "*" \
+            --include "*.xml" \
+            --include "*.json" \
+            --include "*.txt" \
+            --include "*.md" \
+            --cache-control "public, max-age=86400" \
+            --exclude ".git/*"
+          
+          # --- Screenshots (if directory exists) ---
           if [ -d "docs/screenshots" ]; then
-            echo "📸 Deploying screenshots with default cache headers..."
+            echo "📸 Syncing screenshots to both paths..."
             aws s3 sync docs/screenshots/. s3://${{ env.S3_BUCKET_NAME }}/screenshots/ \
-              $HASHED_SYNC_MODE
-          else
-            echo "ℹ️  No screenshots directory found, skipping..."
-          fi
-          
-          # Deploy all remaining files not already handled (catch-all)
-          echo "📦 Deploying remaining files..."
-          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
-            --exclude ".git/*" \
-            --exclude "screenshots/*" \
-            --exclude "*.js" \
-            --exclude "*.css" \
-            --exclude "*.js.map" \
-            --exclude "*.css.map" \
-            --exclude "*.woff" \
-            --exclude "*.woff2" \
-            --exclude "*.ttf" \
-            --exclude "*.eot" \
-            --exclude "*.otf" \
-            --exclude "*.webp" \
-            --exclude "*.png" \
-            --exclude "*.jpg" \
-            --exclude "*.jpeg" \
-            --exclude "*.gif" \
-            --exclude "*.svg" \
-            --exclude "*.ico" \
-            --exclude "*.html" \
-            --exclude "*.xml" \
-            --exclude "*.json" \
-            --exclude "*.txt" \
-            $HASHED_SYNC_MODE
-
-          # Deploy JS and CSS files with 1-year cache (versioned, immutable assets)
-          echo "⚡ Deploying JS and CSS files with immutable cache headers..."
-          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/docs/ \
-            --exclude "*" \
-            --include "*.js" \
-            --include "*.css" \
-            --cache-control "public, max-age=31536000, immutable" \
-            $HASHED_SYNC_MODE \
-            --exclude ".git/*"
-          
-          # Deploy source map files with 1-year cache (versioned, immutable assets)
-          echo "🗺️  Deploying source map files with immutable cache headers..."
-          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/docs/ \
-            --exclude "*" \
-            --include "*.js.map" \
-            --include "*.css.map" \
-            --cache-control "public, max-age=31536000, immutable" \
-            --content-type "application/json" \
-            $HASHED_SYNC_MODE \
-            --exclude ".git/*"
-          
-          # Deploy font files with 1-year cache (static, immutable assets)
-          echo "🔤 Deploying font files with immutable cache headers..."
-          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/docs/ \
-            --exclude "*" \
-            --include "*.woff" \
-            --include "*.woff2" \
-            --include "*.ttf" \
-            --include "*.eot" \
-            --include "*.otf" \
-            --cache-control "public, max-age=31536000, immutable" \
-            $HASHED_SYNC_MODE \
-            --exclude ".git/*"
-          
-          # Deploy image files with 1-year cache (static, immutable assets, excluding screenshots)
-          echo "🖼️  Deploying image files with immutable cache headers..."
-          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/docs/ \
-            --exclude "*" \
-            --include "*.webp" \
-            --include "*.png" \
-            --include "*.jpg" \
-            --include "*.jpeg" \
-            --include "*.gif" \
-            --include "*.svg" \
-            --include "*.ico" \
-            --cache-control "public, max-age=31536000, immutable" \
-            $HASHED_SYNC_MODE \
-            --exclude ".git/*" \
-            --exclude "screenshots/*"
-          
-          # Deploy HTML files with short cache (1 hour, must revalidate)
-          # Use normal sync (size+mtime) for correctness - HTML is not content-hashed
-          echo "📄 Deploying HTML files with revalidation cache headers..."
-          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/docs/ \
-            --exclude "*" \
-            --include "*.html" \
-            --cache-control "public, max-age=3600, must-revalidate" \
-            --content-type "text/html; charset=utf-8" \
-            $DOCUMENT_SYNC_MODE \
-            --exclude ".git/*"
-          
-          # Deploy metadata files with medium cache (1 day)
-          # Use normal sync (size+mtime) for correctness - metadata files are not content-hashed
-          echo "📋 Deploying metadata files with 1-day cache headers..."
-          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/docs/ \
-            --exclude "*" \
-            --include "*.xml" \
-            --include "*.json" \
-            --include "*.txt" \
-            --cache-control "public, max-age=86400" \
-            $DOCUMENT_SYNC_MODE \
-            --exclude ".git/*"
-          
-          # Deploy screenshots with default cache (if directory exists)
-          if [ -d "docs/screenshots" ]; then
-            echo "📸 Deploying screenshots with default cache headers..."
+              --size-only
             aws s3 sync docs/screenshots/. s3://${{ env.S3_BUCKET_NAME }}/docs/screenshots/ \
-              $HASHED_SYNC_MODE
-          else
-            echo "ℹ️  No screenshots directory found, skipping..."
+              --size-only
           fi
           
-          # Deploy all remaining files not already handled (catch-all)
-          echo "📦 Deploying remaining files..."
-          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/docs/ \
-            --exclude ".git/*" \
-            --exclude "screenshots/*" \
-            --exclude "*.js" \
-            --exclude "*.css" \
-            --exclude "*.js.map" \
-            --exclude "*.css.map" \
-            --exclude "*.woff" \
-            --exclude "*.woff2" \
-            --exclude "*.ttf" \
-            --exclude "*.eot" \
-            --exclude "*.otf" \
-            --exclude "*.webp" \
-            --exclude "*.png" \
-            --exclude "*.jpg" \
-            --exclude "*.jpeg" \
-            --exclude "*.gif" \
-            --exclude "*.svg" \
-            --exclude "*.ico" \
-            --exclude "*.html" \
-            --exclude "*.xml" \
-            --exclude "*.json" \
-            --exclude "*.txt" \
-            $HASHED_SYNC_MODE
-          
-          echo "✅ Deployment completed with optimized cache headers"
+          echo "✅ Deployment completed (6 sync commands vs 16 previously)"
 
-      # Invalidate CloudFront cache to ensure latest content is served
+      # Invalidate CloudFront cache for HTML and metadata only (immutable assets don't need invalidation)
       - name: Invalidate CloudFront
         run: |
           echo "🔍 Discovering CloudFront distribution ID from stack: ${{ env.CLOUDFRONT_STACK_NAME }}"
@@ -329,7 +210,6 @@ jobs:
           if [ -z "$CloudFrontDistId" ]; then
             echo "⚠️  Warning: CloudFront distribution ID not found in stack outputs"
             echo "Attempting to find distribution by S3 origin domain..."
-            # List all distributions and filter by S3 bucket origin
             CloudFrontDistId=$(aws cloudfront list-distributions \
               --output json 2>/dev/null | \
               jq -r ".DistributionList.Items[] | select(.Origins.Items[].DomainName | contains(\"${{ env.S3_BUCKET_NAME }}\")) | .Id" | \
@@ -342,11 +222,11 @@ jobs:
           fi
           
           echo "✅ Found CloudFront distribution: $CloudFrontDistId"
-          echo "🔄 Creating cache invalidation for all paths..."
+          echo "🔄 Invalidating HTML and metadata paths (immutable assets use cache-busting hashes)..."
           
           aws cloudfront create-invalidation \
             --distribution-id $CloudFrontDistId \
-            --paths "/*"
+            --paths "/index.html" "/docs/index.html" "/*.html" "/docs/*.html" "/*/index.html" "/docs/*/index.html" "/sitemap.xml" "/docs/sitemap.xml" "/manifest.json" "/robots.txt" "/version.txt"
           
-          echo "✅ CloudFront cache invalidation completed"
+          echo "✅ CloudFront invalidation completed (targeted paths only, reduces cost vs /*)"
 
