@@ -81,7 +81,8 @@ jobs:
       - name: Deploy to S3 with optimized sync
         run: |
           # Cost-optimized deployment: minimizes S3 API calls and CloudTrail events
-          # - Uses --size-only globally (legacy files already have correct headers)
+          # - Uses --size-only for immutable content-hashed assets only
+          # - Uses default sync (size+mtime) for mutable files (HTML, metadata)
           # - Consolidates multiple syncs into minimal commands per cache tier
           # - Deploys to both / and /docs/ paths to support all current and legacy URLs
           
@@ -89,16 +90,13 @@ jobs:
           
           # --- Deploy to root (/) ---
           
-          # 1. Immutable assets: JS, CSS, maps, fonts, images (all content-hashed)
-          #    Single sync replaces 5 previous separate syncs
-          echo "⚡ [root] Syncing immutable assets (JS, CSS, maps, fonts, images)..."
+          # 1. Immutable assets: JS, CSS, fonts, images (all content-hashed)
+          echo "⚡ [root] Syncing immutable assets (JS, CSS, fonts, images)..."
           aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
             --size-only \
             --exclude "*" \
             --include "*.js" \
             --include "*.css" \
-            --include "*.js.map" \
-            --include "*.css.map" \
             --include "*.woff" \
             --include "*.woff2" \
             --include "*.ttf" \
@@ -115,21 +113,29 @@ jobs:
             --exclude ".git/*" \
             --exclude "screenshots/*"
           
-          # 2. HTML files (not content-hashed, short cache)
-          echo "📄 [root] Syncing HTML files..."
+          # 2. Source map files with explicit content-type (immutable, content-hashed)
+          echo "🗺️  [root] Syncing source maps with correct content-type..."
           aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
             --size-only \
+            --exclude "*" \
+            --include "*.js.map" \
+            --include "*.css.map" \
+            --cache-control "public, max-age=31536000, immutable" \
+            --content-type "application/json" \
+            --exclude ".git/*"
+          
+          # 3. HTML files (not content-hashed, short cache, use size+mtime for correctness)
+          echo "📄 [root] Syncing HTML files..."
+          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
             --exclude "*" \
             --include "*.html" \
             --cache-control "public, max-age=3600, must-revalidate" \
             --content-type "text/html; charset=utf-8" \
             --exclude ".git/*"
           
-          # 3. Metadata and text files (medium cache)
-          # Includes .md files which are served directly from S3 (documentation pages)
+          # 4. Metadata and text files (medium cache, use size+mtime for correctness)
           echo "📋 [root] Syncing metadata files..."
           aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
-            --size-only \
             --exclude "*" \
             --include "*.xml" \
             --include "*.json" \
@@ -138,17 +144,22 @@ jobs:
             --cache-control "public, max-age=86400" \
             --exclude ".git/*"
           
+          # 5. Extensionless files (CNAME, .nojekyll, etc.)
+          echo "📎 [root] Syncing extensionless/dotfiles..."
+          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/ \
+            --exclude "*.*" \
+            --exclude ".git/*" \
+            --cache-control "public, max-age=86400"
+          
           # --- Deploy to /docs/ (legacy URL support) ---
           
-          # 4. Immutable assets to /docs/
+          # 6. Immutable assets to /docs/
           echo "⚡ [/docs/] Syncing immutable assets..."
           aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/docs/ \
             --size-only \
             --exclude "*" \
             --include "*.js" \
             --include "*.css" \
-            --include "*.js.map" \
-            --include "*.css.map" \
             --include "*.woff" \
             --include "*.woff2" \
             --include "*.ttf" \
@@ -165,20 +176,29 @@ jobs:
             --exclude ".git/*" \
             --exclude "screenshots/*"
           
-          # 5. HTML files to /docs/
-          echo "📄 [/docs/] Syncing HTML files..."
+          # 7. Source map files to /docs/ with explicit content-type
+          echo "🗺️  [/docs/] Syncing source maps with correct content-type..."
           aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/docs/ \
             --size-only \
+            --exclude "*" \
+            --include "*.js.map" \
+            --include "*.css.map" \
+            --cache-control "public, max-age=31536000, immutable" \
+            --content-type "application/json" \
+            --exclude ".git/*"
+          
+          # 8. HTML files to /docs/
+          echo "📄 [/docs/] Syncing HTML files..."
+          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/docs/ \
             --exclude "*" \
             --include "*.html" \
             --cache-control "public, max-age=3600, must-revalidate" \
             --content-type "text/html; charset=utf-8" \
             --exclude ".git/*"
           
-          # 6. Metadata and text files to /docs/
+          # 9. Metadata and text files to /docs/
           echo "📋 [/docs/] Syncing metadata files..."
           aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/docs/ \
-            --size-only \
             --exclude "*" \
             --include "*.xml" \
             --include "*.json" \
@@ -186,6 +206,13 @@ jobs:
             --include "*.md" \
             --cache-control "public, max-age=86400" \
             --exclude ".git/*"
+          
+          # 10. Extensionless files to /docs/
+          echo "📎 [/docs/] Syncing extensionless/dotfiles..."
+          aws s3 sync docs/. s3://${{ env.S3_BUCKET_NAME }}/docs/ \
+            --exclude "*.*" \
+            --exclude ".git/*" \
+            --cache-control "public, max-age=86400"
           
           # --- Screenshots (if directory exists) ---
           if [ -d "docs/screenshots" ]; then
@@ -196,7 +223,7 @@ jobs:
               --size-only
           fi
           
-          echo "✅ Deployment completed (6 sync commands vs 16 previously)"
+          echo "✅ Deployment completed (10 sync commands vs 16 previously)"
 
       # Invalidate CloudFront cache for HTML and metadata only (immutable assets don't need invalidation)
       - name: Invalidate CloudFront
@@ -226,7 +253,7 @@ jobs:
           
           aws cloudfront create-invalidation \
             --distribution-id $CloudFrontDistId \
-            --paths "/index.html" "/docs/index.html" "/*.html" "/docs/*.html" "/*/index.html" "/docs/*/index.html" "/sitemap.xml" "/docs/sitemap.xml" "/manifest.json" "/robots.txt" "/version.txt"
+            --paths "/index.html" "/docs/index.html" "/*.html" "/docs/*.html" "/*/index.html" "/docs/*/index.html" "/sitemap.xml" "/docs/sitemap.xml" "/manifest.json" "/docs/manifest.json" "/robots.txt" "/docs/robots.txt" "/version.txt" "/docs/version.txt"
           
           echo "✅ CloudFront invalidation completed (targeted paths only, reduces cost vs /*)"
 
