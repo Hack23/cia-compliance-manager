@@ -297,5 +297,7 @@
 
 .security-summary-radar-frame .radar-chart-container canvas {
   max-height: var(--security-summary-radar-canvas-max-height);
+  /* The app targets evergreen browsers; aspect-ratio matches existing chart
+     sizing rules above while max-height remains the hard overflow guard. */
   aspect-ratio: 4 / 3;
 }
