@@ -285,7 +285,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.25rem;
   margin-bottom: 0.25rem;
-  font-size: 0.72rem;
+  font-size: var(--security-summary-radar-value-font-size);
   line-height: 1.2;
   text-align: center;
 }
@@ -296,6 +296,6 @@
 }
 
 .security-summary-radar-frame .radar-chart-container canvas {
-  max-height: min(170px, 28vh);
+  max-height: var(--security-summary-radar-canvas-max-height);
   aspect-ratio: 4 / 3;
 }

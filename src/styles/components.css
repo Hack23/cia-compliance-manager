@@ -2344,6 +2344,11 @@ button.more-info:hover::before {
   --widget-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
   --widget-tab-min-width: 5.25rem; /* 84px: allows two accessible tabs per 390px mobile row and avoids four-tab wrapping in ~460px dashboard widgets. */
   --widget-tab-font-size: 0.78rem;
+  --widget-compact-content-font-size: 0.92rem; /* 14.72px: keeps dense first-row widgets readable while fitting dashboard cells. */
+  --widget-compact-line-height: 1.38; /* Compact text rhythm for card descriptions and summaries. */
+  --widget-compact-card-padding: 0.625rem; /* 10px: midpoint between 8px grid steps for dense nested cards. */
+  --security-summary-radar-value-font-size: 0.72rem; /* Fits three value labels above the compact radar canvas. */
+  --security-summary-radar-canvas-max-height: min(170px, 28vh); /* Prevents chart bleed into component cards on short viewports. */
   --widget-accent-confidentiality: #7b1fa2;
   --widget-accent-integrity: #2e7d32;
   --widget-accent-availability: #1565c0;
@@ -2775,7 +2780,7 @@ button.more-info:hover::before {
 .security-level-widget-content,
 .business-impact-widget-content,
 .security-summary-overview {
-  font-size: 0.92rem;
+  font-size: var(--widget-compact-content-font-size);
 }
 
 .security-level-intro {
@@ -2784,7 +2789,7 @@ button.more-info:hover::before {
 
 .security-level-intro p,
 .business-impact-executive-summary p {
-  line-height: 1.38;
+  line-height: var(--widget-compact-line-height);
 }
 
 .security-level-selector-panel,
@@ -2800,7 +2805,7 @@ button.more-info:hover::before {
 }
 
 .security-level-control-card {
-  padding: 0.625rem;
+  padding: var(--widget-compact-card-padding);
 }
 
 .security-level-control-card label,
@@ -2830,7 +2835,7 @@ button.more-info:hover::before {
 .business-impact-category-card p,
 .business-impact-card-grid p {
   font-size: 0.85rem;
-  line-height: 1.38;
+  line-height: var(--widget-compact-line-height);
 }
 
 .security-level-detail-metrics {
@@ -2839,7 +2844,7 @@ button.more-info:hover::before {
 
 .security-level-overview p {
   font-size: 0.85rem;
-  line-height: 1.38;
+  line-height: var(--widget-compact-line-height);
 }
 
 .security-level-overview-grid {
@@ -2862,7 +2867,7 @@ button.more-info:hover::before {
 }
 
 .business-impact-category-card {
-  padding: 0.625rem;
+  padding: var(--widget-compact-card-padding);
 }
 
 .business-impact-category-card .risk-level-badge,
