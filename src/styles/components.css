@@ -2344,7 +2344,8 @@ button.more-info:hover::before {
   --widget-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
   --widget-tab-min-width: 5.25rem; /* 84px: allows two accessible tabs per 390px mobile row and avoids four-tab wrapping in ~460px dashboard widgets. */
   --widget-tab-font-size: 0.78rem;
-  --widget-compact-content-font-size: 0.92rem; /* 14.72px: keeps dense first-row widgets readable while fitting dashboard cells. */
+  /* Centralized compact widget tokens for dense assessment-center dashboard cards. */
+  --widget-compact-content-font-size: 0.92rem; /* 14.72px: readable body text while fitting first-row cells. */
   --widget-compact-line-height: 1.38; /* Compact text rhythm for card descriptions and summaries. */
   --widget-compact-card-padding: 0.625rem; /* 10px: midpoint between 8px grid steps for dense nested cards. */
   --security-summary-radar-value-font-size: 0.72rem; /* Fits three value labels above the compact radar canvas. */
@@ -2751,7 +2752,6 @@ button.more-info:hover::before {
   word-break: break-word;
 }
 
-.line-clamp-3,
 .business-impact-card-description {
   display: -webkit-box;
   -webkit-line-clamp: 3;
