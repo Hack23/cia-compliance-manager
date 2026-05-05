@@ -2349,7 +2349,7 @@ button.more-info:hover::before {
   --widget-compact-line-height: 1.38; /* Compact text rhythm for card descriptions and summaries. */
   --widget-compact-card-padding: 0.625rem; /* 10px: midpoint between 8px grid steps for dense nested cards. */
   --security-summary-radar-value-font-size: 0.72rem; /* Fits three value labels above the compact radar canvas. */
-  --security-summary-radar-canvas-max-height: min(170px, 28vh); /* 170px keeps the radar within the summary card; 28vh becomes the cap below ~607px high viewports. */
+  --security-summary-radar-canvas-max-height: min(170px, 28vh); /* 170px keeps the radar within the summary card; 28vh is the approximate short-viewport cap. */
   --widget-accent-confidentiality: #7b1fa2;
   --widget-accent-integrity: #2e7d32;
   --widget-accent-availability: #1565c0;
@@ -2753,8 +2753,8 @@ button.more-info:hover::before {
 }
 
 .business-impact-card-description {
-  /* max-height is a non-clamping fallback; line-clamp provides the polished
-     three-line treatment in the evergreen browsers supported by the app. */
+  /* max-height is the fallback; browsers without unprefixed line-clamp still
+     get bounded content, while supported browsers get a polished three-line clamp. */
   max-height: calc(3 * var(--widget-compact-line-height) * 1em);
   display: -webkit-box;
   -webkit-line-clamp: 3;
