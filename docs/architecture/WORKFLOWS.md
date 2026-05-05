@@ -33,7 +33,7 @@ This document provides comprehensive documentation of the CI/CD workflows implem
 
 This document details the continuous integration and deployment workflows used in the CIA Compliance Manager project. The workflows automate testing, security scanning, and release procedures to ensure code quality and security compliance.
 
-**Current Node.js version: 25**
+**Current Node.js version: 26**
 **Current TypeScript version: 6.0.3**
 
 ## 📚 Related Documents
@@ -140,7 +140,7 @@ The project uses GitHub Actions for automation with the following workflows:
 10. **🤖 Copilot Setup Steps** (`.github/workflows/copilot-setup-steps.yml`)
    - **Triggers:** Manual dispatch, workflow file changes, pull requests affecting workflow
    - **Purpose:** GitHub Copilot workspace environment setup and validation
-   - **Key Features:** Node.js 25 setup, dependency caching, environment validation
+   - **Key Features:** Node.js 26 setup, dependency caching, environment validation
 
 ### 📊 Security Gates & Quality Thresholds
 
@@ -304,7 +304,7 @@ The test-and-report workflow is implemented with comprehensive job coordination:
 **Prepare Job Steps:**
 1. **Harden Runner**: StepSecurity runner hardening with egress policy audit
 2. **Repository Checkout**: Securely checks out code with proper permissions
-3. **Node.js Setup**: Sets up Node.js 25 environment with npm caching
+3. **Node.js Setup**: Sets up Node.js 26 environment with npm caching
 4. **Apt Package Caching**: Caches system packages for faster builds
 5. **Display Setup**: Configures xvfb and GUI dependencies for headless testing
 6. **Dependency Caching**: Multi-level caching (npm, Cypress binary)
@@ -313,7 +313,7 @@ The test-and-report workflow is implemented with comprehensive job coordination:
 
 **Build Validation Job Steps:**
 1. **Harden Runner**: Security hardening of the build environment
-2. **Environment Setup**: Node.js 25 with dependency caching
+2. **Environment Setup**: Node.js 26 with dependency caching
 3. **Dependency Installation**: Uses `npm ci` for clean install
 4. **Application Build**: Executes production build with `npm run build`
 5. **License Verification**: Runs `npm run test:licenses` to ensure compliance
@@ -575,7 +575,7 @@ prepare → build → release
 This job handles environment preparation, testing, and documentation generation:
 
 **Key Steps:**
-1. **Environment Setup**: Ubuntu latest with Node.js 25, dependency caching
+1. **Environment Setup**: Ubuntu latest with Node.js 26, dependency caching
 2. **Version Detection**: Extracts version from tag or workflow input
 3. **Display Configuration**: Sets up xvfb for headless Cypress testing
 4. **Dependency Installation**: Full `npm ci` with audit
@@ -598,7 +598,7 @@ This job creates the production build with full SLSA Level 3 attestation:
 
 **Key Steps:**
 1. **Repository Checkout**: Checks out the appropriate ref (tag or branch)
-2. **Environment Setup**: Node.js 25 with comprehensive caching
+2. **Environment Setup**: Node.js 26 with comprehensive caching
 3. **Dependency Installation**: Clean install with `npm ci`
 4. **Production Build**: Creates optimized build with version embedding
 5. **Artifact Creation**: Zips build directory for distribution
@@ -647,7 +647,7 @@ This job publishes the `cia-compliance-manager` package to the npm registry with
 
 **Key Steps:**
 1. **Harden Runner**: `step-security/harden-runner` with egress audit policy
-2. **Checkout + Setup Node 25** with `registry-url: https://registry.npmjs.org/`
+2. **Checkout + Setup Node 26** with `registry-url: https://registry.npmjs.org/`
 3. **`npm ci`**: Deterministic install from `package-lock.json`
 4. **`npm run prepublishOnly`**: Chains `lint → knip → test:ci → build:lib` (library build via `vite build --config vite.config.lib.ts && tsc --project tsconfig.lib.json` emitting `dist/`)
 5. **`npm publish --provenance --access public`**: Publishes with SLSA-style provenance attestation
@@ -1222,7 +1222,7 @@ Each phase adds additional security and quality validation:
 
 **Key Steps:**
 1. **Checkout Repository**: Securely checks out code with proper permissions
-2. **Node.js Environment**: Sets up Node.js 25 with npm caching
+2. **Node.js Environment**: Sets up Node.js 26 with npm caching
 3. **Dependency Installation**: Installs project dependencies with `npm ci`
 4. **Environment Validation**: Displays Node, npm, and TypeScript versions
 5. **Build Artifact Caching**: Caches node_modules and dist directories for performance

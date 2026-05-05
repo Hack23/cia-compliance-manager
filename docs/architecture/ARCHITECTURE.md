@@ -864,7 +864,7 @@ sequenceDiagram
 ### **Runtime Requirements**
 | Technology | Version | Purpose |
 |-----------|---------|---------|
-| **Node.js** | >=25.0.0 | Runtime environment |
+| **Node.js** | >=26.0.0 | Runtime environment |
 
 ### **Frontend Framework**
 | Technology | Version | Purpose | Key Features |

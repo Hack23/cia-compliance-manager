@@ -1,6 +1,6 @@
 # 🤖 GitHub Copilot Instructions for CIA Compliance Manager
 
-**Version**: 3.0 | **Package**: v1.1.43 | **Stack**: TypeScript 6.0.2, React 19.x, Vite 8, Node >=25, ES2025
+**Version**: 3.0 | **Package**: v1.1.43 | **Stack**: TypeScript 6.0.2, React 19.x, Vite 8, Node >=26, ES2025
 
 ---
 
@@ -105,7 +105,7 @@ Performance benchmarks · Code complexity tracking · Bundle size analysis · Mu
 | TypeScript | 6.0.2 | ES2025 target, strict mode, ESNext modules |
 | React | 19.x | Component library with hooks |
 | Vite | 8.x | Build tool + dev server with CSP headers |
-| Node.js | ≥25.0.0 | Runtime requirement |
+| Node.js | ≥26.0.0 | Runtime requirement |
 | Vitest | 4.x | Unit/integration testing |
 | Cypress | 15.x | E2E testing |
 | ESLint | 10.x | Flat config (`eslint.config.js`) |

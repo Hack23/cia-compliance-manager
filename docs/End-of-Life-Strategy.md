@@ -53,10 +53,10 @@ Based on [Hack23 AB Classification Framework](https://github.com/Hack23/ISMS-PUB
 mindmap
   root)📊 CIA Compliance Manager Stack(
     (🖥️ Runtime)
-      ☕ Node.js 25.x
-        📅 Current: 25.x (CI/CD Production)
-        ⏰ Node 25 EOL: Apr 2026 (Current only, not LTS)
-        🔄 Next LTS: Node 26 (Oct 2026, upgrading ~Apr 2026)
+      ☕ Node.js 26.x
+        📅 Current: 26.x (CI/CD Production)
+        ⏰ Node 26 LTS: Oct 2026 (Current → LTS)
+        🔬 Nightly CI: Node 27 nightly (`node-next.yml`)
         📢 New Schedule from 27.x
       🌐 Browser Runtime
         📅 Evergreen Updates
@@ -115,7 +115,7 @@ mindmap
 | **⚛️ React Framework**  | 19.2.5 (Latest)           | Major annually, Minor quarterly | ~2027-2028         | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
 | **📝 TypeScript**       | 6.0.3 (Latest)            | Major annually, minor quarterly | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
 | **⚡ Vite Build Tool**  | 8.0.9 (Latest)            | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
-| **☕ Node.js Runtime**  | 25.x (Production)         | New: 1 major/year from 27.x    | Current EOL Apr 2026 → 26.x LTS | [![High](https://img.shields.io/badge/Complexity-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)     |
+| **☕ Node.js Runtime**  | 26.x (Production)         | New: 1 major/year from 27.x    | Current → LTS Oct 2026, EOL Apr 2029 | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)     |
 | **🧪 Testing Stack**    | Vitest 4.x + Cypress 15.x | Major annually                  | Active development | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
 | **📊 Chart.js**         | 4.5.1 (Latest)            | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
 | **🎨 TailwindCSS**      | 4.2.3 (Latest)           | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
@@ -150,7 +150,7 @@ As [announced by the Node.js project](https://nodejs.org/en/blog/announcements/e
 
 > **Note:** The total **36-month support window** is measured from the April GA (Current) release: 6 months Current + 30 months LTS = 36 months. The preceding 6-month Alpha phase is a pre-release testing window and does not count toward the support timeline.
 
-> **Impact for CIA Compliance Manager:** We run **Node.js 25.x** across all CI/CD workflows (`engines.node >= 25.0.0`). Node.js 25 is an odd-numbered Current release (no LTS designation), serving as a bridge to **Node.js 26.x (Current) GA expected April 2026; promoted to LTS in Oct 2026**. We plan to upgrade to Node.js 26.x immediately after its GA release (~April 2026). The primary change from the new schedule (starting Node.js 27.x) is that **every future Node.js release will become LTS**, simplifying our upgrade planning. Library authors should integrate Alpha releases into CI as early as possible to report bugs before they affect users.
+> **Impact for CIA Compliance Manager:** We run **Node.js 26.x** across all CI/CD workflows (`engines.node >= 26.0.0`). Node.js 26 is an even-numbered release that becomes LTS in October 2026, giving it a support window through April 2029. We test against **Node.js 27 nightly builds** via the `node-next.yml` workflow to catch regressions early. The primary change from the new schedule (starting Node.js 27.x) is that **every future Node.js release will become LTS**, simplifying our upgrade planning. Library authors should integrate Alpha releases into CI as early as possible to report bugs before they affect users.
 
 ### **🎯 Strategic Node.js Lifecycle Management**
 
@@ -180,14 +180,14 @@ gantt
     Node.js 28.x LTS           :node28lts, 2028-10-01, 2031-04-30
 
     section CIA Compliance Manager Strategy
-    Current Node 25.x Production :active, cm25prod, 2025-10-29, 2026-04-21
-    Node.js 26.x Production (Current→LTS) :cm26prod, 2026-04-21, 2029-04-30
+    Node.js 26.x Production (Current→LTS) :active, cm26prod, 2026-04-21, 2029-04-30
+    Node.js 27.x Nightly CI Testing :active, cm27nightly, 2026-05-01, 2027-04-01
     Node.js 27.x Alpha CI Testing :cm27alpha, 2026-10-01, 2027-04-01
     Node.js 27.x Production      :cm27prod, 2027-10-01, 2030-04-30
 
     section Critical Milestones
-    Node.js 25 EOL (→ upgrade 26) :milestone, node25eol, 2026-04-21, 0d
-    Node.js 26.x Release          :milestone, node26rel, 2026-04-21, 0d
+    Node.js 26 GA / Production upgrade :milestone, node26ga, 2026-04-21, 0d
+    Node.js 26.x LTS Promotion        :milestone, node26lts, 2026-10-20, 0d
     Node.js 24 LTS EOL            :milestone, node24eol, 2028-04-30, 0d
     New Schedule Begins (27.x)    :milestone, newschedule, 2026-10-01, 0d
 ```
@@ -271,44 +271,28 @@ flowchart TB
 | **📝 TypeScript major upgrade breaks build** | [![Medium](https://img.shields.io/badge/Risk-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | [![High](https://img.shields.io/badge/Impact-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Test with `tsc --noEmit`, lint, and full test suite before merging | Build + lint + tests pass |
 | **📝 @typescript-eslint drops TS version support** | [![Medium](https://img.shields.io/badge/Risk-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | [![High](https://img.shields.io/badge/Impact-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Monitor peer dependency ranges; pin TypeScript if needed | Type-aware linting operational |
 
-### **🚀 Node.js 26.x Upgrade Preparation (Immediate — ~April 2026)**
+### **🚀 Node.js 26.x — Production Runtime (Upgraded April 2026)**
 
-> **🎯 Status:** Node.js 25.x is our current CI/CD runtime (`node-version: "25"`). Node.js 26.x is expected to be released in **April 2026**. We will upgrade to Node.js 26.x **immediately after its official release** as it becomes the new even-numbered LTS candidate — following our "living on the edge" philosophy.
+> **🎯 Status:** Node.js 26.x is our current CI/CD runtime (`node-version: "26"`, `engines.node >= 26.0.0`). Node.js 26 was released in **April 2026** and becomes LTS in **October 2026**, providing a support window through April 2029. We now test against **Node.js 27 nightly builds** via the `node-next.yml` workflow to stay ahead of the next release cycle.
 
-#### **📅 Node.js 26.x Upgrade Timeline**
+#### **📅 Node.js 26.x Status & Next Steps**
 
-| Phase | Target Date | Action |
-|-------|-------------|--------|
-| **🔍 Pre-release monitoring** | Now → Apr 2026 | Track Node.js 26 release candidates and changelog |
-| **🧪 Compatibility testing** | Apr 2026 (release week) | Run full CI suite against Node.js 26 in a dedicated branch |
-| **⬆️ Upgrade execution** | Within 1 week of release | Update `node-version: "26"` in all workflows + `engines.node >= 26.0.0` |
-| **📝 Documentation update** | Same day as upgrade | Update all docs to reflect Node.js 26 as production runtime |
-| **✅ LTS adoption** | Oct 2026 (LTS promotion) | Confirm continued use through LTS promotion |
+| Phase | Date | Status |
+|-------|------|--------|
+| **✅ Released** | Apr 2026 | Node.js 26 GA — now our production runtime |
+| **✅ Upgraded** | May 2026 | `node-version: "26"` in all workflows, `engines.node >= 26.0.0` |
+| **🔬 Nightly CI** | Now | `node-next.yml` tests against Node.js 27 nightly builds daily |
+| **⬆️ LTS adoption** | Oct 2026 | Node.js 26 promoted to LTS — continue using |
+| **📋 Node 27 planning** | Apr 2027 | Evaluate upgrade to Node.js 27.x (GA Apr 2027) |
 
-#### **🔍 Pre-upgrade Checklist for Node.js 26.x**
-
-- [ ] Monitor [Node.js 26 release notes](https://github.com/nodejs/node/blob/main/CHANGELOG.md) for breaking changes
-- [ ] Test CI pipeline against Node.js 26.x release candidate builds
-- [ ] Verify Vite 8+ compatibility with Node.js 26
-- [ ] Verify React 19 / TypeScript 6 / ESLint 9 compatibility
-- [ ] Run full test suite (`npm run test:coverage`) on Node.js 26
-- [ ] Validate Cypress 15 E2E tests on Node.js 26
-- [ ] Check all native/build tooling (knip, dependency-cruiser) compatibility
-- [ ] Update `engines.node >= 26.0.0` in `package.json`
-- [ ] Update `node-version: "26"` in all GitHub Actions workflows
-- [ ] Update documentation (End-of-Life-Strategy.md, WORKFLOWS.md, FUTURE_WORKFLOWS.md)
-
-#### **🔭 Node.js Release Roadmap Projections (2025–2031)**
+#### **🔭 Node.js Release Roadmap Projections (2026–2031)**
 
 | Version | Type | Release Date | LTS Start | LTS EOL | CI/CD Strategy |
 |---------|------|-------------|-----------|---------|----------------|
-| **25.x** | Current (odd) | Oct 2025 | — | Apr 2026 | **✅ Current production** (Mar 2026) |
-| **26.x** | LTS (even) | Apr 2026 | Oct 2026 | Apr 2029 | **⬆️ Upgrading immediately on release** (~Apr 2026) |
-| **27.x** | New sched — Alpha→LTS | Oct 2026 (alpha) / Apr 2027 (GA) | Oct 2027 | Apr 2030 | 🔬 Alpha CI testing from Oct 2026 |
-| **28.x** | New sched — Alpha→LTS | Oct 2027 (alpha) / Apr 2028 (GA) | Oct 2028 | Apr 2031 | 🔬 Alpha CI testing from Oct 2027 |
+| **26.x** | LTS (even) | Apr 2026 | Oct 2026 | Apr 2029 | **✅ Production now** |
+| **27.x** | New sched — Alpha→LTS | Oct 2026 (alpha) / Apr 2027 (GA) | Oct 2027 | Apr 2030 | 🔬 Nightly CI (`node-next.yml`) |
+| **28.x** | New sched — Alpha→LTS | Oct 2027 (alpha) / Apr 2028 (GA) | Oct 2028 | Apr 2031 | 🔬 Nightly CI from ~Oct 2027 |
 | **29.x** | New sched — Alpha→LTS | Oct 2028 (alpha) / Apr 2029 (GA) | Oct 2029 | Apr 2032 | 📋 Planned upgrade ~Apr 2029 |
-
-> **Note:** Starting with Node.js 27.x (new release schedule), **all releases become LTS** — no more odd/even distinction. Versions align with the calendar year of their GA release (27 GA in April 2027, 28 GA in April 2028).
 
 ---
 
@@ -373,8 +357,8 @@ gantt
     Node.js 20.x LTS          :crit, active, node20, 2023-10-24, 2026-04-30
     Node.js 22.x LTS          :active, node22, 2024-10-29, 2027-04-30
     Node.js 24.x LTS          :active, node24, 2025-10-28, 2028-04-30
-    Node.js 25.x Current      :active, node25, 2025-10-29, 2026-04-21
-    Node.js 26.x (Current→LTS) :node26, 2026-04-21, 2029-04-30
+    Node.js 25.x Current      :done, node25, 2025-10-29, 2026-04-21
+    Node.js 26.x (Current→LTS) :active, node26, 2026-04-21, 2029-04-30
     Node.js 27.x LTS (New Sched) :node27, 2027-10-01, 2030-04-30
     Node.js 28.x LTS (New Sched) :node28, 2028-10-01, 2031-04-30
 

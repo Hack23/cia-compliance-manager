@@ -1579,7 +1579,7 @@ e2e-tests:
     - uses: actions/checkout@v5
     - uses: actions/setup-node@v6
       with:
-        node-version: "25"
+        node-version: "26"
         cache: "npm"
     
     # Cache Cypress binary for faster runs

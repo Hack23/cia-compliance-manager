@@ -6,11 +6,11 @@ Specialized agent configurations for **CIA Compliance Manager** (v1.1.43).
 
 All agents read these files first:
 1. **README.md** — Project context, features, architecture
-2. **.github/workflows/copilot-setup-steps.yml** — Node 25, npm, build/test commands
+2. **.github/workflows/copilot-setup-steps.yml** — Node 26, npm, build/test commands
 3. **.github/copilot-mcp.json** — MCP servers (filesystem, github, memory, sequential-thinking, playwright)
 
 ## Tech Stack
-TypeScript 6.0.2 · React 19.x · Vite 8 · Vitest 4.x · Cypress 15.x · ESLint 10.x · TailwindCSS 4 · Node ≥25 · ES2025
+TypeScript 6.0.2 · React 19.x · Vite 8 · Vitest 4.x · Cypress 15.x · ESLint 10.x · TailwindCSS 4 · Node ≥26 · ES2025
 
 ## Skills Framework
 

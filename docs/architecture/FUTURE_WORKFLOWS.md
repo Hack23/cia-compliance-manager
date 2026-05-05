@@ -25,19 +25,18 @@ The future enhancements build upon the robust v1.1 workflow foundation:
 - ✅ **Comprehensive Security Scanning**: CodeQL, Dependency Review, Scorecard, ZAP, Lighthouse
 - ✅ **Automated PR Management**: Labeling, dependency review, test reporting
 - ✅ **Documentation Pipeline**: Integrated documentation generation and deployment
-- ✅ **Node.js 25.x Runtime**: All CI/CD workflows use `node-version: "25"` (`engines.node >= 25.0.0`)
+- ✅ **Node.js 26.x Runtime**: All CI/CD workflows use `node-version: "26"` (`engines.node >= 26.0.0`)
 - ✅ **TypeScript 6.0.2**: Upgraded from 5.9.3 with TS6 breaking change fixes (`global` → `globalThis`, `ignoreDeprecations: "6.0"` for Cypress)
 
-**Planned Immediate Upgrade (~April 2026):**
-- ⬆️ **Node.js 26.x**: Upgrade immediately after Node.js 26 release (expected April 2026, LTS October 2026)
+**Planned Upgrade (~October 2026):**
+- ⬆️ **Node.js 26.x → LTS**: Node.js 26 is now the current production version; it becomes LTS in October 2026
 
 **Future Node.js Roadmap (2026–2031):**
 
 | Version | Type | GA Date | Support EOL | CI/CD Strategy |
 |---------|------|---------|-------------|----------------|
-| **25.x** (current) | Current (odd) | Oct 2025 | Apr 2026 | ✅ Production now |
-| **26.x** | Current→LTS (even) | Apr 2026 (Current) / Oct 2026 (LTS) | Apr 2029 | ⬆️ Upgrade immediately on GA |
-| **27.x** | New schedule (all LTS) | Apr 2027 | Apr 2030 | 🔬 Alpha CI from Oct 2026 |
+| **26.x** ✅ (current) | Current→LTS (even) | Apr 2026 (Current) / Oct 2026 (LTS) | Apr 2029 | ✅ Production now |
+| **27.x** | New schedule (all LTS) | Apr 2027 | Apr 2030 | 🔬 Nightly CI from now (`node-next.yml`) |
 | **28.x** | New schedule (all LTS) | Apr 2028 | Apr 2031 | 📋 Planned upgrade ~Apr 2028 |
 
 **Areas for Enhancement:**

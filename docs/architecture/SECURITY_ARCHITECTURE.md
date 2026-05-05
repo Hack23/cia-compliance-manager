@@ -1661,7 +1661,7 @@ The `cia-compliance-manager` npm package is published from the same CI pipeline 
 
 ```yaml
 # .github/workflows/release.yml (publish-npm job)
-- uses: actions/setup-node@… # Node 25, registry-url: https://registry.npmjs.org/
+- uses: actions/setup-node@… # Node 26, registry-url: https://registry.npmjs.org/
 - run: npm ci
 - run: npm run prepublishOnly  # lint + knip + test:ci + build:lib
 - run: npm publish --provenance --access public
