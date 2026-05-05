@@ -241,6 +241,24 @@ describe("BusinessImpactAnalysisWidget", () => {
     });
   });
 
+  it("applies compact card classes for dashboard readability", async () => {
+    await act(async () => {
+      render(
+        <BusinessImpactAnalysisWidget
+          availabilityLevel={"Moderate" as SecurityLevel}
+          integrityLevel={"Moderate" as SecurityLevel}
+          confidentialityLevel={"Moderate" as SecurityLevel}
+          testId="business-impact-analysis-widget"
+        />,
+      );
+    });
+
+    const widget = screen.getByTestId("business-impact-analysis-widget");
+    expect(widget.querySelector(".business-impact-category-card")).toBeInTheDocument();
+    expect(widget.querySelector(".business-impact-card-description")).toBeInTheDocument();
+    expect(widget.querySelector(".business-impact-summary-grid")).toBeInTheDocument();
+  });
+
   it("renders financial metrics for impact analysis", async () => {
     await act(async () => {
       render(

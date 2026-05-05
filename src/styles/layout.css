@@ -263,3 +263,39 @@
   object-fit: contain;
   display: block;
 }
+
+/* Security Summary uses the radar chart inside a compact dashboard card, so
+   bound both the value row and canvas to prevent Chart.js overflow from
+   visually colliding with the component cards below in dark and light mode. */
+.security-summary-radar-frame {
+  inline-size: 100%;
+  max-inline-size: 22rem;
+  margin-inline: auto;
+}
+
+.security-summary-radar-frame .radar-chart-container {
+  height: auto;
+  max-height: none;
+  overflow: hidden;
+  padding-bottom: 0.25rem;
+}
+
+.security-summary-radar-frame .radar-values {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.25rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.72rem;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.security-summary-radar-frame .radar-values > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.security-summary-radar-frame .radar-chart-container canvas {
+  max-height: min(170px, 28vh);
+  aspect-ratio: 4 / 3;
+}

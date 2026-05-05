@@ -7,6 +7,7 @@ import { WidgetClasses } from "../../../utils/tailwindClassHelpers";
 import RadarChart from "../../charts/RadarChart";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import StatusBadge from "../../common/StatusBadge";
+import { cn } from "../../../utils/tailwindClassHelpers";
 
 /**
  * Props for SecurityOverviewTab component
@@ -43,32 +44,36 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
   getStatusVariant,
 }) => {
   return (
-    <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-overview')} className="space-y-sm">
+    <div
+      data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-overview')}
+      className="space-y-sm security-summary-overview"
+    >
       {/* Security Radar Chart */}
-      <div className="rounded-lg border border-gray-100 dark:border-gray-700 p-sm bg-white dark:bg-gray-800">
+      <div className="rounded-lg border border-gray-100 dark:border-gray-700 p-sm bg-white dark:bg-gray-800 security-summary-radar-shell">
         <h3 className="text-body-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
           Security Profile
         </h3>
-        <div className="h-[200px]">
+        <div className="security-summary-radar-frame">
           <RadarChart
             availabilityLevel={availabilityLevel}
             integrityLevel={integrityLevel}
             confidentialityLevel={confidentialityLevel}
+            className="security-summary-radar-chart"
             testId={`${testId}-radar-chart`}
           />
         </div>
       </div>
 
       {/* Security Level Summary */}
-      <div className="rounded-lg border border-gray-100 dark:border-gray-700 p-sm bg-white dark:bg-gray-800">
+      <div className="rounded-lg border border-gray-100 dark:border-gray-700 p-sm bg-white dark:bg-gray-800 security-summary-section">
         <h3 className="text-body-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
           Security Components
         </h3>
 
-        <div className={WidgetClasses.grid3Cols}>
+        <div className={cn(WidgetClasses.grid3Cols, "security-summary-component-grid")}>
           {/* Confidentiality Card */}
           <div
-            className="p-sm bg-purple-50 dark:bg-purple-900/20 rounded border border-purple-100 dark:border-purple-800"
+            className="p-sm bg-purple-50 dark:bg-purple-900/20 rounded border border-purple-100 dark:border-purple-800 security-summary-component-card"
             data-testid={SECURITY_SUMMARY_TEST_IDS.CONFIDENTIALITY_CARD}
           >
             <div className="flex items-center mb-sm">
@@ -94,7 +99,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
 
           {/* Integrity Card */}
           <div
-            className="p-sm bg-green-50 dark:bg-green-900/20 rounded border border-green-100 dark:border-green-800"
+            className="p-sm bg-green-50 dark:bg-green-900/20 rounded border border-green-100 dark:border-green-800 security-summary-component-card"
             data-testid={SECURITY_SUMMARY_TEST_IDS.INTEGRITY_CARD}
           >
             <div className="flex items-center mb-sm">
@@ -120,7 +125,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
 
           {/* Availability Card */}
           <div
-            className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-100 dark:border-blue-800"
+            className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-100 dark:border-blue-800 security-summary-component-card"
             data-testid={SECURITY_SUMMARY_TEST_IDS.AVAILABILITY_CARD}
           >
             <div className="flex items-center mb-sm">
@@ -147,11 +152,11 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
       </div>
 
       {/* Key Metrics Dashboard */}
-      <div className="rounded-lg border border-gray-100 dark:border-gray-700 p-sm bg-white dark:bg-gray-800">
+      <div className="rounded-lg border border-gray-100 dark:border-gray-700 p-sm bg-white dark:bg-gray-800 security-summary-section">
         <h3 className="text-body-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
           Key Metrics
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-sm">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-sm security-summary-metric-grid">
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded">
             <div className="text-xs font-medium mb-sm text-gray-700 dark:text-gray-200">
               Complexity

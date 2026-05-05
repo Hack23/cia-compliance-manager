@@ -214,7 +214,10 @@ const BusinessImpactAnalysisWidget: React.FC<
     return (
       <div
         key={`impact-${category}`}
-        className={cn(WidgetClasses.card, "bg-gray-50 dark:bg-gray-800 mb-sm")}
+        className={cn(
+          WidgetClasses.card,
+          "bg-gray-50 dark:bg-gray-800 mb-sm business-impact-category-card"
+        )}
         data-testid={BUSINESS_IMPACT_WIDGET_IDS.section(`impact-${category.toLowerCase()}`)}
       >
         <div className="flex flex-wrap justify-start items-start gap-sm mb-sm">
@@ -229,7 +232,7 @@ const BusinessImpactAnalysisWidget: React.FC<
             />
           )}
         </div>
-        <p className={WidgetClasses.body}>
+        <p className={cn(WidgetClasses.body, "business-impact-card-description")}>
           {impact.description || "No description available"}
         </p>
       </div>
@@ -402,7 +405,7 @@ const BusinessImpactAnalysisWidget: React.FC<
       <div
         className={cn(
           WidgetClasses.card,
-          "bg-blue-50 dark:bg-blue-900/20 mb-sm shadow-none"
+          "bg-blue-50 dark:bg-blue-900/20 mb-sm shadow-none business-impact-executive-summary"
         )}
         data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('executive-summary')}
       >
@@ -420,7 +423,7 @@ const BusinessImpactAnalysisWidget: React.FC<
           )}{" "}
           areas.
         </p>
-        <div className={WidgetClasses.grid3Cols}>
+        <div className={cn(WidgetClasses.grid3Cols, "business-impact-summary-grid")}>
           <KeyValuePair
             label="Overall Impact"
             value={impactLevel}
@@ -522,7 +525,7 @@ const BusinessImpactAnalysisWidget: React.FC<
         error={serviceError}
       >
       <div 
-        className="p-sm space-y-sm"
+        className="p-sm space-y-sm business-impact-widget-content"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Business Impact Analysis",
@@ -531,7 +534,7 @@ const BusinessImpactAnalysisWidget: React.FC<
       >
         {/* Component Business Impacts */}
         <section 
-          className="mb-sm"
+            className="mb-sm business-impact-sections"
           aria-labelledby="business-impacts-heading"
         >
           <h3 id="business-impacts-heading" className={WidgetClasses.subheading}>
@@ -540,7 +543,7 @@ const BusinessImpactAnalysisWidget: React.FC<
 
           {/* Confidentiality impact */}
           {confidentialityImpact && (
-            <div className="mb-sm">
+            <div className="mb-sm business-impact-component-section">
               <h4 className={cn(WidgetClasses.subheading, "flex min-w-0 items-start")}>
                 <span className="mr-sm" aria-hidden="true">🔒</span>Confidentiality Impact
               </h4>
@@ -561,7 +564,7 @@ const BusinessImpactAnalysisWidget: React.FC<
 
           {/* Integrity impact */}
           {integrityImpact && (
-            <div className="mb-sm">
+            <div className="mb-sm business-impact-component-section">
               <h4 className={cn(WidgetClasses.subheading, "flex min-w-0 items-start")}>
                 <span className="mr-sm" aria-hidden="true">✅</span>Integrity Impact
               </h4>
@@ -579,7 +582,7 @@ const BusinessImpactAnalysisWidget: React.FC<
 
           {/* Availability impact - Full width */}
           {availabilityImpact && (
-            <div className="mb-sm">
+            <div className="mb-sm business-impact-component-section">
               <h4 className={cn(WidgetClasses.subheading, "flex min-w-0 items-start")}>
                 <span className="mr-sm" aria-hidden="true">⏱️</span>Availability Impact
               </h4>
@@ -597,7 +600,7 @@ const BusinessImpactAnalysisWidget: React.FC<
         </section>
 
         {/* Executive Summary and Heatmap combined */}
-        <div className="mb-sm">
+        <div className="mb-sm business-impact-current-levels">
           {renderExecutiveSummary()}
         </div>
 

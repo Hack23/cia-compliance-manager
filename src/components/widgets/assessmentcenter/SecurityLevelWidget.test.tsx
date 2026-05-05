@@ -56,6 +56,15 @@ describe("SecurityLevelWidget", () => {
     expect(content).toMatch(/confidentiality|privacy|protection/i);
   });
 
+  it("applies compact layout classes for dashboard fit", () => {
+    render(<SecurityLevelWidget {...defaultProps} />);
+
+    const widget = screen.getByTestId("widget-container-test-security-level");
+    expect(widget.querySelector(".security-level-config-layout")).toBeInTheDocument();
+    expect(widget.querySelector(".security-level-details-card")).toBeInTheDocument();
+    expect(widget.querySelectorAll(".security-level-control-card")).toHaveLength(3);
+  });
+
   it("calls onAvailabilityChange when changed", () => {
     render(<SecurityLevelWidget {...defaultProps} />);
 

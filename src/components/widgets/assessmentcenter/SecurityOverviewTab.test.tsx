@@ -51,6 +51,16 @@ describe("SecurityOverviewTab", () => {
     expect(screen.getByTestId("security-overview-radar-chart")).toBeInTheDocument();
   });
 
+  it("wraps the radar chart in a compact overflow-safe frame", () => {
+    render(<SecurityOverviewTab {...defaultProps} />);
+
+    expect(
+      screen
+        .getByTestId("security-overview-radar-chart")
+        .closest(".security-summary-radar-frame")
+    ).toBeInTheDocument();
+  });
+
   it("displays CIA component cards", () => {
     render(<SecurityOverviewTab {...defaultProps} />);
     

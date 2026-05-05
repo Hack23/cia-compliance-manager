@@ -219,7 +219,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
         testId={testId}
       >
       <div 
-        className="p-sm space-y-sm"
+        className="p-sm space-y-sm security-level-widget-content"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Security Level Configuration",
@@ -228,7 +228,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       >
         <div className={cn(
           WidgetClasses.section,
-          "p-sm rounded-md",
+           "p-sm rounded-md security-level-intro",
           "bg-info-light/10 dark:bg-info-dark/20"
         )}>
           <p className={WidgetClasses.body}>
@@ -264,7 +264,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
         <div className={cn(WidgetClasses.grid2Cols, "security-level-config-layout")}>
           {/* Security level selectors */}
-          <div>
+          <div className="security-level-selector-panel">
             <h3 className={WidgetClasses.heading}>
               Configure Security Levels
             </h3>
@@ -274,7 +274,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
               <div
                 className={cn(
                   WidgetClasses.card,
-                  "bg-neutral-light/10 dark:bg-neutral-dark/20"
+                    "bg-neutral-light/10 dark:bg-neutral-dark/20 security-level-control-card"
                 )}
                 data-testid={SECURITY_LEVEL_WIDGET_IDS.section('confidentiality')}
               >
@@ -345,7 +345,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
               {/* Integrity selector */}
               <div
-                className={cn(WidgetClasses.card, "p-sm")}
+                className={cn(WidgetClasses.card, "p-sm security-level-control-card")}
                 data-testid={SECURITY_LEVEL_WIDGET_IDS.section('integrity')}
               >
                 <div className="flex justify-between items-center mb-sm">
@@ -409,7 +409,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
               {/* Availability selector */}
               <div
-                className={cn(WidgetClasses.card, "p-sm")}
+                className={cn(WidgetClasses.card, "p-sm security-level-control-card")}
                 data-testid={SECURITY_LEVEL_WIDGET_IDS.section('availability')}
               >
                 <div className="flex justify-between items-center mb-sm">
@@ -474,7 +474,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           </div>
 
           {/* Security level details */}
-          <div>
+          <div className="security-level-detail-panel">
             <h3 className="text-base sm:text-lg font-medium mb-sm text-gray-800 dark:text-gray-200">
               {activeComponent.charAt(0).toUpperCase() +
                 activeComponent.slice(1)}{" "}
@@ -482,11 +482,11 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
             </h3>
 
             <div
-              className={cn(WidgetClasses.card, "p-sm h-full")}
+              className={cn(WidgetClasses.card, "p-sm h-full security-level-details-card")}
               data-testid={`${activeComponent}-details-content`}
             >
               {activeDetails ? (
-                <div className="space-y-md">
+                <div className="space-y-sm security-level-details-content">
                   <h4
                     className={`font-medium ${getComponentColor(
                       activeComponent
@@ -500,7 +500,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                     Level
                   </h4>
 
-                  <div className="space-y-sm">
+                   <div className="space-y-sm">
                     {/* Description */}
                     <div>
                       <h5 className="text-sm font-medium mb-xs">Description</h5>
@@ -534,7 +534,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                     {/* Component-specific details */}
                     {activeComponent === "availability" && (
-                      <div className="mt-md grid grid-cols-2 gap-md">
+                      <div className="mt-sm grid grid-cols-2 gap-sm security-level-detail-metrics">
                         <div className="bg-blue-50 dark:bg-blue-900/20 p-sm rounded">
                           <div className="text-xs font-medium mb-xs text-blue-700 dark:text-blue-300">
                             Uptime
@@ -556,7 +556,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                     {activeComponent === "integrity" &&
                       activeDetails.validationMethod && (
-                        <div className="mt-md bg-green-50 dark:bg-green-900/20 p-sm rounded">
+                        <div className="mt-sm bg-green-50 dark:bg-green-900/20 p-sm rounded">
                           <div className="text-xs font-medium mb-xs text-green-700 dark:text-green-300">
                             Validation Method
                           </div>
@@ -568,7 +568,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                     {activeComponent === "confidentiality" &&
                       activeDetails.protectionMethod && (
-                        <div className="mt-md bg-purple-50 dark:bg-purple-900/20 p-sm rounded">
+                        <div className="mt-sm bg-purple-50 dark:bg-purple-900/20 p-sm rounded">
                           <div className="text-xs font-medium mb-xs text-purple-700 dark:text-purple-300">
                             Protection Method
                           </div>
@@ -589,7 +589,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
         </div>
 
         {/* Security level overview */}
-        <div className="mt-sm bg-gray-100 dark:bg-gray-800 p-sm rounded-lg">
+        <div className="mt-sm bg-gray-100 dark:bg-gray-800 p-sm rounded-lg security-level-overview">
           <h3 className="text-md font-medium mb-sm text-gray-800 dark:text-gray-200">Security Level Overview</h3>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-sm">
             Higher security levels provide stronger protection but typically
@@ -597,7 +597,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
             organization's needs and constraints when selecting security levels.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-sm text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-sm text-xs security-level-overview-grid">
             <div className="p-sm bg-red-50 dark:bg-red-900/20 rounded">
               <div className="font-medium text-red-700 dark:text-red-300">
                 None

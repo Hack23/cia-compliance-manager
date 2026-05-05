@@ -2746,6 +2746,16 @@ button.more-info:hover::before {
   word-break: break-word;
 }
 
+.line-clamp-3,
+.business-impact-card-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
 /* Rich first-row widgets need more horizontal space than generic viewport breakpoints provide. */
 .security-level-config-layout,
 .business-impact-card-grid {
@@ -2760,6 +2770,130 @@ button.more-info:hover::before {
   .business-impact-card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+.security-level-widget-content,
+.business-impact-widget-content,
+.security-summary-overview {
+  font-size: 0.92rem;
+}
+
+.security-level-intro {
+  margin-bottom: 0.5rem;
+}
+
+.security-level-intro p,
+.business-impact-executive-summary p {
+  line-height: 1.38;
+}
+
+.security-level-selector-panel,
+.security-level-detail-panel,
+.security-level-control-card,
+.security-level-details-card,
+.security-level-overview,
+.business-impact-category-card,
+.business-impact-executive-summary,
+.security-summary-section,
+.security-summary-radar-shell {
+  min-width: 0;
+}
+
+.security-level-control-card {
+  padding: 0.625rem;
+}
+
+.security-level-control-card label,
+.security-level-detail-panel h3,
+.business-impact-component-section h4,
+.business-impact-category-card h3,
+.security-summary-section h3,
+.security-summary-radar-shell h3 {
+  line-height: 1.2;
+}
+
+.security-level-control-card select {
+  font-size: 0.9rem;
+}
+
+.security-level-details-content {
+  line-height: 1.35;
+}
+
+.security-level-details-content h4,
+.security-level-details-content h5 {
+  margin-bottom: 0.25rem;
+}
+
+.security-level-details-content p,
+.security-level-details-content .text-sm,
+.business-impact-category-card p,
+.business-impact-card-grid p {
+  font-size: 0.85rem;
+  line-height: 1.38;
+}
+
+.security-level-detail-metrics {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.security-level-overview p {
+  font-size: 0.85rem;
+  line-height: 1.38;
+}
+
+.security-level-overview-grid {
+  gap: 0.375rem;
+}
+
+.security-level-overview-grid > div,
+.business-impact-summary-grid > div,
+.security-summary-metric-grid > div {
+  min-width: 0;
+}
+
+.business-impact-sections {
+  display: grid;
+  gap: 0.625rem;
+}
+
+.business-impact-component-section {
+  margin-bottom: 0;
+}
+
+.business-impact-category-card {
+  padding: 0.625rem;
+}
+
+.business-impact-category-card .risk-level-badge,
+.business-impact-category-card [data-testid$="risk-level"] {
+  flex-shrink: 0;
+}
+
+.business-impact-summary-grid {
+  gap: 0.5rem;
+}
+
+.business-impact-current-levels .flex {
+  gap: 0.375rem;
+}
+
+.security-summary-component-grid,
+.security-summary-metric-grid {
+  gap: 0.5rem;
+}
+
+.security-summary-component-card {
+  display: grid;
+  gap: 0.375rem;
+}
+
+.security-summary-component-card > div {
+  min-width: 0;
+}
+
+.security-summary-component-card h4 {
+  overflow-wrap: anywhere;
 }
 
 .widget-body [data-testid^="widget-"]:not([data-testid^="widget-container"]),
