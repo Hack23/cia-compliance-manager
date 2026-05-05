@@ -228,6 +228,7 @@ const BusinessImpactAnalysisWidget: React.FC<
           {impact.riskLevel && (
             <RiskLevelBadge
               risk={impact.riskLevel}
+              className="bia-risk-badge"
               testId={`${testId}-risk-level`}
             />
           )}

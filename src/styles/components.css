@@ -2873,8 +2873,7 @@ button.more-info:hover::before {
   padding: var(--widget-compact-card-padding);
 }
 
-.business-impact-category-card .risk-level-badge,
-.business-impact-category-card [data-testid$="risk-level"] {
+.bia-risk-badge {
   flex-shrink: 0;
 }
 

@@ -57,7 +57,6 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
             availabilityLevel={availabilityLevel}
             integrityLevel={integrityLevel}
             confidentialityLevel={confidentialityLevel}
-            className="security-summary-radar-chart"
             testId={`${testId}-radar-chart`}
           />
         </div>
