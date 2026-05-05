@@ -56,7 +56,7 @@ mindmap
       ☕ Node.js 26.x
         📅 Current: 26.x (CI/CD Production)
         ⏰ Node 26 LTS: Oct 2026 (Current → LTS)
-        🔬 Nightly CI: Node 27 nightly (`node-next.yml`)
+        🔬 Nightly CI: Node 27 nightly - node-next.yml
         📢 New Schedule from 27.x
       🌐 Browser Runtime
         📅 Evergreen Updates
