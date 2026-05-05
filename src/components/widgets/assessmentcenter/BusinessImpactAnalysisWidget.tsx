@@ -533,8 +533,8 @@ const BusinessImpactAnalysisWidget: React.FC<
         )}
       >
         {/* Component Business Impacts */}
-        <section 
-            className="mb-sm business-impact-sections"
+        <section
+          className="mb-sm business-impact-sections"
           aria-labelledby="business-impacts-heading"
         >
           <h3 id="business-impacts-heading" className={WidgetClasses.subheading}>
@@ -600,12 +600,12 @@ const BusinessImpactAnalysisWidget: React.FC<
         </section>
 
         {/* Executive Summary and Heatmap combined */}
-        <div className="mb-sm business-impact-current-levels">
+        <div className="mb-sm">
           {renderExecutiveSummary()}
         </div>
 
         {/* Current Security Levels & Impact */}
-        <div className="mb-sm">
+        <div className="mb-sm business-impact-current-levels">
           <h3 className={WidgetClasses.subheading}>Current Security Levels</h3>
           <div className="flex flex-wrap gap-sm">
             <SecurityLevelBadge

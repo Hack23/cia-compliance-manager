@@ -228,7 +228,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       >
         <div className={cn(
           WidgetClasses.section,
-           "p-sm rounded-md security-level-intro",
+          "p-sm rounded-md security-level-intro",
           "bg-info-light/10 dark:bg-info-dark/20"
         )}>
           <p className={WidgetClasses.body}>
@@ -274,7 +274,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
               <div
                 className={cn(
                   WidgetClasses.card,
-                    "bg-neutral-light/10 dark:bg-neutral-dark/20 security-level-control-card"
+                  "bg-neutral-light/10 dark:bg-neutral-dark/20 security-level-control-card"
                 )}
                 data-testid={SECURITY_LEVEL_WIDGET_IDS.section('confidentiality')}
               >
@@ -500,7 +500,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                     Level
                   </h4>
 
-                   <div className="space-y-sm">
+                  <div className="space-y-sm">
                     {/* Description */}
                     <div>
                       <h5 className="text-sm font-medium mb-xs">Description</h5>
