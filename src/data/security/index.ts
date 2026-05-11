@@ -10,7 +10,6 @@ import confidentialityData from "./confidentialityData";
 import integrityData from "./integrityData";
 import roiEstimatesData from "./roiEstimatesData";
 
-// Export the primary data objects
 export {
   availabilityData,
   confidentialityData,
@@ -18,7 +17,6 @@ export {
   roiEstimatesData,
 };
 
-// Export additional aliases for backward compatibility
 export const availabilityOptions = availabilityData;
 export const confidentialityOptions = confidentialityData;
 export const integrityOptions = integrityData;

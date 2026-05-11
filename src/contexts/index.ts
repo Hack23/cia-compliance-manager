@@ -7,7 +7,6 @@
  * @packageDocumentation
  */
 
-// Re-export error context
 export {
   ErrorProvider,
   useError,
@@ -20,7 +19,6 @@ export type {
   ErrorProviderProps,
 } from "./ErrorContext";
 
-// Re-export keyboard shortcut context
 export {
   KeyboardShortcutProvider,
   useKeyboardShortcutContext,

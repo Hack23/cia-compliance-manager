@@ -12,14 +12,14 @@ import { ROIEstimatesMap } from "../../types/cia-services";
 const roiEstimatesData: ROIEstimatesMap = {
   NONE: {
     returnRate: "0%",
-    value: "0%", // For backward compatibility
+    value: "0%",
     description: "No ROI without security investment",
     potentialSavings: "$0",
     breakEvenPeriod: "N/A",
   },
   LOW: {
     returnRate: "50-100%",
-    value: "50-100%", // For backward compatibility
+    value: "50-100%",
     description:
       "Basic security measures provide minimal protection with moderate return",
     potentialSavings: "$5K-$10K annually",
@@ -27,7 +27,7 @@ const roiEstimatesData: ROIEstimatesMap = {
   },
   MODERATE: {
     returnRate: "100-200%",
-    value: "100-200%", // For backward compatibility
+    value: "100-200%",
     description:
       "Balanced security approach delivers positive returns for most organizations",
     potentialSavings: "$10K-$25K annually",
@@ -35,7 +35,7 @@ const roiEstimatesData: ROIEstimatesMap = {
   },
   HIGH: {
     returnRate: "200-300%",
-    value: "200-300%", // For backward compatibility
+    value: "200-300%",
     description:
       "Strong security posture provides excellent returns for organizations with sensitive data or operations",
     potentialSavings: "$20K-$50K annually",
@@ -43,7 +43,7 @@ const roiEstimatesData: ROIEstimatesMap = {
   },
   VERY_HIGH: {
     returnRate: "300-500%",
-    value: "300-500%", // For backward compatibility
+    value: "300-500%",
     description:
       "Maximum security investment delivers highest potential returns for organizations in regulated industries or handling critical data",
     potentialSavings: "$30K-$70K annually",
