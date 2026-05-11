@@ -1,9 +1,6 @@
 import React, { useCallback, useEffect, lazy, Suspense, useMemo } from "react";
-// Import SecurityLevelWidget eagerly - critical for initial user interaction
 import SecurityLevelWidget from "../components/widgets/assessmentcenter/SecurityLevelWidget";
 
-// Lazy load all other widgets for better code splitting and faster initial load
-// Assessment Center Widgets
 const BusinessImpactAnalysisWidget = lazy(
   () => import("../components/widgets/assessmentcenter/BusinessImpactAnalysisWidget")
 );
@@ -11,7 +8,6 @@ const SecuritySummaryWidget = lazy(
   () => import("../components/widgets/assessmentcenter/SecuritySummaryWidget")
 );
 
-// Business Value Widgets
 const ComplianceStatusWidget = lazy(
   () => import("../components/widgets/businessvalue/ComplianceStatusWidget")
 );
@@ -22,7 +18,6 @@ const ValueCreationWidget = lazy(
   () => import("../components/widgets/businessvalue/ValueCreationWidget")
 );
 
-// Impact Analysis Widgets
 const AvailabilityImpactWidget = lazy(
   () => import("../components/widgets/impactanalysis/AvailabilityImpactWidget")
 );
@@ -33,7 +28,6 @@ const IntegrityImpactWidget = lazy(
   () => import("../components/widgets/impactanalysis/IntegrityImpactWidget")
 );
 
-// Implementation Guide Widgets (includes Chart.js dependency)
 const SecurityResourcesWidget = lazy(
   () => import("../components/widgets/implementationguide/SecurityResourcesWidget")
 );
@@ -68,10 +62,8 @@ import logger from "../utils/logger";
 const CIAClassificationApp: React.FC = () => {
   const appVersion = APP_VERSION;
   
-  // Get keyboard shortcut context
   const { showHelp, setShowHelp } = useKeyboardShortcutContext();
 
-  // Use custom hooks for security level state management with localStorage persistence
   const defaultLevels: SecurityLevelState = {
     availability: "Moderate",
     integrity: "Moderate",
@@ -79,21 +71,17 @@ const CIAClassificationApp: React.FC = () => {
   };
   const [savedLevels, setSavedLevels] = useLocalStorage("securityLevels", defaultLevels);
 
-  // Initialize security level state with saved values
   const { levels, setLevel } = useSecurityLevelState(savedLevels);
 
-  // Persist security levels to localStorage whenever they change
   useEffect(() => {
     setSavedLevels(levels);
   }, [levels, setSavedLevels]);
 
-  // Use custom hook for dark mode persistence
   const defaultDarkMode =
     window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [darkMode, setDarkMode] = useLocalStorage("darkMode", defaultDarkMode);
 
-  // Log initial values for debugging
   useEffect(() => {
     logger.debug("Security levels initialized", {
       availability: levels.availability,
@@ -102,7 +90,6 @@ const CIAClassificationApp: React.FC = () => {
     });
   }, [levels]);
 
-  // Create handler functions using the hook's setLevel method
   const handleAvailabilityChange = useCallback(
     (level: SecurityLevel) => {
       logger.debug("Setting availability level", { level });
@@ -127,19 +114,15 @@ const CIAClassificationApp: React.FC = () => {
     [setLevel]
   );
 
-  // Toggle dark mode
   const toggleDarkMode = () => {
     setDarkMode((prev) => !prev);
   };
 
-  // Error handler for widget error boundaries
   const handleWidgetError = useCallback((error: Error, errorInfo: React.ErrorInfo) => {
     logger.error('Widget error caught by error boundary', { error, errorInfo });
   }, []);
   
-  // Register keyboard shortcuts
   const shortcuts: ShortcutMap = useMemo(() => ({
-    // Show help
     [KEYBOARD_SHORTCUTS.SHOW_HELP.id]: {
       ...KEYBOARD_SHORTCUTS.SHOW_HELP,
       handler: () => setShowHelp(true),
@@ -148,19 +131,14 @@ const CIAClassificationApp: React.FC = () => {
       ...KEYBOARD_SHORTCUTS.SHOW_HELP_ALT,
       handler: () => setShowHelp(true),
     },
-    // Security level selection shortcuts (future enhancement)
-    // Navigation shortcuts (future enhancement)
-    // Action shortcuts (future enhancement)
   }), [setShowHelp]);
   
-  // Use keyboard shortcuts hook
   useKeyboardShortcuts({
     shortcuts,
     enabled: true,
     preventDefault: true,
   });
 
-  // Apply dark mode class
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -178,7 +156,6 @@ const CIAClassificationApp: React.FC = () => {
           darkMode ? "dark bg-gray-900" : "bg-gray-100"
         } p-4 transition-colors duration-300`}
       >
-        {/* Ultra-compact app header with horizontal layout */}
         <div className="mb-2 px-2 py-0.5 bg-white dark:bg-gray-800 rounded-lg shadow-md flex justify-between items-center app-header">
           <div className="flex items-center">
             <div className="flex items-center justify-center mr-1.5">
@@ -266,7 +243,6 @@ const CIAClassificationApp: React.FC = () => {
             data-testid={APP_TEST_IDS.DASHBOARD_GRID}
             className="dashboard-grid-container"
           >
-            {/* Security Level Widget */}
             <div className="grid-widget-container">
               <SecurityLevelWidget
                 availabilityLevel={levels.availability}
@@ -279,7 +255,6 @@ const CIAClassificationApp: React.FC = () => {
               />
             </div>
 
-            {/* Business Impact Analysis Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Business Impact Analysis" onError={handleWidgetError}>
                 <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-business-impact" />}>
@@ -293,7 +268,6 @@ const CIAClassificationApp: React.FC = () => {
               </WidgetErrorBoundary>
             </div>
 
-            {/* Security Summary Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Security Summary" onError={handleWidgetError}>
                 <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-security-summary" />}>
@@ -307,7 +281,6 @@ const CIAClassificationApp: React.FC = () => {
               </WidgetErrorBoundary>
             </div>
 
-            {/* Value Creation Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Value Creation" onError={handleWidgetError}>
                 <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-value-creation" />}>
@@ -321,7 +294,6 @@ const CIAClassificationApp: React.FC = () => {
               </WidgetErrorBoundary>
             </div>
 
-            {/* Cost Estimation Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Cost Estimation" onError={handleWidgetError}>
                 <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-cost-estimation" />}>
@@ -335,7 +307,6 @@ const CIAClassificationApp: React.FC = () => {
               </WidgetErrorBoundary>
             </div>
 
-            {/* Compliance Status Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Compliance Status" onError={handleWidgetError}>
                 <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-compliance-status" />}>
@@ -349,7 +320,6 @@ const CIAClassificationApp: React.FC = () => {
               </WidgetErrorBoundary>
             </div>
 
-            {/* Confidentiality Impact Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Confidentiality Impact" onError={handleWidgetError}>
                 <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-confidentiality-impact" />}>
@@ -363,7 +333,6 @@ const CIAClassificationApp: React.FC = () => {
               </WidgetErrorBoundary>
             </div>
 
-            {/* Integrity Impact Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Integrity Impact" onError={handleWidgetError}>
                 <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-integrity-impact" />}>
@@ -377,7 +346,6 @@ const CIAClassificationApp: React.FC = () => {
               </WidgetErrorBoundary>
             </div>
 
-            {/* Availability Impact Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Availability Impact" onError={handleWidgetError}>
                 <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-availability-impact" />}>
@@ -391,7 +359,6 @@ const CIAClassificationApp: React.FC = () => {
               </WidgetErrorBoundary>
             </div>
 
-            {/* Technical Details Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Technical Details" onError={handleWidgetError}>
                 <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-technical-details" />}>
@@ -405,7 +372,6 @@ const CIAClassificationApp: React.FC = () => {
               </WidgetErrorBoundary>
             </div>
 
-            {/* Security Visualization Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Security Visualization" onError={handleWidgetError}>
                 <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-security-visualization" />}>
@@ -419,7 +385,6 @@ const CIAClassificationApp: React.FC = () => {
               </WidgetErrorBoundary>
             </div>
 
-            {/* Security Resources Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Security Resources" onError={handleWidgetError}>
                 <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-security-resources" />}>
@@ -435,7 +400,6 @@ const CIAClassificationApp: React.FC = () => {
           </div>
         </div>
         
-        {/* Keyboard Shortcut Help Modal */}
         <KeyboardShortcutHelp
           isOpen={showHelp}
           onClose={() => setShowHelp(false)}

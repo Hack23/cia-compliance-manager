@@ -39,14 +39,12 @@ const BusinessImpactAnalysisWidget: React.FC<
   className = "",
   testId = BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_WIDGET,
 }) => {
-  // Get the CIA content service to access business impact data
   const {
     ciaContentService,
     error: serviceError,
     isLoading,
   } = useCIAContentService();
 
-  // Calculate overall impact level with proper error handling
   const impactLevel = useMemo(() => {
     try {
       if (isNullish(ciaContentService)) {
@@ -94,7 +92,6 @@ const BusinessImpactAnalysisWidget: React.FC<
     confidentialityLevel,
   ]);
 
-  // Get availability impact with error handling
   const availabilityImpact = useMemo(() => {
     try {
       if (isNullish(ciaContentService)) {
@@ -118,7 +115,6 @@ const BusinessImpactAnalysisWidget: React.FC<
     }
   }, [ciaContentService, availabilityLevel]);
 
-  // Get integrity impact with error handling
   const integrityImpact = useMemo(() => {
     try {
       if (isNullish(ciaContentService)) {
@@ -142,7 +138,6 @@ const BusinessImpactAnalysisWidget: React.FC<
     }
   }, [ciaContentService, integrityLevel]);
 
-  // Get confidentiality impact with error handling
   const confidentialityImpact = useMemo(() => {
     try {
       if (isNullish(ciaContentService)) {
@@ -169,7 +164,6 @@ const BusinessImpactAnalysisWidget: React.FC<
     }
   }, [ciaContentService, confidentialityLevel]);
 
-  // Helper function to determine implementation complexity
   const getImplementationComplexity = (
     availabilityLevel: SecurityLevel,
     integrityLevel: SecurityLevel,
@@ -196,7 +190,6 @@ const BusinessImpactAnalysisWidget: React.FC<
     return "Very High";
   };
 
-  // Helper to render an impact category with standardized icons
   const renderImpactCategory = (
     category: string,
     impact: BusinessImpactDetail
@@ -240,7 +233,6 @@ const BusinessImpactAnalysisWidget: React.FC<
     );
   };
 
-  // Generate considerations and benefits based on security levels
   const considerations = useMemo((): BusinessItem[] => {
     const totalLevelValue =
       getSecurityLevelValue(availabilityLevel) +
@@ -361,9 +353,7 @@ const BusinessImpactAnalysisWidget: React.FC<
     ];
   }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Add visual impact heat map component
   const renderImpactHeatMap = () => {
-    // Create a visual representation of impact across CIA components
     return (
       <div className={cn(WidgetClasses.grid3Cols, "mt-sm mb-sm")}>
         <div
@@ -400,7 +390,6 @@ const BusinessImpactAnalysisWidget: React.FC<
     );
   };
 
-  // Add a "Summary at a glance" section for executives
   const renderExecutiveSummary = () => {
     return (
       <div
@@ -455,7 +444,6 @@ const BusinessImpactAnalysisWidget: React.FC<
     );
   };
 
-  // Configure tabs with content
   const tabs: Tab[] = [
     {
       id: 'considerations',
@@ -533,7 +521,6 @@ const BusinessImpactAnalysisWidget: React.FC<
           "Business implications of security measures across financial, operational, reputational and regulatory dimensions"
         )}
       >
-        {/* Component Business Impacts */}
         <section
           className="mb-sm business-impact-sections"
           aria-labelledby="business-impacts-heading"
@@ -542,7 +529,6 @@ const BusinessImpactAnalysisWidget: React.FC<
             Business Impacts by Component
           </h3>
 
-          {/* Confidentiality impact */}
           {confidentialityImpact && (
             <div className="mb-sm business-impact-component-section">
               <h4 className={cn(WidgetClasses.subheading, "flex min-w-0 items-start")}>
@@ -563,7 +549,6 @@ const BusinessImpactAnalysisWidget: React.FC<
             </div>
           )}
 
-          {/* Integrity impact */}
           {integrityImpact && (
             <div className="mb-sm business-impact-component-section">
               <h4 className={cn(WidgetClasses.subheading, "flex min-w-0 items-start")}>
@@ -581,7 +566,6 @@ const BusinessImpactAnalysisWidget: React.FC<
             </div>
           )}
 
-          {/* Availability impact - Full width */}
           {availabilityImpact && (
             <div className="mb-sm business-impact-component-section">
               <h4 className={cn(WidgetClasses.subheading, "flex min-w-0 items-start")}>
@@ -600,12 +584,10 @@ const BusinessImpactAnalysisWidget: React.FC<
           )}
         </section>
 
-        {/* Executive Summary and Heatmap combined */}
         <div className="mb-sm">
           {renderExecutiveSummary()}
         </div>
 
-        {/* Current Security Levels & Impact */}
         <div className="mb-sm business-impact-current-levels">
           <h3 className={WidgetClasses.subheading}>Current Security Levels</h3>
           <div className="flex flex-wrap gap-sm">
@@ -634,7 +616,6 @@ const BusinessImpactAnalysisWidget: React.FC<
           {renderImpactHeatMap()}
         </div>
 
-        {/* Business Considerations & Benefits */}
         <div className="mt-sm">
           <TabContainer
             tabs={tabs}
@@ -648,7 +629,6 @@ const BusinessImpactAnalysisWidget: React.FC<
   );
 };
 
-// Helper function to determine the highest impact area from the components
 function getHighestImpactArea(
   availabilityImpact: BusinessImpactDetails,
   integrityImpact: BusinessImpactDetails,
@@ -690,7 +670,6 @@ function getHighestImpactArea(
   return "multiple";
 }
 
-// Helper function to get security level value for calculations
 function getSecurityLevelValue(level: SecurityLevel): number {
   const levelValues: Record<SecurityLevel, number> = {
     None: 0,
@@ -703,7 +682,6 @@ function getSecurityLevelValue(level: SecurityLevel): number {
   return levelValues[level] || 0;
 }
 
-// Helper function to get color class for impact heat map
 function getImpactColorClass(level: SecurityLevel): string {
   switch (level) {
     case "None":
@@ -721,7 +699,6 @@ function getImpactColorClass(level: SecurityLevel): string {
   }
 }
 
-// Helper function to get text color class for impact level
 function getImpactTextColorClass(level: string): string {
   if (level.includes("Low")) {
     return "text-green-600 dark:text-green-400";
@@ -735,7 +712,6 @@ function getImpactTextColorClass(level: string): string {
   return "text-gray-600 dark:text-gray-400";
 }
 
-// Helper function to calculate default impact level when service isn't available
 function calculateDefaultImpactLevel(
   availabilityLevel: SecurityLevel,
   integrityLevel: SecurityLevel,
@@ -763,7 +739,6 @@ function calculateDefaultImpactLevel(
   return "Very High";
 }
 
-// Helper function to generate default component impact data
 function getDefaultComponentImpact(component: string, level: SecurityLevel) {
   const isLowSecurity = level === "None" || level === "Low";
 
@@ -811,7 +786,6 @@ function getDefaultComponentImpact(component: string, level: SecurityLevel) {
     };
   }
 
-  // confidentiality
   return {
     summary: `${level} confidentiality impact on business operations`,
     reputational: {
