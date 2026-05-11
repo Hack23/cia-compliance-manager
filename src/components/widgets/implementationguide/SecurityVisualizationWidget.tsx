@@ -42,18 +42,14 @@ const SecurityVisualizationWidget: React.FC<
   className = "",
   testId = SECURITY_VISUALIZATION_WIDGET_IDS.root,
 }) => {
-  // Get error/loading state from the security metrics service
   const { error, isLoading } = useSecurityMetricsService();
 
-  // Calculate security score based on selected levels
   const securityScore = useMemo(() => {
-    // Normalize security levels to ensure consistent case handling
     const normalizedAvailability = normalizeSecurityLevel(availabilityLevel);
     const normalizedIntegrity = normalizeSecurityLevel(integrityLevel);
     const normalizedConfidentiality =
       normalizeSecurityLevel(confidentialityLevel);
 
-    // Get security level values using normalized values
     const availabilityValue = getSecurityLevelValue(normalizedAvailability);
     const integrityValue = getSecurityLevelValue(normalizedIntegrity);
     const confidentialityValue = getSecurityLevelValue(
@@ -62,31 +58,26 @@ const SecurityVisualizationWidget: React.FC<
 
     const totalScore =
       availabilityValue + integrityValue + confidentialityValue;
-    const maxPossibleScore = 12; // 3 components x maximum value of 4
+    const maxPossibleScore = 12;
 
     return Math.round((totalScore / maxPossibleScore) * 100);
   }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Use the business impact level to determine risk using utility functions
   const riskLevel = useMemo(() => {
-    // Calculate impact level using the utility function
     const impactLevel = calculateBusinessImpactLevel(
       availabilityLevel,
       integrityLevel,
       confidentialityLevel
     );
 
-    // Use the centralized utility to map impact level to risk level string
     return getRiskLevelFromImpactLevel(impactLevel);
   }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Get security recommendations based on security levels
   const getSecurityRecommendations = () => {
     const availabilityValue = getSecurityLevelValue(availabilityLevel);
     const integrityValue = getSecurityLevelValue(integrityLevel);
     const confidentialityValue = getSecurityLevelValue(confidentialityLevel);
 
-    // If all security levels are the same and high, show balanced recommendation
     if (
       availabilityLevel === integrityLevel &&
       integrityLevel === confidentialityLevel
@@ -106,7 +97,6 @@ const SecurityVisualizationWidget: React.FC<
       }
     }
 
-    // Component-specific recommendations
     return (
       <div className={cn("space-y-xs mt-md")} data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('recommendations')}>
         {availabilityValue < 2 && (
@@ -155,7 +145,6 @@ const SecurityVisualizationWidget: React.FC<
           "Visual representation of security posture with CIA triad metrics, security score, and risk level"
         )}
       >
-        {/* Security score section */}
         <section 
           className={cn(WidgetClasses.section)}
           aria-labelledby="security-posture-heading"
@@ -196,7 +185,6 @@ const SecurityVisualizationWidget: React.FC<
               </div>
             </div>
 
-            {/* Score gauge */}
             <div className={cn("mb-sm")} aria-label="Security score visualization">
               <div className={cn(WidgetClasses.body, "text-caption mb-xs")}>
                 Security Level
@@ -221,7 +209,6 @@ const SecurityVisualizationWidget: React.FC<
           </div>
         </section>
 
-        {/* Security Radar Chart using existing component */}
         <div className={cn(WidgetClasses.section)}>
           <h3 className={cn(WidgetClasses.subheading)}>Security Components</h3>
 
@@ -240,11 +227,9 @@ const SecurityVisualizationWidget: React.FC<
           </div>
         </div>
 
-        {/* Component Details Section */}
         <div className={cn(WidgetClasses.section)}>
           <h3 className={cn(WidgetClasses.subheading)}>Component Details</h3>
           <div className={cn("grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-sm")}>
-            {/* Confidentiality component */}
             <div
               className={cn("p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md")}
               data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('confidentiality-component')}
@@ -271,7 +256,6 @@ const SecurityVisualizationWidget: React.FC<
               </div>
             </div>
 
-            {/* Integrity component */}
             <div
               className={cn("p-md bg-green-50 dark:bg-green-900/20 rounded-lg")}
               data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('integrity-component')}
@@ -298,7 +282,6 @@ const SecurityVisualizationWidget: React.FC<
               </div>
             </div>
 
-            {/* Availability component */}
             <div
               className={cn("p-md bg-blue-50 dark:bg-blue-900/20 rounded-lg")}
               data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('availability-component')}
@@ -327,10 +310,8 @@ const SecurityVisualizationWidget: React.FC<
           </div>
         </div>
 
-        {/* Recommendations Section - Added for test expectation */}
         {getSecurityRecommendations()}
 
-        {/* Explanation section */}
         <div className={cn("p-md bg-blue-50 dark:bg-blue-900/20 rounded-lg mt-md")}>
           <h3 className={cn("text-body-lg font-medium mb-sm")}>
             Security Visualization Key

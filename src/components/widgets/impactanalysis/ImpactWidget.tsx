@@ -83,7 +83,6 @@ interface ComponentConfig {
  * ```
  */
 const getComponentConfig = (component: CIAComponent): ComponentConfig => {
-  // Get consistent CIA colors from utility
   const ciaColors = getCIAColors(component);
   
   switch (component) {
@@ -124,7 +123,6 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig => {
         getSecurityBadgeTestId: (_effectiveTestId, widgetIds) => widgetIds.label("security-badge"),
       };
     default: {
-      // Exhaustive check to ensure all CIAComponent values are handled
       const exhaustiveCheck: never = component;
       throw new Error(`Unsupported CIA component in ImpactWidget: ${String(exhaustiveCheck)}`);
     }
@@ -172,7 +170,6 @@ const getTestIds = (component: CIAComponent) => {
         widgetIds: CONFIDENTIALITY_IMPACT_WIDGET_IDS,
       };
     default: {
-      // Exhaustive check to ensure all CIAComponent values are handled
       const exhaustiveCheck: never = component;
       throw new Error(`Unsupported CIA component in getTestIds: ${String(exhaustiveCheck)}`);
     }
@@ -198,21 +195,17 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
   showExtendedDetails = false,
   onError,
 }) => {
-  // Get component-specific configuration (memoized for performance)
   const config = useMemo(() => getComponentConfig(component), [component]);
   const testIds = useMemo(() => getTestIds(component), [component]);
   const effectiveTestId = testId || testIds.prefix;
 
-  // Use security level utility for consistent normalization
   const effectiveLevel = useMemo(() => 
     normalizeSecurityLevel(level || "Moderate"), 
     [level]
   );
 
-  // Get CIA content service for loading/error states
   const { ciaContentService, error, isLoading } = useCIAContentService();
 
-  // Invoke error callback when service error occurs (memoized callback)
   const handleError = useCallback((err: Error) => {
     if (onError) {
       onError(err);
@@ -225,11 +218,9 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
     }
   }, [error, handleError]);
 
-  // Use custom hooks for data fetching
   const details = useComponentDetails(component, effectiveLevel);
   const businessImpact = useBusinessImpact(component, effectiveLevel);
 
-  // Get recommendations for extended details
   const recommendations = useMemo(() => {
     if (!showExtendedDetails || !ciaContentService) return [];
     
@@ -241,7 +232,6 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
     }
   }, [showExtendedDetails, ciaContentService, component, effectiveLevel]);
 
-  // Get component-specific metrics
   const metrics = useMemo(() => {
     switch (component) {
       case "availability": {
@@ -266,7 +256,6 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
           },
         };
       case "confidentiality": {
-        // Get data classification with proper error handling
         let dataClassification: string;
         if (ciaContentService) {
           try {
@@ -287,7 +276,6 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
         };
       }
       default: {
-        // Exhaustive check to ensure all CIAComponent values are handled
         const exhaustiveCheck: never = component;
         throw new Error(`Unsupported CIA component in metrics calculation: ${String(exhaustiveCheck)}`);
       }
@@ -309,7 +297,6 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
           role="region"
           aria-label={getWidgetAriaDescription(config.defaultTitle, config.ariaDescription)}
         >
-          {/* Security level indicator */}
           <section
             className={cn("mb-sm")}
             aria-labelledby={`${component}-level-heading`}
@@ -326,7 +313,6 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
             />
           </section>
 
-          {/* Business Impact Analysis */}
           {businessImpact && (
             <section
               className={cn("mb-sm")}
@@ -343,7 +329,6 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
             </section>
           )}
 
-          {/* Component-specific metrics */}
           {metrics.type === "availability" && (
             <WidgetSection
               title="SLA Metrics"
@@ -490,7 +475,6 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
   );
 });
 
-// Set display name for debugging
 ImpactWidget.displayName = "ImpactWidget";
 
 export default ImpactWidget;
