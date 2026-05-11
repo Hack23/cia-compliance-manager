@@ -151,7 +151,7 @@ export const ErrorToast: React.FC<ErrorToastProps> = ({
     setTimeout(() => {
       setIsAnimatingOut(false);
       onDismiss();
-    }, 300); // Match animation duration
+    }, 300);
   }, [onDismiss]);
 
   useEffect(() => {
@@ -183,7 +183,6 @@ export const ErrorToast: React.FC<ErrorToastProps> = ({
     >
       <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg border-l-4 border-red-500 dark:border-red-600 overflow-hidden">
         <div className="p-4">
-          {/* Header */}
           <div className="flex items-start">
             <div className="flex-shrink-0">
               <svg
@@ -239,7 +238,6 @@ export const ErrorToast: React.FC<ErrorToastProps> = ({
             </div>
           </div>
 
-          {/* Action Button */}
           {retry && (
             <div className="mt-3">
               <button
@@ -270,7 +268,6 @@ export const ErrorToast: React.FC<ErrorToastProps> = ({
           )}
         </div>
 
-        {/* Progress bar (for auto-dismiss) */}
         {autoHideDuration > 0 && isVisible && !isAnimatingOut && (
           <div className="h-1 bg-gray-200 dark:bg-gray-700 overflow-hidden">
             <div
