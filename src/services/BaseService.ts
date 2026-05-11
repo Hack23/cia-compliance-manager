@@ -54,7 +54,6 @@ export class BaseService implements CIAService, IBaseService {
    * @param dataProvider - Data provider for security information
    */
   constructor(dataProvider: CIADataProvider) {
-    // Validate data provider
     if (!dataProvider) {
       throw createValidationError(
         'Data provider is required',
@@ -71,8 +70,6 @@ export class BaseService implements CIAService, IBaseService {
    * @returns True if valid, false otherwise
    */
   public validate(input: unknown): boolean {
-    // Default implementation returns true
-    // Subclasses should override this method
     return input !== null && input !== undefined;
   }
 
@@ -102,13 +99,11 @@ export class BaseService implements CIAService, IBaseService {
    * @returns ServiceError
    */
   public handleError(error: Error): ServiceError {
-    // If already a ServiceError, return it
     if (isServiceError(error)) {
       logger.error(error.getFormattedMessage());
       return error;
     }
 
-    // Convert to ServiceError
     const serviceError = new ServiceError(
       error.message,
       ServiceErrorCode.INTERNAL_ERROR,
@@ -231,7 +226,6 @@ export class BaseService implements CIAService, IBaseService {
    * Get security level description
    */
   public getSecurityLevelDescription(level: SecurityLevel): string {
-    // Default implementation
     switch (level) {
       case "None":
         return "No security controls";
@@ -252,7 +246,6 @@ export class BaseService implements CIAService, IBaseService {
    * Get risk level from security level
    */
   public getRiskLevelFromSecurityLevel(level: SecurityLevel): string {
-    // Modified to return the exact format expected by tests
     const riskLevels: Record<SecurityLevel, string> = {
       None: "Critical",
       Low: "High",
@@ -282,13 +275,11 @@ export class BaseService implements CIAService, IBaseService {
    * Get default security icon for a level
    */
   protected getDefaultSecurityIcon(level: SecurityLevel): string {
-    // Check if dataProvider provides the method and if it returns a non-null value
     if (typeof this.dataProvider.getDefaultSecurityIcon === "function") {
       const icon = this.dataProvider.getDefaultSecurityIcon(level);
       if (icon) return icon;
     }
 
-    // Default icons
     switch (level) {
       case "None":
         return "⚠️";

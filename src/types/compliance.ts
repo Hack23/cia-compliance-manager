@@ -59,22 +59,18 @@ export interface ComplianceFramework {
  * Represents the overall compliance status
  */
 export interface ComplianceStatusDetails {
-  // Required properties
   status: string;
   compliantFrameworks: string[];
   partiallyCompliantFrameworks: string[];
   nonCompliantFrameworks: string[];
   frameworks?: ComplianceFramework[];
 
-  // Optional properties
   remediationSteps?: string[];
   requirements?: string[];
   complianceScore: number;
 
-  // Optional status text for display
   statusText?: string;
 
-  // For interface compatibility
   frameworkName?: string;
   findings?: string[];
   metRequirements?: string[];

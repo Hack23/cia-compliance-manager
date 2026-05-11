@@ -152,14 +152,11 @@ export interface TechnicalImplementationDetails {
     maintenance: string;
     expertise: string;
   };
-  // Add the component-specific properties
   validationMethod?: string; // For integrity
   protectionMethod?: string; // For confidentiality
   recoveryMethod?: string; // For availability
-  // Additional optional properties for implementation guidance
   expertiseLevel?: string; // Expertise level required
   developmentEffort?: string; // Development effort estimate
-  // Allow additional properties for extensibility (use unknown for type safety)
   [key: string]: unknown;
 }
 
@@ -214,7 +211,6 @@ export interface ROIEstimatesMap {
   MODERATE: ROIEstimate;
   HIGH: ROIEstimate;
   VERY_HIGH: ROIEstimate;
-  // Remove duplicate index signature, keep only one
   [key: string]: ROIEstimate; // Add string index signature for easier access
 }
 
@@ -225,49 +221,39 @@ export interface ROIEstimatesMap {
  * security level across availability, integrity, or confidentiality.
  */
 export interface CIADetails {
-  // Core descriptive fields
   description: string;
   technical: string;
   businessImpact: string;
 
-  // Financial metrics (optional for partial data)
   capex?: number;
   opex?: number;
 
-  // Styling properties (optional for partial data)
   bg?: string;
   text?: string;
 
-  // Security guidance
   recommendations: string[];
 
-  // Business impact analysis
   businessImpactDetails?: BusinessImpactDetails;
 
-  // Availability-specific metrics
   uptime?: string;
   rto?: string;
   rpo?: string;
   mttr?: string;
   sla?: string; // Added missing property
 
-  // Integrity-specific metrics
   validationMethod?: string;
   validationLevel?: string; // Added missing property
   errorRate?: string; // Added missing property
 
-  // Confidentiality-specific metrics
   protectionMethod?: string;
   privacyImpact?: string; // Added missing property
 
-  // Implementation details
   implementationComplexity?: string;
   maintenanceRequirements?: string;
   requiredExpertise?: string;
   controlFamily?: string[];
   applicableFrameworks?: string[];
 
-  // Business perspective and value creation
   businessPerspective?: string;
   implementationSteps?: string[];
   effort?: ImplementationEffort;
@@ -277,15 +263,12 @@ export interface CIADetails {
   roiEstimate?: ROIEstimate;
   implementationConsiderations?: string;
 
-  // Visual and compliance indicators
   securityIcon?: string;
   complianceImpact?: ComplianceImpact;
 
-  // Implementation guidance
   codeExamples?: CodeExample[];
   technicalImplementation?: TechnicalImplementationDetails;
 
-  // Add missing properties
   expertise?: string;
   timeframe?: string;
 }
@@ -389,7 +372,6 @@ export interface ComplianceStatus {
   nonCompliantFrameworks: string[];
   remediationSteps?: string[];
   complianceScore: number;
-  // ...other properties...
 }
 
 /**

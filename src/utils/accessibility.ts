@@ -540,32 +540,26 @@ export function announceToScreenReader(
 ): void {
   const liveRegion = getLiveRegion();
   
-  // Update politeness level if changed
   liveRegion.setAttribute('aria-live', politeness);
   
-  // Clear existing content and cancel ALL pending timeouts to prevent accumulation
   liveRegion.textContent = '';
   if (cleanupTimeout) {
     clearTimeout(cleanupTimeout);
     cleanupTimeout = null;
   }
   
-  // Clear all pending timeouts from rapid successive calls
   while (pendingTimeouts.length > 0) {
     const timeout = pendingTimeouts.pop();
     if (timeout) clearTimeout(timeout);
   }
 
-  // Delay to ensure screen readers detect the change
   const messageTimeout = setTimeout(() => {
     liveRegion.textContent = message;
   }, 100);
   pendingTimeouts.push(messageTimeout);
 
-  // Schedule cleanup after announcement (but keep the element for reuse)
   cleanupTimeout = setTimeout(() => {
     liveRegion.textContent = '';
-    // Clear completed timeout from pending array
     const index = pendingTimeouts.indexOf(messageTimeout);
     if (index > -1) pendingTimeouts.splice(index, 1);
   }, 3000);
@@ -587,7 +581,6 @@ export function meetsContrastRequirement(
   background: string,
   isLargeText = false
 ): boolean {
-  // Validate hex colors
   const fgRgb = hexToRgb(foreground);
   const bgRgb = hexToRgb(background);
   

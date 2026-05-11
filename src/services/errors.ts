@@ -17,33 +17,27 @@
  * categories for documentation purposes. The actual enum values are strings.
  */
 export enum ServiceErrorCode {
-  // Validation errors
   VALIDATION_ERROR = 'VALIDATION_ERROR',
   INVALID_SECURITY_LEVEL = 'INVALID_SECURITY_LEVEL',
   INVALID_COMPONENT_TYPE = 'INVALID_COMPONENT_TYPE',
   INVALID_INPUT = 'INVALID_INPUT',
   MISSING_REQUIRED_FIELD = 'MISSING_REQUIRED_FIELD',
 
-  // Data access errors
   DATA_NOT_FOUND = 'DATA_NOT_FOUND',
   DATA_PROVIDER_ERROR = 'DATA_PROVIDER_ERROR',
   CONFIGURATION_ERROR = 'CONFIGURATION_ERROR',
 
-  // Business logic errors
   CALCULATION_ERROR = 'CALCULATION_ERROR',
   COMPLIANCE_CHECK_ERROR = 'COMPLIANCE_CHECK_ERROR',
   ROI_CALCULATION_ERROR = 'ROI_CALCULATION_ERROR',
 
-  // Network errors
   NETWORK_ERROR = 'NETWORK_ERROR',
   CONNECTION_ERROR = 'CONNECTION_ERROR',
   TIMEOUT_ERROR = 'TIMEOUT_ERROR',
   
-  // Retryable errors
   RETRYABLE_ERROR = 'RETRYABLE_ERROR',
   RATE_LIMIT_ERROR = 'RATE_LIMIT_ERROR',
   
-  // System errors
   INTERNAL_ERROR = 'INTERNAL_ERROR',
   UNEXPECTED_ERROR = 'UNEXPECTED_ERROR',
 }
@@ -112,7 +106,6 @@ export class ServiceError extends Error {
     this.cause = cause;
     this.timestamp = new Date();
 
-    // Maintain proper stack trace for where our error was thrown
     if (Error.captureStackTrace) {
       Error.captureStackTrace(this, ServiceError);
     }

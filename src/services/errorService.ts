@@ -99,7 +99,6 @@ export class ErrorService {
    * Private constructor for singleton pattern
    */
   private constructor() {
-    // Private constructor for singleton
   }
 
   /**
@@ -124,7 +123,6 @@ export class ErrorService {
       recoverable: this.canRecover(error),
     };
 
-    // Log based on severity
     switch (severity) {
       case ErrorSeverity.CRITICAL:
       case ErrorSeverity.HIGH:
@@ -152,9 +150,6 @@ export class ErrorService {
         });
     }
 
-    // TODO: Integrate with external monitoring service (e.g., Sentry, LogRocket)
-    // See docs/ERROR_HANDLING.md for future enhancement plan
-    // this.sendToMonitoring(logEntry);
   }
 
   /**
@@ -164,9 +159,7 @@ export class ErrorService {
    * @returns User-friendly error message
    */
   public getUserFriendlyMessage(error: unknown): string {
-    // Handle ServiceError with specific codes
     if (isServiceError(error)) {
-      // Check for validation errors
       if (error.code === ServiceErrorCode.VALIDATION_ERROR) {
         const field = error.context.field as string | undefined;
         return field
@@ -174,7 +167,6 @@ export class ErrorService {
           : 'Please check your input and try again.';
       }
       
-      // Check for network errors
       if (isNetworkError(error)) {
         const statusCode = error.context.statusCode as number | undefined;
         if (statusCode === 404) {
@@ -189,7 +181,6 @@ export class ErrorService {
         return 'Network connection issue. Please check your connection and try again.';
       }
       
-      // Check for retryable errors
       if (isRetryableError(error)) {
         const retryAfter = error.context.retryAfter as number | undefined;
         return retryAfter
@@ -197,7 +188,6 @@ export class ErrorService {
           : 'Operation failed. Please try again.';
       }
       
-      // Handle other service error codes
       switch (error.code) {
         case ServiceErrorCode.INVALID_SECURITY_LEVEL:
         case ServiceErrorCode.INVALID_COMPONENT_TYPE:
@@ -233,9 +223,7 @@ export class ErrorService {
       }
     }
 
-    // Handle standard Error
     if (error instanceof Error) {
-      // Check for known error patterns in the message
       const msg = error.message.toLowerCase();
       if (msg.includes('network') || msg.includes('fetch')) {
         return 'Network connection issue. Please check your connection and try again.';
@@ -248,7 +236,6 @@ export class ErrorService {
       }
     }
 
-    // Default fallback message
     return 'An unexpected error occurred. Please try again.';
   }
 
@@ -259,22 +246,18 @@ export class ErrorService {
    * @returns True if the error is recoverable
    */
   public canRecover(error: unknown): boolean {
-    // Retryable ServiceErrors are explicitly marked as recoverable
     if (isRetryableError(error)) {
       return true;
     }
 
-    // Network ServiceErrors are generally recoverable
     if (isNetworkError(error)) {
       return true;
     }
 
-    // Validation ServiceErrors are recoverable through user correction
     if (isValidationError(error)) {
       return true;
     }
 
-    // Other ServiceErrors - check code
     if (isServiceError(error)) {
       switch (error.code) {
         case ServiceErrorCode.INVALID_SECURITY_LEVEL:
@@ -291,7 +274,6 @@ export class ErrorService {
       }
     }
 
-    // Standard errors - check message for known recoverable patterns
     if (error instanceof Error) {
       const msg = error.message.toLowerCase();
       if (msg.includes('network') || msg.includes('timeout') || msg.includes('fetch')) {
@@ -299,7 +281,6 @@ export class ErrorService {
       }
     }
 
-    // By default, assume errors are not recoverable
     return false;
   }
 
@@ -310,14 +291,11 @@ export class ErrorService {
    * @returns Error severity level
    */
   public getErrorSeverity(error: unknown): ErrorSeverity {
-    // Handle ServiceErrors
     if (isServiceError(error)) {
-      // Validation errors are usually low severity
       if (error.code === ServiceErrorCode.VALIDATION_ERROR) {
         return ErrorSeverity.LOW;
       }
       
-      // Network errors severity depends on status code
       if (isNetworkError(error)) {
         const statusCode = error.context.statusCode as number | undefined;
         if (statusCode && statusCode >= 500) {
@@ -326,12 +304,10 @@ export class ErrorService {
         return ErrorSeverity.MEDIUM;
       }
       
-      // Retryable errors are medium severity
       if (isRetryableError(error)) {
         return ErrorSeverity.MEDIUM;
       }
       
-      // Other error codes
       switch (error.code) {
         case ServiceErrorCode.INVALID_INPUT:
         case ServiceErrorCode.MISSING_REQUIRED_FIELD:
@@ -363,7 +339,6 @@ export class ErrorService {
       }
     }
 
-    // Default to HIGH for unknown error types
     return ErrorSeverity.HIGH;
   }
 

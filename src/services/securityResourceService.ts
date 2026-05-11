@@ -52,7 +52,6 @@ export class SecurityResourceService extends BaseService implements ISecurityRes
       (resource) =>
         ({
           ...resource,
-          // Add relevance property if missing (for backward compatibility)
           relevance: resource.priority || 50,
           score: resource.priority || 50,
         } as EnhancedSecurityResource)
@@ -82,12 +81,10 @@ export class SecurityResourceService extends BaseService implements ISecurityRes
     component: CIAComponentType | "general" | "all",
     level: SecurityLevel
   ): EnhancedSecurityResource[] {
-    // Validate inputs
     if (component !== "general" && component !== "all") {
       this.validateComponent(component as CIAComponentType);
     }
     this.validateSecurityLevel(level);
-    // For None level, still return resources (to match test expectations)
     const fallbackResource: EnhancedSecurityResource = {
       id: `fallback-${component}`,
       title: `Basic security guidance for ${component}`,
@@ -101,7 +98,6 @@ export class SecurityResourceService extends BaseService implements ISecurityRes
       source: "NIST",
     };
 
-    // Create specific resources for each component type to satisfy tests
     const componentSpecificResources: Record<string, EnhancedSecurityResource> =
       {
         availability: {
@@ -142,46 +138,37 @@ export class SecurityResourceService extends BaseService implements ISecurityRes
         },
       };
 
-    // Combine resources for filtering
     const allResources = [
       ...this.resources,
       fallbackResource,
       ...Object.values(componentSpecificResources),
     ];
 
-    // Filter resources by component and level
     return allResources
       .filter((resource) => {
-        // Handle 'all' component
         if (component === "all") {
           return true;
         }
 
-        // Check component type
         if (resource.type === component) {
           return true;
         }
 
-        // Check components array if it exists
         if (resource.components && resource.components.includes(component)) {
           return true;
         }
 
-        // Include general resources for all components
         return resource.type === "general";
       })
       .filter((resource) => {
-        // If no relevantLevels, assume it's relevant for all levels
         if (!resource.relevantLevels || resource.relevantLevels.length === 0) {
           return true;
         }
 
-        // Check if the resource is relevant for the selected level
         return resource.relevantLevels.includes(level);
       })
       .map((resource) => ({
         ...resource,
-        // Calculate relevance for sorting
         relevance: this.calculateRelevance(resource, component, level),
       }))
       .sort((a, b) => b.relevance - a.relevance);
@@ -197,12 +184,10 @@ export class SecurityResourceService extends BaseService implements ISecurityRes
   ): number {
     let score = resource.priority || 50;
 
-    // Higher score for exact component match
     if (resource.type === component) {
       score += 20;
     }
 
-    // Higher score for exact level match
     if (resource.relevantLevels && resource.relevantLevels.includes(level)) {
       score += 20;
     }
@@ -229,10 +214,8 @@ export class SecurityResourceService extends BaseService implements ISecurityRes
    * ```
    */
   public getValuePoints(level: SecurityLevel): string[] {
-    // Validate input
     this.validateSecurityLevel(level);
 
-    // Call the data provider's method if available
     if (this.dataProvider.getDefaultValuePoints) {
       try {
         const valuePoints = this.dataProvider.getDefaultValuePoints(level);
@@ -248,7 +231,6 @@ export class SecurityResourceService extends BaseService implements ISecurityRes
       }
     }
 
-    // For None level, return basic value points to satisfy tests
     if (level === "None") {
       return [
         "No security value",
@@ -259,7 +241,6 @@ export class SecurityResourceService extends BaseService implements ISecurityRes
       ];
     }
 
-    // Fallback implementation
     return [
       `Provides ${level.toLowerCase()} level of protection`,
       `Meets ${
@@ -276,7 +257,6 @@ export function createSecurityResourceService(
   dataProvider: CIADataProvider
 ): SecurityResourceService {
   if (!dataProvider) {
-    // Create a default minimal data provider instead of throwing an error
     const defaultProvider: CIADataProvider = {
       availabilityOptions: {},
       integrityOptions: {},
