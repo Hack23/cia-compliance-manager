@@ -77,11 +77,11 @@ export const SECURITY_LEVEL_COLORS: Record<
   SecurityLevel,
   SecurityLevelColorPair
 > = {
-  None: { bg: "#e74c3c", text: "#ff3b3b" }, // Red
-  Low: { bg: "#e67e22", text: "#ff9500" }, // Orange/Yellow
-  Moderate: { bg: "#f1c40f", text: "#ffcc00" }, // Yellow/Blue
-  High: { bg: "#27ae60", text: "#00e676" }, // Green
-  "Very High": { bg: "#3498db", text: "#00ccff" }, // Blue/Purple
+  None: { bg: "#e74c3c", text: "#ff3b3b" },
+  Low: { bg: "#e67e22", text: "#ff9500" },
+  Moderate: { bg: "#f1c40f", text: "#ffcc00" },
+  High: { bg: "#27ae60", text: "#00e676" },
+  "Very High": { bg: "#3498db", text: "#00ccff" },
 };
 
 /**
@@ -121,19 +121,19 @@ export const SECURITY_LEVEL_COLORS: Record<
  */
 export const CIA_COMPONENT_COLORS = {
   CONFIDENTIALITY: {
-    PRIMARY: "#f97316", // Orange
-    SECONDARY: "#fed7aa", // Light orange
-    DARK: "#fb923c", // Dark orange
+    PRIMARY: "#f97316",
+    SECONDARY: "#fed7aa",
+    DARK: "#fb923c",
   },
   INTEGRITY: {
-    PRIMARY: "#27ae60", // Green
-    SECONDARY: "#d4efdf", // Light green
-    DARK: "#00e676", // Vibrant green
+    PRIMARY: "#27ae60",
+    SECONDARY: "#d4efdf",
+    DARK: "#00e676",
   },
   AVAILABILITY: {
-    PRIMARY: "#2980b9", // Blue
-    SECONDARY: "#bbdefb", // Light blue
-    DARK: "#00ccff", // Dark blue
+    PRIMARY: "#2980b9",
+    SECONDARY: "#bbdefb",
+    DARK: "#00ccff",
   },
 };
 
@@ -223,13 +223,12 @@ export const getCIAComponentColors = (
 ): { primary: string; secondary: string } => {
   const isDarkMode = document.documentElement.classList.contains("dark");
 
-  // Return appropriate colors based on dark mode
   return {
     primary: isDarkMode
       ? CIA_COMPONENT_COLORS[component].DARK
       : CIA_COMPONENT_COLORS[component].PRIMARY,
     secondary: isDarkMode
-      ? `${CIA_COMPONENT_COLORS[component].DARK}80` // Add transparency
+      ? `${CIA_COMPONENT_COLORS[component].DARK}80`
       : CIA_COMPONENT_COLORS[component].SECONDARY,
   };
 };

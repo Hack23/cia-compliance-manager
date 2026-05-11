@@ -10,18 +10,17 @@ export const RISK_LEVELS = {
   MEDIUM: "Medium",
   HIGH: "High",
   CRITICAL: "Critical",
-  UNKNOWN: "Unknown", // Add missing UNKNOWN risk level
+  UNKNOWN: "Unknown",
 };
 
 export type RiskLevel = (typeof RISK_LEVELS)[keyof typeof RISK_LEVELS];
 
-// Export the risk level literal type for reuse
+/** Exported risk level literal type */
 export type { RiskLevelLiteral };
 
 /**
  * Categories for business impact analysis
  */
-// Change from array to object with properties
 export const BUSINESS_IMPACT_CATEGORIES = {
   FINANCIAL: "Financial",
   OPERATIONAL: "Operational",
@@ -30,7 +29,7 @@ export const BUSINESS_IMPACT_CATEGORIES = {
   STRATEGIC: "Strategic",
 };
 
-// Keep track of categories array for iterating
+/** Business impact category list for iteration */
 export const BUSINESS_IMPACT_CATEGORY_LIST = [
   "financial",
   "operational",
@@ -119,11 +118,11 @@ export const RISK_MATRIX = {
   likelihood: ["Rare", "Unlikely", "Possible", "Likely", "Almost Certain"],
   impact: ["Insignificant", "Minor", "Moderate", "Major", "Catastrophic"],
   scores: [
-    [1, 2, 3, 4, 5], // Rare
-    [2, 4, 6, 8, 10], // Unlikely
-    [3, 6, 9, 12, 15], // Possible
-    [4, 8, 12, 16, 20], // Likely
-    [5, 10, 15, 20, 25], // Almost Certain
+    [1, 2, 3, 4, 5],
+    [2, 4, 6, 8, 10],
+    [3, 6, 9, 12, 15],
+    [4, 8, 12, 16, 20],
+    [5, 10, 15, 20, 25],
   ],
 };
 
@@ -151,11 +150,11 @@ export const RISK_SCORE_TO_LEVEL: Record<number, string> = {
  * Color coding for risk levels
  */
 export const RISK_LEVEL_COLORS: Record<string, string> = {
-  [RISK_LEVELS.MINIMAL]: "#4caf50", // Green
-  [RISK_LEVELS.LOW]: "#8bc34a", // Light Green
-  [RISK_LEVELS.MEDIUM]: "#ffeb3b", // Yellow
-  [RISK_LEVELS.HIGH]: "#ff9800", // Orange
-  [RISK_LEVELS.CRITICAL]: "#f44336", // Red
+  [RISK_LEVELS.MINIMAL]: "#4caf50",
+  [RISK_LEVELS.LOW]: "#8bc34a",
+  [RISK_LEVELS.MEDIUM]: "#ffeb3b",
+  [RISK_LEVELS.HIGH]: "#ff9800",
+  [RISK_LEVELS.CRITICAL]: "#f44336",
 };
 
 /**
