@@ -33,7 +33,6 @@ import * as CIAUtilities from "./cia.utility";
 
 // Selective exports from cia-services to avoid conflicts
 export type {
-  // Use BusinessImpactDetail and CIADetails from here as the canonical source
   BusinessImpactDetail,
   BusinessImpactDetails,
   CIAComponentType,

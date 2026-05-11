@@ -157,9 +157,7 @@ export const useCIAContentService = (): UseCIAContentServiceReturn => {
   const initService = async () => {
     try {
       setIsLoading(true);
-      // Create the service using the createCIAContentService factory function
       const service = createCIAContentService();
-      // Wait for any async initialization to complete
       await service.initialize();
       setCIAContentService(service);
       setError(null);
@@ -171,9 +169,7 @@ export const useCIAContentService = (): UseCIAContentServiceReturn => {
     }
   };
 
-  // Refresh function to retry initialization if needed
   const refresh = () => {
-    // Make sure we set isLoading immediately, not after the async part
     setIsLoading(true);
     initService();
   };

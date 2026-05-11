@@ -32,7 +32,6 @@ export const SECURITY_LEVEL_VALUES: Record<SecurityLevel, number> = {
  */
 export function getSecurityLevelValue(level: SecurityLevel | string): number {
   if (typeof level === 'string') {
-    // Normalize the level to handle case-insensitive matching
     const normalizedLevel = level.trim();
 
     if (/^none$/i.test(normalizedLevel)) return 0;
@@ -42,7 +41,6 @@ export function getSecurityLevelValue(level: SecurityLevel | string): number {
     if (/^very\s*high$/i.test(normalizedLevel)) return 4;
   }
 
-  // For SecurityLevel type or unknown strings
   return SECURITY_LEVEL_VALUES[level as SecurityLevel] ?? 0;
 }
 
@@ -80,20 +78,15 @@ export function calculateOverallSecurityLevel(
 
   switch (strategy) {
     case 'min':
-      // Security is only as strong as the weakest link
       result = Math.min(availValue, integValue, confValue);
       break;
     case 'max':
-      // For maximum level calculation
       result = Math.max(availValue, integValue, confValue);
       break;
     case 'avg':
-      // Average security level
       result = Math.round((availValue + integValue + confValue) / 3);
       break;
     case 'weighted':
-      // Weighted calculation based on business priorities
-      // This example uses 30% availability, 30% integrity, 40% confidentiality
       result = Math.round((availValue * 0.3) + (integValue * 0.3) + (confValue * 0.4));
       break;
     default:
@@ -112,7 +105,6 @@ export function calculateOverallSecurityLevel(
  */
 export function getNormalizedSecurityValue(level: SecurityLevel): number {
   const value = getSecurityLevelValue(level);
-  // Convert 0-4 scale to 0-100 scale
   return (value / 4) * 100;
 }
 

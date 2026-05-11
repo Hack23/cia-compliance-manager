@@ -41,7 +41,6 @@ export function useTabs(tabs: Tab[], options: UseTabsOptions = {}): UseTabsRetur
   const [activeTab, setActiveTab] = useState<string>(initialTab || tabs[0]?.id || '');
   const tabRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
 
-  // Memoize non-disabled tab IDs to avoid recalculating on every keydown
   const enabledTabIds = useMemo(() => {
     return tabs.filter(t => !t.disabled).map(t => t.id);
   }, [tabs]);
@@ -63,7 +62,6 @@ export function useTabs(tabs: Tab[], options: UseTabsOptions = {}): UseTabsRetur
    * Supports Arrow Left/Right, Home, and End keys
    */
   const handleKeyDown = useCallback((event: React.KeyboardEvent, currentTabId: string): void => {
-    // Early return if no enabled tabs
     if (enabledTabIds.length === 0) {
       return;
     }
@@ -74,12 +72,10 @@ export function useTabs(tabs: Tab[], options: UseTabsOptions = {}): UseTabsRetur
     switch (event.key) {
       case 'ArrowLeft':
         event.preventDefault();
-        // Wrap to end if at beginning
         newIndex = currentIndex > 0 ? currentIndex - 1 : enabledTabIds.length - 1;
         break;
       case 'ArrowRight':
         event.preventDefault();
-        // Wrap to beginning if at end
         newIndex = currentIndex < enabledTabIds.length - 1 ? currentIndex + 1 : 0;
         break;
       case 'Home':
@@ -91,14 +87,12 @@ export function useTabs(tabs: Tab[], options: UseTabsOptions = {}): UseTabsRetur
         newIndex = enabledTabIds.length - 1;
         break;
       default:
-        // Don't handle other keys
         return;
     }
 
     const newTabId = enabledTabIds[newIndex];
     selectTab(newTabId);
     
-    // Focus the new tab button
     tabRefs.current.get(newTabId)?.focus();
   }, [enabledTabIds, selectTab]);
 

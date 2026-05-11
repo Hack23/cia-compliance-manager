@@ -9,10 +9,8 @@ import { SecurityLevel } from "./cia";
 export function formatSecurityLevel(level?: string): string {
   if (!level) return "None";
   
-  // Handle special case for "Very High"
   if (level.toUpperCase() === "VERY HIGH") return "Very High";
   
-  // First character uppercase, rest lowercase
   return level.charAt(0).toUpperCase() + level.slice(1).toLowerCase();
 }
 
@@ -69,41 +67,31 @@ export function calculateOverallSecurityLevel(
   integrityLevel: SecurityLevel,
   confidentialityLevel: SecurityLevel
 ): SecurityLevel {
-  // Convert levels to numeric values
   const availValue = getSecurityLevelValue(availabilityLevel);
   const integValue = getSecurityLevelValue(integrityLevel);
   const confidValue = getSecurityLevelValue(confidentialityLevel);
   
-  // Special case: All levels are the same
   if (availabilityLevel === integrityLevel && integrityLevel === confidentialityLevel) {
     return availabilityLevel;
   }
   
-  // Special case for mixed security levels that include "None"
   const hasNone = availabilityLevel === "None" || integrityLevel === "None" || confidentialityLevel === "None";
   
   if (hasNone) {
-    // Count how many "None" values we have
     const noneCount = [availabilityLevel, integrityLevel, confidentialityLevel]
       .filter(level => level === "None").length;
     
-    // If all are "None", return "None"
     if (noneCount === 3) {
       return "None";
     }
     
-    // If majority are "None", return "None"
     if (noneCount >= 2) {
       return "None";
     }
     
-    // If only one is "None", check the other two
-    // If both remaining levels are High or above, return Low (cap at Low)
-    // Otherwise, calculate the average of non-None values
     const nonNoneValues = [availValue, integValue, confidValue].filter(val => val > 0);
     const avgNonNoneValue = nonNoneValues.reduce((sum, val) => sum + val, 0) / nonNoneValues.length;
     
-    // Cap at Low if the average would be higher
     if (avgNonNoneValue > 1) {
       return "Low";
     }
@@ -111,10 +99,8 @@ export function calculateOverallSecurityLevel(
     return "None";
   }
   
-  // Calculate average and round it to nearest integer
   const avgValue = Math.round((availValue + integValue + confidValue) / 3);
   
-  // Convert back to SecurityLevel
   return getSecurityLevelFromValue(avgValue);
 }
 
@@ -131,14 +117,12 @@ export function calculateRiskLevel(
   integrityLevel: SecurityLevel,
   confidentialityLevel: SecurityLevel
 ): string {
-  // Calculate overall security level first
   const overallLevel = calculateOverallSecurityLevel(
     availabilityLevel,
     integrityLevel,
     confidentialityLevel
   );
   
-  // Map security levels to risk levels
   switch (overallLevel) {
     case "None": return "Critical";
     case "Low": return "High";

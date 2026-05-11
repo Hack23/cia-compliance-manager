@@ -28,18 +28,15 @@ export function calculateROIEstimate(
   integrityLevel: SecurityLevel,
   confidentialityLevel: SecurityLevel,
 ): ROIEstimate {
-  // Calculate overall security level for consistent ROI estimation
   const securityLevel = calculateOverallSecurityLevel(
     availabilityLevel,
     integrityLevel,
     confidentialityLevel,
   );
 
-  // Convert security level to ROI key format (e.g., "Very High" -> "VERY_HIGH")
   const roiKey = securityLevel
     .toUpperCase()
     .replace(" ", "_") as keyof typeof roiEstimatesData;
 
-  // Return the ROI estimate from the existing data
   return roiEstimatesData[roiKey] || roiEstimatesData.MODERATE;
 }

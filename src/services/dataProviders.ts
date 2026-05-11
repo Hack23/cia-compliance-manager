@@ -7,7 +7,6 @@ import { CIADataProvider } from "../types/cia-services";
  */
 export function createDefaultDataProvider(): CIADataProvider {
   return {
-    // Mock component options for availability
     availabilityOptions: {
       None: {
         description: "No availability guarantees",
@@ -77,7 +76,6 @@ export function createDefaultDataProvider(): CIADataProvider {
       },
     },
 
-    // Mock component options for integrity
     integrityOptions: {
       None: {
         description: "No data integrity controls",
@@ -143,7 +141,6 @@ export function createDefaultDataProvider(): CIADataProvider {
       },
     },
 
-    // Mock component options for confidentiality
     confidentialityOptions: {
       None: {
         description: "No confidentiality controls",
@@ -203,7 +200,6 @@ export function createDefaultDataProvider(): CIADataProvider {
       },
     },
 
-    // Mock ROI estimates
     roiEstimates: {
       NONE: { returnRate: "0%", description: "No ROI" },
       LOW: { returnRate: "50%", description: "Low ROI" },

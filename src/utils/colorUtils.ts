@@ -61,7 +61,6 @@ export function getSecurityLevelColorPair(
 export function getSecurityLevelColorClass(
   level: SecurityLevel | string,
 ): string {
-  // Normalize the level to handle case variations
   const normalizedLevel =
     typeof level === "string"
       ? level.toLowerCase().trim()
@@ -91,7 +90,6 @@ export function getSecurityLevelColorClass(
 export function getSecurityLevelBackgroundClass(
   level: SecurityLevel | string,
 ): string {
-  // Normalize the level to handle case variations
   const normalizedLevel =
     typeof level === "string"
       ? level.toLowerCase().trim()
@@ -189,16 +187,13 @@ export function getSecurityLevelClass(level: SecurityLevel): string {
  * @returns Black or white based on contrast
  */
 export function getContrastColor(backgroundColor: string): string {
-  // Convert hex to RGB
   const hex = backgroundColor.replace("#", "");
   const r = parseInt(hex.substring(0, 2), 16);
   const g = parseInt(hex.substring(2, 4), 16);
   const b = parseInt(hex.substring(4, 6), 16);
 
-  // Calculate luminance
   const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
 
-  // Return black for light backgrounds, white for dark
   return luminance > 0.5 ? "#000000" : "#ffffff";
 }
 

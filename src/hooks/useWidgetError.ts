@@ -90,7 +90,6 @@ export function useWidgetError(widgetName: string): WidgetErrorState {
     } else if (typeof err === 'string') {
       return new Error(err);
     } else {
-      // Attempt to preserve error details for debugging
       let errorDetails: string;
       
       if (typeof err === 'object' && err !== null) {

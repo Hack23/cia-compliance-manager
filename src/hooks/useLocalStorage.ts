@@ -56,36 +56,25 @@ export function useLocalStorage<T>(
   key: string,
   initialValue: T
 ): [T, (value: T | ((prev: T) => T)) => void] {
-  // State to store our value
-  // Pass initial state function to useState so logic is only executed once
   const [storedValue, setStoredValue] = useState<T>(() => {
-    // SSR safety: return initial value if window is undefined
     if (typeof window === 'undefined') {
       return initialValue;
     }
     
     try {
-      // Get from local storage by key
       const item = window.localStorage.getItem(key);
-      // Parse stored json or return initialValue if none exists
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
-      // If error reading from localStorage, log and return initial value
       console.warn(`Error reading localStorage key "${key}":`, error);
       return initialValue;
     }
   });
 
-  // Return a wrapped version of useState's setter function that
-  // persists the new value to localStorage
   const setValue = useCallback((value: T | ((prev: T) => T)) => {
     try {
-      // Allow value to be a function like useState
       setStoredValue((prevValue) => {
         const valueToStore = value instanceof Function ? value(prevValue) : value;
         
-        // Save to local storage - wrapped in try/catch to handle QuotaExceededError
-        // and other storage errors without crashing the React state update
         if (typeof window !== 'undefined') {
           try {
             window.localStorage.setItem(key, JSON.stringify(valueToStore));
@@ -97,12 +86,10 @@ export function useLocalStorage<T>(
         return valueToStore;
       });
     } catch (error) {
-      // If error writing to localStorage, log but don't throw
       console.error(`Error saving to localStorage key "${key}":`, error);
     }
   }, [key]);
 
-  // Sync with changes to localStorage from other tabs/windows
   useEffect(() => {
     if (typeof window === 'undefined') {
       return;
@@ -118,7 +105,6 @@ export function useLocalStorage<T>(
       }
     };
 
-    // Listen for changes in other tabs/windows
     window.addEventListener('storage', handleStorageChange);
 
     return () => {

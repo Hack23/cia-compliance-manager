@@ -63,13 +63,11 @@ export function toErrorObject(err: unknown): Error {
   }
 
   if (err instanceof Object) {
-    // If the error is an object with a message property, use that
     if ("message" in err && typeof err.message === "string") {
       return new Error(err.message);
     }
   }
 
-  // For strings, numbers, etc.
   return new Error(String(err));
 }
 

@@ -51,7 +51,6 @@ export function getComplianceRequirementText(
       ? "Meets advanced compliance standards"
       : "Meets stringent compliance standards";
   }
-  // Very High
   return component === "availability"
     ? "Exceeds enterprise requirements"
     : component === "integrity"

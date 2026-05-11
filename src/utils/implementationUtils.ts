@@ -99,7 +99,6 @@ export function getImplementationDescription(
     }
   }
 
-  // availability
   switch (level) {
     case "None":
       return "No uptime guarantees or redundancy";

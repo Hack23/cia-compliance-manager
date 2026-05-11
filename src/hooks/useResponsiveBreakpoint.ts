@@ -54,22 +54,18 @@ function getBreakpoint(width: number): Breakpoint {
  */
 export function useResponsiveBreakpoint(): Breakpoint {
   const [breakpoint, setBreakpoint] = useState<Breakpoint>(() => {
-    // SSR safety: return desktop as default for server-side rendering
     if (typeof window === 'undefined') return 'desktop';
     return getBreakpoint(window.innerWidth);
   });
 
   useEffect(() => {
-    // Handler for window resize events
     const handleResize = () => {
       const width = window.innerWidth;
       setBreakpoint(getBreakpoint(width));
     };
 
-    // Add event listener
     window.addEventListener('resize', handleResize);
 
-    // Cleanup: remove event listener on unmount
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 

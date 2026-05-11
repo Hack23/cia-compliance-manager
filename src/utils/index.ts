@@ -162,7 +162,6 @@ export const calculateWidgetRiskLevel = (
   integrityLevel: SecurityLevel,
   confidentialityLevel: SecurityLevel
 ) => {
-  // Basic implementation based on average security level
   const levels: Record<string, number> = {
     None: 0,
     Low: 1,

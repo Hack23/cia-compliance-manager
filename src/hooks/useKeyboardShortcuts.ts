@@ -47,11 +47,9 @@ export function useKeyboardShortcuts(options: UseKeyboardShortcutsOptions): void
     stopPropagation = false,
   } = options;
 
-  // Use ref to avoid recreating handler on every render
   const shortcutsRef = useRef<ShortcutMap>(shortcuts);
   const optionsRef = useRef({ preventDefault, stopPropagation });
 
-  // Update refs when values change
   useEffect(() => {
     shortcutsRef.current = shortcuts;
     optionsRef.current = { preventDefault, stopPropagation };
@@ -61,31 +59,25 @@ export function useKeyboardShortcuts(options: UseKeyboardShortcutsOptions): void
    * Handle keyboard event and match against registered shortcuts
    */
   const handleKeyDown = useCallback((event: KeyboardEvent): void => {
-    // Skip if shortcuts are not supported or event should be ignored
     if (!areKeyboardShortcutsSupported() || shouldIgnoreKeyboardEvent(event)) {
       return;
     }
 
-    // Get the key combination from the event
     const keyCombination = getKeyCombination(event);
 
-    // Find matching shortcut
     const matchingShortcut = Object.values(shortcutsRef.current).find(shortcut => {
       if (shortcut.enabled === false) {
         return false;
       }
 
-      // Get platform-specific keys if available
       const shortcutKeys = getPlatformShortcut(
         shortcut.keys,
         shortcut.platformKeys
       );
 
-      // Check if keys match
       return shortcutsMatch(keyCombination, shortcutKeys);
     });
 
-    // Execute handler if match found
     if (matchingShortcut) {
       logger.debug('Keyboard shortcut triggered', {
         id: matchingShortcut.id,
@@ -111,7 +103,6 @@ export function useKeyboardShortcuts(options: UseKeyboardShortcutsOptions): void
     }
   }, []);
 
-  // Register and cleanup event listener
   useEffect(() => {
     if (!enabled || !areKeyboardShortcutsSupported()) {
       return;

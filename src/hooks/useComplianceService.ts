@@ -4,13 +4,30 @@ import { createEmptyCIADetails } from "../utils/serviceUtils";
 
 /**
  * Hook to access compliance service functionality
+ *
+ * ## Business Perspective
+ *
+ * Provides compliance status and framework validation capabilities for CIA security levels.
+ * Enables widgets to determine which compliance frameworks are satisfied based on
+ * selected security configurations. 📋
+ *
+ * @returns Object containing complianceService, isLoading state, and error state
+ *
+ * @example
+ * ```typescript
+ * const { complianceService, isLoading, error } = useComplianceService();
+ *
+ * if (!isLoading && complianceService) {
+ *   const status = complianceService.getComplianceStatus('High', 'High', 'High');
+ *   console.log(status?.compliantFrameworks);
+ * }
+ * ```
  */
 export function useComplianceService() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
   const complianceService = useMemo(() => {
-    // Create default empty options that satisfy the type requirements
     const emptySecurityLevelRecord = {
       None: createEmptyCIADetails(),
       Low: createEmptyCIADetails(),
@@ -19,7 +36,6 @@ export function useComplianceService() {
       "Very High": createEmptyCIADetails(),
     };
 
-    // Create minimal valid data provider for the service
     return new ComplianceServiceAdapter({
       availabilityOptions: emptySecurityLevelRecord,
       integrityOptions: emptySecurityLevelRecord,
@@ -39,9 +55,7 @@ export function useComplianceService() {
 
     const initializeService = async () => {
       try {
-        // Check if service exists first
         if (complianceService) {
-          // No need to call initialize as it doesn't exist
           if (isMounted) {
             setIsLoading(false);
           }
