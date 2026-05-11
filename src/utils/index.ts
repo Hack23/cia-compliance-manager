@@ -7,7 +7,6 @@
  * @packageDocumentation
  */
 
-// Import all utilities to help organize exports
 import {
   BUSINESS_IMPACT_CATEGORIES,
   RISK_LEVELS,
@@ -25,12 +24,11 @@ import * as typeGuards from "./typeGuards";
 import * as widgetUtils from "./widgetHelpers";
 import * as accessibilityUtils from "./accessibility";
 
-// Export individual utilities with explicit names to avoid conflicts
-
-// ===============================================================================
-// ACCESSIBILITY UTILITIES - WCAG 2.1 Level AA Compliance
-// ===============================================================================
-// ARIA helpers, keyboard navigation, screen reader support, and color contrast
+/**
+ * ACCESSIBILITY UTILITIES - WCAG 2.1 Level AA Compliance
+ *
+ * ARIA helpers, keyboard navigation, screen reader support, and color contrast
+ */
 export const {
   ARIA_ROLES,
   ARIA_LIVE,
@@ -50,10 +48,8 @@ export const {
   meetsContrastRequirement,
 } = accessibilityUtils;
 
-// Color utilities
 export const { getSecurityLevelColorClass } = colorUtils;
 
-// Add missing color utilities with appropriate fallbacks
 export const getColorForRiskLevel =
   colorUtils.getSecurityLevelColorClass ||
   ((_level: string) => `text-gray-600`);
@@ -75,7 +71,6 @@ export const getSeverityColor = (severity: string) =>
     ? "text-yellow-500"
     : "text-green-500";
 
-// Cost calculation utilities
 export const {
   calculateImplementationCost,
   calculateTotalSecurityCost,
@@ -83,10 +78,8 @@ export const {
   getRecommendedBudgetAllocation,
 } = costUtils;
 
-// Re-export CostResult type for npm consumers
 export type { CostResult } from "./costCalculationUtils";
 
-// Formatting utilities
 export const {
   formatBudgetPercentage,
   formatCurrency,
@@ -101,7 +94,6 @@ export const {
   toTitleCase,
 } = formatUtils;
 
-// Level value utilities
 export const {
   calculateOverallSecurityLevel: calculateOverallSecurityLevelFromValues,
   compareSecurityLevels,
@@ -111,7 +103,6 @@ export const {
   SECURITY_LEVEL_VALUES,
 } = levelUtils;
 
-// Risk utilities
 export const {
   calculateCombinedRiskLevel,
   calculateRiskScore,
@@ -124,7 +115,6 @@ export const {
   parseRiskLevel,
 } = riskUtils;
 
-// Security level utilities
 export const {
   calculateOverallSecurityLevel,
   asSecurityLevel,
@@ -141,7 +131,6 @@ export const {
   normalizeSecurityLevel,
 } = securityUtils;
 
-// Widget helper utilities
 export const {
   formatSecurityLevel: formatSecurityLevelFromWidget,
   getWidgetColumnSpan,
@@ -156,7 +145,6 @@ export const {
   WidgetLoading,
 } = widgetUtils;
 
-// Add missing widget utilities with appropriate implementations
 export const calculateWidgetRiskLevel = (
   availabilityLevel: SecurityLevel,
   integrityLevel: SecurityLevel,
@@ -192,7 +180,6 @@ export const formatSecurityMetric = (
   return `${prefix}${formattedValue}${suffix}`;
 };
 
-// Type guards
 export const {
   ensureArray,
   extractSecurityLevels,
@@ -222,18 +209,18 @@ export const {
   hasWidgetProps,
 } = typeGuards;
 
-// Error utilities
 export const { toErrorObject, formatError } = errorUtils;
 
-// Other exports
 export { BUSINESS_IMPACT_CATEGORIES, calculateRiskLevel, RISK_LEVELS };
 
-// Keyboard utilities
-// Note: Internal utilities like `resetPlatformCache()` are marked @internal
-// and should be imported directly from "./keyboardUtils" in tests/internal modules
-// to avoid exposing them as part of the public API surface.
+/**
+ * Keyboard utilities
+ *
+ * Note: Internal utilities like `resetPlatformCache()` are marked @internal
+ * and should be imported directly from "./keyboardUtils" in tests/internal modules
+ * to avoid exposing them as part of the public API surface.
+ */
 export * from "./keyboardUtils";
 
-// TailwindCSS class helpers for consistent widget styling
 export { cn, WidgetClasses } from "./tailwindClassHelpers";
 export type { WidgetClassKey } from "./tailwindClassHelpers";
