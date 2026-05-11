@@ -80,7 +80,6 @@ export function resetPlatformCache(): void {
  * ```
  */
 export function detectPlatform(): Platform {
-  // Return cached result if available
   if (cachedPlatform !== null) {
     return cachedPlatform;
   }
@@ -90,7 +89,6 @@ export function detectPlatform(): Platform {
     return cachedPlatform;
   }
   
-  // Use modern userAgentData API if available
   const nav = navigator as NavigatorWithUserAgentData;
   if ('userAgentData' in navigator && nav.userAgentData?.platform) {
     const platform = nav.userAgentData.platform.toUpperCase();
@@ -109,7 +107,6 @@ export function detectPlatform(): Platform {
     }
   }
   
-  // Fallback to navigator.platform for browsers without userAgentData support
   const platform = window.navigator.platform.toUpperCase();
   
   if (platform.indexOf(PLATFORM_DETECTION.MAC) >= 0) {
@@ -192,10 +189,8 @@ export function getKeyCombination(event: KeyboardEvent): string {
   const parts: string[] = [];
   const platform: Platform = detectPlatform();
   
-  // Add modifiers in consistent order
   if (event.ctrlKey) parts.push('ctrl');
   if (event.metaKey) {
-    // On Mac, metaKey is Command key; on Windows/Linux, it's Windows/Super key
     if (platform === 'mac') {
       parts.push('cmd');
     } else {
@@ -205,10 +200,8 @@ export function getKeyCombination(event: KeyboardEvent): string {
   if (event.shiftKey) parts.push('shift');
   if (event.altKey) parts.push('alt');
   
-  // Add the main key (lowercase for consistency)
   const key = event.key.toLowerCase();
   
-  // Handle special keys
   if (key === ' ') {
     parts.push('space');
   } else if (key === 'escape') {
@@ -251,12 +244,10 @@ export function normalizeShortcut(shortcut: string): string {
     }
   }
 
-  // Ensure modifiers follow the same canonical order as getKeyCombination
   const orderedModifiers: string[] = modifierOrder.filter(
     (modifier: string) => modifiers.includes(modifier),
   );
 
-  // Sort non-modifier keys for determinism; typically there is only one main key
   const orderedOthers: string[] = [...others].sort();
 
   return [...orderedModifiers, ...orderedOthers].join('+');
@@ -270,7 +261,6 @@ export function normalizeShortcut(shortcut: string): string {
  * @returns True if shortcuts match
  */
 export function shortcutsMatch(shortcut1: string, shortcut2: string): boolean {
-  // Handle cmd/meta/ctrl equivalence for cross-platform matching
   const normalized1 = normalizeShortcut(
     shortcut1.replace(/cmd/g, 'ctrl').replace(/meta/g, 'ctrl')
   );
@@ -296,13 +286,11 @@ export function formatShortcut(keys: string, platform?: Platform): string {
     .map(key => {
       const lowerKey = key.toLowerCase();
       
-      // Check if key has platform-specific display name
       if (lowerKey in KEY_DISPLAY_NAMES) {
         const keyName = lowerKey as keyof typeof KEY_DISPLAY_NAMES;
         return KEY_DISPLAY_NAMES[keyName][targetPlatform];
       }
       
-      // Capitalize first letter for other keys
       return key.charAt(0).toUpperCase() + key.slice(1);
     })
     .join(targetPlatform === 'mac' ? '' : '+');
@@ -355,17 +343,14 @@ export function isInputElement(element: Element | null): boolean {
 export function shouldIgnoreKeyboardEvent(event: KeyboardEvent): boolean {
   const target = event.target as Element | null;
   
-  // Check if key should bypass input check (e.g., Escape)
   if (BYPASS_INPUT_CHECK_KEYS.includes(event.key as typeof BYPASS_INPUT_CHECK_KEYS[number])) {
     return false;
   }
   
-  // Ignore if focused on input element
   if (target && isInputElement(target)) {
     return true;
   }
   
-  // Ignore if contenteditable
   if (target && target.getAttribute && target.getAttribute('contenteditable') === 'true') {
     return true;
   }
@@ -403,7 +388,6 @@ export function getShortcutAriaLabel(keys: string): string {
   const parts = keys.split('+').map(key => {
     const lowerKey = key.toLowerCase();
     
-    // Use full names for screen readers
     if (lowerKey === 'ctrl') return 'Control';
     if (lowerKey === 'cmd') return 'Command';
     if (lowerKey === 'shift') return 'Shift';

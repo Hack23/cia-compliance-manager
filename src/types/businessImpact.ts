@@ -380,9 +380,7 @@ import {
 
 // Fix the format to match the expected structure in tests
 export const BUSINESS_CONSIDERATIONS = {
-  // Use spread operator to copy all properties from BC
   ...BC,
-  // Add these properties with a safer approach to access potential properties
   AVAILABILITY: {
     NONE: [],
     LOW: [],

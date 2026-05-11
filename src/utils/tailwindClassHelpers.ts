@@ -33,7 +33,6 @@
  */
 export const WidgetClasses = {
   // ========================================
-  // Container patterns
   // ========================================
   
   /**
@@ -49,7 +48,6 @@ export const WidgetClasses = {
   containerHover: 'hover:shadow-lg transition-shadow duration-normal',
   
   // ========================================
-  // Section patterns
   // ========================================
   
   /**
@@ -65,7 +63,6 @@ export const WidgetClasses = {
   sectionBorder: 'border-l-4 border-primary pl-md',
   
   // ========================================
-  // Typography patterns
   // ========================================
   
   /**
@@ -100,7 +97,6 @@ export const WidgetClasses = {
   labelNormal: 'text-caption font-medium text-gray-500 dark:text-gray-500 tracking-wide',
   
   // ========================================
-  // Card patterns
   // ========================================
   
   /**
@@ -122,7 +118,6 @@ export const WidgetClasses = {
   cardInteractive: 'hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer transition-colors duration-fast',
   
   // ========================================
-  // Button patterns
   // ========================================
   
   /**
@@ -138,7 +133,6 @@ export const WidgetClasses = {
   buttonSecondary: 'bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 text-gray-800 dark:text-gray-100 font-medium py-sm px-md rounded-md transition-colors duration-fast focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',
   
   // ========================================
-  // Grid patterns
   // ========================================
   
   /**
@@ -160,7 +154,6 @@ export const WidgetClasses = {
   flexRow: 'flex flex-wrap gap-sm md:gap-md',
   
   // ========================================
-  // Responsive patterns
   // ========================================
   
   /**
@@ -182,7 +175,6 @@ export const WidgetClasses = {
   textResponsive: 'text-body md:text-body-lg',
   
   // ========================================
-  // State patterns
   // ========================================
   
   /**
@@ -204,7 +196,6 @@ export const WidgetClasses = {
   focusVisible: 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
   
   // ========================================
-  // Badge patterns
   // ========================================
   
   /**
@@ -239,7 +230,6 @@ export const WidgetClasses = {
   badgeNeutral: 'bg-neutral text-white',
   
   // ========================================
-  // Divider patterns
   // ========================================
   
   /**

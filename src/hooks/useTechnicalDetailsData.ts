@@ -29,13 +29,11 @@ export function useTechnicalDetailsData(
   confidentialityLevel: SecurityLevel,
   ciaContentService: unknown
 ) {
-  // Helper to convert complexity string to numeric value for UI
   const getComplexityValue = (complexity: string): number => {
     const value = getSecurityLevelValue(complexity as SecurityLevel);
     return value * 25;
   };
 
-  // Get technical details for each component with error handling
   const confidentialityDetails = useMemo(() => {
     try {
       if (isNullish(ciaContentService)) {
@@ -55,7 +53,6 @@ export function useTechnicalDetailsData(
     }
   }, [ciaContentService, confidentialityLevel]);
 
-  // Get integrity technical details
   const integrityDetails = useMemo(() => {
     try {
       if (isNullish(ciaContentService)) {
@@ -75,7 +72,6 @@ export function useTechnicalDetailsData(
     }
   }, [ciaContentService, integrityLevel]);
 
-  // Get availability technical details
   const availabilityDetails = useMemo(() => {
     try {
       if (isNullish(ciaContentService)) {
@@ -95,7 +91,6 @@ export function useTechnicalDetailsData(
     }
   }, [ciaContentService, availabilityLevel]);
 
-  // Calculate component complexities using riskUtils
   const confidentialityComplexity = useMemo(() => {
     const complexity = getImplementationComplexity(
       confidentialityLevel,

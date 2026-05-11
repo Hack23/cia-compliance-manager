@@ -36,7 +36,6 @@ export function useSecuritySummaryData(
   ciaContentService: unknown,
   complianceService: unknown
 ) {
-  // Calculate overall security level
   const overallSecurityLevel = useMemo(
     () =>
       calculateOverallSecurityLevel(
@@ -47,13 +46,11 @@ export function useSecuritySummaryData(
     [availabilityLevel, integrityLevel, confidentialityLevel]
   );
 
-  // Get security level description
   const securityLevelDescription = useMemo(
     () => getSecurityLevelDescription(overallSecurityLevel),
     [overallSecurityLevel]
   );
 
-  // Calculate security score (0-100)
   const securityScore = useMemo(() => {
     const availabilityValue = getSecurityLevelValue(availabilityLevel);
     const integrityValue = getSecurityLevelValue(integrityLevel);
@@ -65,7 +62,6 @@ export function useSecuritySummaryData(
     return Math.round((totalValue / maxPossibleValue) * 100);
   }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Calculate risk level based on security score
   const riskLevel = useMemo(() => {
     if (securityScore >= 80) return "Low Risk";
     if (securityScore >= 60) return "Medium Risk";
@@ -73,7 +69,6 @@ export function useSecuritySummaryData(
     return "Critical Risk";
   }, [securityScore]);
 
-  // Get security classification
   const securityClassification = useMemo((): string => {
     if (!isNullish(ciaContentService)) {
       try {
@@ -87,7 +82,6 @@ export function useSecuritySummaryData(
       }
     }
 
-    // Fallback classification
     switch (overallSecurityLevel) {
       case "None":
         return "Minimal Security";
@@ -104,7 +98,6 @@ export function useSecuritySummaryData(
     }
   }, [ciaContentService, overallSecurityLevel]);
 
-  // Get data classification
   const dataClassification = useMemo((): string => {
     if (
       !isNullish(ciaContentService) &&
@@ -120,7 +113,6 @@ export function useSecuritySummaryData(
       }
     }
 
-    // Fallback classification
     switch (confidentialityLevel) {
       case "None":
         return "Public Data";
@@ -137,7 +129,6 @@ export function useSecuritySummaryData(
     }
   }, [ciaContentService, confidentialityLevel]);
 
-  // Get implementation complexity
   const implementationComplexity = useMemo((): string => {
     if (
       !isNullish(ciaContentService) &&
@@ -155,7 +146,6 @@ export function useSecuritySummaryData(
       }
     }
 
-    // Fallback calculation
     const levelValues: Record<SecurityLevel, number> = {
       None: 0,
       Low: 1,
@@ -182,7 +172,6 @@ export function useSecuritySummaryData(
     confidentialityLevel,
   ]);
 
-  // Get compliance status
   const complianceStatus = useMemo((): ComplianceStatusType | null => {
     try {
       if (isNullish(complianceService)) return null;
@@ -193,7 +182,6 @@ export function useSecuritySummaryData(
         confidentialityLevel
       );
 
-      // Ensure we have proper arrays
       if (status) {
         return {
           ...status,
@@ -216,7 +204,6 @@ export function useSecuritySummaryData(
     confidentialityLevel,
   ]);
 
-  // Calculate business maturity level based on security score
   const businessMaturityLevel = useMemo(() => {
     if (securityScore >= 80) return "Strategic";
     if (securityScore >= 60) return "Advanced";
@@ -224,7 +211,6 @@ export function useSecuritySummaryData(
     return "Basic";
   }, [securityScore]);
 
-  // Get business maturity description
   const businessMaturityDescription = useMemo(() => {
     switch (businessMaturityLevel) {
       case "Strategic":
@@ -240,7 +226,6 @@ export function useSecuritySummaryData(
     }
   }, [businessMaturityLevel]);
 
-  // Get cost details using standardized cost calculation utility
   const costDetails = useMemo(() => {
     return calculateTotalSecurityCost(
       availabilityLevel,
@@ -251,7 +236,6 @@ export function useSecuritySummaryData(
     );
   }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Compute implementation time
   const implementationTime = useMemo((): string => {
     try {
       if (
@@ -269,14 +253,12 @@ export function useSecuritySummaryData(
       console.error("Error fetching implementation time:", err);
     }
 
-    // Fallback based on security score
     if (securityScore >= 80) return "3-6 months";
     if (securityScore >= 60) return "2-4 months";
     if (securityScore >= 40) return "1-2 months";
     return "2-4 weeks";
   }, [ciaContentService, securityScore, availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Compute resource requirements
   const requiredResources = useMemo((): string => {
     try {
       if (
@@ -294,14 +276,12 @@ export function useSecuritySummaryData(
       console.error("Error fetching resource requirements:", err);
     }
 
-    // Fallback based on security score
     if (securityScore >= 80) return "Specialized Team";
     if (securityScore >= 60) return "Dedicated Team";
     if (securityScore >= 40) return "Small Team";
     return "Individual Effort";
   }, [ciaContentService, securityScore, availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Compute ROI estimate
   const roiEstimate = useMemo(() => {
     try {
       const estimate = calculateROIEstimate(

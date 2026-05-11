@@ -69,7 +69,6 @@ function normalizeSecurityLevel(
 ): SecurityLevel {
   if (!level) return "None";
 
-  // Handle case-insensitive matching
   const normalizedLevel = typeof level === "string" ? level.trim() : "";
 
   if (/^none$/i.test(normalizedLevel)) return "None";
@@ -78,7 +77,6 @@ function normalizeSecurityLevel(
   if (/^high$/i.test(normalizedLevel)) return "High";
   if (/^very\s*high$/i.test(normalizedLevel)) return "Very High";
 
-  // Default to "None" if no match
   return "None";
 }
 
@@ -90,20 +88,16 @@ export function calculateImplementationCost(
   orgSize: OrganizationSize = "medium",
   industry: Industry = "general"
 ): CostResult {
-  // Normalize the security level and handle case variations
   const normalizedLevel = normalizeSecurityLevel(securityLevel);
 
-  // Get base costs for the normalized level
   const baseCosts = BASE_IMPLEMENTATION_COSTS[normalizedLevel] || {
     capex: 0,
     opex: 0,
   };
 
-  // Get scaling factors
   const sizeFactor = getSizeFactor(orgSize);
   const industryFactor = getIndustryFactor(industry);
 
-  // Apply factors to base costs
   return {
     capex: Math.round(baseCosts.capex * sizeFactor * industryFactor),
     opex: Math.round(baseCosts.opex * sizeFactor * industryFactor),
@@ -172,24 +166,18 @@ export function calculateSecurityROI(
   paybackPeriodMonths: number;
   costAvoidance: number;
 } {
-  // Risk reduction as decimal
   const riskReduction = riskReductionPercent / 100;
 
-  // Annual cost avoidance
   const annualCostAvoidance = potentialLoss * riskReduction;
 
-  // Total cost avoidance over timeframe
   const costAvoidance = annualCostAvoidance * timeframeYears;
 
-  // ROI calculation
   const roi = securityCost > 0
     ? (costAvoidance - securityCost) / securityCost
     : costAvoidance > 0 ? Infinity : 0;
 
-  // ROI as percentage
   const roiPercentage = `${Math.round(roi * 100)}%`;
 
-  // Payback period in months - Fix floating-point precision by rounding to 1 decimal
   const paybackPeriodMonths = annualCostAvoidance > 0
     ? Number(((securityCost / annualCostAvoidance) * 12).toFixed(1))
     : Infinity;
@@ -215,7 +203,6 @@ export function getRecommendedBudgetAllocation(
   integrity: number;
   confidentiality: number;
 } {
-  // Convert security levels to numeric values
   const availabilityValue = getSecurityLevelValue(availabilityLevel);
   const integrityValue = getSecurityLevelValue(integrityLevel);
   const confidentialityValue = getSecurityLevelValue(confidentialityLevel);
@@ -223,7 +210,6 @@ export function getRecommendedBudgetAllocation(
   const totalValue = availabilityValue + integrityValue + confidentialityValue;
 
   if (totalValue === 0) {
-    // If all None, divide equally
     return {
       availability: Math.round(totalBudget / 3),
       integrity: Math.round(totalBudget / 3),
@@ -231,7 +217,6 @@ export function getRecommendedBudgetAllocation(
     };
   }
 
-  // Allocate proportionally
   const availabilityBudget = Math.round(
     (availabilityValue / totalValue) * totalBudget
   );
