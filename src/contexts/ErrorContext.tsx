@@ -151,10 +151,8 @@ export const ErrorProvider: React.FC<ErrorProviderProps> = ({
    * Add an error to tracking
    */
   const addError = useCallback((error: Error, context?: Record<string, unknown>) => {
-    // Log error using error service
     errorService.logError(error, context);
 
-    // Create error entry
     const errorEntry: ErrorEntry = {
       id: generateErrorId(),
       error,
@@ -164,7 +162,6 @@ export const ErrorProvider: React.FC<ErrorProviderProps> = ({
       context,
     };
 
-    // Add to tracked errors (limit to maxErrors)
     setErrors(prevErrors => {
       const newErrors = [errorEntry, ...prevErrors];
       return newErrors.slice(0, maxErrors);
@@ -198,7 +195,6 @@ export const ErrorProvider: React.FC<ErrorProviderProps> = ({
    */
   const hideToast = useCallback(() => {
     setIsToastVisible(false);
-    // Clear config after animation completes
     setTimeout(() => {
       setToastConfig(null);
     }, 300);

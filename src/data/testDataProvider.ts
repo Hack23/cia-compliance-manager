@@ -15,7 +15,6 @@ import {
  * This provides minimum viable data for unit testing
  */
 export function createTestDataProvider(): CIADataProvider {
-  // Create a minimal data provider with required properties
   const dataProvider: CIADataProvider = {
     availabilityOptions: enhanceAvailabilityOptions(availabilityOptions),
     integrityOptions: enhanceIntegrityOptions(integrityOptions),
@@ -24,7 +23,6 @@ export function createTestDataProvider(): CIADataProvider {
     ),
     roiEstimates: createTestROIEstimates(),
 
-    // Add required functions
     getDefaultSecurityIcon: getDefaultSecurityIcon,
     getDefaultValuePoints: getDefaultValuePoints,
     getDefaultExpertiseLevel: getDefaultExpertiseLevel,
@@ -102,17 +100,14 @@ function enhanceAvailabilityOptions(
 ): Record<SecurityLevel, CIADetails> {
   const result: Record<SecurityLevel, CIADetails> = { ...options };
 
-  // Add required properties to each security level
   Object.keys(result).forEach((level) => {
     const securityLevel = level as SecurityLevel;
-    // Add availability-specific metrics
     result[securityLevel] = {
       ...result[securityLevel],
       uptime: getUptimeForLevel(securityLevel),
       rto: getRtoForLevel(securityLevel),
       rpo: getRpoForLevel(securityLevel),
       mttr: getMttrForLevel(securityLevel),
-      // Add business impact details
       businessImpactDetails: {
         summary: `Business impact summary for ${securityLevel} availability`,
         financial: {
@@ -128,7 +123,6 @@ function enhanceAvailabilityOptions(
           riskLevel: getRiskLevelForSecurityLevel(securityLevel),
         },
       },
-      // Add technical implementation details
       technicalImplementation: {
         description: `Technical implementation for ${securityLevel} availability`,
         implementationSteps: [
@@ -156,7 +150,6 @@ function enhanceIntegrityOptions(
 ): Record<SecurityLevel, CIADetails> {
   const result: Record<SecurityLevel, CIADetails> = { ...options };
 
-  // Map of validation methods for each level to match test expectations
   const validationMethods: Record<SecurityLevel, string> = {
     None: "None",
     Low: "Manual checks",
@@ -165,14 +158,11 @@ function enhanceIntegrityOptions(
     "Very High": "Blockchain/distributed ledger", // Fixed to match test expectations
   };
 
-  // Add required properties to each security level
   Object.keys(result).forEach((level) => {
     const securityLevel = level as SecurityLevel;
-    // Add integrity-specific properties
     result[securityLevel] = {
       ...result[securityLevel],
       validationMethod: validationMethods[securityLevel],
-      // Add business impact details
       businessImpactDetails: {
         summary: `Business impact summary for ${securityLevel} integrity`,
         financial: {
@@ -188,7 +178,6 @@ function enhanceIntegrityOptions(
           riskLevel: getRiskLevelForSecurityLevel(securityLevel),
         },
       },
-      // Add technical implementation details
       technicalImplementation: {
         description: `Technical implementation for ${securityLevel} integrity`,
         implementationSteps: [
@@ -216,7 +205,6 @@ function enhanceConfidentialityOptions(
 ): Record<SecurityLevel, CIADetails> {
   const result: Record<SecurityLevel, CIADetails> = { ...options };
 
-  // Map of protection methods for each level to match test expectations exactly
   const protectionMethods: Record<SecurityLevel, string> = {
     None: "None",
     Low: "Basic access control", // Already fixed
@@ -225,14 +213,11 @@ function enhanceConfidentialityOptions(
     "Very High": "Military-grade encryption with zero-trust", // Fixed to match test
   };
 
-  // Add required properties to each security level
   Object.keys(result).forEach((level) => {
     const securityLevel = level as SecurityLevel;
-    // Add confidentiality-specific properties
     result[securityLevel] = {
       ...result[securityLevel],
       protectionMethod: protectionMethods[securityLevel],
-      // Add business impact details
       businessImpactDetails: {
         summary: `Business impact summary for ${securityLevel} confidentiality`,
         financial: {
@@ -249,7 +234,6 @@ function enhanceConfidentialityOptions(
           reputationalImpact: `Reputational impact details for ${securityLevel} confidentiality`,
         },
       },
-      // Add technical implementation details
       technicalImplementation: {
         description: `Technical implementation for ${securityLevel} confidentiality`,
         implementationSteps: [
@@ -428,29 +412,24 @@ function getExpertiseForLevel(level: SecurityLevel): string {
   return expertise[level] || "Unknown";
 }
 
-// Named export for the class
 export class TestDataProvider implements CIADataProvider {
-  // Implementation of the CIADataProvider interface
   availabilityOptions: Record<SecurityLevel, CIADetails>;
   integrityOptions: Record<SecurityLevel, CIADetails>;
   confidentialityOptions: Record<SecurityLevel, CIADetails>;
   roiEstimates: ROIEstimatesMap;
 
-  // Add required functions with explicit types
   getDefaultSecurityIcon: (level: SecurityLevel) => string;
   getDefaultValuePoints: (level: SecurityLevel) => string[];
   getDefaultExpertiseLevel: (level: SecurityLevel) => string;
   getProtectionLevel: (level: SecurityLevel) => string;
 
   constructor() {
-    // Initialize using the createTestDataProvider function
     const provider = createTestDataProvider();
     this.availabilityOptions = provider.availabilityOptions;
     this.integrityOptions = provider.integrityOptions;
     this.confidentialityOptions = provider.confidentialityOptions;
     this.roiEstimates = provider.roiEstimates;
 
-    // Initialize the required functions with fallbacks if not provided
     this.getDefaultSecurityIcon =
       provider.getDefaultSecurityIcon || getDefaultSecurityIcon;
     this.getDefaultValuePoints =

@@ -395,14 +395,12 @@ export function getBusinessImpact(
   component: CIAComponent,
   level: SecurityLevel
 ): BusinessImpactDetail {
-  // Validate inputs
   if (!isValidCIAComponent(component)) {
     throw new Error(`Invalid CIA component: ${component}`);
   }
 
   let impactData: RiskImpact;
 
-  // Get the right impact map for the component
   switch (component) {
     case "availability":
       impactData = AVAILABILITY_RISK_IMPACTS[level];
@@ -417,7 +415,6 @@ export function getBusinessImpact(
       impactData = AVAILABILITY_RISK_IMPACTS[level];
   }
 
-  // Convert RiskImpact to BusinessImpactDetail
   return {
     description: impactData.description,
     riskLevel: impactData.level,
@@ -473,7 +470,6 @@ export function calculateBusinessImpactLevel(
   const integrityImpact = impactMap[integrityLevel] ?? 4;
   const confidentialityImpact = impactMap[confidentialityLevel] ?? 4;
 
-  // Calculate weighted average, with higher weight on confidentiality
   const weightedAverage =
     (availabilityImpact + integrityImpact + confidentialityImpact * 1.5) / 3.5;
   const roundedImpact = Math.round(weightedAverage);
@@ -486,7 +482,6 @@ export function calculateBusinessImpactLevel(
     "Critical",
   ];
 
-  // Ensure the index is within bounds
   const clampedIndex = Math.max(0, Math.min(4, roundedImpact));
   return impactLevels[clampedIndex] ?? "Critical";
 }
