@@ -1,8 +1,12 @@
 /**
  * Constants used by widget components
+ *
+ * @module components/widgets/constants
  */
 
-// Compliance status values
+/**
+ * Human-readable compliance status message strings keyed by compliance level
+ */
 export const COMPLIANCE_STATUS = {
   FULLY_COMPLIANT: "Meets all compliance requirements",
   SUBSTANTIALLY_COMPLIANT: "Meets most compliance requirements",
@@ -11,7 +15,9 @@ export const COMPLIANCE_STATUS = {
   NON_COMPLIANT: "Does not meet compliance requirements"
 };
 
-// Test IDs for compliance status widget
+/**
+ * Test IDs for the ComplianceStatusWidget elements
+ */
 export const COMPLIANCE_STATUS_TEST_IDS = {
   WIDGET: "compliance-status-widget",
   OVERALL_STATUS: "compliance-overall-status",
@@ -22,5 +28,3 @@ export const COMPLIANCE_STATUS_TEST_IDS = {
   FRAMEWORK_ITEM: "compliance-framework-item",
   REMEDIATION_STEP: "compliance-remediation-step"
 };
-
-// Don't re-export from itself, which causes circular dependency

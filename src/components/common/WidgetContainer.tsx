@@ -4,8 +4,8 @@ export interface WidgetContainerProps {
   title: string;
   children: React.ReactNode;
   isLoading?: boolean;
-  loading?: boolean; // For backward compatibility
-  error?: string | null | Error; // Accept Error objects too
+  loading?: boolean;
+  error?: string | null | Error;
   className?: string;
   testId?: string;
   errorContent?: React.ReactNode;
@@ -26,7 +26,7 @@ const WidgetContainer: React.FC<WidgetContainerProps> = ({
   title,
   children,
   isLoading = false,
-  loading = false, // Accept loading prop for backward compatibility
+  loading = false,
   error = null,
   className = '',
   testId,
@@ -34,10 +34,8 @@ const WidgetContainer: React.FC<WidgetContainerProps> = ({
   icon,
   actions
 }) => {
-  // For backward compatibility - support older code using "loading" prop
   const isLoadingState = isLoading || loading;
   
-  // Create unique test IDs for different widget states
   const containerTestId = error 
     ? `widget-container-error${testId ? `-${testId}` : ''}` 
     : isLoadingState 
@@ -47,13 +45,11 @@ const WidgetContainer: React.FC<WidgetContainerProps> = ({
   const spinnerTestId = `widget-spinner${testId ? `-${testId}` : ''}`;
   const errorTestId = `test-widget-error${testId ? `-${testId}` : ''}`;
 
-  // Convert Error objects to strings
   let errorMessage: string | null = null;
   if (error !== null) {
     errorMessage = error instanceof Error ? error.message : String(error);
   }
 
-  // Handle error state
   if (errorMessage) {
     return (
       <div className={`widget-container widget-error border border-error rounded-md shadow-md ${className}`} data-testid={containerTestId}>
@@ -73,7 +69,6 @@ const WidgetContainer: React.FC<WidgetContainerProps> = ({
     );
   }
 
-  // Handle loading or normal state
   return (
     <div className={`widget-container border border-neutral-light dark:border-neutral-dark rounded-md shadow-md ${className}`} data-testid={containerTestId}>
       <div className="widget-header bg-neutral-light/10 dark:bg-neutral-dark/20 px-md py-md sm:px-lg sm:py-lg border-b border-neutral-light dark:border-neutral-dark rounded-t-md flex justify-between items-center">

@@ -13,7 +13,6 @@
  * @packageDocumentation
  */
 
-// Widget Components - Keep these since they are used in the simplified app
 export { default as BusinessImpactAnalysisWidget } from "./widgets/assessmentcenter/BusinessImpactAnalysisWidget";
 export { default as SecurityLevelWidget } from "./widgets/assessmentcenter/SecurityLevelWidget";
 export { default as SecuritySummaryWidget } from "./widgets/assessmentcenter/SecuritySummaryWidget";
@@ -27,8 +26,6 @@ export { default as SecurityResourcesWidget } from "./widgets/implementationguid
 export { default as SecurityVisualizationWidget } from "./widgets/implementationguide/SecurityVisualizationWidget";
 export { default as TechnicalDetailsWidget } from "./widgets/implementationguide/TechnicalDetailsWidget";
 
-// Common Components
-// Only include components that exist and are actively used
 export { default as BusinessImpactSection } from "./common/BusinessImpactSection";
 export { default as ErrorMessage } from "./common/ErrorMessage";
 export { KeyValuePair } from "./common/KeyValuePair";
@@ -41,13 +38,10 @@ export { default as StatusBadge } from "./common/StatusBadge";
 export { default as WidgetErrorBoundary } from "./common/WidgetErrorBoundary";
 export { default as WidgetSection } from "./common/WidgetSection";
 
-// Charts
 export { default as RadarChart } from "./charts/RadarChart";
 
-// Export widget components that are actively used
 export * from "./widgets";
 
-// Import and re-export only the component prop types that are actually used
 export type {
   BusinessImpactSectionProps,
   BusinessRiskDisplayProps,

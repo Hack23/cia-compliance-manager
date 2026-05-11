@@ -1,5 +1,5 @@
 import React from "react";
-import { StatusType } from "../../types/common/StatusTypes"; // Add this import
+import { StatusType } from "../../types/common/StatusTypes";
 import { getStatusBadgeForRiskLevel } from "../../utils/riskUtils";
 import StatusBadge from "./StatusBadge";
 
@@ -34,7 +34,6 @@ const RiskLevelBadge: React.FC<RiskLevelBadgeProps> = ({
   testId = "risk-level-badge",
   showIcon = false,
 }) => {
-  // Handle undefined risk level
   if (!risk) {
     return (
       <StatusBadge status="neutral" className={className} testId={testId}>
@@ -43,11 +42,8 @@ const RiskLevelBadge: React.FC<RiskLevelBadgeProps> = ({
     );
   }
 
-  // Normalize the risk level text
   const formattedRisk = risk.includes("Risk") ? risk : `${risk} Risk`;
 
-  // Get the appropriate badge status based on risk level
-  // Use type assertion to ensure it's recognized as a valid StatusType
   const status = getStatusBadgeForRiskLevel(risk) as StatusType;
 
   return (

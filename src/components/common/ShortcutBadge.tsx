@@ -9,7 +9,6 @@ import { ShortcutBadgeProps } from '../../types/keyboard';
 import { splitShortcutKeys, detectPlatform } from '../../utils/keyboardUtils';
 import { KEYBOARD_TEST_IDS } from '../../constants/keyboardShortcuts';
 
-// Size classes defined outside component to avoid recreation on each render
 const SIZE_CLASSES = {
   sm: 'px-1.5 py-0.5 text-xs',
   md: 'px-2 py-1 text-sm',
@@ -30,7 +29,6 @@ export const ShortcutBadge: React.FC<ShortcutBadgeProps> = React.memo(({
   className = '',
   platformSpecific = true,
 }) => {
-  // detectPlatform is already cached at module level
   const platform = platformSpecific ? detectPlatform() : 'windows';
   const keys = splitShortcutKeys(shortcut, platform);
 

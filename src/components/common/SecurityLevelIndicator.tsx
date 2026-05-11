@@ -37,7 +37,6 @@ const SecurityLevelIndicator: React.FC<SecurityLevelIndicatorProps> = ({
   className = "",
   testId,
 }) => {
-  // Determine color based on level
   const getColor = (): string => {
     switch (level) {
       case "None":
@@ -55,7 +54,6 @@ const SecurityLevelIndicator: React.FC<SecurityLevelIndicatorProps> = ({
     }
   };
 
-  // Determine size classes
   const getSizeClasses = (): string => {
     switch (size) {
       case "sm":

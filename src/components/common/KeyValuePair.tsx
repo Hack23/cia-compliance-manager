@@ -24,7 +24,7 @@ interface KeyValuePairProps {
   
   keyClassName?: string;
   valueClassName?: string;
-  labelClassName?: string; // Add this missing property
+  labelClassName?: string;
   iconPrefix?: React.ReactNode;
 }
 
@@ -46,7 +46,7 @@ function KeyValuePair({
   className = "",
   keyClassName = "",
   valueClassName = "",
-  labelClassName = "", // Initialize with empty string
+  labelClassName = "",
   testId,
   iconPrefix,
 }: KeyValuePairProps): React.ReactElement {

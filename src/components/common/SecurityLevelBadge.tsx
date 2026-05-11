@@ -50,7 +50,6 @@ const SecurityLevelBadge: React.FC<SecurityLevelBadgeProps> = ({
   className = '',
   testId
 }) => {
-  // Default color classes based on security level if not provided
   const defaultColorClass = () => {
     switch (level) {
       case 'None':
@@ -68,7 +67,6 @@ const SecurityLevelBadge: React.FC<SecurityLevelBadgeProps> = ({
     }
   };
 
-  // Default text classes based on security level if not provided
   const defaultTextClass = () => {
     switch (level) {
       case 'None':

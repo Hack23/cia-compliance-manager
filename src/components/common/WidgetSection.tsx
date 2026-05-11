@@ -53,7 +53,6 @@ export const WidgetSection: React.FC<WidgetSectionProps> = ({
   ariaLabelledBy,
   variant = 'default',
 }) => {
-  // Variant color classes for borders and backgrounds - Tailwind only
   const variantClasses = {
     default: 'border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800',
     primary: 'border-primary-light dark:border-primary-dark bg-primary-light/10 dark:bg-primary-dark/20',
@@ -63,7 +62,6 @@ export const WidgetSection: React.FC<WidgetSectionProps> = ({
     error: 'border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20',
   };
 
-  // Generate unique heading ID to avoid circular reference
   const headingId = ariaLabelledBy || `${testId}-heading`;
 
   return (
