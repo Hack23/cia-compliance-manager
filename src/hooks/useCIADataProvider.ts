@@ -13,18 +13,15 @@ export const useCIADataProvider = () => {
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // Initialize the data provider
   const initDataProvider = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
 
-      // Import the createDefaultDataProvider dynamically to avoid circular dependencies
       const { createDefaultDataProvider } = await import(
         "../services/dataProviders"
       );
 
-      // Create a default data provider
       const provider = createDefaultDataProvider();
       setDataProvider(provider);
     } catch (err) {
@@ -40,7 +37,6 @@ export const useCIADataProvider = () => {
     }
   }, []);
 
-  // Initialize the data provider when the component using this hook mounts
   useEffect(() => {
     initDataProvider();
   }, [initDataProvider]);

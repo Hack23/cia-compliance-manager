@@ -16,16 +16,13 @@ export const useSecurityMetricsService = () => {
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // Use the data provider if available
   const { dataProvider } = useCIADataProvider();
 
-  // Initialize the security metrics service
   const initService = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
 
-      // Create a new security metrics service with the data provider
       const service = dataProvider
         ? createSecurityMetricsService(dataProvider)
         : createSecurityMetricsService();
@@ -44,7 +41,6 @@ export const useSecurityMetricsService = () => {
     }
   }, [dataProvider]);
 
-  // Initialize the service when the component using this hook mounts
   useEffect(() => {
     initService();
   }, [initService]);
