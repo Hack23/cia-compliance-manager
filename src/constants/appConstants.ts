@@ -1,24 +1,19 @@
-// App constants used by both components and tests
-// Centralized to avoid duplication and make tests more stable
-
-// Import from the shared risk constants file
-import { SecurityLevel } from "../types/cia"; // Import SecurityLevel only
+import { SecurityLevel } from "../types/cia";
 import { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS } from "./riskConstants";
-// Import CIADetails from the correct module
 import { CIADetails } from "../types/cia-services";
-// Import the UI constants for clean references
 import { getComponentIcon, UI_DISPLAY_LIMITS } from "./uiConstants";
 
-// Export the risk levels and business impact categories from here as well for consistency
 export { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS, UI_DISPLAY_LIMITS };
 
-// SecurityLevelMap type for cleaner lookups
+/** Type for security level constant keys */
 export type SecurityLevelKey =
   | "NONE"
   | "LOW"
   | "MODERATE"
   | "HIGH"
   | "VERY_HIGH";
+
+/** Generic map type indexed by security level keys */
 export type SecurityLevelMap<T> = Record<SecurityLevelKey, T>;
 
 /**
@@ -66,7 +61,7 @@ export const mapOptionsToConstants = <
   };
 };
 
-// Update the type of SECURITY_LEVELS to use the imported SecurityLevel
+/** Maps constant keys to SecurityLevel display values */
 export const SECURITY_LEVELS: Record<SecurityLevelKey, SecurityLevel> = {
   NONE: "None",
   LOW: "Low",
@@ -75,21 +70,21 @@ export const SECURITY_LEVELS: Record<SecurityLevelKey, SecurityLevel> = {
   VERY_HIGH: "Very High",
 };
 
-// CIA Component Labels
+/** CIA component display labels */
 export const CIA_LABELS = {
   AVAILABILITY: "Availability",
   INTEGRITY: "Integrity",
   CONFIDENTIALITY: "Confidentiality",
 };
 
-// CIA tooltip descriptions for better user understanding
+/** CIA component tooltip descriptions */
 export const CIA_DESCRIPTIONS = {
   CONFIDENTIALITY: "Controls who can access your data and systems",
   INTEGRITY: "Ensures data remains accurate and unaltered",
   AVAILABILITY: "Determines how reliably your systems can be accessed",
 };
 
-// Compliance Status Text
+/** Compliance status display text */
 export const COMPLIANCE_STATUS = {
   NON_COMPLIANT: "Non-Compliant",
   BASIC_COMPLIANCE: "Meets basic compliance only",
@@ -97,7 +92,7 @@ export const COMPLIANCE_STATUS = {
   FULL_COMPLIANCE: "Compliant with all major frameworks",
 };
 
-// Security recommendations for each level
+/** Security recommendations for each level */
 export const SECURITY_RECOMMENDATIONS = {
   NONE: "Not recommended for any production system. Implement basic security controls immediately.",
   LOW: "Only appropriate for non-critical systems with public information.",
@@ -109,7 +104,7 @@ export const SECURITY_RECOMMENDATIONS = {
   BASIC: "Only appropriate for non-critical systems with public information.",
 };
 
-// Framework descriptions
+/** Framework descriptions */
 export const FRAMEWORK_DESCRIPTIONS = {
   SOC2: "Requires basic security controls across CIA triad",
   ISO27001: "Requires moderate security controls and management system",
@@ -118,7 +113,7 @@ export const FRAMEWORK_DESCRIPTIONS = {
   NIST: "High security controls for federal information systems",
 };
 
-// Security Descriptions - direct hardcoded values to maintain test compatibility
+/** Security level descriptions */
 export const SECURITY_DESCRIPTIONS = {
   NONE: "No security controls implemented.",
   LOW: "Basic protection with minimal controls and manual processes.",
@@ -129,8 +124,7 @@ export const SECURITY_DESCRIPTIONS = {
     "Maximum protection with quantum-safe encryption, multi-site redundancy, and real-time validation.",
 };
 
-// Technical descriptions - for more detailed tooltips - using the helper function
-// Value Creation Points
+/** Value creation points by security level */
 export const VALUE_CREATION_POINTS: Partial<Record<SecurityLevel, string[]>> = {
   None: ["Minimal security baseline"],
   Low: ["Basic security protection"],
@@ -139,7 +133,7 @@ export const VALUE_CREATION_POINTS: Partial<Record<SecurityLevel, string[]>> = {
   "Very High": ["Enables participation in classified"],
 };
 
-// ROI Estimates - consistent format across all values
+/** ROI estimates by security level */
 export const ROI_ESTIMATES = {
   NONE: "Negative (high risk of losses)",
   LOW: "1-2x for basic security implementation",
@@ -147,7 +141,6 @@ export const ROI_ESTIMATES = {
   HIGH: "3-5x with high security",
   VERY_HIGH: "5x+ with very high security",
 
-  // Also include structured data for component use
   NONE_OBJ: {
     returnRate: "0%",
     description: "No security investment means no return",
@@ -170,7 +163,7 @@ export const ROI_ESTIMATES = {
   },
 };
 
-// Cost Analysis Messages
+/** Cost analysis messages */
 export const COST_ANALYSIS = {
   SMALL_SOLUTION:
     "Basic security implementation with minimal investment. Suitable for small businesses or non-critical systems.",
@@ -178,19 +171,17 @@ export const COST_ANALYSIS = {
     "Comprehensive security solution requiring significant investment. Recommended for critical systems or regulated industries.",
 };
 
-// Framework names
+/** Compliance framework display names */
 export const COMPLIANCE_FRAMEWORKS = {
-  SOC2: "SOC 2", // Change if needed to match what the component uses
+  SOC2: "SOC 2",
   ISO27001: "ISO 27001",
   PCI_DSS: "PCI DSS",
   HIPAA: "HIPAA",
   NIST: "NIST 800-53 High",
 };
 
-// Additional constants for specific UI components (previously in testConstants)
-// UI Text constants - centralized text for all UI elements
+/** Centralized UI text constants */
 export const UI_TEXT = {
-  // Common UI labels
   LABELS: {
     BUSINESS_IMPACT: "Business Impact:",
     RECOMMENDATION: "Recommendation:",
@@ -207,7 +198,6 @@ export const UI_TEXT = {
     CONFIDENTIALITY: "Confidentiality",
   },
 
-  // Widget titles
   WIDGET_TITLES: {
     SECURITY_LEVEL: "Security Profile Configuration",
     SECURITY_SUMMARY: "Security Summary",
@@ -220,43 +210,37 @@ export const UI_TEXT = {
     SECURITY_RESOURCES: "Security Resources",
   },
 
-  // Budget related text
   BUDGET: {
     IT_BUDGET_CAPEX: "of IT budget as one-time capital expenditure",
     IT_BUDGET_OPEX: "of IT budget as annual operational expenses",
   },
 
-  // Security measures
   SECURITY_MEASURES: {
     AVAILABILITY: "Availability",
     INTEGRITY: "Integrity",
     CONFIDENTIALITY: "Confidentiality",
   },
 
-  // Chart labels
   CHART: {
     LABEL_SECURITY_LEVELS: "Security Levels",
     TITLE_SECURITY_PROFILE: "Security Profile",
   },
 
-  // Value creation titles
   VALUE_CREATION: {
     NONE_TITLE: "No Value Creation",
     WITH_LEVEL: (level: string) => `${level} Value Creation`,
   },
 
-  // App title
   APP_TITLE: "CIA Compliance Manager Dashboard",
 };
 
-// Test specific matchers for use in testing UI elements
+/** Test matchers for UI element validation */
 export const TEST_MATCHERS = {
   COMPLIANCE_FRAMEWORKS_REGEX: new RegExp(
     Object.values(COMPLIANCE_FRAMEWORKS).join("|")
   ),
   UPTIME_PATTERN: /\d+\.?\d*%\s+uptime/i,
   DOWNTIME_PATTERN: /downtime/i,
-  // Add matchers for security descriptions
   SECURITY_NONE_PATTERN: new RegExp(SECURITY_DESCRIPTIONS.NONE),
   SECURITY_LOW_PATTERN: new RegExp(SECURITY_DESCRIPTIONS.LOW),
   SECURITY_MODERATE_PATTERN: new RegExp(SECURITY_DESCRIPTIONS.MODERATE),
@@ -264,7 +248,7 @@ export const TEST_MATCHERS = {
   SECURITY_VERY_HIGH_PATTERN: new RegExp(SECURITY_DESCRIPTIONS.VERY_HIGH),
 };
 
-// Add for test data:
+/** Test data for widget and component testing */
 export const TEST_DATA = {
   WIDGET: {
     TITLE: "Test Widget",
@@ -298,7 +282,7 @@ export const TEST_DATA = {
   },
 };
 
-// Add to the constants file
+/** Implementation cost estimates by security level */
 export const IMPLEMENTATION_COSTS: {
   [key: string]: {
     developmentEffort: string;
@@ -337,16 +321,15 @@ export const IMPLEMENTATION_COSTS: {
  * Widget icons for consistent UI representation
  */
 export const WIDGET_ICONS = {
-  SECURITY_LEVEL: "🔐",
-  SECURITY_SUMMARY: "📊",
-  BUSINESS_IMPACT_ANALYSIS: "📈",
-  COMPLIANCE_STATUS: "📋",
-  SECURITY_RESOURCES: "📚",
-  COST_ESTIMATION: "💰",
-  VALUE_CREATION: "💎",
-  TECHNICAL_DETAILS: "⚙️",
-  SECURITY_VISUALIZATION: "📈",
-  // Use getComponentIcon function from uiConstants to avoid duplication
+  SECURITY_LEVEL: "\uD83D\uDD10",
+  SECURITY_SUMMARY: "\uD83D\uDCCA",
+  BUSINESS_IMPACT_ANALYSIS: "\uD83D\uDCC8",
+  COMPLIANCE_STATUS: "\uD83D\uDCCB",
+  SECURITY_RESOURCES: "\uD83D\uDCDA",
+  COST_ESTIMATION: "\uD83D\uDCB0",
+  VALUE_CREATION: "\uD83D\uDC8E",
+  TECHNICAL_DETAILS: "\u2699\uFE0F",
+  SECURITY_VISUALIZATION: "\uD83D\uDCC8",
   AVAILABILITY_IMPACT: getComponentIcon("availability"),
   INTEGRITY_IMPACT: getComponentIcon("integrity"),
   CONFIDENTIALITY_IMPACT: getComponentIcon("confidentiality"),
@@ -381,26 +364,17 @@ export const SECURITY_LEVEL_COLORS = {
   VERY_HIGH: "purple",
 };
 
-/**
- * Constants used throughout the application
- */
-
-/**
- * Default CIA Details when none are provided
- */
-/**
- * Default security level
- */
+/** Default security level */
 export const DEFAULT_SECURITY_LEVEL: SecurityLevel = "None";
 
 /**
  * Widget sizes for layout
  */
 export const WIDGET_SIZES = {
-  SMALL: "small", // 1/3 width
-  MEDIUM: "medium", // 1/2 width
-  LARGE: "large", // 2/3 width
-  FULL: "full", // Full width
+  SMALL: "small",
+  MEDIUM: "medium",
+  LARGE: "large",
+  FULL: "full",
 };
 
 /**
@@ -439,9 +413,9 @@ export const STORAGE_KEYS = {
  * Refresh intervals (in milliseconds)
  */
 export const REFRESH_INTERVALS = {
-  FAST: 5000, // 5 seconds
-  MEDIUM: 30000, // 30 seconds
-  SLOW: 60000, // 1 minute
+  FAST: 5000,
+  MEDIUM: 30000,
+  SLOW: 60000,
 };
 
 /**
@@ -462,15 +436,15 @@ export const DEFAULT_TRANSITION_DURATION = 300;
  * Chart colors
  */
 export const CHART_COLORS = {
-  AVAILABILITY: "#2196F3", // Blue
-  INTEGRITY: "#4CAF50", // Green
-  CONFIDENTIALITY: "#9C27B0", // Purple
+  AVAILABILITY: "#2196F3",
+  INTEGRITY: "#4CAF50",
+  CONFIDENTIALITY: "#9C27B0",
   SECURITY_LEVEL_COLORS: {
-    None: "#F44336", // Red
-    Low: "#FF9800", // Orange
-    Moderate: "#FFEB3B", // Yellow
-    High: "#4CAF50", // Green
-    "Very High": "#2196F3", // Blue
+    None: "#F44336",
+    Low: "#FF9800",
+    Moderate: "#FFEB3B",
+    High: "#4CAF50",
+    "Very High": "#2196F3",
   },
 };
 
