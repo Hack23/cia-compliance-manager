@@ -51,29 +51,22 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   className = "",
   testId = SECURITY_LEVEL_WIDGET_IDS.root,
 }) => {
-  // Use the content service for security level details
   const { ciaContentService, isLoading: serviceLoading, error: serviceError } = useCIAContentService();
 
-  // Define local state for details loading (separate from service loading)
   const [isLoadingDetails, setIsLoadingDetails] = useState(false);
 
-  // Track which component is active for details display
   const [activeComponent, setActiveComponent] = useState<
     "availability" | "integrity" | "confidentiality"
   >("availability");
 
-  // Add error state
   const [error, setError] = useState<Error | null>(null);
   const [activeDetails, setActiveDetails] = useState<CIADetails | null>(null);
 
-  // Track the last changed component for visual feedback
   const [lastChangedComponent, setLastChangedComponent] = useState<
     "availability" | "integrity" | "confidentiality" | null
   >(null);
 
-  // Get details for the active component with error handling
   useEffect(() => {
-    // Wait for service to be available before loading details
     if (!ciaContentService) {
       setIsLoadingDetails(true);
       return;
@@ -118,13 +111,11 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
     confidentialityLevel,
   ]);
 
-  // Create handler functions that call the prop handlers
   const handleAvailabilityChange = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const newLevel = event.target.value as SecurityLevel;
       if (onAvailabilityChange) onAvailabilityChange(newLevel);
       setLastChangedComponent("availability");
-      // Announce change to screen readers
       announceToScreenReader(`Availability security level changed to ${newLevel}`, 'polite');
     },
     [onAvailabilityChange]
@@ -135,7 +126,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       const newLevel = event.target.value as SecurityLevel;
       if (onIntegrityChange) onIntegrityChange(newLevel);
       setLastChangedComponent("integrity");
-      // Announce change to screen readers
       announceToScreenReader(`Integrity security level changed to ${newLevel}`, 'polite');
     },
     [onIntegrityChange]
@@ -146,13 +136,11 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       const newLevel = event.target.value as SecurityLevel;
       if (onConfidentialityChange) onConfidentialityChange(newLevel);
       setLastChangedComponent("confidentiality");
-      // Announce change to screen readers
       announceToScreenReader(`Confidentiality security level changed to ${newLevel}`, 'polite');
     },
     [onConfidentialityChange]
   );
 
-  // Get security level options
   const securityLevelOptions = [
     SECURITY_LEVELS.NONE,
     SECURITY_LEVELS.LOW,
@@ -161,7 +149,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
     SECURITY_LEVELS.VERY_HIGH,
   ];
 
-  // Helper function to get component-specific summary
   const getComponentSummary = (
     component: string,
     level: SecurityLevel
@@ -196,7 +183,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
     }
   };
 
-  // Get color class for component - Use standardized utility
   const getComponentColor = (component: string): string => {
     switch (component) {
       case "availability":
@@ -238,7 +224,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           </p>
         </div>
 
-        {/* Display error message if there's an error */}
         {(error || serviceError) && (
           <div className={cn(
             WidgetClasses.card,
@@ -251,7 +236,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           </div>
         )}
 
-        {/* Display loading state */}
         {(serviceLoading || isLoadingDetails) && (
           <div className={cn(
             WidgetClasses.card,
@@ -263,14 +247,12 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
         )}
 
         <div className={cn(WidgetClasses.grid2Cols, "security-level-config-layout")}>
-          {/* Security level selectors */}
           <div className="security-level-selector-panel">
             <h3 className={WidgetClasses.heading}>
               Configure Security Levels
             </h3>
 
             <div className="space-y-sm">
-              {/* Confidentiality selector */}
               <div
                 className={cn(
                   WidgetClasses.card,
@@ -343,7 +325,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 )}
               </div>
 
-              {/* Integrity selector */}
               <div
                 className={cn(WidgetClasses.card, "p-sm security-level-control-card")}
                 data-testid={SECURITY_LEVEL_WIDGET_IDS.section('integrity')}
@@ -407,7 +388,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 )}
               </div>
 
-              {/* Availability selector */}
               <div
                 className={cn(WidgetClasses.card, "p-sm security-level-control-card")}
                 data-testid={SECURITY_LEVEL_WIDGET_IDS.section('availability')}
@@ -473,7 +453,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
             </div>
           </div>
 
-          {/* Security level details */}
           <div className="security-level-detail-panel">
             <h3 className="text-base sm:text-lg font-medium mb-sm text-gray-800 dark:text-gray-200">
               {activeComponent.charAt(0).toUpperCase() +
@@ -501,7 +480,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                   </h4>
 
                   <div className="space-y-sm">
-                    {/* Description */}
                     <div>
                       <h5 className="text-sm font-medium mb-xs">Description</h5>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -510,7 +488,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                       </p>
                     </div>
 
-                    {/* Technical implementation */}
                     <div>
                       <h5 className="text-sm font-medium mb-xs">
                         Technical Implementation
@@ -521,7 +498,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                       </p>
                     </div>
 
-                    {/* Business impact */}
                     <div>
                       <h5 className="text-sm font-medium mb-xs">
                         Business Impact
@@ -532,7 +508,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                       </p>
                     </div>
 
-                    {/* Component-specific details */}
                     {activeComponent === "availability" && (
                       <div className="mt-sm grid grid-cols-2 gap-sm security-level-detail-metrics">
                         <div className="bg-blue-50 dark:bg-blue-900/20 p-sm rounded">
@@ -588,7 +563,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           </div>
         </div>
 
-        {/* Security level overview */}
         <div className="mt-sm bg-gray-100 dark:bg-gray-800 p-sm rounded-lg security-level-overview">
           <h3 className="text-md font-medium mb-sm text-gray-800 dark:text-gray-200">Security Level Overview</h3>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-sm">
@@ -646,5 +620,4 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   );
 };
 
-// Export the component directly without HOC
 export default SecurityLevelWidget;

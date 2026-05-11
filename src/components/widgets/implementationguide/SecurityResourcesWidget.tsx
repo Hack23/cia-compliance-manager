@@ -19,8 +19,7 @@ import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 import ImplementationGuidancePanel from "./ImplementationGuidancePanel";
 
-// Constants for top resources filtering
-const TOP_RESOURCES_PERCENTAGE = 0.5; // 50%
+const TOP_RESOURCES_PERCENTAGE = 0.5;
 const MIN_TOP_RESOURCES = 5;
 const WIDE_LAYOUT_BREAKPOINT = 760;
 
@@ -90,25 +89,19 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   maxItems = 8,
   showTopResourcesOnly = false,
 }) => {
-  // Use the CIA content service
   const {
     ciaContentService,
     error: serviceError,
     isLoading,
   } = useCIAContentService();
 
-  // State for resource filtering and pagination
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [resourcesPerPage, setResourcesPerPage] = useState(maxItems);
   const widgetContentRef = useRef<HTMLDivElement | null>(null);
-  // Sidebar visibility - collapsed by default in narrow widget cells, expanded in wide ones.
-  // Container queries hide the toggle above 760px (see CSS), so the panel is
-  // expanded when the rendered widget body reaches that same inline-size.
   const [showFilters, setShowFilters] = useState(false);
 
-  // Update resourcesPerPage when maxItems changes
   useEffect(() => {
     setResourcesPerPage(maxItems);
   }, [maxItems]);
@@ -199,14 +192,12 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
       }
     };
   }, []);
-  // Calculate security resources with proper error handling and type safety
   const securityResources = useMemo((): SecurityResource[] => {
     try {
       if (isNullish(ciaContentService)) {
         return [];
       }
 
-      // Get resources for each security level
       const availabilityResources = isArray(
         ciaContentService.getSecurityResources?.(
           "availability",
@@ -237,14 +228,12 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
           )
         : [];
 
-      // Combine all resources
       const allResources = [
         ...(availabilityResources || []),
         ...(integrityResources || []),
         ...(confidentialityResources || []),
       ];
 
-      // Deduplicate resources by URL (or title if URL is not available)
       const uniqueResources: SecurityResource[] = [];
       const resourceKeys = new Set();
 
@@ -256,13 +245,10 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
         }
       });
 
-      // Sort by relevance score if available, otherwise by title
       return uniqueResources.sort((a, b) => {
-        // Extract scores using helper (0 is default for missing scores)
         const aScore = getResourceRelevanceScore(a);
         const bScore = getResourceRelevanceScore(b);
 
-        // Sort by score (higher first), then by title
         if (aScore !== bScore) {
           return bScore - aScore;
         }
@@ -279,7 +265,6 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
     confidentialityLevel,
   ]);
 
-  // Get unique resource categories for filtering
   const resourceCategories = useMemo(() => {
     const categories = new Set<string>();
     securityResources.forEach((resource) => {
@@ -290,21 +275,16 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
     return Array.from(categories).sort();
   }, [securityResources]);
 
-  // Filter resources based on category, search term, and top resources flag
   const filteredResources = useMemo(() => {
     let filtered = securityResources;
 
-    // Filter to show only top priority resources if requested
     if (showTopResourcesOnly) {
-      // Filter resources with high relevance scores
-      // Shows top 50% with a minimum of 5 resources (or all if less than 10 total)
       const sortedByRelevance = [...filtered].sort((a, b) => {
         const aScore = getResourceRelevanceScore(a);
         const bScore = getResourceRelevanceScore(b);
         return bScore - aScore;
       });
       
-      // Take top percentage of resources with a minimum to ensure meaningful results
       const topCount = Math.max(
         Math.ceil(sortedByRelevance.length * TOP_RESOURCES_PERCENTAGE), 
         MIN_TOP_RESOURCES
@@ -312,14 +292,12 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
       filtered = sortedByRelevance.slice(0, topCount);
     }
 
-    // Apply category filter
     if (selectedCategory) {
       filtered = filtered.filter(
         (resource) => resource.category === selectedCategory
       );
     }
 
-    // Apply search filter
     if (searchTerm.trim()) {
       const normalizedSearch = searchTerm.toLowerCase().trim();
       filtered = filtered.filter(
@@ -336,37 +314,31 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
     return filtered;
   }, [securityResources, selectedCategory, searchTerm, showTopResourcesOnly]);
 
-  // Paginate resources
   const currentResources = useMemo(() => {
     const indexOfLastResource = currentPage * resourcesPerPage;
     const indexOfFirstResource = indexOfLastResource - resourcesPerPage;
     return filteredResources.slice(indexOfFirstResource, indexOfLastResource);
   }, [filteredResources, currentPage, resourcesPerPage]);
 
-  // Handle category selection
   const handleCategorySelect = useCallback((category: string | null) => {
     setSelectedCategory(category);
-    setCurrentPage(1); // Reset to first page when changing filters
+    setCurrentPage(1);
   }, []);
 
-  // Handle search input change
   const handleSearchChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setSearchTerm(e.target.value);
-      setCurrentPage(1); // Reset to first page when changing search
+      setCurrentPage(1);
     },
     []
   );
 
-  // Handle page change
   const handlePageChange = useCallback((pageNumber: number) => {
     setCurrentPage(pageNumber);
   }, []);
 
-  // Determine total pages
   const totalPages = Math.ceil(filteredResources.length / resourcesPerPage);
 
-  // Get implementation guides - component-specific guidance
   const implementationGuides = useMemo(() => {
     try {
       if (isNullish(ciaContentService)) {
@@ -417,7 +389,6 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
           "Curated security resources and implementation guides for selected CIA security levels"
         )}
       >
-        {/* Widget introduction */}
         <section 
           className={cn(
             WidgetClasses.section,
@@ -552,7 +523,6 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
               </nav>
             )}
 
-            {/* Implementation Guidelines */}
             <section className="mb-md" aria-labelledby="implementation-guidelines-heading">
               <h3 id="implementation-guidelines-heading" className={cn(WidgetClasses.body, "font-medium mb-sm")}>
                 Implementation Guidelines
@@ -583,9 +553,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
             </div>
           </aside>
 
-          {/* Resources grid - right column on larger screens */}
           <div className="security-resources-list">
-            {/* Resources list */}
             <div className="mb-md">
               <div className="flex justify-between items-center mb-sm">
                 <h3 className="text-subheading font-medium">Security Resources</h3>
@@ -596,7 +564,6 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                 </div>
               </div>
 
-              {/* Empty state */}
               {filteredResources.length === 0 && (
                 <div
                   className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg text-center text-gray-500 dark:text-gray-400"
@@ -611,7 +578,6 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                 </div>
               )}
 
-              {/* Resources grid */}
               {filteredResources.length > 0 && (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-sm">
                   {currentResources.map((resource, index) => (
@@ -624,7 +590,6 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                 </div>
               )}
 
-              {/* Pagination controls */}
               {totalPages > 1 && (
                 <div className="mt-md flex justify-center">
                   <nav
@@ -643,7 +608,6 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                       Previous
                     </button>
 
-                    {/* Page numbers */}
                     {Array.from({ length: totalPages }).map((_, index) => (
                       <button
                         key={index}
@@ -674,7 +638,6 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
               )}
             </div>
 
-            {/* Implementation Guidance Panel */}
             <ImplementationGuidancePanel
               implementationGuides={implementationGuides}
               availabilityLevel={availabilityLevel}
