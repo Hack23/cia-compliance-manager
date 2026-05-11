@@ -1,9 +1,5 @@
 import { SecurityLevel } from "../types/cia";
 
-// ---------------------------------------------------------------
-// SECTION 1: TEST ID NAMING CONVENTION
-// ---------------------------------------------------------------
-
 /**
  * ## Test ID Naming Convention
  *
@@ -31,10 +27,6 @@ import { SecurityLevel } from "../types/cia";
  * - Value: `widget-{name}-value-{data-type}`
  * - Label: `widget-{name}-label-{field}`
  */
-
-// ---------------------------------------------------------------
-// SECTION 2: HELPER FUNCTIONS AND UTILITIES
-// ---------------------------------------------------------------
 
 /**
  * Generate hierarchical test ID from parts
@@ -212,7 +204,6 @@ export const createDynamicTestId = {
    * @returns Category-specific test ID
    */
   categorySpecific: (prefix: string, category: string): string => {
-    // Ensure category has first letter capitalized, then convert to lowercase
     const formattedCategory =
       category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
     return `${prefix}-${formattedCategory.toLowerCase()}`;
@@ -292,23 +283,13 @@ export const TEST_HELPERS = {
    * Get value points for a security level
    */
   getValuePointsForLevel: (_level: SecurityLevel): string[] => {
-    // Default implementation returns empty array
-    // This is just for type checking in tests
     return [];
   },
 };
 
-// ---------------------------------------------------------------
-// SECTION 2: WIDGET REGISTRY TEST IDs
-// ---------------------------------------------------------------
-
 export const WIDGET_REGISTRY_TEST_IDS = {
   WIDGET_PREFIX: "widget-",
 };
-
-// ---------------------------------------------------------------
-// SECTION 3: WIDGET-SCOPED TEST ID GENERATORS
-// ---------------------------------------------------------------
 
 /**
  * Widget-scoped test ID generators using the createWidgetTestId helper.
@@ -339,17 +320,11 @@ export const TECHNICAL_DETAILS_WIDGET_IDS = createWidgetTestId('technical-detail
 export const SECURITY_RESOURCES_WIDGET_IDS = createWidgetTestId('security-resources');
 export const SECURITY_VISUALIZATION_WIDGET_IDS = createWidgetTestId('security-visualization');
 
-// ---------------------------------------------------------------
-// SECTION 4: CIA COMPONENT TEST IDs
-// ---------------------------------------------------------------
-
 export const CIA_TEST_IDS = {
-  // Select dropdown elements
   AVAILABILITY_SELECT: "availability-selector",
   INTEGRITY_SELECT: "integrity-selector",
   CONFIDENTIALITY_SELECT: "confidentiality-selector",
 
-  // Labels and descriptions
   AVAILABILITY_LABEL: "availability-label",
   INTEGRITY_LABEL: "integrity-label",
   CONFIDENTIALITY_LABEL: "confidentiality-label",
@@ -357,12 +332,10 @@ export const CIA_TEST_IDS = {
   INTEGRITY_DESCRIPTION: "integrity-description",
   CONFIDENTIALITY_DESCRIPTION: "confidentiality-description",
 
-  // Description text elements
   AVAILABILITY_DESCRIPTION_TEXT: "availability-description-text",
   INTEGRITY_DESCRIPTION_TEXT: "integrity-description-text",
   CONFIDENTIALITY_DESCRIPTION_TEXT: "confidentiality-description-text",
 
-  // Sections and indicators
   AVAILABILITY_SECTION: "availability-section",
   INTEGRITY_SECTION: "integrity-section",
   CONFIDENTIALITY_SECTION: "confidentiality-section",
@@ -370,57 +343,43 @@ export const CIA_TEST_IDS = {
   INTEGRITY_COLOR_INDICATOR: "integrity-color-indicator",
   CONFIDENTIALITY_COLOR_INDICATOR: "confidentiality-color-indicator",
 
-  // Details sections
   AVAILABILITY_DETAILS_SECTION: "availability-details-section",
   INTEGRITY_DETAILS_SECTION: "integrity-details-section",
   CONFIDENTIALITY_DETAILS_SECTION: "confidentiality-details-section",
 
-  // Tab-specific elements
   TAB_AVAILABILITY: "tab-availability",
   TAB_INTEGRITY: "tab-integrity",
   TAB_CONFIDENTIALITY: "tab-confidentiality",
 
-  // Icons and symbols
   SECURITY_ICON: "security-icon",
   SECURITY_LEVEL_ICON: "security-level-icon",
   CONFIDENTIALITY_ICON: "confidentiality-icon",
   INTEGRITY_ICON: "integrity-icon",
   AVAILABILITY_ICON: "availability-icon",
 
-  // Key-value pairs
   SECURITY_LEVEL_KV: "security-level-kv",
   AVAILABILITY_KV: "availability-kv",
   INTEGRITY_KV: "integrity-kv",
   CONFIDENTIALITY_KV: "confidentiality-kv",
 
-  // Shared state display
   SECURITY_LEVEL_DISPLAY: "security-level-display",
   DISPLAYED_VALUE: "displayed-value",
 
-  // SecurityLevelSelector
   CURRENT_AVAILABILITY: "current-availability",
   CURRENT_INTEGRITY: "current-integrity",
   CURRENT_CONFIDENTIALITY: "current-confidentiality",
 
-  // Selection
   CONTEXT_INFO: "context-info",
 
-  // Security level controls
   SECURITY_LEVEL_SELECTOR: "security-level-selector",
   SECURITY_LEVEL_CONTROLS: "security-level-controls",
 
-  // Additional backward compatibility for any potential direct references
   AVAILABILITY: "availability",
   INTEGRITY: "integrity",
   CONFIDENTIALITY: "confidentiality",
 };
 
-// ---------------------------------------------------------------
-// SECTION 4: COMMON WIDGET TEST IDs
-// ---------------------------------------------------------------
-
 export const WIDGET_TEST_IDS = {
-  // Common widget elements
   SECURITY_LEVEL_CONTROLS: "security-level-controls",
   VALUE_CREATION_TITLE: "value-creation-title",
   ROI_VALUE: "roi-value",
@@ -429,14 +388,12 @@ export const WIDGET_TEST_IDS = {
   DATA_CONTAINER: "data-container",
   CONTENT_TITLE: "content-title",
 
-  // Value Creation Widget
   VALUE_CREATION_CONTENT: "value-creation-content",
   VALUE_CREATION_SUBTITLE: "value-creation-subtitle",
   VALUE_POINTS_LIST: "value-points-list",
   ROI_SECTION: "roi-section",
   BENEFITS_SECTION: "benefits-section",
 
-  // Technical Details Widget
   TECHNICAL_DETAILS_WIDGET: "technical-details-widget",
   AVAILABILITY_TAB: "availability-tab",
   INTEGRITY_TAB: "integrity-tab",
@@ -449,7 +406,6 @@ export const WIDGET_TEST_IDS = {
   MAINTENANCE_LEVEL: "maintenance-level",
   REQUIRED_EXPERTISE: "required-expertise",
 
-  // CIA Impact Summary Widget
   CIA_IMPACT_SUMMARY: "cia-impact-summary",
   CIA_IMPACT_AVAILABILITY_ROW: "cia-impact-availability-row",
   CIA_IMPACT_INTEGRITY_ROW: "cia-impact-integrity-row",
@@ -458,7 +414,6 @@ export const WIDGET_TEST_IDS = {
   CIA_IMPACT_INTEGRITY_LEVEL: "cia-impact-integrity-level",
   CIA_IMPACT_CONFIDENTIALITY_LEVEL: "cia-impact-confidentiality-level",
 
-  // Widget container IDs
   SECURITY_LEVEL_WIDGET: "widget-security-level",
   SECURITY_LEVEL_SELECTION: "widget-security-level-selection",
   COST_ESTIMATION_WIDGET: "widget-cost-estimation",
@@ -467,7 +422,6 @@ export const WIDGET_TEST_IDS = {
   RADAR_CHART_WIDGET: "widget-radar-chart",
   VALUE_CREATION_WIDGET: "widget-value-creation",
 
-  // Impact widgets
   INTEGRITY_IMPACT_WIDGET: "widget-integrity-impact",
   CONFIDENTIALITY_IMPACT_WIDGET: "widget-confidentiality-impact",
   AVAILABILITY_IMPACT_WIDGET: "widget-availability-impact",
@@ -481,7 +435,6 @@ export const WIDGET_TEST_IDS = {
   SECURITY_RESOURCES: "security-resources-widget",
   CIA_IMPACT_SUMMARY_WIDGET: "cia-impact-summary-widget",
 
-  // Widget type enum constant
   COST_ESTIMATION: "cost-estimation-widget",
   SECURITY_LEVEL: "security-level-widget",
   BUSINESS_IMPACT_ANALYSIS: "business-impact-analysis-widget",
@@ -492,12 +445,7 @@ export const WIDGET_TEST_IDS = {
   BUSINESS_IMPACT: "business-impact-widget",
 };
 
-// ---------------------------------------------------------------
-// SECTION 5: BUSINESS IMPACT ANALYSIS WIDGET TEST IDs
-// ---------------------------------------------------------------
-
 export const BUSINESS_IMPACT_TEST_IDS = {
-  // Impact sections
   FINANCIAL_IMPACT_SECTION: "financial-impact-section",
   OPERATIONAL_IMPACT_SECTION: "operational-impact-section",
   REPUTATIONAL_IMPACT_SECTION: "reputational-impact-section",
@@ -505,11 +453,9 @@ export const BUSINESS_IMPACT_TEST_IDS = {
   STRATEGIC_IMPACT_SECTION: "strategic-impact-section",
   BUSINESS_IMPACT_WIDGET: "business-impact-widget",
 
-  // Add the missing constants
   IMPACT_HEATMAP: "business-impact-heatmap",
   EXECUTIVE_SUMMARY: "business-impact-executive-summary",
 
-  // Prefixes for dynamic IDs
   BUSINESS_IMPACT_ANALYSIS_PREFIX: "business-impact-analysis",
   CATEGORY_ICON_PREFIX: "category-icon",
   IMPACT_ANALYSIS_PREFIX: "impact-analysis",
@@ -518,7 +464,6 @@ export const BUSINESS_IMPACT_TEST_IDS = {
   IMPACT_DESCRIPTION_PREFIX: "impact-description",
   BUSINESS_IMPACT_PREFIX: "business-impact",
 
-  // Tabs and sections
   TAB_CONSIDERATIONS: "tab-considerations",
   TAB_BENEFITS: "tab-benefits",
   BUSINESS_IMPACT_SUMMARY: "business-impact-summary",
@@ -527,7 +472,6 @@ export const BUSINESS_IMPACT_TEST_IDS = {
   NO_CONSIDERATIONS_MESSAGE: "no-considerations-message",
   NO_BENEFITS_MESSAGE: "no-benefits-message",
 
-  // Impact metrics
   IMPACT_METRICS_SECTION: "impact-metrics-section",
   FINANCIAL_IMPACT_CARD: "financial-impact-card",
   FINANCIAL_IMPACT_METRICS: "financial-impact-metrics",
@@ -537,24 +481,17 @@ export const BUSINESS_IMPACT_TEST_IDS = {
   OPERATIONAL_IMPACT_METRICS: "operational-impact-metrics",
   MEAN_RECOVERY_TIME: "mean-recovery-time",
   RECOVERY_TIME_KV: "recovery-time-kv",
-  // Add missing constants
   REPUTATIONAL_IMPACT_CARD: "reputational-impact-card",
   REGULATORY_IMPACT_CARD: "regulatory-impact-card",
 
-  // Analysis widget specific IDs
   BUSINESS_IMPACT_ANALYSIS_WIDGET: "business-impact-analysis-widget",
   IMPACT_SUMMARY: "impact-summary",
   IMPACT_CATEGORY: "impact-category",
   IMPACT_DESCRIPTION: "impact-description",
   RISK_LEVEL: "risk-level",
 
-  // Combined Impact Widget
   COMBINED_BUSINESS_IMPACT_WIDGET: "combined-business-impact-widget",
 };
-
-// ---------------------------------------------------------------
-// SECTION 6: COMPLIANCE FRAMEWORK TEST IDs
-// ---------------------------------------------------------------
 
 export const FRAMEWORK_TEST_IDS = {
   COMPLIANCE_FRAMEWORKS_CONTAINER: "compliance-frameworks-container",
@@ -565,10 +502,6 @@ export const FRAMEWORK_TEST_IDS = {
   COMPLIANCE_REQUIREMENTS_LIST: "compliance-requirements-list",
 };
 
-// ---------------------------------------------------------------
-// SECTION 7: RADAR CHART TEST IDs
-// ---------------------------------------------------------------
-
 export const CHART_TEST_IDS = {
   RADAR_CHART: "radar-chart",
   RADAR_AVAILABILITY_VALUE: "radar-availability-value",
@@ -577,40 +510,30 @@ export const CHART_TEST_IDS = {
   SECURITY_SCORE_OVERLAY: "security-score-overlay",
   SECURITY_SCORE_SUMMARY: "security-score-summary",
 
-  // Chart components
   CHART_CONTAINER: "chart-container",
   CHART_LEGEND: "chart-legend",
   CHART_TOOLTIP: "chart-tooltip",
 
-  // Chart annotations
   CHART_ANNOTATION: "chart-annotation",
   CHART_THRESHOLD_LINE: "chart-threshold-line",
 
-  // Chart controls
   CHART_ZOOM_CONTROL: "chart-zoom-control",
   CHART_RESET_BUTTON: "chart-reset-button",
   CHART_DOWNLOAD_BUTTON: "chart-download-button",
 
-  // Chart labels
   CHART_AXIS_LABEL: "chart-axis-label",
   CHART_TITLE: "chart-title",
   CHART_SUBTITLE: "chart-subtitle",
   RADAR_CHART_CONTAINER: "radar-chart-container",
 };
 
-// ---------------------------------------------------------------
-// SECTION 8: COST ESTIMATION WIDGET TEST IDs
-// ---------------------------------------------------------------
-
 export const COST_TEST_IDS = {
-  // Core cost container elements
   COST_CONTAINER: "cost-container",
   CAPEX_VALUE: "capex-value",
   OPEX_VALUE: "opex-value",
   TOTAL_COST: "total-cost",
   ROI_ESTIMATE: "roi-estimate",
 
-  // Cost Estimation Widget
   COST_ESTIMATION_CONTENT: "cost-estimation-content",
   ESTIMATED_COST_HEADING: "estimated-cost-heading",
   IMPLEMENTATION_TIME: "implementation-time",
@@ -632,7 +555,6 @@ export const COST_TEST_IDS = {
   COST_ANALYSIS_TEXT: "cost-analysis-text",
   ROI_SECTION: "roi-section",
 
-  // Widget identifiers
   COST_ESTIMATION_WIDGET: "widget-cost-estimation",
   COST_ESTIMATION_ROOT: "widget-cost-estimation-root",
 };
@@ -654,10 +576,6 @@ export const COST_ESTIMATION_TEST_IDS = {
   WIDGET: "widget-cost-estimation",
 };
 
-// ---------------------------------------------------------------
-// SECTION 9: SECURITY SUMMARY WIDGET TEST IDs
-// ---------------------------------------------------------------
-
 export const SUMMARY_TEST_IDS = {
   SUMMARY_CONTAINER: "security-summary-container",
   OVERALL_RATING: "security-summary-overall-rating",
@@ -669,7 +587,6 @@ export const SUMMARY_TEST_IDS = {
   SECURITY_SUMMARY_DESCRIPTION: "security-summary-description",
   SECURITY_ICON: "security-summary-icon",
   SECURITY_RECOMMENDATION: "security-recommendation",
-  // Added missing test IDs
   RECOMMENDATION_HEADING: "security-summary-recommendation-heading",
   TECHNICAL_SECTION_TOGGLE: "security-summary-technical-toggle",
   TECHNICAL_DETAILS_SECTION: "security-summary-technical-details",
@@ -695,10 +612,6 @@ export const SUMMARY_TEST_IDS = {
   ROI_ESTIMATE_PAIR: "security-summary-roi-estimate-pair",
 };
 
-// ---------------------------------------------------------------
-// SECTION 10: APP-LEVEL TEST IDs
-// ---------------------------------------------------------------
-
 export const APP_TEST_IDS = {
   APP_CONTAINER: "app-container",
   APP_TITLE: "app-title",
@@ -717,17 +630,12 @@ export const APP_TEST_IDS = {
   DOCS_LINK: "docs-link",
   AUTHOR_LINK: "author-link",
 
-  // Additional app-level constants
   ERROR_BOUNDARY: "error-boundary",
   ERROR_MESSAGE: "error-message",
   ERROR_DETAILS: "error-details",
   ERROR_STACK: "error-stack",
   ERROR_RESET: "error-reset",
 };
-
-// ---------------------------------------------------------------
-// SECTION 11: COMMON COMPONENT TEST IDs
-// ---------------------------------------------------------------
 
 export const COMMON_COMPONENT_TEST_IDS = {
   STATUS_BADGE: "status-badge",
@@ -752,7 +660,6 @@ export const COMMON_COMPONENT_TEST_IDS = {
   EMPTY_STATE: "empty-state",
   VALUE_DISPLAY: "value-display",
   CONTEXT_INFO: "context-info",
-  // Additional common component test IDs
   METRIC_CARD: "metric-card",
   RISK_LEVEL_BADGE: "risk-level-badge",
   WIDGET_SECTION: "widget-section",
@@ -761,7 +668,6 @@ export const COMMON_COMPONENT_TEST_IDS = {
   TAB_CONTAINER: "tab-container",
 };
 
-// Error Toast Test IDs
 export const ERROR_TOAST_TEST_IDS = {
   ERROR_TOAST: "error-toast",
   ERROR_TOAST_TITLE: "error-toast-title",
@@ -775,7 +681,6 @@ export const ERROR_TOAST_TEST_IDS = {
   ERROR_TOAST_SEVERITY: "error-toast-severity",
 };
 
-// Error Message Test IDs
 export const ERROR_MESSAGE_TEST_IDS = {
   ERROR_MESSAGE: "error-message",
   ERROR_MESSAGE_TEXT: "error-message-text",
@@ -786,7 +691,6 @@ export const ERROR_MESSAGE_TEST_IDS = {
   ERROR_MESSAGE_DESCRIPTION: "error-message-description",
 };
 
-// Widget Container Test IDs
 export const WIDGET_CONTAINER_TEST_IDS = {
   WIDGET_CONTAINER: "widget-container",
   WIDGET_SPINNER: "widget-spinner",
@@ -799,10 +703,6 @@ export const WIDGET_CONTAINER_TEST_IDS = {
   WIDGET_CONTAINER_CONTENT: "widget-container-content",
 };
 
-// ---------------------------------------------------------------
-// SECTION 12: SECURITY LEVEL WIDGET TEST IDs
-// ---------------------------------------------------------------
-
 export const SECURITY_LEVEL_TEST_IDS = {
   SECURITY_LEVEL_WIDGET: "security-level-widget",
   SECURITY_LEVEL_SELECTOR: "security-level-selector",
@@ -812,7 +712,6 @@ export const SECURITY_LEVEL_TEST_IDS = {
   SECURITY_LEVEL_ICON: "security-level-icon",
   SECURITY_LEVEL_VALUE: "security-level-value",
   SECURITY_LEVEL_DESCRIPTION: "security-level-description",
-  // Add missing test IDs
   AVAILABILITY_SELECTOR: "availability-selector",
   INTEGRITY_SELECTOR: "integrity-selector",
   CONFIDENTIALITY_SELECTOR: "confidentiality-selector",
@@ -820,10 +719,6 @@ export const SECURITY_LEVEL_TEST_IDS = {
   MANUAL_LEVEL_SELECTOR: "manual-level-selector",
   AUTO_CALCULATE_BUTTON: "auto-calculate-button",
 };
-
-// ---------------------------------------------------------------
-// SECTION 13: SECURITY SUMMARY WIDGET TEST IDs
-// ---------------------------------------------------------------
 
 export const SECURITY_SUMMARY_TEST_IDS = {
   SECURITY_SUMMARY_WIDGET: "security-summary-widget",
@@ -833,7 +728,6 @@ export const SECURITY_SUMMARY_TEST_IDS = {
   AVAILABILITY_IMPACT: "availability-impact",
   INTEGRITY_IMPACT: "integrity-impact",
   CONFIDENTIALITY_IMPACT: "confidentiality-impact",
-  // Add missing test IDs
   WIDGET: "security-summary-widget",
   OVERALL_LEVEL: "overall-security-level",
   SUMMARY_DESCRIPTION: "summary-description",
@@ -847,10 +741,6 @@ export const SECURITY_SUMMARY_TEST_IDS = {
   CONFIDENTIALITY_LEVEL: "confidentiality-level",
   CONFIDENTIALITY_RISK: "confidentiality-risk",
 };
-
-// ---------------------------------------------------------------
-// SECTION 14: VALUE CREATION WIDGET TEST IDs
-// ---------------------------------------------------------------
 
 export const VALUE_CREATION_TEST_IDS = {
   VALUE_CREATION_WIDGET: "value-creation-widget",
@@ -868,7 +758,6 @@ export const VALUE_CREATION_TEST_IDS = {
   TOTAL_COST: "total-cost",
   ROI_DESCRIPTION: "roi-description",
   VALUE_TITLE: "value-title",
-  // Add missing test ID
   ROI_SECTION: "roi-section",
   VALUE_BENEFITS: "value-benefits",
   VALUE_METRIC: "value-metric",
@@ -887,10 +776,6 @@ export const VALUE_CREATION_TEST_IDS = {
   STRATEGIC_VALUE: "strategic-value",
 };
 
-// ---------------------------------------------------------------
-// SECTION 15: AVAILABILITY IMPACT WIDGET TEST IDs
-// ---------------------------------------------------------------
-
 export const AVAILABILITY_IMPACT_TEST_IDS = {
   AVAILABILITY_IMPACT_PREFIX: "widget-availability-impact",
   AVAILABILITY_IMPACT_TITLE: "availability-impact-title",
@@ -906,10 +791,6 @@ export const AVAILABILITY_IMPACT_TEST_IDS = {
     "availability-impact-business-perspective",
 };
 
-// ---------------------------------------------------------------
-// SECTION 16: CONFIDENTIALITY & INTEGRITY IMPACT TEST IDs
-// ---------------------------------------------------------------
-
 export const CONFIDENTIALITY_IMPACT_TEST_IDS = {
   CONFIDENTIALITY_IMPACT_PREFIX: "confidentiality-impact",
   CONFIDENTIALITY_IMPACT_DESCRIPTION: "confidentiality-impact-description",
@@ -921,10 +802,6 @@ export const INTEGRITY_IMPACT_TEST_IDS = {
   INTEGRITY_IMPACT_DESCRIPTION: "integrity-impact-description",
   INTEGRITY_IMPACT_VALUE: "integrity-impact-value",
 };
-
-// ---------------------------------------------------------------
-// SECTION 17: TECHNICAL DETAILS WIDGET TEST IDs
-// ---------------------------------------------------------------
 
 export const TECHNICAL_DETAILS_TEST_IDS = {
   TECHNICAL_DETAILS_PREFIX: "technical-details",
@@ -938,7 +815,6 @@ export const TECHNICAL_DETAILS_TEST_IDS = {
   IMPLEMENTATION_COMPLEXITY: "implementation-complexity",
   REQUIRED_EXPERTISE: "required-expertise",
 
-  // Add missing test IDs
   COMPONENT_SELECTOR: "technical-details-component-selector",
   COMPONENT_DESCRIPTION: "technical-details-component-description",
   IMPLEMENTATION_TABS: "technical-details-implementation-tabs",
@@ -953,7 +829,6 @@ export const TECHNICAL_DETAILS_TEST_IDS = {
   INTEGRITY_BUTTON: "technical-details-integrity-button",
   AVAILABILITY_BUTTON: "technical-details-availability-button",
 
-  // Keep existing IDs
   AVAILABILITY_SECTION: "technical-details-availability",
   INTEGRITY_SECTION: "technical-details-integrity",
   CONFIDENTIALITY_SECTION: "technical-details-confidentiality",
@@ -967,10 +842,6 @@ export const TECHNICAL_DETAILS_TEST_IDS = {
   CONFIDENTIALITY_TAB: "confidentiality-tab",
   IMPLEMENTATION_HEADER: "implementation-header",
 };
-
-// ---------------------------------------------------------------
-// SECTION 18: SECURITY RESOURCES WIDGET TEST IDs
-// ---------------------------------------------------------------
 
 export const RESOURCE_TEST_IDS = {
   SECURITY_RESOURCES_WIDGET: "security-resources-widget",
@@ -1011,15 +882,10 @@ export const SECURITY_RESOURCES_TEST_IDS = {
   RESOURCE_TITLE: "security-resources-title",
   RESOURCE_DESCRIPTION: "security-resources-description",
   VIEW_ALL_BUTTON: "security-resources-view-all",
-  // Add missing properties
   SECURITY_RESOURCES_WIDGET: "security-resources-widget",
   RESOURCE_CATEGORY_FILTER: "resource-category-filter",
   RESOURCE_SEARCH: "resource-search",
 };
-
-// ---------------------------------------------------------------
-// SECTION 19: COMMON TEST IDs
-// ---------------------------------------------------------------
 
 export const COMMON_TEST_IDS = {
   BUTTON: "button",
@@ -1053,10 +919,6 @@ export const COMMON_TEST_IDS = {
   NAV: "nav",
 };
 
-// ---------------------------------------------------------------
-// SECTION 20: COMPLIANCE TEST IDs
-// ---------------------------------------------------------------
-
 export const COMPLIANCE_TEST_IDS = {
   COMPLIANCE_STATUS_WIDGET: "compliance-status-widget",
   COMPLIANCE_STATUS_BADGE: "compliance-status-badge",
@@ -1064,8 +926,7 @@ export const COMPLIANCE_TEST_IDS = {
   COMPLIANCE_REQUIREMENTS_LIST: "compliance-requirements-list",
   COMPLIANCE_FRAMEWORKS_CONTAINER: "compliance-frameworks-container",
   COMPLIANT_FRAMEWORKS_LIST: "compliant-frameworks-list",
-  // Add missing test IDs
-  WIDGET: "compliance-status-widget", // Alias for backward compatibility
+  WIDGET: "compliance-status-widget",
   COMPLIANCE_ERROR: "compliance-error",
   COMPLIANCE_LOADING: "compliance-loading",
   COMPLIANCE_STATUS_SUMMARY: "compliance-status-summary",
@@ -1090,10 +951,6 @@ export const COMPLIANCE_TEST_IDS = {
   NO_GAP_ANALYSIS: "no-gap-analysis",
   COMPLIANCE_TIPS_LIST: "compliance-tips-list",
 };
-
-// ---------------------------------------------------------------
-// SECTION 21: EXPORT ALL TEST IDs
-// ---------------------------------------------------------------
 
 /**
  * Consolidated export of all test IDs for easier imports
@@ -1126,7 +983,6 @@ export const TEST_IDS = {
     summary: "cost-estimation-summary",
     details: "cost-estimation-details",
     chart: "cost-estimation-chart",
-    // Adding the missing test IDs
     implementationCost: "implementation-cost",
     operationalCost: "operational-cost",
     personnelCost: "personnel-cost",
@@ -1151,60 +1007,46 @@ export function asSecurityLevel(level: string): SecurityLevel {
   return level as SecurityLevel;
 }
 
-// ---------------------------------------------------------------
-// SECTION 22: ACCESSIBILITY TEST IDs
-// ---------------------------------------------------------------
-
 /**
  * Test IDs for accessibility features and WCAG compliance
  */
 export const ACCESSIBILITY_TEST_IDS = {
-  // Skip links
   SKIP_TO_MAIN: 'skip-to-main-content',
   SKIP_TO_NAVIGATION: 'skip-to-navigation',
   SKIP_TO_FOOTER: 'skip-to-footer',
 
-  // Landmarks
   MAIN_CONTENT: 'main-content',
   PRIMARY_NAVIGATION: 'primary-navigation',
   CONTENT_REGION: 'content-region',
 
-  // ARIA live regions
   ANNOUNCEMENT_REGION: 'announcement-region',
   STATUS_MESSAGE: 'status-message',
   ALERT_MESSAGE: 'alert-message',
 
-  // Focus management
   FOCUS_TRAP_CONTAINER: 'focus-trap-container',
   FIRST_FOCUSABLE: 'first-focusable-element',
   LAST_FOCUSABLE: 'last-focusable-element',
 
-  // Screen reader only text
   SR_ONLY_TEXT: 'sr-only-text',
   VISUALLY_HIDDEN: 'visually-hidden',
 
-  // Keyboard navigation indicators
   KEYBOARD_FOCUS_INDICATOR: 'keyboard-focus-indicator',
   ACTIVE_ELEMENT: 'active-element',
 
-  // Accessible descriptions
   ACCESSIBLE_DESCRIPTION: 'accessible-description',
   ACCESSIBLE_LABEL: 'accessible-label',
   ACCESSIBLE_NAME: 'accessible-name',
 
-  // Chart accessibility
   CHART_DATA_TABLE: 'chart-data-table',
   CHART_ACCESSIBLE_DESCRIPTION: 'chart-accessible-description',
   CHART_SUMMARY: 'chart-summary',
 
-  // Form accessibility
   FORM_ERROR_SUMMARY: 'form-error-summary',
   FORM_SUCCESS_MESSAGE: 'form-success-message',
   REQUIRED_FIELD_INDICATOR: 'required-field-indicator',
   FIELD_ERROR_MESSAGE: 'field-error-message',
   FIELD_HELP_TEXT: 'field-help-text',
 
-  // Widget accessibility
   WIDGET_ACCESSIBLE_DESCRIPTION: 'widget-accessible-description',
   WIDGET_KEYBOARD_INSTRUCTIONS: 'widget-keyboard-instructions',
 };
