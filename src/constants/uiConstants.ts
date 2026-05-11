@@ -4,7 +4,7 @@ import { CIAComponentType } from "../types/cia-services";
  * UI-related constants for the application
  */
 
-// Widget icons using emoji characters
+/** Widget icons using emoji characters */
 export const WIDGET_ICONS = {
   SECURITY_LEVEL: "🛡️",
   SECURITY_SUMMARY: "📊",
@@ -77,7 +77,6 @@ export function getComponentIcon(component: CIAComponentType): string {
 export function getBusinessImpactIcon(category: string): string {
   const normalizedCategory = category.toLowerCase();
 
-  // Type assertion to access the object with string index
   const icons = BUSINESS_IMPACT_ICONS as Record<string, string>;
 
   return icons[normalizedCategory] || "📊";
@@ -92,7 +91,6 @@ export function getBusinessImpactIcon(category: string): string {
 export function getSecurityIcon(concept: string): string {
   const normalizedConcept = concept.toLowerCase();
 
-  // Type assertion to access the object with string index
   const icons = SECURITY_ICONS as Record<string, string>;
 
   return icons[normalizedConcept] || "🔷";
@@ -102,11 +100,11 @@ export function getSecurityIcon(concept: string): string {
  * Color mapping for security levels
  */
 export const SECURITY_LEVEL_COLORS = {
-  NONE: "#e74c3c", // Red
-  LOW: "#f39c12", // Orange
-  MODERATE: "#3498db", // Blue
-  HIGH: "#2ecc71", // Green
-  VERY_HIGH: "#9b59b6", // Purple
+  NONE: "#e74c3c",
+  LOW: "#f39c12",
+  MODERATE: "#3498db",
+  HIGH: "#2ecc71",
+  VERY_HIGH: "#9b59b6",
 };
 
 /**

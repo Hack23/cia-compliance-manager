@@ -2,50 +2,51 @@ import { COMPLIANCE_FRAMEWORKS, SECURITY_DESCRIPTIONS } from "./coreConstants";
 import { SECURITY_LEVEL_COLORS } from "./index";
 import { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS } from "./riskConstants";
 
-// Format constants for consistent display
+/** Display format constants */
 export const DISPLAY_FORMAT = {
   CURRENCY_PREFIX: "$",
   PERCENTAGE_SUFFIX: "%",
   DECIMAL_PLACES: 2,
 };
 
-// Format constants for display in tests
+/** Test display format constants */
 export const TEST_DISPLAY_FORMAT = {
   CURRENCY_PREFIX: "$",
   PERCENTAGE_SUFFIX: "%",
   DECIMAL_PLACES: 2,
 };
 
-// Test-specific helpers
+/** Returns a partial text matcher for substring matching */
 export const getPartialTextMatcher = (text: string, length = 15) => {
   return text.substring(0, Math.min(text.length, length));
 };
 
+/** Creates a case-insensitive regex matcher from text */
 export const createRegexMatcher = (text: string) => {
-  // Escape special regex characters and return a case-insensitive regex
   const escaped = text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   return new RegExp(escaped, "i");
 };
 
+/** Creates a regex matcher from the first three words of a value point */
 export const createValuePointMatcher = (point: string) => {
   const words = point.split(" ").slice(0, 3).join("\\s+");
   return new RegExp(words, "i");
 };
 
+/** Creates a matcher for text elements with a specific class */
 export const getTextElementMatcher = (text: string, className: string) => {
   return (content: string, element: Element) =>
     element.className.includes(className) &&
     content.includes(getPartialTextMatcher(text));
 };
 
-// Test matchers for UI elements
+/** Test matchers for UI element verification */
 export const TEST_MATCHERS = {
   COMPLIANCE_FRAMEWORKS_REGEX: new RegExp(
     Object.values(COMPLIANCE_FRAMEWORKS).join("|")
   ),
   UPTIME_PATTERN: /\d+\.?\d*%\s+uptime/i,
   DOWNTIME_PATTERN: /downtime/i,
-  // Security description matchers
   SECURITY_DESCRIPTIONS_REGEX: {
     NONE: new RegExp(SECURITY_DESCRIPTIONS.NONE),
     LOW: new RegExp(SECURITY_DESCRIPTIONS.LOW),
@@ -63,30 +64,28 @@ export const TEST_MATCHERS = {
     /Maximum security for highly sensitive systems and data/i,
 };
 
-// Add test matchers for CI/A levels
+/** CIA component test identifiers */
 export const CIA_TEST_IDS = {
   AVAILABILITY: "availability",
   INTEGRITY: "integrity",
   CONFIDENTIALITY: "confidentiality",
 };
 
-// Add test data that matches real data structure
+/** Test CIA security levels */
 export const TEST_CIA_LEVELS = {
   NONE: "None",
   LOW: "Low",
   MODERATE: "Moderate",
   HIGH: "High",
   VERY_HIGH: "Very High",
-  // Add these missing properties
   AVAILABILITY: "Availability",
   INTEGRITY: "Integrity",
   CONFIDENTIALITY: "Confidentiality",
 };
 
-// Add test helper to get color from security level
+/** Returns the color associated with a security level */
 export const getSecurityLevelColor = (level: string): string => {
   const normalizedLevel = level.toUpperCase().replace(/\s+/g, "_");
-  // Use type assertion and check if it's a valid key
   return normalizedLevel in SECURITY_LEVEL_COLORS
     ? SECURITY_LEVEL_COLORS[
         normalizedLevel as keyof typeof SECURITY_LEVEL_COLORS
@@ -94,12 +93,10 @@ export const getSecurityLevelColor = (level: string): string => {
     : "#666666";
 };
 
-// Export test helpers for components
+/** Test helper utilities for component testing */
 export const TEST_HELPERS = {
-  // Helper to check if an element has a specific security level color
   checkSecurityLevelColor: (element: HTMLElement, level: string) => {
     const color = getSecurityLevelColor(level);
-    // Check if element has color as background or border
     return (
       element.style.backgroundColor === color ||
       element.style.borderColor === color ||
@@ -107,7 +104,6 @@ export const TEST_HELPERS = {
     );
   },
 
-  // Helper to generate consistent test IDs
   getTestId: (component: string, entity: string, action?: string) => {
     return action
       ? `${component}-${entity}-${action}`
@@ -115,7 +111,7 @@ export const TEST_HELPERS = {
   },
 };
 
-// Test data
+/** Mock test data */
 export const TEST_DATA = {
   MOCK_OPTIONS: {
     BASE: { capex: 0, opex: 0 },
@@ -130,5 +126,4 @@ export const TEST_DATA = {
   },
 };
 
-// Re-export important constants for tests
 export { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS };

@@ -51,8 +51,6 @@ export function KeyboardShortcutProvider({
   const [isEnabled, setIsEnabled] = useState<boolean>(defaultEnabled);
   const [showHelp, setShowHelp] = useState<boolean>(false);
   
-  // Platform detection is cached at module level, so we can simply call it
-  // directly without memoization (it returns the cached value instantly)
   const platform = detectPlatform();
 
   /**
@@ -99,7 +97,6 @@ export function KeyboardShortcutProvider({
     setShowHelp(show);
   }, []);
 
-  // Memoize context value to avoid unnecessary re-renders
   const contextValue = useMemo<KeyboardShortcutContextValue>(
     () => ({
       shortcuts,

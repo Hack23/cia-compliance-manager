@@ -8,7 +8,6 @@
  * @packageDocumentation
  */
 
-// Re-export security data (primary source for CIA security level details)
 export {
   availabilityData,
   confidentialityData,
@@ -20,7 +19,6 @@ export {
   ROI_ESTIMATES,
 } from "./security";
 
-// Re-export CIA options data (excludes aliases already exported from security)
 export {
   defaultCIADataProvider,
   getCIAOptionsForComponent,
@@ -32,7 +30,6 @@ export {
 } from "./ciaOptionsData";
 export type { CIADetails } from "./ciaOptionsData";
 
-// Re-export risk impact data
 export {
   financialImpactByLevel,
   operationalImpactByLevel,
@@ -51,11 +48,9 @@ export {
 } from "./riskImpactData";
 export type { RiskImpactLevel, RiskImpact } from "./riskImpactData";
 
-// Re-export security resources
 export { default as securityResources } from "./securityResources";
 export { securityResourcesData } from "./securityResources";
 
-// Re-export value creation data (excludes ROI_ESTIMATES alias already from security)
 export {
   valueCreationPoints,
   valueCreationTitles,
