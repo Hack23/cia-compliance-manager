@@ -37,7 +37,6 @@ export const SecurityImplementationTab: React.FC<
       data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-implementation')}
       className="space-y-md"
     >
-      {/* Implementation introduction */}
       <div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg mb-sm">
         <p className="text-sm">
           This section summarizes implementation requirements for your selected
@@ -46,7 +45,6 @@ export const SecurityImplementationTab: React.FC<
         </p>
       </div>
 
-      {/* Implementation Overview */}
       <div className={cn(WidgetClasses.cardWhite, "shadow-sm")}>
         <h3 className={WidgetClasses.subheading}>
           Implementation Overview
@@ -82,7 +80,6 @@ export const SecurityImplementationTab: React.FC<
         </div>
 
         <div className={WidgetClasses.grid2Cols}>
-          {/* Implementation Timeline */}
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="text-body font-medium mb-sm text-gray-700 dark:text-gray-200">
               Estimated Implementation Time
@@ -93,7 +90,6 @@ export const SecurityImplementationTab: React.FC<
             </div>
           </div>
 
-          {/* Required Resources */}
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="text-body font-medium mb-sm text-gray-700 dark:text-gray-200">Required Resources</div>
             <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{requiredResources}</div>
@@ -104,14 +100,12 @@ export const SecurityImplementationTab: React.FC<
         </div>
       </div>
 
-      {/* Component Implementation Summary */}
       <div className={cn(WidgetClasses.card, "shadow-sm")}>
         <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Component Implementation Summary
         </h3>
 
         <div className={WidgetClasses.grid3Cols}>
-          {/* Confidentiality Implementation */}
           <div className="p-sm bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-100 dark:border-purple-800">
             <h4 className="font-medium text-purple-700 dark:text-purple-300 mb-sm">
               Confidentiality Implementation
@@ -127,7 +121,6 @@ export const SecurityImplementationTab: React.FC<
             </div>
           </div>
 
-          {/* Integrity Implementation */}
           <div className="p-sm bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800">
             <h4 className="font-medium text-green-700 dark:text-green-300 mb-sm">
               Integrity Implementation
@@ -140,7 +133,6 @@ export const SecurityImplementationTab: React.FC<
             </div>
           </div>
 
-          {/* Availability Implementation */}
           <div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800">
             <h4 className="font-medium text-blue-700 dark:text-blue-300 mb-sm">
               Availability Implementation
@@ -155,7 +147,6 @@ export const SecurityImplementationTab: React.FC<
         </div>
       </div>
 
-      {/* Implementation Considerations */}
       <div className={cn(WidgetClasses.card, "shadow-sm")}>
         <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Implementation Considerations

@@ -29,14 +29,12 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
 }) => {
   return (
     <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-compliance')} className="space-y-sm">
-      {/* Compliance introduction */}
       <div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded mb-sm">
         <p className="text-caption">
           Compliance status and framework alignment for your security levels.
         </p>
       </div>
 
-      {/* Compliance Status */}
       <div className="rounded-lg border border-gray-100 dark:border-gray-700 p-sm bg-white dark:bg-gray-800">
         <h3 className="text-body-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
           Compliance Status
@@ -87,7 +85,6 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
         )}
       </div>
 
-      {/* Framework Status */}
       {complianceStatus && (
         <div className="rounded-lg border border-gray-100 dark:border-gray-700 p-sm bg-white dark:bg-gray-800">
           <h3 className="text-body-lg font-medium mb-sm text-gray-800 dark:text-gray-100">

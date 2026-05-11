@@ -12,14 +12,6 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { CHART_TEST_IDS } from "../../constants/testIds";
 
-// Register Chart.js components at module level (intentional)
-// This executes once when the module is first imported, which is the recommended
-// approach for Chart.js registration. The check prevents duplicate registration
-// in environments where the module might be imported multiple times (e.g., tests).
-// Module-level registration is safe because:
-// 1. Chart.js registration is global and idempotent
-// 2. The overrides check ensures components are only registered once
-// 3. Lazy loading of SecurityVisualizationWidget defers this until needed
 const isRadarRegistered = Chart.overrides.radar !== undefined;
 if (!isRadarRegistered) {
   Chart.register(
@@ -34,13 +26,40 @@ if (!isRadarRegistered) {
   );
 }
 
+/**
+ * Props for the RadarChart component
+ */
 interface RadarChartProps {
+  /** Current availability security level */
   availabilityLevel: string;
+  /** Current integrity security level */
   integrityLevel: string;
+  /** Current confidentiality security level */
   confidentialityLevel: string;
+  /** Additional CSS class names */
   className?: string;
+  /** Test ID for automated testing */
   testId?: string;
 }
+
+/**
+ * Radar chart visualization of the CIA security triad
+ *
+ * ## Business Perspective
+ *
+ * Provides an intuitive visual representation of the security posture
+ * across all three CIA triad dimensions, enabling at-a-glance assessment
+ * of security balance and identifying areas needing improvement. 📊
+ *
+ * @example
+ * ```tsx
+ * <RadarChart
+ *   availabilityLevel="High"
+ *   integrityLevel="Moderate"
+ *   confidentialityLevel="Very High"
+ * />
+ * ```
+ */
 
 const RadarChart: React.FC<RadarChartProps> = ({
   availabilityLevel = "None",
@@ -53,21 +72,17 @@ const RadarChart: React.FC<RadarChartProps> = ({
   const chartInstanceRef = useRef<Chart<"radar", number[], string> | null>(
     null
   );
-  // Add state to track render errors for testing
   const [renderError, setRenderError] = useState<string | null>(null);
-  // Add state to track dark mode
   const [isDarkMode, setIsDarkMode] = useState<boolean>(
     document.documentElement.classList.contains("dark")
   );
 
-  // Remove unused state or rename to indicate it's unused
   const [_securityLevels] = useState({
     availabilityLevel,
     integrityLevel,
     confidentialityLevel,
   });
 
-  // Convert security levels to numerical values
   const mapLevelToValue = (level: string): number => {
     switch (level) {
       case "None":
@@ -86,9 +101,7 @@ const RadarChart: React.FC<RadarChartProps> = ({
     }
   };
 
-  // Add effect to listen for theme changes
   useEffect(() => {
-    // Create a MutationObserver to watch for changes to the document element's class list
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (
@@ -97,7 +110,6 @@ const RadarChart: React.FC<RadarChartProps> = ({
         ) {
           const newDarkMode =
             document.documentElement.classList.contains("dark");
-          // Only update state if the mode actually changed
           if (newDarkMode !== isDarkMode) {
             setIsDarkMode(newDarkMode);
           }
@@ -105,10 +117,8 @@ const RadarChart: React.FC<RadarChartProps> = ({
       });
     });
 
-    // Start observing
     observer.observe(document.documentElement, { attributes: true });
 
-    // Cleanup observer on unmount
     return () => observer.disconnect();
   }, [isDarkMode]);
 
@@ -116,12 +126,10 @@ const RadarChart: React.FC<RadarChartProps> = ({
     if (!chartRef.current) return;
 
     try {
-      // Cleanup previous chart instance
       if (chartInstanceRef.current) {
         chartInstanceRef.current.destroy();
       }
 
-      // Add null checking for chart context
       const ctx = chartRef.current?.getContext("2d");
       if (!ctx) {
         setRenderError("Could not get canvas context");
@@ -132,7 +140,6 @@ const RadarChart: React.FC<RadarChartProps> = ({
       const integrityValue = mapLevelToValue(integrityLevel);
       const confidentialityValue = mapLevelToValue(confidentialityLevel);
 
-      // Set chart colors based on theme - now using isDarkMode state
       const backgroundColor = isDarkMode
         ? "rgba(0, 204, 102, 0.2)"
         : "rgba(0, 102, 51, 0.2)";
@@ -142,7 +149,6 @@ const RadarChart: React.FC<RadarChartProps> = ({
         : "rgba(0, 0, 0, 0.1)";
       const textColor = isDarkMode ? "#f0f0f0" : "#222222";
 
-      // Create chart
       chartInstanceRef.current = new Chart(ctx, {
         type: "radar",
         data: {
@@ -234,7 +240,6 @@ const RadarChart: React.FC<RadarChartProps> = ({
         },
       });
 
-      // Handle resize events to ensure the chart remains responsive
       const resizeHandler = () => {
         if (chartInstanceRef.current) {
           chartInstanceRef.current.resize();
@@ -250,13 +255,11 @@ const RadarChart: React.FC<RadarChartProps> = ({
         }
       };
     } catch (error) {
-      // Improved error handling with proper type checking
       setRenderError(error instanceof Error ? error.message : String(error));
     }
-    return undefined; // Add explicit return
-  }, [availabilityLevel, integrityLevel, confidentialityLevel, isDarkMode]); // Added isDarkMode as dependency
+    return undefined;
+  }, [availabilityLevel, integrityLevel, confidentialityLevel, isDarkMode]);
 
-  // Apply className to container element if provided
   const containerClassName = className
     ? `radar-chart-container ${className}`.trim()
     : "radar-chart-container";

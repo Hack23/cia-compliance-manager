@@ -21,8 +21,6 @@ import { SecurityComplianceTab } from "./SecurityComplianceTab";
 import { SecurityImplementationTab } from "./SecurityImplementationTab";
 import { SecurityOverviewTab } from "./SecurityOverviewTab";
 
-
-
 /**
  * Displays a comprehensive executive summary of security posture with key metrics
  *
@@ -40,7 +38,6 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
   className = "",
   testId = SECURITY_SUMMARY_TEST_IDS.WIDGET,
 }) => {
-  // Get services for data
   const {
     ciaContentService,
     error: ciaError,
@@ -56,11 +53,9 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
     isLoading: complianceLoading,
   } = useComplianceService();
 
-  // Determine if any service is loading or has errors
   const isLoading = ciaLoading || metricsLoading || complianceLoading;
   const error = ciaError || metricsError || complianceError;
 
-  // Use custom hook for all data calculations
   const {
     securityLevelDescription,
     securityScore,
@@ -85,7 +80,6 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
     complianceService
   );
 
-  // Configure tabs with content
   const tabs: Tab[] = [
     {
       id: 'overview',
@@ -178,7 +172,6 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
             "Comprehensive executive summary of security posture with key metrics"
           )}
         >
-          {/* Security Classification Banner - Compact layout */}
           <section
             className={cn(
               "p-sm rounded-md border-l-4 border-info dark:border-info-light",
@@ -235,7 +228,6 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
             </div>
           </section>
 
-          {/* Tab Navigation and Content */}
           <TabContainer
             tabs={tabs}
             initialTab="overview"
