@@ -83,7 +83,6 @@ export const TabContainer: React.FC<TabContainerProps> = ({
 
   return (
     <div className={className} data-testid={testId}>
-      {/* Tab List */}
       <div
         role={ARIA_ROLES.TABLIST}
         className="flex space-x-sm border-b border-gray-200 dark:border-gray-700 mb-sm"
@@ -138,7 +137,6 @@ export const TabContainer: React.FC<TabContainerProps> = ({
         })}
       </div>
 
-      {/* Tab Panels */}
       {tabs.map((tab) => (
         <div
           key={tab.id}

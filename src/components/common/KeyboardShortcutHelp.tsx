@@ -26,7 +26,6 @@ export const KeyboardShortcutHelp: React.FC<KeyboardShortcutHelpProps> = ({
   const context = useKeyboardShortcutContext();
   const shortcuts = providedShortcuts || context.shortcuts;
 
-  // Group shortcuts by category
   const groupedShortcuts = useMemo<GroupedShortcuts>(() => {
     const groups: GroupedShortcuts = {};
     
@@ -41,10 +40,6 @@ export const KeyboardShortcutHelp: React.FC<KeyboardShortcutHelpProps> = ({
     return groups;
   }, [shortcuts]);
 
-  // Handle Escape key to close modal
-  // Note: This local handler coexists with the global keyboard shortcut handler.
-  // The Escape key is marked as a bypass key in BYPASS_INPUT_CHECK_KEYS, ensuring
-  // it works correctly in both contexts without conflicts.
   useEffect(() => {
     if (!isOpen) return;
 
@@ -60,13 +55,11 @@ export const KeyboardShortcutHelp: React.FC<KeyboardShortcutHelpProps> = ({
     return () => window.removeEventListener('keydown', handleEscape);
   }, [isOpen, onClose]);
 
-  // Focus trap for accessibility
   useEffect(() => {
     if (!isOpen) return;
 
     let cleanup: (() => void) | undefined;
 
-    // Use requestAnimationFrame to ensure modal is in DOM
     const rafId = requestAnimationFrame(() => {
       const modal = document.querySelector('[role="dialog"]');
       if (!modal) return;
@@ -118,7 +111,6 @@ export const KeyboardShortcutHelp: React.FC<KeyboardShortcutHelpProps> = ({
         className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
         <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
           <h2
             id="keyboard-shortcuts-title"
@@ -149,7 +141,6 @@ export const KeyboardShortcutHelp: React.FC<KeyboardShortcutHelpProps> = ({
           </button>
         </div>
 
-        {/* Content */}
         <div className="overflow-y-auto p-6 flex-1">
           {Object.entries(groupedShortcuts).map(([category, categoryShortcuts]) => (
             <div
@@ -182,7 +173,6 @@ export const KeyboardShortcutHelp: React.FC<KeyboardShortcutHelpProps> = ({
           ))}
         </div>
 
-        {/* Footer */}
         <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
           <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
             Press <ShortcutBadge shortcut="Escape" size="sm" /> to close this dialog

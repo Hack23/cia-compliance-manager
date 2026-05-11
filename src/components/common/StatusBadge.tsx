@@ -1,7 +1,6 @@
 import * as React from "react";
 import { StatusType } from "../../types/common/StatusTypes";
 
-// Single, unified interface definition to fix the "merged declaration" error
 export interface StatusBadgeProps {
   /**
    * The status type (determines color when variant is not provided)
@@ -69,15 +68,12 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({
   children,
   className = "",
   testId,
-  size = "md", // Default to medium size
+  size = "md",
   variant,
 }) => {
-  // Use variant as color key when explicitly provided and recognized,
-  // otherwise fall back to the status prop.
   const colorKey: string =
     variant && KNOWN_VARIANTS.has(variant) ? variant : status;
 
-  // Determine color classes based on resolved color key
   const getStatusClasses = (): string => {
     switch (colorKey) {
       case "success":
@@ -97,7 +93,6 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({
     }
   };
 
-  // Determine size classes
   const getSizeClasses = (): string => {
     switch (size) {
       case "sm":
@@ -120,5 +115,4 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({
 };
 
 export default StatusBadge;
-// Use imported types rather than redefining them
 export type { StatusType };

@@ -60,7 +60,6 @@ export const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({
   const baseClasses = 'animate-pulse';
   const skeletonClasses = 'bg-gray-200 dark:bg-gray-700 rounded';
 
-  // Configuration map for each variant
   const variantConfigs: Record<SkeletonVariant, SkeletonVariantConfig> = {
     default: {
       ariaLabel: 'Loading content',
@@ -161,10 +160,8 @@ export const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({
     }
   };
 
-  // Get the configuration for the current variant, fallback to default
   const config = variantConfigs[variant] || variantConfigs.default;
   
-  // Explicit spacing configuration per variant for maintainability
   const spaceClassMap: Record<SkeletonVariant, string> = {
     default: 'space-y-4',
     summary: 'space-y-4',

@@ -8,7 +8,6 @@ interface ResourceCardProps {
   testId?: string;
 }
 
-// Helper function to truncate text with ellipsis
 const truncateText = (text: string | undefined, maxLength: number): string => {
   if (!text) return "";
   return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
@@ -89,7 +88,6 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === " ") {
-          // Space scrolls the page on focusable non-button elements; prevent it to match native button activation.
           e.preventDefault();
         } else if (e.key === "Enter") {
           handleClick();

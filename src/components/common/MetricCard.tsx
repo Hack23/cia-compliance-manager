@@ -57,7 +57,6 @@ export const MetricCard: React.FC<MetricCardProps> = ({
   className = '',
   ariaLabel,
 }) => {
-  // Variant color classes for borders and backgrounds - Tailwind only
   const variantClasses = {
     default: {
       container: 'border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800',

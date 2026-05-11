@@ -109,13 +109,11 @@ export class WidgetErrorBoundary extends Component<
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
     const { widgetName, onError } = this.props;
     
-    // Log using centralized logger for debugging
     logger.error(
       `WidgetErrorBoundary caught error${widgetName ? ` in ${widgetName}` : ''}`,
       { error, errorInfo }
     );
     
-    // Call optional error callback
     if (onError) {
       onError(error, errorInfo);
     }
@@ -133,12 +131,10 @@ export class WidgetErrorBoundary extends Component<
     const { children, fallback, widgetName, testId = 'widget-error-boundary' } = this.props;
 
     if (hasError) {
-      // Use custom fallback if provided
       if (fallback) {
         return fallback;
       }
 
-      // Default error UI using ErrorMessage component
       return (
         <div data-testid={testId} className="p-4">
           <ErrorMessage
