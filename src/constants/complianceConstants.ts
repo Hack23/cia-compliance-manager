@@ -118,7 +118,6 @@ export const AVAILABILITY_REQUIREMENTS: Record<
       "Continuous availability monitoring",
     ],
   },
-  // Additional frameworks could be added here
 };
 
 /**
@@ -149,7 +148,6 @@ export const INTEGRITY_REQUIREMENTS: Record<
       "Immutable audit trails",
     ],
   },
-  // Additional frameworks could be added here
 };
 
 /**
@@ -180,7 +178,6 @@ export const CONFIDENTIALITY_REQUIREMENTS: Record<
       "Data tokenization",
     ],
   },
-  // Additional frameworks could be added here
 };
 
 /**
@@ -229,7 +226,6 @@ export const FRAMEWORK_MINIMUM_LEVELS: Record<
     integrity: "Moderate",
     confidentiality: "Moderate",
   },
-  // Additional frameworks could be added here
 };
 
 /**

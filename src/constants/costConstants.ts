@@ -13,16 +13,9 @@ import { SecurityLevel } from "../types/cia";
  * Default cost estimation parameters
  */
 export const DEFAULT_COST_PARAMS = {
-  // Default organization size for cost calculations
   DEFAULT_ORG_SIZE: "medium",
-
-  // Default industry for cost calculations
   DEFAULT_INDUSTRY: "general",
-
-  // Default currency for displaying costs
   DEFAULT_CURRENCY: "USD",
-
-  // Default implementation timeframe in months
   DEFAULT_TIMEFRAME: 6,
 };
 
@@ -30,23 +23,23 @@ export const DEFAULT_COST_PARAMS = {
  * Cost multipliers based on organization size
  */
 export const ORGANIZATION_SIZE_MULTIPLIERS = {
-  small: 0.5, // Smaller organizations have lower implementation costs
-  medium: 1.0, // Base multiplier
-  large: 2.0, // Larger organizations have higher implementation costs
-  enterprise: 4.0, // Enterprise-scale implementations are substantially more expensive
+  small: 0.5,
+  medium: 1.0,
+  large: 2.0,
+  enterprise: 4.0,
 };
 
 /**
  * Industry-specific cost factors that adjust implementation costs
  */
 export const INDUSTRY_COST_FACTORS = {
-  healthcare: 1.5, // Higher regulatory requirements
-  finance: 1.7, // Stringent security requirements
-  government: 1.3, // Procurement complexity
-  retail: 1.1, // PCI DSS considerations
-  technology: 1.0, // Baseline
-  manufacturing: 0.9, // Lower regulatory burden
-  general: 1.0, // Default for unspecified industries
+  healthcare: 1.5,
+  finance: 1.7,
+  government: 1.3,
+  retail: 1.1,
+  technology: 1.0,
+  manufacturing: 0.9,
+  general: 1.0,
 };
 
 /**
@@ -229,8 +222,8 @@ export const RESOURCE_SCALE: Record<SecurityLevel, number> = {
 export const CALCULATION_CONSTANTS = {
   MONTHS_PER_YEAR: 12,
   STANDARD_TCO_YEARS: 3,
-  BASE_COST_UNIT: 5000, // Base cost unit for calculations in currency units
-  ROI_TIMEFRAME_YEARS: 5, // Years to calculate ROI over
+  BASE_COST_UNIT: 5000,
+  ROI_TIMEFRAME_YEARS: 5,
 };
 
 /**
