@@ -13,8 +13,6 @@ import { ShortcutCategory } from '../types/keyboard';
  * with browser default shortcuts.
  */
 export const KEYBOARD_SHORTCUTS = {
-  // Security Level Selection (Alt+1-5 for None through Very High)
-  // Note: Using Alt instead of Ctrl to avoid browser tab switching conflicts
   SELECT_NONE: {
     id: 'select-none',
     keys: 'alt+1',
@@ -46,7 +44,6 @@ export const KEYBOARD_SHORTCUTS = {
     category: 'Selection' as ShortcutCategory,
   },
   
-  // Navigation (Ctrl+Shift+1-4 for widget categories)
   NAV_ASSESSMENT: {
     id: 'nav-assessment',
     keys: 'ctrl+shift+1',
@@ -72,7 +69,6 @@ export const KEYBOARD_SHORTCUTS = {
     category: 'Navigation' as ShortcutCategory,
   },
   
-  // Actions
   TOGGLE_COMPARISON: {
     id: 'toggle-comparison',
     keys: 'ctrl+m',
@@ -102,12 +98,10 @@ export const KEYBOARD_SHORTCUTS = {
   },
   SHOW_HELP_ALT: {
     id: 'show-help-alt',
-    keys: 'ctrl+/',
+    keys: 'ctrl/',
     description: 'Show keyboard shortcuts (alternative)',
     category: 'Help' as ShortcutCategory,
   },
-  // CLOSE_MODAL is handled locally by individual modal components
-  // and doesn't need to be registered globally
 } as const;
 
 /**
