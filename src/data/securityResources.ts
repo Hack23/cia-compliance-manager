@@ -198,7 +198,6 @@ const securityResources: SecurityResource[] = [
  * Sample security resources for development and testing
  */
 const securityResourcesData: SecurityResource[] = [
-  // Availability Resources
   {
     id: "avail-1",
     title: "High Availability Architecture Patterns",
@@ -241,7 +240,6 @@ const securityResourcesData: SecurityResource[] = [
     format: "Website",
     complexity: 3,
   },
-  // Integrity Resources
   {
     id: "integ-1",
     title: "Data Integrity Validation Framework",
@@ -285,7 +283,6 @@ const securityResourcesData: SecurityResource[] = [
     format: "Software",
     complexity: 1,
   },
-  // Confidentiality Resources
   {
     id: "conf-1",
     title: "Data Classification Policy Template",
@@ -328,7 +325,6 @@ const securityResourcesData: SecurityResource[] = [
     format: "Website",
     complexity: 3,
   },
-  // Multi-component Resources
   {
     id: "multi-1",
     title: "NIST Cybersecurity Framework Implementation Guide",
@@ -373,6 +369,5 @@ const securityResourcesData: SecurityResource[] = [
   },
 ];
 
-// Only export one default
 export { securityResources, securityResourcesData };
 export default securityResources;
