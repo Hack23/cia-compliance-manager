@@ -26,7 +26,7 @@ interface ComponentTheme {
  */
 const COMPONENT_THEMES: Record<CIAComponent, ComponentTheme> = {
   confidentiality: {
-    icon: "🔒",
+    icon: "\uD83D\uDD12",
     colorClass: "bg-purple-100 dark:bg-purple-900/20",
     textClass: "text-purple-800 dark:text-purple-300",
     bgClass: "bg-purple-50 dark:bg-purple-900/20",
@@ -36,7 +36,7 @@ const COMPONENT_THEMES: Record<CIAComponent, ComponentTheme> = {
     title: "Confidentiality Controls",
   },
   integrity: {
-    icon: "✓",
+    icon: "\u2713",
     colorClass: "bg-green-100 dark:bg-green-900/20",
     textClass: "text-green-800 dark:text-green-300",
     bgClass: "bg-green-50 dark:bg-green-900/20",
@@ -46,7 +46,7 @@ const COMPONENT_THEMES: Record<CIAComponent, ComponentTheme> = {
     title: "Integrity Controls",
   },
   availability: {
-    icon: "⏱️",
+    icon: "\u23F1\uFE0F",
     colorClass: "bg-blue-100 dark:bg-blue-900/20",
     textClass: "text-blue-800 dark:text-blue-300",
     bgClass: "bg-blue-50 dark:bg-blue-900/20",
@@ -91,13 +91,11 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
   const theme = COMPONENT_THEMES[component];
   const [showAdvancedDetails, setShowAdvancedDetails] = useState(false);
 
-  // Helper to convert complexity string to numeric value for UI
   const getComplexityValue = (complexity: string): number => {
     const value = getSecurityLevelValue(complexity as SecurityLevel);
     return value * 25;
   };
 
-  // Calculate complexity using existing utility
   const complexity = useMemo(() => {
     const complexityLabel = getImplementationComplexity(level, level, level);
     return {
@@ -106,7 +104,6 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
     };
   }, [level]);
 
-  // Get optional property with fallback
   const getOptionalProperty = (
     obj: unknown,
     property: string,
@@ -139,7 +136,6 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-sm mb-md">
-        {/* Main technical details card */}
         <div
           className={`p-sm ${theme.bgClass} rounded-lg shadow-sm border ${theme.borderClass}`}
         >
@@ -191,7 +187,6 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
           </div>
         </div>
 
-        {/* Implementation requirements card */}
         <div className="p-sm bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
           <h4
             className="text-md font-medium mb-md"
@@ -215,7 +210,6 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         </div>
       </div>
 
-      {/* Advanced Details - Collapsible */}
       <div className="mb-sm">
         <button
           onClick={() => setShowAdvancedDetails(!showAdvancedDetails)}
@@ -235,17 +229,16 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
             {showAdvancedDetails ? "Hide" : "Show"} Advanced Details
           </span>
           <span className="text-gray-500">
-            {showAdvancedDetails ? "▲" : "▼"}
+            {showAdvancedDetails ? "\u25B2" : "\u25BC"}
           </span>
         </button>
         
         {showAdvancedDetails && (
           <div id={`${testId}-${component}-advanced-content`} className="mt-sm space-y-sm">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-sm">
-              {/* Technologies card */}
               <div className="p-sm bg-white dark:bg-gray-800 rounded-md shadow-sm border border-neutral-light dark:border-neutral-dark">
                 <h4 className="text-body font-medium flex items-center mb-sm">
-                  <span className={`mr-xs ${theme.accentClass}`}>💻</span>Technologies
+                  <span className={`mr-xs ${theme.accentClass}`}>\uD83D\uDCBB</span>Technologies
                 </h4>
                 <p className={`text-sm ${theme.textClass}`}>
                   {getOptionalProperty(
@@ -256,10 +249,9 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
                 </p>
               </div>
 
-              {/* Configurations card */}
               <div className="p-sm bg-white dark:bg-gray-800 rounded-md shadow-sm border border-neutral-light dark:border-neutral-dark">
                 <h4 className="text-body font-medium flex items-center mb-sm">
-                  <span className={`mr-xs ${theme.accentClass}`}>⚙️</span>
+                  <span className={`mr-xs ${theme.accentClass}`}>\u2699\uFE0F</span>
                   Configurations
                 </h4>
                 <p className={`text-sm ${theme.textClass}`}>
@@ -272,10 +264,9 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
               </div>
             </div>
 
-            {/* Expertise Required card */}
             <div className="p-sm bg-white dark:bg-gray-800 rounded-md shadow-sm border border-gray-200 dark:border-gray-700">
               <h4 className="text-body font-medium flex items-center mb-sm">
-                <span className={`mr-xs ${theme.accentClass}`}>👨‍💻</span>Expertise Required
+                <span className={`mr-xs ${theme.accentClass}`}>\uD83D\uDC68\u200D\uD83D\uDCBB</span>Expertise Required
               </h4>
               <ul
                 className="grid grid-cols-1 lg:grid-cols-2 gap-xs"

@@ -3,7 +3,6 @@ import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { TECHNICAL_DETAILS_WIDGET_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { useTechnicalDetailsData } from "../../../hooks/useTechnicalDetailsData";
-import { SecurityLevel } from "../../../types/cia";
 import { TechnicalDetailsWidgetProps } from "../../../types/widget-props";
 import { Tab } from "../../../types/tabs";
 import { 
@@ -16,8 +15,6 @@ import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 import TabContainer from "../../common/TabContainer";
 import { CIAComponentDetails } from "./CIAComponentDetails";
 
-
-
 /**
  * Widget that displays detailed technical implementation requirements
  *
@@ -26,7 +23,7 @@ import { CIAComponentDetails } from "./CIAComponentDetails";
  * This widget provides technical teams with specific implementation details
  * for achieving the selected security levels. It helps bridge the gap between
  * security requirements and technical implementation by providing concrete
- * guidance on controls, configurations, and technologies. 🛠️
+ * guidance on controls, configurations, and technologies. \uD83D\uDEE0\uFE0F
  */
 const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   availabilityLevel,
@@ -35,10 +32,8 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   className = "",
   testId = TECHNICAL_DETAILS_WIDGET_IDS.root,
 }) => {
-  // Get CIA content service
   const { ciaContentService, error, isLoading } = useCIAContentService();
 
-  // Use custom hook for all data and helper functions
   const {
     confidentialityDetails,
     integrityDetails,
@@ -55,12 +50,11 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
     ciaContentService
   );
 
-  // Configure tabs with content
   const tabs: Tab[] = [
     {
       id: 'confidentiality',
       label: 'Confidentiality',
-      icon: <span className="mr-xs" aria-hidden="true">🔒</span>,
+      icon: <span className="mr-xs" aria-hidden="true">\uD83D\uDD12</span>,
       content: (
         <CIAComponentDetails
           component="confidentiality"
@@ -80,7 +74,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
     {
       id: 'integrity',
       label: 'Integrity',
-      icon: <span className="mr-xs" aria-hidden="true">✓</span>,
+      icon: <span className="mr-xs" aria-hidden="true">\u2713</span>,
       content: (
         <CIAComponentDetails
           component="integrity"
@@ -100,7 +94,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
     {
       id: 'availability',
       label: 'Availability',
-      icon: <span className="mr-xs" aria-hidden="true">⏱️</span>,
+      icon: <span className="mr-xs" aria-hidden="true">\u23F1\uFE0F</span>,
       content: (
         <CIAComponentDetails
           component="availability"
@@ -125,7 +119,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         title={
           WIDGET_TITLES.TECHNICAL_DETAILS || "Technical Implementation Details"
         }
-        icon={WIDGET_ICONS.TECHNICAL_DETAILS || "🛠️"}
+        icon={WIDGET_ICONS.TECHNICAL_DETAILS || "\uD83D\uDEE0\uFE0F"}
         className={className}
         testId={testId}
         isLoading={isLoading}
@@ -139,7 +133,6 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
           "Detailed technical implementation requirements for achieving selected security levels"
         )}
       >
-        {/* Technical details description */}
         <section 
           className={cn(
             WidgetClasses.section,
@@ -155,17 +148,15 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
           </p>
         </section>
 
-        {/* Tab Navigation and Content */}
         <TabContainer
           tabs={tabs}
           initialTab="confidentiality"
           testId={`${testId}-tabs`}
         />
 
-        {/* Implementation considerations */}
         <div className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
           <h3 className="text-subheading font-medium mb-md flex items-center">
-            <span className="mr-sm">💡</span>Implementation Notes
+            <span className="mr-sm">\uD83D\uDCA1</span>Implementation Notes
           </h3>
           <ul className="space-y-xs text-body text-gray-600 dark:text-gray-400">
             <li className="flex items-start">
