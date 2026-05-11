@@ -18,7 +18,7 @@ const highlightCode = (code: string, language?: string): string => {
     .replace(/>/g, "&gt;");
 
   if (language === "typescript" || language === "javascript" || language === "jsx" || language === "tsx") {
-    const tsPattern = /(\/\/.*$|\/\*[\s\S]*?\*\/)|("|(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)|(\b(?:const|let|var|function|return|if|else|for|while|class|interface|type|import|export|from|default|async|await|try|catch|throw|new|this|extends|implements|public|private|protected|static|readonly)\b)|(\b\d+\b)/gm;
+    const tsPattern = /(\/\/.*$|\/\*[\s\S]*?\*\/)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)|(\b(?:const|let|var|function|return|if|else|for|while|class|interface|type|import|export|from|default|async|await|try|catch|throw|new|this|extends|implements|public|private|protected|static|readonly)\b)|(\b\d+\b)/gm;
     
     highlighted = highlighted.replace(
       tsPattern,
@@ -39,7 +39,7 @@ const highlightCode = (code: string, language?: string): string => {
       }
     );
   } else if (language === "python") {
-    const pythonPattern = /(#.*$)|("""|'\s*[\s\S]*?"\s*""|'(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*")|(\b(?:def|class|if|elif|else|for|while|return|import|from|as|try|except|finally|with|lambda|yield|raise|pass|break|continue|True|False|None)\b)/gm;
+    const pythonPattern = /(#.*$)|("""[\s\S]*?"""|'''[\s\S]*?'''|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')|(\b(?:def|class|if|elif|else|for|while|return|import|from|as|try|except|finally|with|lambda|yield|raise|pass|break|continue|True|False|None)\b)/gm;
     
     highlighted = highlighted.replace(
       pythonPattern,
@@ -145,6 +145,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
       className={`relative rounded-md overflow-hidden ${className}`}
       data-testid={testId}
     >
+      {/* Header with language and copy button */}
       <div className="flex items-center justify-between px-lg py-md bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
           {language || "code"}
@@ -163,6 +164,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
         )}
       </div>
 
+      {/* Code content */}
       <div className="bg-gray-50 dark:bg-gray-900 overflow-x-auto">
         <pre className="p-lg text-sm">
           <code className="font-mono">

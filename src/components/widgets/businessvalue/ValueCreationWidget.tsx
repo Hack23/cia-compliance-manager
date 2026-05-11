@@ -65,7 +65,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
       case "Very High":
         return "Very High";
       default:
-        return "Moderate";
+        return "Moderate"; // Default fallback
     }
   }, [securityScore]);
 
@@ -82,7 +82,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
       case "Very High":
         return 5;
       default:
-        return 3;
+        return 3; // Default fallback
     }
   }, [securityScore]);
 
@@ -223,7 +223,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
       );
 
       return {
-        value: roiEstimate.value ?? "Unable to calculate",
+        value: roiEstimate.value ?? "Unable to calculate", // Ensure value is a string
         description: roiEstimate.description,
       };
     } catch (err) {
@@ -304,6 +304,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           "Business value and return on investment created by security investments"
         )}
       >
+        {/* Summary cards at top - Compact 3-column grid (responsive) */}
         <section className={cn("grid grid-cols-1 sm:grid-cols-3 gap-sm mb-md")} aria-label="Summary metrics">
           <div className={cn("p-sm bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light/30 dark:border-success-dark/30")}>
             <div className={cn(WidgetClasses.labelNormal, "text-success-dark dark:text-success-light mb-xs")}>ROI</div>
@@ -328,6 +329,8 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           </div>
         </section>
 
+        {/* Collapsible sections */}
+        {/* Value Overview */}
         <div className={cn("mb-sm")}>
           <button
             type="button"
@@ -375,6 +378,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           )}
         </div>
 
+        {/* Component Value - Collapsible */}
         <div className={cn("mb-sm")}>
           <button
             type="button"
@@ -398,6 +402,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               id="component-value-content"
               className={cn("p-sm mt-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 space-y-sm")}
             >
+              {/* Confidentiality */}
               <div className={cn("p-xs bg-primary-light/10 dark:bg-primary-dark/20 rounded")}>
                 <div className={cn("flex items-center mb-xs")}>
                   <span className={cn("mr-xs")} aria-hidden="true">🔒</span>
@@ -412,6 +417,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
                 </ul>
               </div>
 
+              {/* Integrity */}
               <div className={cn("p-xs bg-success-light/10 dark:bg-success-dark/20 rounded")}>
                 <div className={cn("flex items-center mb-xs")}>
                   <span className={cn("mr-xs")} aria-hidden="true">✓</span>
@@ -426,6 +432,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
                 </ul>
               </div>
 
+              {/* Availability */}
               <div className={cn("p-xs bg-info-light/10 dark:bg-info-dark/20 rounded")}>
                 <div className={cn("flex items-center mb-xs")}>
                   <span className={cn("mr-xs")} aria-hidden="true">⏱️</span>
@@ -443,6 +450,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           )}
         </div>
 
+        {/* Business Case - Collapsible */}
         <div className={cn("mb-sm")}>
           <button
             type="button"

@@ -15,7 +15,6 @@ import { SecurityMetricsService } from "./securityMetricsService";
 import { SecurityResourceService } from "./securityResourceService";
 import { TechnicalImplementationService } from "./technicalImplementationService";
 
-// Import default data provider
 import {
   ROI_ESTIMATES,
   availabilityOptions,
@@ -81,7 +80,6 @@ export function getCIAOptions(
     case "confidentiality":
       return confidentialityOptions;
     default:
-      // Return a properly typed empty object with default values for each security level
       return {
         None: createEmptyCIADetails(),
         Low: createEmptyCIADetails(),
@@ -164,7 +162,6 @@ function getSecurityScoreDescription(score: number): string {
  * impact analysis, technical implementations, and compliance requirements. 🔒
  */
 export class CIAContentService extends BaseService {
-  // Change from private to protected to match BaseService
   protected dataProvider: CIADataProvider;
   private businessImpactService: BusinessImpactService;
   private complianceService: ComplianceServiceAdapter;
@@ -173,7 +170,6 @@ export class CIAContentService extends BaseService {
   private securityResourceService: SecurityResourceService;
 
   constructor(dataProvider?: CIADataProvider) {
-    // Create a default dataProvider if none is provided
     const effectiveDataProvider = dataProvider || {
       availabilityOptions,
       integrityOptions,
@@ -181,13 +177,10 @@ export class CIAContentService extends BaseService {
       roiEstimates: ROI_ESTIMATES,
     };
 
-    // Call super with the data provider
     super(effectiveDataProvider);
 
-    // Store the data provider again due to the protected vs private visibility
     this.dataProvider = effectiveDataProvider;
 
-    // Initialize service instances
     this.businessImpactService = new BusinessImpactService(this.dataProvider);
     this.complianceService = new ComplianceServiceAdapter(this.dataProvider);
     this.securityMetricsService = new SecurityMetricsService(this.dataProvider);
@@ -204,7 +197,6 @@ export class CIAContentService extends BaseService {
    * This is a placeholder for any async initialization that might be needed
    */
   public async initialize(): Promise<void> {
-    // Placeholder for future initialization logic
     return Promise.resolve();
   }
 
@@ -380,7 +372,6 @@ export class CIAContentService extends BaseService {
    * ```
    */
   public getROIEstimate(level: SecurityLevel): ROIEstimate {
-    // More robust check for None security level
     if (
       !level ||
       level === "None" ||
@@ -413,7 +404,6 @@ export class CIAContentService extends BaseService {
    * Get ROI estimates for a specific security level
    */
   public getROIEstimates(level: SecurityLevel): ROIEstimate {
-    // More robust check for None security level
     if (
       !level ||
       level === "None" ||
@@ -426,14 +416,12 @@ export class CIAContentService extends BaseService {
       };
     }
 
-    // Fix to ensure we always return a valid ROIEstimate with required properties
     const fallbackEstimate: ROIEstimate = {
       returnRate: "0%",
       description: "No return on investment for security controls",
       value: "0%",
     };
 
-    // Use the securityLevelToROIKey method to ensure it's utilized
     const roiKey = this.securityLevelToROIKey(level);
     const estimates = this.dataProvider.roiEstimates || {};
 
@@ -443,7 +431,6 @@ export class CIAContentService extends BaseService {
       return fallbackEstimate;
     }
 
-    // Ensure returnRate is always present
     return {
       ...estimate,
       returnRate: estimate.returnRate || "0%",
@@ -480,7 +467,6 @@ export class CIAContentService extends BaseService {
     return this.dataProvider.roiEstimates;
   }
 
-  // Use delegate pattern to reuse service functionality
   public getBusinessImpact(
     component: CIAComponentType,
     level: SecurityLevel
@@ -547,7 +533,6 @@ export class CIAContentService extends BaseService {
     component: CIAComponentType,
     level: SecurityLevel
   ): BusinessImpactDetails {
-    // Get the impact from the business impact service
     if (this.businessImpactService) {
       const impact = this.businessImpactService.getBusinessImpact(
         component,
@@ -555,7 +540,6 @@ export class CIAContentService extends BaseService {
       );
       return impact;
     }
-    // Return an empty object that satisfies the interface if the service is not available
     return {
       summary: "",
       financial: { description: "", riskLevel: "" },
@@ -584,7 +568,6 @@ export class CIAContentService extends BaseService {
     level: SecurityLevel,
     implementationCost: number
   ): ROIMetrics {
-    // More robust check for None security level
     if (
       !level ||
       level === "None" ||
@@ -597,7 +580,6 @@ export class CIAContentService extends BaseService {
       };
     }
 
-    // Handle zero or negative implementation cost - return $0 value but keep the security level percentage
     if (implementationCost <= 0) {
       return {
         value: "$0",
@@ -606,7 +588,6 @@ export class CIAContentService extends BaseService {
       };
     }
 
-    // Standard calculation path
     const roiEstimate = this.getROIEstimates(level);
     const roiPercentageNum =
       parseInt(roiEstimate.returnRate.replace("%", ""), 10) || 0;
@@ -643,7 +624,6 @@ export class CIAContentService extends BaseService {
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel
   ) {
-    // Call the compliance service with all three parameters
     return this.complianceService.getComplianceStatus(
       availabilityLevel,
       integrityLevel,
@@ -705,7 +685,6 @@ export class CIAContentService extends BaseService {
     integrityLevel: SecurityLevel = availabilityLevel,
     confidentialityLevel: SecurityLevel = availabilityLevel
   ): string {
-    // Call the business impact service with all three parameters
     return this.businessImpactService.calculateBusinessImpactLevel(
       availabilityLevel,
       integrityLevel,
@@ -743,12 +722,10 @@ export class CIAContentService extends BaseService {
   public getImplementationConsiderations(
     levels: [SecurityLevel, SecurityLevel, SecurityLevel]
   ): string {
-    // Validate parameters
     if (!levels || !Array.isArray(levels) || levels.length !== 3) {
       return "Invalid security levels provided. Please provide an array with exactly three security levels.";
     }
 
-    // Delegate to the technical implementation service
     return this.technicalImplementationService.getImplementationConsiderations(
       levels[0]
     );
@@ -765,7 +742,6 @@ export class CIAContentService extends BaseService {
    * Get compliant frameworks
    */
   public getCompliantFrameworks(level: SecurityLevel): string[] {
-    // Fix: Pass the same level to all three parameters
     return this.complianceService.getCompliantFrameworks(level, level, level);
   }
 
@@ -783,24 +759,20 @@ export class CIAContentService extends BaseService {
     component: CIAComponentType,
     level: SecurityLevel
   ): string {
-    // Use all security levels for a more comprehensive evaluation
     const availability = level;
     const integrity = level;
     const confidentiality = level;
 
-    // Use component for a more specific assessment when needed
     const componentSpecificStatus = this.complianceService.getComplianceStatus(
       availability,
       integrity,
       confidentiality
     );
 
-    // Include component in log message for debugging and tracking purposes
     logger.info(
       `Assessing framework requirements for ${component} at ${level} level`
     );
 
-    // Access status properties correctly based on the type
     if (
       componentSpecificStatus.compliantFrameworks.length > 0 &&
       componentSpecificStatus.nonCompliantFrameworks.length === 0
@@ -834,7 +806,6 @@ export class CIAContentService extends BaseService {
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel
   ): string {
-    // Convert individual implementation times to a rough time estimate
     const timeMapping: Record<SecurityLevel, number> = {
       None: 0,
       Low: 2, // 2 weeks
@@ -848,18 +819,14 @@ export class CIAContentService extends BaseService {
       timeMapping[integrityLevel] +
       timeMapping[confidentialityLevel];
 
-    // Apply a reduction factor for parallel implementation (roughly 40% reduction)
     const adjustedWeeks = Math.round(totalWeeks * 0.6);
 
     if (adjustedWeeks <= 0) return "No implementation required";
 
-    // For low security levels (adjusted <= 4 weeks), return weeks
     if (adjustedWeeks <= 4) return `${adjustedWeeks} weeks`;
 
-    // For medium security levels (up to 12 weeks), return weeks
     if (adjustedWeeks <= 12) return `${adjustedWeeks} weeks`;
 
-    // For higher security levels, return months
     return `${Math.round(adjustedWeeks / 4)} to ${
       Math.round(adjustedWeeks / 4) + 2
     } months`;
@@ -873,14 +840,12 @@ export class CIAContentService extends BaseService {
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel
   ): string {
-    // Get maximum security level
     const levels = [availabilityLevel, integrityLevel, confidentialityLevel];
     const maxLevel = levels.sort((a, b) => {
       const order = { None: 0, Low: 1, Moderate: 2, High: 3, "Very High": 4 };
       return order[b as SecurityLevel] - order[a as SecurityLevel];
     })[0];
 
-    // Return expertise based on maximum level
     switch (maxLevel) {
       case "None":
         return "No special expertise required";
@@ -905,12 +870,10 @@ export class CIAContentService extends BaseService {
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel
   ): string {
-    // Calculate a value to ensure different combinations get different plans
     const availValue = this.getSecurityLevelValue(availabilityLevel);
     const integValue = this.getSecurityLevelValue(integrityLevel);
     const confValue = this.getSecurityLevelValue(confidentialityLevel);
 
-    // Create different plans based on security level combinations
     const totalValue = availValue + integValue + confValue;
 
     if (totalValue <= 3) {
@@ -1051,7 +1014,6 @@ export class CIAContentService extends BaseService {
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel
   ): string {
-    // Get impact level descriptions
     const availabilityDesc =
       this.getComponentDetails("availability", availabilityLevel)
         ?.description || `${availabilityLevel} availability`;
@@ -1062,21 +1024,18 @@ export class CIAContentService extends BaseService {
       this.getComponentDetails("confidentiality", confidentialityLevel)
         ?.description || `${confidentialityLevel} confidentiality`;
 
-    // Get compliance status
     const complianceStatus = this.complianceService.getComplianceStatus(
       availabilityLevel,
       integrityLevel,
       confidentialityLevel
     );
 
-    // Calculate overall security score
     const securityScore = this.securityMetricsService.calculateSecurityScore(
       availabilityLevel,
       integrityLevel,
       confidentialityLevel
     );
 
-    // Get business impact details
     const availabilityImpact =
       this.businessImpactService.getBusinessImpactDescription(
         "availability",
@@ -1093,7 +1052,6 @@ export class CIAContentService extends BaseService {
         confidentialityLevel
       );
 
-    // Generate content
     return `
       # Security Profile Summary
       
@@ -1304,10 +1262,8 @@ export class CIAContentService extends BaseService {
   }
 }
 
-// Create a default service instance
 const defaultService = new CIAContentService();
 
-// Export default service instance
 export default defaultService;
 
 /**
@@ -1371,7 +1327,6 @@ function getDefaultValuePointsImpl(level: SecurityLevel): string[] {
 export function createCIAContentService(
   dataProvider?: CIADataProvider
 ): CIAContentService {
-  // Use provided data provider or create a default one
   const provider: CIADataProvider = dataProvider || {
     availabilityOptions: availabilityOptions,
     integrityOptions: integrityOptions,
@@ -1381,13 +1336,11 @@ export function createCIAContentService(
     getDefaultValuePoints: getDefaultValuePointsImpl,
   };
 
-  // Create service instance
   const service: CIAContentService = new CIAContentService(provider);
 
   return service;
 }
 
-// Export helper functions for direct use
 export const getInformationSensitivity = (level: SecurityLevel): string => {
   const sensitivityMap: Record<SecurityLevel, string> = {
     None: "Public Data",
@@ -1452,7 +1405,6 @@ export const getROIEstimate = (level: SecurityLevel): ROIEstimate => {
 };
 
 export const getValuePoints = (level: SecurityLevel): string[] => {
-  // Fix: return valid value points for all security levels
   if (level === "None") {
     return [
       "No security value",
@@ -1489,7 +1441,6 @@ export const getValuePoints = (level: SecurityLevel): string[] => {
   return [...basePoints, ...(levelSpecificPoints[level] || [])];
 };
 
-// Export types
 export type { BusinessImpactDetails, TechnicalImplementationDetails };
 
 /**
@@ -1505,7 +1456,6 @@ export const getSecuritySummary = async (
   integrityLevel: SecurityLevel,
   confidentialityLevel: SecurityLevel
 ): Promise<Record<string, unknown>> => {
-  // This would normally fetch from an API, but for now we'll return mock data
   return {
     overallLevel: Math.max(
       securityLevelToValue(availabilityLevel),
@@ -1544,7 +1494,6 @@ export const getSecuritySummary = async (
 export const getAvailabilityDetails = async (
   level: SecurityLevel
 ): Promise<CIADetails> => {
-  // This would normally fetch from an API, but for now we'll return mock data
   return {
     description: `Availability at ${level} level ensures system uptime meets business requirements.`,
     technical: `Technical considerations for ${level} availability include redundancy and failover systems.`,
@@ -1559,7 +1508,6 @@ export const getAvailabilityDetails = async (
       "Create disaster recovery plan",
       "Test backup systems regularly",
     ],
-    // Add missing required properties
     capex: 0,
     opex: 0,
     bg: "#ffffff",
@@ -1576,7 +1524,6 @@ export const getAvailabilityDetails = async (
 export const getIntegrityDetails = async (
   level: SecurityLevel
 ): Promise<CIADetails> => {
-  // This would normally fetch from an API, but for now we'll return mock data
   return {
     description: `Integrity at ${level} level ensures data accuracy and trustworthiness.`,
     technical: `Technical considerations for ${level} integrity include access controls and validation mechanisms.`,
@@ -1587,7 +1534,6 @@ export const getIntegrityDetails = async (
       "Maintain audit logs for all data changes",
       "Perform regular data integrity checks",
     ],
-    // Add missing required properties
     capex: 0,
     opex: 0,
     bg: "#ffffff",
@@ -1598,7 +1544,6 @@ export const getIntegrityDetails = async (
 export const getConfidentialityDetails = async (
   level: SecurityLevel
 ): Promise<CIADetails> => {
-  // This would normally fetch from an API, but for now we'll return mock data
   return {
     description: `Confidentiality at ${level} level ensures sensitive information is protected from unauthorized access.`,
     technical: `Technical considerations for ${level} confidentiality include encryption and access controls.`,
@@ -1609,7 +1554,6 @@ export const getConfidentialityDetails = async (
       "Conduct regular security awareness training",
       "Monitor for unauthorized access attempts",
     ],
-    // Add missing required properties
     capex: 0,
     opex: 0,
     bg: "#ffffff",
@@ -1617,7 +1561,6 @@ export const getConfidentialityDetails = async (
   };
 };
 
-// Helper functions
 function securityLevelToValue(level: SecurityLevel): number {
   switch (level) {
     case "None":

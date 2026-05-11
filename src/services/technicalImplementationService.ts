@@ -1,27 +1,38 @@
-/**
- * # Technical Implementation Service
- *
- * Provides technical implementation details and guidance for CIA security components.
- *
- * ## Business Perspective
- * Delivers actionable technical specifications for implementing security controls
- * at each security level, bridging the gap between security policy and technical
- * implementation. Supports development teams in implementing appropriate controls. 🔧
- *
- * @packageDocumentation
- */
-
 import { SecurityLevel } from "../types/cia";
-import { CIAComponentType, CIADataProvider, TechnicalImplementationDetails } from "../types/cia-services";
+import {
+  CIAComponentType,
+  CIADataProvider,
+  ImplementationEffort,
+  TechnicalImplementationDetails,
+} from "../types/cia-services";
 import { ITechnicalImplementationService } from "../types/services";
-import { getDefaultTechnicalImplementation } from "../utils/technicalDetailsDefaults";
+import logger from "../utils/logger";
 import { BaseService } from "./BaseService";
 
 /**
- * Service for technical implementation details
+ * Technical implementation details for different security components
+ */
+export interface ComponentTechnicalDetails {
+  description: string;
+  implementationSteps: string[];
+  effort: {
+    development: string;
+    maintenance: string;
+    expertise: string;
+  };
+}
+
+/**
+ * Service for technical implementation details and guidance
  *
- * Provides detailed technical specifications and implementation guidance
- * for each CIA component at various security levels.
+ * ## Implementation Perspective
+ *
+ * This service provides practical implementation guidance for security controls,
+ * including effort estimation, technical requirements, and step-by-step
+ * implementation guides. It helps technical teams understand how to operationalize
+ * security requirements and implement controls effectively. 🔧
+ * 
+ * @implements {ITechnicalImplementationService}
  */
 export class TechnicalImplementationService extends BaseService implements ITechnicalImplementationService {
   /**
@@ -31,8 +42,8 @@ export class TechnicalImplementationService extends BaseService implements ITech
 
   /**
    * Create a new TechnicalImplementationService instance
-   *
-   * @param dataProvider - Data provider for CIA security information
+   * 
+   * @param dataProvider - Data provider for CIA options and implementation data
    * @throws {ServiceError} If dataProvider is not provided
    */
   constructor(dataProvider: CIADataProvider) {
@@ -40,203 +51,530 @@ export class TechnicalImplementationService extends BaseService implements ITech
   }
 
   /**
-   * Get technical implementation details for a CIA component and security level
+   * Get technical implementation details for a component and security level
+   * 
+   * Provides detailed technical guidance including implementation steps,
+   * effort estimates, required expertise, and technology recommendations
+   * for implementing security controls.
    *
-   * Returns comprehensive technical specifications including implementation steps,
-   * effort requirements, validation methods, and deployment considerations for the
-   * specified CIA component at the given security level.
-   *
-   * @param component - CIA component type (availability, integrity, confidentiality)
-   * @param level - Security level (None, Low, Moderate, High, Very High)
-   * @returns Technical implementation details with steps, effort, and specifications
-   *
+   * @param component - CIA component type (confidentiality, integrity, availability)
+   * @param level - Security level
+   * @returns Technical implementation details including steps, effort estimates, and requirements
+   * @throws {ServiceError} If component or level is invalid
+   * 
    * @example
    * ```typescript
-   * const details = service.getTechnicalImplementation('availability', 'High');
-   * console.log(details.implementationSteps);
-   * // ['Implement redundant systems', 'Configure load balancing', ...]
-   * console.log(details.effort.development); // '3-6 months'
+   * const details = service.getTechnicalImplementation('confidentiality', 'High');
+   * console.log(details.description);
+   * console.log(`Development effort: ${details.effort.development}`);
+   * details.implementationSteps.forEach((step, i) => console.log(`${i+1}. ${step}`));
    * ```
    */
   public getTechnicalImplementation(
     component: CIAComponentType,
     level: SecurityLevel
   ): TechnicalImplementationDetails {
-    const details = this.getComponentDetails(component, level);
-    
-    if (details?.technicalImplementation) {
-      return details.technicalImplementation;
+    this.validateComponent(component);
+    this.validateSecurityLevel(level);
+
+    const options = this.getCIAOptions(component);
+    const componentDetails = options[level];
+
+    if (componentDetails && !componentDetails.technical) {
+      return this.createDefaultImplementationDetails(component, level);
     }
 
-    const implementationSteps = details?.implementationSteps || [];
-    const effort = details?.effort || { development: '', maintenance: '', expertise: '' };
+    if (
+      componentDetails?.technicalImplementation &&
+      componentDetails.technicalImplementation.description &&
+      componentDetails.technicalImplementation.implementationSteps &&
+      componentDetails.technicalImplementation.effort
+    ) {
+      return componentDetails.technicalImplementation;
+    }
 
-    if (implementationSteps.length > 0 || (effort.development && effort.maintenance && effort.expertise)) {
+    if (
+      componentDetails?.recommendations &&
+      componentDetails.recommendations.length > 0
+    ) {
       return {
-        description: details?.technical || details?.description || '',
-        implementationSteps,
-        effort,
-        validationMethod: component === 'integrity' ? details?.validationMethod : undefined,
-        protectionMethod: component === 'confidentiality' ? details?.protectionMethod : undefined,
-        recoveryMethod: component === 'availability' ? details?.recommendations?.[0] : undefined,
+        description: "No implementation details available",
+        implementationSteps: componentDetails.recommendations,
+        effort: {
+          development: this.getDefaultDevelopmentEffort(level),
+          maintenance: this.getDefaultMaintenanceEffort(level),
+          expertise: this.getDefaultExpertiseLevel(level),
+        },
       };
     }
 
-    return getDefaultTechnicalImplementation(component, level);
+    return this.createDefaultImplementationDetails(component, level);
   }
 
   /**
-   * Get implementation steps for a component at a security level
-   *
-   * @param component - CIA component type
-   * @param level - Security level
-   * @returns Array of implementation step strings
+   * Get component implementation details
    */
-  public getImplementationSteps(
-    component: CIAComponentType,
+  public getComponentImplementationDetails(
+    _component: CIAComponentType,
     level: SecurityLevel
-  ): string[] {
-    return this.getTechnicalImplementation(component, level).implementationSteps;
+  ): TechnicalImplementationDetails {
+    return this.getTechnicalImplementation(_component, level);
   }
 
   /**
-   * Get required expertise for a component at a security level
+   * Get technical description for a component and security level
+   * 
+   * Returns a detailed technical description of what needs to be implemented
+   * for the specified security control.
    *
    * @param component - CIA component type
    * @param level - Security level
-   * @returns Required expertise level description
+   * @returns Technical description or "No technical details available" if not found
+   * @throws {ServiceError} If component or level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const desc = service.getTechnicalDescription('integrity', 'High');
+   * console.log(desc); // "Implement cryptographic hashing and digital signatures..."
+   * ```
    */
-  public getRequiredExpertise(
+  public getTechnicalDescription(
     component: CIAComponentType,
     level: SecurityLevel
   ): string {
-    const details = this.getComponentDetails(component, level);
-    
-    if (details?.requiredExpertise) {
-      return details.requiredExpertise;
+    this.validateComponent(component);
+    this.validateSecurityLevel(level);
+
+    const componentDetails = this.getComponentDetails(component, level);
+
+    if (componentDetails?.technical) {
+      return componentDetails.technical;
     }
 
-    return this.getTechnicalImplementation(component, level).effort.expertise;
+    return "No technical details available";
   }
 
   /**
-   * Get technical recommendations for a CIA component and security level
+   * Get recommendations for a component and security level
+   * 
+   * Returns specific actionable recommendations for implementing
+   * security controls at the given level.
    *
    * @param component - CIA component type
    * @param level - Security level
-   * @returns Array of recommendation strings
+   * @returns Array of recommendation strings (may be empty if none available)
+   * @throws {ServiceError} If component or level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const recs = service.getRecommendations('availability', 'High');
+   * recs.forEach(rec => console.log(`- ${rec}`));
+   * ```
    */
   public getRecommendations(
     component: CIAComponentType,
     level: SecurityLevel
   ): string[] {
-    const details = this.getComponentDetails(component, level);
-    return details?.recommendations || [];
+    this.validateComponent(component);
+    this.validateSecurityLevel(level);
+
+    const componentDetails = this.getComponentDetails(component, level);
+
+    if (!componentDetails?.technical) {
+      return [];
+    }
+
+    if (component === "availability" && level === "None") {
+      return [];
+    }
+
+    if (!componentDetails?.recommendations) {
+      return [];
+    }
+
+    return componentDetails.recommendations;
   }
 
   /**
-   * Get uptime requirement for availability component
+   * Get implementation time estimate based on security level
    *
    * @param level - Security level
-   * @returns Uptime requirement string (e.g., '99.9%')
+   * @returns Implementation time estimate
    */
-  public getUptimeRequirement(level: SecurityLevel): string {
-    const details = this.getComponentDetails('availability', level);
-    return details?.uptime || this.getDefaultUptimeRequirement(level);
-  }
-
   /**
-   * Get recovery time objective for availability component
-   *
+   * Get implementation time estimate for a security level
+   * 
+   * Provides an estimated timeframe for implementing security controls
+   * at the specified security level.
+   * 
    * @param level - Security level
-   * @returns RTO string
+   * @returns Time estimate string (e.g., "3-6 months")
+   * @throws {ServiceError} If level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const time = service.getImplementationTime('High');
+   * console.log(`Expected implementation time: ${time}`);
+   * ```
    */
-  public getRecoveryTimeObjective(level: SecurityLevel): string {
-    const details = this.getComponentDetails('availability', level);
-    return details?.rto || this.getDefaultRTO(level);
+  public getImplementationTime(level: SecurityLevel): string {
+    this.validateSecurityLevel(level);
+
+    switch (level) {
+      case "None":
+        return "No implementation time";
+      case "Low":
+        return "1-2 weeks";
+      case "Moderate":
+        return "4-8 weeks";
+      case "High":
+        return "3-6 months";
+      case "Very High":
+        return "6-12 months";
+      default:
+        return "Unknown implementation time";
+    }
   }
 
   /**
-   * Get recovery point objective for availability component
+   * Get implementation considerations based on security levels
    *
-   * @param level - Security level
-   * @returns RPO string
+   * @param level - Security level for implementation
+   * @returns Implementation considerations text
    */
-  public getRecoveryPointObjective(level: SecurityLevel): string {
-    const details = this.getComponentDetails('availability', level);
-    return details?.rpo || this.getDefaultRPO(level);
+  public getImplementationConsiderations(level: SecurityLevel): string {
+    switch (level) {
+      case "None":
+        return "No implementation considerations as no controls are implemented.";
+      case "Low":
+        return "Basic implementation with minimal resource requirements. This level focuses on establishing foundational security controls with straightforward implementation steps.";
+      case "Moderate":
+        return "Moderate implementation complexity requiring dedicated technical expertise. This level requires a more structured approach with comprehensive planning and periodic maintenance.";
+      case "High":
+        return "Complex implementation requiring specialized expertise and significant resource allocation. This level involves sophisticated technical controls with regular maintenance and monitoring requirements.";
+      case "Very High":
+        return "Highly complex implementation requiring expert-level technical skills and substantial resource investment. This level involves enterprise-grade security architecture with continuous monitoring, updates, and specialized maintenance procedures.";
+      default:
+        return "Unknown security level - implementation considerations cannot be determined.";
+    }
   }
 
   /**
-   * Get validation method for integrity component
+   * Get implementation effort for a component's security level
+   * @param component - The CIA component
+   * @param level - The security level
+   * @returns Implementation effort details or default effort
+   */
+  public getImplementationEffort(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): ImplementationEffort {
+    const details = this.getComponentImplementationDetails(component, level);
+    return details.effort;
+  }
+
+  /**
+   * Get implementation steps for a component's security level
+   * @param component - The CIA component
+   * @param level - The security level
+   * @returns Array of implementation steps
+   */
+  public getImplementationSteps(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): string[] {
+    const details = this.getComponentImplementationDetails(component, level);
+    return details.implementationSteps;
+  }
+
+  /**
+   * Create default implementation details based on component and level
    *
+   * @param _component - CIA component type
    * @param level - Security level
-   * @returns Validation method description
+   * @returns Default implementation details
    */
-  public getValidationMethod(level: SecurityLevel): string {
-    const details = this.getComponentDetails('integrity', level);
-    return details?.validationMethod || 'Not specified';
-  }
-
-  /**
-   * Get protection method for confidentiality component
-   *
-   * @param level - Security level
-   * @returns Protection method description
-   */
-  public getProtectionMethod(level: SecurityLevel): string {
-    const details = this.getComponentDetails('confidentiality', level);
-    return details?.protectionMethod || 'Not specified';
-  }
-
-  /**
-   * Get default uptime requirement based on security level
-   */
-  private getDefaultUptimeRequirement(level: SecurityLevel): string {
-    const uptimeMap: Record<SecurityLevel, string> = {
-      None: '< 90%',
-      Low: '95%',
-      Moderate: '99%',
-      High: '99.9%',
-      'Very High': '99.99%',
+  private createDefaultImplementationDetails(
+    _component: CIAComponentType, // Add underscore to mark as intentionally unused
+    level: SecurityLevel
+  ): TechnicalImplementationDetails {
+    return {
+      description: "No implementation details available",
+      implementationSteps: [],
+      effort: {
+        development: this.getDefaultDevelopmentEffort(level),
+        maintenance: this.getDefaultMaintenanceEffort(level),
+        expertise: this.getDefaultExpertiseLevel(level),
+      },
     };
-    return uptimeMap[level] || '99%';
   }
 
   /**
-   * Get default RTO based on security level
+   * Get default development effort for a security level
+   *
+   * @param level - Security level
+   * @returns Development effort
    */
-  private getDefaultRTO(level: SecurityLevel): string {
-    const rtoMap: Record<SecurityLevel, string> = {
-      None: 'No defined RTO',
-      Low: '72 hours',
-      Moderate: '24 hours',
-      High: '4 hours',
-      'Very High': '15 minutes',
-    };
-    return rtoMap[level] || '24 hours';
+  private getDefaultDevelopmentEffort(level: SecurityLevel): string {
+    switch (level) {
+      case "None":
+        return "None required";
+      case "Low":
+        return "Days (3-5)";
+      case "Moderate":
+        return "Weeks (2-4)";
+      case "High":
+        return "Months (1-3)";
+      case "Very High":
+        return "Months (3-6+)";
+      default:
+        return "Unknown effort";
+    }
   }
 
   /**
-   * Get default RPO based on security level
+   * Get default maintenance effort for a security level
+   *
+   * @param level - Security level
+   * @returns Maintenance effort
    */
-  private getDefaultRPO(level: SecurityLevel): string {
-    const rpoMap: Record<SecurityLevel, string> = {
-      None: 'No defined RPO',
-      Low: '24 hours',
-      Moderate: '8 hours',
-      High: '1 hour',
-      'Very High': '5 minutes',
-    };
-    return rpoMap[level] || '8 hours';
+  private getDefaultMaintenanceEffort(level: SecurityLevel): string {
+    switch (level) {
+      case "None":
+        return "None required";
+      case "Low":
+        return "Minimal (quarterly review)";
+      case "Moderate":
+        return "Regular (monthly review)";
+      case "High":
+        return "Significant (weekly review)";
+      case "Very High":
+        return "Continuous (daily monitoring)";
+      default:
+        return "Unknown effort";
+    }
+  }
+
+  /**
+   * Get default expertise level for a security level
+   *
+   * @param level - Security level
+   * @returns Required expertise level
+   */
+  private getDefaultExpertiseLevel(level: SecurityLevel): string {
+    if (typeof this.dataProvider.getDefaultExpertiseLevel === "function") {
+      try {
+        return this.dataProvider.getDefaultExpertiseLevel(level);
+      } catch (error) {
+        logger.warn(
+          "Failed to get expertise level from data provider, using default implementation",
+          { level, error }
+        );
+      }
+    }
+
+    switch (level) {
+      case "None":
+        return "No special expertise required";
+      case "Low":
+        return "Basic IT knowledge";
+      case "Moderate":
+        return "Security professional";
+      case "High":
+        return "Security specialist";
+      case "Very High":
+        return "Security expert team";
+      default:
+        return "Unknown expertise level";
+    }
   }
 }
 
 /**
- * Create TechnicalImplementationService with the provided data provider
+ * Create a TechnicalImplementationService instance
+ *
+ * @param dataProvider - Optional data provider for the service
+ * @returns A new TechnicalImplementationService instance
  */
 export function createTechnicalImplementationService(
-  dataProvider: CIADataProvider
+  dataProvider?: CIADataProvider
 ): TechnicalImplementationService {
+  if (!dataProvider) {
+    const defaultDataProvider: CIADataProvider = {
+      availabilityOptions: {
+        None: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        Low: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        Moderate: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        High: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        "Very High": {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+      },
+      integrityOptions: {
+        None: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        Low: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        Moderate: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        High: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        "Very High": {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+      },
+      confidentialityOptions: {
+        None: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        Low: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        Moderate: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        High: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        "Very High": {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+      },
+      roiEstimates: {
+        NONE: { returnRate: "0%", value: "0%", description: "No ROI" },
+        LOW: { returnRate: "50%", value: "50%", description: "Low ROI" },
+        MODERATE: {
+          returnRate: "150%",
+          value: "150%",
+          description: "Moderate ROI",
+        },
+        HIGH: { returnRate: "250%", value: "250%", description: "High ROI" },
+        VERY_HIGH: {
+          returnRate: "400%",
+          value: "400%",
+          description: "Very High ROI",
+        },
+      },
+    };
+    return new TechnicalImplementationService(defaultDataProvider);
+  }
+
   return new TechnicalImplementationService(dataProvider);
 }

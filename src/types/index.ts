@@ -13,7 +13,6 @@
  * @packageDocumentation
  */
 
-// Core CIA Types - use explicit exports to avoid conflicts
 export type {
   AvailabilityImpact,
   BaseImpact,
@@ -28,10 +27,8 @@ export type {
 } from "./cia";
 export { CIAUtilities };
 
-// Re-export utilities with namespacing to prevent conflicts
 import * as CIAUtilities from "./cia.utility";
 
-// Selective exports from cia-services to avoid conflicts
 export type {
   BusinessImpactDetail,
   BusinessImpactDetails,
@@ -48,7 +45,6 @@ export type {
   TechnicalImplementationDetails,
 } from "./cia-services";
 
-// Compliance types
 export type {
   ComplianceFramework,
   ComplianceStatusDetails,
@@ -56,7 +52,6 @@ export type {
   FrameworkComplianceStatus,
 } from "./compliance";
 
-// Widget Types - export from widget-props.ts for impact widgets
 export type {
   AvailabilityImpactWidgetProps,
   IntegrityImpactWidgetProps,
@@ -70,7 +65,6 @@ export type {
   ValueCreationWidgetProps,
 } from "./widget-props";
 
-// Export remaining widget types from widgets.ts
 export type {
   WidgetProps,
 } from "./widgets";
@@ -78,7 +72,6 @@ export type {
 export type { CommonWidgetProps, WithSecurityLevelProps, BaseWidgetProps } from "./widget-props";
 export type { CIABaseWidgetProps } from "./widgets";
 
-// Selective export from businessImpact to avoid conflicts
 export type {
   BusinessConsideration,
   BusinessConsiderations,
@@ -89,7 +82,6 @@ export type {
   BusinessValueMetric,
 } from "./businessImpact";
 
-// Component Props - use more specific exports to avoid conflicts
 export type {
   BusinessImpactSectionProps,
   BusinessRiskDisplayProps,
@@ -102,17 +94,14 @@ export type {
   WidgetHeaderProps,
 } from "./componentPropExports";
 
-// Helper functions from cia
 export {
   calculateOverallSecurityLevel,
   calculateRiskLevel,
   getSecurityLevelFromValue,
 } from "./cia";
 
-// Type guards for better type safety
 export { isCIAComponentType } from "./cia-services";
 
-// Keyboard shortcut types
 export type {
   KeyboardShortcut,
   KeyboardShortcutContextValue,
@@ -124,7 +113,6 @@ export type {
   UseKeyboardShortcutsOptions,
 } from './keyboard';
 
-// Tab navigation types
 export type {
   Tab,
   TabsState,

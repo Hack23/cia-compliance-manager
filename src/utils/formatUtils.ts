@@ -64,6 +64,7 @@ export function toTitleCase(str: string): string {
  */
 export function formatPercentage(value: number, decimalPlaces: number = 0): string {
   const percentage = value * 100;
+
   return `${percentage.toFixed(decimalPlaces)}%`;
 }
 
@@ -193,7 +194,8 @@ const RISK_LEVEL_ICONS: Record<string, string> = {
  * ```
  */
 export function formatRiskLevel(riskLevel: string): string {
-  let icon = "❓";
+  let icon = "❓"; // Default icon for unknown risk levels
+
   const riskLowerCase = riskLevel.toLowerCase();
   Object.entries(RISK_LEVEL_ICONS).forEach(([level, levelIcon]) => {
     if (level.toLowerCase() === riskLowerCase) {

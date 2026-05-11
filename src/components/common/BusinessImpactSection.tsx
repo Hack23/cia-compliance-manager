@@ -99,6 +99,7 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {/* Financial Impact */}
         {impact.financial && (
           <div
             className={`p-2 rounded-md bg-opacity-10 dark:bg-opacity-20 border ${bgClasses}`}
@@ -122,6 +123,7 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
           </div>
         )}
 
+        {/* Operational Impact */}
         {impact.operational && (
           <div
             className={`p-2 rounded-md bg-opacity-10 dark:bg-opacity-20 border ${bgClasses}`}
@@ -145,6 +147,7 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
           </div>
         )}
 
+        {/* Reputational Impact */}
         {impact.reputational && (
           <div
             className={`p-2 rounded-md bg-opacity-10 dark:bg-opacity-20 border ${bgClasses}`}
@@ -167,6 +170,7 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
           </div>
         )}
 
+        {/* Strategic Impact */}
         {impact.strategic && (
           <div
             className={`p-2 rounded-md bg-opacity-10 dark:bg-opacity-20 border ${bgClasses}`}
@@ -190,6 +194,7 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
           </div>
         )}
 
+        {/* Regulatory Impact */}
         {impact.regulatory && (
           <div
             className={`p-2 rounded-md bg-opacity-10 dark:bg-opacity-20 border ${bgClasses}`}

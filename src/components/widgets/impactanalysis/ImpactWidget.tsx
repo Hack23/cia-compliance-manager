@@ -297,6 +297,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
           role="region"
           aria-label={getWidgetAriaDescription(config.defaultTitle, config.ariaDescription)}
         >
+          {/* Security level indicator */}
           <section
             className={cn("mb-sm")}
             aria-labelledby={`${component}-level-heading`}
@@ -313,6 +314,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
             />
           </section>
 
+          {/* Business Impact Analysis */}
           {businessImpact && (
             <section
               className={cn("mb-sm")}
@@ -329,6 +331,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
             </section>
           )}
 
+          {/* Component-specific metrics */}
           {metrics.type === "availability" && (
             <WidgetSection
               title="SLA Metrics"

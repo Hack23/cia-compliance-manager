@@ -165,6 +165,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
           "Cost estimates for implementing and maintaining security controls"
         )}
       >
+        {/* Summary cost section - Compact 3-column grid */}
         <section 
           className={cn("grid grid-cols-1 sm:grid-cols-3 gap-xs mb-xs")}
           aria-labelledby="cost-summary-heading"
@@ -190,7 +191,9 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
           </div>
         </section>
 
+        {/* Implementation details - Compact inline layout */}
         <div className={cn("grid grid-cols-1 sm:grid-cols-2 gap-xs mb-xs")}>
+          {/* Implementation complexity */}
           <div className={cn("p-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded border border-neutral-light/20 dark:border-neutral-dark/20")}>
             <div className={cn("flex justify-between items-center mb-xs")}>
               <span className={cn(WidgetClasses.labelNormal)}>Complexity</span>
@@ -211,6 +214,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
             </div>
           </div>
 
+          {/* Personnel requirements - Compact */}
           <div className={cn("p-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded border border-neutral-light/20 dark:border-neutral-dark/20")}>
             <div className={cn("flex justify-between items-center mb-xs")}>
               <span className={cn(WidgetClasses.labelNormal)}>Personnel</span>
@@ -224,9 +228,11 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
           </div>
         </div>
 
+        {/* Component breakdown - Horizontal cards */}
         <div className={cn("mb-xs")}>
           <h3 className={cn(WidgetClasses.subheading, "text-body-lg mb-xs")}>By Component</h3>
           <div className={cn("grid grid-cols-1 sm:grid-cols-3 gap-xs")}>
+            {/* Confidentiality */}
             <div className={cn("p-xs bg-primary-light/10 dark:bg-primary-dark/20 rounded border border-primary-light/30 dark:border-primary-dark/30")}>
               <div className={cn("flex items-center justify-between mb-xs")}>
                 <span className={cn(WidgetClasses.labelNormal, "text-primary-dark dark:text-primary-light")}><span aria-hidden="true">🔒</span> Conf</span>
@@ -242,6 +248,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
               </div>
             </div>
 
+            {/* Integrity */}
             <div className={cn("p-xs bg-success-light/10 dark:bg-success-dark/20 rounded border border-success-light/30 dark:border-success-dark/30")}>
               <div className={cn("flex items-center justify-between mb-xs")}>
                 <span className={cn(WidgetClasses.labelNormal, "text-success-dark dark:text-success-light")}><span aria-hidden="true">✓</span> Integ</span>
@@ -257,6 +264,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
               </div>
             </div>
 
+            {/* Availability */}
             <div className={cn("p-xs bg-info-light/10 dark:bg-info-dark/20 rounded border border-info-light/30 dark:border-info-dark/30")}>
               <div className={cn("flex items-center justify-between mb-xs")}>
                 <span className={cn(WidgetClasses.labelNormal, "text-info-dark dark:text-info-light")}><span aria-hidden="true">⏱️</span> Avail</span>
@@ -274,6 +282,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
           </div>
         </div>
 
+        {/* Expertise required - Compact grid */}
         <div className={cn("p-xs bg-info-light/5 dark:bg-info-dark/10 rounded border border-info-light/20 dark:border-info-dark/20")}>
           <h3 className={cn(WidgetClasses.subheading, "text-body-lg mb-xs flex items-center")}>
             <span className={cn("mr-xs")} aria-hidden="true">💡</span>Expertise

@@ -19,7 +19,7 @@ import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 import ImplementationGuidancePanel from "./ImplementationGuidancePanel";
 
-const TOP_RESOURCES_PERCENTAGE = 0.5;
+const TOP_RESOURCES_PERCENTAGE = 0.5; // 50%
 const MIN_TOP_RESOURCES = 5;
 const WIDE_LAYOUT_BREAKPOINT = 760;
 
@@ -322,13 +322,13 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
   const handleCategorySelect = useCallback((category: string | null) => {
     setSelectedCategory(category);
-    setCurrentPage(1);
+    setCurrentPage(1); // Reset to first page when changing filters
   }, []);
 
   const handleSearchChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setSearchTerm(e.target.value);
-      setCurrentPage(1);
+      setCurrentPage(1); // Reset to first page when changing search
     },
     []
   );
@@ -389,6 +389,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
           "Curated security resources and implementation guides for selected CIA security levels"
         )}
       >
+        {/* Widget introduction */}
         <section 
           className={cn(
             WidgetClasses.section,
@@ -523,6 +524,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
               </nav>
             )}
 
+            {/* Implementation Guidelines */}
             <section className="mb-md" aria-labelledby="implementation-guidelines-heading">
               <h3 id="implementation-guidelines-heading" className={cn(WidgetClasses.body, "font-medium mb-sm")}>
                 Implementation Guidelines
@@ -553,7 +555,9 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
             </div>
           </aside>
 
+          {/* Resources grid - right column on larger screens */}
           <div className="security-resources-list">
+            {/* Resources list */}
             <div className="mb-md">
               <div className="flex justify-between items-center mb-sm">
                 <h3 className="text-subheading font-medium">Security Resources</h3>
@@ -564,6 +568,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                 </div>
               </div>
 
+              {/* Empty state */}
               {filteredResources.length === 0 && (
                 <div
                   className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg text-center text-gray-500 dark:text-gray-400"
@@ -578,6 +583,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                 </div>
               )}
 
+              {/* Resources grid */}
               {filteredResources.length > 0 && (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-sm">
                   {currentResources.map((resource, index) => (
@@ -590,6 +596,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                 </div>
               )}
 
+              {/* Pagination controls */}
               {totalPages > 1 && (
                 <div className="mt-md flex justify-center">
                   <nav
@@ -608,6 +615,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                       Previous
                     </button>
 
+                    {/* Page numbers */}
                     {Array.from({ length: totalPages }).map((_, index) => (
                       <button
                         key={index}
@@ -638,6 +646,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
               )}
             </div>
 
+            {/* Implementation Guidance Panel */}
             <ImplementationGuidancePanel
               implementationGuides={implementationGuides}
               availabilityLevel={availabilityLevel}

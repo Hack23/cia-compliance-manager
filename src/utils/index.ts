@@ -24,11 +24,7 @@ import * as typeGuards from "./typeGuards";
 import * as widgetUtils from "./widgetHelpers";
 import * as accessibilityUtils from "./accessibility";
 
-/**
- * ACCESSIBILITY UTILITIES - WCAG 2.1 Level AA Compliance
- *
- * ARIA helpers, keyboard navigation, screen reader support, and color contrast
- */
+
 export const {
   ARIA_ROLES,
   ARIA_LIVE,
@@ -213,13 +209,6 @@ export const { toErrorObject, formatError } = errorUtils;
 
 export { BUSINESS_IMPACT_CATEGORIES, calculateRiskLevel, RISK_LEVELS };
 
-/**
- * Keyboard utilities
- *
- * Note: Internal utilities like `resetPlatformCache()` are marked @internal
- * and should be imported directly from "./keyboardUtils" in tests/internal modules
- * to avoid exposing them as part of the public API surface.
- */
 export * from "./keyboardUtils";
 
 export { cn, WidgetClasses } from "./tailwindClassHelpers";
