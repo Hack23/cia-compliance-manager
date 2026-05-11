@@ -5,10 +5,7 @@ import {
   roiEstimatesData,
 } from "./security";
 
-// Import CIADetails from types
 import { CIADetails } from "../types/cia-services";
-
-// Use imported data from their respective modules
 /**
  * Availability options derived from security module.
  * Ensures system availability and uptime.
@@ -33,7 +30,6 @@ export const confidentialityOptions = confidentialityData;
  */
 export const ROI_ESTIMATES = roiEstimatesData;
 
-// Export types for documentation
 export type { CIADetails };
 
 import { SecurityLevel } from "../types/cia";
@@ -360,8 +356,6 @@ export function getImplementationDetails(
     "Very High": "4-6 months",
   };
 
-  // Adjust based on component
-  // Mark these variables as explicitly unused with underscore prefix
   let _expertiseModifier = "";
 
   switch (component) {
@@ -376,13 +370,10 @@ export function getImplementationDetails(
       break;
   }
 
-  // Format the effort based on level and modifier
   const effort = baseEffort[level];
 
-  // Combine expertise with modifier
   const expertise = baseExpertise[level] + _expertiseModifier;
 
-  // Adjust timeframe based on modifier
   const timeframe = baseTimeframe[level];
 
   return {
@@ -516,7 +507,7 @@ export const getDefaultErrorRate = (level: SecurityLevel): string => {
     case "Low":
       return "< 5%";
     case "Moderate":
-      return "< 3%"; // Changed to match test expectations
+      return "< 3%";
     case "High":
       return "< 1%";
     case "Very High":
@@ -525,4 +516,3 @@ export const getDefaultErrorRate = (level: SecurityLevel): string => {
       return "Unknown";
   }
 };
-
