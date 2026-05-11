@@ -74,7 +74,7 @@ export const ROI_ESTIMATES: ROIEstimatesMap = {
     description: "No ROI without security investment",
     potentialSavings: "$0",
     breakEvenPeriod: "N/A",
-    value: "0%", // For backward compatibility
+    value: "0%",
   },
   LOW: {
     returnRate: "50-100%",
@@ -85,7 +85,7 @@ export const ROI_ESTIMATES: ROIEstimatesMap = {
     breakEvenPeriod: "12-18 months",
   },
   MODERATE: {
-    returnRate: "100-200%", // Update to match the test expectations
+    returnRate: "100-200%",
     description:
       "Balanced security approach delivers positive returns for most organizations",
     value: "100-200%",
@@ -93,15 +93,15 @@ export const ROI_ESTIMATES: ROIEstimatesMap = {
     breakEvenPeriod: "6-12 months",
   },
   HIGH: {
-    returnRate: "200-300%", // Updated to match test expectations
+    returnRate: "200-300%",
     description:
-      "Strong security posture provides excellent returns for organizations with sensitive data or operations", // Updated to match test
-    value: "200-300%", // Updated to match test expectations
-    potentialSavings: "$20K-$50K annually", // Updated to match test expectations
-    breakEvenPeriod: "3-6 months", // Updated to match test expectations
+      "Strong security posture provides excellent returns for organizations with sensitive data or operations",
+    value: "200-300%",
+    potentialSavings: "$20K-$50K annually",
+    breakEvenPeriod: "3-6 months",
   },
   VERY_HIGH: {
-    returnRate: "300-500%", // Updated to match test expectations
+    returnRate: "300-500%",
     description:
       "Maximum security investment delivers highest potential returns for organizations in regulated industries or handling critical data",
     value: "300-500%",
@@ -121,7 +121,6 @@ export function getROIEstimateForLevel(level: SecurityLevel): ROIEstimate {
     return ROI_ESTIMATES.NONE;
   }
 
-  // Handle case variations and normalize
   const normalizedLevel = level.toString().toUpperCase().replace(/\s+/g, "_");
 
   switch (normalizedLevel) {
