@@ -22,7 +22,7 @@
  * ```
  */
 
-import { SecurityLevel } from "../types/cia"; // Remove unused CIAOptions import
+import { SecurityLevel } from "../types/cia";
 
 /**
  * Widget icon constants for consistent icon use across the application.
@@ -127,11 +127,11 @@ export const CIA_LABELS = {
  * ```
  */
 export const SECURITY_LEVEL_COLORS = {
-  NONE: "#e74c3c", // Red
-  LOW: "#f39c12", // Orange
-  MODERATE: "#f1c40f", // Yellow
-  HIGH: "#2ecc71", // Green
-  VERY_HIGH: "#3498db", // Blue
+  NONE: "#e74c3c",
+  LOW: "#f39c12",
+  MODERATE: "#f1c40f",
+  HIGH: "#2ecc71",
+  VERY_HIGH: "#3498db",
 };
 
 /**
@@ -258,9 +258,8 @@ export const IMPLEMENTATION_COSTS: Record<
   },
 };
 
-// UI Text constants for labels
+/** UI text constants for labels */
 export const UI_TEXT = {
-  // Common UI labels
   LABELS: {
     BUSINESS_IMPACT: "Business Impact:",
     RECOMMENDATION: "Recommendation:",
@@ -274,23 +273,20 @@ export const UI_TEXT = {
     CURRENT_PROFILE: "Current Profile",
   },
 
-  // Budget related text
   BUDGET: {
     IT_BUDGET_CAPEX: "of IT budget as one-time capital expenditure",
     IT_BUDGET_OPEX: "of IT budget as annual operational expenses",
   },
 
-  // Value creation titles
   VALUE_CREATION: {
     NONE_TITLE: "No Value Creation",
     WITH_LEVEL: (level: string) => `${level} Value Creation`,
   },
 
-  // Add WIDGET_TITLES
-  WIDGET_TITLES: WIDGET_TITLES, // Reference the already defined WIDGET_TITLES constant
+  WIDGET_TITLES: WIDGET_TITLES,
 };
 
-// Security level type helpers
+/** Security level constant key type */
 export type SecurityLevelKey =
   | "NONE"
   | "LOW"
@@ -299,7 +295,7 @@ export type SecurityLevelKey =
   | "VERY_HIGH";
 export type SecurityLevelMap<T> = Record<SecurityLevelKey, T>;
 
-// Framework names
+/** Compliance framework display names */
 export const COMPLIANCE_FRAMEWORKS = {
   SOC2: "SOC 2 Type 2",
   ISO27001: "ISO 27001",
@@ -308,7 +304,7 @@ export const COMPLIANCE_FRAMEWORKS = {
   NIST: "NIST 800-53 High",
 };
 
-// Compliance Status Text
+/** Compliance status display text */
 export const COMPLIANCE_STATUS = {
   NON_COMPLIANT: "Non-Compliant",
   BASIC_COMPLIANCE: "Meets basic compliance only",
@@ -316,7 +312,7 @@ export const COMPLIANCE_STATUS = {
   FULL_COMPLIANCE: "Compliant with all major frameworks",
 };
 
-// Add this export if it's defined in this file
+/** Security level descriptions */
 export const SECURITY_DESCRIPTIONS = {
   NONE: "No security controls implemented.",
   LOW: "Basic protection with minimal controls and manual processes.",
@@ -335,19 +331,19 @@ export const CIA_COMPONENT_INFO = {
     NAME: "Confidentiality",
     DESCRIPTION: "Protection against unauthorized disclosure of data",
     ICON: "🔒",
-    COLOR: "#8e44ad", // Purple
+    COLOR: "#8e44ad",
   },
   INTEGRITY: {
     NAME: "Integrity",
     DESCRIPTION: "Protection against unauthorized modification of data",
     ICON: "✓",
-    COLOR: "#27ae60", // Green
+    COLOR: "#27ae60",
   },
   AVAILABILITY: {
     NAME: "Availability",
     DESCRIPTION: "Accessibility and uptime of systems and data",
     ICON: "⏱️",
-    COLOR: "#2980b9", // Blue
+    COLOR: "#2980b9",
   },
 };
 
@@ -357,18 +353,18 @@ export const CIA_COMPONENT_INFO = {
 export const CIA_COMPONENT_COLORS = {
   CONFIDENTIALITY: {
     PRIMARY: CIA_COMPONENT_INFO.CONFIDENTIALITY.COLOR,
-    LIGHT: "#d6b8e8", // Light purple
-    DARK: "#6c3483", // Dark purple
+    LIGHT: "#d6b8e8",
+    DARK: "#6c3483",
   },
   INTEGRITY: {
     PRIMARY: CIA_COMPONENT_INFO.INTEGRITY.COLOR,
-    LIGHT: "#a9dfbf", // Light green
-    DARK: "#1e8449", // Dark green
+    LIGHT: "#a9dfbf",
+    DARK: "#1e8449",
   },
   AVAILABILITY: {
     PRIMARY: CIA_COMPONENT_INFO.AVAILABILITY.COLOR,
-    LIGHT: "#aed6f1", // Light blue
-    DARK: "#1a5276", // Dark blue
+    LIGHT: "#aed6f1",
+    DARK: "#1a5276",
   },
 };
 
@@ -393,10 +389,6 @@ export const SECURITY_LEVEL_LABELS = {
   HIGH: "High",
   VERY_HIGH: "Very High",
 };
-
-/**
- * Core constants used across the application
- */
 
 /**
  * Application metadata
