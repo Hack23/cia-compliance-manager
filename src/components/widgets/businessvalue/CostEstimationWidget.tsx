@@ -32,14 +32,12 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
   className = "",
   testId = COST_ESTIMATION_WIDGET_IDS.root,
 }) => {
-  // Use the content service
   const {
     ciaContentService,
     error: serviceError,
     isLoading,
   } = useCIAContentService();
 
-  // Calculate costs using consistent utility function
   const {
     totalCapex,
     totalOpex,
@@ -57,7 +55,6 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
     [availabilityLevel, integrityLevel, confidentialityLevel]
   );
 
-  // Calculate implementation complexity using existing utility
   const implementationComplexity = useMemo(
     () =>
       getImplementationComplexity(
@@ -68,9 +65,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
     [availabilityLevel, integrityLevel, confidentialityLevel]
   );
 
-  // Calculate FTE requirements using same approach as TechnicalDetailsWidget
   const fteRequirements = useMemo(() => {
-    // FTE mapping from security level - same as in TechnicalDetailsWidget
     const levelFteMap: Record<SecurityLevel, number> = {
       None: 0.1,
       Low: 0.25,
@@ -79,18 +74,14 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
       "Very High": 2,
     };
 
-    // Calculate FTEs for each component based on their respective security levels
     const availFte = levelFteMap[availabilityLevel] || 0.5;
     const integFte = levelFteMap[integrityLevel] || 0.5;
     const confFte = levelFteMap[confidentialityLevel] || 0.5;
 
-    // Find the max FTE across all components to match TechnicalDetailsWidget exactly
     const maxFte = Math.max(availFte, integFte, confFte);
 
-    // Implementation is the primary FTE
     const implementationFte = maxFte;
 
-    // Maintenance FTE is typically 60% of implementation
     const maintenanceFte = Number((implementationFte * 0.6).toFixed(1));
 
     return {
@@ -100,7 +91,6 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
     };
   }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Get expertise required - using defined type and handling missing property
   const getExpertiseForComponent = (
     component: CIAComponent,
     level: SecurityLevel
@@ -112,8 +102,6 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
 
       const details = ciaContentService.getComponentDetails(component, level);
 
-      // Since expertiseRequired is not in CIADetails type, we need to handle it differently
-      // Use runtime checks for safety without type assertions
       if (!isNullish(details) && typeof details === "object" && "expertiseRequired" in details) {
         const expertise = (details as { expertiseRequired?: unknown }).expertiseRequired;
         if (isArray(expertise) && expertise.every(item => isString(item))) {
@@ -131,9 +119,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
     }
   };
 
-  // Get highest component expertise
   const expertiseRequired = useMemo(() => {
-    // Get the component with the highest security level for expertise determination
     const highestComponent = [
       { type: "availability" as CIAComponent, level: availabilityLevel },
       { type: "integrity" as CIAComponent, level: integrityLevel },
@@ -151,7 +137,6 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
     );
   }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Calculate the complexity percentage for visualization
   const complexityPercentage = useMemo(() => {
     const complexityMap: Record<string, number> = {
       Low: 25,
@@ -180,7 +165,6 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
           "Cost estimates for implementing and maintaining security controls"
         )}
       >
-        {/* Summary cost section - Compact 3-column grid */}
         <section 
           className={cn("grid grid-cols-1 sm:grid-cols-3 gap-xs mb-xs")}
           aria-labelledby="cost-summary-heading"
@@ -206,9 +190,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
           </div>
         </section>
 
-        {/* Implementation details - Compact inline layout */}
         <div className={cn("grid grid-cols-1 sm:grid-cols-2 gap-xs mb-xs")}>
-          {/* Implementation complexity */}
           <div className={cn("p-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded border border-neutral-light/20 dark:border-neutral-dark/20")}>
             <div className={cn("flex justify-between items-center mb-xs")}>
               <span className={cn(WidgetClasses.labelNormal)}>Complexity</span>
@@ -229,7 +211,6 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
             </div>
           </div>
 
-          {/* Personnel requirements - Compact */}
           <div className={cn("p-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded border border-neutral-light/20 dark:border-neutral-dark/20")}>
             <div className={cn("flex justify-between items-center mb-xs")}>
               <span className={cn(WidgetClasses.labelNormal)}>Personnel</span>
@@ -243,11 +224,9 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
           </div>
         </div>
 
-        {/* Component breakdown - Horizontal cards */}
         <div className={cn("mb-xs")}>
           <h3 className={cn(WidgetClasses.subheading, "text-body-lg mb-xs")}>By Component</h3>
           <div className={cn("grid grid-cols-1 sm:grid-cols-3 gap-xs")}>
-            {/* Confidentiality */}
             <div className={cn("p-xs bg-primary-light/10 dark:bg-primary-dark/20 rounded border border-primary-light/30 dark:border-primary-dark/30")}>
               <div className={cn("flex items-center justify-between mb-xs")}>
                 <span className={cn(WidgetClasses.labelNormal, "text-primary-dark dark:text-primary-light")}><span aria-hidden="true">🔒</span> Conf</span>
@@ -263,7 +242,6 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
               </div>
             </div>
 
-            {/* Integrity */}
             <div className={cn("p-xs bg-success-light/10 dark:bg-success-dark/20 rounded border border-success-light/30 dark:border-success-dark/30")}>
               <div className={cn("flex items-center justify-between mb-xs")}>
                 <span className={cn(WidgetClasses.labelNormal, "text-success-dark dark:text-success-light")}><span aria-hidden="true">✓</span> Integ</span>
@@ -279,7 +257,6 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
               </div>
             </div>
 
-            {/* Availability */}
             <div className={cn("p-xs bg-info-light/10 dark:bg-info-dark/20 rounded border border-info-light/30 dark:border-info-dark/30")}>
               <div className={cn("flex items-center justify-between mb-xs")}>
                 <span className={cn(WidgetClasses.labelNormal, "text-info-dark dark:text-info-light")}><span aria-hidden="true">⏱️</span> Avail</span>
@@ -297,7 +274,6 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
           </div>
         </div>
 
-        {/* Expertise required - Compact grid */}
         <div className={cn("p-xs bg-info-light/5 dark:bg-info-dark/10 rounded border border-info-light/20 dark:border-info-dark/20")}>
           <h3 className={cn(WidgetClasses.subheading, "text-body-lg mb-xs flex items-center")}>
             <span className={cn("mr-xs")} aria-hidden="true">💡</span>Expertise
@@ -317,7 +293,6 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
   );
 };
 
-// Helper function to provide default expertise requirements
 function getDefaultExpertise(
   component: CIAComponent,
   level: SecurityLevel
@@ -385,7 +360,6 @@ function getDefaultExpertise(
     }
   }
 
-  // Default to availability expertise
   switch (level) {
     case "None":
       return ["No specific expertise required"];

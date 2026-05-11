@@ -13,7 +13,6 @@ import StatusBadge from "../../common/StatusBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 
-// Add function to determine badge status with proper typing
 const getBadgeStatus = (complianceScore: number): StatusType => {
   if (complianceScore >= 80) return "success";
   if (complianceScore >= 50) return "warning";
@@ -39,19 +38,15 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
   className = "",
   testId = COMPLIANCE_TEST_IDS.WIDGET,
 }) => {
-  // Use the compliance service
   const {
     complianceService,
     error: serviceError,
     isLoading,
   } = useComplianceService();
 
-  // Active framework for detailed view
   const [activeFramework, setActiveFramework] = useState<string | null>(null);
 
-  // Calculate overall security level with proper type safety
   const overallSecurityLevel = useMemo(() => {
-    // Convert security levels to numeric values
     const levelValues: Record<SecurityLevel, number> = {
       None: 0,
       Low: 1,
@@ -60,14 +55,12 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
       "Very High": 4,
     };
 
-    // Calculate the minimum security level as the overall level
     const minValue = Math.min(
       levelValues[availabilityLevel],
       levelValues[integrityLevel],
       levelValues[confidentialityLevel]
     );
 
-    // Map numeric value back to SecurityLevel using a type-safe approach
     const levels: SecurityLevel[] = [
       "None",
       "Low",
@@ -78,12 +71,10 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
     return levels.find((_, index) => index === minValue) || "Moderate";
   }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Get compliance status with proper error handling
   const complianceStatus = useMemo((): ComplianceStatusDetails | null => {
     if (isLoading || serviceError || !complianceService) return null;
 
     try {
-      // Use industry and region context when appropriate
       return complianceService.getComplianceStatus(
         availabilityLevel,
         integrityLevel,
@@ -98,13 +89,12 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
     availabilityLevel,
     integrityLevel,
     confidentialityLevel,
-    industry, // Keep this dependency for potential future implementation
-    region, // Keep this dependency for potential future implementation
+    industry,
+    region,
     isLoading,
     serviceError,
   ]);
 
-  // Get status text for display with proper error handling
   const getComplianceStatusText = useCallback((): string => {
     if (isLoading) return "Loading compliance status...";
     if (serviceError) return "Error loading compliance status";
@@ -123,12 +113,10 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         }
       }
 
-      // Fallback if service doesn't provide status text
       if (complianceStatus.status) {
         return complianceStatus.status;
       }
 
-      // Final fallback
       return `Based on ${overallSecurityLevel} security level`;
     } catch (err) {
       console.error("Error getting compliance status text:", err);
@@ -145,13 +133,11 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
     serviceError,
   ]);
 
-  // Get status text
   const statusText = useMemo(
     () => getComplianceStatusText(),
     [getComplianceStatusText]
   );
 
-  // Define gapAnalysis variable
   const gapAnalysis = useMemo(() => {
     if (isLoading || serviceError || !complianceService || !activeFramework)
       return null;
@@ -177,10 +163,8 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
     serviceError,
   ]);
 
-  // Create a type-safe implementation of getFrameworkRequiredLevel
   const getFrameworkRequiredLevel = useCallback(
     (framework: string, component: CIAComponent): SecurityLevel => {
-      // If the service is available, use it
       if (complianceService?.getFrameworkRequiredLevel) {
         try {
           return complianceService.getFrameworkRequiredLevel(
@@ -192,7 +176,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         }
       }
 
-      // Default fallback levels based on typical requirements
       const defaultLevels: Record<
         string,
         Record<CIAComponent, SecurityLevel>
@@ -224,7 +207,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         },
       };
 
-      // Return the default if available, otherwise return Moderate as a safe fallback
       return defaultLevels[framework]?.[component] || "Moderate";
     },
     [complianceService]
@@ -248,7 +230,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
           "Status of compliance with regulatory frameworks and industry standards"
         )}
       >
-        {/* Overall Compliance Status - Compact */}
         <section 
           className="mb-xs"
           aria-label="Overall Compliance Status"
@@ -276,7 +257,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
             </div>
           </div>
           
-          {/* Progress bar */}
           {complianceStatus && (
             <div 
               className="relative h-1 rounded-full bg-info-light/20 dark:bg-info-dark overflow-hidden"
@@ -295,12 +275,10 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
           )}
         </section>
 
-        {/* Framework Status - Horizontal Badge Layout */}
         {complianceStatus && (
           <div className="mb-xs">
             <h3 className="text-body-lg font-medium mb-xs">Frameworks</h3>
             
-            {/* Compliant Frameworks - Horizontal badges */}
             {complianceStatus.compliantFrameworks.length > 0 && (
               <div className="mb-xs">
                 <div className="text-caption text-success-dark dark:text-success-light font-medium mb-xs"><span aria-hidden="true">✓</span> Compliant</div>
@@ -327,7 +305,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
               </div>
             )}
 
-            {/* Partially Compliant - Horizontal badges */}
             {complianceStatus.partiallyCompliantFrameworks.length > 0 && (
               <div className="mb-xs">
                 <div className="text-caption text-warning-dark dark:text-warning-light font-medium mb-xs"><span aria-hidden="true">⚠</span> Partial</div>
@@ -354,7 +331,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
               </div>
             )}
 
-            {/* Non-Compliant - Horizontal badges */}
             {complianceStatus.nonCompliantFrameworks.length > 0 && (
               <div className="mb-xs">
                 <div className="text-caption text-error-dark dark:text-error-light font-medium mb-xs"><span aria-hidden="true">✗</span> Non-Compliant</div>
@@ -383,7 +359,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
           </div>
         )}
 
-        {/* Framework Gap Analysis - Compact */}
         {activeFramework && (
           <div className="mb-xs">
             <div className="p-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded border border-neutral-light/20 dark:border-neutral-dark/20">
@@ -391,14 +366,12 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
               
               {gapAnalysis ? (
                 <div className="space-y-xs">
-                  {/* Status */}
                   <div className="text-caption text-neutral-dark dark:text-neutral-light">
                     {gapAnalysis.isCompliant
                       ? `✓ Meeting ${activeFramework} requirements`
                       : `✗ Not fully meeting ${activeFramework} requirements`}
                   </div>
 
-                  {/* Component Requirements - Compact Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-xs">
                     {["availability", "integrity", "confidentiality"].map((comp) => {
                       const componentType = comp as CIAComponent;
@@ -433,7 +406,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                     })}
                   </div>
 
-                  {/* Gaps - Compact */}
                   {gapAnalysis.gaps && gapAnalysis.gaps.length > 0 && (
                     <div className="text-caption text-error-dark dark:text-error-light">
                       <div className="font-medium mb-xs">Gaps:</div>
@@ -462,7 +434,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
           </div>
         )}
 
-        {/* Compliance Tips - Compact */}
         <div className="p-xs bg-info-light/5 dark:bg-info-dark/10 rounded border border-info-light/20 dark:border-info-dark/20">
           <div className="flex items-center mb-xs">
             <span className="text-info-dark dark:text-info-light mr-xs" aria-hidden="true">💡</span>
@@ -500,7 +471,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
   );
 };
 
-// Helper function to convert security level to numeric value
 function getSecurityLevelValue(level: SecurityLevel): number {
   const levelValues: Record<SecurityLevel, number> = {
     None: 0,
