@@ -204,7 +204,7 @@
     "eslint": "10.3.0",
     "globals": "17.6.0",
     "jsdom": "29.1.1",
-    "knip": "6.12.2",
+    "knip": "6.13.0",
     "license-compliance": "3.0.1",
     "mocha-junit-reporter": "2.2.1",
     "mochawesome": "7.1.4",
