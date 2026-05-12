@@ -15,12 +15,12 @@
 <p align="center">
   <a href="https://ciacompliancemanager.com"><img src="https://img.shields.io/badge/🌐_Live_App-ciacompliancemanager.com-0066CC?style=for-the-badge" alt="Live App"/></a>
   <a href="https://ciacompliancemanager.com/docs/api/"><img src="https://img.shields.io/badge/📔_API_Reference-TypeDoc-2E7D32?style=for-the-badge" alt="API Reference"/></a>
-  <a href="https://www.npmjs.com/package/cia-compliance-manager"><img src="https://img.shields.io/badge/📦_npm_Package-v1.1.59-CB3837?style=for-the-badge&logo=npm" alt="npm Package"/></a>
+  <a href="https://www.npmjs.com/package/cia-compliance-manager"><img src="https://img.shields.io/badge/📦_npm_Package-v1.1.70-CB3837?style=for-the-badge&logo=npm" alt="npm Package"/></a>
 </p>
 
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/Owner-CEO-0A66C2?style=for-the-badge" alt="Owner"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Version-1.1.59-success?style=for-the-badge" alt="Version"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Version-1.1.70-success?style=for-the-badge" alt="Version"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Effective-2026--04--28-blue?style=for-the-badge" alt="Effective Date"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Review-Quarterly-orange?style=for-the-badge" alt="Review Cycle"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Classification-Public-success?style=for-the-badge" alt="Classification"/></a>
@@ -96,7 +96,7 @@ CIA Compliance Manager is both a live assessment platform **and** a reusable npm
       <a href="https://www.npmjs.com/package/cia-compliance-manager"><img src="https://img.shields.io/badge/📦-npm_Package-CB3837?style=for-the-badge&logo=npm" alt="npm Package"/></a>
     </td>
     <td>
-      <strong><a href="https://www.npmjs.com/package/cia-compliance-manager">📦 npm Library — cia-compliance-manager@1.1.59</a></strong><br>
+      <strong><a href="https://www.npmjs.com/package/cia-compliance-manager">📦 npm Library — cia-compliance-manager@1.1.70</a></strong><br>
       Tree-shakeable ES module package with 10 subpath exports (<code>types</code>, <code>services</code>, <code>hooks</code>, <code>utils</code>, <code>components</code>, <code>components/widgets</code>, <code>constants</code>, <code>data</code>, <code>contexts</code>, plus root). Provides React components, hooks, and services for building security assessment and compliance management features into your own applications. Fully typed with TypeScript, peer-dependency-light (React 18.2+ or 19.x, optional Chart.js 4.x), and SLSA 3 provenance-signed. Suitable for embedding CIA triad assessments, compliance dashboards, threat modeling, or business impact analysis into enterprise portals, GRC platforms, or security operations consoles.
     </td>
   </tr>
@@ -332,7 +332,7 @@ Each agent is equipped with **domain-specific skills** that define reusable best
 - **[documentation-standards.md](.github/skills/documentation-standards.md)** — JSDoc, TypeDoc, Markdown, Mermaid diagram standards
 - **[c4-architecture-documentation.md](.github/skills/c4-architecture-documentation.md)** — C4 model (Context/Container/Component/Code) for architecture diagrams
 - **[code-quality-excellence.md](.github/skills/code-quality-excellence.md)** — TypeScript best practices, React patterns, ESLint rules, code organization
-- **[security-best-practices.md](.github/skills/security-best-practices.md)** — OWASP Top 10, secure coding patterns, input validation, authentication/authorization
+- **[security-by-design.md](.github/skills/security-by-design.md)** — OWASP Top 10, secure coding patterns, input validation, authentication/authorization
 - **[testing-excellence.md](.github/skills/testing-excellence.md)** — Vitest, React Testing Library, Cypress E2E, coverage thresholds, test design
 - **[compliance-frameworks.md](.github/skills/compliance-frameworks.md)** — ISO 27001, NIST CSF 2.0, GDPR, HIPAA, SOC 2, PCI DSS, EU CRA control mapping
 
@@ -354,30 +354,116 @@ This ensures every diagram, every heading, every cross-link follows the same vis
 
 ---
 
-## 📝 Featured Blog Posts
+## 📝 Featured Hack23 Blog Posts
 
-Expert analysis and thought leadership on CIA triad security, compliance frameworks, and business impact from industry professionals:
+Expert analysis and thought leadership from [Hack23's cybersecurity blog](https://hack23.com/blog.html), selected from the [Hack23 site map](https://hack23.com/sitemap.html) for direct relevance to CIA Compliance Manager, CIA triad assessment, compliance automation, secure development, and business impact analysis:
 
-### 🎯 **CIA Triad & Business Impact Analysis**
+### 🎯 CIA Compliance Manager Architecture & Code Deep Dives
 
 <table>
   <tr>
     <td width="50%">
-      <h4>📊 The CIA Triad for Business Impact Analysis</h4>
-      <p><strong>Author:</strong> Simon Moon (Independent Security Consultant)</p>
-      <p><strong>Published:</strong> DevGenius, 2024-12-15</p>
-      <p>Deep dive into using the CIA triad (Confidentiality, Integrity, Availability) as the foundation for business impact analysis. Explores how security professionals can translate technical security requirements into business-justifiable metrics, quantify risk across financial/operational/reputational dimensions, and align security investments with organizational value.</p>
-      <p><a href="https://blog.devgenius.io/the-cia-triad-for-business-impact-analysis-06c4b31d95f0"><strong>Read Full Article →</strong></a></p>
+      <h4>📐 Compliance Manager Architecture</h4>
+      <p><strong>Focus:</strong> CIA triad capability maturation and control mapping architecture</p>
+      <p>Sacred geometry in compliance architecture: three CIA principles multiplied by four maturity levels to create twelve control points. Explains how automated compliance system design connects NIST SP 800-53, ISO 27001, and business-facing assessment levels.</p>
+      <p><a href="https://hack23.com/blog-compliance-architecture.html"><strong>Read on Hack23 →</strong></a></p>
     </td>
     <td width="50%">
-      <h4>🛡️ The CIA Triad: Your Secret Weapon for Smarter Security Decisions</h4>
-      <p><strong>Author:</strong> George Dorn (Security Strategist & Risk Analyst)</p>
-      <p><strong>Published:</strong> Medium, 2024-12-14</p>
-      <p>Practical guide to leveraging the CIA triad for strategic security decision-making. Covers real-world scenarios where Confidentiality, Integrity, and Availability trade-offs drive architecture choices, technology selection, and budget prioritization. Includes case studies from financial services, healthcare, and SaaS platforms.</p>
-      <p><a href="https://medium.com/@george.dorn/the-cia-triad-your-secret-weapon-for-smarter-security-decisions-e4c9f5c85aac"><strong>Read Full Article →</strong></a></p>
+      <h4>🛡️ Compliance Security</h4>
+      <p><strong>Focus:</strong> STRIDE threat modeling for compliance automation</p>
+      <p>Breaks down six STRIDE threat categories into five defensive layers and thirty risk scenarios. Useful background for understanding how CIA Compliance Manager models spoofing, tampering, repudiation, information disclosure, denial of service, and elevation of privilege.</p>
+      <p><a href="https://hack23.com/blog-compliance-security.html"><strong>Read on Hack23 →</strong></a></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h4>🔮 Compliance Future</h4>
+      <p><strong>Focus:</strong> Context-aware security and adaptive defense</p>
+      <p>Future architecture for compliance tooling that moves beyond static questionnaires into context engines, machine-learning recommendations, continuous monitoring, and dynamic threat intelligence integration aligned with organizational reality.</p>
+      <p><a href="https://hack23.com/blog-compliance-future.html"><strong>Read on Hack23 →</strong></a></p>
+    </td>
+    <td width="50%">
+      <h4>💻 Compliance Manager Code Analysis</h4>
+      <p><strong>Focus:</strong> Client-side TypeScript/React security architecture</p>
+      <p>Repository deep-dive into CIA Compliance Manager's TypeScript and React implementation: zero-backend architecture, IndexedDB patterns, attack-surface reduction, and how client-side design choices support transparent security assessment workflows.</p>
+      <p><a href="https://hack23.com/blog-george-dorn-compliance-code.html"><strong>Read on Hack23 →</strong></a></p>
     </td>
   </tr>
 </table>
+
+### 📊 Compliance, Risk & Security Governance
+
+<table>
+  <tr>
+    <td width="50%">
+      <h4>📋 Compliance: Multi-Framework Mapping</h4>
+      <p><strong>Focus:</strong> One control model mapped across many frameworks</p>
+      <p>Practical guidance for avoiding duplicate compliance work by mapping a single control implementation to ISO 27001, NIST CSF, CIS Controls, GDPR, NIS2, and EU CRA expectations. Directly supports CIA Compliance Manager's multi-framework assessment model.</p>
+      <p><a href="https://hack23.com/discordian-compliance.html"><strong>Read on Hack23 →</strong></a></p>
+    </td>
+    <td width="50%">
+      <h4>🧭 Compliance Frameworks</h4>
+      <p><strong>Focus:</strong> Evidence-based implementation across regulatory standards</p>
+      <p>Explains how ISO 27001 controls, NIST CSF 2.0 outcomes, CIS safeguards, GDPR, NIS2, and EU CRA requirements can be implemented as continuous evidence rather than audit theater. Useful for interpreting framework coverage in the platform.</p>
+      <p><a href="https://hack23.com/discordian-compliance-frameworks.html"><strong>Read on Hack23 →</strong></a></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h4>📉 Risk Assessment</h4>
+      <p><strong>Focus:</strong> Quantitative risk and business impact methodology</p>
+      <p>Five-step risk methodology covering identification, quantitative analysis, evaluation, treatment, and monitoring. Provides context for translating CIA security levels into financial, operational, reputational, and regulatory business impact.</p>
+      <p><a href="https://hack23.com/discordian-risk-assessment.html"><strong>Read on Hack23 →</strong></a></p>
+    </td>
+    <td width="50%">
+      <h4>🏷️ Data Classification</h4>
+      <p><strong>Focus:</strong> Security levels based on real risk</p>
+      <p>Explains practical data classification and five security levels that drive handling requirements, access control, and resource allocation. Aligns with CIA Compliance Manager's data classification and CIA-level assessment model.</p>
+      <p><a href="https://hack23.com/discordian-classification.html"><strong>Read on Hack23 →</strong></a></p>
+    </td>
+  </tr>
+</table>
+
+### 🔐 Threat Modeling, Secure Development & Regulatory Readiness
+
+<table>
+  <tr>
+    <td width="50%">
+      <h4>🎯 Threat Modeling</h4>
+      <p><strong>Focus:</strong> STRIDE, MITRE ATT&amp;CK, and attack-tree thinking</p>
+      <p>Threat modeling guidance built on the assumption that capable adversaries exist and must be modeled explicitly. Complements CIA Compliance Manager's STRIDE analysis and attack tree visualization capabilities.</p>
+      <p><a href="https://hack23.com/discordian-threat-modeling.html"><strong>Read on Hack23 →</strong></a></p>
+    </td>
+    <td width="50%">
+      <h4>🧪 Secure Development</h4>
+      <p><strong>Focus:</strong> STRIDE plus DevSecOps evidence</p>
+      <p>Secure SDLC practices covering threat modeling integration, test coverage expectations, SLSA provenance, OpenSSF Scorecard targets, security architecture documentation, and automated security testing used across Hack23 projects.</p>
+      <p><a href="https://hack23.com/discordian-secure-dev.html"><strong>Read on Hack23 →</strong></a></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h4>🇪🇺 CRA Conformity Assessment</h4>
+      <p><strong>Focus:</strong> EU Cyber Resilience Act documentation and lifecycle evidence</p>
+      <p>Explains CRA conformity expectations for Hack23 projects, including CIA Compliance Manager: public threat models, security architecture documentation, SLSA provenance, vulnerability handling, and technical evidence.</p>
+      <p><a href="https://hack23.com/discordian-cra.html"><strong>Read on Hack23 →</strong></a></p>
+    </td>
+    <td width="50%">
+      <h4>🌐 Why Our ISMS Is Public</h4>
+      <p><strong>Focus:</strong> Transparency as a security and trust control</p>
+      <p>Describes Hack23's public ISMS approach: trust through verification, public scrutiny, and security excellence through transparent evidence. Provides governance context for why CIA Compliance Manager's methodology, controls, and documentation are open.</p>
+      <p><a href="https://hack23.com/blog-public-isms-benefits.html"><strong>Read on Hack23 →</strong></a></p>
+    </td>
+  </tr>
+</table>
+
+### 📚 Related Hack23 Resources
+
+- **[All Hack23 Blog Posts](https://hack23.com/blog.html)** — complete index of Hack23 cybersecurity articles.
+- **[CIA Triad FAQ](https://hack23.com/cia-triad-faq.html)** — fundamentals for Confidentiality, Integrity, and Availability.
+- **[CIA Compliance Manager Overview](https://hack23.com/compliance-manager.html)** — project overview and positioning.
+- **[CIA Compliance Manager Features](https://hack23.com/cia-compliance-manager-features.html)** — feature-level guide for assessment, compliance mapping, business impact, and threat modeling.
+- **[CIA Compliance Manager Documentation](https://hack23.com/cia-compliance-manager-docs.html)** — technical documentation entry point on Hack23.
 
 **Want to contribute a blog post?** We welcome guest articles on CIA triad security, compliance automation, threat modeling, and GRC best practices. See our [Contributing Guidelines](CONTRIBUTING.md) for submission details.
 
@@ -385,7 +471,7 @@ Expert analysis and thought leadership on CIA triad security, compliance framewo
 
 ## 📊 Current Status / At a Glance
 
-**Version:** 1.1.59 (Effective: 2026-04-28 | Next Review: 2026-07-28)
+**Version:** 1.1.70 (Effective: 2026-04-28 | Next Review: 2026-07-28)
 
 **Package Health:**
 - **Build Status:** ✅ All workflows passing
@@ -544,7 +630,7 @@ This project demonstrates compliance controls for multiple frameworks simultaneo
 ### 📖 Quick Links
 
 - **[🌐 Live Application](https://ciacompliancemanager.com)** — Interactive assessment platform
-- **[📦 npm Package](https://www.npmjs.com/package/cia-compliance-manager)** — Reusable React library (v1.1.59)
+- **[📦 npm Package](https://www.npmjs.com/package/cia-compliance-manager)** — Reusable React library (v1.1.70)
 - **[🗺️ Site Map](https://ciacompliancemanager.com/sitemap.html)** — All platform pages and docs
 - **[📔 API Reference](https://ciacompliancemanager.com/docs/api/)** — TypeDoc-generated symbol documentation
 - **[📓 Test Coverage](https://ciacompliancemanager.com/docs/coverage/index.html)** — Interactive Vitest coverage report
@@ -553,7 +639,7 @@ This project demonstrates compliance controls for multiple frameworks simultaneo
 
 ### 🏛️ Architecture Documentation
 
-**Current State (v1.1.59):**
+**Current State (v1.1.70):**
 
 | Document | Description | Last Updated |
 |----------|-------------|--------------|
@@ -803,5 +889,5 @@ Special thanks to the maintainers of React, TypeScript, Vite, Vitest, Cypress, T
 </p>
 
 <p align="center">
-  <sub>Version 1.1.59 | Effective 2026-04-28 | Next Review 2026-07-28 | <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification: PUBLIC</a></sub>
+  <sub>Version 1.1.70 | Effective 2026-04-28 | Next Review 2026-07-28 | <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification: PUBLIC</a></sub>
 </p>

@@ -104,15 +104,15 @@ This Markdown documentation can be easily integrated into your own project docum
 
 - **[SecurityLevel](types/cia/type-aliases/SecurityLevel.md)**: Core security level type (1-5)
 - **[SecurityProfile](types/cia/interfaces/SecurityProfile.md)**: Complete security profile
-- **[ComplianceStatus](types/compliance/interfaces/ComplianceStatus.md)**: Compliance evaluation status
+- **[ComplianceStatus](types/compliance/type-aliases/ComplianceStatus.md)**: Compliance evaluation status
 - **[BusinessImpact](types/businessImpact/interfaces/BusinessImpact.md)**: Business impact assessment
-- **[RiskAssessment](types/widgets/interfaces/RiskAssessment.md)**: Security risk evaluation
+- **[RiskAssessmentProps](types/componentPropExports/interfaces/RiskAssessmentProps.md)**: Security risk evaluation props
 
 ## Core Components
 
-- **[SecurityLevelSelector](components/securitylevel/classes/SecurityLevelSelector.md)**: For selecting security levels
-- **[SecuritySummaryWidget](components/widgets/assessmentcenter/variables/SecuritySummaryWidget.md)**: For displaying security overview
-- **[ComplianceStatusWidget](components/widgets/businessvalue/variables/ComplianceStatusWidget.md)**: For compliance reporting
+- **[SecurityLevelSelectorProps](types/componentPropExports/interfaces/SecurityLevelSelectorProps.md)**: For selecting security levels
+- **[SecuritySummaryWidget](components/variables/SecuritySummaryWidget.md)**: For displaying security overview
+- **[ComplianceStatusWidget](components/variables/ComplianceStatusWidget.md)**: For compliance reporting
 
 ## Services 
 

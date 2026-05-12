@@ -59,7 +59,7 @@ For detailed architecture diagrams and documentation, see the [Architecture sect
 
 This diagram shows the relationship between different modules in the codebase:
 
-![Module Dependencies](https://ciacompliancemanager.com/dependencies/module-dependencies.svg)
+![Module Dependencies](https://ciacompliancemanager.com/docs/dependencies/module-dependencies.svg)
 
 ## 🔒 Security Features
 
@@ -78,23 +78,23 @@ The following resources are available in our [Documentation Portal](https://ciac
 
 | Resource                  | Description                                           | Link                                                                                         |
 | ------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| API Documentation         | Detailed API reference for all components             | [View](https://ciacompliancemanager.com/api)                                  |
-| Architecture Diagrams     | C4 model diagrams and architecture documentation      | [View](/workspaces/cia-compliance-manager/docs/architecture/ARCHITECTURE.md)                 |
-| Diagrams & Visualizations | UML and Mermaid diagrams showing system relationships | [View](https://ciacompliancemanager.com/diagrams)                             |
-| Code Coverage             | Test coverage reports and metrics                     | [View](https://ciacompliancemanager.com/coverage)                             |
-| Dependencies              | Visual representation of module dependencies          | [View](https://ciacompliancemanager.com/dependencies/module-dependencies.svg) |
+| API Documentation         | Detailed API reference for all components             | [View](https://ciacompliancemanager.com/docs/api/)                            |
+| Architecture Diagrams     | C4 model diagrams and architecture documentation      | [View](architecture/ARCHITECTURE.md)                                          |
+| Diagrams & Visualizations | UML and Mermaid diagrams showing system relationships | [View](diagrams/README.md)                                                    |
+| Code Coverage             | Test coverage reports and metrics                     | [View](https://ciacompliancemanager.com/docs/coverage/index.html)             |
+| Dependencies              | Visual representation of module dependencies          | [View](https://ciacompliancemanager.com/docs/dependencies/module-dependencies.svg) |
 
 ## 📝 Key Documentation Sections
 
-- [User Guide](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/user-guide/README.md) - For end users of the system
-- [Admin Guide](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/admin-guide/README.md) - For system administrators
-- [Integration Guide](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/integration/README.md) - For connecting with other systems
-- [API Reference](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/api/README.md) - For developers integrating with our API
-- [Security Documentation](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/security/README.md) - Details on security features and certifications
-- [Compliance Frameworks](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/frameworks/README.md) - Documentation on supported compliance frameworks
-- [Current Architecture](/workspaces/cia-compliance-manager/docs/architecture/ARCHITECTURE.md) - Current architecture documentation
-- [Future Architecture](/workspaces/cia-compliance-manager/docs/architecture/FUTURE_ARCHITECTURE.md) - Planned architectural improvements
-- [Performance Testing](/workspaces/cia-compliance-manager/docs/performance-testing.md) - Performance testing methodology and results
+- [User Guide](../README.md#-explore-the-platform) - For end users of the system
+- [Operations Guide](architecture/WORKFLOWS.md) - For release, workflow, and operational processes
+- [Integration Guide](api-overview.md) - For connecting with and embedding the library
+- [API Reference](api/index.html) - For developers integrating with our API
+- [Security Documentation](architecture/SECURITY_ARCHITECTURE.md) - Details on security features and certifications
+- [Compliance Evidence](COMPLIANCE_EVIDENCE.md) - Documentation on supported compliance frameworks and evidence
+- [Current Architecture](architecture/ARCHITECTURE.md) - Current architecture documentation
+- [Future Architecture](architecture/FUTURE_ARCHITECTURE.md) - Planned architectural improvements
+- [Performance Testing](performance-testing.md) - Performance testing methodology and results
 
 ## 🛡️ DevSecOps Practices
 
@@ -116,8 +116,8 @@ The CIA Compliance Manager follows secure development practices, including:
 
 ## 🚀 Getting Started
 
-Please see our [Quick Start Guide](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/getting-started.md) to begin using the CIA Compliance Manager.
+Please see our [Getting Started guide](../README.md#-getting-started) to begin using the CIA Compliance Manager.
 
 ## 👥 Contributing
 
-We welcome contributions to our documentation. Please see the [Contributing Guide](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/CONTRIBUTING.md) for more information.
+We welcome contributions to our documentation. Please see the [Contributing Guide](../CONTRIBUTING.md) for more information.
