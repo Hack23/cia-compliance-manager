@@ -12,6 +12,9 @@
 @import "./styles/light-theme.css";
 @import "./styles/dark-theme.css";
 
+/* Use the app-controlled `.dark` class instead of OS color-scheme media queries. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Global styles that use CSS variables */
 :root {
   /* Any global variables should be here, not outside a selector */
