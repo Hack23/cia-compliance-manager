@@ -612,7 +612,7 @@
 .dark .business-impact-category-card p,
 .dark .security-level-details-card p,
 .dark .security-level-control-card [data-testid*="-summary"],
-.dark .security-summary-metric-grid > div {
+.dark .security-summary-metric-grid > div > div:first-child {
   color: var(--text-secondary);
 }
 

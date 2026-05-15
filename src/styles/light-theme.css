@@ -422,7 +422,7 @@ button.lightbutton:hover:active {
 .business-impact-category-card p,
 .security-level-details-card p,
 .security-level-control-card [data-testid*="-summary"],
-.security-summary-metric-grid > div {
+.security-summary-metric-grid > div > div:first-child {
   color: var(--text-secondary);
 }
 
