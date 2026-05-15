@@ -334,3 +334,98 @@ button.lightbutton:hover:active {
 [data-testid^="widget-container"] {
   overflow: visible;
 }
+
+/* Final light-mode dashboard polish.
+ * These selectors intentionally target existing widget composition classes so
+ * utility-level dark/light classes cannot leave nested cards looking inverted.
+ */
+:root {
+  --light-primary: #005ea8;
+  --light-secondary: #0072ce;
+  --light-accent: #0d9488;
+  --light-background: #f6f8fb;
+  --light-card-bg: #ffffff;
+  --light-border: rgba(0, 94, 168, 0.18);
+  --light-glow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  --light-text: #172033;
+  --widget-shell-border: rgba(15, 81, 128, 0.18);
+  --widget-inner-border: rgba(15, 81, 128, 0.14);
+  --widget-muted-border: rgba(100, 116, 139, 0.22);
+  --widget-surface: #ffffff;
+  --widget-subtle-surface: #f8fbff;
+  --widget-nested-surface: #f7fbff;
+  --widget-nested-strong-surface: #eef6ff;
+  --widget-header-surface: linear-gradient(135deg, #f8fbff 0%, #edf6ff 100%);
+  --widget-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  --color-integrity: #1f7a3f;
+  --color-integrity-dark: #166534;
+  --color-availability: #075985;
+  --color-availability-dark: #075985;
+  --color-high: #1f7a3f;
+  --color-very-high: #075985;
+  --color-success: #1f7a3f;
+  --color-info: #075985;
+}
+
+.widget-container,
+[data-testid^="widget-container"] {
+  background: var(--widget-surface);
+  border-color: var(--widget-shell-border);
+  box-shadow: var(--widget-shadow);
+}
+
+.widget-header,
+.widget-container > div:first-child,
+[data-testid^="widget-container"] > div:first-child {
+  background: var(--widget-header-surface);
+  border-bottom-color: var(--widget-inner-border);
+}
+
+.widget-body,
+.widget-container > div:nth-child(2),
+[data-testid^="widget-container"] > div:nth-child(2) {
+  background: var(--widget-surface);
+  color: var(--text-color);
+}
+
+.security-level-control-card,
+.security-level-details-card,
+.security-level-overview,
+.business-impact-category-card,
+.business-impact-executive-summary,
+.security-summary-section,
+.security-summary-radar-shell,
+.security-summary-metric-grid > div {
+  background: var(--widget-nested-surface);
+  border-color: var(--widget-inner-border);
+  color: var(--text-color);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.business-impact-executive-summary,
+.security-summary-radar-shell {
+  background: linear-gradient(180deg, #ffffff 0%, var(--widget-nested-strong-surface) 100%);
+}
+
+.security-level-control-card select,
+.widget-body input,
+.widget-body select,
+.widget-body textarea,
+[data-testid^="widget-container"] input,
+[data-testid^="widget-container"] select,
+[data-testid^="widget-container"] textarea {
+  background-color: #ffffff;
+  border-color: var(--widget-muted-border);
+  color: var(--text-color);
+}
+
+.business-impact-category-card p,
+.security-level-details-card p,
+.security-level-control-card [data-testid*="-summary"],
+.security-summary-metric-grid > div {
+  color: var(--text-secondary);
+}
+
+.security-summary-component-card {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}

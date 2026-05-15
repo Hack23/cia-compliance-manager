@@ -540,3 +540,82 @@
 [data-testid^="widget-container"] {
   overflow: visible;
 }
+
+/* Final dark-mode dashboard polish.
+ * Keeps the cyber security look while preventing nested panels from becoming
+ * low-contrast black blocks or inheriting light-mode surfaces.
+ */
+.dark {
+  --widget-shell-border: rgba(56, 189, 248, 0.24);
+  --widget-inner-border: rgba(125, 211, 252, 0.18);
+  --widget-muted-border: rgba(148, 163, 184, 0.22);
+  --widget-surface: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(8, 20, 32, 0.98) 100%);
+  --widget-subtle-surface: rgba(30, 41, 59, 0.66);
+  --widget-nested-surface: rgba(15, 23, 42, 0.76);
+  --widget-nested-strong-surface: rgba(30, 41, 59, 0.86);
+  --widget-header-surface: linear-gradient(135deg, rgba(15, 35, 52, 0.98) 0%, rgba(10, 28, 42, 0.98) 100%);
+  --widget-shadow: 0 16px 34px rgba(0, 0, 0, 0.36), 0 0 18px rgba(43, 138, 255, 0.1);
+}
+
+.dark .widget-container,
+.dark [data-testid^="widget-container"] {
+  background: var(--widget-surface);
+  border-color: var(--widget-shell-border);
+  box-shadow: var(--widget-shadow);
+}
+
+.dark .widget-header,
+.dark .widget-container > div:first-child,
+.dark [data-testid^="widget-container"] > div:first-child {
+  background: var(--widget-header-surface);
+  border-bottom-color: var(--widget-inner-border);
+}
+
+.dark .widget-body,
+.dark .widget-container > div:nth-child(2),
+.dark [data-testid^="widget-container"] > div:nth-child(2) {
+  background: transparent;
+  color: var(--text-color);
+}
+
+.dark .security-level-control-card,
+.dark .security-level-details-card,
+.dark .security-level-overview,
+.dark .business-impact-category-card,
+.dark .business-impact-executive-summary,
+.dark .security-summary-section,
+.dark .security-summary-radar-shell,
+.dark .security-summary-metric-grid > div {
+  background: var(--widget-nested-surface);
+  border-color: var(--widget-inner-border);
+  color: var(--text-color);
+  box-shadow: inset 0 1px 0 rgba(148, 163, 184, 0.08);
+}
+
+.dark .business-impact-executive-summary,
+.dark .security-summary-radar-shell {
+  background: linear-gradient(180deg, var(--widget-nested-strong-surface) 0%, var(--widget-nested-surface) 100%);
+}
+
+.dark .security-level-control-card select,
+.dark .widget-body input,
+.dark .widget-body select,
+.dark .widget-body textarea,
+.dark [data-testid^="widget-container"] input,
+.dark [data-testid^="widget-container"] select,
+.dark [data-testid^="widget-container"] textarea {
+  background-color: rgba(15, 23, 42, 0.92);
+  border-color: var(--widget-muted-border);
+  color: var(--text-color);
+}
+
+.dark .business-impact-category-card p,
+.dark .security-level-details-card p,
+.dark .security-level-control-card [data-testid*="-summary"],
+.dark .security-summary-metric-grid > div {
+  color: var(--text-secondary);
+}
+
+.dark .security-summary-component-card {
+  box-shadow: inset 0 1px 0 rgba(148, 163, 184, 0.08);
+}
