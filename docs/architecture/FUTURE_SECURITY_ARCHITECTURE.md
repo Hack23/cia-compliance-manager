@@ -65,8 +65,8 @@ This document outlines the comprehensive future security architecture for the CI
 ### Supporting Documentation
 | Document                                    | Focus          | Description                         |
 | ------------------------------------------- | -------------- | ----------------------------------- |
-| [End-of-Life Strategy](End-of-Life-Strategy.md) | 📅 Lifecycle   | Security patching and updates       |
-| [Development Guide](development.md)         | 🔧 Development | Security features and testing       |
+| [End-of-Life Strategy](../End-of-Life-Strategy.md) | 📅 Lifecycle   | Security patching and updates       |
+| [Development Guide](../../CONTRIBUTING.md)  | 🔧 Development | Security features and testing       |
 
 </div>
 

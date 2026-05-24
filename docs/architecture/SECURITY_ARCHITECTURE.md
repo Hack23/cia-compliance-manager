@@ -80,9 +80,9 @@ This security architecture is continuously validated through automated security 
 | Document                                          | Focus          | Description                            |
 | ------------------------------------------------- | -------------- | -------------------------------------- |
 | [Security Architecture](SECURITY_ARCHITECTURE.md) | 🛡️ Security    | Complete security overview             |
-| [End-of-Life Strategy](End-of-Life-Strategy.md)   | 📅 Lifecycle   | Security patching and updates          |
+| [End-of-Life Strategy](../End-of-Life-Strategy.md)   | 📅 Lifecycle   | Security patching and updates          |
 | [Workflows](WORKFLOWS.md)                         | 🔧 CI/CD       | Security-hardened CI/CD workflows      |
-| [Development Guide](development.md)               | 🔧 Development | Security features and testing strategy |
+| [Development Guide](../../CONTRIBUTING.md)         | 🔧 Development | Security features and testing strategy |
 | [Architecture](ARCHITECTURE.md)                   | 🏛️ Structure   | Overall system architecture            |
 
 ## 🔑 Authentication Architecture
@@ -2035,7 +2035,7 @@ CIA Compliance Manager implements a **security-first approach optimized for a fr
 
 ### Future Security Considerations
 
-As documented in the [End-of-Life Strategy](End-of-Life-Strategy.md), any future evolution toward backend services or user accounts would require implementing the traditional security layers currently marked as "not applicable."
+As documented in the [End-of-Life Strategy](../End-of-Life-Strategy.md), any future evolution toward backend services or user accounts would require implementing the traditional security layers currently marked as "not applicable."
 - **🔄 Continuous Scanning**: Every commit and pull request analyzed
 - **📊 Security Reporting**: Centralized security findings in GitHub Security tab
 - **⚡ Automated Remediation**: Dependency updates and vulnerability fixes

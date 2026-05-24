@@ -230,7 +230,7 @@ flowchart TD
 - **Fallback Handling**: Default values if service fails
 - **Error Recovery**: Automatic retry with exponential backoff
 
-**Cross-Reference:** See [STATEDIAGRAM.md](STATEDIAGRAM.md#-widget-component-state-machine-v10) for widget lifecycle details.
+**Cross-Reference:** See [STATEDIAGRAM.md](STATEDIAGRAM.md#-widget-component-state-machine-v1159) for widget lifecycle details.
 
 ## 🔄 Data Flow Process
 
@@ -854,7 +854,7 @@ export class WidgetErrorBoundary extends Component<WidgetErrorBoundaryProps, Wid
 - ❌ **Event Handler Errors**: Requires manual try-catch
 - ❌ **Async Errors**: Requires promise catch
 
-**Cross-Reference:** See [STATEDIAGRAM.md](STATEDIAGRAM.md#-react-error-boundary-state-transitions-v10) for error boundary state machine.
+**Cross-Reference:** See [STATEDIAGRAM.md](STATEDIAGRAM.md#-react-error-boundary-state-transitions-v1159) for error boundary state machine.
 
 ## 📤 Data Export and Report Generation Workflow (v1.1.59)
 
@@ -1208,7 +1208,7 @@ stateDiagram-v2
 - `User Retries/Resets`: Error recovery action
 - `Component Removed`: Parent component unmounts widget
 
-**Cross-Reference:** See [STATEDIAGRAM.md](STATEDIAGRAM.md#-widget-component-state-machine-v10) for detailed state machine specifications.
+**Cross-Reference:** See [STATEDIAGRAM.md](STATEDIAGRAM.md#-widget-component-state-machine-v1159) for detailed state machine specifications.
 
 ## 🔐 Authentication and Session Management (Future)
 
