@@ -342,3 +342,22 @@ To ensure consistency across all architecture documentation:
 4. **Diagram reviews** should focus on clarity, consistency, and compliance with style guide
 
 By following these style guidelines, we ensure that all architecture documentation for the CIA Compliance Manager is consistent, readable, and visually appealing, making it more accessible and useful for all stakeholders.
+
+## 🧪 Diagram Validation Tooling
+
+The repository ships three helpers under `scripts/` so style-guide compliance is testable:
+
+| Script | npm command | Purpose |
+|--------|-------------|---------|
+| `scripts/validate-mermaid.mjs` | `npm run test:mermaid` | Compiles every ```mermaid``` block with `@mermaid-js/mermaid-cli` and fails the run for any block the parser/renderer rejects. Writes `build/mermaid-report.json`. |
+| `scripts/quote-mermaid-icons.mjs` | (run on demand) | Sweeps every `flowchart` / `graph` block and wraps node labels containing emoji or special characters (`( ) < > & # %`) in `"..."` to keep the parser happy and the style consistent. Pass `--dry-run` to preview. |
+| `scripts/audit-mermaid-colors.mjs` | (run on demand) | Reports every hex color used in `style` / `classDef` / `linkStyle` / `UpdateElementStyle` lines and flags ones outside this palette. Writes `build/mermaid-color-audit.json`. |
+
+### Diagram rules enforced by tooling
+
+1. **Every diagram must render** — `npm run test:mermaid` blocks broken syntax.
+2. **Icons / special characters must be quoted** — flowchart/graph node labels containing an emoji or `( ) < > & # %` are wrapped in `"..."`. Example: `A["🧪 Vitest 4.1.4"]`, `H["📊 ≥80% (enforced) Coverage"]`.
+3. **Mindmap labels with special characters use a node shape** — for example `["≥80% (enforced) Coverage"]` rather than a bare `≥80% (enforced) Coverage` line.
+4. **Gantt charts use ISO dates** — prefer `dateFormat YYYY-MM-DD` with explicit task starts (`2024-04-01`) and day-based durations (`182d`) rather than informal quarter strings such as `2024-Q2` / `2quarters`, which the parser rejects.
+5. **Colors should come from the palette above**; reviewers should consult `npm run -s test:mermaid && node scripts/audit-mermaid-colors.mjs --non-palette` before adding new fills/strokes.
+
