@@ -123,6 +123,7 @@
     "lint:src": "eslint src",
     "test:licenses": "license-compliance --direct --allow 'MIT;ISC;0BSD;BSD-2-Clause;BSD-3-Clause;Apache-2.0;Unlicense;CC0-1.0'",
     "validate:agents": "bash scripts/validate-agents.sh",
+    "test:mermaid": "node scripts/validate-mermaid.mjs",
     "audit:design-tokens": "node scripts/audit-design-tokens.js",
     "test:widgets": "vitest run --coverage --coverage.reportOnFailure --reporter=verbose  --exclude \"src/components/widgets/**/*.test.{ts,tsx}\"",
     "test:core": "vitest run --coverage --coverage.reportOnFailure --reporter=verbose  --exclude \"src/components/widgets/**/*.test.{ts,tsx}\"",

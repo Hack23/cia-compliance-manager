@@ -154,7 +154,7 @@ mindmap
     (🧪 Testing)
       🔬 Unit Tests
         Vitest 4.1.4
-        ≥80% (enforced) Coverage
+        ["≥80% (enforced) Coverage"]
       🌐 E2E Tests
         Cypress 15.14.0
         Critical Path Coverage
@@ -489,7 +489,7 @@ mindmap
         Test Framework
         Coverage Reporting
       📊 Coverage Metrics
-        ≥80% (enforced) Line Coverage
+        ["≥80% (enforced) Line Coverage"]
         80% Target Exceeded
         Branch Coverage
       🧩 Component Tests

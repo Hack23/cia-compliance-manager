@@ -1374,7 +1374,7 @@ flowchart TD
         C --> F[🔐 Workflow Security Tests]
         D --> G[⚠️ UI Security Validation]
         
-        H[📊 ≥80% (enforced) Coverage] --> A
+        H["📊 ≥80% (enforced) Coverage"] --> A
         I[🔄 Session Handling] --> C
     end
 

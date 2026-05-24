@@ -459,7 +459,7 @@ flowchart TD
         C --> F[✅ Isolated Environment]
         D --> G[✅ No Credentials Needed]
         
-        H[🛡️ ≥80% (enforced) Coverage] --> I[📊 Security Gap Detection]
+        H["🛡️ ≥80% (enforced) Coverage"] --> I[📊 Security Gap Detection]
         J[🌐 E2E Tests] --> K[🔐 Workflow Security Validation]
     end
 
