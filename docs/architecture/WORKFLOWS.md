@@ -264,7 +264,7 @@ The test-and-report workflow runs comprehensive testing and generates quality me
 flowchart TD
     CodeChange[Code Change] --> PrepareJob[Prepare Job]
     PrepareJob --> BuildValidation[Build Validation]
-    BuildValidation --> Adequate{Build & License<br>Checks Pass?}
+    BuildValidation --> Adequate{"Build & License<br>Checks Pass?"}
     Adequate -->|Yes| ParallelTests[Run Tests in Parallel]
     Adequate -->|No| FixBuild[Fix Build/License Issues]
     FixBuild --> CodeChange
@@ -278,7 +278,7 @@ flowchart TD
     CoverageMeasurement --> Report[Generate Reports]
     UIValidation --> Report
     
-    Report --> CoverageCheck{Coverage<br>Adequate?}
+    Report --> CoverageCheck{"Coverage<br>Adequate?"}
     CoverageCheck -->|Yes| MergeCode[Ready to Merge]
     CoverageCheck -->|No| AddTests[Add More Tests]
     AddTests --> CodeChange
@@ -377,16 +377,16 @@ flowchart TD
     StaticAnalysis --> DependencyScan[Scan Dependencies]
     DependencyScan --> SecretScanning[Secret Detection]
     SecretScanning --> LicenseCheck[License Verification]
-    LicenseCheck --> QualityGates{All Checks<br>Pass?}
+    LicenseCheck --> QualityGates{"All Checks<br>Pass?"}
     QualityGates -->|Yes| Report[Generate Report]
     QualityGates -->|No| Fail[Fail Build]
     
-    Report --> Approval{Approval<br>Required?}
+    Report --> Approval{"Approval<br>Required?"}
     Approval -->|Yes| RequestReview[Request Review]
     Approval -->|No| AutoMerge[Auto-merge]
     
     RequestReview --> ReviewProcess[Review Process]
-    ReviewProcess --> MergeDecision{Merge<br>Decision}
+    ReviewProcess --> MergeDecision{"Merge<br>Decision"}
     MergeDecision -->|Approved| Merge[Merge PR]
     MergeDecision -->|Rejected| UpdateCode[Update Code]
     UpdateCode --> Tests
@@ -999,7 +999,7 @@ flowchart TD
     
     SetCacheMeta --> DiscoverDistribution[Discover CloudFront Distribution ID]
     DiscoverDistribution --> CreateInvalidation[Create CloudFront Invalidation /*]
-    CreateInvalidation --> Complete[✅ Deployment Complete]
+    CreateInvalidation --> Complete["✅ Deployment Complete"]
     
     style Start fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:white,font-weight:bold
     style HardenRunner fill:#D32F2F,stroke:#C62828,stroke-width:2px,color:white,font-weight:bold
@@ -1190,10 +1190,10 @@ The integration approach follows a layered security model:
 ```mermaid
 flowchart LR
     PR([Pull Request]) --> Static[Static Analysis]
-    Static --> Build[Build & Test]
+    Static --> Build["Build & Test"]
     Build --> Security[Security Scanning]
     Security --> Deploy[Deploy Preview]
-    Deploy --> Audit[Audit & Verify]
+    Deploy --> Audit["Audit & Verify"]
     
     classDef prNode fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
     classDef phase fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
@@ -1293,7 +1293,7 @@ The rollback process follows these steps:
 ```mermaid
 flowchart TD
     Issue[Deployment Issue Detected] --> Assess[Assess Impact]
-    Assess --> Decision{Rollback<br>Needed?}
+    Assess --> Decision{"Rollback<br>Needed?"}
     Decision -->|Yes| Manual[Manual Workflow Trigger]
     Decision -->|No| Monitor[Continue Monitoring]
     Manual --> Rollback[Initiate Rollback]

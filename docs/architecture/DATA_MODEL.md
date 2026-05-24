@@ -1285,25 +1285,25 @@ classDiagram
 
 ```mermaid
 flowchart TD
-    Start[🚀 User Interaction] --> Selection[🎯 Security Level Selection]
-    Selection --> State[📊 Component State Update]
-    State --> Provider[🔌 Data Provider Query]
-    Provider --> Service[⚙️ Service Layer Processing]
-    Service --> Transform[🔄 Data Transformation]
-    Transform --> Widgets[🧩 Widget Update]
-    Widgets --> Display[📱 UI Render]
+    Start["🚀 User Interaction"] --> Selection["🎯 Security Level Selection"]
+    Selection --> State["📊 Component State Update"]
+    State --> Provider["🔌 Data Provider Query"]
+    Provider --> Service["⚙️ Service Layer Processing"]
+    Service --> Transform["🔄 Data Transformation"]
+    Transform --> Widgets["🧩 Widget Update"]
+    Widgets --> Display["📱 UI Render"]
     
-    Provider --> Cache{💾 Cache?}
+    Provider --> Cache{"💾 Cache?"}
     Cache -->|Hit| Transform
-    Cache -->|Miss| Fetch[📡 Fetch Data]
+    Cache -->|Miss| Fetch["📡 Fetch Data"]
     Fetch --> Cache
     
-    Service --> ErrorSvc[🛡️ Error Service]
+    Service --> ErrorSvc["🛡️ Error Service"]
     ErrorSvc -->|Recoverable| Transform
-    ErrorSvc -->|Fatal| ErrorUI[⚠️ Error Display]
+    ErrorSvc -->|Fatal| ErrorUI["⚠️ Error Display"]
     
-    Provider --> DataProv[📦 Data Providers]
-    DataProv --> StaticData[💾 Static Data Modules]
+    Provider --> DataProv["📦 Data Providers"]
+    DataProv --> StaticData["💾 Static Data Modules"]
     
     classDef user fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     classDef state fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
@@ -1475,13 +1475,13 @@ sequenceDiagram
 
 ```mermaid
 flowchart LR
-    Profile[📊 Security Profile] --> Assessment[🔍 Compliance Assessment]
-    Assessment --> Frameworks[📋 Framework Evaluation]
-    Frameworks --> Gap[🔍 Gap Analysis]
-    Gap --> Score[📈 Score Calculation]
-    Score --> Recommendations[💡 Recommendations]
-    Recommendations --> Status[✅ Compliance Status]
-    Status --> Display[📱 Widget Display]
+    Profile["📊 Security Profile"] --> Assessment["🔍 Compliance Assessment"]
+    Assessment --> Frameworks["📋 Framework Evaluation"]
+    Frameworks --> Gap["🔍 Gap Analysis"]
+    Gap --> Score["📈 Score Calculation"]
+    Score --> Recommendations["💡 Recommendations"]
+    Recommendations --> Status["✅ Compliance Status"]
+    Status --> Display["📱 Widget Display"]
     
     classDef input fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
     classDef process fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff

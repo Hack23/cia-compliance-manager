@@ -318,20 +318,20 @@ it("meets performance requirements", () => {
 
 ```mermaid
 graph TB
-    A[👨‍💻 Code Changes] --> B[🔨 Build Application]
-    B --> C{📦 Bundle Size Check}
-    C -->|✅ Within Budget| D[🚀 Deploy to Staging]
-    C -->|❌ Over Budget| E[⚡ Optimize & Rebuild]
+    A["👨‍💻 Code Changes"] --> B["🔨 Build Application"]
+    B --> C{"📦 Bundle Size Check"}
+    C -->|✅ Within Budget| D["🚀 Deploy to Staging"]
+    C -->|❌ Over Budget| E["⚡ Optimize & Rebuild"]
     E --> B
-    D --> F[🔍 Lighthouse Audit]
-    F --> G{📊 Scores >90?}
-    G -->|❌ Below Target| H[🔧 Performance Optimization]
-    G -->|✅ Pass| I[✅ Deploy to Production]
+    D --> F["🔍 Lighthouse Audit"]
+    F --> G{"📊 Scores >90?"}
+    G -->|❌ Below Target| H["🔧 Performance Optimization"]
+    G -->|✅ Pass| I["✅ Deploy to Production"]
     H --> F
-    I --> J[📈 Real User Monitoring]
-    J --> K[📊 Performance Dashboard]
-    K --> L{⚠️ Regression Detected?}
-    L -->|Yes| M[🚨 Alert & Investigate]
+    I --> J["📈 Real User Monitoring"]
+    J --> K["📊 Performance Dashboard"]
+    K --> L{"⚠️ Regression Detected?"}
+    L -->|Yes| M["🚨 Alert & Investigate"]
     L -->|No| J
     M --> H
     

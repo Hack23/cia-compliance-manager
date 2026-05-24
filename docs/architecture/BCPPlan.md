@@ -138,8 +138,8 @@ graph TB
         A --> C[Static Content Delivery]
         A --> D[Security Dashboard]
         A --> E[Compliance Mapping]
-        A --> F[Reporting & Export]
-        A --> G[User Data & Settings]
+        A --> F["Reporting & Export"]
+        A --> G["User Data & Settings"]
     end
 
     subgraph "Technical Components"
@@ -1244,24 +1244,24 @@ mindmap
 ```mermaid
 flowchart TB
     subgraph "🔬 Test Result Analysis Process"
-        A[🚀 Execute Test Case] --> B{🔍 Success Criteria<br>Met?}
-        B -->|Yes| C[✅ Document Success]
-        B -->|No| D[❌ Document Failure]
+        A["🚀 Execute Test Case"] --> B{"🔍 Success Criteria<br>Met?"}
+        B -->|Yes| C["✅ Document Success"]
+        B -->|No| D["❌ Document Failure"]
 
-        C --> E[📊 Measure Against<br>Targets]
-        D --> F[🔎 Root Cause<br>Analysis]
+        C --> E["📊 Measure Against<br>Targets"]
+        D --> F["🔎 Root Cause<br>Analysis"]
 
-        E --> G[📝 Compare to<br>Regulatory Requirements]
-        F --> H[🛠️ Develop<br>Remediation Plan]
+        E --> G["📝 Compare to<br>Regulatory Requirements"]
+        F --> H["🛠️ Develop<br>Remediation Plan"]
 
-        G -->|Compliant| I[📗 Update Compliance<br>Documentation]
-        G -->|Non-Compliant| J[⚠️ Document<br>Compliance Gap]
+        G -->|Compliant| I["📗 Update Compliance<br>Documentation"]
+        G -->|Non-Compliant| J["⚠️ Document<br>Compliance Gap"]
 
-        H --> K[🏗️ Implement<br>Improvements]
+        H --> K["🏗️ Implement<br>Improvements"]
         J --> K
 
-        I --> L[📅 Schedule Next<br>Test Cycle]
-        K --> M[🔄 Retest to<br>Validate Fix]
+        I --> L["📅 Schedule Next<br>Test Cycle"]
+        K --> M["🔄 Retest to<br>Validate Fix"]
         M --> L
     end
 
@@ -1289,7 +1289,7 @@ flowchart TB
 ```mermaid
 flowchart TD
     subgraph "📣 Incident Detection & Communication"
-        A[🚨 BCP Event Detected] --> B{⚖️ Event<br>Classification}
+        A["🚨 BCP Event Detected"] --> B{"⚖️ Event<br>Classification"}
 
         B -->|"⚫ Critical<br>(Complete Outage)"| C1["🔴 CRITICAL RESPONSE<br>Initial Notification: <15 min"]
         B -->|"🔴 Major<br>(Partial Outage)"| C2["🟠 MAJOR RESPONSE<br>Initial Notification: <30 min"]

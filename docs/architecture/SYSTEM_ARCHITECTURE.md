@@ -77,33 +77,33 @@ The application uses a widget-based architecture organized into four main catego
 ```mermaid
 flowchart TB
     subgraph Core
-        SLW[Security Level<br>Widget]
+        SLW["Security Level<br>Widget"]
     end
 
     subgraph Categories ["CIA Security Widget Categories"]
         subgraph Assessment ["📊 Assessment Center"]
-            SSW[Security Summary<br>Widget]
-            BIAW[Business Impact<br>Analysis Widget]
+            SSW["Security Summary<br>Widget"]
+            BIAW["Business Impact<br>Analysis Widget"]
         end
         
         subgraph Business ["💰 Business Value"]
-            CSW[Compliance Status<br>Widget]
-            CEW[Cost Estimation<br>Widget]
-            VCW[Value Creation<br>Widget]
+            CSW["Compliance Status<br>Widget"]
+            CEW["Cost Estimation<br>Widget"]
+            VCW["Value Creation<br>Widget"]
         end
         
         subgraph Impact ["🔍 Impact Analysis"]
             subgraph CIA ["🔐 CIA Components"]
-                CIW[Confidentiality<br>Impact Widget]
-                IIW[Integrity<br>Impact Widget]
-                AIW[Availability<br>Impact Widget]
+                CIW["Confidentiality<br>Impact Widget"]
+                IIW["Integrity<br>Impact Widget"]
+                AIW["Availability<br>Impact Widget"]
             end
         end
         
         subgraph Implementation ["🛠️ Implementation"]
-            SRW[Security Resources<br>Widget]
-            SVW[Security Visualization<br>Widget]
-            TDW[Technical Details<br>Widget]
+            SRW["Security Resources<br>Widget"]
+            SVW["Security Visualization<br>Widget"]
+            TDW["Technical Details<br>Widget"]
         end
     end
     

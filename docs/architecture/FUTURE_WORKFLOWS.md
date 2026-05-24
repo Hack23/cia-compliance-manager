@@ -96,7 +96,7 @@ flowchart TB
     end
 
     subgraph "Enhanced Continuous Deployment"
-        Release[Release Trigger] --> BuildTest[Prepare & Test]
+        Release[Release Trigger] --> BuildTest["Prepare & Test"]
         BuildTest --> LicenseCheck2[License Check]
         BuildTest --> ModelTraining[ML Model Training]
         LicenseCheck2 --> Build[Build Package]
@@ -265,7 +265,7 @@ flowchart TD
     F -->|Patch| G3[Targeted Verification]
     F -->|Model Update| G4[Model Verification]
     
-    G1 & G2 & G3 & G4 --> H[Build & Package]
+    G1 & G2 & G3 & G4 --> H["Build & Package"]
     H --> I[Generate Attestations]
     I --> J[Create Release]
     
@@ -274,7 +274,7 @@ flowchart TD
     L --> M[Monitor Key Metrics]
     M --> N{Success Metrics Met?}
     
-    N -->|Yes| O1[Expand Deployment %]
+    N -->|Yes| O1["Expand Deployment %"]
     N -->|No| O2[Rollback]
     
     O1 --> P{Full Deployment?}
@@ -370,7 +370,7 @@ flowchart LR
         A --- C[Compliance Validation]
         A --- D[ML Pipeline]
         A --- E[Release Automation]
-        A --- F[Monitoring & Feedback]
+        A --- F["Monitoring & Feedback"]
     end
 
     subgraph "External Security Tools"

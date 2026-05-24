@@ -56,27 +56,27 @@ The following flowchart illustrates the enhanced v1.1.59 security level configur
 flowchart TD
     Start([User Opens Application]) --> InitContexts[Initialize Context Providers]
     
-    InitContexts --> ErrorCtx[ErrorContext<br>Global Error Handling]
-    InitContexts --> KeyboardCtx[KeyboardShortcutContext<br>Keyboard Navigation]
-    InitContexts --> SecurityState[useSecurityLevelState Hook<br>CIA Triad Levels]
+    InitContexts --> ErrorCtx["ErrorContext<br>Global Error Handling"]
+    InitContexts --> KeyboardCtx["KeyboardShortcutContext<br>Keyboard Navigation"]
+    InitContexts --> SecurityState["useSecurityLevelState Hook<br>CIA Triad Levels"]
     
-    ErrorCtx --> LoadState{Load Persisted<br>State?}
+    ErrorCtx --> LoadState{"Load Persisted<br>State?"}
     KeyboardCtx --> LoadState
     SecurityState --> LoadState
     
-    LoadState -->|localStorage Available| RestoreState[Restore Security Levels<br>from localStorage]
-    LoadState -->|No State| InitDefaults[Initialize Default Levels<br>All Moderate]
+    LoadState -->|localStorage Available| RestoreState["Restore Security Levels<br>from localStorage"]
+    LoadState -->|No State| InitDefaults["Initialize Default Levels<br>All Moderate"]
     
-    RestoreState --> ValidateSaved{Validate<br>Saved State?}
+    RestoreState --> ValidateSaved{"Validate<br>Saved State?"}
     ValidateSaved -->|Valid| DisplayWidget[Display Security Level Widget]
     ValidateSaved -->|Invalid| InitDefaults
     InitDefaults --> DisplayWidget
     
     DisplayWidget --> UserInteract{User Action}
     
-    UserInteract -->|Select Confidentiality| ValidateC{Validate<br>Selection}
-    UserInteract -->|Select Integrity| ValidateI{Validate<br>Selection}
-    UserInteract -->|Select Availability| ValidateA{Validate<br>Selection}
+    UserInteract -->|Select Confidentiality| ValidateC{"Validate<br>Selection"}
+    UserInteract -->|Select Integrity| ValidateI{"Validate<br>Selection"}
+    UserInteract -->|Select Availability| ValidateA{"Validate<br>Selection"}
     
     ValidateC -->|Valid| UpdateC[Update Confidentiality]
     ValidateC -->|Invalid| ShowErrorC[Show Validation Error]
@@ -90,21 +90,21 @@ flowchart TD
     ValidateA -->|Invalid| ShowErrorA[Show Validation Error]
     ShowErrorA --> UserInteract
     
-    UpdateC --> PropagateState[Propagate State via<br>Props from useSecurityLevelState]
+    UpdateC --> PropagateState["Propagate State via<br>Props from useSecurityLevelState"]
     UpdateI --> PropagateState
     UpdateA --> PropagateState
     
     PropagateState --> PersistState[Persist to localStorage]
-    PersistState --> TriggerRerender[Trigger Component<br>Re-renders]
-    TriggerRerender --> UpdateWidgets[Update All<br>Assessment Widgets]
+    PersistState --> TriggerRerender["Trigger Component<br>Re-renders"]
+    TriggerRerender --> UpdateWidgets["Update All<br>Assessment Widgets"]
     UpdateWidgets --> DisplayWidget
     
     DisplayWidget -->|Export| GenerateExport[Generate Report]
     GenerateExport --> ExportComplete[Export Complete]
     ExportComplete --> DisplayWidget
     
-    DisplayWidget -->|Error Occurs| ErrorBoundary{WidgetErrorBoundary<br>Catches Error}
-    ErrorBoundary -->|Caught| ShowErrorUI[Display Error UI<br>with Retry Option]
+    DisplayWidget -->|Error Occurs| ErrorBoundary{"WidgetErrorBoundary<br>Catches Error"}
+    ErrorBoundary -->|Caught| ShowErrorUI["Display Error UI<br>with Retry Option"]
     ShowErrorUI -->|User Retries| DisplayWidget
     ShowErrorUI -->|User Resets| InitDefaults
     
@@ -147,49 +147,49 @@ This flowchart details the comprehensive assessment generation workflow with ser
 
 ```mermaid
 flowchart TD
-    SecurityLevels[Security Levels<br>Updated] --> ValidateLevels{Validate<br>Input?}
+    SecurityLevels["Security Levels<br>Updated"] --> ValidateLevels{"Validate<br>Input?"}
     ValidateLevels -->|Valid| InitServices[Initialize Service Layer]
     ValidateLevels -->|Invalid| ValidationError[Display Validation Error]
     ValidationError --> End([End])
     
-    InitServices --> ParallelFetch{Parallel Service<br>Calls}
+    InitServices --> ParallelFetch{"Parallel Service<br>Calls"}
     
-    ParallelFetch -->|CIAContentService| GetCIADetails[Retrieve CIA Component<br>Details & ROI]
-    ParallelFetch -->|BusinessImpactService| CalcBusinessImpact[Calculate Business<br>Impact Analysis]
-    ParallelFetch -->|ComplianceService| MapCompliance[Map to Compliance<br>Frameworks]
-    ParallelFetch -->|SecurityMetricsService| CalcMetrics[Calculate Security<br>Metrics]
-    ParallelFetch -->|TechnicalImplementationService| GetTechDetails[Retrieve Technical<br>Implementation]
-    ParallelFetch -->|SecurityResourceService| GetResources[Retrieve Security<br>Resources]
+    ParallelFetch -->|CIAContentService| GetCIADetails["Retrieve CIA Component<br>Details & ROI"]
+    ParallelFetch -->|BusinessImpactService| CalcBusinessImpact["Calculate Business<br>Impact Analysis"]
+    ParallelFetch -->|ComplianceService| MapCompliance["Map to Compliance<br>Frameworks"]
+    ParallelFetch -->|SecurityMetricsService| CalcMetrics["Calculate Security<br>Metrics"]
+    ParallelFetch -->|TechnicalImplementationService| GetTechDetails["Retrieve Technical<br>Implementation"]
+    ParallelFetch -->|SecurityResourceService| GetResources["Retrieve Security<br>Resources"]
     
-    GetCIADetails --> Aggregate[Aggregate Assessment<br>Results]
+    GetCIADetails --> Aggregate["Aggregate Assessment<br>Results"]
     CalcBusinessImpact --> Aggregate
     MapCompliance --> Aggregate
     CalcMetrics --> Aggregate
     GetTechDetails --> Aggregate
     GetResources --> Aggregate
     
-    Aggregate --> ValidateResults{Validate<br>Results?}
-    ValidateResults -->|Valid| GenerateOutput[Generate Assessment<br>Output]
-    ValidateResults -->|Invalid| FallbackData[Use Fallback<br>Defaults]
+    Aggregate --> ValidateResults{"Validate<br>Results?"}
+    ValidateResults -->|Valid| GenerateOutput["Generate Assessment<br>Output"]
+    ValidateResults -->|Invalid| FallbackData["Use Fallback<br>Defaults"]
     FallbackData --> GenerateOutput
     
-    GenerateOutput --> CalcCostEstimates[Calculate Cost<br>Estimates CAPEX/OPEX]
-    CalcCostEstimates --> GenRecommendations[Generate Prioritized<br>Recommendations]
-    GenRecommendations --> CompileResults[Compile Complete<br>Assessment Package]
-    CompileResults --> UpdateWidgets[Update 11 Assessment<br>Widgets + SecurityLevelWidget]
+    GenerateOutput --> CalcCostEstimates["Calculate Cost<br>Estimates CAPEX/OPEX"]
+    CalcCostEstimates --> GenRecommendations["Generate Prioritized<br>Recommendations"]
+    GenRecommendations --> CompileResults["Compile Complete<br>Assessment Package"]
+    CompileResults --> UpdateWidgets["Update 11 Assessment<br>Widgets + SecurityLevelWidget"]
     
-    UpdateWidgets --> RenderCheck{Render<br>Success?}
-    RenderCheck -->|Success| DisplayResults[Display Assessment<br>Results]
-    RenderCheck -->|Error| ErrorBoundary[Error Boundary<br>Catches Exception]
+    UpdateWidgets --> RenderCheck{"Render<br>Success?"}
+    RenderCheck -->|Success| DisplayResults["Display Assessment<br>Results"]
+    RenderCheck -->|Error| ErrorBoundary["Error Boundary<br>Catches Exception"]
     ErrorBoundary --> LogError[Log Error Details]
-    LogError --> ShowFallbackUI[Show Fallback UI<br>with Retry]
+    LogError --> ShowFallbackUI["Show Fallback UI<br>with Retry"]
     ShowFallbackUI -->|Retry| InitServices
     ShowFallbackUI -->|Cancel| End
     
     DisplayResults --> UserAction{User Action}
-    UserAction -->|Explore Details| DrillDown[Navigate to<br>Specific Widget]
-    UserAction -->|Export| TriggerExport[Trigger Export<br>Workflow]
-    UserAction -->|Modify Levels| UpdateLevels[Return to Security<br>Level Configuration]
+    UserAction -->|Explore Details| DrillDown["Navigate to<br>Specific Widget"]
+    UserAction -->|Export| TriggerExport["Trigger Export<br>Workflow"]
+    UserAction -->|Modify Levels| UpdateLevels["Return to Security<br>Level Configuration"]
     
     DrillDown --> DisplayResults
     TriggerExport --> End
@@ -280,41 +280,41 @@ This flowchart illustrates how security controls are mapped to compliance framew
 
 ```mermaid
 flowchart TD
-    Start([Security Levels<br>Configured]) --> SelectFramework{Select Compliance<br>Framework}
+    Start(["Security Levels<br>Configured"]) --> SelectFramework{"Select Compliance<br>Framework"}
     
-    SelectFramework -->|ISO 27001| ISO[Map to ISO 27001<br>Controls]
-    SelectFramework -->|NIST CSF 2.0| NIST[Map to NIST CSF<br>Functions]
-    SelectFramework -->|CIS Controls v8.1| CIS[Map to CIS<br>Safeguards]
-    SelectFramework -->|All Frameworks| AllFrameworks[Map to All<br>Frameworks]
+    SelectFramework -->|ISO 27001| ISO["Map to ISO 27001<br>Controls"]
+    SelectFramework -->|NIST CSF 2.0| NIST["Map to NIST CSF<br>Functions"]
+    SelectFramework -->|CIS Controls v8.1| CIS["Map to CIS<br>Safeguards"]
+    SelectFramework -->|All Frameworks| AllFrameworks["Map to All<br>Frameworks"]
     
-    ISO --> MapControls[Map Security Levels<br>to Framework Controls]
+    ISO --> MapControls["Map Security Levels<br>to Framework Controls"]
     NIST --> MapControls
     CIS --> MapControls
     AllFrameworks --> MapControls
     
-    MapControls --> ConfidentialityMap[Confidentiality Controls<br>A.8 Information Security]
-    MapControls --> IntegrityMap[Integrity Controls<br>A.14 System Development]
-    MapControls --> AvailabilityMap[Availability Controls<br>A.17 Business Continuity]
+    MapControls --> ConfidentialityMap["Confidentiality Controls<br>A.8 Information Security"]
+    MapControls --> IntegrityMap["Integrity Controls<br>A.14 System Development"]
+    MapControls --> AvailabilityMap["Availability Controls<br>A.17 Business Continuity"]
     
-    ConfidentialityMap --> CalculateGap[Calculate Gap<br>Analysis]
+    ConfidentialityMap --> CalculateGap["Calculate Gap<br>Analysis"]
     IntegrityMap --> CalculateGap
     AvailabilityMap --> CalculateGap
     
-    CalculateGap --> IdentifyGaps{Gaps<br>Identified?}
-    IdentifyGaps -->|Yes| PrioritizeGaps[Prioritize Gaps by<br>Risk & Impact]
-    IdentifyGaps -->|No| FullCompliance[Full Compliance<br>Achieved]
+    CalculateGap --> IdentifyGaps{"Gaps<br>Identified?"}
+    IdentifyGaps -->|Yes| PrioritizeGaps["Prioritize Gaps by<br>Risk & Impact"]
+    IdentifyGaps -->|No| FullCompliance["Full Compliance<br>Achieved"]
     
-    PrioritizeGaps --> GenerateRoadmap[Generate Implementation<br>Roadmap]
+    PrioritizeGaps --> GenerateRoadmap["Generate Implementation<br>Roadmap"]
     FullCompliance --> GenerateRoadmap
     
-    GenerateRoadmap --> EstimateCosts[Estimate Gap<br>Remediation Costs]
-    EstimateCosts --> CalculateROI[Calculate Compliance<br>ROI]
-    CalculateROI --> DisplayResults[Display Compliance<br>Status Widget]
+    GenerateRoadmap --> EstimateCosts["Estimate Gap<br>Remediation Costs"]
+    EstimateCosts --> CalculateROI["Calculate Compliance<br>ROI"]
+    CalculateROI --> DisplayResults["Display Compliance<br>Status Widget"]
     
     DisplayResults --> UserReview{User Action}
-    UserReview -->|Export Report| GenerateReport[Generate Compliance<br>Report]
-    UserReview -->|View Details| DrillDown[Navigate to<br>Control Details]
-    UserReview -->|Change Levels| UpdateLevels[Modify Security<br>Levels]
+    UserReview -->|Export Report| GenerateReport["Generate Compliance<br>Report"]
+    UserReview -->|View Details| DrillDown["Navigate to<br>Control Details"]
+    UserReview -->|Change Levels| UpdateLevels["Modify Security<br>Levels"]
     
     GenerateReport --> End([End])
     DrillDown --> DisplayResults
@@ -367,7 +367,7 @@ flowchart TD
     UnitTests --> IntegrationTests[Run Integration Tests]
     IntegrationTests --> UITests[Run UI Tests]
     UITests --> CoverageMeasurement[Measure Code Coverage]
-    CoverageMeasurement --> Adequate{Coverage<br>Adequate?}
+    CoverageMeasurement --> Adequate{"Coverage<br>Adequate?"}
     Adequate -->|Yes| MergeCode[Merge Code]
     Adequate -->|No| AddTests[Add More Tests]
     AddTests --> UnitTests
@@ -390,18 +390,18 @@ This comprehensive workflow shows how business impact is calculated across multi
 
 ```mermaid
 flowchart TD
-    Start([Security Levels<br>Selected]) --> InitBIA[Initialize Business<br>Impact Analysis]
+    Start(["Security Levels<br>Selected"]) --> InitBIA["Initialize Business<br>Impact Analysis"]
     
-    InitBIA --> ParallelAnalysis{Parallel Impact<br>Assessment}
+    InitBIA --> ParallelAnalysis{"Parallel Impact<br>Assessment"}
     
-    ParallelAnalysis -->|Financial| FinancialImpact[Calculate Financial<br>Impact]
-    ParallelAnalysis -->|Operational| OperationalImpact[Calculate Operational<br>Impact]
-    ParallelAnalysis -->|Reputational| ReputationalImpact[Calculate Reputational<br>Impact]
-    ParallelAnalysis -->|Regulatory| RegulatoryImpact[Calculate Regulatory<br>Impact]
+    ParallelAnalysis -->|Financial| FinancialImpact["Calculate Financial<br>Impact"]
+    ParallelAnalysis -->|Operational| OperationalImpact["Calculate Operational<br>Impact"]
+    ParallelAnalysis -->|Reputational| ReputationalImpact["Calculate Reputational<br>Impact"]
+    ParallelAnalysis -->|Regulatory| RegulatoryImpact["Calculate Regulatory<br>Impact"]
     
-    FinancialImpact --> CalculateLosses[Calculate Daily<br>Loss Estimates]
-    CalculateLosses --> AssessConfidentiality[Assess Confidentiality<br>Breach Impact]
-    AssessConfidentiality --> ConfidentialityFinancial{Impact<br>Level?}
+    FinancialImpact --> CalculateLosses["Calculate Daily<br>Loss Estimates"]
+    CalculateLosses --> AssessConfidentiality["Assess Confidentiality<br>Breach Impact"]
+    AssessConfidentiality --> ConfidentialityFinancial{"Impact<br>Level?"}
     
     ConfidentialityFinancial -->|Very High| VH_Conf[$10K-50K daily]
     ConfidentialityFinancial -->|High| H_Conf[$1K-5K daily]
@@ -409,63 +409,63 @@ flowchart TD
     ConfidentialityFinancial -->|Low| L_Conf[$100-500 daily]
     ConfidentialityFinancial -->|None| N_Conf[$0 daily]
     
-    VH_Conf --> AggregateFinancial[Aggregate Financial<br>Impact]
+    VH_Conf --> AggregateFinancial["Aggregate Financial<br>Impact"]
     H_Conf --> AggregateFinancial
     M_Conf --> AggregateFinancial
     L_Conf --> AggregateFinancial
     N_Conf --> AggregateFinancial
     
-    OperationalImpact --> AssessDisruption[Assess Operational<br>Disruption]
-    AssessDisruption --> CalculateDowntime[Calculate Downtime<br>Impact]
-    CalculateDowntime --> AssessAvailability[Assess Availability<br>Requirements]
-    AssessAvailability --> AvailabilityOperational{Impact<br>Level?}
+    OperationalImpact --> AssessDisruption["Assess Operational<br>Disruption"]
+    AssessDisruption --> CalculateDowntime["Calculate Downtime<br>Impact"]
+    CalculateDowntime --> AssessAvailability["Assess Availability<br>Requirements"]
+    AssessAvailability --> AvailabilityOperational{"Impact<br>Level?"}
     
-    AvailabilityOperational -->|Very High| VH_Avail[Complete Service<br>Outage]
+    AvailabilityOperational -->|Very High| VH_Avail["Complete Service<br>Outage"]
     AvailabilityOperational -->|High| H_Avail[Major Degradation]
     AvailabilityOperational -->|Moderate| M_Avail[Partial Impact]
     AvailabilityOperational -->|Low| L_Avail[Minor Disruption]
     AvailabilityOperational -->|None| N_Avail[No Impact]
     
-    VH_Avail --> AggregateOperational[Aggregate Operational<br>Impact]
+    VH_Avail --> AggregateOperational["Aggregate Operational<br>Impact"]
     H_Avail --> AggregateOperational
     M_Avail --> AggregateOperational
     L_Avail --> AggregateOperational
     N_Avail --> AggregateOperational
     
-    ReputationalImpact --> AssessBrandDamage[Assess Brand<br>Damage]
-    AssessBrandDamage --> CalculateRecovery[Calculate Recovery<br>Time & Cost]
-    CalculateRecovery --> AggregateReputational[Aggregate Reputational<br>Impact]
+    ReputationalImpact --> AssessBrandDamage["Assess Brand<br>Damage"]
+    AssessBrandDamage --> CalculateRecovery["Calculate Recovery<br>Time & Cost"]
+    CalculateRecovery --> AggregateReputational["Aggregate Reputational<br>Impact"]
     
-    RegulatoryImpact --> IdentifyRegulations[Identify Applicable<br>Regulations]
-    IdentifyRegulations --> CalculateFines[Calculate Potential<br>Fines & Penalties]
-    CalculateFines --> AssessIntegrity[Assess Integrity<br>Requirements]
-    AssessIntegrity --> IntegrityRegulatory{Impact<br>Level?}
+    RegulatoryImpact --> IdentifyRegulations["Identify Applicable<br>Regulations"]
+    IdentifyRegulations --> CalculateFines["Calculate Potential<br>Fines & Penalties"]
+    CalculateFines --> AssessIntegrity["Assess Integrity<br>Requirements"]
+    AssessIntegrity --> IntegrityRegulatory{"Impact<br>Level?"}
     
-    IntegrityRegulatory -->|Very High| VH_Int[Severe Penalties<br>License Revocation]
-    IntegrityRegulatory -->|High| H_Int[Significant Fines<br>Legal Action]
-    IntegrityRegulatory -->|Moderate| M_Int[Minor Penalties<br>Corrective Action]
-    IntegrityRegulatory -->|Low| L_Int[Warnings<br>Documentation]
+    IntegrityRegulatory -->|Very High| VH_Int["Severe Penalties<br>License Revocation"]
+    IntegrityRegulatory -->|High| H_Int["Significant Fines<br>Legal Action"]
+    IntegrityRegulatory -->|Moderate| M_Int["Minor Penalties<br>Corrective Action"]
+    IntegrityRegulatory -->|Low| L_Int["Warnings<br>Documentation"]
     IntegrityRegulatory -->|None| N_Int[No Penalties]
     
-    VH_Int --> AggregateRegulatory[Aggregate Regulatory<br>Impact]
+    VH_Int --> AggregateRegulatory["Aggregate Regulatory<br>Impact"]
     H_Int --> AggregateRegulatory
     M_Int --> AggregateRegulatory
     L_Int --> AggregateRegulatory
     N_Int --> AggregateRegulatory
     
-    AggregateFinancial --> CombineImpacts[Combine All Impact<br>Dimensions]
+    AggregateFinancial --> CombineImpacts["Combine All Impact<br>Dimensions"]
     AggregateOperational --> CombineImpacts
     AggregateReputational --> CombineImpacts
     AggregateRegulatory --> CombineImpacts
     
-    CombineImpacts --> CalculateRisk[Calculate Overall<br>Business Risk]
-    CalculateRisk --> GenerateMatrix[Generate Impact<br>Matrix]
-    GenerateMatrix --> DisplayBIA[Display Business Impact<br>Analysis Widget]
+    CombineImpacts --> CalculateRisk["Calculate Overall<br>Business Risk"]
+    CalculateRisk --> GenerateMatrix["Generate Impact<br>Matrix"]
+    GenerateMatrix --> DisplayBIA["Display Business Impact<br>Analysis Widget"]
     
     DisplayBIA --> UserAction{User Action}
-    UserAction -->|Export| ExportBIA[Export BIA<br>Report]
-    UserAction -->|Drill Down| ViewDetails[View Detailed<br>Impact Analysis]
-    UserAction -->|Adjust Levels| ModifyLevels[Modify Security<br>Levels]
+    UserAction -->|Export| ExportBIA["Export BIA<br>Report"]
+    UserAction -->|Drill Down| ViewDetails["View Detailed<br>Impact Analysis"]
+    UserAction -->|Adjust Levels| ModifyLevels["Modify Security<br>Levels"]
     
     ExportBIA --> End([End])
     ViewDetails --> DisplayBIA
@@ -526,7 +526,7 @@ flowchart TD
     
     subgraph "Assessment Center"
         SSW
-        BIAW[Business Impact Analysis<br>4 tabs: Financial, Operational,<br>Reputational, Regulatory]
+        BIAW["Business Impact Analysis<br>4 tabs: Financial, Operational,<br>Reputational, Regulatory"]
     end
     
     subgraph "Impact Analysis"
@@ -573,72 +573,72 @@ This workflow shows the automated CAPEX/OPEX calculation process:
 
 ```mermaid
 flowchart TD
-    Start([Security Levels<br>Configured]) --> InitCostCalc[Initialize Cost<br>Estimation Service]
+    Start(["Security Levels<br>Configured"]) --> InitCostCalc["Initialize Cost<br>Estimation Service"]
     
-    InitCostCalc --> GetSecurityLevel[Retrieve Security<br>Levels]
-    GetSecurityLevel --> ParallelEstimate{Parallel Cost<br>Calculation}
+    InitCostCalc --> GetSecurityLevel["Retrieve Security<br>Levels"]
+    GetSecurityLevel --> ParallelEstimate{"Parallel Cost<br>Calculation"}
     
     ParallelEstimate -->|CAPEX| CalculateCAPEX[Calculate CAPEX]
     ParallelEstimate -->|OPEX| CalculateOPEX[Calculate OPEX]
     
-    CalculateCAPEX --> ConfidentialityCapex[Confidentiality<br>Infrastructure]
-    CalculateCAPEX --> IntegrityCapex[Integrity<br>Systems]
-    CalculateCAPEX --> AvailabilityCapex[Availability<br>Infrastructure]
+    CalculateCAPEX --> ConfidentialityCapex["Confidentiality<br>Infrastructure"]
+    CalculateCAPEX --> IntegrityCapex["Integrity<br>Systems"]
+    CalculateCAPEX --> AvailabilityCapex["Availability<br>Infrastructure"]
     
     ConfidentialityCapex --> CapexComponents[CAPEX Components]
     IntegrityCapex --> CapexComponents
     AvailabilityCapex --> CapexComponents
     
-    CapexComponents --> Encryption[Encryption Hardware<br>HSM, TPM]
-    CapexComponents --> Access[Access Control<br>MFA, Biometric]
-    CapexComponents --> Monitoring[Monitoring Tools<br>SIEM, IDS/IPS]
-    CapexComponents --> Backup[Backup Systems<br>Storage, DR Site]
+    CapexComponents --> Encryption["Encryption Hardware<br>HSM, TPM"]
+    CapexComponents --> Access["Access Control<br>MFA, Biometric"]
+    CapexComponents --> Monitoring["Monitoring Tools<br>SIEM, IDS/IPS"]
+    CapexComponents --> Backup["Backup Systems<br>Storage, DR Site"]
     
-    Encryption --> AggregateCapex[Aggregate CAPEX<br>Estimates]
+    Encryption --> AggregateCapex["Aggregate CAPEX<br>Estimates"]
     Access --> AggregateCapex
     Monitoring --> AggregateCapex
     Backup --> AggregateCapex
     
-    CalculateOPEX --> ConfidentialityOpex[Confidentiality<br>Operations]
-    CalculateOPEX --> IntegrityOpex[Integrity<br>Operations]
-    CalculateOPEX --> AvailabilityOpex[Availability<br>Operations]
+    CalculateOPEX --> ConfidentialityOpex["Confidentiality<br>Operations"]
+    CalculateOPEX --> IntegrityOpex["Integrity<br>Operations"]
+    CalculateOPEX --> AvailabilityOpex["Availability<br>Operations"]
     
     ConfidentialityOpex --> OpexComponents[OPEX Components]
     IntegrityOpex --> OpexComponents
     AvailabilityOpex --> OpexComponents
     
-    OpexComponents --> Staffing[Staffing Costs<br>Security Team]
-    OpexComponents --> Training[Training & Cert<br>Annual]
-    OpexComponents --> Licenses[Software Licenses<br>Annual]
-    OpexComponents --> Maintenance[Maintenance<br>Annual]
-    OpexComponents --> CloudServices[Cloud Services<br>Monthly]
+    OpexComponents --> Staffing["Staffing Costs<br>Security Team"]
+    OpexComponents --> Training["Training & Cert<br>Annual"]
+    OpexComponents --> Licenses["Software Licenses<br>Annual"]
+    OpexComponents --> Maintenance["Maintenance<br>Annual"]
+    OpexComponents --> CloudServices["Cloud Services<br>Monthly"]
     
-    Staffing --> AggregateOpex[Aggregate OPEX<br>Estimates]
+    Staffing --> AggregateOpex["Aggregate OPEX<br>Estimates"]
     Training --> AggregateOpex
     Licenses --> AggregateOpex
     Maintenance --> AggregateOpex
     CloudServices --> AggregateOpex
     
-    AggregateCapex --> CombineCosts[Combine Total<br>Investment]
+    AggregateCapex --> CombineCosts["Combine Total<br>Investment"]
     AggregateOpex --> CombineCosts
     
-    CombineCosts --> CalculateBreakdown[Calculate Cost<br>Breakdown by Level]
-    CalculateBreakdown --> EstimateTimeline[Estimate Implementation<br>Timeline]
-    EstimateTimeline --> CalculateROI[Calculate Security<br>ROI]
+    CombineCosts --> CalculateBreakdown["Calculate Cost<br>Breakdown by Level"]
+    CalculateBreakdown --> EstimateTimeline["Estimate Implementation<br>Timeline"]
+    EstimateTimeline --> CalculateROI["Calculate Security<br>ROI"]
     
-    CalculateROI --> GenerateScenarios[Generate Cost<br>Scenarios]
-    GenerateScenarios --> CompareOptions{Multiple<br>Scenarios?}
+    CalculateROI --> GenerateScenarios["Generate Cost<br>Scenarios"]
+    GenerateScenarios --> CompareOptions{"Multiple<br>Scenarios?"}
     
-    CompareOptions -->|Yes| ScenarioComparison[Compare Security<br>Level Scenarios]
-    CompareOptions -->|No| SingleScenario[Single Scenario<br>Analysis]
+    CompareOptions -->|Yes| ScenarioComparison["Compare Security<br>Level Scenarios"]
+    CompareOptions -->|No| SingleScenario["Single Scenario<br>Analysis"]
     
-    ScenarioComparison --> DisplayWidget[Display Cost<br>Estimation Widget]
+    ScenarioComparison --> DisplayWidget["Display Cost<br>Estimation Widget"]
     SingleScenario --> DisplayWidget
     
     DisplayWidget --> UserAction{User Action}
-    UserAction -->|Export| ExportCosts[Export Cost<br>Report]
-    UserAction -->|Compare| CompareScenarios[Compare Different<br>Security Levels]
-    UserAction -->|Modify| AdjustLevels[Adjust Security<br>Levels]
+    UserAction -->|Export| ExportCosts["Export Cost<br>Report"]
+    UserAction -->|Compare| CompareScenarios["Compare Different<br>Security Levels"]
+    UserAction -->|Modify| AdjustLevels["Adjust Security<br>Levels"]
     
     ExportCosts --> End([End])
     CompareScenarios --> DisplayWidget
@@ -707,57 +707,57 @@ This comprehensive workflow shows React 19.x error boundary patterns with recove
 
 ```mermaid
 flowchart TD
-    Start([Component<br>Rendering]) --> RenderAttempt[Attempt Component<br>Render]
+    Start(["Component<br>Rendering"]) --> RenderAttempt["Attempt Component<br>Render"]
     
-    RenderAttempt --> RenderCheck{Render<br>Successful?}
-    RenderCheck -->|Success| DisplayContent[Display Component<br>Content]
-    RenderCheck -->|Error| ErrorCaught[Error Boundary<br>Catches Exception]
+    RenderAttempt --> RenderCheck{"Render<br>Successful?"}
+    RenderCheck -->|Success| DisplayContent["Display Component<br>Content"]
+    RenderCheck -->|Error| ErrorCaught["Error Boundary<br>Catches Exception"]
     
-    ErrorCaught --> LogError[Log Error Details<br>to Console]
-    LogError --> DetermineErrorType{Classify<br>Error Type}
+    ErrorCaught --> LogError["Log Error Details<br>to Console"]
+    LogError --> DetermineErrorType{"Classify<br>Error Type"}
     
-    DetermineErrorType -->|Render Error| RenderError[Component Render<br>Exception]
-    DetermineErrorType -->|Data Error| DataError[Invalid Data<br>Structure]
-    DetermineErrorType -->|Network Error| NetworkError[Service Call<br>Failed]
-    DetermineErrorType -->|Validation Error| ValidationError[Input Validation<br>Failed]
+    DetermineErrorType -->|Render Error| RenderError["Component Render<br>Exception"]
+    DetermineErrorType -->|Data Error| DataError["Invalid Data<br>Structure"]
+    DetermineErrorType -->|Network Error| NetworkError["Service Call<br>Failed"]
+    DetermineErrorType -->|Validation Error| ValidationError["Input Validation<br>Failed"]
     
-    RenderError --> ShowErrorUI[Display Error UI<br>with Error Message]
+    RenderError --> ShowErrorUI["Display Error UI<br>with Error Message"]
     DataError --> ShowErrorUI
     NetworkError --> ShowErrorUI
     ValidationError --> ShowErrorUI
     
-    ShowErrorUI --> ProvideOptions[Provide Recovery<br>Options]
-    ProvideOptions --> UserChoice{User<br>Action}
+    ShowErrorUI --> ProvideOptions["Provide Recovery<br>Options"]
+    ProvideOptions --> UserChoice{"User<br>Action"}
     
     UserChoice -->|Retry| ClearErrorState[Clear Error State]
-    UserChoice -->|Reset| ResetToDefaults[Reset to Default<br>State]
-    UserChoice -->|Ignore| PersistError[Persist Error State<br>Show Fallback]
-    UserChoice -->|Report| OpenIssue[Open GitHub Issue<br>with Error Details]
+    UserChoice -->|Reset| ResetToDefaults["Reset to Default<br>State"]
+    UserChoice -->|Ignore| PersistError["Persist Error State<br>Show Fallback"]
+    UserChoice -->|Report| OpenIssue["Open GitHub Issue<br>with Error Details"]
     
-    ClearErrorState --> RetryCount{Retry<br>Count < 3?}
-    RetryCount -->|Yes| IncrementRetry[Increment Retry<br>Counter]
-    RetryCount -->|No| MaxRetriesReached[Max Retries<br>Reached]
+    ClearErrorState --> RetryCount{"Retry<br>Count < 3?"}
+    RetryCount -->|Yes| IncrementRetry["Increment Retry<br>Counter"]
+    RetryCount -->|No| MaxRetriesReached["Max Retries<br>Reached"]
     
-    IncrementRetry --> ExponentialBackoff[Apply Exponential<br>Backoff Delay]
+    IncrementRetry --> ExponentialBackoff["Apply Exponential<br>Backoff Delay"]
     ExponentialBackoff --> RenderAttempt
     
-    MaxRetriesReached --> ShowPermanentError[Show Permanent<br>Error State]
-    ShowPermanentError --> SuggestActions[Suggest Alternative<br>Actions]
+    MaxRetriesReached --> ShowPermanentError["Show Permanent<br>Error State"]
+    ShowPermanentError --> SuggestActions["Suggest Alternative<br>Actions"]
     SuggestActions --> End([End])
     
-    ResetToDefaults --> ClearStorage[Clear localStorage<br>State]
-    ClearStorage --> ReloadApp[Reload Application<br>with Defaults]
+    ResetToDefaults --> ClearStorage["Clear localStorage<br>State"]
+    ClearStorage --> ReloadApp["Reload Application<br>with Defaults"]
     ReloadApp --> Start
     
-    PersistError --> RenderFallback[Render Fallback<br>Component]
+    PersistError --> RenderFallback["Render Fallback<br>Component"]
     RenderFallback --> DisplayContent
     
-    OpenIssue --> CreateIssueURL[Create GitHub Issue<br>URL with Details]
-    CreateIssueURL --> OpenInNewTab[Open in New<br>Browser Tab]
+    OpenIssue --> CreateIssueURL["Create GitHub Issue<br>URL with Details"]
+    CreateIssueURL --> OpenInNewTab["Open in New<br>Browser Tab"]
     OpenInNewTab --> ShowErrorUI
     
-    DisplayContent --> MonitorHealth[Monitor Component<br>Health]
-    MonitorHealth --> HealthCheck{Component<br>Healthy?}
+    DisplayContent --> MonitorHealth["Monitor Component<br>Health"]
+    MonitorHealth --> HealthCheck{"Component<br>Healthy?"}
     HealthCheck -->|Healthy| DisplayContent
     HealthCheck -->|Unhealthy| ErrorCaught
     
@@ -862,66 +862,66 @@ This workflow shows the comprehensive export process for generating assessment r
 
 ```mermaid
 flowchart TD
-    Start([User Triggers<br>Export]) --> SelectFormat{Select Export<br>Format}
+    Start(["User Triggers<br>Export"]) --> SelectFormat{"Select Export<br>Format"}
     
     SelectFormat -->|JSON| ExportJSON[Export as JSON]
     SelectFormat -->|Markdown| ExportMarkdown[Export as Markdown]
     SelectFormat -->|PDF| ExportPDF[Export as PDF]
     SelectFormat -->|CSV| ExportCSV[Export as CSV]
     
-    ExportJSON --> GatherData[Gather Assessment<br>Data]
+    ExportJSON --> GatherData["Gather Assessment<br>Data"]
     ExportMarkdown --> GatherData
     ExportPDF --> GatherData
     ExportCSV --> GatherData
     
-    GatherData --> CollectSections{Collect Report<br>Sections}
+    GatherData --> CollectSections{"Collect Report<br>Sections"}
     
-    CollectSections -->|Security Levels| SecurityLevelData[Security Level<br>Configuration]
-    CollectSections -->|Business Impact| BusinessImpactData[Business Impact<br>Analysis]
-    CollectSections -->|Compliance| ComplianceData[Compliance Framework<br>Mapping]
-    CollectSections -->|Costs| CostData[Cost Estimation<br>CAPEX/OPEX]
-    CollectSections -->|Technical| TechnicalData[Technical Implementation<br>Details]
-    CollectSections -->|Resources| ResourceData[Security Resources<br>& References]
+    CollectSections -->|Security Levels| SecurityLevelData["Security Level<br>Configuration"]
+    CollectSections -->|Business Impact| BusinessImpactData["Business Impact<br>Analysis"]
+    CollectSections -->|Compliance| ComplianceData["Compliance Framework<br>Mapping"]
+    CollectSections -->|Costs| CostData["Cost Estimation<br>CAPEX/OPEX"]
+    CollectSections -->|Technical| TechnicalData["Technical Implementation<br>Details"]
+    CollectSections -->|Resources| ResourceData["Security Resources<br>& References"]
     
-    SecurityLevelData --> ValidateData{Validate<br>Data?}
+    SecurityLevelData --> ValidateData{"Validate<br>Data?"}
     BusinessImpactData --> ValidateData
     ComplianceData --> ValidateData
     CostData --> ValidateData
     TechnicalData --> ValidateData
     ResourceData --> ValidateData
     
-    ValidateData -->|Valid| FormatData[Format Data for<br>Selected Export Type]
-    ValidateData -->|Invalid| HandleMissing[Handle Missing<br>Data]
+    ValidateData -->|Valid| FormatData["Format Data for<br>Selected Export Type"]
+    ValidateData -->|Invalid| HandleMissing["Handle Missing<br>Data"]
     
-    HandleMissing --> UsePlaceholders[Use Placeholder<br>Values]
+    HandleMissing --> UsePlaceholders["Use Placeholder<br>Values"]
     UsePlaceholders --> FormatData
     
-    FormatData --> GenerateDocument[Generate Export<br>Document]
-    GenerateDocument --> AddMetadata[Add Document<br>Metadata]
+    FormatData --> GenerateDocument["Generate Export<br>Document"]
+    GenerateDocument --> AddMetadata["Add Document<br>Metadata"]
     
     AddMetadata --> MetadataFields[Add Metadata Fields]
-    MetadataFields --> Timestamp[Timestamp:<br>ISO 8601 UTC]
-    MetadataFields --> Version[App Version:<br>v1.1.59]
-    MetadataFields --> Classification[Classification:<br>CIA Levels]
+    MetadataFields --> Timestamp["Timestamp:<br>ISO 8601 UTC"]
+    MetadataFields --> Version["App Version:<br>v1.1.59"]
+    MetadataFields --> Classification["Classification:<br>CIA Levels"]
     
-    Timestamp --> CompileDocument[Compile Final<br>Document]
+    Timestamp --> CompileDocument["Compile Final<br>Document"]
     Version --> CompileDocument
     Classification --> CompileDocument
     
-    CompileDocument --> ValidateOutput{Validate<br>Output?}
-    ValidateOutput -->|Valid| PrepareDownload[Prepare Browser<br>Download]
-    ValidateOutput -->|Invalid| ExportError[Export Generation<br>Failed]
+    CompileDocument --> ValidateOutput{"Validate<br>Output?"}
+    ValidateOutput -->|Valid| PrepareDownload["Prepare Browser<br>Download"]
+    ValidateOutput -->|Invalid| ExportError["Export Generation<br>Failed"]
     
-    PrepareDownload --> CreateBlob[Create Blob<br>Object]
-    CreateBlob --> GenerateURL[Generate Download<br>URL]
-    GenerateURL --> TriggerDownload[Trigger Browser<br>Download]
-    TriggerDownload --> CleanupURL[Cleanup Blob<br>URL]
-    CleanupURL --> ShowSuccess[Show Success<br>Notification]
+    PrepareDownload --> CreateBlob["Create Blob<br>Object"]
+    CreateBlob --> GenerateURL["Generate Download<br>URL"]
+    GenerateURL --> TriggerDownload["Trigger Browser<br>Download"]
+    TriggerDownload --> CleanupURL["Cleanup Blob<br>URL"]
+    CleanupURL --> ShowSuccess["Show Success<br>Notification"]
     ShowSuccess --> End([End])
     
-    ExportError --> LogExportError[Log Export<br>Error]
-    LogExportError --> ShowErrorMessage[Show Error<br>Message]
-    ShowErrorMessage --> OfferRetry{Offer<br>Retry?}
+    ExportError --> LogExportError["Log Export<br>Error"]
+    LogExportError --> ShowErrorMessage["Show Error<br>Message"]
+    ShowErrorMessage --> OfferRetry{"Offer<br>Retry?"}
     OfferRetry -->|Yes| Start
     OfferRetry -->|No| End
     
@@ -1216,64 +1216,64 @@ stateDiagram-v2
 
 ```mermaid
 flowchart TD
-    Start([User Accesses<br>Application]) --> CheckSession{Session<br>Valid?}
+    Start(["User Accesses<br>Application"]) --> CheckSession{"Session<br>Valid?"}
     
     CheckSession -->|Yes| LoadApp[Load Application]
     CheckSession -->|No| ShowLogin[Show Login Page]
     
-    ShowLogin --> UserLogin{Login<br>Method?}
+    ShowLogin --> UserLogin{"Login<br>Method?"}
     UserLogin -->|Username/Password| BasicAuth[Basic Authentication]
     UserLogin -->|SSO| SSOAuth[SSO/SAML Authentication]
     UserLogin -->|OAuth2| OAuth2Flow[OAuth2/OIDC Flow]
     
-    BasicAuth --> ValidateCredentials{Credentials<br>Valid?}
-    ValidateCredentials -->|Yes| CheckMFA{MFA<br>Enabled?}
+    BasicAuth --> ValidateCredentials{"Credentials<br>Valid?"}
+    ValidateCredentials -->|Yes| CheckMFA{"MFA<br>Enabled?"}
     ValidateCredentials -->|No| LoginError[Show Login Error]
     LoginError --> ShowLogin
     
     CheckMFA -->|Yes| PromptMFA[Prompt for MFA Code]
     CheckMFA -->|No| CreateSession[Create User Session]
     
-    PromptMFA --> ValidateMFA{MFA Code<br>Valid?}
+    PromptMFA --> ValidateMFA{"MFA Code<br>Valid?"}
     ValidateMFA -->|Yes| CreateSession
     ValidateMFA -->|No| MFAError[Show MFA Error]
     MFAError --> PromptMFA
     
-    SSOAuth --> RedirectToIDP[Redirect to Identity<br>Provider]
-    RedirectToIDP --> SAMLResponse[Receive SAML<br>Response]
-    SAMLResponse --> ValidateSAML{SAML<br>Valid?}
+    SSOAuth --> RedirectToIDP["Redirect to Identity<br>Provider"]
+    RedirectToIDP --> SAMLResponse["Receive SAML<br>Response"]
+    SAMLResponse --> ValidateSAML{"SAML<br>Valid?"}
     ValidateSAML -->|Yes| CreateSession
     ValidateSAML -->|No| SSOError[Show SSO Error]
     SSOError --> ShowLogin
     
-    OAuth2Flow --> RedirectToProvider[Redirect to OAuth<br>Provider]
-    RedirectToProvider --> AuthCodeReceived[Receive Authorization<br>Code]
-    AuthCodeReceived --> ExchangeToken[Exchange for Access<br>Token]
-    ExchangeToken --> ValidateToken{Token<br>Valid?}
+    OAuth2Flow --> RedirectToProvider["Redirect to OAuth<br>Provider"]
+    RedirectToProvider --> AuthCodeReceived["Receive Authorization<br>Code"]
+    AuthCodeReceived --> ExchangeToken["Exchange for Access<br>Token"]
+    ExchangeToken --> ValidateToken{"Token<br>Valid?"}
     ValidateToken -->|Yes| CreateSession
     ValidateToken -->|No| OAuth2Error[Show OAuth2 Error]
     OAuth2Error --> ShowLogin
     
-    CreateSession --> StoreToken[Store Session<br>Token]
-    StoreToken --> SetExpiration[Set Token<br>Expiration]
+    CreateSession --> StoreToken["Store Session<br>Token"]
+    StoreToken --> SetExpiration["Set Token<br>Expiration"]
     SetExpiration --> LoadApp
     
-    LoadApp --> ActiveSession[Active User<br>Session]
-    ActiveSession --> SessionMonitor{Session<br>Expired?}
+    LoadApp --> ActiveSession["Active User<br>Session"]
+    ActiveSession --> SessionMonitor{"Session<br>Expired?"}
     
-    SessionMonitor -->|No| ContinueSession[Continue Using<br>Application]
+    SessionMonitor -->|No| ContinueSession["Continue Using<br>Application"]
     ContinueSession --> ActiveSession
     
-    SessionMonitor -->|Yes| RefreshToken{Refresh Token<br>Available?}
-    RefreshToken -->|Yes| RenewSession[Renew Session<br>Token]
+    SessionMonitor -->|Yes| RefreshToken{"Refresh Token<br>Available?"}
+    RefreshToken -->|Yes| RenewSession["Renew Session<br>Token"]
     RefreshToken -->|No| SessionExpired[Session Expired]
     
     RenewSession --> ActiveSession
-    SessionExpired --> ClearSession[Clear Session<br>Data]
+    SessionExpired --> ClearSession["Clear Session<br>Data"]
     ClearSession --> ShowLogin
     
-    ActiveSession -->|User Logs Out| Logout[User Logout<br>Requested]
-    Logout --> InvalidateToken[Invalidate Session<br>Token]
+    ActiveSession -->|User Logs Out| Logout["User Logout<br>Requested"]
+    Logout --> InvalidateToken["Invalidate Session<br>Token"]
     InvalidateToken --> ClearSession
     
     classDef startend fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff

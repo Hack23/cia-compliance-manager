@@ -307,13 +307,13 @@ Following [Hack23 AB Threat Modeling Policy §4.1.4](https://github.com/Hack23/I
 flowchart LR
     R[1. Recon] --> W[2. Weaponize] --> D[3. Deliver] --> E[4. Exploit] --> I[5. Install] --> C[6. C2] --> A[7. Actions]
 
-    R -.-|Secret scanning<br/>Push protection| B1[🛡️ Block]
-    W -.-|SBOM + SLSA<br/>Dependabot| B2[🛡️ Block]
-    D -.-|Branch protection<br/>PR reviews| B3[🛡️ Block]
-    E -.-|CSP + React escape<br/>TypeScript strict| B4[🛡️ Block]
-    I -.-|No service worker<br/>SRI checks| B5[🛡️ Block]
-    C -.-|CSP connect-src<br/>Network isolation| B6[🛡️ Block]
-    A -.-|Build attestations<br/>Integrity checks| B7[🛡️ Block]
+    R -.-|Secret scanning<br/>Push protection| B1["🛡️ Block"]
+    W -.-|SBOM + SLSA<br/>Dependabot| B2["🛡️ Block"]
+    D -.-|Branch protection<br/>PR reviews| B3["🛡️ Block"]
+    E -.-|CSP + React escape<br/>TypeScript strict| B4["🛡️ Block"]
+    I -.-|No service worker<br/>SRI checks| B5["🛡️ Block"]
+    C -.-|CSP connect-src<br/>Network isolation| B6["🛡️ Block"]
+    A -.-|Build attestations<br/>Integrity checks| B7["🛡️ Block"]
 
     style R fill:#2196F3,stroke:#1565c0
     style W fill:#4CAF50,stroke:#2e7d32
@@ -409,17 +409,17 @@ Following [Hack23 AB Quantitative Risk Assessment](https://github.com/Hack23/ISM
 ```mermaid
 flowchart TD
     subgraph "React 19.x Error Boundary Security"
-        A[⚛️ Component Error] --> B{Error Boundary}
+        A["⚛️ Component Error"] --> B{Error Boundary}
         
-        B -->|✅ Caught| C[🛡️ Fallback UI]
-        B -->|❌ Uncaught| D[⚠️ App Crash]
+        B -->|✅ Caught| C["🛡️ Fallback UI"]
+        B -->|❌ Uncaught| D["⚠️ App Crash"]
         
-        C --> E[📊 Error Logged]
-        C --> F[🔒 No Stack Trace]
-        C --> G[🔄 Isolation Maintained]
+        C --> E["📊 Error Logged"]
+        C --> F["🔒 No Stack Trace"]
+        C --> G["🔄 Isolation Maintained"]
         
-        D --> H[🚨 Information Disclosure]
-        D --> I[⚡ DoS Risk]
+        D --> H["🚨 Information Disclosure"]
+        D --> I["⚡ DoS Risk"]
     end
 
     style A fill:#D32F2F,stroke:#BF360C,stroke-width:2px,color:white,font-weight:bold
@@ -451,16 +451,16 @@ flowchart TD
 ```mermaid
 flowchart TD
     subgraph "Vitest & Cypress Security Testing Threats"
-        A[🧪 Test Infrastructure] --> B[🔍 Test Data Exposure]
-        A --> C[⚙️ Test Environment Tampering]
-        A --> D[🔑 Test Credential Leakage]
+        A["🧪 Test Infrastructure"] --> B["🔍 Test Data Exposure"]
+        A --> C["⚙️ Test Environment Tampering"]
+        A --> D["🔑 Test Credential Leakage"]
         
-        B --> E[✅ No Sensitive Data]
-        C --> F[✅ Isolated Environment]
-        D --> G[✅ No Credentials Needed]
+        B --> E["✅ No Sensitive Data"]
+        C --> F["✅ Isolated Environment"]
+        D --> G["✅ No Credentials Needed"]
         
-        H["🛡️ ≥80% (enforced) Coverage"] --> I[📊 Security Gap Detection]
-        J[🌐 E2E Tests] --> K[🔐 Workflow Security Validation]
+        H["🛡️ ≥80% (enforced) Coverage"] --> I["📊 Security Gap Detection"]
+        J["🌐 E2E Tests"] --> K["🔐 Workflow Security Validation"]
     end
 
     style A fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
@@ -490,16 +490,16 @@ flowchart TD
 ```mermaid
 flowchart LR
     subgraph "CSP Bypass Attack Scenarios"
-        A[🎯 XSS Attempt] --> B[🛡️ CSP Check]
+        A["🎯 XSS Attempt"] --> B["🛡️ CSP Check"]
         
-        B -->|Blocked| C[✅ script-src 'self']
-        B -->|Blocked| D[✅ frame-ancestors 'none']
-        B -->|Blocked| E[✅ connect-src 'self']
+        B -->|Blocked| C["✅ script-src 'self'"]
+        B -->|Blocked| D["✅ frame-ancestors 'none'"]
+        B -->|Blocked| E["✅ connect-src 'self'"]
         
-        F[⚠️ 'unsafe-inline'] --> G{Risk Assessment}
+        F["⚠️ 'unsafe-inline'"] --> G{Risk Assessment}
         
-        G -->|React Code| H[✅ Acceptable Risk]
-        G -->|User Input| I[🔒 Sanitized by React]
+        G -->|React Code| H["✅ Acceptable Risk"]
+        G -->|User Input| I["🔒 Sanitized by React"]
     end
 
     style A fill:#D32F2F,stroke:#BF360C,stroke-width:2px,color:white,font-weight:bold
@@ -533,17 +533,17 @@ flowchart LR
 ```mermaid
 flowchart TD
     subgraph "SLSA Level 3 Threat Mitigation"
-        A[🎯 Supply Chain Attack] --> B{SLSA Protection}
+        A["🎯 Supply Chain Attack"] --> B{SLSA Protection}
         
-        B -->|Provenance| C[🔏 Build Verification]
-        B -->|SBOM| D[📋 Dependency Audit]
-        B -->|Attestation| E[🔐 Artifact Integrity]
+        B -->|Provenance| C["🔏 Build Verification"]
+        B -->|SBOM| D["📋 Dependency Audit"]
+        B -->|Attestation| E["🔐 Artifact Integrity"]
         
-        C --> F[✅ Tamper-Evident]
-        D --> G[✅ Vulnerability Tracking]
-        E --> H[✅ Authenticity Verified]
+        C --> F["✅ Tamper-Evident"]
+        D --> G["✅ Vulnerability Tracking"]
+        E --> H["✅ Authenticity Verified"]
         
-        I[⚙️ GitHub Actions] --> J[🛡️ Hermetic Build]
+        I["⚙️ GitHub Actions"] --> J["🛡️ Hermetic Build"]
         J --> B
     end
 

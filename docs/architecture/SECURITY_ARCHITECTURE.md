@@ -92,15 +92,15 @@ This security architecture is continuously validated through automated security 
 ```mermaid
 flowchart TD
     subgraph "Frontend-Only Architecture (No Authentication)"
-        A[👤 Security Professional] -->|"Direct Access"| B[🌐 Web Browser]
-        B -->|"HTTPS"| C[📦 Static Assets<br/>CloudFront CDN + S3<br/>GitHub Pages DR]
+        A["👤 Security Professional"] -->|"Direct Access"| B["🌐 Web Browser"]
+        B -->|"HTTPS"| C["📦 Static Assets<br/>CloudFront CDN + S3<br/>GitHub Pages DR"]
 
-        C --> D[⚙️ Assessment Logic<br/>Client-Side Only]
-        D --> E[💾 Local Storage<br/>Session Only]
+        C --> D["⚙️ Assessment Logic<br/>Client-Side Only"]
+        D --> E["💾 Local Storage<br/>Session Only"]
 
-        F[🔄 No Backend<br/>No Authentication]
-        G[🔒 No User Accounts<br/>No Persistence]
-        H[⚠️ No Access Control<br/>No Authorization]
+        F["🔄 No Backend<br/>No Authentication"]
+        G["🔒 No User Accounts<br/>No Persistence"]
+        H["⚠️ No Access Control<br/>No Authorization"]
     end
 
     style A fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
@@ -134,13 +134,13 @@ CIA Compliance Manager is a frontend-only compliance assessment platform with:
 ```mermaid
 flowchart TD
     subgraph "No Auditing Architecture"
-        A[👤 Security Professional] -->|"Assessment Action"| B[⚙️ Client Logic]
-        B -->|"Temporary"| C[💾 Browser Memory]
+        A["👤 Security Professional"] -->|"Assessment Action"| B["⚙️ Client Logic"]
+        B -->|"Temporary"| C["💾 Browser Memory"]
 
-        D[📝 No Audit Trail]
-        E[👤 No Author Tracking]
-        F[📊 No Change History]
-        G[⏱️ No Persistence]
+        D["📝 No Audit Trail"]
+        E["👤 No Author Tracking"]
+        F["📊 No Change History"]
+        G["⏱️ No Persistence"]
     end
 
     style A fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
@@ -172,13 +172,13 @@ CIA Compliance Manager currently has:
 ```mermaid
 flowchart TD
     subgraph "No Session Tracking"
-        A[👤 Security Professional] -->|"Interact"| B[🖱️ Assessment Interface]
-        B -->|"Local Only"| C[📝 Browser State]
+        A["👤 Security Professional"] -->|"Interact"| B["🖱️ Assessment Interface"]
+        B -->|"Local Only"| C["📝 Browser State"]
 
-        D[📋 No Session Metadata]
-        E[🌐 No IP Tracking]
-        F[⏰ No Time Tracking]
-        G[💾 No Storage]
+        D["📋 No Session Metadata"]
+        E["🌐 No IP Tracking"]
+        F["⏰ No Time Tracking"]
+        G["💾 No Storage"]
     end
 
     style A fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
@@ -211,13 +211,13 @@ CIA Compliance Manager session handling:
 ```mermaid
 flowchart TD
     subgraph "No Security Event Monitoring"
-        A[🔓 No Authentication<br>Events]
-        B[🛡️ No Authorization<br>Events]
-        C[⚙️ No System<br>Events]
+        A["🔓 No Authentication<br>Events"]
+        B["🛡️ No Authorization<br>Events"]
+        C["⚙️ No System<br>Events"]
 
-        D[📝 No Event Storage]
-        E[🚨 No Security Alerts]
-        F[📊 No Security Dashboard]
+        D["📝 No Event Storage"]
+        E["🚨 No Security Alerts"]
+        F["📊 No Security Dashboard"]
     end
 
     style A,B,C,D,E,F fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
@@ -247,15 +247,15 @@ CIA Compliance Manager security monitoring:
 ```mermaid
 graph TD
     subgraph "DNS & Network Security Infrastructure"
-        A[🌐 Internet] -->|"DNS Query"| B[🛡️ Route53 DNSSEC]
-        B -->|"Verified DNS"| C[⚖️ CDN/Load Balancer]
-        C -->|"HTTPS Only"| D[📦 Asset Delivery]
+        A["🌐 Internet"] -->|"DNS Query"| B["🛡️ Route53 DNSSEC"]
+        B -->|"Verified DNS"| C["⚖️ CDN/Load Balancer"]
+        C -->|"HTTPS Only"| D["📦 Asset Delivery"]
 
-        E[🔒 TLS 1.3] --> C
-        F[🛡️ HTTPS Redirect] --> C
-        G[📄 Static Assets] --> D
-        H[🔐 CAA Records] --> B
-        I[🔑 DNSSEC Validation] --> B
+        E["🔒 TLS 1.3"] --> C
+        F["🛡️ HTTPS Redirect"] --> C
+        G["📄 Static Assets"] --> D
+        H["🔐 CAA Records"] --> B
+        I["🔑 DNSSEC Validation"] --> B
     end
 
     style A fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
@@ -341,9 +341,9 @@ ciacompliancemanager.com.    IN    RRSIG     DNSKEY 8 2 86400 (signature-data)
 ```mermaid
 flowchart LR
     subgraph "DNS Security Monitoring"
-        A[🔍 DNSSEC Validation] --> B[📊 Query Monitoring]
-        C[📜 CAA Compliance] --> D[🚨 Certificate Alerts]
-        E[🛡️ Route53 Logs] --> F[📈 Security Metrics]
+        A["🔍 DNSSEC Validation"] --> B["📊 Query Monitoring"]
+        C["📜 CAA Compliance"] --> D["🚨 Certificate Alerts"]
+        E["🛡️ Route53 Logs"] --> F["📈 Security Metrics"]
     end
 
     style A,B,C,D,E,F fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
@@ -364,37 +364,37 @@ flowchart LR
 flowchart TB
     subgraph "AWS Infrastructure Security Architecture"
         subgraph "DNS Layer"
-            A[🌐 Route53 DNS]
+            A["🌐 Route53 DNS"]
             A -->|Primary| B[CloudFront Distribution]
             A -->|DR Failover| C[GitHub Pages]
         end
         
         subgraph "CDN & Security"
-            B[☁️ CloudFront Distribution]
+            B["☁️ CloudFront Distribution"]
             B -->|Security Headers| D[Content Security Policy]
             B -->|DDoS Protection| E[AWS Shield Standard]
             B -->|Future| F[AWS WAF - Planned]
         end
         
         subgraph "Origin Storage"
-            G[💾 S3 Primary us-east-1]
-            H[💾 S3 Multi-Region Replication]
+            G["💾 S3 Primary us-east-1"]
+            H["💾 S3 Multi-Region Replication"]
             G -->|Cross-Region Replication| H
         end
         
         subgraph "Access Control"
-            I[🔐 IAM OIDC Authentication]
-            J[🎫 Temporary Credentials]
-            K[🔑 GithubWorkFlowRole]
+            I["🔐 IAM OIDC Authentication"]
+            J["🎫 Temporary Credentials"]
+            K["🔑 GithubWorkFlowRole"]
             I -->|Token Exchange| J
             J -->|Assumes| K
             K -->|Authorizes| G
         end
         
         subgraph "CI/CD Security"
-            L[🛡️ Harden-Runner]
-            M[📋 Egress Policy Block]
-            N[✅ Allowed Endpoints]
+            L["🛡️ Harden-Runner"]
+            M["📋 Egress Policy Block"]
+            N["✅ Allowed Endpoints"]
             L -->|Enforces| M
             M -->|Permits| N
         end
@@ -556,11 +556,11 @@ CIA Compliance Manager does not use VPC infrastructure:
 ```mermaid
 graph TD
     subgraph "Static Content Availability"
-        A[⚖️ CDN Distribution] --> B[🌐 Global Edge Locations]
-        B --> C[📦 Static Assets<br/>Cached Globally]
+        A["⚖️ CDN Distribution"] --> B["🌐 Global Edge Locations"]
+        B --> C["📦 Static Assets<br/>Cached Globally"]
 
-        D[🔄 No Database<br/>Failover]
-        E[🔄 No Application<br/>Servers]
+        D["🔄 No Database<br/>Failover"]
+        E["🔄 No Application<br/>Servers"]
     end
 
     style A,B,C fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
@@ -589,12 +589,12 @@ CIA Compliance Manager availability:
 ```mermaid
 flowchart TD
     subgraph "Data Protection Strategy"
-        A[👤 Security Professional] <-->|"🔒 TLS 1.3"| B[⚖️ CloudFront CDN<br/>GitHub Pages DR]
-        B <-->|"📦 Static Assets"| C[🖥️ Browser]
+        A["👤 Security Professional"] <-->|"🔒 TLS 1.3"| B["⚖️ CloudFront CDN<br/>GitHub Pages DR"]
+        B <-->|"📦 Static Assets"| C["🖥️ Browser"]
 
-        D[🔐 No Encryption<br/>At Rest Needed]
-        E[🗝️ No Secrets<br/>Management]
-        F[🔄 No Data<br/>Rotation]
+        D["🔐 No Encryption<br/>At Rest Needed"]
+        E["🗝️ No Secrets<br/>Management"]
+        F["🔄 No Data<br/>Rotation"]
     end
 
     style A fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
@@ -626,28 +626,28 @@ CIA Compliance Manager data protection:
 graph TD
     subgraph "AWS Security Architecture"
         subgraph "Identity & Access"
-            A[🔐 IAM OIDC Provider]
-            B[🎫 Temporary STS Tokens]
-            C[🔑 GithubWorkFlowRole]
+            A["🔐 IAM OIDC Provider"]
+            B["🎫 Temporary STS Tokens"]
+            C["🔑 GithubWorkFlowRole"]
             A -->|Token Exchange| B
             B -->|Assumes| C
         end
         
         subgraph "Content Delivery & Protection"
-            D[☁️ CloudFront Distribution]
-            E[🛡️ AWS Shield Standard]
-            F[🔒 Security Headers]
-            G[📜 TLS 1.3 Certificates]
+            D["☁️ CloudFront Distribution"]
+            E["🛡️ AWS Shield Standard"]
+            F["🔒 Security Headers"]
+            G["📜 TLS 1.3 Certificates"]
             D -->|Protected by| E
             D -->|Applies| F
             D -->|Uses| G
         end
         
         subgraph "Storage & Encryption"
-            H[💾 S3 us-east-1 Primary]
-            I[💾 S3 Multi-Region Replica]
-            J[🔐 SSE-S3 Encryption]
-            K[📦 Versioning]
+            H["💾 S3 us-east-1 Primary"]
+            I["💾 S3 Multi-Region Replica"]
+            J["🔐 SSE-S3 Encryption"]
+            K["📦 Versioning"]
             H -->|Encrypted with| J
             H -->|Replicates to| I
             H -->|Maintains| K
@@ -655,17 +655,17 @@ graph TD
         end
         
         subgraph "Network Security"
-            L[🛡️ Harden-Runner]
-            M[🚫 Egress Block Policy]
-            N[✅ Allowlist Endpoints]
+            L["🛡️ Harden-Runner"]
+            M["🚫 Egress Block Policy"]
+            N["✅ Allowlist Endpoints"]
             L -->|Enforces| M
             M -->|Permits Only| N
         end
         
         subgraph "Monitoring & Audit"
-            O[📋 CloudTrail Logging]
-            P[👀 GitHub Actions Logs]
-            Q[🔍 Harden-Runner Telemetry]
+            O["📋 CloudTrail Logging"]
+            P["👀 GitHub Actions Logs"]
+            Q["🔍 Harden-Runner Telemetry"]
             C -->|Logged by| O
             N -->|Logged by| Q
         end
@@ -966,13 +966,13 @@ CIA Compliance Manager uses AWS infrastructure for static content delivery with 
 ```mermaid
 flowchart TD
     subgraph "Partially Applicable AWS FSBP"
-        A[✅ IAM: OIDC for Deployments]
-        B[✅ S3: Bucket Policies & Encryption]
-        C[✅ CloudFront: TLS 1.3 + Shield]
-        D[🚫 No Config Service<br/>Static hosting only]
-        E[🚫 No Security Hub<br/>No compute to scan]
-        F[🚫 No GuardDuty<br/>No VPC/network to monitor]
-        G[🚫 No Inspector<br/>No instances to assess]
+        A["✅ IAM: OIDC for Deployments"]
+        B["✅ S3: Bucket Policies & Encryption"]
+        C["✅ CloudFront: TLS 1.3 + Shield"]
+        D["🚫 No Config Service<br/>Static hosting only"]
+        E["🚫 No Security Hub<br/>No compute to scan"]
+        F["🚫 No GuardDuty<br/>No VPC/network to monitor"]
+        G["🚫 No Inspector<br/>No instances to assess"]
     end
 
     style A,B,C fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
@@ -998,13 +998,13 @@ CIA Compliance Manager implements applicable AWS FSBP controls for static conten
 ```mermaid
 flowchart TD
     subgraph "CI/CD Threat Detection"
-        A[🔍 Harden-Runner<br>Network Monitoring] --> B[🛡️ Egress Policy<br>Enforcement]
-        C[🔎 CodeQL<br>Analysis] --> D[⚠️ Security<br>Findings]
-        E[📦 Dependency<br>Review] --> F[🔒 Supply Chain<br>Validation]
+        A["🔍 Harden-Runner<br>Network Monitoring"] --> B["🛡️ Egress Policy<br>Enforcement"]
+        C["🔎 CodeQL<br>Analysis"] --> D["⚠️ Security<br>Findings"]
+        E["📦 Dependency<br>Review"] --> F["🔒 Supply Chain<br>Validation"]
     end
 
     subgraph "AWS Infrastructure"
-        G[☁️ CloudTrail<br>Logging] --> H[📊 Access<br>Auditing]
+        G["☁️ CloudTrail<br>Logging"] --> H["📊 Access<br>Auditing"]
     end
 
     style A,C,E fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:white,font-weight:bold
@@ -1045,15 +1045,15 @@ Per [ISMS Threat Modeling Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/mai
 ```mermaid
 flowchart TD
     subgraph "Vulnerability Management Pipeline"
-        A[🔎 CodeQL<br>SAST Scanning] --> D[📊 Security<br>Findings]
-        B[📦 Dependabot<br>SCA Scanning] --> D
-        C[🔍 Dependency<br>Review] --> D
-        E[🌐 ZAP<br>DAST Scanning] --> D
-        F[📋 OSSF<br>Scorecard] --> D
+        A["🔎 CodeQL<br>SAST Scanning"] --> D["📊 Security<br>Findings"]
+        B["📦 Dependabot<br>SCA Scanning"] --> D
+        C["🔍 Dependency<br>Review"] --> D
+        E["🌐 ZAP<br>DAST Scanning"] --> D
+        F["📋 OSSF<br>Scorecard"] --> D
     end
 
-    D --> G[🔧 Automated<br>PR Creation]
-    D --> H[📋 Security<br>Advisories]
+    D --> G["🔧 Automated<br>PR Creation"]
+    D --> H["📋 Security<br>Advisories"]
 
     style A,B,C,E,F fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:white,font-weight:bold
 ```
@@ -1098,9 +1098,9 @@ Per [ISMS Vulnerability Management Policy](https://github.com/Hack23/ISMS-PUBLIC
 ```mermaid
 flowchart TD
     subgraph "Static Content Resilience"
-        A[📦 CDN Resilience] --> B[🌍 Global Distribution]
-        C[🔄 No Recovery<br>Objectives]
-        D[🚫 No Disaster<br>Recovery]
+        A["📦 CDN Resilience"] --> B["🌍 Global Distribution"]
+        C["🔄 No Recovery<br>Objectives"]
+        D["🚫 No Disaster<br>Recovery"]
     end
 
     style A,B fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
@@ -1128,15 +1128,15 @@ CIA Compliance Manager resilience:
 ```mermaid
 flowchart TD
     subgraph "Configuration Management"
-        A[⚙️ GitHub Actions<br>IaC Workflows] --> D[📊 Build-Time<br>Validation]
-        B[📝 Version-Controlled<br>Configuration] --> D
-        C[🔒 Dependabot<br>Dependency Config] --> D
+        A["⚙️ GitHub Actions<br>IaC Workflows"] --> D["📊 Build-Time<br>Validation"]
+        B["📝 Version-Controlled<br>Configuration"] --> D
+        C["🔒 Dependabot<br>Dependency Config"] --> D
     end
 
     subgraph "Compliance Checks"
-        D --> E[🔍 ESLint Security<br>Rules]
-        D --> F[📋 OSSF Scorecard<br>Assessment]
-        D --> G[🛡️ SLSA Level 3<br>Attestation]
+        D --> E["🔍 ESLint Security<br>Rules"]
+        D --> F["📋 OSSF Scorecard<br>Assessment"]
+        D --> G["🛡️ SLSA Level 3<br>Attestation"]
     end
 
     style A,B,C fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:white,font-weight:bold
@@ -1168,13 +1168,13 @@ CIA Compliance Manager configuration management:
 ```mermaid
 flowchart TD
     subgraph "CI/CD Monitoring"
-        A[📊 GitHub Actions<br>Logs] --> E[📈 Build & Test<br>Metrics]
-        B[🔍 Harden-Runner<br>Telemetry] --> E
-        C[📋 Lighthouse<br>Performance] --> E
+        A["📊 GitHub Actions<br>Logs"] --> E["📈 Build & Test<br>Metrics"]
+        B["🔍 Harden-Runner<br>Telemetry"] --> E
+        C["📋 Lighthouse<br>Performance"] --> E
     end
 
     subgraph "AWS Monitoring"
-        D[☁️ CloudTrail<br>Access Logs] --> F[📊 S3 & CloudFront<br>Analytics]
+        D["☁️ CloudTrail<br>Access Logs"] --> F["📊 S3 & CloudFront<br>Analytics"]
     end
 
     style A,B,C fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:white,font-weight:bold
@@ -1204,14 +1204,14 @@ CIA Compliance Manager monitoring operates at infrastructure and CI/CD levels:
 ```mermaid
 flowchart TD
     subgraph "Automated Security Operations"
-        A[📦 Dependabot<br>Auto-Updates] --> D[🔒 Automated<br>Security PRs]
-        B[🔍 CodeQL<br>Scheduled Scans] --> D
-        C[📋 Scorecard<br>Best Practices] --> D
+        A["📦 Dependabot<br>Auto-Updates"] --> D["🔒 Automated<br>Security PRs"]
+        B["🔍 CodeQL<br>Scheduled Scans"] --> D
+        C["📋 Scorecard<br>Best Practices"] --> D
     end
 
     subgraph "Build Automation"
-        E[🏗️ SLSA Level 3<br>Attestation] --> F[📦 SBOM<br>Generation]
-        G[🔐 Artifact<br>Signing] --> F
+        E["🏗️ SLSA Level 3<br>Attestation"] --> F["📦 SBOM<br>Generation"]
+        G["🔐 Artifact<br>Signing"] --> F
     end
 
     style A,B,C fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:white,font-weight:bold
@@ -1241,13 +1241,13 @@ CIA Compliance Manager implements automated security operations via CI/CD:
 ```mermaid
 flowchart LR
     subgraph "Frontend Application Security"
-        A[🛡️ Browser<br>Security Model] --> B[🔐 HTTPS Only]
-        A --> C[🔒 CSP Headers]
-        A --> D[🛑 Input<br>Validation]
+        A["🛡️ Browser<br>Security Model"] --> B["🔐 HTTPS Only"]
+        A --> C["🔒 CSP Headers"]
+        A --> D["🛑 Input<br>Validation"]
 
-        E[🚫 No Backend<br>Security]
-        F[🚫 No Authentication]
-        G[🚫 No Authorization]
+        E["🚫 No Backend<br>Security"]
+        F["🚫 No Authentication"]
+        G["🚫 No Authorization"]
     end
 
     style A,B,C,D fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
@@ -1281,18 +1281,18 @@ CIA Compliance Manager application security:
 ```mermaid
 flowchart TD
     subgraph "React 19.x Security Controls"
-        A[⚛️ React 19.2.5 Core] --> B[🛡️ Error Boundaries]
-        A --> C[🔄 Concurrent Rendering]
-        A --> D[📦 Automatic Batching]
+        A["⚛️ React 19.2.5 Core"] --> B["🛡️ Error Boundaries"]
+        A --> C["🔄 Concurrent Rendering"]
+        A --> D["📦 Automatic Batching"]
         
-        B --> E[⚠️ Component Error Isolation]
-        B --> F[🔒 Graceful Failure]
+        B --> E["⚠️ Component Error Isolation"]
+        B --> F["🔒 Graceful Failure"]
         
-        C --> G[🚀 Performance Security]
-        C --> H[⏱️ Priority-Based Rendering]
+        C --> G["🚀 Performance Security"]
+        C --> H["⏱️ Priority-Based Rendering"]
         
-        I[🔐 TypeScript Strict Mode] --> A
-        J[🛡️ Custom WidgetErrorBoundary] --> B
+        I["🔐 TypeScript Strict Mode"] --> A
+        J["🛡️ Custom WidgetErrorBoundary"] --> B
     end
 
     style A fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff,font-weight:bold
@@ -1342,10 +1342,10 @@ import WidgetErrorBoundary from './components/common/WidgetErrorBoundary';
 ```mermaid
 flowchart LR
     subgraph "TypeScript 6.0.3 Strict Mode"
-        A[🔒 strictNullChecks] --> B[✅ Null Safety]
-        C[🔒 noImplicitAny] --> D[✅ Type Safety]
-        E[🔒 strictFunctionTypes] --> F[✅ Function Safety]
-        G[🔒 strictPropertyInitialization] --> H[✅ Property Safety]
+        A["🔒 strictNullChecks"] --> B["✅ Null Safety"]
+        C["🔒 noImplicitAny"] --> D["✅ Type Safety"]
+        E["🔒 strictFunctionTypes"] --> F["✅ Function Safety"]
+        G["🔒 strictPropertyInitialization"] --> H["✅ Property Safety"]
     end
 
     style A,C,E,G fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
@@ -1365,17 +1365,17 @@ flowchart LR
 ```mermaid
 flowchart TD
     subgraph "Vitest & Cypress Security Testing"
-        A[🧪 Vitest 4.1.4] --> B1[🔍 Unit Testing]
-        A1[🧪 Cypress 15.14.0] --> B[🔍 Component Testing]
-        A --> C[🌐 E2E Testing]
-        A --> D[📸 Visual Testing]
+        A["🧪 Vitest 4.1.4"] --> B1["🔍 Unit Testing"]
+        A1["🧪 Cypress 15.14.0"] --> B["🔍 Component Testing"]
+        A --> C["🌐 E2E Testing"]
+        A --> D["📸 Visual Testing"]
         
-        B --> E[🛡️ Widget Security Tests]
-        C --> F[🔐 Workflow Security Tests]
-        D --> G[⚠️ UI Security Validation]
+        B --> E["🛡️ Widget Security Tests"]
+        C --> F["🔐 Workflow Security Tests"]
+        D --> G["⚠️ UI Security Validation"]
         
         H["📊 ≥80% (enforced) Coverage"] --> A
-        I[🔄 Session Handling] --> C
+        I["🔄 Session Handling"] --> C
     end
 
     style A fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
@@ -1425,17 +1425,17 @@ flowchart TD
 ```mermaid
 graph TD
     subgraph "Compliance Framework Mapping"
-        A[🏛️ Hack23 ISMS<br>Policy Framework] --> B[🔐 Secure Development<br>Policy]
-        A --> C[🔍 Vulnerability<br>Management]
-        A --> D[📋 Open Source<br>Policy]
-        A --> E[🏷️ Classification<br>Framework]
+        A["🏛️ Hack23 ISMS<br>Policy Framework"] --> B["🔐 Secure Development<br>Policy"]
+        A --> C["🔍 Vulnerability<br>Management"]
+        A --> D["📋 Open Source<br>Policy"]
+        A --> E["🏷️ Classification<br>Framework"]
     end
 
     subgraph "Standards Alignment"
-        F[📊 ISO 27001:2022] --> G[A.8.25 Secure Dev Lifecycle]
-        H[🛡️ NIST CSF 2.0] --> I[PR.DS Data Security]
-        J[📋 CIS Controls v8] --> K[Control 16 App Security]
-        L[🇪🇺 CRA] --> M[Conformity Assessment]
+        F["📊 ISO 27001:2022"] --> G[A.8.25 Secure Dev Lifecycle]
+        H["🛡️ NIST CSF 2.0"] --> I[PR.DS Data Security]
+        J["📋 CIS Controls v8"] --> K[Control 16 App Security]
+        L["🇪🇺 CRA"] --> M[Conformity Assessment]
     end
 
     A --> F
@@ -1472,19 +1472,19 @@ CIA Compliance Manager compliance alignment:
 ```mermaid
 flowchart TD
     subgraph "CSP Security Architecture"
-        A[🛡️ CSP Headers] --> B[📜 default-src 'self']
-        A --> C[📝 script-src Policy]
-        A --> D[🎨 style-src Policy]
-        A --> E[🖼️ img-src Policy]
+        A["🛡️ CSP Headers"] --> B["📜 default-src 'self'"]
+        A --> C["📝 script-src Policy"]
+        A --> D["🎨 style-src Policy"]
+        A --> E["🖼️ img-src Policy"]
         
-        B --> F[🔒 Strict Default]
-        C --> G[⚠️ 'unsafe-inline' Limited]
-        D --> H[🎨 Google Fonts Allowed]
-        E --> I[🖼️ Data URIs + HTTPS]
+        B --> F["🔒 Strict Default"]
+        C --> G["⚠️ 'unsafe-inline' Limited"]
+        D --> H["🎨 Google Fonts Allowed"]
+        E --> I["🖼️ Data URIs + HTTPS"]
         
-        J[🔒 X-Content-Type-Options] --> A
-        K[🚫 X-Frame-Options: DENY] --> A
-        L[🔐 Cross-Origin Policies] --> A
+        J["🔒 X-Content-Type-Options"] --> A
+        K["🚫 X-Frame-Options: DENY"] --> A
+        L["🔐 Cross-Origin Policies"] --> A
     end
 
     style A fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
@@ -1550,11 +1550,11 @@ The application implements comprehensive Content Security Policy headers in `ind
 ```mermaid
 flowchart LR
     subgraph "Multi-Layer XSS Protection"
-        A[🎯 Attack Vector] --> B[🛡️ CSP Headers]
-        B --> C[⚛️ React Escaping]
-        C --> D[🔒 TypeScript Types]
-        D --> E[✅ Input Validation]
-        E --> F[🚫 Attack Blocked]
+        A["🎯 Attack Vector"] --> B["🛡️ CSP Headers"]
+        B --> C["⚛️ React Escaping"]
+        C --> D["🔒 TypeScript Types"]
+        D --> E["✅ Input Validation"]
+        E --> F["🚫 Attack Blocked"]
     end
 
     style A fill:#D32F2F,stroke:#BF360C,stroke-width:2px,color:white,font-weight:bold
@@ -1576,17 +1576,17 @@ flowchart LR
 ```mermaid
 flowchart TD
     subgraph "SLSA Level 3 Architecture"
-        A[📦 GitHub Actions Build] --> B[🔏 Build Provenance]
-        B --> C[📋 SBOM Generation]
-        C --> D[🔐 Artifact Attestation]
+        A["📦 GitHub Actions Build"] --> B["🔏 Build Provenance"]
+        B --> C["📋 SBOM Generation"]
+        C --> D["🔐 Artifact Attestation"]
         
-        D --> E[✅ Tamper-Evident]
-        D --> F[🔍 Verifiable]
-        D --> G[📊 Transparent]
+        D --> E["✅ Tamper-Evident"]
+        D --> F["🔍 Verifiable"]
+        D --> G["📊 Transparent"]
         
-        H[🛡️ actions/attest-build-provenance] --> B
-        I[📦 SBOM Attestation] --> C
-        J[🔒 SHA-Pinned Actions] --> A
+        H["🛡️ actions/attest-build-provenance"] --> B
+        I["📦 SBOM Attestation"] --> C
+        J["🔒 SHA-Pinned Actions"] --> A
     end
 
     style A fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
@@ -1627,12 +1627,12 @@ flowchart TD
 ```mermaid
 flowchart LR
     subgraph "Supply Chain Threat Mitigation"
-        A[🎯 Threat] --> B[🔒 Control]
+        A["🎯 Threat"] --> B["🔒 Control"]
         
-        T1[📦 Package Tampering] --> C1[🔏 Build Provenance]
-        T2[🔗 Dependency Attack] --> C2[📋 SBOM Verification]
-        T3[⚙️ Build Compromise] --> C3[🛡️ Hermetic Builds]
-        T4[🎭 Artifact Substitution] --> C4[🔐 Attestations]
+        T1["📦 Package Tampering"] --> C1["🔏 Build Provenance"]
+        T2["🔗 Dependency Attack"] --> C2["📋 SBOM Verification"]
+        T3["⚙️ Build Compromise"] --> C3["🛡️ Hermetic Builds"]
+        T4["🎭 Artifact Substitution"] --> C4["🔐 Attestations"]
     end
 
     style T1,T2,T3,T4 fill:#D32F2F,stroke:#BF360C,stroke-width:2px,color:white,font-weight:bold
@@ -1684,13 +1684,13 @@ The `cia-compliance-manager` npm package is published from the same CI pipeline 
 ```mermaid
 flowchart TD
     subgraph "Simplified Defense-in-Depth"
-        A[🌐 Network Layer] --> B[🔒 HTTPS/TLS]
-        C[🖥️ Application Layer] --> D[🛡️ Browser Security]
-        E[👤 User Layer] --> F[🔍 Input Validation]
+        A["🌐 Network Layer"] --> B["🔒 HTTPS/TLS"]
+        C["🖥️ Application Layer"] --> D["🛡️ Browser Security"]
+        E["👤 User Layer"] --> F["🔍 Input Validation"]
 
-        G[🚫 No Identity Layer]
-        H[🚫 No Data Layer]
-        I[🚫 No Infrastructure Layer]
+        G["🚫 No Identity Layer"]
+        H["🚫 No Data Layer"]
+        I["🚫 No Infrastructure Layer"]
     end
 
     style A,B,C,D,E,F fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
@@ -1724,10 +1724,10 @@ CIA Compliance Manager's simplified defense approach:
 ```mermaid
 flowchart TD
     subgraph "No Security Operations"
-        A[🔍 No Monitoring]
-        B[⚡ No Incident<br>Response]
-        C[🔄 No Security<br>Maintenance]
-        D[📊 No Threat<br>Intelligence]
+        A["🔍 No Monitoring"]
+        B["⚡ No Incident<br>Response"]
+        C["🔄 No Security<br>Maintenance"]
+        D["📊 No Threat<br>Intelligence"]
     end
 
     style A,B,C,D fill:#9E9E9E,stroke:#616161,stroke-width:2px,color:white,font-weight:bold
@@ -1755,13 +1755,13 @@ CIA Compliance Manager security operations:
 ```mermaid
 flowchart TD
     subgraph "Minimal Security Investment"
-        A[💰 Low Cost] --> B[📦 CDN Costs Only]
-        A --> C[🔒 TLS Certificate]
-        A --> D[🛠️ Development Time]
+        A["💰 Low Cost"] --> B["📦 CDN Costs Only"]
+        A --> C["🔒 TLS Certificate"]
+        A --> D["🛠️ Development Time"]
 
-        E[🚫 No AWS Costs]
-        F[🚫 No Monitoring Costs]
-        G[🚫 No Operations Costs]
+        E["🚫 No AWS Costs"]
+        F["🚫 No Monitoring Costs"]
+        G["🚫 No Operations Costs"]
     end
 
     style A,B,C,D fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
@@ -1831,13 +1831,13 @@ CIA Compliance Manager v1.1.0 introduces significant security enhancements acros
 
 ```mermaid
 flowchart LR
-    A[♿ Accessibility Controls] --> B[🎯 Keyboard Navigation]
-    A --> C[📢 Screen Reader Support]
-    A --> D[🎨 Color Contrast]
+    A["♿ Accessibility Controls"] --> B["🎯 Keyboard Navigation"]
+    A --> C["📢 Screen Reader Support"]
+    A --> D["🎨 Color Contrast"]
     
-    B --> E[🛡️ Reduces Phishing Risk]
-    C --> F[🛡️ Security Alert Clarity]
-    D --> G[🛡️ Security Status Visibility]
+    B --> E["🛡️ Reduces Phishing Risk"]
+    C --> F["🛡️ Security Alert Clarity"]
+    D --> G["🛡️ Security Status Visibility"]
     
     style A fill:#4CAF50,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
     style B,C,D fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
@@ -1863,13 +1863,13 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    A[⚡ Performance Controls] --> B[📦 Bundle Optimization]
-    A --> C[🔄 Lazy Loading]
-    A --> D[📊 Monitoring]
+    A["⚡ Performance Controls"] --> B["📦 Bundle Optimization"]
+    A --> C["🔄 Lazy Loading"]
+    A --> D["📊 Monitoring"]
     
-    B --> E[🛡️ DoS Resilience]
-    C --> F[🛡️ Resource Efficiency]
-    D --> G[🛡️ Anomaly Detection]
+    B --> E["🛡️ DoS Resilience"]
+    C --> F["🛡️ Resource Efficiency"]
+    D --> G["🛡️ Anomaly Detection"]
     
     style A fill:#D32F2F,stroke:#BF360C,stroke-width:2px,color:white,font-weight:bold
     style B,C,D fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
@@ -1902,13 +1902,13 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    A[🛡️ Error Handling] --> B[⚠️ Error Boundaries]
-    A --> C[📝 Error Service]
-    A --> D[🚫 Safe Messages]
+    A["🛡️ Error Handling"] --> B["⚠️ Error Boundaries"]
+    A --> C["📝 Error Service"]
+    A --> D["🚫 Safe Messages"]
     
-    B --> E[🔒 No Stack Traces]
-    C --> F[🔒 Secure Logging]
-    D --> G[🔒 No Info Disclosure]
+    B --> E["🔒 No Stack Traces"]
+    C --> F["🔒 Secure Logging"]
+    D --> G["🔒 No Info Disclosure"]
     
     style A fill:#7B1FA2,stroke:#6A1B9A,stroke-width:2px,color:white,font-weight:bold
     style B,C,D fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
@@ -1936,13 +1936,13 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    A[🎨 Design System] --> B[🎯 Design Tokens]
-    A --> C[🔧 Components]
-    A --> D[📐 Patterns]
+    A["🎨 Design System"] --> B["🎯 Design Tokens"]
+    A --> C["🔧 Components"]
+    A --> D["📐 Patterns"]
     
-    B --> E[🛡️ Consistent Security UI]
-    C --> F[🛡️ Tested Components]
-    D --> G[🛡️ Predictable Behavior]
+    B --> E["🛡️ Consistent Security UI"]
+    C --> F["🛡️ Tested Components"]
+    D --> G["🛡️ Predictable Behavior"]
     
     style A fill:#FFC107,stroke:#FF8F00,stroke-width:2px,color:black,font-weight:bold
     style B,C,D fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold

@@ -292,36 +292,36 @@ Implementing [ENISA Threat Landscape 2024](https://www.enisa.europa.eu/publicati
 
 ```mermaid
 flowchart TD
-    GOAL[🎯 Compromise Cloud Assessment Platform]
+    GOAL["🎯 Compromise Cloud Assessment Platform"]
 
-    GOAL --> PATH1[🔐 Authentication Attack]
-    GOAL --> PATH2[📊 Data Exfiltration]
-    GOAL --> PATH3[⚡ Service Disruption]
-    GOAL --> PATH4[🔗 Supply Chain Attack]
+    GOAL --> PATH1["🔐 Authentication Attack"]
+    GOAL --> PATH2["📊 Data Exfiltration"]
+    GOAL --> PATH3["⚡ Service Disruption"]
+    GOAL --> PATH4["🔗 Supply Chain Attack"]
 
     PATH1 --> A1[Credential Stuffing]
     PATH1 --> A2[JWT Token Forgery]
     PATH1 --> A3[OAuth2 Redirect Manipulation]
-    A1 --> A1M[🛡️ MFA + Rate Limiting]
-    A2 --> A2M[🛡️ Short-lived Tokens + JWK Rotation]
-    A3 --> A3M[🛡️ Strict URI Validation + PKCE]
+    A1 --> A1M["🛡️ MFA + Rate Limiting"]
+    A2 --> A2M["🛡️ Short-lived Tokens + JWK Rotation"]
+    A3 --> A3M["🛡️ Strict URI Validation + PKCE"]
 
     PATH2 --> B1[Cross-Tenant Leakage]
     PATH2 --> B2[API Response Exposure]
     PATH2 --> B3[S3 Misconfiguration]
-    B1 --> B1M[🛡️ Partition-Key Scoping + IAM Conditions]
-    B2 --> B2M[🛡️ Field-Level Access Control]
-    B3 --> B3M[🛡️ S3 Block Public Access]
+    B1 --> B1M["🛡️ Partition-Key Scoping + IAM Conditions"]
+    B2 --> B2M["🛡️ Field-Level Access Control"]
+    B3 --> B3M["🛡️ S3 Block Public Access"]
 
     PATH3 --> C1[API Gateway DDoS]
     PATH3 --> C2[Lambda Exhaustion]
-    C1 --> C1M[🛡️ WAF + Shield + CloudFront]
-    C2 --> C2M[🛡️ Reserved Concurrency]
+    C1 --> C1M["🛡️ WAF + Shield + CloudFront"]
+    C2 --> C2M["🛡️ Reserved Concurrency"]
 
     PATH4 --> D1[Malicious Lambda Layer]
     PATH4 --> D2[Compromised SDK]
-    D1 --> D1M[🛡️ Layer Pinning + Inspector]
-    D2 --> D2M[🛡️ Code Signing + SBOM]
+    D1 --> D1M["🛡️ Layer Pinning + Inspector"]
+    D2 --> D2M["🛡️ Code Signing + SBOM"]
 
     style GOAL fill:#d32f2f,color:#fff
     style PATH1 fill:#D32F2F,color:#fff
@@ -440,13 +440,13 @@ Following [Hack23 AB Workshop Framework](https://github.com/Hack23/ISMS-PUBLIC/b
 
 ```mermaid
 flowchart LR
-    PRE[📋 Pre-Workshop Prep] --> ENUM[🎯 Cloud Asset Enumeration]
-    ENUM --> THREATS[🔍 Threat Identification<br/>STRIDE + ATT&CK Cloud]
-    THREATS --> MAP[⚖️ Risk & Compliance Mapping]
-    MAP --> PLAN[🛡️ AWS Control Plan]
-    PLAN --> INTEG[🔧 CI/CD + IaC Integration]
-    INTEG --> MON[📊 GuardDuty + Security Hub]
-    MON --> REVIEW[🔄 Quarterly Review]
+    PRE["📋 Pre-Workshop Prep"] --> ENUM["🎯 Cloud Asset Enumeration"]
+    ENUM --> THREATS["🔍 Threat Identification<br/>STRIDE + ATT&CK Cloud"]
+    THREATS --> MAP["⚖️ Risk & Compliance Mapping"]
+    MAP --> PLAN["🛡️ AWS Control Plan"]
+    PLAN --> INTEG["🔧 CI/CD + IaC Integration"]
+    INTEG --> MON["📊 GuardDuty + Security Hub"]
+    MON --> REVIEW["🔄 Quarterly Review"]
     REVIEW --> THREATS
 ```
 

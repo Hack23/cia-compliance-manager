@@ -136,7 +136,7 @@ flowchart TD
     
     subgraph "Organizational Context Parameters"
         D1[Industry]
-        D2[Size & Resources]
+        D2["Size & Resources"]
         D3[Geographic Locations]
         D4[Business Functions]
         D5[Data Sensitivity]
@@ -164,7 +164,7 @@ flowchart TD
     H --> I[Business-Aligned Controls]
     H --> J[Implementation Roadmap]
     
-    I --> K[Continuous Monitoring & Adaptation]
+    I --> K["Continuous Monitoring & Adaptation"]
     J --> K
     
     K --> L[Feedback Loop]

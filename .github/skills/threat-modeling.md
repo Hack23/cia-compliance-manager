@@ -152,7 +152,7 @@ interface DataFlow {
 graph LR
     User[External: User] -->|1. Login Credentials| WebApp[Process: Web Application]
     WebApp -->|2. Validate Credentials| AuthService[Process: Auth Service]
-    AuthService -->|3. Query User| UserDB[(Data Store: User Database)]
+    AuthService -->|3. Query User| UserDB["(Data Store: User Database)"]
     UserDB -->|4. User Record| AuthService
     AuthService -->|5. JWT Token| WebApp
     WebApp -->|6. Set Session Cookie| User

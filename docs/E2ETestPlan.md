@@ -428,10 +428,10 @@ graph TB
         APP[CIA Compliance Manager]
         
         subgraph "Widget Categories"
-            AC[Assessment Center<br/>3 widgets]
-            BV[Business Value<br/>3 widgets]
-            IA[Impact Analysis<br/>3 widgets]
-            IG[Implementation Guide<br/>3 widgets]
+            AC["Assessment Center<br/>3 widgets"]
+            BV["Business Value<br/>3 widgets"]
+            IA["Impact Analysis<br/>3 widgets"]
+            IG["Implementation Guide<br/>3 widgets"]
         end
         
         APP --> AC
@@ -441,11 +441,11 @@ graph TB
     end
     
     subgraph "Test Suites"
-        TS1[Assessment Center Tests<br/>security-level.cy.ts<br/>security-summary.cy.ts<br/>business-impact.cy.ts]
-        TS2[Business Value Tests<br/>compliance-status.cy.ts<br/>cost-estimation.cy.ts<br/>value-creation.cy.ts]
-        TS3[Impact Analysis Tests<br/>confidentiality-impact.cy.ts<br/>integrity-impact.cy.ts<br/>availability-impact.cy.ts]
-        TS4[Implementation Guide Tests<br/>security-visualization.cy.ts<br/>security-resources.cy.ts<br/>technical-details.cy.ts]
-        TS5[Integration Tests<br/>compliance-validation.cy.ts<br/>security-level-transitions.cy.ts<br/>widget-screenshots.cy.ts]
+        TS1["Assessment Center Tests<br/>security-level.cy.ts<br/>security-summary.cy.ts<br/>business-impact.cy.ts"]
+        TS2["Business Value Tests<br/>compliance-status.cy.ts<br/>cost-estimation.cy.ts<br/>value-creation.cy.ts"]
+        TS3["Impact Analysis Tests<br/>confidentiality-impact.cy.ts<br/>integrity-impact.cy.ts<br/>availability-impact.cy.ts"]
+        TS4["Implementation Guide Tests<br/>security-visualization.cy.ts<br/>security-resources.cy.ts<br/>technical-details.cy.ts"]
+        TS5["Integration Tests<br/>compliance-validation.cy.ts<br/>security-level-transitions.cy.ts<br/>widget-screenshots.cy.ts"]
     end
     
     subgraph "Reporting & Evidence"

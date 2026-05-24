@@ -44,17 +44,17 @@ The widgets are organized in a hierarchical relationship, with the Security Leve
 
 ```mermaid
 flowchart TD
-    SLW((Security Level<br>Widget)) --> SSW[Security Summary<br>Widget]
-    SLW --> BIAW[Business Impact<br>Analysis Widget]
-    SLW --> CIW[Confidentiality<br>Impact Widget]
-    SLW --> IIW[Integrity<br>Impact Widget]
-    SLW --> AIW[Availability<br>Impact Widget]
-    SLW --> CSW[Compliance Status<br>Widget]
-    SLW --> CEW[Cost Estimation<br>Widget]
-    SLW --> VCW[Value Creation<br>Widget]
-    SLW --> TDW[Technical Details<br>Widget]
-    SLW --> SRW[Security Resources<br>Widget]
-    SLW --> SVW[Security Visualization<br>Widget]
+    SLW(("Security Level<br>Widget")) --> SSW["Security Summary<br>Widget"]
+    SLW --> BIAW["Business Impact<br>Analysis Widget"]
+    SLW --> CIW["Confidentiality<br>Impact Widget"]
+    SLW --> IIW["Integrity<br>Impact Widget"]
+    SLW --> AIW["Availability<br>Impact Widget"]
+    SLW --> CSW["Compliance Status<br>Widget"]
+    SLW --> CEW["Cost Estimation<br>Widget"]
+    SLW --> VCW["Value Creation<br>Widget"]
+    SLW --> TDW["Technical Details<br>Widget"]
+    SLW --> SRW["Security Resources<br>Widget"]
+    SLW --> SVW["Security Visualization<br>Widget"]
     
     classDef core fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#ffffff
     classDef assessment fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#ffffff
@@ -80,27 +80,27 @@ Each widget depends on specific services to provide its functionality:
 ```mermaid
 flowchart LR
     subgraph "Services"
-        CIAContent[CIA Content<br>Service]
-        Compliance[Compliance<br>Service]
-        SecMetrics[Security Metrics<br>Service]
-        SecResources[Security Resources<br>Service]
-        TechImpl[Technical Implementation<br>Service]
-        BusImpact[Business Impact<br>Service]
+        CIAContent["CIA Content<br>Service"]
+        Compliance["Compliance<br>Service"]
+        SecMetrics["Security Metrics<br>Service"]
+        SecResources["Security Resources<br>Service"]
+        TechImpl["Technical Implementation<br>Service"]
+        BusImpact["Business Impact<br>Service"]
     end
     
     subgraph "Widgets"
-        SLW[Security Level<br>Widget]
-        SSW[Security Summary<br>Widget]
-        BIAW[Business Impact<br>Analysis Widget]
-        CIW[Confidentiality<br>Impact Widget]
-        IIW[Integrity<br>Impact Widget]
-        AIW[Availability<br>Impact Widget]
-        CSW[Compliance Status<br>Widget]
-        CEW[Cost Estimation<br>Widget]
-        VCW[Value Creation<br>Widget]
-        TDW[Technical Details<br>Widget]
-        SRW[Security Resources<br>Widget]
-        SVW[Security Visualization<br>Widget]
+        SLW["Security Level<br>Widget"]
+        SSW["Security Summary<br>Widget"]
+        BIAW["Business Impact<br>Analysis Widget"]
+        CIW["Confidentiality<br>Impact Widget"]
+        IIW["Integrity<br>Impact Widget"]
+        AIW["Availability<br>Impact Widget"]
+        CSW["Compliance Status<br>Widget"]
+        CEW["Cost Estimation<br>Widget"]
+        VCW["Value Creation<br>Widget"]
+        TDW["Technical Details<br>Widget"]
+        SRW["Security Resources<br>Widget"]
+        SVW["Security Visualization<br>Widget"]
     end
     
     SLW --> CIAContent

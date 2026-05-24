@@ -173,7 +173,7 @@ erDiagram
 
 ```mermaid
 flowchart LR
-    User[👤 User] -->|Interacts| UI[React 19.x UI]
+    User["👤 User"] -->|Interacts| UI[React 19.x UI]
     UI -->|Updates| State[React Hooks State]
     State -->|Persists| LS[localStorage]
     
@@ -200,19 +200,19 @@ The v2.0 architecture implements a three-tier persistence strategy balancing per
 ```mermaid
 flowchart TD
     subgraph "Client Tier - Offline-First"
-        IDB[IndexedDB<br/>Local Cache]
-        SW[Service Worker<br/>Offline Support]
+        IDB["IndexedDB<br/>Local Cache"]
+        SW["Service Worker<br/>Offline Support"]
     end
     
     subgraph "Edge Tier - Low Latency"
-        CF[CloudFront Cache<br/>Static Assets]
-        APIGW[API Gateway Cache<br/>API Responses]
+        CF["CloudFront Cache<br/>Static Assets"]
+        APIGW["API Gateway Cache<br/>API Responses"]
     end
     
     subgraph "Persistence Tier - AWS Serverless"
-        DDB[DynamoDB Global Tables<br/>Primary Data Store]
-        S3[S3 + Glacier<br/>Archive Storage]
-        Audit[DynamoDB Audit<br/>Append-Only Logs]
+        DDB["DynamoDB Global Tables<br/>Primary Data Store"]
+        S3["S3 + Glacier<br/>Archive Storage"]
+        Audit["DynamoDB Audit<br/>Append-Only Logs"]
     end
     
     IDB <-->|Background Sync| DDB
@@ -514,21 +514,21 @@ interface DDBauditLog {
 ```mermaid
 graph TB
     subgraph "Primary Region: us-east-1"
-        P1[DynamoDB Table<br/>SecurityProfiles]
-        P2[DynamoDB Table<br/>Organizations]
-        P3[DynamoDB Table<br/>AuditLogs]
+        P1["DynamoDB Table<br/>SecurityProfiles"]
+        P2["DynamoDB Table<br/>Organizations"]
+        P3["DynamoDB Table<br/>AuditLogs"]
     end
     
     subgraph "Secondary Region: eu-west-1"
-        S1[DynamoDB Replica<br/>SecurityProfiles]
-        S2[DynamoDB Replica<br/>Organizations]
-        S3[DynamoDB Replica<br/>AuditLogs]
+        S1["DynamoDB Replica<br/>SecurityProfiles"]
+        S2["DynamoDB Replica<br/>Organizations"]
+        S3["DynamoDB Replica<br/>AuditLogs"]
     end
     
     subgraph "Tertiary Region: ap-southeast-1"
-        T1[DynamoDB Replica<br/>SecurityProfiles]
-        T2[DynamoDB Replica<br/>Organizations]
-        T3[DynamoDB Replica<br/>AuditLogs]
+        T1["DynamoDB Replica<br/>SecurityProfiles"]
+        T2["DynamoDB Replica<br/>Organizations"]
+        T3["DynamoDB Replica<br/>AuditLogs"]
     end
     
     P1 <-.->|Automatic<br/>Replication| S1
@@ -1087,10 +1087,10 @@ flowchart TD
     
     subgraph "Migration Orchestration"
         Event -->|Triggers| StepFunc[Step Functions State Machine]
-        StepFunc -->|1. Batch Read| Scan[DynamoDB Scan<br/>1000 items/batch]
+        StepFunc -->|1. Batch Read| Scan["DynamoDB Scan<br/>1000 items/batch"]
         StepFunc -->|2. Transform| Lambda[Migration Lambda]
         StepFunc -->|3. Batch Write| Write[DynamoDB BatchWrite]
-        StepFunc -->|4. Update Progress| Progress[Update SchemaVersion<br/>migratedRecords]
+        StepFunc -->|4. Update Progress| Progress["Update SchemaVersion<br/>migratedRecords"]
     end
     
     subgraph "Validation & Rollback"
@@ -1601,19 +1601,19 @@ flowchart TD
     subgraph "Client-Side Encryption"
         Browser[Browser]
         WebCrypto[Web Crypto API]
-        IDB[IndexedDB<br/>Encrypted Storage]
+        IDB["IndexedDB<br/>Encrypted Storage"]
     end
     
     subgraph "Transport Encryption"
-        TLS[TLS 1.3<br/>End-to-End]
-        CF[CloudFront<br/>TLS Termination]
+        TLS["TLS 1.3<br/>End-to-End"]
+        CF["CloudFront<br/>TLS Termination"]
     end
     
     subgraph "Server-Side Encryption"
         APIGW[API Gateway]
-        KMS[AWS KMS<br/>Customer CMK]
-        DDB[DynamoDB<br/>Encryption at Rest]
-        S3[S3<br/>SSE-KMS]
+        KMS["AWS KMS<br/>Customer CMK"]
+        DDB["DynamoDB<br/>Encryption at Rest"]
+        S3["S3<br/>SSE-KMS"]
     end
     
     Browser -->|Sensitive Fields| WebCrypto
@@ -2226,9 +2226,9 @@ The migration from v1.0 (client-only) to v2.0 (AWS serverless) follows a **phase
 ```mermaid
 flowchart LR
     subgraph "Phase 1: Foundation"
-        V1[v1.0<br/>Client Only]
+        V1["v1.0<br/>Client Only"]
         Backend[Add Backend APIs]
-        Hybrid[Hybrid Mode<br/>Local + Cloud]
+        Hybrid["Hybrid Mode<br/>Local + Cloud"]
     end
     
     subgraph "Phase 2: Data Migration"

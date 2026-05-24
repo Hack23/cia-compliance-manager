@@ -302,7 +302,7 @@ The future architecture aligns comprehensively with all five pillars of the AWS 
 ```mermaid
 flowchart TD
     subgraph "Security Pillar Implementation"
-        A[Identity & Access] --> B[AWS Cognito + IAM]
+        A["Identity & Access"] --> B[AWS Cognito + IAM]
         A --> C[Multi-Factor Authentication]
         A --> D[Federated SSO]
         
@@ -478,21 +478,21 @@ The platform will use AWS Well-Architected Tool for:
 ```mermaid
 graph TD
     subgraph "Primary Region: us-east-1"
-        A[Application] --> B[DynamoDB Table<br/>Assessments]
-        A --> C[DynamoDB Table<br/>Organizations]
-        A --> D[DynamoDB Table<br/>Audit Logs]
+        A[Application] --> B["DynamoDB Table<br/>Assessments"]
+        A --> C["DynamoDB Table<br/>Organizations"]
+        A --> D["DynamoDB Table<br/>Audit Logs"]
     end
     
     subgraph "Secondary Region: eu-west-1"
-        E[Application] --> F[DynamoDB Replica<br/>Assessments]
-        E --> G[DynamoDB Replica<br/>Organizations]
-        E --> H[DynamoDB Replica<br/>Audit Logs]
+        E[Application] --> F["DynamoDB Replica<br/>Assessments"]
+        E --> G["DynamoDB Replica<br/>Organizations"]
+        E --> H["DynamoDB Replica<br/>Audit Logs"]
     end
     
     subgraph "Tertiary Region: ap-southeast-1"
-        I[Application] --> J[DynamoDB Replica<br/>Assessments]
-        I --> K[DynamoDB Replica<br/>Organizations]
-        I --> L[DynamoDB Replica<br/>Audit Logs]
+        I[Application] --> J["DynamoDB Replica<br/>Assessments"]
+        I --> K["DynamoDB Replica<br/>Organizations"]
+        I --> L["DynamoDB Replica<br/>Audit Logs"]
     end
     
     B <-.->|Automatic<br/>Replication| F
@@ -559,8 +559,8 @@ graph TD
 ```mermaid
 flowchart TD
     subgraph "Resilience Hub Architecture"
-        A[Application<br/>Definition] --> B[Resilience Policy]
-        B --> C[Assessment<br/>Execution]
+        A["Application<br/>Definition"] --> B[Resilience Policy]
+        B --> C["Assessment<br/>Execution"]
         
         C --> D[RTO Analysis]
         C --> E[RPO Analysis]
@@ -570,13 +570,13 @@ flowchart TD
         E --> G
         F --> G
         
-        G --> H[Automated<br/>Remediation]
-        G --> I[Manual<br/>Review]
+        G --> H["Automated<br/>Remediation"]
+        G --> I["Manual<br/>Review"]
         
-        H --> J[CloudFormation<br/>Updates]
-        I --> K[Architecture<br/>Changes]
+        H --> J["CloudFormation<br/>Updates"]
+        I --> K["Architecture<br/>Changes"]
         
-        J --> L[Continuous<br/>Validation]
+        J --> L["Continuous<br/>Validation"]
         K --> L
     end
 

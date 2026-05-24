@@ -130,8 +130,8 @@ stateDiagram-v2
 flowchart TD
     subgraph CIA["CIA Security Triad"]
         direction LR
-        C[Confidentiality<br>🔒] --- I[Integrity<br>✓]
-        I --- A[Availability<br>⏱️]
+        C["Confidentiality<br>🔒"] --- I["Integrity<br>✓"]
+        I --- A["Availability<br>⏱️"]
         A --- C
     end
     
@@ -149,11 +149,11 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    SLW[Security Level<br>Widget] --> SSW[Security Summary<br>Widget]
-    SLW --> BIAW[Business Impact<br>Widget]
-    SLW --> CIW[Confidentiality<br>Impact Widget]
-    SLW --> IIW[Integrity<br>Impact Widget]
-    SLW --> AIW[Availability<br>Impact Widget]
+    SLW["Security Level<br>Widget"] --> SSW["Security Summary<br>Widget"]
+    SLW --> BIAW["Business Impact<br>Widget"]
+    SLW --> CIW["Confidentiality<br>Impact Widget"]
+    SLW --> IIW["Integrity<br>Impact Widget"]
+    SLW --> AIW["Availability<br>Impact Widget"]
     
     %% Style definitions with enhanced colors
     classDef control fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#ffffff
@@ -204,8 +204,8 @@ Section content with appropriate diagrams and explanations.
 
 ```mermaid
 flowchart TD
-    A[📋 Section Content] --> B[📊 Analysis]
-    B --> C[📝 Documentation]
+    A["📋 Section Content"] --> B["📊 Analysis"]
+    B --> C["📝 Documentation"]
 
     classDef default fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
 ```

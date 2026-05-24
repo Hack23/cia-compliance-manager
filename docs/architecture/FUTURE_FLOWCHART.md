@@ -98,7 +98,7 @@ flowchart TD
     
     I --> J[Business-Aligned Security Recommendations]
     J --> K[Prioritized Implementation Roadmap]
-    K --> L[Continuous Monitoring & Feedback]
+    K --> L["Continuous Monitoring & Feedback"]
     L --> M{Context Change?}
     
     M -->|Yes| D
@@ -571,44 +571,44 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    Start([v1.0 Manual Compliance<br>Mapping Complete]) --> LoadProfile[Load Current<br>Security Profile]
+    Start(["v1.0 Manual Compliance<br>Mapping Complete"]) --> LoadProfile["Load Current<br>Security Profile"]
     
-    LoadProfile --> SelectFrameworks{Select Target<br>Frameworks}
+    LoadProfile --> SelectFrameworks{"Select Target<br>Frameworks"}
     
-    SelectFrameworks -->|Single Framework| SingleAnalysis[Single Framework<br>Gap Analysis]
-    SelectFrameworks -->|Multiple Frameworks| MultiAnalysis[Multi-Framework<br>Reconciliation]
+    SelectFrameworks -->|Single Framework| SingleAnalysis["Single Framework<br>Gap Analysis"]
+    SelectFrameworks -->|Multiple Frameworks| MultiAnalysis["Multi-Framework<br>Reconciliation"]
     
-    SingleAnalysis --> AIEngine[AI Gap Analysis<br>Engine]
-    MultiAnalysis --> CommonControls[Identify Common<br>Controls]
-    CommonControls --> FrameworkSpecific[Extract Framework-<br>Specific Controls]
+    SingleAnalysis --> AIEngine["AI Gap Analysis<br>Engine"]
+    MultiAnalysis --> CommonControls["Identify Common<br>Controls"]
+    CommonControls --> FrameworkSpecific["Extract Framework-<br>Specific Controls"]
     FrameworkSpecific --> AIEngine
     
-    AIEngine --> HistoricalMatch[Match Against<br>Historical Patterns]
-    HistoricalMatch --> SimilarOrgs[Find Similar<br>Organizations]
-    SimilarOrgs --> SuccessAnalysis[Analyze Success<br>Patterns]
+    AIEngine --> HistoricalMatch["Match Against<br>Historical Patterns"]
+    HistoricalMatch --> SimilarOrgs["Find Similar<br>Organizations"]
+    SimilarOrgs --> SuccessAnalysis["Analyze Success<br>Patterns"]
     
-    SuccessAnalysis --> GenerateRecs[Generate AI-Powered<br>Recommendations]
-    GenerateRecs --> PrioritizeGaps[Prioritize Gaps by<br>Risk × Effort]
+    SuccessAnalysis --> GenerateRecs["Generate AI-Powered<br>Recommendations"]
+    GenerateRecs --> PrioritizeGaps["Prioritize Gaps by<br>Risk × Effort"]
     
-    PrioritizeGaps --> CostEstimate[Auto-Calculate<br>Remediation Costs]
-    CostEstimate --> TimelineGen[Generate Implementation<br>Timeline]
+    PrioritizeGaps --> CostEstimate["Auto-Calculate<br>Remediation Costs"]
+    CostEstimate --> TimelineGen["Generate Implementation<br>Timeline"]
     
-    TimelineGen --> QuickWins[Identify Quick<br>Wins]
-    TimelineGen --> LongTerm[Plan Long-Term<br>Initiatives]
+    TimelineGen --> QuickWins["Identify Quick<br>Wins"]
+    TimelineGen --> LongTerm["Plan Long-Term<br>Initiatives"]
     
-    QuickWins --> RoadmapGen[Generate Automated<br>Roadmap]
+    QuickWins --> RoadmapGen["Generate Automated<br>Roadmap"]
     LongTerm --> RoadmapGen
     
-    RoadmapGen --> ValidationCheck{Validate Against<br>Best Practices?}
+    RoadmapGen --> ValidationCheck{"Validate Against<br>Best Practices?"}
     
-    ValidationCheck -->|Pass| Publish[Publish Gap Analysis<br>Report]
+    ValidationCheck -->|Pass| Publish["Publish Gap Analysis<br>Report"]
     ValidationCheck -->|Fail| Adjust[Adjust Recommendations]
     Adjust --> GenerateRecs
     
-    Publish --> NotifyStakeholders[Trigger Notification<br>Workflow]
-    NotifyStakeholders --> AssignTasks[Auto-Assign Tasks<br>to Owners]
+    Publish --> NotifyStakeholders["Trigger Notification<br>Workflow"]
+    NotifyStakeholders --> AssignTasks["Auto-Assign Tasks<br>to Owners"]
     
-    AssignTasks --> TrackProgress[Enable Progress<br>Tracking]
+    AssignTasks --> TrackProgress["Enable Progress<br>Tracking"]
     TrackProgress --> End([End])
     
     classDef baseline fill:#455A64,stroke:#37474F,stroke-width:2px,color:#ffffff
@@ -646,56 +646,56 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    User1[User 1 Opens<br>Assessment] --> CheckLock{Assessment<br>Locked?}
-    User2[User 2 Opens<br>Same Assessment] --> CheckLock
+    User1["User 1 Opens<br>Assessment"] --> CheckLock{"Assessment<br>Locked?"}
+    User2["User 2 Opens<br>Same Assessment"] --> CheckLock
     
-    CheckLock -->|No Lock| AcquireLock[Acquire Soft Lock<br>via DynamoDB]
-    CheckLock -->|Locked by Others| ViewMode[Open in View-Only<br>Mode]
+    CheckLock -->|No Lock| AcquireLock["Acquire Soft Lock<br>via DynamoDB"]
+    CheckLock -->|Locked by Others| ViewMode["Open in View-Only<br>Mode"]
     
-    AcquireLock --> LoadLatest[Load Latest Version<br>from DynamoDB]
-    ViewMode --> SubscribeChanges[Subscribe to Real-Time<br>Changes via WebSocket]
+    AcquireLock --> LoadLatest["Load Latest Version<br>from DynamoDB"]
+    ViewMode --> SubscribeChanges["Subscribe to Real-Time<br>Changes via WebSocket"]
     
-    LoadLatest --> EnableEditing[Enable Editing<br>Controls]
-    EnableEditing --> User1Edit[User 1 Makes<br>Changes]
+    LoadLatest --> EnableEditing["Enable Editing<br>Controls"]
+    EnableEditing --> User1Edit["User 1 Makes<br>Changes"]
     
-    User1Edit --> OptimisticUpdate[Optimistic UI<br>Update]
-    OptimisticUpdate --> SendChange[Send Change via<br>WebSocket]
+    User1Edit --> OptimisticUpdate["Optimistic UI<br>Update"]
+    OptimisticUpdate --> SendChange["Send Change via<br>WebSocket"]
     
-    SendChange --> ServerValidate{Server Validates<br>Change?}
+    SendChange --> ServerValidate{"Server Validates<br>Change?"}
     
-    ServerValidate -->|Valid| ApplyChange[Apply to DynamoDB<br>Global Table]
+    ServerValidate -->|Valid| ApplyChange["Apply to DynamoDB<br>Global Table"]
     ServerValidate -->|Conflict| DetectConflict[Conflict Detected]
     
-    DetectConflict --> ConflictType{Conflict<br>Type?}
+    DetectConflict --> ConflictType{"Conflict<br>Type?"}
     
-    ConflictType -->|Same Field| LastWriteWins[Apply Last-Write-Wins<br>Strategy]
-    ConflictType -->|Different Fields| AutoMerge[Auto-Merge<br>Changes]
-    ConflictType -->|Logical Conflict| PromptResolution[Prompt User<br>Resolution]
+    ConflictType -->|Same Field| LastWriteWins["Apply Last-Write-Wins<br>Strategy"]
+    ConflictType -->|Different Fields| AutoMerge["Auto-Merge<br>Changes"]
+    ConflictType -->|Logical Conflict| PromptResolution["Prompt User<br>Resolution"]
     
-    LastWriteWins --> BroadcastChange[Broadcast via<br>EventBridge]
+    LastWriteWins --> BroadcastChange["Broadcast via<br>EventBridge"]
     AutoMerge --> BroadcastChange
-    PromptResolution --> UserResolves[User Resolves<br>Conflict]
+    PromptResolution --> UserResolves["User Resolves<br>Conflict"]
     UserResolves --> BroadcastChange
     
     ApplyChange --> BroadcastChange
     
-    BroadcastChange --> NotifyUsers[Notify Active Users<br>via WebSocket]
-    NotifyUsers --> UpdateUI[Update All User<br>UIs]
+    BroadcastChange --> NotifyUsers["Notify Active Users<br>via WebSocket"]
+    NotifyUsers --> UpdateUI["Update All User<br>UIs"]
     
-    SubscribeChanges --> ReceiveUpdate[Receive Real-Time<br>Update]
-    ReceiveUpdate --> RefreshView[Refresh View-Only<br>Display]
+    SubscribeChanges --> ReceiveUpdate["Receive Real-Time<br>Update"]
+    ReceiveUpdate --> RefreshView["Refresh View-Only<br>Display"]
     
-    UpdateUI --> CheckActivity{User Still<br>Active?}
+    UpdateUI --> CheckActivity{"User Still<br>Active?"}
     RefreshView --> CheckActivity
     
     CheckActivity -->|Yes| ContinueEditing[Continue Editing/Viewing]
-    CheckActivity -->|No| ReleaseLock[Release Lock via<br>Timeout]
+    CheckActivity -->|No| ReleaseLock["Release Lock via<br>Timeout"]
     
-    ContinueEditing --> MoreChanges{More<br>Changes?}
+    ContinueEditing --> MoreChanges{"More<br>Changes?"}
     MoreChanges -->|Yes| User1Edit
-    MoreChanges -->|No| SaveFinal[Save Final<br>Assessment]
+    MoreChanges -->|No| SaveFinal["Save Final<br>Assessment"]
     
-    SaveFinal --> CreateVersion[Create Version<br>Snapshot]
+    SaveFinal --> CreateVersion["Create Version<br>Snapshot"]
     CreateVersion --> ReleaseLock
     ReleaseLock --> End([End])
     
@@ -738,21 +738,21 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    Start([Assessment<br>Completed]) --> EnableMonitoring[Enable Continuous<br>Monitoring]
+    Start(["Assessment<br>Completed"]) --> EnableMonitoring["Enable Continuous<br>Monitoring"]
     
-    EnableMonitoring --> ParallelMonitor{Monitoring<br>Channels}
+    EnableMonitoring --> ParallelMonitor{"Monitoring<br>Channels"}
     
-    ParallelMonitor -->|Context Changes| ContextWatch[Monitor Organization<br>Context via EventBridge]
-    ParallelMonitor -->|Threat Intel| ThreatWatch[Subscribe to Threat<br>Intelligence Feeds]
-    ParallelMonitor -->|Compliance Updates| ComplianceWatch[Monitor Regulatory<br>Changes]
-    ParallelMonitor -->|Integration Data| IntegrationWatch[Monitor SIEM/GRC<br>Data]
+    ParallelMonitor -->|Context Changes| ContextWatch["Monitor Organization<br>Context via EventBridge"]
+    ParallelMonitor -->|Threat Intel| ThreatWatch["Subscribe to Threat<br>Intelligence Feeds"]
+    ParallelMonitor -->|Compliance Updates| ComplianceWatch["Monitor Regulatory<br>Changes"]
+    ParallelMonitor -->|Integration Data| IntegrationWatch["Monitor SIEM/GRC<br>Data"]
     
-    ContextWatch --> ContextChange{Significant<br>Change?}
-    ThreatWatch --> ThreatChange{New Relevant<br>Threat?}
-    ComplianceWatch --> CompChange{Regulatory<br>Update?}
-    IntegrationWatch --> IntegrationChange{Security<br>Event?}
+    ContextWatch --> ContextChange{"Significant<br>Change?"}
+    ThreatWatch --> ThreatChange{"New Relevant<br>Threat?"}
+    ComplianceWatch --> CompChange{"Regulatory<br>Update?"}
+    IntegrationWatch --> IntegrationChange{"Security<br>Event?"}
     
-    ContextChange -->|Yes| EvaluateImpact[Evaluate Impact<br>Score]
+    ContextChange -->|Yes| EvaluateImpact["Evaluate Impact<br>Score"]
     ThreatChange -->|Yes| EvaluateImpact
     CompChange -->|Yes| EvaluateImpact
     IntegrationChange -->|Yes| EvaluateImpact
@@ -762,43 +762,43 @@ flowchart TD
     CompChange -->|No| ContinueMonitor
     IntegrationChange -->|No| ContinueMonitor
     
-    EvaluateImpact --> ImpactLevel{Impact<br>Level?}
+    EvaluateImpact --> ImpactLevel{"Impact<br>Level?"}
     
-    ImpactLevel -->|Critical| ImmediateReassess[Trigger Immediate<br>Re-assessment]
-    ImpactLevel -->|High| ScheduleUrgent[Schedule Urgent<br>Re-assessment 24h]
-    ImpactLevel -->|Medium| ScheduleNormal[Schedule Normal<br>Re-assessment 7d]
-    ImpactLevel -->|Low| LogChange[Log Change<br>for Review]
+    ImpactLevel -->|Critical| ImmediateReassess["Trigger Immediate<br>Re-assessment"]
+    ImpactLevel -->|High| ScheduleUrgent["Schedule Urgent<br>Re-assessment 24h"]
+    ImpactLevel -->|Medium| ScheduleNormal["Schedule Normal<br>Re-assessment 7d"]
+    ImpactLevel -->|Low| LogChange["Log Change<br>for Review"]
     
-    ImmediateReassess --> NotifyCritical[Send Critical<br>Alert]
-    ScheduleUrgent --> NotifyHigh[Send High-Priority<br>Notification]
-    ScheduleNormal --> NotifyMedium[Send Standard<br>Notification]
+    ImmediateReassess --> NotifyCritical["Send Critical<br>Alert"]
+    ScheduleUrgent --> NotifyHigh["Send High-Priority<br>Notification"]
+    ScheduleNormal --> NotifyMedium["Send Standard<br>Notification"]
     
-    NotifyCritical --> RunAssessment[Execute Automated<br>Assessment]
+    NotifyCritical --> RunAssessment["Execute Automated<br>Assessment"]
     NotifyHigh --> RunAssessment
     NotifyMedium --> RunAssessment
     
-    RunAssessment --> CompareBaseline[Compare with<br>Baseline Profile]
-    CompareBaseline --> IdentifyDeltas[Identify Security<br>Deltas]
+    RunAssessment --> CompareBaseline["Compare with<br>Baseline Profile"]
+    CompareBaseline --> IdentifyDeltas["Identify Security<br>Deltas"]
     
-    IdentifyDeltas --> DeltaType{Delta<br>Type?}
+    IdentifyDeltas --> DeltaType{"Delta<br>Type?"}
     
-    DeltaType -->|New Gaps| GenerateRecs[Generate New<br>Recommendations]
-    DeltaType -->|Controls Outdated| UpdateControls[Update Existing<br>Controls]
-    DeltaType -->|Risk Increase| EscalateRisk[Escalate Risk<br>Assessment]
+    DeltaType -->|New Gaps| GenerateRecs["Generate New<br>Recommendations"]
+    DeltaType -->|Controls Outdated| UpdateControls["Update Existing<br>Controls"]
+    DeltaType -->|Risk Increase| EscalateRisk["Escalate Risk<br>Assessment"]
     
-    GenerateRecs --> UpdateReport[Update Assessment<br>Report]
+    GenerateRecs --> UpdateReport["Update Assessment<br>Report"]
     UpdateControls --> UpdateReport
     EscalateRisk --> UpdateReport
     
-    UpdateReport --> CreateVersion[Create New<br>Version]
-    CreateVersion --> NotifyStakeholders[Notify Stakeholders<br>of Changes]
+    UpdateReport --> CreateVersion["Create New<br>Version"]
+    CreateVersion --> NotifyStakeholders["Notify Stakeholders<br>of Changes"]
     
-    NotifyStakeholders --> ApprovalRequired{Approval<br>Required?}
+    NotifyStakeholders --> ApprovalRequired{"Approval<br>Required?"}
     
-    ApprovalRequired -->|Yes| TriggerApproval[Trigger Approval<br>Workflow]
-    ApprovalRequired -->|No| PublishUpdate[Publish Updated<br>Assessment]
+    ApprovalRequired -->|Yes| TriggerApproval["Trigger Approval<br>Workflow"]
+    ApprovalRequired -->|No| PublishUpdate["Publish Updated<br>Assessment"]
     
-    TriggerApproval --> AwaitApproval[Await Stakeholder<br>Approval]
+    TriggerApproval --> AwaitApproval["Await Stakeholder<br>Approval"]
     AwaitApproval --> PublishUpdate
     
     PublishUpdate --> LogChange
@@ -846,83 +846,83 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    Start([Integration<br>Configuration]) --> SelectPlatform{Select Integration<br>Platform}
+    Start(["Integration<br>Configuration"]) --> SelectPlatform{"Select Integration<br>Platform"}
     
-    SelectPlatform -->|SIEM| ConfigureSIEM[Configure SIEM<br>Connection]
-    SelectPlatform -->|GRC| ConfigureGRC[Configure GRC<br>Connection]
-    SelectPlatform -->|ITSM| ConfigureITSM[Configure ITSM<br>Connection]
-    SelectPlatform -->|Vulnerability Scanner| ConfigureScanner[Configure Scanner<br>Connection]
+    SelectPlatform -->|SIEM| ConfigureSIEM["Configure SIEM<br>Connection"]
+    SelectPlatform -->|GRC| ConfigureGRC["Configure GRC<br>Connection"]
+    SelectPlatform -->|ITSM| ConfigureITSM["Configure ITSM<br>Connection"]
+    SelectPlatform -->|Vulnerability Scanner| ConfigureScanner["Configure Scanner<br>Connection"]
     
-    ConfigureSIEM --> AuthSetup[Setup OAuth2/API Key<br>Authentication]
+    ConfigureSIEM --> AuthSetup["Setup OAuth2/API Key<br>Authentication"]
     ConfigureGRC --> AuthSetup
     ConfigureITSM --> AuthSetup
     ConfigureScanner --> AuthSetup
     
-    AuthSetup --> TestConnection[Test Connection<br>to Platform]
-    TestConnection --> ConnValid{Connection<br>Valid?}
+    AuthSetup --> TestConnection["Test Connection<br>to Platform"]
+    TestConnection --> ConnValid{"Connection<br>Valid?"}
     
-    ConnValid -->|No| ShowError[Display Error<br>Message]
+    ConnValid -->|No| ShowError["Display Error<br>Message"]
     ShowError --> RetryConfig[Retry Configuration]
     RetryConfig --> AuthSetup
     
-    ConnValid -->|Yes| ConfigureSync[Configure Sync<br>Settings]
-    ConfigureSync --> SelectData[Select Data<br>to Sync]
+    ConnValid -->|Yes| ConfigureSync["Configure Sync<br>Settings"]
+    ConfigureSync --> SelectData["Select Data<br>to Sync"]
     
-    SelectData --> InboundFlow[Configure Inbound<br>Data Flow]
-    SelectData --> OutboundFlow[Configure Outbound<br>Data Flow]
+    SelectData --> InboundFlow["Configure Inbound<br>Data Flow"]
+    SelectData --> OutboundFlow["Configure Outbound<br>Data Flow"]
     
-    InboundFlow --> InboundType{Data<br>Type?}
+    InboundFlow --> InboundType{"Data<br>Type?"}
     
-    InboundType -->|Security Events| MapEvents[Map to Security<br>Metrics]
-    InboundType -->|Vulnerabilities| MapVulns[Map to Gap<br>Analysis]
-    InboundType -->|Compliance Evidence| MapEvidence[Map to Framework<br>Controls]
-    InboundType -->|Asset Inventory| MapAssets[Map to Context<br>Model]
+    InboundType -->|Security Events| MapEvents["Map to Security<br>Metrics"]
+    InboundType -->|Vulnerabilities| MapVulns["Map to Gap<br>Analysis"]
+    InboundType -->|Compliance Evidence| MapEvidence["Map to Framework<br>Controls"]
+    InboundType -->|Asset Inventory| MapAssets["Map to Context<br>Model"]
     
-    MapEvents --> TransformInbound[Transform to CIA CM<br>Data Model]
+    MapEvents --> TransformInbound["Transform to CIA CM<br>Data Model"]
     MapVulns --> TransformInbound
     MapEvidence --> TransformInbound
     MapAssets --> TransformInbound
     
-    TransformInbound --> ValidateInbound[Validate Data<br>Quality]
-    ValidateInbound --> StoreInbound[Store in DynamoDB<br>Integration Table]
+    TransformInbound --> ValidateInbound["Validate Data<br>Quality"]
+    ValidateInbound --> StoreInbound["Store in DynamoDB<br>Integration Table"]
     
-    StoreInbound --> TriggerReeval[Trigger Re-evaluation<br>if Needed]
-    TriggerReeval --> InboundComplete[Inbound Sync<br>Complete]
+    StoreInbound --> TriggerReeval["Trigger Re-evaluation<br>if Needed"]
+    TriggerReeval --> InboundComplete["Inbound Sync<br>Complete"]
     
-    OutboundFlow --> OutboundType{Data<br>Type?}
+    OutboundFlow --> OutboundType{"Data<br>Type?"}
     
-    OutboundType -->|Assessment Results| PackageAssessment[Package Assessment<br>Data]
-    OutboundType -->|Recommendations| PackageRecs[Package Prioritized<br>Recommendations]
-    OutboundType -->|Gap Analysis| PackageGaps[Package Gap Analysis<br>Results]
-    OutboundType -->|Compliance Status| PackageCompliance[Package Framework<br>Mapping]
+    OutboundType -->|Assessment Results| PackageAssessment["Package Assessment<br>Data"]
+    OutboundType -->|Recommendations| PackageRecs["Package Prioritized<br>Recommendations"]
+    OutboundType -->|Gap Analysis| PackageGaps["Package Gap Analysis<br>Results"]
+    OutboundType -->|Compliance Status| PackageCompliance["Package Framework<br>Mapping"]
     
-    PackageAssessment --> TransformOutbound[Transform to Platform<br>Data Model]
+    PackageAssessment --> TransformOutbound["Transform to Platform<br>Data Model"]
     PackageRecs --> TransformOutbound
     PackageGaps --> TransformOutbound
     PackageCompliance --> TransformOutbound
     
-    TransformOutbound --> ValidateOutbound[Validate Against<br>API Schema]
-    ValidateOutbound --> SendToPlat[Send to Platform<br>via REST/GraphQL]
+    TransformOutbound --> ValidateOutbound["Validate Against<br>API Schema"]
+    ValidateOutbound --> SendToPlat["Send to Platform<br>via REST/GraphQL"]
     
-    SendToPlat --> PlatformResponse{Platform<br>Response?}
+    SendToPlat --> PlatformResponse{"Platform<br>Response?"}
     
-    PlatformResponse -->|Success| LogSuccess[Log Successful<br>Sync]
-    PlatformResponse -->|Error| HandleError[Handle Error<br>with Retry]
-    HandleError --> RetryLogic[Apply Exponential<br>Backoff]
+    PlatformResponse -->|Success| LogSuccess["Log Successful<br>Sync"]
+    PlatformResponse -->|Error| HandleError["Handle Error<br>with Retry"]
+    HandleError --> RetryLogic["Apply Exponential<br>Backoff"]
     RetryLogic --> SendToPlat
     
-    LogSuccess --> OutboundComplete[Outbound Sync<br>Complete]
+    LogSuccess --> OutboundComplete["Outbound Sync<br>Complete"]
     
-    InboundComplete --> EnableSchedule[Enable Scheduled<br>Sync]
+    InboundComplete --> EnableSchedule["Enable Scheduled<br>Sync"]
     OutboundComplete --> EnableSchedule
     
-    EnableSchedule --> ScheduleType{Sync<br>Frequency?}
+    EnableSchedule --> ScheduleType{"Sync<br>Frequency?"}
     
-    ScheduleType -->|Real-Time| SetupWebhook[Setup Webhook<br>Listeners]
-    ScheduleType -->|Hourly| ScheduleHourly[Schedule Hourly<br>EventBridge Rule]
-    ScheduleType -->|Daily| ScheduleDaily[Schedule Daily<br>EventBridge Rule]
+    ScheduleType -->|Real-Time| SetupWebhook["Setup Webhook<br>Listeners"]
+    ScheduleType -->|Hourly| ScheduleHourly["Schedule Hourly<br>EventBridge Rule"]
+    ScheduleType -->|Daily| ScheduleDaily["Schedule Daily<br>EventBridge Rule"]
     
-    SetupWebhook --> MonitorSync[Monitor Sync<br>Health]
+    SetupWebhook --> MonitorSync["Monitor Sync<br>Health"]
     ScheduleHourly --> MonitorSync
     ScheduleDaily --> MonitorSync
     
@@ -970,87 +970,87 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    Start([Report<br>Request]) --> TriggerType{Trigger<br>Type?}
+    Start(["Report<br>Request"]) --> TriggerType{"Trigger<br>Type?"}
     
-    TriggerType -->|Scheduled| ScheduledReport[Scheduled Report<br>Generation]
-    TriggerType -->|On-Demand| OnDemandReport[User-Initiated<br>Report]
-    TriggerType -->|Event-Driven| EventReport[Event-Triggered<br>Report]
+    TriggerType -->|Scheduled| ScheduledReport["Scheduled Report<br>Generation"]
+    TriggerType -->|On-Demand| OnDemandReport["User-Initiated<br>Report"]
+    TriggerType -->|Event-Driven| EventReport["Event-Triggered<br>Report"]
     
-    ScheduledReport --> LoadTemplate[Load Report<br>Template]
-    OnDemandReport --> SelectTemplate[User Selects<br>Template]
+    ScheduledReport --> LoadTemplate["Load Report<br>Template"]
+    OnDemandReport --> SelectTemplate["User Selects<br>Template"]
     EventReport --> LoadTemplate
     
     SelectTemplate --> LoadTemplate
     
-    LoadTemplate --> TemplateType{Template<br>Type?}
+    LoadTemplate --> TemplateType{"Template<br>Type?"}
     
-    TemplateType -->|Executive Summary| ExecTemplate[Executive Dashboard<br>Template]
-    TemplateType -->|Technical Detail| TechTemplate[Technical Assessment<br>Template]
-    TemplateType -->|Compliance Matrix| CompTemplate[Framework Compliance<br>Template]
-    TemplateType -->|Audit Report| AuditTemplate[Audit Evidence<br>Template]
-    TemplateType -->|Custom| CustomTemplate[Custom User<br>Template]
+    TemplateType -->|Executive Summary| ExecTemplate["Executive Dashboard<br>Template"]
+    TemplateType -->|Technical Detail| TechTemplate["Technical Assessment<br>Template"]
+    TemplateType -->|Compliance Matrix| CompTemplate["Framework Compliance<br>Template"]
+    TemplateType -->|Audit Report| AuditTemplate["Audit Evidence<br>Template"]
+    TemplateType -->|Custom| CustomTemplate["Custom User<br>Template"]
     
-    ExecTemplate --> GatherData[Gather Assessment<br>Data]
+    ExecTemplate --> GatherData["Gather Assessment<br>Data"]
     TechTemplate --> GatherData
     CompTemplate --> GatherData
     AuditTemplate --> GatherData
     CustomTemplate --> GatherData
     
-    GatherData --> DataSources{Data<br>Sources}
+    GatherData --> DataSources{"Data<br>Sources"}
     
-    DataSources -->|Current Assessment| FetchAssessment[Fetch Latest<br>Assessment]
-    DataSources -->|Historical Trend| FetchHistory[Fetch Historical<br>Data]
-    DataSources -->|Integration Data| FetchIntegration[Fetch External<br>Platform Data]
-    DataSources -->|Benchmark Data| FetchBenchmark[Fetch Industry<br>Benchmarks]
+    DataSources -->|Current Assessment| FetchAssessment["Fetch Latest<br>Assessment"]
+    DataSources -->|Historical Trend| FetchHistory["Fetch Historical<br>Data"]
+    DataSources -->|Integration Data| FetchIntegration["Fetch External<br>Platform Data"]
+    DataSources -->|Benchmark Data| FetchBenchmark["Fetch Industry<br>Benchmarks"]
     
-    FetchAssessment --> AggregateData[Aggregate All<br>Data Sources]
+    FetchAssessment --> AggregateData["Aggregate All<br>Data Sources"]
     FetchHistory --> AggregateData
     FetchIntegration --> AggregateData
     FetchBenchmark --> AggregateData
     
-    AggregateData --> ApplyFilters[Apply Stakeholder-<br>Specific Filters]
-    ApplyFilters --> GenerateCharts[Generate Charts<br>and Visualizations]
+    AggregateData --> ApplyFilters["Apply Stakeholder-<br>Specific Filters"]
+    ApplyFilters --> GenerateCharts["Generate Charts<br>and Visualizations"]
     
-    GenerateCharts --> CompileReport[Compile Report<br>Sections]
-    CompileReport --> AddMetadata[Add Metadata<br>and Signatures]
+    GenerateCharts --> CompileReport["Compile Report<br>Sections"]
+    CompileReport --> AddMetadata["Add Metadata<br>and Signatures"]
     
-    AddMetadata --> FormatOutput{Output<br>Format?}
+    AddMetadata --> FormatOutput{"Output<br>Format?"}
     
-    FormatOutput -->|PDF| GeneratePDF[Generate PDF<br>with Branding]
-    FormatOutput -->|Word| GenerateWord[Generate Word<br>Document]
-    FormatOutput -->|Excel| GenerateExcel[Generate Excel<br>Workbook]
-    FormatOutput -->|HTML| GenerateHTML[Generate Interactive<br>HTML]
-    FormatOutput -->|JSON| GenerateJSON[Generate JSON<br>API Export]
+    FormatOutput -->|PDF| GeneratePDF["Generate PDF<br>with Branding"]
+    FormatOutput -->|Word| GenerateWord["Generate Word<br>Document"]
+    FormatOutput -->|Excel| GenerateExcel["Generate Excel<br>Workbook"]
+    FormatOutput -->|HTML| GenerateHTML["Generate Interactive<br>HTML"]
+    FormatOutput -->|JSON| GenerateJSON["Generate JSON<br>API Export"]
     
-    GeneratePDF --> QualityCheck[Perform Quality<br>Check]
+    GeneratePDF --> QualityCheck["Perform Quality<br>Check"]
     GenerateWord --> QualityCheck
     GenerateExcel --> QualityCheck
     GenerateHTML --> QualityCheck
     GenerateJSON --> QualityCheck
     
-    QualityCheck --> QCResult{Quality<br>Check Pass?}
+    QualityCheck --> QCResult{"Quality<br>Check Pass?"}
     
-    QCResult -->|Pass| StoreReport[Store Report in<br>S3 Bucket]
-    QCResult -->|Fail| LogError[Log Generation<br>Error]
-    LogError --> NotifyAdmin[Notify Admin<br>of Failure]
+    QCResult -->|Pass| StoreReport["Store Report in<br>S3 Bucket"]
+    QCResult -->|Fail| LogError["Log Generation<br>Error"]
+    LogError --> NotifyAdmin["Notify Admin<br>of Failure"]
     
-    StoreReport --> GenerateLink[Generate Signed<br>Download URL]
-    GenerateLink --> DistributeReport[Distribute Report<br>to Stakeholders]
+    StoreReport --> GenerateLink["Generate Signed<br>Download URL"]
+    GenerateLink --> DistributeReport["Distribute Report<br>to Stakeholders"]
     
-    DistributeReport --> DistMethod{Distribution<br>Method?}
+    DistributeReport --> DistMethod{"Distribution<br>Method?"}
     
-    DistMethod -->|Email| SendEmail[Send via SES<br>with Attachment]
-    DistMethod -->|Portal| PublishPortal[Publish to<br>User Portal]
-    DistMethod -->|API| PublishAPI[Expose via<br>API Endpoint]
-    DistMethod -->|Integration| PushExternal[Push to External<br>Platform]
+    DistMethod -->|Email| SendEmail["Send via SES<br>with Attachment"]
+    DistMethod -->|Portal| PublishPortal["Publish to<br>User Portal"]
+    DistMethod -->|API| PublishAPI["Expose via<br>API Endpoint"]
+    DistMethod -->|Integration| PushExternal["Push to External<br>Platform"]
     
-    SendEmail --> LogDistribution[Log Distribution<br>Success]
+    SendEmail --> LogDistribution["Log Distribution<br>Success"]
     PublishPortal --> LogDistribution
     PublishAPI --> LogDistribution
     PushExternal --> LogDistribution
     
-    LogDistribution --> SetRetention[Apply Retention<br>Policy]
-    SetRetention --> ScheduleArchive[Schedule Archive<br>to Glacier]
+    LogDistribution --> SetRetention["Apply Retention<br>Policy"]
+    SetRetention --> ScheduleArchive["Schedule Archive<br>to Glacier"]
     
     ScheduleArchive --> End([End])
     NotifyAdmin --> End
@@ -1100,90 +1100,90 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    Start([Event<br>Occurs]) --> EventType{Event<br>Type?}
+    Start(["Event<br>Occurs"]) --> EventType{"Event<br>Type?"}
     
-    EventType -->|Critical Finding| CriticalEvent[Critical Security<br>Finding]
-    EventType -->|Assessment Complete| AssessmentEvent[Assessment<br>Completed]
-    EventType -->|Gap Identified| GapEvent[Compliance Gap<br>Detected]
-    EventType -->|Approval Needed| ApprovalEvent[Approval<br>Required]
-    EventType -->|Deadline Approaching| DeadlineEvent[Remediation Deadline<br>Approaching]
+    EventType -->|Critical Finding| CriticalEvent["Critical Security<br>Finding"]
+    EventType -->|Assessment Complete| AssessmentEvent["Assessment<br>Completed"]
+    EventType -->|Gap Identified| GapEvent["Compliance Gap<br>Detected"]
+    EventType -->|Approval Needed| ApprovalEvent["Approval<br>Required"]
+    EventType -->|Deadline Approaching| DeadlineEvent["Remediation Deadline<br>Approaching"]
     
-    CriticalEvent --> DetermineSeverity[Determine Severity<br>Level]
+    CriticalEvent --> DetermineSeverity["Determine Severity<br>Level"]
     AssessmentEvent --> DetermineSeverity
     GapEvent --> DetermineSeverity
     ApprovalEvent --> DetermineSeverity
     DeadlineEvent --> DetermineSeverity
     
-    DetermineSeverity --> SeverityLevel{Severity<br>Level?}
+    DetermineSeverity --> SeverityLevel{"Severity<br>Level?"}
     
-    SeverityLevel -->|Critical| P1Response[P1: Critical<br>Response Required]
-    SeverityLevel -->|High| P2Response[P2: High Priority<br>Action Needed]
-    SeverityLevel -->|Medium| P3Response[P3: Medium Priority<br>Review Requested]
-    SeverityLevel -->|Low| P4Response[P4: Informational<br>FYI Only]
+    SeverityLevel -->|Critical| P1Response["P1: Critical<br>Response Required"]
+    SeverityLevel -->|High| P2Response["P2: High Priority<br>Action Needed"]
+    SeverityLevel -->|Medium| P3Response["P3: Medium Priority<br>Review Requested"]
+    SeverityLevel -->|Low| P4Response["P4: Informational<br>FYI Only"]
     
-    P1Response --> IdentifyRecipients[Identify Notification<br>Recipients]
+    P1Response --> IdentifyRecipients["Identify Notification<br>Recipients"]
     P2Response --> IdentifyRecipients
     P3Response --> IdentifyRecipients
     P4Response --> IdentifyRecipients
     
-    IdentifyRecipients --> RecipientRoles{Recipient<br>Roles?}
+    IdentifyRecipients --> RecipientRoles{"Recipient<br>Roles?"}
     
-    RecipientRoles -->|Primary Owner| PrimaryList[Build Primary<br>Recipient List]
-    RecipientRoles -->|Secondary Contact| SecondaryList[Build Secondary<br>Recipient List]
-    RecipientRoles -->|Stakeholder| StakeholderList[Build Stakeholder<br>Notification List]
-    RecipientRoles -->|Escalation Path| EscalationList[Build Escalation<br>Chain]
+    RecipientRoles -->|Primary Owner| PrimaryList["Build Primary<br>Recipient List"]
+    RecipientRoles -->|Secondary Contact| SecondaryList["Build Secondary<br>Recipient List"]
+    RecipientRoles -->|Stakeholder| StakeholderList["Build Stakeholder<br>Notification List"]
+    RecipientRoles -->|Escalation Path| EscalationList["Build Escalation<br>Chain"]
     
-    PrimaryList --> SelectChannels[Select Notification<br>Channels]
+    PrimaryList --> SelectChannels["Select Notification<br>Channels"]
     SecondaryList --> SelectChannels
     StakeholderList --> SelectChannels
     EscalationList --> SelectChannels
     
-    SelectChannels --> ChannelStrategy{Channel<br>Strategy?}
+    SelectChannels --> ChannelStrategy{"Channel<br>Strategy?"}
     
-    ChannelStrategy -->|Critical| MultiChannel[Multi-Channel<br>Broadcast]
-    ChannelStrategy -->|Normal| PrimaryChannel[Primary Channel<br>Only]
+    ChannelStrategy -->|Critical| MultiChannel["Multi-Channel<br>Broadcast"]
+    ChannelStrategy -->|Normal| PrimaryChannel["Primary Channel<br>Only"]
     
-    MultiChannel --> SendEmail[Send Email via<br>AWS SES]
-    MultiChannel --> SendSMS[Send SMS via<br>AWS SNS]
-    MultiChannel --> SendPush[Send Push via<br>Mobile App]
-    MultiChannel --> SendSlack[Send Slack via<br>Webhook]
-    MultiChannel --> SendTeams[Send Teams via<br>Webhook]
+    MultiChannel --> SendEmail["Send Email via<br>AWS SES"]
+    MultiChannel --> SendSMS["Send SMS via<br>AWS SNS"]
+    MultiChannel --> SendPush["Send Push via<br>Mobile App"]
+    MultiChannel --> SendSlack["Send Slack via<br>Webhook"]
+    MultiChannel --> SendTeams["Send Teams via<br>Webhook"]
     
     PrimaryChannel --> SendEmail
     
-    SendEmail --> TrackDelivery[Track Delivery<br>Status]
+    SendEmail --> TrackDelivery["Track Delivery<br>Status"]
     SendSMS --> TrackDelivery
     SendPush --> TrackDelivery
     SendSlack --> TrackDelivery
     SendTeams --> TrackDelivery
     
-    TrackDelivery --> DeliverySuccess{Delivery<br>Successful?}
+    TrackDelivery --> DeliverySuccess{"Delivery<br>Successful?"}
     
-    DeliverySuccess -->|Yes| LogNotification[Log Notification<br>Sent]
-    DeliverySuccess -->|No| RetryDelivery[Retry with<br>Exponential Backoff]
+    DeliverySuccess -->|Yes| LogNotification["Log Notification<br>Sent"]
+    DeliverySuccess -->|No| RetryDelivery["Retry with<br>Exponential Backoff"]
     
-    RetryDelivery --> RetryCount{Retry<br>Attempts < 3?}
+    RetryDelivery --> RetryCount{"Retry<br>Attempts < 3?"}
     RetryCount -->|Yes| TrackDelivery
-    RetryCount -->|No| EscalateFailure[Escalate Delivery<br>Failure]
+    RetryCount -->|No| EscalateFailure["Escalate Delivery<br>Failure"]
     
-    LogNotification --> WaitForAck[Wait for<br>Acknowledgment]
+    LogNotification --> WaitForAck["Wait for<br>Acknowledgment"]
     
-    WaitForAck --> AckReceived{Acknowledgment<br>Received?}
+    WaitForAck --> AckReceived{"Acknowledgment<br>Received?"}
     
-    AckReceived -->|Yes| RecordAck[Record Acknowledgment<br>Timestamp]
-    AckReceived -->|No After Timeout| CheckEscalation{Escalation<br>Required?}
+    AckReceived -->|Yes| RecordAck["Record Acknowledgment<br>Timestamp"]
+    AckReceived -->|No After Timeout| CheckEscalation{"Escalation<br>Required?"}
     
-    CheckEscalation -->|Yes| NotifyEscalation[Notify Escalation<br>Contact]
-    CheckEscalation -->|No| RecordNoAck[Record No<br>Acknowledgment]
+    CheckEscalation -->|Yes| NotifyEscalation["Notify Escalation<br>Contact"]
+    CheckEscalation -->|No| RecordNoAck["Record No<br>Acknowledgment"]
     
-    NotifyEscalation --> EscalationAck[Wait for Escalation<br>Acknowledgment]
+    NotifyEscalation --> EscalationAck["Wait for Escalation<br>Acknowledgment"]
     EscalationAck --> RecordAck
     
-    RecordAck --> UpdateMetrics[Update Notification<br>Metrics]
+    RecordAck --> UpdateMetrics["Update Notification<br>Metrics"]
     RecordNoAck --> UpdateMetrics
     EscalateFailure --> UpdateMetrics
     
-    UpdateMetrics --> ArchiveNotif[Archive Notification<br>to DynamoDB]
+    UpdateMetrics --> ArchiveNotif["Archive Notification<br>to DynamoDB"]
     ArchiveNotif --> End([End])
     
     classDef start fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#ffffff
@@ -1232,88 +1232,88 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    Start([Assessment<br>Ready for Approval]) --> DetermineApproval[Determine Approval<br>Requirements]
+    Start(["Assessment<br>Ready for Approval"]) --> DetermineApproval["Determine Approval<br>Requirements"]
     
-    DetermineApproval --> ApprovalType{Assessment<br>Criticality?}
+    DetermineApproval --> ApprovalType{"Assessment<br>Criticality?"}
     
-    ApprovalType -->|High Criticality| MultiStageApproval[Multi-Stage<br>Approval Required]
-    ApprovalType -->|Medium Criticality| SingleApproval[Single Approver<br>Required]
-    ApprovalType -->|Low Criticality| AutoApprove[Auto-Approve with<br>Notification]
+    ApprovalType -->|High Criticality| MultiStageApproval["Multi-Stage<br>Approval Required"]
+    ApprovalType -->|Medium Criticality| SingleApproval["Single Approver<br>Required"]
+    ApprovalType -->|Low Criticality| AutoApprove["Auto-Approve with<br>Notification"]
     
-    AutoApprove --> PublishAssessment[Publish Approved<br>Assessment]
+    AutoApprove --> PublishAssessment["Publish Approved<br>Assessment"]
     
-    SingleApproval --> IdentifyApprover[Identify Primary<br>Approver]
-    IdentifyApprover --> NotifyApprover[Notify Approver<br>via Email]
+    SingleApproval --> IdentifyApprover["Identify Primary<br>Approver"]
+    IdentifyApprover --> NotifyApprover["Notify Approver<br>via Email"]
     
-    MultiStageApproval --> DefineStages[Define Approval<br>Stages]
-    DefineStages --> Stage1[Stage 1: Security<br>Team Review]
+    MultiStageApproval --> DefineStages["Define Approval<br>Stages"]
+    DefineStages --> Stage1["Stage 1: Security<br>Team Review"]
     
-    Stage1 --> NotifyStage1[Notify Stage 1<br>Reviewers]
-    NotifyApprover --> WaitForReview[Wait for<br>Review]
+    Stage1 --> NotifyStage1["Notify Stage 1<br>Reviewers"]
+    NotifyApprover --> WaitForReview["Wait for<br>Review"]
     NotifyStage1 --> WaitForReview
     
-    WaitForReview --> ReviewAction{Reviewer<br>Action?}
+    WaitForReview --> ReviewAction{"Reviewer<br>Action?"}
     
-    ReviewAction -->|Approved| RecordApproval[Record Approval<br>Timestamp]
-    ReviewAction -->|Rejected| RecordRejection[Record Rejection<br>with Comments]
-    ReviewAction -->|Request Changes| RecordChangeReq[Record Change<br>Request]
-    ReviewAction -->|Timeout| CheckTimeout[Check Timeout<br>Policy]
+    ReviewAction -->|Approved| RecordApproval["Record Approval<br>Timestamp"]
+    ReviewAction -->|Rejected| RecordRejection["Record Rejection<br>with Comments"]
+    ReviewAction -->|Request Changes| RecordChangeReq["Record Change<br>Request"]
+    ReviewAction -->|Timeout| CheckTimeout["Check Timeout<br>Policy"]
     
-    CheckTimeout --> TimeoutAction{Timeout<br>Action?}
-    TimeoutAction -->|Auto-Escalate| EscalateReview[Escalate to Next<br>Level]
-    TimeoutAction -->|Reassign| ReassignReviewer[Reassign to<br>Backup Reviewer]
+    CheckTimeout --> TimeoutAction{"Timeout<br>Action?"}
+    TimeoutAction -->|Auto-Escalate| EscalateReview["Escalate to Next<br>Level"]
+    TimeoutAction -->|Reassign| ReassignReviewer["Reassign to<br>Backup Reviewer"]
     
-    EscalateReview --> NotifyEscalation[Notify Escalation<br>Reviewer]
+    EscalateReview --> NotifyEscalation["Notify Escalation<br>Reviewer"]
     NotifyEscalation --> WaitForReview
     
-    ReassignReviewer --> NotifyBackup[Notify Backup<br>Reviewer]
+    ReassignReviewer --> NotifyBackup["Notify Backup<br>Reviewer"]
     NotifyBackup --> WaitForReview
     
-    RecordRejection --> NotifySubmitter[Notify Assessment<br>Owner]
+    RecordRejection --> NotifySubmitter["Notify Assessment<br>Owner"]
     RecordChangeReq --> NotifySubmitter
     
-    NotifySubmitter --> SubmitterAction{Submitter<br>Response?}
+    NotifySubmitter --> SubmitterAction{"Submitter<br>Response?"}
     
-    SubmitterAction -->|Revise| ReviseAssessment[Revise Assessment<br>per Feedback]
-    SubmitterAction -->|Appeal| InitiateAppeal[Initiate Appeal<br>Process]
+    SubmitterAction -->|Revise| ReviseAssessment["Revise Assessment<br>per Feedback"]
+    SubmitterAction -->|Appeal| InitiateAppeal["Initiate Appeal<br>Process"]
     SubmitterAction -->|Withdraw| WithdrawAssessment[Withdraw Assessment]
     
-    ReviseAssessment --> ResubmitCheck[Resubmit for<br>Approval]
+    ReviseAssessment --> ResubmitCheck["Resubmit for<br>Approval"]
     ResubmitCheck --> WaitForReview
     
-    InitiateAppeal --> AppealReviewer[Assign Appeal<br>Reviewer]
-    AppealReviewer --> AppealDecision[Review Appeal<br>Decision]
-    AppealDecision --> FinalDecision{Appeal<br>Outcome?}
+    InitiateAppeal --> AppealReviewer["Assign Appeal<br>Reviewer"]
+    AppealReviewer --> AppealDecision["Review Appeal<br>Decision"]
+    AppealDecision --> FinalDecision{"Appeal<br>Outcome?"}
     
     FinalDecision -->|Overturned| RecordApproval
     FinalDecision -->|Upheld| WithdrawAssessment
     
-    WithdrawAssessment --> ArchiveWithdrawn[Archive Withdrawn<br>Assessment]
+    WithdrawAssessment --> ArchiveWithdrawn["Archive Withdrawn<br>Assessment"]
     ArchiveWithdrawn --> End([End])
     
-    RecordApproval --> CheckStages{More Approval<br>Stages?}
+    RecordApproval --> CheckStages{"More Approval<br>Stages?"}
     
-    CheckStages -->|Yes| NextStage[Proceed to Next<br>Stage]
-    CheckStages -->|No| FinalizeApproval[Finalize Complete<br>Approval]
+    CheckStages -->|Yes| NextStage["Proceed to Next<br>Stage"]
+    CheckStages -->|No| FinalizeApproval["Finalize Complete<br>Approval"]
     
-    NextStage --> Stage2{Which<br>Stage?}
-    Stage2 -->|Stage 2| ComplianceReview[Stage 2: Compliance<br>Team Review]
-    Stage2 -->|Stage 3| ExecutiveReview[Stage 3: Executive<br>Approval]
+    NextStage --> Stage2{"Which<br>Stage?"}
+    Stage2 -->|Stage 2| ComplianceReview["Stage 2: Compliance<br>Team Review"]
+    Stage2 -->|Stage 3| ExecutiveReview["Stage 3: Executive<br>Approval"]
     
-    ComplianceReview --> NotifyStage2[Notify Stage 2<br>Reviewers]
+    ComplianceReview --> NotifyStage2["Notify Stage 2<br>Reviewers"]
     NotifyStage2 --> WaitForReview
     
-    ExecutiveReview --> NotifyStage3[Notify Stage 3<br>Approvers]
+    ExecutiveReview --> NotifyStage3["Notify Stage 3<br>Approvers"]
     NotifyStage3 --> WaitForReview
     
-    FinalizeApproval --> GenerateCertificate[Generate Approval<br>Certificate]
-    GenerateCertificate --> DigitalSignature[Apply Digital<br>Signatures]
+    FinalizeApproval --> GenerateCertificate["Generate Approval<br>Certificate"]
+    GenerateCertificate --> DigitalSignature["Apply Digital<br>Signatures"]
     
     DigitalSignature --> PublishAssessment
-    PublishAssessment --> NotifyStakeholders[Notify All<br>Stakeholders]
+    PublishAssessment --> NotifyStakeholders["Notify All<br>Stakeholders"]
     
-    NotifyStakeholders --> UpdateAuditTrail[Update Audit<br>Trail]
-    UpdateAuditTrail --> ArchiveApproval[Archive Approval<br>Documentation]
+    NotifyStakeholders --> UpdateAuditTrail["Update Audit<br>Trail"]
+    UpdateAuditTrail --> ArchiveApproval["Archive Approval<br>Documentation"]
     
     ArchiveApproval --> End
     

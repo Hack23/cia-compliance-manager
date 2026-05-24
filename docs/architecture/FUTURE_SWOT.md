@@ -312,7 +312,7 @@ flowchart LR
         MS3[User Experience Focus]
         MS4[Implementation Support]
         MS5[Phased Capability Introduction]
-        MS6[Education & Thought Leadership]
+        MS6["Education & Thought Leadership"]
     end
     
     CR1 & CR2 & CR3 --> MS1

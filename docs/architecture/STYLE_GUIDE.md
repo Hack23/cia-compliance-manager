@@ -65,23 +65,23 @@ Use this enhanced color palette for all diagrams:
 ```mermaid
 graph TD
     subgraph "CIA Triad Colors"
-        C1[Confidentiality<br>#7B1FA2]
-        I1[Integrity<br>#2E7D32]
-        A1[Availability<br>#1565C0]
+        C1["Confidentiality<br>#7B1FA2"]
+        I1["Integrity<br>#2E7D32"]
+        A1["Availability<br>#1565C0"]
     end
     
     subgraph "Architectural Elements"
-        A2[Core Components<br>#455A64]
-        A3[UI Elements<br>#D32F2F]
-        A4[Services<br>#2196F3]
-        A5[Data Elements<br>#7B1FA2]
+        A2["Core Components<br>#455A64"]
+        A3["UI Elements<br>#D32F2F"]
+        A4["Services<br>#2196F3"]
+        A5["Data Elements<br>#7B1FA2"]
     end
     
     subgraph "Status Colors"
-        S1[Success<br>#4CAF50]
-        S2[Warning<br>#FF9800]
-        S3[Critical<br>#D32F2F]
-        S4[Neutral<br>#9E9E9E]
+        S1["Success<br>#4CAF50"]
+        S2["Warning<br>#FF9800"]
+        S3["Critical<br>#D32F2F"]
+        S4["Neutral<br>#9E9E9E"]
     end
     
     style C1 fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:white
@@ -104,11 +104,11 @@ graph TD
 ```mermaid
 graph TD
     subgraph "Business & Value Colors"
-        B1[Financial<br>#FFC107]
-        B2[Operational<br>#2196F3]
-        B3[Reputational<br>#7B1FA2]
-        B4[Strategic<br>#2E7D32]
-        B5[Regulatory<br>#D32F2F]
+        B1["Financial<br>#FFC107"]
+        B2["Operational<br>#2196F3"]
+        B3["Reputational<br>#7B1FA2"]
+        B4["Strategic<br>#2E7D32"]
+        B5["Regulatory<br>#D32F2F"]
     end
     
     style B1 fill:#FFC107,stroke:#FF9800,stroke-width:2px,color:black
@@ -161,10 +161,10 @@ For process flowcharts, use these enhanced styling guidelines:
 
 ```mermaid
 flowchart TD
-    A([Start Assessment]) --> B{Select<br>Security Level}
-    B -->|Basic| C[Configure<br>Low Security]
-    B -->|Enhanced| D[Configure<br>High Security]
-    C --> E[Generate<br>Assessment]
+    A([Start Assessment]) --> B{"Select<br>Security Level"}
+    B -->|Basic| C["Configure<br>Low Security"]
+    B -->|Enhanced| D["Configure<br>High Security"]
+    C --> E["Generate<br>Assessment"]
     D --> E
     E --> F([Complete])
 

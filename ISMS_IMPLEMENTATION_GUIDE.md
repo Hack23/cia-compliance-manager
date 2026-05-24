@@ -63,13 +63,13 @@ CIA Compliance Manager follows Hack23 AB's Secure Development Policy throughout 
 
 ```mermaid
 graph TD
-    A[🏗️ Architecture Design] --> B[🔒 Security Review]
-    B --> C[💻 Secure Coding]
-    C --> D[🧪 Security Testing]
-    D --> E[📦 Secure Build]
-    E --> F[🚀 Secure Deployment]
-    F --> G[📊 Security Monitoring]
-    G --> H[🔄 Continuous Improvement]
+    A["🏗️ Architecture Design"] --> B["🔒 Security Review"]
+    B --> C["💻 Secure Coding"]
+    C --> D["🧪 Security Testing"]
+    D --> E["📦 Secure Build"]
+    E --> F["🚀 Secure Deployment"]
+    F --> G["📊 Security Monitoring"]
+    G --> H["🔄 Continuous Improvement"]
     H --> A
     
     style A fill:#4CAF50,color:#ffffff
@@ -134,10 +134,10 @@ graph TD
 
 ```mermaid
 graph TD
-    A[🧪 Unit Tests<br/>80%+ Coverage] --> B[🔗 Integration Tests<br/>Critical Paths]
-    B --> C[🌐 E2E Tests<br/>User Journeys]
-    C --> D[🔒 Security Tests<br/>SAST/SCA/DAST]
-    D --> E[⚡ Performance Tests<br/>Lighthouse 90+]
+    A["🧪 Unit Tests<br/>80%+ Coverage"] --> B["🔗 Integration Tests<br/>Critical Paths"]
+    B --> C["🌐 E2E Tests<br/>User Journeys"]
+    C --> D["🔒 Security Tests<br/>SAST/SCA/DAST"]
+    D --> E["⚡ Performance Tests<br/>Lighthouse 90+"]
     
     style A fill:#4CAF50,color:#ffffff
     style B fill:#2196F3,color:#ffffff
@@ -319,9 +319,9 @@ gh attestation verify cia-compliance-manager-*.spdx.json \
 
 ```mermaid
 graph LR
-    A[👤 User Browser] -->|HTTPS Only| B[🌐 GitHub Pages CDN]
-    B -->|Static Assets| C[📦 Application Bundle]
-    C -->|API Requests| D[🔒 External APIs]
+    A["👤 User Browser"] -->|HTTPS Only| B["🌐 GitHub Pages CDN"]
+    B -->|Static Assets| C["📦 Application Bundle"]
+    C -->|API Requests| D["🔒 External APIs"]
     
     style A fill:#4CAF50,color:#ffffff
     style B fill:#2196F3,color:#ffffff
@@ -367,17 +367,17 @@ graph LR
 
 ```mermaid
 graph TD
-    A[🔍 Continuous Scanning] --> B{Vulnerability<br/>Detected?}
-    B -->|Yes| C[📊 Severity Assessment]
-    C -->|Critical/High| D[⚡ Immediate Fix]
-    C -->|Medium| E[📅 Scheduled Fix]
-    C -->|Low| F[📋 Backlog]
-    D --> G[🧪 Test Fix]
+    A["🔍 Continuous Scanning"] --> B{"Vulnerability<br/>Detected?"}
+    B -->|Yes| C["📊 Severity Assessment"]
+    C -->|Critical/High| D["⚡ Immediate Fix"]
+    C -->|Medium| E["📅 Scheduled Fix"]
+    C -->|Low| F["📋 Backlog"]
+    D --> G["🧪 Test Fix"]
     E --> G
     F --> G
-    G --> H[🚀 Deploy]
-    H --> I[✅ Verify]
-    B -->|No| J[📊 Report Status]
+    G --> H["🚀 Deploy"]
+    H --> I["✅ Verify"]
+    B -->|No| J["📊 Report Status"]
     
     style A fill:#4CAF50,color:#ffffff
     style D fill:#D32F2F,color:#ffffff
@@ -430,14 +430,14 @@ graph TD
 
 ```mermaid
 graph TD
-    A[📝 Change Request] --> B[👥 Code Review]
-    B --> C[🧪 Automated Tests]
-    C --> D[🔒 Security Checks]
-    D --> E[✅ Approval]
-    E --> F[🔀 Merge to Main]
-    F --> G[📦 Build]
-    G --> H[🚀 Deploy]
-    H --> I[📊 Monitoring]
+    A["📝 Change Request"] --> B["👥 Code Review"]
+    B --> C["🧪 Automated Tests"]
+    C --> D["🔒 Security Checks"]
+    D --> E["✅ Approval"]
+    E --> F["🔀 Merge to Main"]
+    F --> G["📦 Build"]
+    G --> H["🚀 Deploy"]
+    H --> I["📊 Monitoring"]
     
     style A fill:#4CAF50,color:#ffffff
     style B fill:#2196F3,color:#ffffff
@@ -502,14 +502,14 @@ graph TD
 
 ```mermaid
 graph LR
-    A[🚨 Detection] --> B[📞 Report]
-    B --> C[📊 Triage]
-    C --> D[🔍 Investigate]
-    D --> E[🛠️ Contain]
-    E --> F[🔧 Remediate]
-    F --> G[✅ Verify]
-    G --> H[📝 Document]
-    H --> I[📚 Lessons Learned]
+    A["🚨 Detection"] --> B["📞 Report"]
+    B --> C["📊 Triage"]
+    C --> D["🔍 Investigate"]
+    D --> E["🛠️ Contain"]
+    E --> F["🔧 Remediate"]
+    F --> G["✅ Verify"]
+    G --> H["📝 Document"]
+    H --> I["📚 Lessons Learned"]
     
     style A fill:#D32F2F
     style B fill:#FF9800
@@ -568,11 +568,11 @@ graph LR
 
 ```mermaid
 graph TD
-    A[📦 Source Code] -->|Git| B[🔄 GitHub Repository]
-    B -->|Mirror| C[💾 Git Backup]
-    A -->|Build| D[📦 Release Artifacts]
-    D --> E[🔒 GitHub Releases]
-    E -->|SLSA Attestation| F[✅ Verified Backup]
+    A["📦 Source Code"] -->|Git| B["🔄 GitHub Repository"]
+    B -->|Mirror| C["💾 Git Backup"]
+    A -->|Build| D["📦 Release Artifacts"]
+    D --> E["🔒 GitHub Releases"]
+    E -->|SLSA Attestation| F["✅ Verified Backup"]
     
     style A fill:#4CAF50
     style B fill:#2196F3
@@ -621,11 +621,11 @@ graph TD
 
 ```mermaid
 graph LR
-    A[📊 Security KPIs] --> B[🔒 Vulnerability Count]
-    A --> C[⚡ Response Time]
-    A --> D[✅ Test Coverage]
-    A --> E[🚀 Deployment Frequency]
-    A --> F[📦 Dependency Health]
+    A["📊 Security KPIs"] --> B["🔒 Vulnerability Count"]
+    A --> C["⚡ Response Time"]
+    A --> D["✅ Test Coverage"]
+    A --> E["🚀 Deployment Frequency"]
+    A --> F["📦 Dependency Health"]
     
     style A fill:#4CAF50
     style B fill:#D32F2F
@@ -662,14 +662,14 @@ graph LR
 
 ```mermaid
 graph TD
-    A[📦 Dependencies] --> B[🔍 SCA Scanning]
-    B --> C[✅ License Check]
-    C --> D[🔒 Integrity Verification]
-    D --> E[🛡️ Vulnerability Scan]
-    E --> F[📊 Risk Assessment]
+    A["📦 Dependencies"] --> B["🔍 SCA Scanning"]
+    B --> C["✅ License Check"]
+    C --> D["🔒 Integrity Verification"]
+    D --> E["🛡️ Vulnerability Scan"]
+    E --> F["📊 Risk Assessment"]
     F --> G{Approved?}
-    G -->|Yes| H[✅ Use Dependency]
-    G -->|No| I[🚫 Block/Replace]
+    G -->|Yes| H["✅ Use Dependency"]
+    G -->|No| I["🚫 Block/Replace"]
     
     style A fill:#4CAF50
     style B fill:#2196F3
