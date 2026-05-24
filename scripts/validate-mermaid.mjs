@@ -14,7 +14,7 @@
  *   MMDC=/path/to/mmdc node scripts/validate-mermaid.mjs
  *   PUP_CONFIG=/path/to/pup.json node scripts/validate-mermaid.mjs
  *
- * Exit code is the number of broken blocks (0 = all valid).
+ * Exit code is 1 if any broken blocks are found, 0 otherwise.
  */
 import fs from "node:fs";
 import os from "node:os";
@@ -34,15 +34,13 @@ function resolveMmdc() {
 
 function resolvePuppeteerConfig() {
   if (process.env.PUP_CONFIG) return process.env.PUP_CONFIG;
-  const defaultPath = "/tmp/pup-config.json";
-  if (!fs.existsSync(defaultPath)) {
-    const chrome = ["/usr/bin/google-chrome", "/usr/bin/chromium", "/usr/bin/chromium-browser"]
-      .find((p) => fs.existsSync(p));
-    const cfg = { args: ["--no-sandbox", "--disable-setuid-sandbox"] };
-    if (chrome) cfg.executablePath = chrome;
-    fs.writeFileSync(defaultPath, JSON.stringify(cfg));
-  }
-  return defaultPath;
+  const configPath = path.join(os.tmpdir(), `pup-config-${process.pid}.json`);
+  const chrome = ["/usr/bin/google-chrome", "/usr/bin/chromium", "/usr/bin/chromium-browser"]
+    .find((p) => fs.existsSync(p));
+  const cfg = { args: ["--no-sandbox", "--disable-setuid-sandbox"] };
+  if (chrome) cfg.executablePath = chrome;
+  fs.writeFileSync(configPath, JSON.stringify(cfg));
+  return configPath;
 }
 
 const MMDC = resolveMmdc();
@@ -89,6 +87,10 @@ function extractBlocks(content) {
       }
     }
   }
+  // If EOF reached while still inside a mermaid fence, treat as a broken block
+  if (inBlock) {
+    blocks.push({ startLine: startLine + 1, endLine: lines.length, code: buf.join("\n"), unterminated: true });
+  }
   return blocks;
 }
 
@@ -112,31 +114,51 @@ const results = [];
 let totalBlocks = 0;
 let brokenBlocks = 0;
 
-for (const f of files) {
-  const rel = path.relative(REPO_ROOT, f);
-  const content = fs.readFileSync(f, "utf8");
-  const blocks = extractBlocks(content);
-  if (!blocks.length) continue;
-  for (let i = 0; i < blocks.length; i++) {
-    totalBlocks++;
-    const b = blocks[i];
-    const { ok, output } = validate(b.code, scratchDir, totalBlocks);
-    if (!ok) {
-      brokenBlocks++;
-      results.push({
-        file: rel,
-        index: i,
-        startLine: b.startLine,
-        endLine: b.endLine,
-        error: output.split("\n").slice(-40).join("\n"),
-        code: b.code,
-      });
-      console.log(`  BROKEN: ${rel} block#${i} L${b.startLine}-${b.endLine}`);
+try {
+  for (const f of files) {
+    const rel = path.relative(REPO_ROOT, f);
+    const content = fs.readFileSync(f, "utf8");
+    const blocks = extractBlocks(content);
+    if (!blocks.length) continue;
+    for (let i = 0; i < blocks.length; i++) {
+      totalBlocks++;
+      const b = blocks[i];
+      if (b.unterminated) {
+        brokenBlocks++;
+        results.push({
+          file: rel,
+          index: i,
+          startLine: b.startLine,
+          endLine: b.endLine,
+          error: "Unterminated mermaid fence (missing closing ```)",
+          code: b.code.split("\n").slice(0, 5).join("\n"),
+        });
+        console.log(`  BROKEN (unterminated): ${rel} block#${i} L${b.startLine}-${b.endLine}`);
+        continue;
+      }
+      const { ok, output } = validate(b.code, scratchDir, totalBlocks);
+      if (!ok) {
+        brokenBlocks++;
+        results.push({
+          file: rel,
+          index: i,
+          startLine: b.startLine,
+          endLine: b.endLine,
+          error: output.split("\n").slice(-40).join("\n"),
+          code: b.code,
+        });
+        console.log(`  BROKEN: ${rel} block#${i} L${b.startLine}-${b.endLine}`);
+      }
     }
+    process.stdout.write(`${rel}: ${blocks.length} blocks\n`);
   }
-  process.stdout.write(`${rel}: ${blocks.length} blocks\n`);
+} finally {
+  fs.rmSync(scratchDir, { recursive: true, force: true });
+  if (PUP_CONFIG.includes(`pup-config-${process.pid}`)) {
+    fs.rmSync(PUP_CONFIG, { force: true });
+  }
 }
 
 fs.writeFileSync(REPORT_PATH, JSON.stringify({ totalFiles: files.length, totalBlocks, brokenBlocks, results }, null, 2));
 console.log(`\nTotal: ${totalBlocks} blocks, Broken: ${brokenBlocks}. Report: ${REPORT_PATH}`);
-process.exit(brokenBlocks);
+process.exit(brokenBlocks > 0 ? 1 : 0);

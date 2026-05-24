@@ -31,8 +31,7 @@ function slugify(text) {
   //  2. Lowercase
   //  3. Remove characters that aren't word chars, whitespace, or dashes
   //     (emoji and punctuation disappear, but leave the space behind)
-  //  4. Replace runs of whitespace with single dashes
-  //  5. Collapse multiple consecutive dashes to a single dash
+  //  4. Replace each whitespace character with a single dash
   //  Notably we DO NOT trim leading/trailing dashes — GitHub keeps the
   //  leading dash that results from a heading like `## 🎯 Title`.
   return text

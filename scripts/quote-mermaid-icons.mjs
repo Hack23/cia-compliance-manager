@@ -3,7 +3,7 @@
  * Quote-icons pass for mermaid diagrams.
  *
  * For every ```mermaid``` block in every Markdown file, finds flowchart /
- * graph / classDiagram / stateDiagram / sequenceDiagram node labels that
+ * graph node labels that
  *
  *   (a) contain at least one emoji (or other special character that the
  *       mermaid parser dislikes inside an unquoted label, such as `(`,
