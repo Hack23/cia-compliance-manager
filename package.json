@@ -214,7 +214,7 @@
     "postcss": "8.5.15",
     "react": "19.2.6",
     "react-dom": "19.2.6",
-    "react-error-boundary": "6.1.1",
+    "react-error-boundary": "6.1.2",
     "rollup-plugin-visualizer": "7.0.1",
     "start-server-and-test": "3.0.5",
     "tailwindcss": "4.3.0",
