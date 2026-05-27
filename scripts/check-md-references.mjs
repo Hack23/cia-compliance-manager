@@ -12,6 +12,10 @@
 import fs from "node:fs";
 import path from "node:path";
 
+/** Write informational output to stdout (avoids ESLint no-console rule) */
+const log = (...args) => process.stdout.write(args.join(' ') + '\n');
+
+
 const REPO_ROOT = path.resolve(process.argv[2] || process.cwd());
 const SKIP_DIRS = new Set(["node_modules", ".git", "dist", "build", "coverage", ".cache"]);
 
@@ -123,9 +127,9 @@ fs.mkdirSync(reportDir, { recursive: true });
 const reportPath = path.join(reportDir, "md-reference-report.json");
 fs.writeFileSync(reportPath, JSON.stringify({ totalLinks: total, brokenCount: broken.length, broken }, null, 2));
 
-console.warn(`Checked ${total} links/refs across ${files.length} files.`);
-console.warn(`Broken: ${broken.length}`);
-for (const b of broken.slice(0, 200)) console.warn(`  ${b.file}: ${b.link} (${b.reason})`);
-if (broken.length > 200) console.warn(`  ... and ${broken.length - 200} more (see ${reportPath})`);
+log(`Checked ${total} links/refs across ${files.length} files.`);
+log(`Broken: ${broken.length}`);
+for (const b of broken.slice(0, 200)) log(`  ${b.file}: ${b.link} (${b.reason})`);
+if (broken.length > 200) log(`  ... and ${broken.length - 200} more (see ${reportPath})`);
 
 process.exit(broken.length);

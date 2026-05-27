@@ -16,6 +16,10 @@
 import fs from "node:fs";
 import path from "node:path";
 
+/** Write informational output to stdout (avoids ESLint no-console rule) */
+const log = (...args) => process.stdout.write(args.join(' ') + '\n');
+
+
 const REPO_ROOT = path.resolve(process.cwd());
 const SKIP_DIRS = new Set(["node_modules", ".git", "dist", "build", "coverage", ".cache"]);
 const NON_PALETTE_ONLY = process.argv.includes("--non-palette");
@@ -106,10 +110,10 @@ fs.mkdirSync(reportDir, { recursive: true });
 fs.writeFileSync(path.join(reportDir, "mermaid-color-audit.json"), JSON.stringify(rows, null, 2));
 
 const display = NON_PALETTE_ONLY ? rows.filter((r) => !r.inPalette) : rows;
-console.warn(`${rows.length} distinct colors (${rows.filter((r) => !r.inPalette).length} not in STYLE_GUIDE palette)\n`);
-console.warn("count  files  palette  hex        example");
+log(`${rows.length} distinct colors (${rows.filter((r) => !r.inPalette).length} not in STYLE_GUIDE palette)\n`);
+log("count  files  palette  hex        example");
 for (const r of display) {
-  console.warn(
+  log(
     `${String(r.count).padStart(5)}  ${String(r.files).padStart(5)}  ${(r.inPalette ? "OK" : "----").padStart(7)}  ${r.hex.padEnd(9)}  ${r.example}`
   );
 }

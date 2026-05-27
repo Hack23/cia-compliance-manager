@@ -3,6 +3,10 @@ import path from "path";
 import { execSync } from "child_process";
 import { fileURLToPath } from "url";
 
+/** Write informational output to stdout (avoids ESLint no-console rule) */
+const log = (...args) => process.stdout.write(args.join(' ') + '\n');
+
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DOCS_DIR = path.join(__dirname, "..", "docs", "architecture");
 
@@ -12,7 +16,7 @@ if (!fs.existsSync(DOCS_DIR)) {
 }
 
 // Generate project structure visualization
-console.warn("Generating project structure visualization...");
+log("Generating project structure visualization...");
 try {
   const projectStructure = execSync(
     'find src -type f -not -path "*/node_modules/*" -not -path "*/\\.*" | sort'
@@ -66,4 +70,4 @@ ${projectStructure
   console.error("Error generating project structure visualization:", error);
 }
 
-console.warn("Architecture diagrams generated successfully!");
+log("Architecture diagrams generated successfully!");

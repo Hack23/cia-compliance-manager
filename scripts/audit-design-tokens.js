@@ -12,6 +12,10 @@ import { readFileSync } from 'fs';
 import { glob } from 'glob';
 import { relative } from 'path';
 
+/** Write informational output to stdout (avoids ESLint no-console rule) */
+const log = (...args) => process.stdout.write(args.join(' ') + '\n');
+
+
 // Patterns to detect hardcoded values
 const HARDCODED_PATTERNS = [
   {
@@ -104,15 +108,15 @@ function scanFile(filePath) {
  * Main audit function
  */
 async function auditDesignTokens() {
-  console.warn('🔍 Design Token Audit\n');
-  console.warn('Scanning widget files for hardcoded design values...\n');
+  log('🔍 Design Token Audit\n');
+  log('Scanning widget files for hardcoded design values...\n');
 
   // Find all widget files (exclude tests)
   const files = await glob('src/components/widgets/**/*.tsx', {
     ignore: ['**/*.test.tsx', '**/*.spec.tsx']
   });
 
-  console.warn(`Found ${files.length} widget files to scan\n`);
+  log(`Found ${files.length} widget files to scan\n`);
 
   let totalViolations = 0;
   const fileViolations = [];
@@ -136,45 +140,45 @@ async function auditDesignTokens() {
 
   // Print results
   if (totalViolations === 0) {
-    console.warn('✅ No design token violations found!\n');
-    console.warn('All widgets are using design tokens consistently.\n');
+    log('✅ No design token violations found!\n');
+    log('All widgets are using design tokens consistently.\n');
     return;
   }
 
-  console.warn(`❌ Found ${totalViolations} design token violations in ${fileViolations.length} files\n`);
-  console.warn('=' .repeat(80) + '\n');
+  log(`❌ Found ${totalViolations} design token violations in ${fileViolations.length} files\n`);
+  log('=' .repeat(80) + '\n');
 
   // Print detailed violations by file
   fileViolations.forEach(({ file, violations, totalCount }) => {
-    console.warn(`📄 ${file} (${totalCount} violations)`);
-    console.warn('-'.repeat(80));
+    log(`📄 ${file} (${totalCount} violations)`);
+    log('-'.repeat(80));
     
     violations.forEach(({ type, count, recommendation, matches }) => {
-      console.warn(`\n  ⚠️  ${type}: ${count} occurrence(s)`);
-      console.warn(`  💡 Recommendation: ${recommendation}`);
+      log(`\n  ⚠️  ${type}: ${count} occurrence(s)`);
+      log(`  💡 Recommendation: ${recommendation}`);
       
       // Show first 3 matches with line numbers
       const samplesToShow = Math.min(3, matches.length);
       if (samplesToShow > 0) {
-        console.warn(`  📍 Examples:`);
+        log(`  📍 Examples:`);
         matches.slice(0, samplesToShow).forEach(({ line, content }) => {
-          console.warn(`     Line ${line}: ${content}`);
+          log(`     Line ${line}: ${content}`);
         });
         if (matches.length > samplesToShow) {
-          console.warn(`     ... and ${matches.length - samplesToShow} more`);
+          log(`     ... and ${matches.length - samplesToShow} more`);
         }
       }
     });
     
-    console.warn('\n' + '='.repeat(80) + '\n');
+    log('\n' + '='.repeat(80) + '\n');
   });
 
   // Print summary statistics
-  console.warn('📊 Summary Statistics\n');
-  console.warn(`Total violations: ${totalViolations}`);
-  console.warn(`Files with violations: ${fileViolations.length} / ${files.length}`);
-  console.warn(`Clean files: ${files.length - fileViolations.length} / ${files.length}`);
-  console.warn(`Compliance rate: ${((files.length - fileViolations.length) / files.length * 100).toFixed(1)}%`);
+  log('📊 Summary Statistics\n');
+  log(`Total violations: ${totalViolations}`);
+  log(`Files with violations: ${fileViolations.length} / ${files.length}`);
+  log(`Clean files: ${files.length - fileViolations.length} / ${files.length}`);
+  log(`Compliance rate: ${((files.length - fileViolations.length) / files.length * 100).toFixed(1)}%`);
   
   // Group violations by type
   const violationsByType = {};
@@ -184,14 +188,14 @@ async function auditDesignTokens() {
     });
   });
   
-  console.warn('\n📈 Violations by Type:\n');
+  log('\n📈 Violations by Type:\n');
   Object.entries(violationsByType)
     .sort((a, b) => b[1] - a[1])
     .forEach(([type, count]) => {
-      console.warn(`  ${type}: ${count}`);
+      log(`  ${type}: ${count}`);
     });
   
-  console.warn('\n');
+  log('\n');
   process.exit(1); // Exit with error code to fail CI if violations found
 }
 

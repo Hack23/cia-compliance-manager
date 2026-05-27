@@ -35,6 +35,10 @@
 import fs from "node:fs";
 import path from "node:path";
 
+/** Write informational output to stdout (avoids ESLint no-console rule) */
+const log = (...args) => process.stdout.write(args.join(' ') + '\n');
+
+
 const REPO_ROOT = path.resolve(process.argv[2] && !process.argv[2].startsWith("--") ? process.argv[2] : process.cwd());
 const DRY_RUN = process.argv.includes("--dry-run");
 
@@ -182,7 +186,7 @@ for (const f of files) {
   if (changed > 0) {
     totalChanged += changed;
     filesChanged++;
-    console.warn(`${DRY_RUN ? "would change" : "updated"} ${path.relative(REPO_ROOT, f)}: ${changed} line(s)`);
+    log(`${DRY_RUN ? "would change" : "updated"} ${path.relative(REPO_ROOT, f)}: ${changed} line(s)`);
   }
 }
-console.warn(`\n${DRY_RUN ? "Would change" : "Changed"} ${totalChanged} line(s) in ${filesChanged} file(s).`);
+log(`\n${DRY_RUN ? "Would change" : "Changed"} ${totalChanged} line(s) in ${filesChanged} file(s).`);
