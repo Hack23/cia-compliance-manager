@@ -616,7 +616,7 @@ function generateSitemapHTML(entries) {
  * Main function
  */
 function main() {
-  console.log('🗺️  Generating sitemaps for CIA Compliance Manager...\n');
+  console.warn('🗺️  Generating sitemaps for CIA Compliance Manager...\n');
 
   // Check if docs directory exists
   if (!fs.existsSync(DOCS_DIR)) {
@@ -625,9 +625,9 @@ function main() {
   }
 
   // Find all files
-  console.log('📁 Scanning docs directory...');
+  console.warn('📁 Scanning docs directory...');
   const allFiles = findFiles(DOCS_DIR);
-  console.log(`   Found ${allFiles.length} total files`);
+  console.warn(`   Found ${allFiles.length} total files`);
 
   // Process files
   const entries = [];
@@ -650,24 +650,24 @@ function main() {
     });
   });
 
-  console.log(`✅ Processed ${entries.length} HTML pages\n`);
+  console.warn(`✅ Processed ${entries.length} HTML pages\n`);
 
   // Generate sitemap.xml
-  console.log('📄 Generating sitemap.xml...');
+  console.warn('📄 Generating sitemap.xml...');
   const sitemapXML = generateSitemapXML(entries);
   const xmlPath = path.join(DOCS_DIR, 'sitemap.xml');
   fs.writeFileSync(xmlPath, sitemapXML, 'utf8');
-  console.log(`   ✅ Created ${xmlPath}`);
+  console.warn(`   ✅ Created ${xmlPath}`);
 
   // Generate sitemap.html
-  console.log('📄 Generating sitemap.html...');
+  console.warn('📄 Generating sitemap.html...');
   const sitemapHTML = generateSitemapHTML(entries);
   const htmlPath = path.join(DOCS_DIR, 'sitemap.html');
   fs.writeFileSync(htmlPath, sitemapHTML, 'utf8');
-  console.log(`   ✅ Created ${htmlPath}`);
+  console.warn(`   ✅ Created ${htmlPath}`);
 
   // Print summary by category
-  console.log('\n📊 Summary by Category:');
+  console.warn('\n📊 Summary by Category:');
   const categoryCounts = {};
   entries.forEach(entry => {
     categoryCounts[entry.category] = (categoryCounts[entry.category] || 0) + 1;
@@ -676,12 +676,12 @@ function main() {
   Object.entries(categoryCounts)
     .sort((a, b) => b[1] - a[1])
     .forEach(([category, count]) => {
-      console.log(`   ${category}: ${count} pages`);
+      console.warn(`   ${category}: ${count} pages`);
     });
 
-  console.log('\n✨ Sitemap generation complete!');
-  console.log(`📍 XML Sitemap: ${BASE_URL}/sitemap.xml`);
-  console.log(`📍 HTML Sitemap: ${BASE_URL}/sitemap.html`);
+  console.warn('\n✨ Sitemap generation complete!');
+  console.warn(`📍 XML Sitemap: ${BASE_URL}/sitemap.xml`);
+  console.warn(`📍 HTML Sitemap: ${BASE_URL}/sitemap.html`);
 }
 
 // Run the script

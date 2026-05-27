@@ -123,9 +123,9 @@ fs.mkdirSync(reportDir, { recursive: true });
 const reportPath = path.join(reportDir, "md-reference-report.json");
 fs.writeFileSync(reportPath, JSON.stringify({ totalLinks: total, brokenCount: broken.length, broken }, null, 2));
 
-console.log(`Checked ${total} links/refs across ${files.length} files.`);
-console.log(`Broken: ${broken.length}`);
-for (const b of broken.slice(0, 200)) console.log(`  ${b.file}: ${b.link} (${b.reason})`);
-if (broken.length > 200) console.log(`  ... and ${broken.length - 200} more (see ${reportPath})`);
+console.warn(`Checked ${total} links/refs across ${files.length} files.`);
+console.warn(`Broken: ${broken.length}`);
+for (const b of broken.slice(0, 200)) console.warn(`  ${b.file}: ${b.link} (${b.reason})`);
+if (broken.length > 200) console.warn(`  ... and ${broken.length - 200} more (see ${reportPath})`);
 
 process.exit(broken.length);

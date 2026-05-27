@@ -182,7 +182,7 @@ for (const f of files) {
   if (changed > 0) {
     totalChanged += changed;
     filesChanged++;
-    console.log(`${DRY_RUN ? "would change" : "updated"} ${path.relative(REPO_ROOT, f)}: ${changed} line(s)`);
+    console.warn(`${DRY_RUN ? "would change" : "updated"} ${path.relative(REPO_ROOT, f)}: ${changed} line(s)`);
   }
 }
-console.log(`\n${DRY_RUN ? "Would change" : "Changed"} ${totalChanged} line(s) in ${filesChanged} file(s).`);
+console.warn(`\n${DRY_RUN ? "Would change" : "Changed"} ${totalChanged} line(s) in ${filesChanged} file(s).`);

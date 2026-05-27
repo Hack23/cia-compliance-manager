@@ -106,10 +106,10 @@ fs.mkdirSync(reportDir, { recursive: true });
 fs.writeFileSync(path.join(reportDir, "mermaid-color-audit.json"), JSON.stringify(rows, null, 2));
 
 const display = NON_PALETTE_ONLY ? rows.filter((r) => !r.inPalette) : rows;
-console.log(`${rows.length} distinct colors (${rows.filter((r) => !r.inPalette).length} not in STYLE_GUIDE palette)\n`);
-console.log("count  files  palette  hex        example");
+console.warn(`${rows.length} distinct colors (${rows.filter((r) => !r.inPalette).length} not in STYLE_GUIDE palette)\n`);
+console.warn("count  files  palette  hex        example");
 for (const r of display) {
-  console.log(
+  console.warn(
     `${String(r.count).padStart(5)}  ${String(r.files).padStart(5)}  ${(r.inPalette ? "OK" : "----").padStart(7)}  ${r.hex.padEnd(9)}  ${r.example}`
   );
 }

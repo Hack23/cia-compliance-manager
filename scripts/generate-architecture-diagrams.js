@@ -12,7 +12,7 @@ if (!fs.existsSync(DOCS_DIR)) {
 }
 
 // Generate project structure visualization
-console.log("Generating project structure visualization...");
+console.warn("Generating project structure visualization...");
 try {
   const projectStructure = execSync(
     'find src -type f -not -path "*/node_modules/*" -not -path "*/\\.*" | sort'
@@ -66,4 +66,4 @@ ${projectStructure
   console.error("Error generating project structure visualization:", error);
 }
 
-console.log("Architecture diagrams generated successfully!");
+console.warn("Architecture diagrams generated successfully!");

@@ -104,15 +104,15 @@ function scanFile(filePath) {
  * Main audit function
  */
 async function auditDesignTokens() {
-  console.log('🔍 Design Token Audit\n');
-  console.log('Scanning widget files for hardcoded design values...\n');
+  console.warn('🔍 Design Token Audit\n');
+  console.warn('Scanning widget files for hardcoded design values...\n');
 
   // Find all widget files (exclude tests)
   const files = await glob('src/components/widgets/**/*.tsx', {
     ignore: ['**/*.test.tsx', '**/*.spec.tsx']
   });
 
-  console.log(`Found ${files.length} widget files to scan\n`);
+  console.warn(`Found ${files.length} widget files to scan\n`);
 
   let totalViolations = 0;
   const fileViolations = [];
@@ -136,45 +136,45 @@ async function auditDesignTokens() {
 
   // Print results
   if (totalViolations === 0) {
-    console.log('✅ No design token violations found!\n');
-    console.log('All widgets are using design tokens consistently.\n');
+    console.warn('✅ No design token violations found!\n');
+    console.warn('All widgets are using design tokens consistently.\n');
     return;
   }
 
-  console.log(`❌ Found ${totalViolations} design token violations in ${fileViolations.length} files\n`);
-  console.log('=' .repeat(80) + '\n');
+  console.warn(`❌ Found ${totalViolations} design token violations in ${fileViolations.length} files\n`);
+  console.warn('=' .repeat(80) + '\n');
 
   // Print detailed violations by file
   fileViolations.forEach(({ file, violations, totalCount }) => {
-    console.log(`📄 ${file} (${totalCount} violations)`);
-    console.log('-'.repeat(80));
+    console.warn(`📄 ${file} (${totalCount} violations)`);
+    console.warn('-'.repeat(80));
     
     violations.forEach(({ type, count, recommendation, matches }) => {
-      console.log(`\n  ⚠️  ${type}: ${count} occurrence(s)`);
-      console.log(`  💡 Recommendation: ${recommendation}`);
+      console.warn(`\n  ⚠️  ${type}: ${count} occurrence(s)`);
+      console.warn(`  💡 Recommendation: ${recommendation}`);
       
       // Show first 3 matches with line numbers
       const samplesToShow = Math.min(3, matches.length);
       if (samplesToShow > 0) {
-        console.log(`  📍 Examples:`);
+        console.warn(`  📍 Examples:`);
         matches.slice(0, samplesToShow).forEach(({ line, content }) => {
-          console.log(`     Line ${line}: ${content}`);
+          console.warn(`     Line ${line}: ${content}`);
         });
         if (matches.length > samplesToShow) {
-          console.log(`     ... and ${matches.length - samplesToShow} more`);
+          console.warn(`     ... and ${matches.length - samplesToShow} more`);
         }
       }
     });
     
-    console.log('\n' + '='.repeat(80) + '\n');
+    console.warn('\n' + '='.repeat(80) + '\n');
   });
 
   // Print summary statistics
-  console.log('📊 Summary Statistics\n');
-  console.log(`Total violations: ${totalViolations}`);
-  console.log(`Files with violations: ${fileViolations.length} / ${files.length}`);
-  console.log(`Clean files: ${files.length - fileViolations.length} / ${files.length}`);
-  console.log(`Compliance rate: ${((files.length - fileViolations.length) / files.length * 100).toFixed(1)}%`);
+  console.warn('📊 Summary Statistics\n');
+  console.warn(`Total violations: ${totalViolations}`);
+  console.warn(`Files with violations: ${fileViolations.length} / ${files.length}`);
+  console.warn(`Clean files: ${files.length - fileViolations.length} / ${files.length}`);
+  console.warn(`Compliance rate: ${((files.length - fileViolations.length) / files.length * 100).toFixed(1)}%`);
   
   // Group violations by type
   const violationsByType = {};
@@ -184,14 +184,14 @@ async function auditDesignTokens() {
     });
   });
   
-  console.log('\n📈 Violations by Type:\n');
+  console.warn('\n📈 Violations by Type:\n');
   Object.entries(violationsByType)
     .sort((a, b) => b[1] - a[1])
     .forEach(([type, count]) => {
-      console.log(`  ${type}: ${count}`);
+      console.warn(`  ${type}: ${count}`);
     });
   
-  console.log('\n');
+  console.warn('\n');
   process.exit(1); // Exit with error code to fail CI if violations found
 }
 

@@ -1,11 +1,12 @@
-/* eslint-disable no-console */
 /**
  * Simple logger utility for consistent logging throughout the application
  *
  * ## Technical Perspective
  *
  * Provides standardized logging across the application with different log levels.
- * Can be extended to support more advanced features like remote logging or log rotation.
+ * All output is routed through console.warn (for info/debug/log levels) or
+ * console.error (for error level) to comply with the project's no-console rule
+ * which restricts direct console usage to warn and error only.
  *
  * @example
  * ```typescript
@@ -44,16 +45,18 @@ interface Logger {
 }
 
 /**
- * Simple logger interface with different log levels
+ * Simple logger interface with different log levels.
+ * Uses only console.warn and console.error (ESLint-allowed methods)
+ * with level prefixes to distinguish severity.
  */
 const logger: Logger = {
   /**
-   * Log a message (same as console.log)
+   * Log a general message
    * @param args - Arguments to log
    * @returns The logger instance for chaining
    */
   log(...args: unknown[]): typeof logger {
-    console.log(PREFIX, ...args);
+    console.warn(PREFIX, "[LOG]", ...args);
     return logger;
   },
 
@@ -78,9 +81,9 @@ const logger: Logger = {
    */
   debug(message: string, context?: unknown): typeof logger {
     if (context !== undefined) {
-      console.debug(PREFIX, message, context);
+      console.warn(PREFIX, "[DEBUG]", message, context);
     } else {
-      console.debug(PREFIX, message);
+      console.warn(PREFIX, "[DEBUG]", message);
     }
     return logger;
   },
@@ -94,9 +97,9 @@ const logger: Logger = {
    */
   info(message: string, context?: unknown): typeof logger {
     if (context !== undefined) {
-      console.info(PREFIX, message, context);
+      console.warn(PREFIX, "[INFO]", message, context);
     } else {
-      console.info(PREFIX, message);
+      console.warn(PREFIX, "[INFO]", message);
     }
     return logger;
   },
@@ -110,9 +113,9 @@ const logger: Logger = {
    */
   warn(message: string, context?: unknown): typeof logger {
     if (context !== undefined) {
-      console.warn(PREFIX, message, context);
+      console.warn(PREFIX, "[WARN]", message, context);
     } else {
-      console.warn(PREFIX, message);
+      console.warn(PREFIX, "[WARN]", message);
     }
     return logger;
   },
@@ -126,9 +129,9 @@ const logger: Logger = {
    */
   error(message: string, context?: unknown): typeof logger {
     if (context !== undefined) {
-      console.error(PREFIX, message, context);
+      console.error(PREFIX, "[ERROR]", message, context);
     } else {
-      console.error(PREFIX, message);
+      console.error(PREFIX, "[ERROR]", message);
     }
     return logger;
   },

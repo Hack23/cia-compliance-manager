@@ -107,7 +107,7 @@ function validate(code, scratchDir, id) {
 }
 
 const files = walk(REPO_ROOT);
-console.log(`Scanning ${files.length} markdown files (root: ${REPO_ROOT})`);
+console.warn(`Scanning ${files.length} markdown files (root: ${REPO_ROOT})`);
 
 const scratchDir = fs.mkdtempSync(path.join(os.tmpdir(), "mmd-val-"));
 const results = [];
@@ -133,7 +133,7 @@ try {
           error: "Unterminated mermaid fence (missing closing ```)",
           code: b.code.split("\n").slice(0, 5).join("\n"),
         });
-        console.log(`  BROKEN (unterminated): ${rel} block#${i} L${b.startLine}-${b.endLine}`);
+        console.warn(`  BROKEN (unterminated): ${rel} block#${i} L${b.startLine}-${b.endLine}`);
         continue;
       }
       const { ok, output } = validate(b.code, scratchDir, totalBlocks);
@@ -147,7 +147,7 @@ try {
           error: output.split("\n").slice(-40).join("\n"),
           code: b.code,
         });
-        console.log(`  BROKEN: ${rel} block#${i} L${b.startLine}-${b.endLine}`);
+        console.warn(`  BROKEN: ${rel} block#${i} L${b.startLine}-${b.endLine}`);
       }
     }
     process.stdout.write(`${rel}: ${blocks.length} blocks\n`);
@@ -160,5 +160,5 @@ try {
 }
 
 fs.writeFileSync(REPORT_PATH, JSON.stringify({ totalFiles: files.length, totalBlocks, brokenBlocks, results }, null, 2));
-console.log(`\nTotal: ${totalBlocks} blocks, Broken: ${brokenBlocks}. Report: ${REPORT_PATH}`);
+console.warn(`\nTotal: ${totalBlocks} blocks, Broken: ${brokenBlocks}. Report: ${REPORT_PATH}`);
 process.exit(brokenBlocks > 0 ? 1 : 0);

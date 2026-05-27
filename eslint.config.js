@@ -181,17 +181,6 @@ export default [
     },
   },
 
-  // Scripts - allow console statements
-  {
-    files: [
-      'scripts/**',
-      'generate-sitemaps.js',
-    ],
-    rules: {
-      'no-console': 'off',
-    },
-  },
-
   // Files to ignore
   {
     ignores: [
