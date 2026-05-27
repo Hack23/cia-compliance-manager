@@ -4,9 +4,6 @@
  * ## Technical Perspective
  *
  * Provides standardized logging across the application with different log levels.
- * All output is routed through console.warn (for info/debug/log levels) or
- * console.error (for error level) to comply with the project's no-console rule
- * which restricts direct console usage to warn and error only.
  *
  * @example
  * ```typescript
@@ -46,8 +43,7 @@ interface Logger {
 
 /**
  * Simple logger interface with different log levels.
- * Uses only console.warn and console.error (ESLint-allowed methods)
- * with level prefixes to distinguish severity.
+ * Uses standard console methods with level prefixes to distinguish severity.
  */
 const logger: Logger = {
   /**
@@ -56,7 +52,7 @@ const logger: Logger = {
    * @returns The logger instance for chaining
    */
   log(...args: unknown[]): typeof logger {
-    console.warn(PREFIX, "[LOG]", ...args);
+    console.log(PREFIX, "[LOG]", ...args);
     return logger;
   },
 
@@ -81,9 +77,9 @@ const logger: Logger = {
    */
   debug(message: string, context?: unknown): typeof logger {
     if (context !== undefined) {
-      console.warn(PREFIX, "[DEBUG]", message, context);
+      console.debug(PREFIX, "[DEBUG]", message, context);
     } else {
-      console.warn(PREFIX, "[DEBUG]", message);
+      console.debug(PREFIX, "[DEBUG]", message);
     }
     return logger;
   },
@@ -97,9 +93,9 @@ const logger: Logger = {
    */
   info(message: string, context?: unknown): typeof logger {
     if (context !== undefined) {
-      console.warn(PREFIX, "[INFO]", message, context);
+      console.info(PREFIX, "[INFO]", message, context);
     } else {
-      console.warn(PREFIX, "[INFO]", message);
+      console.info(PREFIX, "[INFO]", message);
     }
     return logger;
   },

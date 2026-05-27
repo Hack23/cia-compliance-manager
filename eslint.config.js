@@ -155,6 +155,14 @@ export default [
       ],
     },
   },
+
+  // Logger utility - allow standard log levels
+  {
+    files: ['src/utils/logger.ts'],
+    rules: {
+      'no-console': ['warn', { allow: ['log', 'info', 'debug', 'warn', 'error'] }],
+    },
+  },
   
   // Cypress files - allow idiomatic patterns
   {

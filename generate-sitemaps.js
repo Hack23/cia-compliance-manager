@@ -76,7 +76,7 @@ function findFiles(dir, fileList = []) {
     try {
       stat = fs.lstatSync(filePath);
     } catch (error) {
-      log(`⚠️  Unable to read file stats: ${filePath}`);
+      console.warn(`⚠️  Unable to read file stats: ${filePath}`);
       return;
     }
 
