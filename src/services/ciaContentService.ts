@@ -22,6 +22,7 @@ import {
   integrityOptions,
 } from "../data/security";
 import { BaseService } from "./BaseService";
+import logger from "../utils/logger";
 
 /**
  * Metrics for ROI assessment
@@ -106,21 +107,6 @@ function createEmptyCIADetails(): CIADetails {
   };
 }
 
-/**
- * Simple logger utility for service operations
- */
-const logger = {
-  warn: (message: string) => {
-    console.warn(message);
-  },
-  error: (message: string) => {
-    console.error(message);
-  },
-  info: (message: string) => {
-    // eslint-disable-next-line no-console
-    console.info(message);
-  },
-};
 
 /**
  * Capitalizes the first letter of each word in a string

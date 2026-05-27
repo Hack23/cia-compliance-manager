@@ -58,12 +58,14 @@ module.exports = {
             // NOTE: Template literals used as arguments to ID generator functions
             // (e.g., WIDGET_IDS.item(`some-${index}`)) are intentionally allowed
             // since the widget-scoped ID generators are designed to accept dynamic arguments.
+            // Only flag template literals where all expressions are static literals
+            // (e.g. `${"hello"}-suffix`). Template literals with variable references
+            // (e.g. `${testId}-suffix`) are allowed as they use dynamic IDs.
             if (
               attrValue &&
               attrValue.type === 'JSXExpressionContainer' &&
               attrValue.expression &&
               attrValue.expression.type === 'TemplateLiteral' &&
-              // Allow template literals that reference variables (dynamic IDs)
               attrValue.expression.expressions.every(
                 (expr) => expr.type === 'Literal'
               )
