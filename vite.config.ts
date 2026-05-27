@@ -9,7 +9,7 @@ import { defineConfig as defineVitestConfig } from "vitest/config";
 interface PackageJson {
   version: string;
   name: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 const packageJson: PackageJson = JSON.parse(

@@ -43,7 +43,7 @@ const SKIP_DIRS = new Set(["node_modules", ".git", "dist", "build", "coverage", 
 // Detect emoji and other characters that need quoting in mermaid labels.
 // We deliberately include `(`, `)`, `<`, `>`, `&`, `#`, `%` because mermaid
 // flowchart parsers reject these inside unquoted node labels.
-const NEEDS_QUOTING_RE = /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2300}-\u{23FF}\u{2B00}-\u{2BFF}\u{1F100}-\u{1F1FF}\u{FE0F}()<>&#%]/u;
+const NEEDS_QUOTING_RE = /(?:[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2300}-\u{23FF}\u{2B00}-\u{2BFF}\u{1F100}-\u{1F1FF}()<>&#%]|\u{FE0F})/u;
 
 function walkMd(dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {

@@ -62,7 +62,11 @@ module.exports = {
               attrValue &&
               attrValue.type === 'JSXExpressionContainer' &&
               attrValue.expression &&
-              attrValue.expression.type === 'TemplateLiteral'
+              attrValue.expression.type === 'TemplateLiteral' &&
+              // Allow template literals that reference variables (dynamic IDs)
+              attrValue.expression.expressions.every(
+                (expr) => expr.type === 'Literal'
+              )
             ) {
               context.report({
                 node: attrValue.expression,

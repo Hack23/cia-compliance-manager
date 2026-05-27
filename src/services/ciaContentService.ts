@@ -117,6 +117,7 @@ const logger = {
     console.error(message);
   },
   info: (message: string) => {
+    // eslint-disable-next-line no-console
     console.info(message);
   },
 };
