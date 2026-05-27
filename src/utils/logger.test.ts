@@ -3,17 +3,26 @@ import logger from "./logger";
 
 describe("Logger Utility", () => {
   // Save the original console methods
+  const originalConsoleLog = console.log;
+  const originalConsoleInfo = console.info;
+  const originalConsoleDebug = console.debug;
   const originalConsoleWarn = console.warn;
   const originalConsoleError = console.error;
 
   // Setup spies
   beforeEach(() => {
+    console.log = vi.fn();
+    console.info = vi.fn();
+    console.debug = vi.fn();
     console.warn = vi.fn();
     console.error = vi.fn();
   });
 
   // Restore original console methods
   afterEach(() => {
+    console.log = originalConsoleLog;
+    console.info = originalConsoleInfo;
+    console.debug = originalConsoleDebug;
     console.warn = originalConsoleWarn;
     console.error = originalConsoleError;
 
@@ -23,16 +32,16 @@ describe("Logger Utility", () => {
 
   it("logs a message with the correct prefix and level", () => {
     logger.log("Test message");
-    expect(console.warn).toHaveBeenCalledWith(
+    expect(console.log).toHaveBeenCalledWith(
       "[CIA-CM]",
       "[LOG]",
       "Test message"
     );
   });
 
-  it("logs an info message via console.warn", () => {
+  it("logs an info message via console.info", () => {
     logger.info("Info message");
-    expect(console.warn).toHaveBeenCalledWith(
+    expect(console.info).toHaveBeenCalledWith(
       "[CIA-CM]",
       "[INFO]",
       "Info message"
@@ -57,9 +66,9 @@ describe("Logger Utility", () => {
     );
   });
 
-  it("logs a debug message via console.warn", () => {
+  it("logs a debug message via console.debug", () => {
     logger.debug("Debug message");
-    expect(console.warn).toHaveBeenCalledWith(
+    expect(console.debug).toHaveBeenCalledWith(
       "[CIA-CM]",
       "[DEBUG]",
       "Debug message"
@@ -69,7 +78,7 @@ describe("Logger Utility", () => {
   it("formats objects properly in log messages", () => {
     const testObject = { key: "value", nested: { prop: true } };
     logger.log("Object:", testObject);
-    expect(console.warn).toHaveBeenCalledWith(
+    expect(console.log).toHaveBeenCalledWith(
       "[CIA-CM]",
       "[LOG]",
       "Object:",
@@ -79,7 +88,7 @@ describe("Logger Utility", () => {
 
   it("handles multiple arguments correctly", () => {
     logger.log("First", "Second", 123, { test: true });
-    expect(console.warn).toHaveBeenCalledWith(
+    expect(console.log).toHaveBeenCalledWith(
       "[CIA-CM]",
       "[LOG]",
       "First",
@@ -102,7 +111,7 @@ describe("Logger Utility", () => {
 
   it("accepts no arguments gracefully", () => {
     logger.log();
-    expect(console.warn).toHaveBeenCalledWith("[CIA-CM]", "[LOG]");
+    expect(console.log).toHaveBeenCalledWith("[CIA-CM]", "[LOG]");
   });
 
   it("supports method chaining", () => {
@@ -111,14 +120,14 @@ describe("Logger Utility", () => {
 
     // Verify we can chain methods
     logger.log("First").info("Second");
-    expect(console.warn).toHaveBeenCalledWith("[CIA-CM]", "[LOG]", "First");
-    expect(console.warn).toHaveBeenCalledWith("[CIA-CM]", "[INFO]", "Second");
+    expect(console.log).toHaveBeenCalledWith("[CIA-CM]", "[LOG]", "First");
+    expect(console.info).toHaveBeenCalledWith("[CIA-CM]", "[INFO]", "Second");
   });
 
   it("logs an info message with context", () => {
     const context = { user: "admin", action: "login" };
     logger.info("Info message with context", context);
-    expect(console.warn).toHaveBeenCalledWith(
+    expect(console.info).toHaveBeenCalledWith(
       "[CIA-CM]",
       "[INFO]",
       "Info message with context",
@@ -151,7 +160,7 @@ describe("Logger Utility", () => {
   it("logs a debug message with context", () => {
     const context = { debug: true, level: 3 };
     logger.debug("Debug message with context", context);
-    expect(console.warn).toHaveBeenCalledWith(
+    expect(console.debug).toHaveBeenCalledWith(
       "[CIA-CM]",
       "[DEBUG]",
       "Debug message with context",
