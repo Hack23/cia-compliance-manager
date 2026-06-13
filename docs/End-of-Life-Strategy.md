@@ -102,6 +102,10 @@ mindmap
         📅 Current: v4
         ⏰ EOL: GitHub managed
         🔄 CI/CD Workflows
+      🖥️ Ubuntu Runner
+        📅 Current: ubuntu-26.04
+        ⏰ EOL: Canonical managed
+        🔄 All CI/CD workflow jobs
       📦 GitHub Pages
         📅 Current: Active
         ⏰ EOL: GitHub managed
@@ -119,6 +123,7 @@ mindmap
 | **🧪 Testing Stack**    | Vitest 4.x + Cypress 15.x | Major annually                  | Active development | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
 | **📊 Chart.js**         | 4.5.1 (Latest)            | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
 | **🎨 TailwindCSS**      | 4.2.3 (Latest)           | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
+| **🖥️ GitHub Runner**   | ubuntu-26.04             | Ubuntu LTS cadence              | Canonical managed  | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
 
 ---
 

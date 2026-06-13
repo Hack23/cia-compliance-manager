@@ -15,7 +15,7 @@ permissions: read-all
 jobs:
   node-next:
     name: Build & Test (Node.js 27 nightly)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     continue-on-error: true # Nightly failures are informational, not blocking
 
     permissions:

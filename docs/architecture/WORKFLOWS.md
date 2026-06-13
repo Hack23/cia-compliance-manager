@@ -575,7 +575,7 @@ prepare → build → release
 This job handles environment preparation, testing, and documentation generation:
 
 **Key Steps:**
-1. **Environment Setup**: Ubuntu latest with Node.js 26, dependency caching
+1. **Environment Setup**: Ubuntu 26.04 with Node.js 26, dependency caching
 2. **Version Detection**: Extracts version from tag or workflow input
 3. **Display Configuration**: Sets up xvfb for headless Cypress testing
 4. **Dependency Installation**: Full `npm ci` with audit
