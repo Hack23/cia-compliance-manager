@@ -114,14 +114,14 @@ mindmap
 
 ### **🔄 TypeScript 7 Migration Status**
 
-The project has started a controlled migration to TypeScript 7 by adopting the Microsoft-recommended side-by-side setup in `package.json`: the `typescript` dependency now resolves to `@typescript/typescript6@6.0.2` for compatibility, while `typescript-7` provides `typescript@7.0.1-rc` so `npx tsc` uses the RC toolchain. The migration is tracked as a compatibility-first transition rather than a hard cutover, with lint, build, and tests validated against the new toolchain.
+The project has started a controlled migration to TypeScript 7 by adopting the Microsoft-recommended side-by-side setup in `package.json`: the `typescript` dependency now resolves to `typescript@7.0.1-rc` for the main compiler, while `typescript-6` provides `@typescript/typescript6@6.0.2` for compatibility. The migration is tracked as a compatibility-first transition rather than a hard cutover, with lint, build, and tests validated against the new toolchain.
 
 ### **📊 Technology Lifecycle Overview**
 
 | **Technology Category** | **Current Version**       | **Release Model**               | **EOL Timeline**   | **Migration Complexity**                                                                                                                                |
 | ----------------------- | ------------------------- | ------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **⚛️ React Framework**  | 19.2.7 (Latest)           | Major annually, Minor quarterly | ~2027-2028         | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
-| **📝 TypeScript**       | 6.0.2 compatibility + 7.0.1-rc (migration started) | Major annually, minor quarterly | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
+| **📝 TypeScript**       | 7.0.1-rc (main) + 6.0.2 compatibility (migration started) | Major annually, minor quarterly | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
 | **⚡ Vite Build Tool**  | 8.1.3 (Latest)            | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
 | **☕ Node.js Runtime**  | 26.x (Production)         | New: 1 major/year from 27.x    | Current → LTS Oct 2026, EOL Apr 2029 | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)     |
 | **🧪 Testing Stack**    | Vitest 4.x + Cypress 15.x | Major annually                  | Active development | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
@@ -321,13 +321,13 @@ Microsoft publishes TypeScript on a roughly quarterly schedule:
 | 5.9.x | Feb 2026 | Previous stable | Limited — security patches only |
 | 5.8.x | Dec 2025 | End of life | ❌ No support |
 
-> **Note:** The project now uses a side-by-side TypeScript setup for compatibility-first migration: `typescript` resolves to `@typescript/typescript6@6.0.2`, while `typescript-7` provides `typescript@7.0.1-rc` for `npx tsc`. The current linting stack remains on `@typescript-eslint 8.63.0` while the TypeScript 7 RC toolchain is validated through the dedicated alias.
+> **Note:** The project now uses a side-by-side TypeScript setup for compatibility-first migration: `typescript` resolves to `typescript@7.0.1-rc` for the main compiler, while `typescript-6` provides `@typescript/typescript6@6.0.2` for compatibility. The current linting stack remains on `@typescript-eslint 8.63.0` while the TypeScript 7 RC toolchain is validated through the main `tsc` binary.
 
 ### TypeScript & Toolchain Version Matrix
 
 | Tool | Current Version | Peer Constraint | Upgrade Path |
 |------|----------------|-----------------|--------------|
-| TypeScript | **6.0.2 compatibility package + 7.0.1-rc** | — | Follow quarterly releases |
+| TypeScript | **7.0.1-rc (main) + 6.0.2 compatibility package** | — | Follow quarterly releases |
 | @typescript-eslint | **8.63.0** | `typescript >=4.8.4 <6.1.0` | Must update before TS 6.1 |
 | Vite | **8.1.3** | — | Follow major releases |
 | Vitest | **4.1.10** | — | Keep aligned with Vite |

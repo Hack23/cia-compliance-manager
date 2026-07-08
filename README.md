@@ -496,7 +496,7 @@ import { SecurityProfileProvider, ComplianceContext } from 'cia-compliance-manag
 
 **Technology Stack:**
 - **Runtime:** Node ≥26.0.0, npm ≥10.0.0
-- **Language:** TypeScript 6.0.2 compatibility package + TypeScript 7.0.1-rc (ES2025 target)
+- **Language:** TypeScript 7.0.1-rc (main compiler) with TypeScript 6.0.2 compatibility available via `typescript-6` (ES2025 target)
 - **Framework:** React 19.2.7 + React DOM 19.2.7
 - **Build:** Vite 8.1.3 (ES module bundler)
 - **Styling:** Tailwind CSS 4.3.2
