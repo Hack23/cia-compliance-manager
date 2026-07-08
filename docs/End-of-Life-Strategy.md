@@ -63,28 +63,28 @@ mindmap
         ⏰ EOL: N/A (Auto-update)
         🔄 ES2025+ Support
     (⚛️ Frontend Framework)
-      📦 React 19.2.5
+      📦 React 19.2.7
         📅 Current: Latest
         ⏰ EOL: ~2027-2028
         🔄 Concurrent Features
-      📝 TypeScript 6.0.3
+      📝 TypeScript 6.0.2 compatibility package + TypeScript 7.0.1-rc
         📅 Current: Latest
         ⏰ EOL: Active (quarterly cadence, majors ~yearly)
         🔄 Strict Mode Enabled
-      ⚡ Vite 8.0.9
+      ⚡ Vite 8.1.3
         📅 Current: Latest
         ⏰ EOL: Active (yearly)
         🔄 OXC/Rolldown Integration
     (🧪 Testing & Quality)
-      🧪 Vitest 4.1.4
+      🧪 Vitest 4.1.10
         📅 Current: Latest
         ⏰ EOL: Active
         🔄 Native ESM Support
-      🔧 Cypress 15.14.0
+      🔧 Cypress 15.18.1
         📅 Current: Latest
         ⏰ EOL: Active
         🔄 E2E Testing
-      🔍 ESLint 10.2.1
+      🔍 ESLint 10.6.0
         📅 Current: Latest
         ⏰ EOL: Active
         🔄 Flat Config System
@@ -93,7 +93,7 @@ mindmap
         📅 Current: Latest
         ⏰ EOL: Long-term stable
         🔄 Security Assessment Charts
-      🎨 TailwindCSS 4.2.3
+      🎨 TailwindCSS 4.3.2
         📅 Current: Latest
         ⏰ EOL: Active development
         🔄 Utility-First CSS
@@ -112,17 +112,21 @@ mindmap
         🔄 Static Site Hosting
 ```
 
+### **🔄 TypeScript 7 Migration Status**
+
+The project has started a controlled migration to TypeScript 7 by adopting the Microsoft-recommended side-by-side setup in `package.json`: the `typescript` dependency now resolves to `@typescript/typescript6@6.0.2` for compatibility, while `typescript-7` provides `typescript@7.0.1-rc` so `npx tsc` uses the RC toolchain. The migration is tracked as a compatibility-first transition rather than a hard cutover, with lint, build, and tests validated against the new toolchain.
+
 ### **📊 Technology Lifecycle Overview**
 
 | **Technology Category** | **Current Version**       | **Release Model**               | **EOL Timeline**   | **Migration Complexity**                                                                                                                                |
 | ----------------------- | ------------------------- | ------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **⚛️ React Framework**  | 19.2.5 (Latest)           | Major annually, Minor quarterly | ~2027-2028         | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
-| **📝 TypeScript**       | 6.0.3 (Latest)            | Major annually, minor quarterly | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
-| **⚡ Vite Build Tool**  | 8.0.9 (Latest)            | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
+| **⚛️ React Framework**  | 19.2.7 (Latest)           | Major annually, Minor quarterly | ~2027-2028         | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **📝 TypeScript**       | 6.0.2 compatibility + 7.0.1-rc (migration started) | Major annually, minor quarterly | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
+| **⚡ Vite Build Tool**  | 8.1.3 (Latest)            | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
 | **☕ Node.js Runtime**  | 26.x (Production)         | New: 1 major/year from 27.x    | Current → LTS Oct 2026, EOL Apr 2029 | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)     |
 | **🧪 Testing Stack**    | Vitest 4.x + Cypress 15.x | Major annually                  | Active development | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
 | **📊 Chart.js**         | 4.5.1 (Latest)            | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
-| **🎨 TailwindCSS**      | 4.2.3 (Latest)           | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
+| **🎨 TailwindCSS**      | 4.3.2 (Latest)           | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
 | **🖥️ GitHub Runner**   | ubuntu-26.04             | Ubuntu LTS cadence              | Canonical managed  | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
 
 ---
@@ -313,20 +317,20 @@ Microsoft publishes TypeScript on a roughly quarterly schedule:
 
 | TypeScript | Release Date | Status | Support Until |
 |-----------|-------------|--------|---------------|
-| **6.0.3** | Mar 2026 | ✅ **Active — in use** | Until 7.0 release (~12 months) |
+| **6.0.2 compatibility package + 7.0.1-rc** | Mar 2026 | ✅ **Active — in use** | Until 7.0 release (~12 months) |
 | 5.9.x | Feb 2026 | Previous stable | Limited — security patches only |
 | 5.8.x | Dec 2025 | End of life | ❌ No support |
 
-> **Note:** TypeScript 6.0 is a major release with breaking changes including stricter module resolution with `moduleResolution: "bundler"`, removal of implicit `global` namespace, and stricter `NodeJS` namespace handling. The project uses `@typescript-eslint 8.59.0` which supports `typescript >=4.8.4 <6.1.0`.
+> **Note:** The project now uses a side-by-side TypeScript setup for compatibility-first migration: `typescript` resolves to `@typescript/typescript6@6.0.2`, while `typescript-7` provides `typescript@7.0.1-rc` for `npx tsc`. The current linting stack remains on `@typescript-eslint 8.63.0` while the TypeScript 7 RC toolchain is validated through the dedicated alias.
 
 ### TypeScript & Toolchain Version Matrix
 
 | Tool | Current Version | Peer Constraint | Upgrade Path |
 |------|----------------|-----------------|--------------|
-| TypeScript | **6.0.3** | — | Follow quarterly releases |
-| @typescript-eslint | **8.59.0** | `typescript >=4.8.4 <6.1.0` | Must update before TS 6.1 |
-| Vite | **8.0.9** | — | Follow major releases |
-| Vitest | **4.1.4** | — | Keep aligned with Vite |
+| TypeScript | **6.0.2 compatibility package + 7.0.1-rc** | — | Follow quarterly releases |
+| @typescript-eslint | **8.63.0** | `typescript >=4.8.4 <6.1.0` | Must update before TS 6.1 |
+| Vite | **8.1.3** | — | Follow major releases |
+| Vitest | **4.1.10** | — | Keep aligned with Vite |
 
 ### TypeScript Upgrade Policy
 
@@ -339,7 +343,7 @@ Microsoft publishes TypeScript on a roughly quarterly schedule:
 
 | Trigger | Action | Timeline |
 |---------|--------|----------|
-| New patch release (e.g., 6.0.3) | Update `package.json`, run full CI | Within 1 week |
+| New patch release (e.g., 6.0.2 / 7.0.1-rc) | Update `package.json`, run full CI | Within 1 week |
 | New minor release (e.g., 6.1.0) | Verify `@typescript-eslint` compatibility first | Within 2 weeks |
 | New major release (e.g., 7.0.0) | Full compatibility assessment, dedicated PR | Within 1 month |
 | `@typescript-eslint` drops support | Upgrade `@typescript-eslint` or pin TypeScript | Within 24 hours |
@@ -375,8 +379,8 @@ gantt
     section Build & Tooling
     Vite 8.x                  :active, vite8, 2026-01-01, 2027-06-01
     Vite 9.x (Future)         :vite9, 2027-01-01, 2028-06-01
-    TypeScript 6.x            :active, ts6, 2026-03-01, 2027-03-31
-    TypeScript 7.x (Future)   :ts7, 2027-03-01, 2028-03-31
+    TypeScript 6.x / 7.x RC            :active, ts6, 2026-03-01, 2027-03-31
+    TypeScript 7.x RC (migration started)   :ts7, 2027-03-01, 2028-03-31
 
     section Visualization & UI
     Chart.js 4.x              :active, chartjs4, 2024-01-01, 2027-12-31
@@ -706,20 +710,20 @@ flowchart LR
 graph TB
     subgraph HEALTH["🏥 Technology Health Dashboard"]
         subgraph CORE["⚛️ Core Technologies"]
-            REACT["📊 React Health<br/>Version: 19.2.5<br/>EOL: ~2027<br/>Status: ✅ Healthy"]
-            TS["📊 TypeScript Health<br/>Version: 6.0.3<br/>EOL: Active<br/>Status: ✅ Healthy"]
+            REACT["📊 React Health<br/>Version: 19.2.7<br/>EOL: ~2027<br/>Status: ✅ Healthy"]
+            TS["📊 TypeScript Health<br/>Version: 6.0.2 compatibility package + 7.0.1-rc<br/>EOL: Active<br/>Status: ✅ Healthy"]
             NODE["📊 Node.js Health<br/>Version: 25.x<br/>Current EOL: Apr 2026<br/>Status: ⚠️ Plan →26.x"]
         end
         
         subgraph TOOLS["🛠️ Build & Testing"]
-            VITE["📊 Vite Health<br/>Version: 8.0.9<br/>EOL: Active<br/>Status: ✅ Healthy"]
-            VITEST["📊 Vitest Health<br/>Version: 4.1.4<br/>EOL: Active<br/>Status: ✅ Healthy"]
-            CYPRESS["📊 Cypress Health<br/>Version: 15.14.0<br/>EOL: Active<br/>Status: ✅ Healthy"]
+            VITE["📊 Vite Health<br/>Version: 8.1.3<br/>EOL: Active<br/>Status: ✅ Healthy"]
+            VITEST["📊 Vitest Health<br/>Version: 4.1.10<br/>EOL: Active<br/>Status: ✅ Healthy"]
+            CYPRESS["📊 Cypress Health<br/>Version: 15.18.1<br/>EOL: Active<br/>Status: ✅ Healthy"]
         end
         
         subgraph DEPS["📦 Dependencies"]
             CHART["📊 Chart.js Health<br/>Version: 4.5.1<br/>EOL: Stable<br/>Status: ✅ Healthy"]
-            TAILWIND["📊 TailwindCSS Health<br/>Version: 4.2.3<br/>EOL: Active<br/>Status: ✅ Healthy"]
+            TAILWIND["📊 TailwindCSS Health<br/>Version: 4.3.2<br/>EOL: Active<br/>Status: ✅ Healthy"]
             OTHER["📊 Other Dependencies<br/>Count: 50+<br/>Vulnerabilities: 0<br/>Status: ✅ Healthy"]
         end
     end

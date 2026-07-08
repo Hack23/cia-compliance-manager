@@ -15,12 +15,12 @@
 <p align="center">
   <a href="https://ciacompliancemanager.com"><img src="https://img.shields.io/badge/🌐_Live_App-ciacompliancemanager.com-0066CC?style=for-the-badge" alt="Live App"/></a>
   <a href="https://ciacompliancemanager.com/docs/api/"><img src="https://img.shields.io/badge/📔_API_Reference-TypeDoc-2E7D32?style=for-the-badge" alt="API Reference"/></a>
-  <a href="https://www.npmjs.com/package/cia-compliance-manager"><img src="https://img.shields.io/badge/📦_npm_Package-v1.1.70-CB3837?style=for-the-badge&logo=npm" alt="npm Package"/></a>
+  <a href="https://www.npmjs.com/package/cia-compliance-manager"><img src="https://img.shields.io/badge/📦_npm_Package-v1.1.103-CB3837?style=for-the-badge&logo=npm" alt="npm Package"/></a>
 </p>
 
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/Owner-CEO-0A66C2?style=for-the-badge" alt="Owner"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Version-1.1.70-success?style=for-the-badge" alt="Version"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Version-1.1.103-success?style=for-the-badge" alt="Version"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Effective-2026--04--28-blue?style=for-the-badge" alt="Effective Date"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Review-Quarterly-orange?style=for-the-badge" alt="Review Cycle"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Classification-Public-success?style=for-the-badge" alt="Classification"/></a>
@@ -88,7 +88,7 @@ CIA Compliance Manager is both a live assessment platform **and** a reusable npm
     </td>
     <td>
       <strong><a href="https://ciacompliancemanager.com">🌐 Live Assessment Platform</a></strong><br>
-      Interactive web application for performing CIA triad security assessments, generating compliance reports, estimating implementation costs (CAPEX/OPEX), and quantifying business impact across ISO 27001, NIST 800-53, GDPR, HIPAA, SOC 2, PCI DSS, and EU CRA frameworks. Features real-time dashboards, STRIDE threat modeling, Porter's Five Forces strategic analysis, and professional data classification tools. Built with React 19.x, TypeScript 6.x, Vite 8.x, and Tailwind 4.x — demonstrating Hack23's commitment to transparency and security by design.
+      Interactive web application for performing CIA triad security assessments, generating compliance reports, estimating implementation costs (CAPEX/OPEX), and quantifying business impact across ISO 27001, NIST 800-53, GDPR, HIPAA, SOC 2, PCI DSS, and EU CRA frameworks. Features real-time dashboards, STRIDE threat modeling, Porter's Five Forces strategic analysis, and professional data classification tools. Built with React 19.x, TypeScript 6/7, Vite 8.x, and Tailwind 4.x — demonstrating Hack23's commitment to transparency and security by design.
     </td>
   </tr>
   <tr>
@@ -96,7 +96,7 @@ CIA Compliance Manager is both a live assessment platform **and** a reusable npm
       <a href="https://www.npmjs.com/package/cia-compliance-manager"><img src="https://img.shields.io/badge/📦-npm_Package-CB3837?style=for-the-badge&logo=npm" alt="npm Package"/></a>
     </td>
     <td>
-      <strong><a href="https://www.npmjs.com/package/cia-compliance-manager">📦 npm Library — cia-compliance-manager@1.1.70</a></strong><br>
+      <strong><a href="https://www.npmjs.com/package/cia-compliance-manager">📦 npm Library — cia-compliance-manager@1.1.103</a></strong><br>
       Tree-shakeable ES module package with 10 subpath exports (<code>types</code>, <code>services</code>, <code>hooks</code>, <code>utils</code>, <code>components</code>, <code>components/widgets</code>, <code>constants</code>, <code>data</code>, <code>contexts</code>, plus root). Provides React components, hooks, and services for building security assessment and compliance management features into your own applications. Fully typed with TypeScript, peer-dependency-light (React 18.2+ or 19.x, optional Chart.js 4.x), and SLSA 3 provenance-signed. Suitable for embedding CIA triad assessments, compliance dashboards, threat modeling, or business impact analysis into enterprise portals, GRC platforms, or security operations consoles.
     </td>
   </tr>
@@ -271,7 +271,7 @@ graph TB
     <td width="50%">
       <h3>⚛️ TypeScript React Agent</h3>
       <p><strong>File:</strong> <a href=".github/agents/typescript-react-agent.md"><code>.github/agents/typescript-react-agent.md</code></a></p>
-      <p>Specialist in React&nbsp;19.x and TypeScript 6.x for building secure, type‑safe components that follow the project's architecture and reusability standards.</p>
+      <p>Specialist in React&nbsp;19.x and TypeScript 6/7 for building secure, type‑safe components that follow the project's architecture and reusability standards.</p>
       <p><strong>Use for:</strong> new components, state management patterns, type definitions, refactoring, and type‑safe integrations.</p>
     </td>
   </tr>
@@ -471,7 +471,7 @@ Expert analysis and thought leadership from [Hack23's cybersecurity blog](https:
 
 ## 📊 Current Status / At a Glance
 
-**Version:** 1.1.70 (Effective: 2026-04-28 | Next Review: 2026-07-28)
+**Version:** 1.1.103 (Effective: 2026-04-28 | Next Review: 2026-07-28)
 
 **Package Health:**
 - **Build Status:** ✅ All workflows passing
@@ -496,12 +496,12 @@ import { SecurityProfileProvider, ComplianceContext } from 'cia-compliance-manag
 
 **Technology Stack:**
 - **Runtime:** Node ≥26.0.0, npm ≥10.0.0
-- **Language:** TypeScript 6.0.3 (ES2025 target)
-- **Framework:** React 19.2.5 + React DOM 19.2.5
-- **Build:** Vite 8.0.10 (ES module bundler)
-- **Styling:** Tailwind CSS 4.2.4
-- **Testing:** Vitest 4.1.5, @vitest/coverage-v8 4.1.5, Cypress 15.14.1
-- **Linting:** ESLint 10.2.1 + TypeScript ESLint 8.59.1
+- **Language:** TypeScript 6.0.2 compatibility package + TypeScript 7.0.1-rc (ES2025 target)
+- **Framework:** React 19.2.7 + React DOM 19.2.7
+- **Build:** Vite 8.1.3 (ES module bundler)
+- **Styling:** Tailwind CSS 4.3.2
+- **Testing:** Vitest 4.1.10, @vitest/coverage-v8 4.1.10, Cypress 15.18.1
+- **Linting:** ESLint 10.6.0 + TypeScript ESLint 8.63.0
 - **Documentation:** TypeDoc 0.28.19 + typedoc-plugin-mermaid 1.12.0
 - **Code Quality:** Knip 6.7.0 (unused exports detection)
 
@@ -614,7 +614,7 @@ This project demonstrates compliance controls for multiple frameworks simultaneo
 - Fork and customize for your compliance framework mix
 
 **If you're a Developer or Architect:**
-- Study a real-world React 19 + TypeScript 6 + Vite 8 project with 85%+ test coverage
+- Study a real-world React 19 + TypeScript 6/7 + Vite 8 project with 85%+ test coverage
 - Learn security-by-design patterns: input validation, CSP, HTTPS enforcement, least-privilege access
 - Explore C4 architecture diagrams, STRIDE threat models, and state machines
 
@@ -630,7 +630,7 @@ This project demonstrates compliance controls for multiple frameworks simultaneo
 ### 📖 Quick Links
 
 - **[🌐 Live Application](https://ciacompliancemanager.com)** — Interactive assessment platform
-- **[📦 npm Package](https://www.npmjs.com/package/cia-compliance-manager)** — Reusable React library (v1.1.70)
+- **[📦 npm Package](https://www.npmjs.com/package/cia-compliance-manager)** — Reusable React library (v1.1.103)
 - **[🗺️ Site Map](https://ciacompliancemanager.com/sitemap.html)** — All platform pages and docs
 - **[📔 API Reference](https://ciacompliancemanager.com/docs/api/)** — TypeDoc-generated symbol documentation
 - **[📓 Test Coverage](https://ciacompliancemanager.com/docs/coverage/index.html)** — Interactive Vitest coverage report
@@ -639,7 +639,7 @@ This project demonstrates compliance controls for multiple frameworks simultaneo
 
 ### 🏛️ Architecture Documentation
 
-**Current State (v1.1.70):**
+**Current State (v1.1.103):**
 
 | Document | Description | Last Updated |
 |----------|-------------|--------------|
@@ -889,5 +889,5 @@ Special thanks to the maintainers of React, TypeScript, Vite, Vitest, Cypress, T
 </p>
 
 <p align="center">
-  <sub>Version 1.1.70 | Effective 2026-04-28 | Next Review 2026-07-28 | <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification: PUBLIC</a></sub>
+  <sub>Version 1.1.103 | Effective 2026-04-28 | Next Review 2026-07-28 | <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification: PUBLIC</a></sub>
 </p>
