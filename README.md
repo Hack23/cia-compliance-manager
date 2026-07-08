@@ -88,7 +88,7 @@ CIA Compliance Manager is both a live assessment platform **and** a reusable npm
     </td>
     <td>
       <strong><a href="https://ciacompliancemanager.com">🌐 Live Assessment Platform</a></strong><br>
-      Interactive web application for performing CIA triad security assessments, generating compliance reports, estimating implementation costs (CAPEX/OPEX), and quantifying business impact across ISO 27001, NIST 800-53, GDPR, HIPAA, SOC 2, PCI DSS, and EU CRA frameworks. Features real-time dashboards, STRIDE threat modeling, Porter's Five Forces strategic analysis, and professional data classification tools. Built with React 19.x, TypeScript 6/7, Vite 8.x, and Tailwind 4.x — demonstrating Hack23's commitment to transparency and security by design.
+      Interactive web application for performing CIA triad security assessments, generating compliance reports, estimating implementation costs (CAPEX/OPEX), and quantifying business impact across ISO 27001, NIST 800-53, GDPR, HIPAA, SOC 2, PCI DSS, and EU CRA frameworks. Features real-time dashboards, STRIDE threat modeling, Porter's Five Forces strategic analysis, and professional data classification tools. Built with React 19.x, TypeScript 7.0.1-rc via the dedicated `typescript-7` alias plus the TypeScript 6.0.2 compatibility package for tooling, Vite 8.x, and Tailwind 4.x — demonstrating Hack23's commitment to transparency and security by design.
     </td>
   </tr>
   <tr>
@@ -271,7 +271,7 @@ graph TB
     <td width="50%">
       <h3>⚛️ TypeScript React Agent</h3>
       <p><strong>File:</strong> <a href=".github/agents/typescript-react-agent.md"><code>.github/agents/typescript-react-agent.md</code></a></p>
-      <p>Specialist in React&nbsp;19.x and TypeScript 6/7 for building secure, type‑safe components that follow the project's architecture and reusability standards.</p>
+      <p>Specialist in React&nbsp;19.x and the TypeScript 6/7 side-by-side toolchain for building secure, type‑safe components that follow the project's architecture and reusability standards.</p>
       <p><strong>Use for:</strong> new components, state management patterns, type definitions, refactoring, and type‑safe integrations.</p>
     </td>
   </tr>
@@ -496,7 +496,7 @@ import { SecurityProfileProvider, ComplianceContext } from 'cia-compliance-manag
 
 **Technology Stack:**
 - **Runtime:** Node ≥26.0.0, npm ≥10.0.0
-- **Language:** TypeScript 7.0.1-rc (main compiler) with TypeScript 6.0.2 compatibility available via `typescript-6` (ES2025 target)
+- **Language:** TypeScript 7.0.1-rc via the dedicated `typescript-7` alias, while the default `typescript` dependency stays on the 6.0.2 compatibility package for tooling compatibility (ES2025 target)
 - **Framework:** React 19.2.7 + React DOM 19.2.7
 - **Build:** Vite 8.1.3 (ES module bundler)
 - **Styling:** Tailwind CSS 4.3.2
@@ -614,7 +614,7 @@ This project demonstrates compliance controls for multiple frameworks simultaneo
 - Fork and customize for your compliance framework mix
 
 **If you're a Developer or Architect:**
-- Study a real-world React 19 + TypeScript 6/7 + Vite 8 project with 85%+ test coverage
+- Study a real-world React 19 + TypeScript 6/7 side-by-side + Vite 8 project with 85%+ test coverage
 - Learn security-by-design patterns: input validation, CSP, HTTPS enforcement, least-privilege access
 - Explore C4 architecture diagrams, STRIDE threat models, and state machines
 

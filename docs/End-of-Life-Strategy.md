@@ -11,13 +11,13 @@
 
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/Owner-CEO-0A66C2?style=for-the-badge" alt="Owner"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Version-2.1-555?style=for-the-badge" alt="Version"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Effective-2026--04--21-success?style=for-the-badge" alt="Effective Date"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Version-2.2-555?style=for-the-badge" alt="Version"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Effective-2026--07--08-success?style=for-the-badge" alt="Effective Date"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Review-Annual-orange?style=for-the-badge" alt="Review Cycle"/></a>
 </p>
 
-**📋 Document Owner:** CEO | **📄 Version:** 2.1 | **📅 Last Updated:** 2026-04-21 (UTC)  
-**🔄 Review Cycle:** Annual | **⏰ Next Review:** 2027-04-21  
+**📋 Document Owner:** CEO | **📄 Version:** 2.2 | **📅 Last Updated:** 2026-07-08 (UTC)  
+**🔄 Review Cycle:** Annual | **⏰ Next Review:** 2027-07-08  
 **🏷️ Classification:** Public (Open Source Security Compliance Platform)
 
 ---
@@ -67,7 +67,7 @@ mindmap
         📅 Current: Latest
         ⏰ EOL: ~2027-2028
         🔄 Concurrent Features
-      📝 TypeScript 6.0.2 compatibility package + TypeScript 7.0.1-rc
+      📝 TypeScript 6.0.2 compatibility package + TypeScript 7.0.1-rc via the dedicated `typescript-7` alias
         📅 Current: Latest
         ⏰ EOL: Active (quarterly cadence, majors ~yearly)
         🔄 Strict Mode Enabled
@@ -114,14 +114,14 @@ mindmap
 
 ### **🔄 TypeScript 7 Migration Status**
 
-The project has started a controlled migration to TypeScript 7 by adopting the Microsoft-recommended side-by-side setup in `package.json`: the `typescript` dependency now resolves to `typescript@7.0.1-rc` for the main compiler, while `typescript-6` provides `@typescript/typescript6@6.0.2` for compatibility. The migration is tracked as a compatibility-first transition rather than a hard cutover, with lint, build, and tests validated against the new toolchain.
+The project has started a controlled migration to TypeScript 7 by adopting the Microsoft-recommended side-by-side setup in `package.json`: the default `typescript` dependency remains the 6.0.2 compatibility package for tooling compatibility, while the TypeScript 7.0.1-rc compiler is invoked explicitly through the dedicated `typescript-7` alias. The migration is tracked as a compatibility-first transition rather than a hard cutover, with lint, build, and tests validated against the new toolchain.
 
 ### **📊 Technology Lifecycle Overview**
 
 | **Technology Category** | **Current Version**       | **Release Model**               | **EOL Timeline**   | **Migration Complexity**                                                                                                                                |
 | ----------------------- | ------------------------- | ------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **⚛️ React Framework**  | 19.2.7 (Latest)           | Major annually, Minor quarterly | ~2027-2028         | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
-| **📝 TypeScript**       | 7.0.1-rc (main) + 6.0.2 compatibility (migration started) | Major annually, minor quarterly | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
+| **📝 TypeScript**       | 7.0.1-rc via `typescript-7` + 6.0.2 compatibility package (migration started) | Major annually, minor quarterly | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
 | **⚡ Vite Build Tool**  | 8.1.3 (Latest)            | Major annually                  | Active development | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)   |
 | **☕ Node.js Runtime**  | 26.x (Production)         | New: 1 major/year from 27.x    | Current → LTS Oct 2026, EOL Apr 2029 | [![Low](https://img.shields.io/badge/Complexity-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)     |
 | **🧪 Testing Stack**    | Vitest 4.x + Cypress 15.x | Major annually                  | Active development | [![Medium](https://img.shields.io/badge/Complexity-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
