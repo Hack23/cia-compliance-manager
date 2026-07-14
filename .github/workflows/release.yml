@@ -6,7 +6,7 @@ on:
       version:
         description: "Version to release (vX.Y.Z format)"
         required: true
-        default: "v0.1.0"
+        default: "v1.1.0"
       prerelease:
         description: "Is this a pre-release?"
         type: boolean
@@ -34,11 +34,20 @@ jobs:
         with:
           egress-policy: audit
 
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
       - name: Checkout repository
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 0
-
+          token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: true
+          
       - name: Get version
         id: get-version
         run: |
@@ -181,11 +190,19 @@ jobs:
         with:
           egress-policy: audit
 
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
       - name: Checkout repository
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 0
-          # Use GITHUB_REF directly for tag events
+          token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: true
           ref: ${{ github.event_name == 'push' && github.ref || github.event_name == 'workflow_dispatch' && github.event.inputs.version || '' }}
 
       - name: Setup Node.js
@@ -286,11 +303,19 @@ jobs:
         with:
           egress-policy: audit
 
-      # Checkout main branch to get latest documentation
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
       - name: Checkout repository
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: true
           ref: main # Always use main branch for deployment
 
       - name: Download build artifacts
@@ -315,7 +340,7 @@ jobs:
           publish: false
           prerelease: ${{ needs.prepare.outputs.is_prerelease }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
 
       # Create GitHub Release with all artifacts
       - name: Create GitHub Release
@@ -333,7 +358,7 @@ jobs:
             artifacts/security/cia-compliance-manager-${{ needs.prepare.outputs.version }}.spdx.json
             artifacts/security/cia-compliance-manager-${{ needs.prepare.outputs.version }}.zip.intoto.jsonl
             artifacts/security/cia-compliance-manager-${{ needs.prepare.outputs.version }}.spdx.json.intoto.jsonl
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.app-token.outputs.token }}
 
       # Selectively clean only application files
       - name: Clean application files
@@ -376,11 +401,17 @@ jobs:
         with:
           egress-policy: audit
 
-      - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v2
         with:
-          fetch-depth: 0
-          ref: ${{ needs.prepare.outputs.version }}
+          app-id: ${{ vars.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          token: ${{ steps.app-token.outputs.token }}
 
       - name: Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -421,7 +452,6 @@ jobs:
       - name: Publish to npm with provenance
         run: npm publish --provenance --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
 
       - name: Verify npm package
