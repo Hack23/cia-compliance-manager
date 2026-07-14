@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.107**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.108**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **useComponentDetails**(`component`, `level`): [`CIADetails`](../../../types/cia-services/interfaces/CIADetails.md) \| `null`
 
-Defined in: [hooks/useComponentDetails.ts:29](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/hooks/useComponentDetails.ts#L29)
+Defined in: [hooks/useComponentDetails.ts:29](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/hooks/useComponentDetails.ts#L29)
 
 Custom hook for fetching CIA component details with error handling
 

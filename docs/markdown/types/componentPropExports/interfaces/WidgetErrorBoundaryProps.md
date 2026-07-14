@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.107**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.108**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: WidgetErrorBoundaryProps
 
-Defined in: [types/componentPropExports.ts:364](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/types/componentPropExports.ts#L364)
+Defined in: [types/componentPropExports.ts:364](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/types/componentPropExports.ts#L364)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:364](https://github.com/Hack23/cia-co
 
 > **children**: `ReactNode`
 
-Defined in: [types/componentPropExports.ts:368](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/types/componentPropExports.ts#L368)
+Defined in: [types/componentPropExports.ts:368](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/types/componentPropExports.ts#L368)
 
 Child components to wrap with error boundary
 
@@ -24,7 +24,7 @@ Child components to wrap with error boundary
 
 > `optional` **fallback?**: `ReactNode`
 
-Defined in: [types/componentPropExports.ts:373](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/types/componentPropExports.ts#L373)
+Defined in: [types/componentPropExports.ts:373](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/types/componentPropExports.ts#L373)
 
 Optional custom fallback component to display on error
 
@@ -34,7 +34,7 @@ Optional custom fallback component to display on error
 
 > `optional` **onError?**: (`error`, `errorInfo`) => `void`
 
-Defined in: [types/componentPropExports.ts:378](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/types/componentPropExports.ts#L378)
+Defined in: [types/componentPropExports.ts:378](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/types/componentPropExports.ts#L378)
 
 Optional callback when an error is caught
 
@@ -58,7 +58,7 @@ Optional callback when an error is caught
 
 > `optional` **widgetName?**: `string`
 
-Defined in: [types/componentPropExports.ts:383](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/types/componentPropExports.ts#L383)
+Defined in: [types/componentPropExports.ts:383](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/types/componentPropExports.ts#L383)
 
 Optional widget name for error messages
 
@@ -68,6 +68,6 @@ Optional widget name for error messages
 
 > `optional` **testId?**: `string`
 
-Defined in: [types/componentPropExports.ts:388](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/types/componentPropExports.ts#L388)
+Defined in: [types/componentPropExports.ts:388](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/types/componentPropExports.ts#L388)
 
 Optional test ID for automated testing

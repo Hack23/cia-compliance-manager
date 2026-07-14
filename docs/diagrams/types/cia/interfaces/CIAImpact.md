@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.107**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.108**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CIAImpact
 
-Defined in: [types/cia.ts:448](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/types/cia.ts#L448)
+Defined in: [types/cia.ts:448](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/types/cia.ts#L448)
 
 Complete CIA impact model
 
@@ -44,7 +44,7 @@ const ciaImpact: CIAImpact = {
 
 > **availability**: [`AvailabilityImpact`](AvailabilityImpact.md)
 
-Defined in: [types/cia.ts:450](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/types/cia.ts#L450)
+Defined in: [types/cia.ts:450](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/types/cia.ts#L450)
 
 Availability impact assessment
 
@@ -54,7 +54,7 @@ Availability impact assessment
 
 > **integrity**: [`IntegrityImpact`](IntegrityImpact.md)
 
-Defined in: [types/cia.ts:453](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/types/cia.ts#L453)
+Defined in: [types/cia.ts:453](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/types/cia.ts#L453)
 
 Integrity impact assessment
 
@@ -64,6 +64,6 @@ Integrity impact assessment
 
 > **confidentiality**: [`ConfidentialityImpact`](ConfidentialityImpact.md)
 
-Defined in: [types/cia.ts:456](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/types/cia.ts#L456)
+Defined in: [types/cia.ts:456](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/types/cia.ts#L456)
 
 Confidentiality impact assessment

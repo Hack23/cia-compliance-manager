@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.107**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.108**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **RISK\_SCORE\_TO\_LEVEL**: `Record`\<`number`, `string`\>
 
-Defined in: [constants/riskConstants.ts:132](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/constants/riskConstants.ts#L132)
+Defined in: [constants/riskConstants.ts:132](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/constants/riskConstants.ts#L132)
 
 Maps risk scores to risk levels

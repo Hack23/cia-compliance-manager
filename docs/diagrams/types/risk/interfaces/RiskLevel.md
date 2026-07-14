@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.107**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.108**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: RiskLevel
 
-Defined in: [types/risk.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/types/risk.ts#L15)
+Defined in: [types/risk.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/types/risk.ts#L15)
 
 Comprehensive risk level interface
 
@@ -16,7 +16,7 @@ Comprehensive risk level interface
 
 > **level**: [`RiskLevelLiteral`](../type-aliases/RiskLevelLiteral.md)
 
-Defined in: [types/risk.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/types/risk.ts#L16)
+Defined in: [types/risk.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/types/risk.ts#L16)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [types/risk.ts:16](https://github.com/Hack23/cia-compliance-manager/
 
 > **description**: `string`
 
-Defined in: [types/risk.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/types/risk.ts#L17)
+Defined in: [types/risk.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/types/risk.ts#L17)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [types/risk.ts:17](https://github.com/Hack23/cia-compliance-manager/
 
 > **value**: `number`
 
-Defined in: [types/risk.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/types/risk.ts#L18)
+Defined in: [types/risk.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/types/risk.ts#L18)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [types/risk.ts:18](https://github.com/Hack23/cia-compliance-manager/
 
 > `optional` **color?**: `string`
 
-Defined in: [types/risk.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/types/risk.ts#L19)
+Defined in: [types/risk.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/types/risk.ts#L19)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [types/risk.ts:19](https://github.com/Hack23/cia-compliance-manager/
 
 > `optional` **badge?**: `string`
 
-Defined in: [types/risk.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/types/risk.ts#L20)
+Defined in: [types/risk.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/types/risk.ts#L20)

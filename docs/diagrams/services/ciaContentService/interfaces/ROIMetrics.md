@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.107**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.108**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ROIMetrics
 
-Defined in: [services/ciaContentService.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/services/ciaContentService.ts#L30)
+Defined in: [services/ciaContentService.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/services/ciaContentService.ts#L30)
 
 Metrics for ROI assessment
 
@@ -16,7 +16,7 @@ Metrics for ROI assessment
 
 > **value**: `string`
 
-Defined in: [services/ciaContentService.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/services/ciaContentService.ts#L31)
+Defined in: [services/ciaContentService.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/services/ciaContentService.ts#L31)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [services/ciaContentService.ts:31](https://github.com/Hack23/cia-com
 
 > **percentage**: `string`
 
-Defined in: [services/ciaContentService.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/services/ciaContentService.ts#L32)
+Defined in: [services/ciaContentService.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/services/ciaContentService.ts#L32)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [services/ciaContentService.ts:32](https://github.com/Hack23/cia-com
 
 > **description**: `string`
 
-Defined in: [services/ciaContentService.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/136c4eac67174302169f1de284a10b51af1f24f5/src/services/ciaContentService.ts#L33)
+Defined in: [services/ciaContentService.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/c8774c5adae041afe27c3067f53da22f1a7cb253/src/services/ciaContentService.ts#L33)
