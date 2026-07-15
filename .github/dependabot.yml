@@ -4,11 +4,17 @@ updates:
     directory: /
     schedule:
       interval: daily
-
+    cooldown:
+      default-days: 1
+      exclude: ["*"]
+      
   - package-ecosystem: npm
     directory: /
     schedule:
       interval: daily
+    cooldown:
+      default-days: 1
+      exclude: ["*"]
     groups:
       # Vite ecosystem - bundler and related plugins
       vite:
