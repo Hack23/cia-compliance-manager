@@ -203,6 +203,7 @@ jobs:
           branch: main
           clean: false
           commit-message: "docs: update documentation for ${{ needs.prepare.outputs.version || 'development' }}"
+          token: ${{ steps.app-token.outputs.token }}
 
   build:
     name: Build Release Package
@@ -416,6 +417,7 @@ jobs:
           branch: main
           clean: false
           commit-message: "chore(release): deploy version ${{ needs.prepare.outputs.version }}"
+          token: ${{ steps.app-token.outputs.token }}
 
   publish-npm:
     name: Publish npm Package
