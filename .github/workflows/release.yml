@@ -7,9 +7,6 @@ on:
         description: "Version to tag and release (vX.Y.Z or vX.Y.Z-prerelease format)"
         required: true
         default: "v1.1.0"
-  push:
-    tags:
-      - "v*"
 
 # Restrict top-level permissions to minimum required defaults
 permissions: read-all
@@ -21,7 +18,6 @@ concurrency:
 jobs:
   create-release-tag:
     name: Create Release Tag
-    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-26.04
     permissions:
       contents: read
@@ -78,13 +74,13 @@ jobs:
 
   prepare:
     name: Prepare Release
-    if: github.event_name == 'push'
+    needs: [create-release-tag]
     runs-on: ubuntu-26.04
     permissions:
       contents: read
     outputs:
-      version: ${{ steps.get-version.outputs.version }}
-      is_prerelease: ${{ contains(steps.get-version.outputs.version, '-') }}
+      version: ${{ needs.create-release-tag.outputs.version }}
+      is_prerelease: ${{ contains(needs.create-release-tag.outputs.version, '-') }}
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920 # v2.20.0
@@ -104,14 +100,7 @@ jobs:
           fetch-depth: 0
           token: ${{ steps.app-token.outputs.token }}
           persist-credentials: true
-          ref: ${{ github.ref }}
-
-      - name: Get version
-        id: get-version
-        run: |
-          VERSION=${GITHUB_REF#refs/tags/}
-          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
-          echo "Version: ${VERSION}"
+          ref: ${{ needs.create-release-tag.outputs.version }}
           
       - name: Setup display and dependencies
         run: |
