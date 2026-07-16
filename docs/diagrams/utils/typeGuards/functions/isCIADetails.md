@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.112**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isCIADetails**(`value`): `value is CIADetails`
 
-Defined in: [utils/typeGuards.ts:474](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/typeGuards.ts#L474)
+Defined in: [utils/typeGuards.ts:474](https://github.com/Hack23/cia-compliance-manager/blob/72fa42d162c7bd411972c979f0e49eb7a915751c/src/utils/typeGuards.ts#L474)
 
 Type guard for CIADetails
 
