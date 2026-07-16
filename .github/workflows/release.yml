@@ -7,20 +7,22 @@ on:
         description: "Version to tag and release (vX.Y.Z or vX.Y.Z-prerelease format)"
         required: true
         default: "v1.1.0"
-  push:
-    tags:
-      - "v*"
 
 # Restrict top-level permissions to minimum required defaults
 permissions: read-all
 
+concurrency:
+  group: release-production
+  cancel-in-progress: false
+
 jobs:
   create-release-tag:
     name: Create Release Tag
-    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-26.04
     permissions:
       contents: read
+    outputs:
+      version: ${{ steps.release-version.outputs.version }}
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920 # v2.20.0
@@ -48,6 +50,7 @@ jobs:
           node-version: "26"
 
       - name: Validate version and create tag
+        id: release-version
         env:
           RELEASE_VERSION: ${{ inputs.version }}
         run: |
@@ -67,16 +70,17 @@ jobs:
           git commit -m "chore(release): bump version to $RELEASE_VERSION"
           git tag --annotate "$RELEASE_VERSION" --message "$RELEASE_VERSION"
           git push --atomic origin HEAD:main "refs/tags/$RELEASE_VERSION"
+          echo "version=$RELEASE_VERSION" >> "$GITHUB_OUTPUT"
 
   prepare:
     name: Prepare Release
-    if: github.event_name == 'push'
+    needs: [create-release-tag]
     runs-on: ubuntu-26.04
     permissions:
       contents: read
     outputs:
-      version: ${{ steps.get-version.outputs.version }}
-      is_prerelease: ${{ contains(steps.get-version.outputs.version, '-') }}
+      version: ${{ needs.create-release-tag.outputs.version }}
+      is_prerelease: ${{ contains(needs.create-release-tag.outputs.version, '-') }}
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920 # v2.20.0
@@ -96,14 +100,8 @@ jobs:
           fetch-depth: 0
           token: ${{ steps.app-token.outputs.token }}
           persist-credentials: true
+          ref: ${{ needs.create-release-tag.outputs.version }}
           
-      - name: Get version
-        id: get-version
-        run: |
-          VERSION=${GITHUB_REF#refs/tags/}
-          echo "version=${VERSION}" >> $GITHUB_OUTPUT
-          echo "Version: ${VERSION}"
-
       - name: Setup display and dependencies
         run: |
           sudo apt-get update
