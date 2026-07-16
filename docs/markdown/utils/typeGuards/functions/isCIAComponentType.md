@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.112**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isCIAComponentType**(`value`): `value is CIAComponentType`
 
-Defined in: [utils/typeGuards.ts:461](https://github.com/Hack23/cia-compliance-manager/blob/72fa42d162c7bd411972c979f0e49eb7a915751c/src/utils/typeGuards.ts#L461)
+Defined in: [utils/typeGuards.ts:461](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/typeGuards.ts#L461)
 
 Type guard for CIAComponentType
 

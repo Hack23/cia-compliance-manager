@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.112**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **WIDGET\_ICONS**: `object`
 
-Defined in: [constants/uiConstants.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/72fa42d162c7bd411972c979f0e49eb7a915751c/src/constants/uiConstants.ts#L8)
+Defined in: [constants/uiConstants.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/uiConstants.ts#L8)
 
 Widget icons using emoji characters
 
