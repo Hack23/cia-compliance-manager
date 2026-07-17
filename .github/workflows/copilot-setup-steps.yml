@@ -11,8 +11,6 @@ on:
     paths:
       - .github/workflows/copilot-setup-steps.yml
 
-permissions: {}
-
 env:
   GITHUB_TOKEN: ${{ secrets.COPILOT_MCP_GITHUB_PERSONAL_ACCESS_TOKEN }}
   GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.COPILOT_MCP_GITHUB_PERSONAL_ACCESS_TOKEN }}
