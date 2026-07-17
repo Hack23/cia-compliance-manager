@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.113**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getBusinessBenefits**(`level`): [`BusinessItem`](../../../types/businessImpact/interfaces/BusinessItem.md)[]
 
-Defined in: [data/valueCreationData.ts:413](https://github.com/Hack23/cia-compliance-manager/blob/74960a7f81055ddd90d84cebf46e733424aff851/src/data/valueCreationData.ts#L413)
+Defined in: [data/valueCreationData.ts:413](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/data/valueCreationData.ts#L413)
 
 Get business benefits for a specific security level
 
