@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.114**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **COMPONENT\_NAMES**: `object`
 
-Defined in: [constants/coreConstants.ts:479](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/coreConstants.ts#L479)
+Defined in: [constants/coreConstants.ts:479](https://github.com/Hack23/cia-compliance-manager/blob/cfd93aac82f8561e7f02de334225220469ce29a6/src/constants/coreConstants.ts#L479)
 
 Component names used for debugging and logging
 
