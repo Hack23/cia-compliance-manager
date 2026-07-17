@@ -80,4 +80,3 @@ jobs:
           echo "=== HTTP MCP Servers ==="
           echo "📍 GitHub MCP Server: Using HTTP endpoint (https://api.githubcopilot.com/mcp/insiders)"         
           echo "✅ MCP server verification complete"
-
