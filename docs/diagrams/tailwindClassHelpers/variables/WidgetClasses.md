@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.114**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **WidgetClasses**: `object`
 
-Defined in: [utils/tailwindClassHelpers.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/cfd93aac82f8561e7f02de334225220469ce29a6/src/utils/tailwindClassHelpers.ts#L34)
+Defined in: [utils/tailwindClassHelpers.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/tailwindClassHelpers.ts#L34)
 
 Standard class patterns for consistent widget styling
 

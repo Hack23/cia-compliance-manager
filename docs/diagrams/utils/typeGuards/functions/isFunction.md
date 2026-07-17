@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.114**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isFunction**(`value`): `value is Function`
 
-Defined in: [utils/typeGuards.ts:834](https://github.com/Hack23/cia-compliance-manager/blob/cfd93aac82f8561e7f02de334225220469ce29a6/src/utils/typeGuards.ts#L834)
+Defined in: [utils/typeGuards.ts:834](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/typeGuards.ts#L834)
 
 Type guard to check if a value is a function.
 Note: `typeof` returns "function" for both callables and class constructors,

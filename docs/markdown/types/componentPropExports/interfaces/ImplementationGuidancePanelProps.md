@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.114**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ImplementationGuidancePanelProps
 
-Defined in: [types/componentPropExports.ts:90](https://github.com/Hack23/cia-compliance-manager/blob/cfd93aac82f8561e7f02de334225220469ce29a6/src/types/componentPropExports.ts#L90)
+Defined in: [types/componentPropExports.ts:90](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/componentPropExports.ts#L90)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:90](https://github.com/Hack23/cia-com
 
 > **implementationGuides**: ([`TechnicalImplementationDetails`](../../cia-services/interfaces/TechnicalImplementationDetails.md) \| `undefined`)[]
 
-Defined in: [types/componentPropExports.ts:94](https://github.com/Hack23/cia-compliance-manager/blob/cfd93aac82f8561e7f02de334225220469ce29a6/src/types/componentPropExports.ts#L94)
+Defined in: [types/componentPropExports.ts:94](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/componentPropExports.ts#L94)
 
 Implementation guides for the CIA components
 
@@ -24,7 +24,7 @@ Implementation guides for the CIA components
 
 > **availabilityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/componentPropExports.ts:99](https://github.com/Hack23/cia-compliance-manager/blob/cfd93aac82f8561e7f02de334225220469ce29a6/src/types/componentPropExports.ts#L99)
+Defined in: [types/componentPropExports.ts:99](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/componentPropExports.ts#L99)
 
 The selected availability level
 
@@ -34,7 +34,7 @@ The selected availability level
 
 > **integrityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/componentPropExports.ts:104](https://github.com/Hack23/cia-compliance-manager/blob/cfd93aac82f8561e7f02de334225220469ce29a6/src/types/componentPropExports.ts#L104)
+Defined in: [types/componentPropExports.ts:104](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/componentPropExports.ts#L104)
 
 The selected integrity level
 
@@ -44,7 +44,7 @@ The selected integrity level
 
 > **confidentialityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/componentPropExports.ts:109](https://github.com/Hack23/cia-compliance-manager/blob/cfd93aac82f8561e7f02de334225220469ce29a6/src/types/componentPropExports.ts#L109)
+Defined in: [types/componentPropExports.ts:109](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/componentPropExports.ts#L109)
 
 The selected confidentiality level
 
@@ -54,7 +54,7 @@ The selected confidentiality level
 
 > `optional` **className?**: `string`
 
-Defined in: [types/componentPropExports.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/cfd93aac82f8561e7f02de334225220469ce29a6/src/types/componentPropExports.ts#L114)
+Defined in: [types/componentPropExports.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/componentPropExports.ts#L114)
 
 Additional CSS classes
 
@@ -64,6 +64,6 @@ Additional CSS classes
 
 > `optional` **testId?**: `string`
 
-Defined in: [types/componentPropExports.ts:119](https://github.com/Hack23/cia-compliance-manager/blob/cfd93aac82f8561e7f02de334225220469ce29a6/src/types/componentPropExports.ts#L119)
+Defined in: [types/componentPropExports.ts:119](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/componentPropExports.ts#L119)
 
 Test ID for testing
