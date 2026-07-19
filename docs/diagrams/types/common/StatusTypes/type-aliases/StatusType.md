@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.115**](../../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > **StatusType** = `"success"` \| `"info"` \| `"warning"` \| `"error"` \| `"neutral"` \| `"purple"`
 
-Defined in: [types/common/StatusTypes.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/common/StatusTypes.ts#L8)
+Defined in: [types/common/StatusTypes.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/7ccd437a9a11f08277626ae4f6879b747fb31d1f/src/types/common/StatusTypes.ts#L8)
 
 Available status types for badges and indicators
