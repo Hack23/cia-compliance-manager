@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.115**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isInputElement**(`element`): `boolean`
 
-Defined in: [utils/keyboardUtils.ts:329](https://github.com/Hack23/cia-compliance-manager/blob/7ccd437a9a11f08277626ae4f6879b747fb31d1f/src/utils/keyboardUtils.ts#L329)
+Defined in: [utils/keyboardUtils.ts:329](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/keyboardUtils.ts#L329)
 
 Check if element is an input that should prevent shortcuts
 

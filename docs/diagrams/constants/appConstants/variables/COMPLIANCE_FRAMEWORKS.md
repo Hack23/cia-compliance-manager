@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.115**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **COMPLIANCE\_FRAMEWORKS**: `object`
 
-Defined in: [constants/appConstants.ts:175](https://github.com/Hack23/cia-compliance-manager/blob/7ccd437a9a11f08277626ae4f6879b747fb31d1f/src/constants/appConstants.ts#L175)
+Defined in: [constants/appConstants.ts:175](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/appConstants.ts#L175)
 
 Compliance framework display names
 

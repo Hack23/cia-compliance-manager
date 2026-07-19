@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.115**](../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **WIDGET\_TITLES**: `object`
 
-Defined in: [constants/coreConstants.ts:182](https://github.com/Hack23/cia-compliance-manager/blob/7ccd437a9a11f08277626ae4f6879b747fb31d1f/src/constants/coreConstants.ts#L182)
+Defined in: [constants/coreConstants.ts:182](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/coreConstants.ts#L182)
 
 Widget title constants for consistent naming.
 
