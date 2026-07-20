@@ -2,7 +2,7 @@
 
 /**
  * Sitemap Generator for CIA Compliance Manager
- * Generates both sitemap.xml and sitemap.html from docs directory
+ * Generates both sitemap.xml and sitemap.html from all deployed HTML content
  * For SEO optimization on ciacompliancemanager.com
  */
 
@@ -19,7 +19,16 @@ const __dirname = path.dirname(__filename);
 
 const BASE_URL = 'https://ciacompliancemanager.com';
 const DOCS_DIR = path.join(__dirname, 'docs');
+const ANALYSIS_DIR = path.join(__dirname, 'analysis');
 const CURRENT_DATE = new Date().toISOString().split('T')[0];
+
+// The deployment publishes docs at both the site root and /docs/ for legacy URLs.
+// Analysis reports, when present, are published below /analysis/.
+const CONTENT_ROOTS = [
+  { directory: DOCS_DIR, urlPrefix: '' },
+  { directory: DOCS_DIR, urlPrefix: 'docs' },
+  { directory: ANALYSIS_DIR, urlPrefix: 'analysis', optional: true },
+];
 
 // Priority and change frequency configuration
 const CONFIG = {
@@ -96,10 +105,18 @@ function findFiles(dir, fileList = []) {
 }
 
 /**
- * Get relative path from docs directory
+ * Get relative path from a content root.
  */
-function getRelativePath(filePath) {
-  return './' + path.relative(DOCS_DIR, filePath).replace(/\\/g, '/');
+function getRelativePath(filePath, rootDir) {
+  return './' + path.relative(rootDir, filePath).replace(/\\/g, '/');
+}
+
+/**
+ * Add a deployment prefix to a relative content path.
+ */
+function getDeploymentPath(relativePath, urlPrefix) {
+  const contentPath = relativePath.replace(/^\.\//, '');
+  return `./${urlPrefix ? `${urlPrefix}/` : ''}${contentPath}`;
 }
 
 /**
@@ -143,7 +160,7 @@ function pathToURL(relativePath) {
   // Normalize Windows-style path separators to URL-style
   urlPath = urlPath.replace(/\\/g, '/');
   
-  // For index.html at root, use root URL
+  // For index.html at the site root, use the root URL.
   if (urlPath === 'index.html') {
     return BASE_URL;
   }
@@ -628,32 +645,42 @@ function main() {
     process.exit(1);
   }
 
-  // Find all files
-  log('📁 Scanning docs directory...');
-  const allFiles = findFiles(DOCS_DIR);
-  log(`   Found ${allFiles.length} total files`);
-
   // Process files
   const entries = [];
-  allFiles.forEach(filePath => {
-    const relativePath = getRelativePath(filePath);
-    
-    if (!shouldInclude(relativePath)) {
+  let totalFiles = 0;
+  CONTENT_ROOTS.forEach(({ directory, urlPrefix, optional }) => {
+    if (!fs.existsSync(directory)) {
+      if (!optional) {
+        console.error(`❌ Error: content directory not found at ${directory}`);
+        process.exit(1);
+      }
+      log(`   ℹ️  Skipping optional directory ${directory}`);
       return;
     }
 
-    const { category, config } = getCategoryConfig(relativePath);
-    const url = pathToURL(relativePath);
+    log(`📁 Scanning ${directory}...`);
+    const allFiles = findFiles(directory);
+    totalFiles += allFiles.length;
+    allFiles.forEach(filePath => {
+      const relativePath = getRelativePath(filePath, directory);
+      const deploymentPath = getDeploymentPath(relativePath, urlPrefix);
 
-    entries.push({
-      url,
-      lastmod: CURRENT_DATE,
-      changefreq: config.changefreq,
-      priority: config.priority,
-      category,
+      if (!shouldInclude(deploymentPath)) {
+        return;
+      }
+
+      const { category, config } = getCategoryConfig(relativePath);
+      entries.push({
+        url: pathToURL(deploymentPath),
+        lastmod: CURRENT_DATE,
+        changefreq: config.changefreq,
+        priority: config.priority,
+        category,
+      });
     });
   });
 
+  log(`   Found ${totalFiles} total files`);
   log(`✅ Processed ${entries.length} HTML pages\n`);
 
   // Generate sitemap.xml

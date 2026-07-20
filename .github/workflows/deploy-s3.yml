@@ -220,7 +220,16 @@ jobs:
               --size-only
           fi
           
-          echo "✅ Deployment completed (10 sync commands vs 16 previously)"
+          echo "✅ Deployment completed (11 sync commands vs 16 previously)"
+
+          # Analysis reports are generated outside docs and published under /analysis/.
+          # Keep this optional because normal releases may not produce analysis reports.
+          if [ -d "analysis" ]; then
+            echo "📊 Syncing analysis reports..."
+            aws s3 sync analysis/. s3://${{ env.S3_BUCKET_NAME }}/analysis/ \
+              --exclude ".git/*" \
+              --exclude "screenshots/*"
+          fi
 
       # Invalidate CloudFront cache for HTML and metadata only (immutable assets don't need invalidation)
       - name: Invalidate CloudFront
@@ -250,7 +259,6 @@ jobs:
           
           aws cloudfront create-invalidation \
             --distribution-id $CloudFrontDistId \
-            --paths "/index.html" "/docs/index.html" "/*.html" "/docs/*.html" "/*/index.html" "/docs/*/index.html" "/sitemap.xml" "/docs/sitemap.xml" "/manifest.json" "/docs/manifest.json" "/robots.txt" "/docs/robots.txt" "/version.txt" "/docs/version.txt"
+            --paths "/index.html" "/docs/index.html" "/*.html" "/docs/*.html" "/*/index.html" "/docs/*/index.html" "/analysis/*.html" "/analysis/*/index.html" "/sitemap.xml" "/docs/sitemap.xml" "/manifest.json" "/docs/manifest.json" "/robots.txt" "/docs/robots.txt" "/version.txt" "/docs/version.txt"
           
           echo "✅ CloudFront invalidation completed (targeted paths only, reduces cost vs /*)"
-
