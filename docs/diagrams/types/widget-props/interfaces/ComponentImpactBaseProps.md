@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.116**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ComponentImpactBaseProps
 
-Defined in: [types/widget-props.ts:179](https://github.com/Hack23/cia-compliance-manager/blob/9ccce78f1d05ab6ac72d787643353220350a4be4/src/types/widget-props.ts#L179)
+Defined in: [types/widget-props.ts:179](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L179)
 
 Base interface for components that impact security levels
 
@@ -29,7 +29,7 @@ interface MyComponentProps extends ComponentImpactBaseProps {
 
 > **availabilityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:186](https://github.com/Hack23/cia-compliance-manager/blob/9ccce78f1d05ab6ac72d787643353220350a4be4/src/types/widget-props.ts#L186)
+Defined in: [types/widget-props.ts:186](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L186)
 
 Current availability security level
 
@@ -42,7 +42,7 @@ and uptime requirements.
 
 > **integrityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:194](https://github.com/Hack23/cia-compliance-manager/blob/9ccce78f1d05ab6ac72d787643353220350a4be4/src/types/widget-props.ts#L194)
+Defined in: [types/widget-props.ts:194](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L194)
 
 Current integrity security level
 
@@ -55,7 +55,7 @@ and accuracy requirements.
 
 > **confidentialityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:202](https://github.com/Hack23/cia-compliance-manager/blob/9ccce78f1d05ab6ac72d787643353220350a4be4/src/types/widget-props.ts#L202)
+Defined in: [types/widget-props.ts:202](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L202)
 
 Current confidentiality security level
 
@@ -68,7 +68,7 @@ and access control requirements.
 
 > `optional` **className?**: `string`
 
-Defined in: [types/widget-props.ts:207](https://github.com/Hack23/cia-compliance-manager/blob/9ccce78f1d05ab6ac72d787643353220350a4be4/src/types/widget-props.ts#L207)
+Defined in: [types/widget-props.ts:207](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L207)
 
 Optional CSS class name for custom styling
 
@@ -78,7 +78,7 @@ Optional CSS class name for custom styling
 
 > `optional` **testId?**: `string`
 
-Defined in: [types/widget-props.ts:212](https://github.com/Hack23/cia-compliance-manager/blob/9ccce78f1d05ab6ac72d787643353220350a4be4/src/types/widget-props.ts#L212)
+Defined in: [types/widget-props.ts:212](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L212)
 
 Optional test ID for automated testing
 
@@ -88,7 +88,7 @@ Optional test ID for automated testing
 
 > `optional` **onLevelChange?**: (`level`) => `void`
 
-Defined in: [types/widget-props.ts:217](https://github.com/Hack23/cia-compliance-manager/blob/9ccce78f1d05ab6ac72d787643353220350a4be4/src/types/widget-props.ts#L217)
+Defined in: [types/widget-props.ts:217](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L217)
 
 Optional callback when security level changes
 

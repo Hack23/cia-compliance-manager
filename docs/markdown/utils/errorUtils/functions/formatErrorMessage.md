@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.116**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **formatErrorMessage**(`error`): `string`
 
-Defined in: [utils/errorUtils.ts:161](https://github.com/Hack23/cia-compliance-manager/blob/9ccce78f1d05ab6ac72d787643353220350a4be4/src/utils/errorUtils.ts#L161)
+Defined in: [utils/errorUtils.ts:161](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/errorUtils.ts#L161)
 
 Format an error message from various error types
 

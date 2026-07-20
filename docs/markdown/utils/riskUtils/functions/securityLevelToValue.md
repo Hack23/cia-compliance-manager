@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.116**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **securityLevelToValue**(`level`): `number`
 
-Defined in: [utils/riskUtils.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/9ccce78f1d05ab6ac72d787643353220350a4be4/src/utils/riskUtils.ts#L250)
+Defined in: [utils/riskUtils.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/riskUtils.ts#L250)
 
 Convert security level to numerical value
 

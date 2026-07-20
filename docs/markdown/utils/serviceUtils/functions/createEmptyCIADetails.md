@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.116**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **createEmptyCIADetails**(): [`CIADetails`](../../../types/cia-services/interfaces/CIADetails.md)
 
-Defined in: [utils/serviceUtils.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/9ccce78f1d05ab6ac72d787643353220350a4be4/src/utils/serviceUtils.ts#L25)
+Defined in: [utils/serviceUtils.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/serviceUtils.ts#L25)
 
 Creates an empty CIADetails object with default values for all required fields
 This helps satisfy type requirements when creating mock/empty objects
