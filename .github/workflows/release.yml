@@ -194,6 +194,10 @@ jobs:
           fi
           echo "Test results copied at $(date)" > docs/test-results-info.txt
 
+      # Generate the sitemap after all documentation and report HTML is present.
+      - name: Generate sitemap
+        run: npm run docs:sitemap
+
       # Always deploy documentation in prepare phase
       - name: Deploy Documentation to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f # v4.8.0
