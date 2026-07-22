@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.117**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: GroupedShortcuts
 
-Defined in: [types/keyboard.ts:138](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/keyboard.ts#L138)
+Defined in: [types/keyboard.ts:138](https://github.com/Hack23/cia-compliance-manager/blob/a54afd2237f33d8871e4dcc8ad218145e057590e/src/types/keyboard.ts#L138)
 
 Grouped shortcuts by category for help display
 

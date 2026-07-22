@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.117**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **KEY\_DISPLAY\_NAMES**: `object`
 
-Defined in: [constants/keyboardShortcuts.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/keyboardShortcuts.ts#L135)
+Defined in: [constants/keyboardShortcuts.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/a54afd2237f33d8871e4dcc8ad218145e057590e/src/constants/keyboardShortcuts.ts#L135)
 
 Key display names for different platforms
 
