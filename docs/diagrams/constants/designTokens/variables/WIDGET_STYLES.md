@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.117**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **WIDGET\_STYLES**: `object`
 
-Defined in: [constants/designTokens.ts:295](https://github.com/Hack23/cia-compliance-manager/blob/a54afd2237f33d8871e4dcc8ad218145e057590e/src/constants/designTokens.ts#L295)
+Defined in: [constants/designTokens.ts:295](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/designTokens.ts#L295)
 
 Widget-specific styling utilities
 These helpers generate consistent className strings for common widget patterns

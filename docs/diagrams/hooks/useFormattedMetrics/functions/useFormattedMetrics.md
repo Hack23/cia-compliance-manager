@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.117**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **useFormattedMetrics**(`options?`): [`MetricFormatters`](../interfaces/MetricFormatters.md)
 
-Defined in: [hooks/useFormattedMetrics.ts:79](https://github.com/Hack23/cia-compliance-manager/blob/a54afd2237f33d8871e4dcc8ad218145e057590e/src/hooks/useFormattedMetrics.ts#L79)
+Defined in: [hooks/useFormattedMetrics.ts:79](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/hooks/useFormattedMetrics.ts#L79)
 
 Custom hook providing memoized formatting functions for metrics
 

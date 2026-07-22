@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.117**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isComplianceStatus**(`obj`): `boolean`
 
-Defined in: [utils/typeGuards.ts:353](https://github.com/Hack23/cia-compliance-manager/blob/a54afd2237f33d8871e4dcc8ad218145e057590e/src/utils/typeGuards.ts#L353)
+Defined in: [utils/typeGuards.ts:353](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/typeGuards.ts#L353)
 
 Checks if an object is a valid compliance status
 

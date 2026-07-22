@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.117**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **FRAMEWORK\_MINIMUM\_LEVELS**: `Record`\<`string`, \{ `availability`: [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md); `integrity`: [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md); `confidentiality`: [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md); \}\>
 
-Defined in: [constants/complianceConstants.ts:186](https://github.com/Hack23/cia-compliance-manager/blob/a54afd2237f33d8871e4dcc8ad218145e057590e/src/constants/complianceConstants.ts#L186)
+Defined in: [constants/complianceConstants.ts:186](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/complianceConstants.ts#L186)
 
 Minimum security levels required for each framework
