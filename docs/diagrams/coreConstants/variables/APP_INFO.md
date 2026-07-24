@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.118**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **APP\_INFO**: `object`
 
-Defined in: [constants/coreConstants.ts:396](https://github.com/Hack23/cia-compliance-manager/blob/191e4152219d006312588704a3d133d539cb2315/src/constants/coreConstants.ts#L396)
+Defined in: [constants/coreConstants.ts:396](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/coreConstants.ts#L396)
 
 Application metadata
 

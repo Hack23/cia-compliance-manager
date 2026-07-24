@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.118**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **createSecurityResourceService**(`dataProvider`): [`SecurityResourceService`](../classes/SecurityResourceService.md)
 
-Defined in: [services/securityResourceService.ts:256](https://github.com/Hack23/cia-compliance-manager/blob/191e4152219d006312588704a3d133d539cb2315/src/services/securityResourceService.ts#L256)
+Defined in: [services/securityResourceService.ts:256](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/services/securityResourceService.ts#L256)
 
 Create SecurityResourceService with the provided data provider
 

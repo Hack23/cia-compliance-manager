@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.118**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **SecurityLevelMap**\<`T`\> = `Record`\<[`SecurityLevelKey`](SecurityLevelKey.md), `T`\>
 
-Defined in: [constants/appConstants.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/191e4152219d006312588704a3d133d539cb2315/src/constants/appConstants.ts#L17)
+Defined in: [constants/appConstants.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/appConstants.ts#L17)
 
 Generic map type indexed by security level keys
 
