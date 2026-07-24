@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.118**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpactDetail
 
-Defined in: [types/impact.ts:110](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/impact.ts#L110)
+Defined in: [types/impact.ts:110](https://github.com/Hack23/cia-compliance-manager/blob/191e4152219d006312588704a3d133d539cb2315/src/types/impact.ts#L110)
 
 Business impact detail for a specific aspect
 
@@ -16,7 +16,7 @@ Business impact detail for a specific aspect
 
 > `optional` **description?**: `string`
 
-Defined in: [types/impact.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/impact.ts#L114)
+Defined in: [types/impact.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/191e4152219d006312588704a3d133d539cb2315/src/types/impact.ts#L114)
 
 Description of the business impact
 
@@ -26,7 +26,7 @@ Description of the business impact
 
 > `optional` **riskLevel?**: `string`
 
-Defined in: [types/impact.ts:119](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/impact.ts#L119)
+Defined in: [types/impact.ts:119](https://github.com/Hack23/cia-compliance-manager/blob/191e4152219d006312588704a3d133d539cb2315/src/types/impact.ts#L119)
 
 Risk level associated with this impact
 
@@ -36,7 +36,7 @@ Risk level associated with this impact
 
 > `optional` **annualRevenueLoss?**: `string`
 
-Defined in: [types/impact.ts:124](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/impact.ts#L124)
+Defined in: [types/impact.ts:124](https://github.com/Hack23/cia-compliance-manager/blob/191e4152219d006312588704a3d133d539cb2315/src/types/impact.ts#L124)
 
 Estimated annual revenue loss
 
@@ -46,7 +46,7 @@ Estimated annual revenue loss
 
 > `optional` **meanTimeToRecover?**: `string`
 
-Defined in: [types/impact.ts:129](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/impact.ts#L129)
+Defined in: [types/impact.ts:129](https://github.com/Hack23/cia-compliance-manager/blob/191e4152219d006312588704a3d133d539cb2315/src/types/impact.ts#L129)
 
 Mean time to recover from incidents
 
@@ -56,6 +56,6 @@ Mean time to recover from incidents
 
 > `optional` **complianceViolations?**: `string`[]
 
-Defined in: [types/impact.ts:134](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/impact.ts#L134)
+Defined in: [types/impact.ts:134](https://github.com/Hack23/cia-compliance-manager/blob/191e4152219d006312588704a3d133d539cb2315/src/types/impact.ts#L134)
 
 List of potential compliance violations

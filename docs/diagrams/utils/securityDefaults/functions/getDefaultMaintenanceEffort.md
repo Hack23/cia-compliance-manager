@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.118**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getDefaultMaintenanceEffort**(`level`): `string`
 
-Defined in: [utils/securityDefaults.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/securityDefaults.ts#L20)
+Defined in: [utils/securityDefaults.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/191e4152219d006312588704a3d133d539cb2315/src/utils/securityDefaults.ts#L20)
 
 Gets default maintenance effort based on security level
 

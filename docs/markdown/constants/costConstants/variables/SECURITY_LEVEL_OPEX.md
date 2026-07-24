@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.118**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **SECURITY\_LEVEL\_OPEX**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), `number`\>
 
-Defined in: [constants/costConstants.ts:189](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/costConstants.ts#L189)
+Defined in: [constants/costConstants.ts:189](https://github.com/Hack23/cia-compliance-manager/blob/191e4152219d006312588704a3d133d539cb2315/src/constants/costConstants.ts#L189)
 
 OPEX cost ratio for each security level
 Used for calculating ongoing maintenance costs
