@@ -203,7 +203,7 @@
     "cypress-wait-until": "3.0.2",
     "dependency-cruiser": "18.1.0",
     "eslint": "10.8.0",
-    "globals": "17.7.0",
+    "globals": "17.8.0",
     "jsdom": "29.1.1",
     "knip": "6.29.0",
     "license-compliance": "3.0.1",
