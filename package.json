@@ -1,6 +1,6 @@
 {
   "name": "cia-compliance-manager",
-  "version": "1.1.118",
+  "version": "1.1.119",
   "description": "React components, hooks, and services for CIA triad security assessment, compliance management, and risk analysis — supporting ISO 27001, NIST 800-53, SOC 2, GDPR, HIPAA, and EU CRA frameworks",
   "type": "module",
   "main": "dist/index.js",
@@ -228,8 +228,8 @@
     "vitest": "4.1.10"
   },
   "overrides": {
-	"glob": "13.0.6",
-	"brace-expansion": "5.0.8",
+    "glob": "13.0.6",
+    "brace-expansion": "5.0.8",
     "diff": "9.0.0",
     "js-yaml": "5.2.2",
     "license-compliance": {
