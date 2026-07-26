@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.119**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityProfile
 
-Defined in: [types/cia.ts:319](https://github.com/Hack23/cia-compliance-manager/blob/7d45bfa4f992cc55d1be9827bce5909a82933f5f/src/types/cia.ts#L319)
+Defined in: [types/cia.ts:319](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L319)
 
 Security profile containing all security levels
 
@@ -30,7 +30,7 @@ const profile: SecurityProfile = {
 
 > **availabilityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:321](https://github.com/Hack23/cia-compliance-manager/blob/7d45bfa4f992cc55d1be9827bce5909a82933f5f/src/types/cia.ts#L321)
+Defined in: [types/cia.ts:321](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L321)
 
 Security level for system availability
 
@@ -40,7 +40,7 @@ Security level for system availability
 
 > **integrityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:324](https://github.com/Hack23/cia-compliance-manager/blob/7d45bfa4f992cc55d1be9827bce5909a82933f5f/src/types/cia.ts#L324)
+Defined in: [types/cia.ts:324](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L324)
 
 Security level for data integrity
 
@@ -50,7 +50,7 @@ Security level for data integrity
 
 > **confidentialityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:327](https://github.com/Hack23/cia-compliance-manager/blob/7d45bfa4f992cc55d1be9827bce5909a82933f5f/src/types/cia.ts#L327)
+Defined in: [types/cia.ts:327](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L327)
 
 Security level for data confidentiality
 
@@ -60,6 +60,6 @@ Security level for data confidentiality
 
 > **securityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:330](https://github.com/Hack23/cia-compliance-manager/blob/7d45bfa4f992cc55d1be9827bce5909a82933f5f/src/types/cia.ts#L330)
+Defined in: [types/cia.ts:330](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L330)
 
 Overall security level (typically the highest of the three components)

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.119**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getDefaultTechDescription**(`component`, `level`): `string`
 
-Defined in: [utils/technicalDetailsDefaults.ts:93](https://github.com/Hack23/cia-compliance-manager/blob/7d45bfa4f992cc55d1be9827bce5909a82933f5f/src/utils/technicalDetailsDefaults.ts#L93)
+Defined in: [utils/technicalDetailsDefaults.ts:93](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/technicalDetailsDefaults.ts#L93)
 
 Gets default technical description for a CIA component at a specific security level
 

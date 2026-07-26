@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.119**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getTabAriaProps**: (`id`, `isSelected`, `controls`) => `object`
 
-Defined in: [utils/index.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/7d45bfa4f992cc55d1be9827bce5909a82933f5f/src/utils/index.ts#L33)
+Defined in: [utils/index.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/index.ts#L33)
 
 Generate ARIA props for a tab component
 
