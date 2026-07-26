@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.119**](../../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **default**: `React.FC`\<[`CodeBlockProps`](../../../../types/componentPropExports/interfaces/CodeBlockProps.md)\>
 
-Defined in: [components/common/CodeBlock.tsx:115](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/components/common/CodeBlock.tsx#L115)
+Defined in: [components/common/CodeBlock.tsx:115](https://github.com/Hack23/cia-compliance-manager/blob/7d45bfa4f992cc55d1be9827bce5909a82933f5f/src/components/common/CodeBlock.tsx#L115)
 
 CodeBlock component - displays code with optional syntax highlighting and copy functionality
 

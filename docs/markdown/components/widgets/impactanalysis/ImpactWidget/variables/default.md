@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.119**](../../../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **default**: `NamedExoticComponent`\<[`ImpactWidgetProps`](../../../../../types/widget-props/interfaces/ImpactWidgetProps.md)\>
 
-Defined in: [components/widgets/impactanalysis/ImpactWidget.tsx:190](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/components/widgets/impactanalysis/ImpactWidget.tsx#L190)
+Defined in: [components/widgets/impactanalysis/ImpactWidget.tsx:190](https://github.com/Hack23/cia-compliance-manager/blob/7d45bfa4f992cc55d1be9827bce5909a82933f5f/src/components/widgets/impactanalysis/ImpactWidget.tsx#L190)
 
 Shared widget component for displaying CIA component impact analysis
 
