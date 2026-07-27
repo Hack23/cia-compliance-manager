@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.120**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **RISK\_SCORE\_TO\_LEVEL**: `Record`\<`number`, `string`\>
 
-Defined in: [constants/riskConstants.ts:132](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/riskConstants.ts#L132)
+Defined in: [constants/riskConstants.ts:132](https://github.com/Hack23/cia-compliance-manager/blob/c56ca9e444ac92e76d58acb93c1d36a453f9b938/src/constants/riskConstants.ts#L132)
 
 Maps risk scores to risk levels

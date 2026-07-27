@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.120**](../../../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > **SemanticColorType** = keyof *typeof* [`SEMANTIC_COLORS`](../variables/SEMANTIC_COLORS.md)
 
-Defined in: [constants/designTokens.ts:375](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/designTokens.ts#L375)
+Defined in: [constants/designTokens.ts:375](https://github.com/Hack23/cia-compliance-manager/blob/c56ca9e444ac92e76d58acb93c1d36a453f9b938/src/constants/designTokens.ts#L375)
