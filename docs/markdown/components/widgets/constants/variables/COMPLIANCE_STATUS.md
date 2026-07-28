@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.121**](../../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **COMPLIANCE\_STATUS**: `object`
 
-Defined in: [components/widgets/constants.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/5fee1bc4aabc01ca6dd59fb34a80389334401588/src/components/widgets/constants.ts#L10)
+Defined in: [components/widgets/constants.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/components/widgets/constants.ts#L10)
 
 Human-readable compliance status message strings keyed by compliance level
 

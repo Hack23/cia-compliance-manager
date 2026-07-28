@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.121**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **SPACING**: `object`
 
-Defined in: [constants/designTokens.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/5fee1bc4aabc01ca6dd59fb34a80389334401588/src/constants/designTokens.ts#L22)
+Defined in: [constants/designTokens.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/designTokens.ts#L22)
 
 Spacing scale based on a flexible grid system with optimizations
 Use these values for padding, margin, and gap properties
