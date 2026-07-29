@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.122**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getConfidentialityDetails**(`level`): `Promise`\<[`CIADetails`](../../../types/cia-services/interfaces/CIADetails.md)\>
 
-Defined in: [services/ciaContentService.ts:1531](https://github.com/Hack23/cia-compliance-manager/blob/fdbd0224f5e379f45807637facf704ea40d9b47d/src/services/ciaContentService.ts#L1531)
+Defined in: [services/ciaContentService.ts:1531](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/services/ciaContentService.ts#L1531)
 
 ## Parameters
 

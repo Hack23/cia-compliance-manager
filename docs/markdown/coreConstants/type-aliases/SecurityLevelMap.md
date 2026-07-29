@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.122**](../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **SecurityLevelMap**\<`T`\> = `Record`\<[`SecurityLevelKey`](SecurityLevelKey.md), `T`\>
 
-Defined in: [constants/coreConstants.ts:296](https://github.com/Hack23/cia-compliance-manager/blob/fdbd0224f5e379f45807637facf704ea40d9b47d/src/constants/coreConstants.ts#L296)
+Defined in: [constants/coreConstants.ts:296](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/coreConstants.ts#L296)
 
 ## Type Parameters
 
