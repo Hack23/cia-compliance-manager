@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.122**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **calculateSecurityROI**(`securityCost`, `riskReductionPercent`, `potentialLoss`, `timeframeYears?`): `object`
 
-Defined in: [utils/costCalculationUtils.ts:158](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/costCalculationUtils.ts#L158)
+Defined in: [utils/costCalculationUtils.ts:158](https://github.com/Hack23/cia-compliance-manager/blob/fdbd0224f5e379f45807637facf704ea40d9b47d/src/utils/costCalculationUtils.ts#L158)
 
 Calculate security ROI
 
