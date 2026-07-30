@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.123**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **INDUSTRY\_ROI\_FACTORS**: `Record`\<`string`, `number`\>
 
-Defined in: [constants/businessConstants.ts:335](https://github.com/Hack23/cia-compliance-manager/blob/d6e41548f5230c63e532615fc0f3bd3c247b6b44/src/constants/businessConstants.ts#L335)
+Defined in: [constants/businessConstants.ts:335](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/businessConstants.ts#L335)
 
 Security ROI factors by industry
