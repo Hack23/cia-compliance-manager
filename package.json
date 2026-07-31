@@ -208,7 +208,7 @@
     "knip": "6.31.0",
     "license-compliance": "4.0.0",
     "mocha-junit-reporter": "2.2.1",
-    "mochawesome": "8.0.0",
+    "mochawesome": "8.0.1",
     "mochawesome-merge": "5.1.1",
     "mochawesome-report-generator": "6.3.2",
     "postcss": "8.5.25",
