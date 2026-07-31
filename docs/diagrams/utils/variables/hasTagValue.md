@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.124**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **hasTagValue**: (`obj`, `tagValue`) => `boolean`
 
-Defined in: [utils/index.ts:183](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/index.ts#L183)
+Defined in: [utils/index.ts:183](https://github.com/Hack23/cia-compliance-manager/blob/ef7938d5209cc131d632ede3c9addb304b63519c/src/utils/index.ts#L183)
 
 Checks if an object has a specific tag value
 

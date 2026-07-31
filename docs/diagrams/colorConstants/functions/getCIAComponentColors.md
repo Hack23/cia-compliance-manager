@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.124**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getCIAComponentColors**(`component`): `object`
 
-Defined in: [constants/colorConstants.ts:221](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/colorConstants.ts#L221)
+Defined in: [constants/colorConstants.ts:221](https://github.com/Hack23/cia-compliance-manager/blob/ef7938d5209cc131d632ede3c9addb304b63519c/src/constants/colorConstants.ts#L221)
 
 Get CIA component color scheme with dark mode support.
 
