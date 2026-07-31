@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.124**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **formatRiskLevel**: (`riskLevel`) => `string`
 
-Defined in: [utils/index.ts:87](https://github.com/Hack23/cia-compliance-manager/blob/ef7938d5209cc131d632ede3c9addb304b63519c/src/utils/index.ts#L87)
+Defined in: [utils/index.ts:87](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/index.ts#L87)
 
 Formats a risk level by adding an appropriate emoji icon
 

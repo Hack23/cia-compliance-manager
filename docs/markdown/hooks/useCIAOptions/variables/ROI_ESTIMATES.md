@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.124**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > `const` **ROI\_ESTIMATES**: `Record`\<[`ROIType`](../type-aliases/ROIType.md), [`ROIData`](../interfaces/ROIData.md)\>
 
-Defined in: [hooks/useCIAOptions.ts:223](https://github.com/Hack23/cia-compliance-manager/blob/ef7938d5209cc131d632ede3c9addb304b63519c/src/hooks/useCIAOptions.ts#L223)
+Defined in: [hooks/useCIAOptions.ts:223](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/hooks/useCIAOptions.ts#L223)

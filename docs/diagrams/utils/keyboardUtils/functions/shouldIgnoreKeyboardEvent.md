@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.124**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **shouldIgnoreKeyboardEvent**(`event`): `boolean`
 
-Defined in: [utils/keyboardUtils.ts:343](https://github.com/Hack23/cia-compliance-manager/blob/ef7938d5209cc131d632ede3c9addb304b63519c/src/utils/keyboardUtils.ts#L343)
+Defined in: [utils/keyboardUtils.ts:343](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/keyboardUtils.ts#L343)
 
 Check if keyboard event should be ignored for shortcuts
 
