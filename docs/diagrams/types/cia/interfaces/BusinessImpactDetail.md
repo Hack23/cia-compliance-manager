@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.125**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpactDetail
 
-Defined in: [types/cia.ts:245](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L245)
+Defined in: [types/cia.ts:245](https://github.com/Hack23/cia-compliance-manager/blob/d9b35b5e30691338e6477d6720a70864ae43ae9b/src/types/cia.ts#L245)
 
 Business impact detail structure
 
@@ -36,7 +36,7 @@ const impact: BusinessImpactDetail = {
 
 > **description**: `string`
 
-Defined in: [types/cia.ts:247](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L247)
+Defined in: [types/cia.ts:247](https://github.com/Hack23/cia-compliance-manager/blob/d9b35b5e30691338e6477d6720a70864ae43ae9b/src/types/cia.ts#L247)
 
 Detailed description of the business impact
 
@@ -46,7 +46,7 @@ Detailed description of the business impact
 
 > **riskLevel**: `string`
 
-Defined in: [types/cia.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L250)
+Defined in: [types/cia.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/d9b35b5e30691338e6477d6720a70864ae43ae9b/src/types/cia.ts#L250)
 
 Risk level classification (e.g., "Critical Risk", "High Risk", "Medium Risk")
 
@@ -56,7 +56,7 @@ Risk level classification (e.g., "Critical Risk", "High Risk", "Medium Risk")
 
 > `optional` **annualRevenueLoss?**: `string`
 
-Defined in: [types/cia.ts:253](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L253)
+Defined in: [types/cia.ts:253](https://github.com/Hack23/cia-compliance-manager/blob/d9b35b5e30691338e6477d6720a70864ae43ae9b/src/types/cia.ts#L253)
 
 Estimated annual revenue loss range
 
@@ -66,7 +66,7 @@ Estimated annual revenue loss range
 
 > `optional` **meanTimeToRecover?**: `string`
 
-Defined in: [types/cia.ts:256](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L256)
+Defined in: [types/cia.ts:256](https://github.com/Hack23/cia-compliance-manager/blob/d9b35b5e30691338e6477d6720a70864ae43ae9b/src/types/cia.ts#L256)
 
 Mean time to recover from the incident
 
@@ -76,7 +76,7 @@ Mean time to recover from the incident
 
 > `optional` **complianceViolations?**: `string`[]
 
-Defined in: [types/cia.ts:259](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L259)
+Defined in: [types/cia.ts:259](https://github.com/Hack23/cia-compliance-manager/blob/d9b35b5e30691338e6477d6720a70864ae43ae9b/src/types/cia.ts#L259)
 
 List of compliance frameworks that would be violated
 
@@ -86,7 +86,7 @@ List of compliance frameworks that would be violated
 
 > `optional` **financial?**: `object`
 
-Defined in: [types/cia.ts:262](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L262)
+Defined in: [types/cia.ts:262](https://github.com/Hack23/cia-compliance-manager/blob/d9b35b5e30691338e6477d6720a70864ae43ae9b/src/types/cia.ts#L262)
 
 Financial impact details
 
@@ -114,7 +114,7 @@ Estimated annual loss amount
 
 > `optional` **operational?**: `object`
 
-Defined in: [types/cia.ts:272](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L272)
+Defined in: [types/cia.ts:272](https://github.com/Hack23/cia-compliance-manager/blob/d9b35b5e30691338e6477d6720a70864ae43ae9b/src/types/cia.ts#L272)
 
 Operational impact details
 
@@ -142,7 +142,7 @@ Time required to recover operations
 
 > `optional` **reputational?**: `object`
 
-Defined in: [types/cia.ts:282](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L282)
+Defined in: [types/cia.ts:282](https://github.com/Hack23/cia-compliance-manager/blob/d9b35b5e30691338e6477d6720a70864ae43ae9b/src/types/cia.ts#L282)
 
 Reputational impact details
 
@@ -164,7 +164,7 @@ Impact severity level
 
 > `optional` **regulatory?**: `object`
 
-Defined in: [types/cia.ts:290](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L290)
+Defined in: [types/cia.ts:290](https://github.com/Hack23/cia-compliance-manager/blob/d9b35b5e30691338e6477d6720a70864ae43ae9b/src/types/cia.ts#L290)
 
 Regulatory impact details
 
@@ -192,6 +192,6 @@ List of affected regulatory frameworks
 
 > `optional` **summary?**: `string`
 
-Defined in: [types/cia.ts:300](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L300)
+Defined in: [types/cia.ts:300](https://github.com/Hack23/cia-compliance-manager/blob/d9b35b5e30691338e6477d6720a70864ae43ae9b/src/types/cia.ts#L300)
 
 Executive summary of the overall impact
