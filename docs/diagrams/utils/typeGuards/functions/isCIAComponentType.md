@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.125**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isCIAComponentType**(`value`): `value is CIAComponentType`
 
-Defined in: [utils/typeGuards.ts:461](https://github.com/Hack23/cia-compliance-manager/blob/d9b35b5e30691338e6477d6720a70864ae43ae9b/src/utils/typeGuards.ts#L461)
+Defined in: [utils/typeGuards.ts:461](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/typeGuards.ts#L461)
 
 Type guard for CIAComponentType
 
