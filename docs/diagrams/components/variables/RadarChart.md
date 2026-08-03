@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.126**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **RadarChart**: `React.FC`\<`RadarChartProps`\>
 
-Defined in: [components/charts/RadarChart.tsx:64](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/components/charts/RadarChart.tsx#L64)
+Defined in: [components/charts/RadarChart.tsx:64](https://github.com/Hack23/cia-compliance-manager/blob/9ccbd7f17a2eef277e3bb28ec127ec9fa27be180/src/components/charts/RadarChart.tsx#L64)
 
 Radar chart visualization of the CIA security triad
 
