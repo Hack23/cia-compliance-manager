@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.126**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getInformationSensitivity**(`level`): `string`
 
-Defined in: [utils/securityDefaults.ts:48](https://github.com/Hack23/cia-compliance-manager/blob/9ccbd7f17a2eef277e3bb28ec127ec9fa27be180/src/utils/securityDefaults.ts#L48)
+Defined in: [utils/securityDefaults.ts:48](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/securityDefaults.ts#L48)
 
 Gets information sensitivity level based on confidentiality level
 
