@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.127**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: FrameworkComplianceStatus
 
-Defined in: [types/compliance.ts:193](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/compliance.ts#L193)
+Defined in: [types/compliance.ts:193](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/types/compliance.ts#L193)
 
 Status of compliance with a specific framework
 
@@ -16,7 +16,7 @@ Status of compliance with a specific framework
 
 > **name**: `string`
 
-Defined in: [types/compliance.ts:195](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/compliance.ts#L195)
+Defined in: [types/compliance.ts:195](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/types/compliance.ts#L195)
 
 Name of the framework
 
@@ -26,7 +26,7 @@ Name of the framework
 
 > **applicable**: `boolean`
 
-Defined in: [types/compliance.ts:198](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/compliance.ts#L198)
+Defined in: [types/compliance.ts:198](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/types/compliance.ts#L198)
 
 Whether the framework applies
 
@@ -36,7 +36,7 @@ Whether the framework applies
 
 > **status**: `"Compliant"` \| `"Partially Compliant"` \| `"Non-Compliant"`
 
-Defined in: [types/compliance.ts:201](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/compliance.ts#L201)
+Defined in: [types/compliance.ts:201](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/types/compliance.ts#L201)
 
 Current compliance status
 
@@ -46,7 +46,7 @@ Current compliance status
 
 > **compliancePercentage**: `number`
 
-Defined in: [types/compliance.ts:204](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/compliance.ts#L204)
+Defined in: [types/compliance.ts:204](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/types/compliance.ts#L204)
 
 Percentage of requirements met
 
@@ -56,7 +56,7 @@ Percentage of requirements met
 
 > **complianceGaps**: `string`[]
 
-Defined in: [types/compliance.ts:207](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/compliance.ts#L207)
+Defined in: [types/compliance.ts:207](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/types/compliance.ts#L207)
 
 Key gaps in compliance
 
@@ -66,6 +66,6 @@ Key gaps in compliance
 
 > **requiredSecurityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/compliance.ts:210](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/compliance.ts#L210)
+Defined in: [types/compliance.ts:210](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/types/compliance.ts#L210)
 
 Required security level to satisfy the framework

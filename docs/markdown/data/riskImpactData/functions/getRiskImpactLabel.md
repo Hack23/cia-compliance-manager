@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.127**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getRiskImpactLabel**(`level`): `string`
 
-Defined in: [data/riskImpactData.ts:505](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/data/riskImpactData.ts#L505)
+Defined in: [data/riskImpactData.ts:505](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/data/riskImpactData.ts#L505)
 
 Get risk impact level label
 

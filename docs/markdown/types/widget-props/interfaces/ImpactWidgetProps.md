@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.127**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ImpactWidgetProps
 
-Defined in: [types/widget-props.ts:687](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L687)
+Defined in: [types/widget-props.ts:687](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/types/widget-props.ts#L687)
 
 Props for the shared ImpactWidget component
 
@@ -34,7 +34,7 @@ CIA component-specific business impact analysis.
 
 > `optional` **className?**: `string`
 
-Defined in: [types/widget-props.ts:124](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L124)
+Defined in: [types/widget-props.ts:124](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/types/widget-props.ts#L124)
 
 Optional CSS class name for custom styling
 
@@ -57,7 +57,7 @@ Use Tailwind CSS classes or custom CSS classes.
 
 > `optional` **testId?**: `string`
 
-Defined in: [types/widget-props.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L135)
+Defined in: [types/widget-props.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/types/widget-props.ts#L135)
 
 Optional test ID for automated testing
 
@@ -81,7 +81,7 @@ defined in testIds constants.
 
 > `optional` **children?**: `ReactNode`
 
-Defined in: [types/widget-props.ts:243](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L243)
+Defined in: [types/widget-props.ts:243](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/types/widget-props.ts#L243)
 
 Optional children elements
 
@@ -95,7 +95,7 @@ Optional children elements
 
 > `optional` **onError?**: (`error`) => `void`
 
-Defined in: [types/widget-props.ts:249](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L249)
+Defined in: [types/widget-props.ts:249](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/types/widget-props.ts#L249)
 
 Optional callback when widget encounters an error
 
@@ -121,7 +121,7 @@ Error that occurred
 
 > **component**: [`CIAComponent`](../../cia/type-aliases/CIAComponent.md)
 
-Defined in: [types/widget-props.ts:269](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L269)
+Defined in: [types/widget-props.ts:269](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/types/widget-props.ts#L269)
 
 CIA triad component (availability, integrity, or confidentiality)
 
@@ -135,7 +135,7 @@ CIA triad component (availability, integrity, or confidentiality)
 
 > **level**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:274](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L274)
+Defined in: [types/widget-props.ts:274](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/types/widget-props.ts#L274)
 
 Current security level for the component
 
@@ -149,7 +149,7 @@ Current security level for the component
 
 > `optional` **showExtendedDetails?**: `boolean`
 
-Defined in: [types/widget-props.ts:692](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L692)
+Defined in: [types/widget-props.ts:692](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/types/widget-props.ts#L692)
 
 If true, displays extended details (e.g., recommendations for integrity)
 
