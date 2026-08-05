@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.127**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **SECURITY\_RECOMMENDATIONS**: `object`
 
-Defined in: [constants/appConstants.ts:96](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/constants/appConstants.ts#L96)
+Defined in: [constants/appConstants.ts:96](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/appConstants.ts#L96)
 
 Security recommendations for each level
 

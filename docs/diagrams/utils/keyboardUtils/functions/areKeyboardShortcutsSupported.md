@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.127**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **areKeyboardShortcutsSupported**(): `boolean`
 
-Defined in: [utils/keyboardUtils.ts:408](https://github.com/Hack23/cia-compliance-manager/blob/b44ae23b82aba288e01694c3ce1c42a26c105d38/src/utils/keyboardUtils.ts#L408)
+Defined in: [utils/keyboardUtils.ts:408](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/keyboardUtils.ts#L408)
 
 Check if keyboard shortcuts are supported in the current environment
 
