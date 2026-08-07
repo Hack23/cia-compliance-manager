@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.128**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **toErrorObject**: (`err`) => `Error`
 
-Defined in: [utils/index.ts:208](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/index.ts#L208)
+Defined in: [utils/index.ts:208](https://github.com/Hack23/cia-compliance-manager/blob/2e8ac3253dba27a3ec201aa4150b1a187ebebcb1/src/utils/index.ts#L208)
 
 Converts any error value to an Error object
 

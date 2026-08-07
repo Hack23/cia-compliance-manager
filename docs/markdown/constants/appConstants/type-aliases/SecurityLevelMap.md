@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.128**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **SecurityLevelMap**\<`T`\> = `Record`\<[`SecurityLevelKey`](SecurityLevelKey.md), `T`\>
 
-Defined in: [constants/appConstants.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/appConstants.ts#L17)
+Defined in: [constants/appConstants.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/2e8ac3253dba27a3ec201aa4150b1a187ebebcb1/src/constants/appConstants.ts#L17)
 
 Generic map type indexed by security level keys
 
