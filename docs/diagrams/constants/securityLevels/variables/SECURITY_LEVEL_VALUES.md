@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.128**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **SECURITY\_LEVEL\_VALUES**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), `number`\>
 
-Defined in: [constants/securityLevels.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/2e8ac3253dba27a3ec201aa4150b1a187ebebcb1/src/constants/securityLevels.ts#L19)
+Defined in: [constants/securityLevels.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/securityLevels.ts#L19)
 
 Maps security levels to integers for calculations
 Higher number = higher security
