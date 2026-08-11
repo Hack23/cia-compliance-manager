@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.130**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isError**(`value`): `value is Error`
 
-Defined in: [utils/typeGuards.ts:879](https://github.com/Hack23/cia-compliance-manager/blob/b7a836960c2f0704ea92d886eb94f0e28258ad80/src/utils/typeGuards.ts#L879)
+Defined in: [utils/typeGuards.ts:879](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/typeGuards.ts#L879)
 
 Type guard to check if a value is an Error object
 
