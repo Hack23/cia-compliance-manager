@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.130**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **SHORTCUT\_CATEGORY\_LABELS**: `Record`\<[`ShortcutCategory`](../../../types/keyboard/type-aliases/ShortcutCategory.md), `string`\>
 
-Defined in: [constants/keyboardShortcuts.ts:115](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/keyboardShortcuts.ts#L115)
+Defined in: [constants/keyboardShortcuts.ts:115](https://github.com/Hack23/cia-compliance-manager/blob/b7a836960c2f0704ea92d886eb94f0e28258ad80/src/constants/keyboardShortcuts.ts#L115)
 
 Category labels for help display

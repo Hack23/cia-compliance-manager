@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.130**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **REGULATORY\_REGIONS**: `object`
 
-Defined in: [constants/complianceConstants.ts:67](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/complianceConstants.ts#L67)
+Defined in: [constants/complianceConstants.ts:67](https://github.com/Hack23/cia-compliance-manager/blob/b7a836960c2f0704ea92d886eb94f0e28258ad80/src/constants/complianceConstants.ts#L67)
 
 Regulatory regions
 

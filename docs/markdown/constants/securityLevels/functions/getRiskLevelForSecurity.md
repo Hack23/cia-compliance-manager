@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.130**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getRiskLevelForSecurity**(`level`): `string`
 
-Defined in: [constants/securityLevels.ts:148](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/securityLevels.ts#L148)
+Defined in: [constants/securityLevels.ts:148](https://github.com/Hack23/cia-compliance-manager/blob/b7a836960c2f0704ea92d886eb94f0e28258ad80/src/constants/securityLevels.ts#L148)
 
 Gets a risk level string for a security level
 
