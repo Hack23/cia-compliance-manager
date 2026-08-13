@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.132**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getNistControlMappings**(): [`ControlMapping`](../interfaces/ControlMapping.md)[]
 
-Defined in: [services/ComplianceServiceAdapter.ts:601](https://github.com/Hack23/cia-compliance-manager/blob/18c7e9fa5b86ac2162df1bb4c2600dea2227dddb/src/services/ComplianceServiceAdapter.ts#L601)
+Defined in: [services/ComplianceServiceAdapter.ts:601](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/services/ComplianceServiceAdapter.ts#L601)
 
 Get NIST 800-53 control mappings
 

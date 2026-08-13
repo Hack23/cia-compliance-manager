@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.132**](../../../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **default**: `React.FC`\<[`ImplementationGuidancePanelProps`](../../../../../types/componentPropExports/interfaces/ImplementationGuidancePanelProps.md)\>
 
-Defined in: [components/widgets/implementationguide/ImplementationGuidancePanel.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/18c7e9fa5b86ac2162df1bb4c2600dea2227dddb/src/components/widgets/implementationguide/ImplementationGuidancePanel.tsx#L31)
+Defined in: [components/widgets/implementationguide/ImplementationGuidancePanel.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/components/widgets/implementationguide/ImplementationGuidancePanel.tsx#L31)
 
 ImplementationGuidancePanel component - displays implementation tips and guidance
 
