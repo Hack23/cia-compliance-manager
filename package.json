@@ -215,7 +215,7 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-error-boundary": "6.1.2",
-    "rollup-plugin-visualizer": "7.0.1",
+    "rollup-plugin-visualizer": "7.1.1",
     "start-server-and-test": "3.0.12",
     "tailwindcss": "4.3.3",
     "typedoc": "0.28.20",
