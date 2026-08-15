@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.133**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **useSecurityMetricsService**(): `object`
 
-Defined in: [hooks/useSecurityMetricsService.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/a3e63053a25f76d3ab18122863c3f4b04ccf4967/src/hooks/useSecurityMetricsService.ts#L13)
+Defined in: [hooks/useSecurityMetricsService.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/hooks/useSecurityMetricsService.ts#L13)
 
 Hook for accessing the SecurityMetricsService
 
