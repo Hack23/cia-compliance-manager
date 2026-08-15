@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.133**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: KeyboardShortcutContextValue
 
-Defined in: [types/keyboard.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/keyboard.ts#L78)
+Defined in: [types/keyboard.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/a3e63053a25f76d3ab18122863c3f4b04ccf4967/src/types/keyboard.ts#L78)
 
 Keyboard shortcut context value
 
@@ -16,7 +16,7 @@ Keyboard shortcut context value
 
 > **shortcuts**: [`ShortcutMap`](../type-aliases/ShortcutMap.md)
 
-Defined in: [types/keyboard.ts:80](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/keyboard.ts#L80)
+Defined in: [types/keyboard.ts:80](https://github.com/Hack23/cia-compliance-manager/blob/a3e63053a25f76d3ab18122863c3f4b04ccf4967/src/types/keyboard.ts#L80)
 
 All registered shortcuts
 
@@ -26,7 +26,7 @@ All registered shortcuts
 
 > **registerShortcut**: (`shortcut`) => `void`
 
-Defined in: [types/keyboard.ts:83](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/keyboard.ts#L83)
+Defined in: [types/keyboard.ts:83](https://github.com/Hack23/cia-compliance-manager/blob/a3e63053a25f76d3ab18122863c3f4b04ccf4967/src/types/keyboard.ts#L83)
 
 Register a new shortcut
 
@@ -46,7 +46,7 @@ Register a new shortcut
 
 > **unregisterShortcut**: (`id`) => `void`
 
-Defined in: [types/keyboard.ts:86](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/keyboard.ts#L86)
+Defined in: [types/keyboard.ts:86](https://github.com/Hack23/cia-compliance-manager/blob/a3e63053a25f76d3ab18122863c3f4b04ccf4967/src/types/keyboard.ts#L86)
 
 Unregister a shortcut by id
 
@@ -66,7 +66,7 @@ Unregister a shortcut by id
 
 > **isEnabled**: `boolean`
 
-Defined in: [types/keyboard.ts:89](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/keyboard.ts#L89)
+Defined in: [types/keyboard.ts:89](https://github.com/Hack23/cia-compliance-manager/blob/a3e63053a25f76d3ab18122863c3f4b04ccf4967/src/types/keyboard.ts#L89)
 
 Check if shortcuts are enabled
 
@@ -76,7 +76,7 @@ Check if shortcuts are enabled
 
 > **setEnabled**: (`enabled`) => `void`
 
-Defined in: [types/keyboard.ts:92](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/keyboard.ts#L92)
+Defined in: [types/keyboard.ts:92](https://github.com/Hack23/cia-compliance-manager/blob/a3e63053a25f76d3ab18122863c3f4b04ccf4967/src/types/keyboard.ts#L92)
 
 Enable/disable all shortcuts
 
@@ -96,7 +96,7 @@ Enable/disable all shortcuts
 
 > **platform**: [`Platform`](../type-aliases/Platform.md)
 
-Defined in: [types/keyboard.ts:95](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/keyboard.ts#L95)
+Defined in: [types/keyboard.ts:95](https://github.com/Hack23/cia-compliance-manager/blob/a3e63053a25f76d3ab18122863c3f4b04ccf4967/src/types/keyboard.ts#L95)
 
 Get current platform
 
@@ -106,7 +106,7 @@ Get current platform
 
 > **showHelp**: `boolean`
 
-Defined in: [types/keyboard.ts:98](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/keyboard.ts#L98)
+Defined in: [types/keyboard.ts:98](https://github.com/Hack23/cia-compliance-manager/blob/a3e63053a25f76d3ab18122863c3f4b04ccf4967/src/types/keyboard.ts#L98)
 
 Toggle help modal visibility
 
@@ -116,7 +116,7 @@ Toggle help modal visibility
 
 > **setShowHelp**: (`show`) => `void`
 
-Defined in: [types/keyboard.ts:101](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/keyboard.ts#L101)
+Defined in: [types/keyboard.ts:101](https://github.com/Hack23/cia-compliance-manager/blob/a3e63053a25f76d3ab18122863c3f4b04ccf4967/src/types/keyboard.ts#L101)
 
 Set help modal visibility
 
