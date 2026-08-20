@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.135**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **COMPLIANCE\_STATUS**: `object`
 
-Defined in: [constants/appConstants.ts:88](https://github.com/Hack23/cia-compliance-manager/blob/adbb4925fe59f61a674ca7ca5a3bd8d1bad15900/src/constants/appConstants.ts#L88)
+Defined in: [constants/appConstants.ts:88](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/appConstants.ts#L88)
 
 Compliance status display text
 

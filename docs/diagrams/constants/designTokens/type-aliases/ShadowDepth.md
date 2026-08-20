@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.135**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > **ShadowDepth** = keyof *typeof* [`SHADOWS`](../variables/SHADOWS.md)
 
-Defined in: [constants/designTokens.ts:376](https://github.com/Hack23/cia-compliance-manager/blob/adbb4925fe59f61a674ca7ca5a3bd8d1bad15900/src/constants/designTokens.ts#L376)
+Defined in: [constants/designTokens.ts:376](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/designTokens.ts#L376)
