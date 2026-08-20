@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.135**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ISecurityMetricsService
 
-Defined in: [types/services.ts:296](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/services.ts#L296)
+Defined in: [types/services.ts:296](https://github.com/Hack23/cia-compliance-manager/blob/adbb4925fe59f61a674ca7ca5a3bd8d1bad15900/src/types/services.ts#L296)
 
 Security Metrics Service interface
 
@@ -22,7 +22,7 @@ Provides security scoring and metrics calculation
 
 > `readonly` **name**: `string`
 
-Defined in: [types/services.ts:82](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/services.ts#L82)
+Defined in: [types/services.ts:82](https://github.com/Hack23/cia-compliance-manager/blob/adbb4925fe59f61a674ca7ca5a3bd8d1bad15900/src/types/services.ts#L82)
 
 Service name for identification and logging
 
@@ -36,7 +36,7 @@ Service name for identification and logging
 
 > **validate**(`input`): `boolean`
 
-Defined in: [types/services.ts:90](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/services.ts#L90)
+Defined in: [types/services.ts:90](https://github.com/Hack23/cia-compliance-manager/blob/adbb4925fe59f61a674ca7ca5a3bd8d1bad15900/src/types/services.ts#L90)
 
 Validate input parameters (returns simple boolean)
 
@@ -64,7 +64,7 @@ True if valid, false otherwise
 
 > **handleError**(`error`): [`ServiceError`](../../../services/errors/classes/ServiceError.md)
 
-Defined in: [types/services.ts:98](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/services.ts#L98)
+Defined in: [types/services.ts:98](https://github.com/Hack23/cia-compliance-manager/blob/adbb4925fe59f61a674ca7ca5a3bd8d1bad15900/src/types/services.ts#L98)
 
 Handle errors consistently across services
 
@@ -92,7 +92,7 @@ Formatted ServiceError
 
 > **calculateSecurityScore**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `number`
 
-Defined in: [types/services.ts:305](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/services.ts#L305)
+Defined in: [types/services.ts:305](https://github.com/Hack23/cia-compliance-manager/blob/adbb4925fe59f61a674ca7ca5a3bd8d1bad15900/src/types/services.ts#L305)
 
 Calculate overall security score
 
@@ -128,7 +128,7 @@ Security score (0-100)
 
 > **getComponentMetrics**(`component`, `level`): [`IComponentMetrics`](IComponentMetrics.md)
 
-Defined in: [types/services.ts:318](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/services.ts#L318)
+Defined in: [types/services.ts:318](https://github.com/Hack23/cia-compliance-manager/blob/adbb4925fe59f61a674ca7ca5a3bd8d1bad15900/src/types/services.ts#L318)
 
 Get component metrics
 
@@ -158,7 +158,7 @@ Component-specific metrics
 
 > **getImpactMetrics**(`component`, `level`): [`IImpactMetrics`](IImpactMetrics.md)
 
-Defined in: [types/services.ts:327](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/services.ts#L327)
+Defined in: [types/services.ts:327](https://github.com/Hack23/cia-compliance-manager/blob/adbb4925fe59f61a674ca7ca5a3bd8d1bad15900/src/types/services.ts#L327)
 
 Get impact metrics
 
@@ -188,7 +188,7 @@ Impact metrics
 
 > **getSecurityIcon**(`level`): `string`
 
-Defined in: [types/services.ts:335](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/services.ts#L335)
+Defined in: [types/services.ts:335](https://github.com/Hack23/cia-compliance-manager/blob/adbb4925fe59f61a674ca7ca5a3bd8d1bad15900/src/types/services.ts#L335)
 
 Get security icon for a level
 
@@ -212,7 +212,7 @@ Icon string (emoji)
 
 > **getProtectionLevel**(`level`): `string`
 
-Defined in: [types/services.ts:343](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/services.ts#L343)
+Defined in: [types/services.ts:343](https://github.com/Hack23/cia-compliance-manager/blob/adbb4925fe59f61a674ca7ca5a3bd8d1bad15900/src/types/services.ts#L343)
 
 Get protection level description
 

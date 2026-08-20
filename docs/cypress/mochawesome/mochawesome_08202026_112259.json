@@ -1,0 +1,285 @@
+{
+  "stats": {
+    "suites": 5,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-08-20T11:22:38.138Z",
+    "end": "2026-08-20T11:22:59.559Z",
+    "duration": 21421,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c5b4aa44-c436-4c9e-bf41-9d1ed605f229",
+      "title": "",
+      "fullFile": "cypress/e2e/integration/cross-widget-interactions.cy.ts",
+      "file": "cypress/e2e/integration/cross-widget-interactions.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6e737f93-57ee-4843-a7a6-310f5d098bb4",
+          "title": "Cross-Widget Interactions",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "6dab171a-bc81-496f-a595-d50290e5064e",
+              "title": "Security Level to All Widgets",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should update all widgets when security levels change",
+                  "fullTitle": "Cross-Widget Interactions Security Level to All Widgets should update all widgets when security levels change",
+                  "timedOut": null,
+                  "duration": 6135,
+                  "state": "passed",
+                  "speed": "medium",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(\"🔄 Testing security level changes propagate to all widgets\");\n// Set initial security levels\ncy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW);\n// Ensure widgets are loaded before capturing count\ncy.verifyMinimumWidgets(5);\n// Capture initial widget count and then test changes\ncy.get('[data-testid*=\"widget\"]').then(($initialWidgets) => {\n    const initialWidgetCount = $initialWidgets.length;\n    cy.log(`✓ Found ${initialWidgetCount} widgets in initial state`);\n    // Change to high security\n    cy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n    // Verify all widgets still rendered and potentially updated\n    cy.get('[data-testid*=\"widget\"]').then(($widgets) => {\n        expect($widgets.length).to.be.at.least(initialWidgetCount);\n        cy.log(`✓ All ${$widgets.length} widgets updated successfully`);\n    });\n});\ncy.log(\"✅ All widgets respond to security level changes\");",
+                  "err": {},
+                  "uuid": "93ce3f47-769f-4398-907b-870c4ed42533",
+                  "parentUUID": "6dab171a-bc81-496f-a595-d50290e5064e",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "should show consistent security level across all displaying widgets",
+                  "fullTitle": "Cross-Widget Interactions Security Level to All Widgets should show consistent security level across all displaying widgets",
+                  "timedOut": null,
+                  "duration": 2670,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(\"🔍 Testing security level consistency across widgets\");\n// Set security levels\ncy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE);\n// Check body text for consistency\ncy.get(\"body\").then(($body) => {\n    const pageText = $body.text().toLowerCase();\n    // Verify \"high\" appears (from Integrity: High)\n    const hasHigh = pageText.includes(\"high\");\n    // Verify \"moderate\" appears (from Availability and Confidentiality)\n    const hasModerate = pageText.includes(\"moderate\");\n    cy.log(`✓ High security level mentioned: ${hasHigh}`);\n    cy.log(`✓ Moderate security level mentioned: ${hasModerate}`);\n    // At least one widget should show the selected levels\n    expect(hasHigh || hasModerate).to.be.true;\n});\ncy.log(\"✅ Security levels consistently displayed across widgets\");",
+                  "err": {},
+                  "uuid": "8d90d303-03a1-4d18-a978-2887d0bc7aa4",
+                  "parentUUID": "6dab171a-bc81-496f-a595-d50290e5064e",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "93ce3f47-769f-4398-907b-870c4ed42533",
+                "8d90d303-03a1-4d18-a978-2887d0bc7aa4"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 8805,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "07262f48-d336-410f-a4b7-8ca3706f858b",
+              "title": "Cost Estimation Widget Integration",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should update costs when security levels change",
+                  "fullTitle": "Cross-Widget Interactions Cost Estimation Widget Integration should update costs when security levels change",
+                  "timedOut": null,
+                  "duration": 4975,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(\"💰 Testing Cost Estimation Widget integration\");\n// Start with low security\ncy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW);\ncy.get('[data-testid*=\"cost\"]')\n    .first()\n    .invoke(\"text\")\n    .then((lowSecurityCostText) => {\n    cy.log(`Low security cost display: ${lowSecurityCostText.slice(0, 50)}...`);\n    // Change to high security\n    cy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n    cy.get('[data-testid*=\"cost\"]')\n        .first()\n        .invoke(\"text\")\n        .then((highSecurityCostText) => {\n        cy.log(`High security cost display: ${highSecurityCostText.slice(0, 50)}...`);\n        // Verify cost display changed (content should be different)\n        const costChanged = highSecurityCostText !== lowSecurityCostText;\n        if (costChanged) {\n            cy.log(\"✓ Cost estimation updated with security level change\");\n        }\n        else {\n            cy.log(\"ℹ Cost display appears unchanged\");\n        }\n        // Just verify the widget is present and has content\n        expect(highSecurityCostText.length).to.be.greaterThan(0);\n    });\n});\ncy.log(\"✅ Cost Estimation Widget responds to security changes\");",
+                  "err": {},
+                  "uuid": "ca51f478-6c89-4bb3-b68f-ebb3b8e1bd8d",
+                  "parentUUID": "07262f48-d336-410f-a4b7-8ca3706f858b",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "ca51f478-6c89-4bb3-b68f-ebb3b8e1bd8d"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 4975,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "ad92a131-dbff-4c3f-af08-e510665cb15a",
+              "title": "Widget Synchronization",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should synchronize all widgets within reasonable time",
+                  "fullTitle": "Cross-Widget Interactions Widget Synchronization should synchronize all widgets within reasonable time",
+                  "timedOut": null,
+                  "duration": 2843,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(\"⚡ Testing widget synchronization performance\");\n// Make a change that affects all widgets\ncy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n// Verify all widgets are visible and synchronized\ncy.verifyMinimumWidgets(5);\ncy.get('[data-testid*=\"widget\"]').should(\"have.length.at.least\", 5);\ncy.log(\"✅ Widget synchronization performance acceptable\");",
+                  "err": {},
+                  "uuid": "81b8fee5-af03-4968-ae22-99f082a26716",
+                  "parentUUID": "ad92a131-dbff-4c3f-af08-e510665cb15a",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "should maintain synchronization during rapid changes",
+                  "fullTitle": "Cross-Widget Interactions Widget Synchronization should maintain synchronization during rapid changes",
+                  "timedOut": null,
+                  "duration": 1782,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(\"⚡ Testing synchronization under rapid changes\");\n// Perform rapid changes\nfor (let i = 0; i < 5; i++) {\n    const level = i % 2 === 0 ? _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW : _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH;\n    cy.get(\"select\").eq(0).select(level, { force: true });\n}\n// Verify all widgets still functional by checking they exist\ncy.verifyMinimumWidgets(5);\ncy.get('[data-testid*=\"widget\"]').should(\"have.length.at.least\", 5);\ncy.log(\"✅ Synchronization maintained during rapid changes\");",
+                  "err": {},
+                  "uuid": "6a1888bd-1b56-4a39-9417-ed7987232c19",
+                  "parentUUID": "ad92a131-dbff-4c3f-af08-e510665cb15a",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "81b8fee5-af03-4968-ae22-99f082a26716",
+                "6a1888bd-1b56-4a39-9417-ed7987232c19"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 4625,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "314baffd-3bec-4edd-a498-b05d5bb0682d",
+              "title": "Data Flow Validation",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should flow data correctly from inputs to all output widgets",
+                  "fullTitle": "Cross-Widget Interactions Data Flow Validation should flow data correctly from inputs to all output widgets",
+                  "timedOut": null,
+                  "duration": 2670,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(\"🔄 Testing end-to-end data flow\");\n// Step 1: Set inputs (security levels)\ncy.log(\"Step 1: Setting security level inputs\");\ncy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n// Step 2: Verify inputs registered\ncy.log(\"Step 2: Verifying inputs registered\");\ncy.get(\"select\").eq(0).should(\"have.value\", _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE);\ncy.get(\"select\").eq(1).should(\"have.value\", _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\ncy.get(\"select\").eq(2).should(\"have.value\", _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n// Step 3: Verify outputs (widgets) updated\ncy.log(\"Step 3: Verifying outputs updated\");\nconst widgetTypes = [\n    \"summary\",\n    \"cost\",\n    \"compliance\",\n    \"impact\",\n    \"technical\",\n    \"value\",\n];\nwidgetTypes.forEach((type) => {\n    cy.get(`[data-testid*=\"${type}\"]`).then(($widgets) => {\n        if ($widgets.length > 0) {\n            cy.log(`✓ ${type} widgets updated (${$widgets.length} found)`);\n        }\n    });\n});\ncy.log(\"✅ End-to-end data flow validated\");",
+                  "err": {},
+                  "uuid": "3ffe8faf-454d-4d4d-9da9-02dfa3dd441c",
+                  "parentUUID": "314baffd-3bec-4edd-a498-b05d5bb0682d",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "3ffe8faf-454d-4d4d-9da9-02dfa3dd441c"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 2670,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.0.1"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "build/cypress/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "code": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "charts": true,
+        "showHooks": "failed",
+        "embeddedScreenshots": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}

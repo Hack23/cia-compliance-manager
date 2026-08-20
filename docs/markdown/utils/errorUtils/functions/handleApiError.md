@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.135**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **handleApiError**(`error`, `operation`): `string`
 
-Defined in: [utils/errorUtils.ts:188](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/errorUtils.ts#L188)
+Defined in: [utils/errorUtils.ts:188](https://github.com/Hack23/cia-compliance-manager/blob/adbb4925fe59f61a674ca7ca5a3bd8d1bad15900/src/utils/errorUtils.ts#L188)
 
 Handle an API error with operation context
 
