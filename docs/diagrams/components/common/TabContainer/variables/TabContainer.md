@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.137**](../../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **TabContainer**: `React.FC`\<[`TabContainerProps`](../interfaces/TabContainerProps.md)\>
 
-Defined in: [components/common/TabContainer.tsx:72](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/components/common/TabContainer.tsx#L72)
+Defined in: [components/common/TabContainer.tsx:72](https://github.com/Hack23/cia-compliance-manager/blob/93f1d84ade636c2035c7999465a9c27157ae0ace/src/components/common/TabContainer.tsx#L72)
 
 TabContainer - Standardized tab navigation component
 

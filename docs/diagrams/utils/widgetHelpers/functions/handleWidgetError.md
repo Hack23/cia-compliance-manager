@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.137**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **handleWidgetError**(`error`): `string`
 
-Defined in: [utils/widgetHelpers.ts:105](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/widgetHelpers.ts#L105)
+Defined in: [utils/widgetHelpers.ts:105](https://github.com/Hack23/cia-compliance-manager/blob/93f1d84ade636c2035c7999465a9c27157ae0ace/src/utils/widgetHelpers.ts#L105)
 
 Handle widget errors and format error messages consistently
 
