@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.137**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityLevelClass**(`level`): `string`
 
-Defined in: [utils/colorUtils.ts:179](https://github.com/Hack23/cia-compliance-manager/blob/93f1d84ade636c2035c7999465a9c27157ae0ace/src/utils/colorUtils.ts#L179)
+Defined in: [utils/colorUtils.ts:179](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/colorUtils.ts#L179)
 
 Get CSS class for a security level
 

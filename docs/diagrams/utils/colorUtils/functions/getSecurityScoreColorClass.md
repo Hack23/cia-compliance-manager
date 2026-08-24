@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.137**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityScoreColorClass**(`score`): `string`
 
-Defined in: [utils/colorUtils.ts:207](https://github.com/Hack23/cia-compliance-manager/blob/93f1d84ade636c2035c7999465a9c27157ae0ace/src/utils/colorUtils.ts#L207)
+Defined in: [utils/colorUtils.ts:207](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/colorUtils.ts#L207)
 
 Get background color class for security score (0-100)
 Preserve the exact behavior from main branch

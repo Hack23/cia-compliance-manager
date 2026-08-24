@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.137**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getROIEstimate**(`level`): `object`
 
-Defined in: [data/valueCreationData.ts:377](https://github.com/Hack23/cia-compliance-manager/blob/93f1d84ade636c2035c7999465a9c27157ae0ace/src/data/valueCreationData.ts#L377)
+Defined in: [data/valueCreationData.ts:377](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/data/valueCreationData.ts#L377)
 
 Get ROI estimate for a specific security level
 
