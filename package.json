@@ -219,7 +219,7 @@
     "start-server-and-test": "3.0.12",
     "tailwindcss": "4.3.3",
     "typedoc": "0.28.20",
-    "typedoc-plugin-markdown": "4.12.0",
+    "typedoc-plugin-markdown": "4.13.0",
     "typedoc-plugin-mermaid": "1.12.0",
     "typescript": "npm:@typescript/typescript6@6.0.2",
     "typescript-7": "npm:typescript@7.0.2",
