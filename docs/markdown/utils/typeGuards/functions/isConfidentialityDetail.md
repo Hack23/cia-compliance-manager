@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.138**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isConfidentialityDetail**(`obj`): `obj is ConfidentialityDetail`
 
-Defined in: [utils/typeGuards.ts:86](https://github.com/Hack23/cia-compliance-manager/blob/daf6e30357f2f03bad3af17a53802a86917ac171/src/utils/typeGuards.ts#L86)
+Defined in: [utils/typeGuards.ts:86](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/typeGuards.ts#L86)
 
 Type guard to check if an object is a ConfidentialityDetail
 

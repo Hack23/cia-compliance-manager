@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.138**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getValuePoints**(`level`): `string`[]
 
-Defined in: [data/valueCreationData.ts:391](https://github.com/Hack23/cia-compliance-manager/blob/daf6e30357f2f03bad3af17a53802a86917ac171/src/data/valueCreationData.ts#L391)
+Defined in: [data/valueCreationData.ts:391](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/data/valueCreationData.ts#L391)
 
 Get value points for a specific security level
 
