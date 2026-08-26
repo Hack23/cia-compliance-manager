@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.139**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CIADetails
 
-Defined in: [types/cia.ts:532](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L532)
+Defined in: [types/cia.ts:532](https://github.com/Hack23/cia-compliance-manager/blob/fb48405c6b6b18111764c7bebe65fc8cb86df743/src/types/cia.ts#L532)
 
 CIA details structure
 
@@ -35,7 +35,7 @@ const details: CIADetails = {
 
 > `optional` **description?**: `string`
 
-Defined in: [types/cia.ts:534](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L534)
+Defined in: [types/cia.ts:534](https://github.com/Hack23/cia-compliance-manager/blob/fb48405c6b6b18111764c7bebe65fc8cb86df743/src/types/cia.ts#L534)
 
 General description of the configuration
 
@@ -45,7 +45,7 @@ General description of the configuration
 
 > `optional` **impact?**: `string`
 
-Defined in: [types/cia.ts:537](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L537)
+Defined in: [types/cia.ts:537](https://github.com/Hack23/cia-compliance-manager/blob/fb48405c6b6b18111764c7bebe65fc8cb86df743/src/types/cia.ts#L537)
 
 Impact statement describing the effect of this configuration
 
@@ -55,7 +55,7 @@ Impact statement describing the effect of this configuration
 
 > `optional` **technical?**: `string`
 
-Defined in: [types/cia.ts:540](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L540)
+Defined in: [types/cia.ts:540](https://github.com/Hack23/cia-compliance-manager/blob/fb48405c6b6b18111764c7bebe65fc8cb86df743/src/types/cia.ts#L540)
 
 Technical implementation details
 
@@ -65,7 +65,7 @@ Technical implementation details
 
 > `optional` **businessImpact?**: `string`
 
-Defined in: [types/cia.ts:543](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L543)
+Defined in: [types/cia.ts:543](https://github.com/Hack23/cia-compliance-manager/blob/fb48405c6b6b18111764c7bebe65fc8cb86df743/src/types/cia.ts#L543)
 
 Business impact and value proposition
 
@@ -75,7 +75,7 @@ Business impact and value proposition
 
 > `optional` **uptime?**: `string`
 
-Defined in: [types/cia.ts:546](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L546)
+Defined in: [types/cia.ts:546](https://github.com/Hack23/cia-compliance-manager/blob/fb48405c6b6b18111764c7bebe65fc8cb86df743/src/types/cia.ts#L546)
 
 Expected uptime percentage
 
@@ -85,7 +85,7 @@ Expected uptime percentage
 
 > `optional` **mttr?**: `string`
 
-Defined in: [types/cia.ts:549](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L549)
+Defined in: [types/cia.ts:549](https://github.com/Hack23/cia-compliance-manager/blob/fb48405c6b6b18111764c7bebe65fc8cb86df743/src/types/cia.ts#L549)
 
 Mean Time To Repair - average time to fix issues
 
@@ -95,7 +95,7 @@ Mean Time To Repair - average time to fix issues
 
 > `optional` **rto?**: `string`
 
-Defined in: [types/cia.ts:552](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L552)
+Defined in: [types/cia.ts:552](https://github.com/Hack23/cia-compliance-manager/blob/fb48405c6b6b18111764c7bebe65fc8cb86df743/src/types/cia.ts#L552)
 
 Recovery Time Objective - maximum acceptable downtime
 
@@ -105,7 +105,7 @@ Recovery Time Objective - maximum acceptable downtime
 
 > `optional` **rpo?**: `string`
 
-Defined in: [types/cia.ts:555](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L555)
+Defined in: [types/cia.ts:555](https://github.com/Hack23/cia-compliance-manager/blob/fb48405c6b6b18111764c7bebe65fc8cb86df743/src/types/cia.ts#L555)
 
 Recovery Point Objective - maximum acceptable data loss
 
@@ -115,6 +115,6 @@ Recovery Point Objective - maximum acceptable data loss
 
 > `optional` **recommendations?**: `string`[]
 
-Defined in: [types/cia.ts:558](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.ts#L558)
+Defined in: [types/cia.ts:558](https://github.com/Hack23/cia-compliance-manager/blob/fb48405c6b6b18111764c7bebe65fc8cb86df743/src/types/cia.ts#L558)
 
 List of recommendations for improvement
