@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.140**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > **CIAComponentType** = `"confidentiality"` \| `"integrity"` \| `"availability"`
 
-Defined in: [types/cia-services.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/a92120748e126e0e01fb8f5587b3f98734c071a1/src/types/cia-services.ts#L45)
+Defined in: [types/cia-services.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia-services.ts#L45)
 
 Type representing CIA component types
