@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.140**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **formatSecurityLevel**(`level`): `string`
 
-Defined in: [utils/widgetHelpers.ts:46](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/widgetHelpers.ts#L46)
+Defined in: [utils/widgetHelpers.ts:46](https://github.com/Hack23/cia-compliance-manager/blob/a92120748e126e0e01fb8f5587b3f98734c071a1/src/utils/widgetHelpers.ts#L46)
 
 Format security level string to the standardized format
 
