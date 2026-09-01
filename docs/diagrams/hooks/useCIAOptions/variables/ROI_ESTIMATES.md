@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.142**](../../../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > `const` **ROI\_ESTIMATES**: `Record`\<[`ROIType`](../type-aliases/ROIType.md), [`ROIData`](../interfaces/ROIData.md)\>
 
-Defined in: [hooks/useCIAOptions.ts:223](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/hooks/useCIAOptions.ts#L223)
+Defined in: [hooks/useCIAOptions.ts:223](https://github.com/Hack23/cia-compliance-manager/blob/7749169fe0dfb00ea4da12e5941787f96c33f1d8/src/hooks/useCIAOptions.ts#L223)
