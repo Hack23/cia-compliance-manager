@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.142**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: WidgetPropsWithLoading\<T\>
 
-Defined in: [types/widget-props.ts:395](https://github.com/Hack23/cia-compliance-manager/blob/7749169fe0dfb00ea4da12e5941787f96c33f1d8/src/types/widget-props.ts#L395)
+Defined in: [types/widget-props.ts:395](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L395)
 
 Widget props with loading state
 
@@ -44,7 +44,7 @@ Type of data being loaded
 
 > `optional` **className?**: `string`
 
-Defined in: [types/widget-props.ts:124](https://github.com/Hack23/cia-compliance-manager/blob/7749169fe0dfb00ea4da12e5941787f96c33f1d8/src/types/widget-props.ts#L124)
+Defined in: [types/widget-props.ts:124](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L124)
 
 Optional CSS class name for custom styling
 
@@ -67,7 +67,7 @@ Use Tailwind CSS classes or custom CSS classes.
 
 > `optional` **testId?**: `string`
 
-Defined in: [types/widget-props.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/7749169fe0dfb00ea4da12e5941787f96c33f1d8/src/types/widget-props.ts#L135)
+Defined in: [types/widget-props.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L135)
 
 Optional test ID for automated testing
 
@@ -91,7 +91,7 @@ defined in testIds constants.
 
 > `optional` **children?**: `ReactNode`
 
-Defined in: [types/widget-props.ts:243](https://github.com/Hack23/cia-compliance-manager/blob/7749169fe0dfb00ea4da12e5941787f96c33f1d8/src/types/widget-props.ts#L243)
+Defined in: [types/widget-props.ts:243](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L243)
 
 Optional children elements
 
@@ -105,7 +105,7 @@ Optional children elements
 
 > `optional` **onError?**: (`error`) => `void`
 
-Defined in: [types/widget-props.ts:249](https://github.com/Hack23/cia-compliance-manager/blob/7749169fe0dfb00ea4da12e5941787f96c33f1d8/src/types/widget-props.ts#L249)
+Defined in: [types/widget-props.ts:249](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L249)
 
 Optional callback when widget encounters an error
 
@@ -131,7 +131,7 @@ Error that occurred
 
 > **data**: `T` \| `null`
 
-Defined in: [types/widget-props.ts:399](https://github.com/Hack23/cia-compliance-manager/blob/7749169fe0dfb00ea4da12e5941787f96c33f1d8/src/types/widget-props.ts#L399)
+Defined in: [types/widget-props.ts:399](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L399)
 
 Data to display in widget
 
@@ -141,7 +141,7 @@ Data to display in widget
 
 > **loading**: `boolean`
 
-Defined in: [types/widget-props.ts:404](https://github.com/Hack23/cia-compliance-manager/blob/7749169fe0dfb00ea4da12e5941787f96c33f1d8/src/types/widget-props.ts#L404)
+Defined in: [types/widget-props.ts:404](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L404)
 
 If true, widget is loading data
 
@@ -151,6 +151,6 @@ If true, widget is loading data
 
 > `optional` **error?**: `Error`
 
-Defined in: [types/widget-props.ts:409](https://github.com/Hack23/cia-compliance-manager/blob/7749169fe0dfb00ea4da12e5941787f96c33f1d8/src/types/widget-props.ts#L409)
+Defined in: [types/widget-props.ts:409](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/widget-props.ts#L409)
 
 Error encountered while loading
