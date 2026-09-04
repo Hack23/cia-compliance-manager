@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.143**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getDefaultValidationLevel**(`level`): `string`
 
-Defined in: [data/ciaOptionsData.ts:480](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/data/ciaOptionsData.ts#L480)
+Defined in: [data/ciaOptionsData.ts:480](https://github.com/Hack23/cia-compliance-manager/blob/ed90fd0069f5cd488ae5acffca473ead6710addb/src/data/ciaOptionsData.ts#L480)
 
 Get default validation level for a security level
 
