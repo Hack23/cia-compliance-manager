@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.143**](../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **COMPONENT\_NAMES**: `object`
 
-Defined in: [constants/coreConstants.ts:479](https://github.com/Hack23/cia-compliance-manager/blob/ed90fd0069f5cd488ae5acffca473ead6710addb/src/constants/coreConstants.ts#L479)
+Defined in: [constants/coreConstants.ts:479](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/coreConstants.ts#L479)
 
 Component names used for debugging and logging
 

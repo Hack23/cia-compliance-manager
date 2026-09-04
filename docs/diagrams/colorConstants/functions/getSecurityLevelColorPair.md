@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.143**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityLevelColorPair**(`level`): [`SecurityLevelColorPair`](../interfaces/SecurityLevelColorPair.md)
 
-Defined in: [constants/colorConstants.ts:174](https://github.com/Hack23/cia-compliance-manager/blob/ed90fd0069f5cd488ae5acffca473ead6710addb/src/constants/colorConstants.ts#L174)
+Defined in: [constants/colorConstants.ts:174](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/colorConstants.ts#L174)
 
 Get security level color pair by level name.
 
