@@ -10,6 +10,15 @@
 
 import { vi } from "vitest";
 
+type ChartMockConstructor = ReturnType<typeof setupChartJsMock>["MockChart"];
+
+const chartModuleMock = vi.hoisted(() => ({
+  Chart: vi.fn() as unknown as ChartMockConstructor,
+  registerables: ["mockRegisterables"],
+}));
+
+vi.mock("chart.js", () => chartModuleMock);
+
 /**
  * Creates a mock for Chart.js library
  * @returns Mock Chart constructor and instance
@@ -39,11 +48,7 @@ export function setupChartJsMock() {
 export function setupChartTest() {
   const { MockChart, mockChartInstance } = setupChartJsMock();
 
-  // Mock the Chart.js module
-  vi.mock("chart.js", () => ({
-    Chart: MockChart,
-    registerables: ["mockRegisterables"],
-  }));
+  chartModuleMock.Chart = MockChart;
 
   // Create a canvas element for testing
   const createCanvasMock = () => {
