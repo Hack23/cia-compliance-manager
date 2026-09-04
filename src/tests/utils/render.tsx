@@ -19,6 +19,29 @@ import { vi } from "vitest";
 import { SecurityLevel } from "../../types/cia";
 import { createSecurityLevelProps } from "./security";
 
+type SecurityContext = ReturnType<typeof createSecurityLevelProps>;
+
+const securityContextMock = vi.hoisted(() => ({
+  current: undefined as SecurityContext | undefined,
+}));
+
+const themeMock = vi.hoisted(() => ({
+  current: "light" as "light" | "dark",
+}));
+
+vi.mock("../../hooks/useSecurityLevelState", () => ({
+  __esModule: true,
+  useSecurityLevelState: () => securityContextMock.current,
+}));
+
+vi.mock("../../hooks/useTheme", () => ({
+  __esModule: true,
+  useTheme: () => ({
+    theme: themeMock.current,
+    toggleTheme: vi.fn(),
+  }),
+}));
+
 // Import missing react-router-dom or create a mock if not needed
 // Mocking BrowserRouter for testing
 const BrowserRouter = ({ children }: { children: React.ReactNode }) => (
@@ -63,11 +86,7 @@ export function renderWithSecurityContext(
     securityLevels?.confidentialityLevel
   );
 
-  // Mock the security context hook
-  vi.mock("../../hooks/useSecurityLevelState", () => ({
-    __esModule: true,
-    useSecurityLevelState: () => securityContext,
-  }));
+  securityContextMock.current = securityContext;
 
   return render(ui, options);
 }
@@ -84,14 +103,7 @@ export function renderWithTheme(
   theme: "light" | "dark" = "light",
   options?: RenderOptions
 ) {
-  // Mock the theme context hook
-  vi.mock("../../hooks/useTheme", () => ({
-    __esModule: true,
-    useTheme: () => ({
-      theme,
-      toggleTheme: vi.fn(),
-    }),
-  }));
+  themeMock.current = theme;
 
   return render(ui, options);
 }
