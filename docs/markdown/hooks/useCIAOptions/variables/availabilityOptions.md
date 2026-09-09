@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.144**](../../../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > `const` **availabilityOptions**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIAOptionDetails`](../interfaces/CIAOptionDetails.md)\>
 
-Defined in: [hooks/useCIAOptions.ts:109](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/hooks/useCIAOptions.ts#L109)
+Defined in: [hooks/useCIAOptions.ts:109](https://github.com/Hack23/cia-compliance-manager/blob/2eb40cb173e01bba3d798101b3bf4d31665a41ba/src/hooks/useCIAOptions.ts#L109)
