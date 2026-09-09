@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.144**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityLevelClass**: (`level`) => `string`
 
-Defined in: [utils/index.ts:121](https://github.com/Hack23/cia-compliance-manager/blob/2eb40cb173e01bba3d798101b3bf4d31665a41ba/src/utils/index.ts#L121)
+Defined in: [utils/index.ts:121](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/index.ts#L121)
 
 Determines the appropriate CSS classes for displaying a security level
 
