@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.146**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **riskLevelMappings**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), `string`\>
 
-Defined in: [constants/securityLevels.ts:134](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/securityLevels.ts#L134)
+Defined in: [constants/securityLevels.ts:134](https://github.com/Hack23/cia-compliance-manager/blob/1ad940e5aedd08b10a800e582746541da5c51dd4/src/constants/securityLevels.ts#L134)
 
 Mapping from security levels to risk levels
 

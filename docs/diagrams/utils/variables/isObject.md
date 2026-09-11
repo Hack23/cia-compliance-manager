@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.146**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isObject**: (`value`) => value is Record\<string \| number \| symbol, unknown\>
 
-Defined in: [utils/index.ts:191](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/index.ts#L191)
+Defined in: [utils/index.ts:191](https://github.com/Hack23/cia-compliance-manager/blob/1ad940e5aedd08b10a800e582746541da5c51dd4/src/utils/index.ts#L191)
 
 Type guard to check if a value is a non-null object
 
