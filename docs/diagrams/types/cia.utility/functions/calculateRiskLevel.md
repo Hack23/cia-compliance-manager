@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.146**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **calculateRiskLevel**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `string`
 
-Defined in: [types/cia.utility.ts:115](https://github.com/Hack23/cia-compliance-manager/blob/1ad940e5aedd08b10a800e582746541da5c51dd4/src/types/cia.utility.ts#L115)
+Defined in: [types/cia.utility.ts:115](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/cia.utility.ts#L115)
 
 Calculate risk level based on security levels
 
