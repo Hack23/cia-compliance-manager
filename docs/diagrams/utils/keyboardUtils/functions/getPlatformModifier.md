@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.147**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getPlatformModifier**(): `"ctrl"` \| `"cmd"`
 
-Defined in: [utils/keyboardUtils.ts:149](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/keyboardUtils.ts#L149)
+Defined in: [utils/keyboardUtils.ts:149](https://github.com/Hack23/cia-compliance-manager/blob/214fa72f9db031dd4d632d2fb67fd304dcc15302/src/utils/keyboardUtils.ts#L149)
 
 Get platform modifier key (Cmd on Mac, Ctrl elsewhere)
 

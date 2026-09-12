@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.147**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **SEMANTIC\_COLORS**: `object`
 
-Defined in: [constants/designTokens.ts:84](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/designTokens.ts#L84)
+Defined in: [constants/designTokens.ts:84](https://github.com/Hack23/cia-compliance-manager/blob/214fa72f9db031dd4d632d2fb67fd304dcc15302/src/constants/designTokens.ts#L84)
 
 Semantic color system
 These colors should be used based on meaning, not appearance
