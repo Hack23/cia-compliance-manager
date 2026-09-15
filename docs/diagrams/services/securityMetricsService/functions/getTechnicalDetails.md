@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.148**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getTechnicalDetails**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `Promise`\<[`TechnicalDetailsResponse`](../interfaces/TechnicalDetailsResponse.md)\>
 
-Defined in: [services/securityMetricsService.ts:1506](https://github.com/Hack23/cia-compliance-manager/blob/9190e7633203f992b6ee77a05ebf18cec5926582/src/services/securityMetricsService.ts#L1506)
+Defined in: [services/securityMetricsService.ts:1506](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/services/securityMetricsService.ts#L1506)
 
 Get technical details based on security levels
 

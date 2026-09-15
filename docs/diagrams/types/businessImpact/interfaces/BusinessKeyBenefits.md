@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.148**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessKeyBenefits
 
-Defined in: [types/businessImpact.ts:265](https://github.com/Hack23/cia-compliance-manager/blob/9190e7633203f992b6ee77a05ebf18cec5926582/src/types/businessImpact.ts#L265)
+Defined in: [types/businessImpact.ts:265](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/businessImpact.ts#L265)
 
 Business benefits by security level
 
