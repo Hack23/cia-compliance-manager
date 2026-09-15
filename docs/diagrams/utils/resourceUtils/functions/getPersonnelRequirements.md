@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.148**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getPersonnelRequirements**(`level`): `string`
 
-Defined in: [utils/resourceUtils.ts:51](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/resourceUtils.ts#L51)
+Defined in: [utils/resourceUtils.ts:51](https://github.com/Hack23/cia-compliance-manager/blob/9190e7633203f992b6ee77a05ebf18cec5926582/src/utils/resourceUtils.ts#L51)
 
 Calculates personnel requirements (FTE) for a given security level
 
