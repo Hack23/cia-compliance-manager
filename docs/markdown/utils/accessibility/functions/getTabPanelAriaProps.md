@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.149**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getTabPanelAriaProps**(`id`, `labelledBy`, `isHidden`): `object`
 
-Defined in: [utils/accessibility.ts:205](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/accessibility.ts#L205)
+Defined in: [utils/accessibility.ts:205](https://github.com/Hack23/cia-compliance-manager/blob/4ea57fac40edd24f79923ba3ce747d1d1a291588/src/utils/accessibility.ts#L205)
 
 Generate ARIA props for a tab panel
 

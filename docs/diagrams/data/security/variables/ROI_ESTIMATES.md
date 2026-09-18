@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.149**](../../../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > `const` **ROI\_ESTIMATES**: [`ROIEstimatesMap`](../../../types/cia-services/interfaces/ROIEstimatesMap.md) = `roiEstimatesData`
 
-Defined in: [data/security/index.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/data/security/index.ts#L23)
+Defined in: [data/security/index.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/4ea57fac40edd24f79923ba3ce747d1d1a291588/src/data/security/index.ts#L23)
