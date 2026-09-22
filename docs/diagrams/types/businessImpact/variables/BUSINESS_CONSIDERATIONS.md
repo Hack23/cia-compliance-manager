@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.151**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **BUSINESS\_CONSIDERATIONS**: `object`
 
-Defined in: [types/businessImpact.ts:382](https://github.com/Hack23/cia-compliance-manager/blob/c7e53bfd6367b7d096cff4d20f8e738297452b86/src/types/businessImpact.ts#L382)
+Defined in: [types/businessImpact.ts:382](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/types/businessImpact.ts#L382)
 
 ## Type Declaration
 
