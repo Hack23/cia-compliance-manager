@@ -204,7 +204,7 @@
     "dependency-cruiser": "18.4.0",
     "eslint": "10.11.0",
     "globals": "17.12.0",
-    "jsdom": "30.1.0",
+    "jsdom": "30.1.1",
     "knip": "6.37.0",
     "license-compliance": "4.0.0",
     "mocha-junit-reporter": "2.2.1",
