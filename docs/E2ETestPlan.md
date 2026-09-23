@@ -232,13 +232,13 @@ export function findWidgetFlexibly(widgetId: string) {
 
 **4. Performance Improvements**
 - **Faster test execution**: Optimized test runner and browser communication
-- **Memory management**: Experimental memory management feature (`experimentalMemoryManagement: true`)
+- **Memory management**: Browser memory management enabled by default (`manageBrowserMemory` in Cypress 16+)
 - **Reduced overhead**: More efficient video recording and screenshot capture
 
 ```typescript
 // cypress.config.ts - Performance optimizations
 export default defineConfig({
-  experimentalMemoryManagement: true,
+  // Memory management enabled by default via manageBrowserMemory (Cypress 16+)
   numTestsKeptInMemory: 10,
   video: false, // Disable by default, enable via env var
   screenshotOnRunFailure: true,
@@ -303,7 +303,7 @@ export default defineConfig({
 - ✅ Update `cypress.config.ts` to use `defineConfig()` API
 - ✅ Remove deprecated `pluginsFile` references
 - ✅ Update TypeScript custom command declarations
-- ✅ Enable `experimentalMemoryManagement` for better performance
+- ✅ Keep `manageBrowserMemory` enabled (default) for better performance
 - ✅ Review and update retry logic (`retries` configuration)
 - ✅ Update CI/CD workflows for Cypress 15.x compatibility
 
@@ -1662,8 +1662,6 @@ CYPRESS_VIDEO=true
 # Custom base URL for different environments
 CYPRESS_BASE_URL=http://localhost:5173
 
-# Enable experimental features
-CYPRESS_experimentalMemoryManagement=true
 
 # Configure retries
 CYPRESS_retries=1
@@ -1979,7 +1977,7 @@ declare global {
 ```typescript
 // cypress.config.ts
 export default defineConfig({
-  experimentalMemoryManagement: true,
+  // Memory management enabled by default via manageBrowserMemory (Cypress 16+)
   numTestsKeptInMemory: 10,
   
   e2e: {

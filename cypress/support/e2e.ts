@@ -66,7 +66,8 @@ Cypress.on("uncaught:exception", (err) => {
 
 // Handle mount command gracefully for E2E tests
 // This avoids the need to check if the command exists using a non-existent list() method
-if (Cypress.env("testingType") === "component") {
+// Cypress 16 removed Cypress.env() — use Cypress.testingType for the current testing type
+if (Cypress.testingType === "component") {
   // In component testing mode, mount is registered by the component testing plugin
   cy.log("Component testing mode detected - mount command available");
 } else {
