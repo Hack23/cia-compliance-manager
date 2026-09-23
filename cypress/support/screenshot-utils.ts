@@ -9,6 +9,42 @@ interface EnhancedScreenshotOptions extends Cypress.ScreenshotOptions {
 }
 
 /**
+ * Capture a well-sized and properly clipped screenshot of a widget element
+ * @param $widget jQuery widget element to capture
+ * @param name Name for the screenshot
+ */
+export function captureWidgetScreenshot(
+  $widget: JQuery<HTMLElement>,
+  name: string
+): void {
+  cy.wrap($widget).scrollIntoView().screenshot(name, {
+    padding: 10,
+    overwrite: true,
+  });
+}
+
+/**
+ * Capture the HTML content of an element for later analysis
+ * @param name Name for the captured content
+ * @param selector Optional selector to capture (defaults to the document body)
+ */
+export function captureHtmlContent(name: string, selector?: string): void {
+  const target = selector ?? "body";
+  cy.get(target)
+    .first()
+    .then(($el) => {
+      cy.task(
+        "writeFile",
+        {
+          path: `build/cypress/artifacts/${name}.html`,
+          content: $el.html() ?? "",
+        },
+        { log: false }
+      );
+    });
+}
+
+/**
  * Capture full page screenshots in both light and dark modes
  * @param pageName Name of the page to capture
  * @param captureHtml Whether to capture HTML content (default: false)

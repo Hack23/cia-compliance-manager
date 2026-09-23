@@ -24,7 +24,7 @@ export default defineConfig({
   trashAssetsBeforeRuns: true,
   viewportWidth: 1280, // More focused viewport default
   viewportHeight: 800, // More focused viewport default
-  experimentalMemoryManagement: true,
+  // Memory management is enabled by default via manageBrowserMemory in Cypress 16+
   reporter: "cypress-multi-reporters",
   reporterOptions: {
     reporterEnabled: "spec, cypress-junit-reporter, mochawesome",
