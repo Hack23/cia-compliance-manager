@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.152**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **CIA\_COMPONENT\_ICONS**: `object`
 
-Defined in: [constants/coreConstants.ts:81](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/constants/coreConstants.ts#L81)
+Defined in: [constants/coreConstants.ts:81](https://github.com/Hack23/cia-compliance-manager/blob/595728fb5c94dae1e26c3774c019edf36a941954/src/constants/coreConstants.ts#L81)
 
 CIA component icon constants.
 
