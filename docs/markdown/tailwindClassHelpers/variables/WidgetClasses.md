@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.110**](../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.153**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **WidgetClasses**: `object`
 
-Defined in: [utils/tailwindClassHelpers.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/tailwindClassHelpers.ts#L34)
+Defined in: [utils/tailwindClassHelpers.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/aae220a35b85217ac74b619cb9128300e38ff3a0/src/utils/tailwindClassHelpers.ts#L34)
 
 Standard class patterns for consistent widget styling
 
