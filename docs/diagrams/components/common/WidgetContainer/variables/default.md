@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.154**](../../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **default**: `React.FC`\<[`WidgetContainerProps`](../interfaces/WidgetContainerProps.md)\>
 
-Defined in: [components/common/WidgetContainer.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/42e66b46977944fe728f624a83223bbbb90a81b2/src/components/common/WidgetContainer.tsx#L25)
+Defined in: [components/common/WidgetContainer.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/components/common/WidgetContainer.tsx#L25)
 
 Container component for dashboard widgets
 
