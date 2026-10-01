@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.110**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.156**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **formatTimeframe**(`minutes`): `string`
 
-Defined in: [utils/formatUtils.ts:384](https://github.com/Hack23/cia-compliance-manager/blob/10c9d46d58d4ca937f15cd84ca8d67641f9ca8bc/src/utils/formatUtils.ts#L384)
+Defined in: [utils/formatUtils.ts:384](https://github.com/Hack23/cia-compliance-manager/blob/b835e9565f8f6ef32fee2fb9cff3193b9e0e73ec/src/utils/formatUtils.ts#L384)
 
 Formats a timeframe in a human-readable format
 
