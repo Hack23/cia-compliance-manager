@@ -372,8 +372,7 @@ jobs:
           name: CIA Compliance Manager ${{ needs.prepare.outputs.version }}
           publish: false
           prerelease: ${{ needs.prepare.outputs.is_prerelease }}
-        env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          token: ${{ steps.app-token.outputs.token }}
 
       # Create GitHub Release with all artifacts
       - name: Create GitHub Release
