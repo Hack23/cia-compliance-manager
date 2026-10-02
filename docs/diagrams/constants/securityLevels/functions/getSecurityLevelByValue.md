@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.159**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.158**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityLevelByValue**(`value`): [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [constants/securityLevels.ts:111](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/constants/securityLevels.ts#L111)
+Defined in: [constants/securityLevels.ts:111](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/constants/securityLevels.ts#L111)
 
 Get a security level by its number value
 

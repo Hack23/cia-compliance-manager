@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.159**](../../../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.158**](../../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CIAComponentDetailsProps
 
-Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:63](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L63)
+Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:63](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L63)
 
 Props for CIAComponentDetails component
 
@@ -16,7 +16,7 @@ Props for CIAComponentDetails component
 
 > **component**: [`CIAComponent`](../../../../../types/cia/type-aliases/CIAComponent.md)
 
-Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:64](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L64)
+Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:64](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L64)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:64](
 
 > **level**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:65](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L65)
+Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:65](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L65)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:65](
 
 > **details**: `unknown`
 
-Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:66](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L66)
+Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:66](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L66)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:66](
 
 > **ciaContentService**: `unknown`
 
-Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:67](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L67)
+Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:67](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L67)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:67](
 
 > **testId**: `string`
 
-Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:68](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L68)
+Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:68](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L68)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:68](
 
 > **getTechnicalDescription**: (`component`, `level`) => `string`
 
-Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:69](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L69)
+Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:69](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L69)
 
 #### Parameters
 
@@ -78,7 +78,7 @@ Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:69](
 
 > **getTechnicalRequirements**: (`component`, `level`) => `string`[]
 
-Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:70](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L70)
+Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:70](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L70)
 
 #### Parameters
 
@@ -100,7 +100,7 @@ Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:70](
 
 > **getTechnologies**: (`component`, `level`) => `string`
 
-Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:71](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L71)
+Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:71](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L71)
 
 #### Parameters
 
@@ -122,7 +122,7 @@ Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:71](
 
 > **getConfigurations**: (`component`, `level`) => `string`
 
-Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:72](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L72)
+Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:72](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L72)
 
 #### Parameters
 
@@ -144,7 +144,7 @@ Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:72](
 
 > **getExpertiseRequired**: (`component`, `level`) => `string`[]
 
-Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:73](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L73)
+Defined in: [components/widgets/implementationguide/CIAComponentDetails.tsx:73](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/implementationguide/CIAComponentDetails.tsx#L73)
 
 #### Parameters
 
