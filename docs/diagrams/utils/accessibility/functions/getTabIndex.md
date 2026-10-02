@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.157**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.158**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getTabIndex**(`isInteractive`, `isDisabled?`): `number` \| `undefined`
 
-Defined in: [utils/accessibility.ts:429](https://github.com/Hack23/cia-compliance-manager/blob/b604739f0e17a4554b56120adba73e902265ce4e/src/utils/accessibility.ts#L429)
+Defined in: [utils/accessibility.ts:429](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/utils/accessibility.ts#L429)
 
 Check if an element should be keyboard focusable
 

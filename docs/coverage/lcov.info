@@ -1821,7 +1821,7 @@ FN:24,(anonymous_0)
 FNF:1
 FNH:1
 FNDA:19,(anonymous_0)
-DA:24,3
+DA:24,2
 DA:35,19
 LF:2
 LH:2
@@ -2327,7 +2327,7 @@ FNDA:110,(anonymous_7)
 FNDA:52,(anonymous_8)
 FNDA:330,(anonymous_9)
 FNDA:53,getDefaultExpertise
-DA:28,4
+DA:28,2
 DA:39,103
 DA:48,103
 DA:50,53
@@ -4753,12 +4753,12 @@ DA:17,21
 DA:18,21
 DA:19,21
 DA:21,21
-DA:25,10
-DA:26,10
+DA:25,7
+DA:26,7
 DA:28,0
 DA:29,0
 DA:34,0
-DA:36,10
+DA:36,7
 DA:40,42
 DA:41,20
 DA:44,42
@@ -7650,8 +7650,8 @@ SF:src/services/dataProviders.ts
 FN:8,createDefaultDataProvider
 FNF:1
 FNH:1
-FNDA:32,createDefaultDataProvider
-DA:9,32
+FNDA:29,createDefaultDataProvider
+DA:9,29
 LF:1
 LH:1
 BRF:0
@@ -9882,7 +9882,7 @@ FNDA:7,handleArrowKeyNavigation
 FNDA:3,getMetricAccessibleName
 FNDA:11,getLiveRegion
 FNDA:11,announceToScreenReader
-FNDA:7,(anonymous_14)
+FNDA:6,(anonymous_14)
 FNDA:2,(anonymous_15)
 FNDA:6,meetsContrastRequirement
 FNDA:6,calculateContrastRatio
@@ -9976,7 +9976,7 @@ DA:551,11
 DA:552,16
 DA:553,16
 DA:556,11
-DA:557,7
+DA:557,6
 DA:559,11
 DA:561,11
 DA:562,2
