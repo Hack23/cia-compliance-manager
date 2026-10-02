@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.158**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.159**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > **ShortcutCategory** = `"Selection"` \| `"Navigation"` \| `"Actions"` \| `"Help"` \| `"General"`
 
-Defined in: [types/keyboard.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/types/keyboard.ts#L10)
+Defined in: [types/keyboard.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/types/keyboard.ts#L10)
 
 Keyboard shortcut categories for organization

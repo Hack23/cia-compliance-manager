@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.158**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.159**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: TechnicalDetailsResponse
 
-Defined in: [services/securityMetricsService.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/services/securityMetricsService.ts#L45)
+Defined in: [services/securityMetricsService.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/services/securityMetricsService.ts#L45)
 
 Technical details response for security implementation
 
@@ -16,7 +16,7 @@ Technical details response for security implementation
 
 > **architecture**: `object`
 
-Defined in: [services/securityMetricsService.ts:46](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/services/securityMetricsService.ts#L46)
+Defined in: [services/securityMetricsService.ts:46](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/services/securityMetricsService.ts#L46)
 
 Architecture details including components and optional diagrams
 
@@ -38,7 +38,7 @@ Architecture details including components and optional diagrams
 
 > **implementation**: `object`
 
-Defined in: [services/securityMetricsService.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/services/securityMetricsService.ts#L55)
+Defined in: [services/securityMetricsService.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/services/securityMetricsService.ts#L55)
 
 Implementation plan details
 
@@ -68,6 +68,6 @@ Implementation plan details
 
 > `optional` **technologies?**: `Record`\<`string`, `unknown`\>
 
-Defined in: [services/securityMetricsService.ts:65](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/services/securityMetricsService.ts#L65)
+Defined in: [services/securityMetricsService.ts:65](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/services/securityMetricsService.ts#L65)
 
 Technology stack by component (availability, integrity, confidentiality)

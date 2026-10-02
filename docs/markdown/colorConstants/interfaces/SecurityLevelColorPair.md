@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.158**](../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.159**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityLevelColorPair
 
-Defined in: [constants/colorConstants.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/constants/colorConstants.ts#L33)
+Defined in: [constants/colorConstants.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/constants/colorConstants.ts#L33)
 
 Interface for security level color pair
 
@@ -16,7 +16,7 @@ Interface for security level color pair
 
 > **bg**: `string`
 
-Defined in: [constants/colorConstants.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/constants/colorConstants.ts#L34)
+Defined in: [constants/colorConstants.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/constants/colorConstants.ts#L34)
 
 Background color in hexadecimal format
 
@@ -26,6 +26,6 @@ Background color in hexadecimal format
 
 > **text**: `string`
 
-Defined in: [constants/colorConstants.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/constants/colorConstants.ts#L35)
+Defined in: [constants/colorConstants.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/constants/colorConstants.ts#L35)
 
 Text/foreground color in hexadecimal format

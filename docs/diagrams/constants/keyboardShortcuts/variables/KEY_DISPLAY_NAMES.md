@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.158**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.159**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **KEY\_DISPLAY\_NAMES**: `object`
 
-Defined in: [constants/keyboardShortcuts.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/constants/keyboardShortcuts.ts#L135)
+Defined in: [constants/keyboardShortcuts.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/3584178e3069ad9fa75313e892d98650e1068c19/src/constants/keyboardShortcuts.ts#L135)
 
 Key display names for different platforms
 
