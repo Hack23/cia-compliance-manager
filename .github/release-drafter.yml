@@ -4,82 +4,122 @@ tag-template: '$RESOLVED_VERSION'
 # Categories match exactly with PR labels from labeler.yml
 categories:
   - title: '🚀 New Features'
-    labels:
-      - 'feature'
-      - 'enhancement'
+    when:
+      labels:
+        - 'feature'
+        - 'enhancement'
 
   - title: '📈 Analytics & Data'
-    labels:
-      - 'analytics'
-      - 'visualization'
-      - 'database'
+    when:
+      labels:
+        - 'analytics'
+        - 'visualization'
+        - 'database'
 
   - title: '🎨 UI/UX Improvements'
-    labels:
-      - 'ui'
-      - 'design'
-      - 'style'
+    when:
+      labels:
+        - 'ui'
+        - 'design'
+        - 'style'
 
   - title: '🏗️ Infrastructure & Performance'
-    labels:
-      - 'infrastructure'
-      - 'performance'
-      - 'build'
-      - 'config'
+    when:
+      labels:
+        - 'infrastructure'
+        - 'performance'
+        - 'build'
+        - 'config'
 
   - title: '🔄 Code Quality & Refactoring'
-    labels:
-      - 'refactor'
-      - 'testing'
+    when:
+      labels:
+        - 'refactor'
+        - 'testing'
 
   - title: '🔒 Security & Compliance'
-    labels:
-      - 'security'
-      - 'compliance'
-      - 'confidentiality'
-      - 'integrity'
-      - 'availability'
+    when:
+      labels:
+        - 'security'
+        - 'compliance'
+        - 'confidentiality'
+        - 'integrity'
+        - 'availability'
 
   - title: '📝 Documentation'
-    labels:
-      - 'documentation'
+    when:
+      labels:
+        - 'documentation'
 
   - title: '📦 Dependencies'
-    labels:
-      - 'dependencies'
-      - 'javascript'
-      - 'github_actions'
+    when:
+      labels:
+        - 'dependencies'
+        - 'javascript'
+        - 'github_actions'
 
   - title: '🐛 Bug Fixes'
-    labels:
-      - 'bug'
-      - 'fix'
+    when:
+      labels:
+        - 'bug'
+        - 'fix'
 
   - title: '🧪 Test Coverage Improvements'
-    labels:
-      - 'test-coverage-impact'
-      - 'needs-tests'
-      - 'branches-coverage-impact'
-      - 'function-coverage-impact'
-      - 'high-coverage'
+    when:
+      labels:
+        - 'test-coverage-impact'
+        - 'needs-tests'
+        - 'branches-coverage-impact'
+        - 'function-coverage-impact'
+        - 'high-coverage'
 
   - title: '🔍 Component Updates'
-    labels:
-      - 'component-radar'
-      - 'component-dashboard'
-      - 'component-security-level'
-      - 'component-business-impact'
-      - 'component-compliance'
-      - 'component-cost'
-      - 'component-security-summary'
-      - 'component-value-creation'
+    when:
+      labels:
+        - 'component-radar'
+        - 'component-dashboard'
+        - 'component-security-level'
+        - 'component-business-impact'
+        - 'component-compliance'
+        - 'component-cost'
+        - 'component-security-summary'
+        - 'component-value-creation'
 
   - title: '⚙️ Core Application Changes'
-    labels:
-      - 'core-app'
-      - 'data-model'
-      - 'critical-security-code'
-      - 'critical-business-code'
+    when:
+      labels:
+        - 'core-app'
+        - 'data-model'
+        - 'critical-security-code'
+        - 'critical-business-code'
+
+  - type: 'version-resolver'
+    semver-increment: 'major'
+    when:
+      labels:
+        - 'major'
+        - 'breaking'
+
+  - type: 'version-resolver'
+    semver-increment: 'minor'
+    when:
+      labels:
+        - 'feature'
+        - 'enhancement'
+        - 'analytics'
+        - 'visualization'
+
+  - type: 'version-resolver'
+    semver-increment: 'patch'
+    when:
+      labels:
+        - 'bug'
+        - 'fix'
+        - 'security'
+        - 'dependencies'
+        - 'documentation'
+        - 'performance'
+        - 'refactor'
 
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 change-title-escapes: '\<*_&' # Escape characters for markdown
@@ -245,28 +285,6 @@ template: |
   **Build Attestations**: [View SLSA Attestations](https://github.com/Hack23/cia-compliance-manager/attestations/)
 
   **Download**: [Release Assets](https://github.com/Hack23/cia-compliance-manager/releases/tag/$RESOLVED_VERSION)
-
-version-resolver:
-  major:
-    labels:
-      - 'major'
-      - 'breaking'
-  minor:
-    labels:
-      - 'feature'
-      - 'enhancement'
-      - 'analytics'
-      - 'visualization'
-  patch:
-    labels:
-      - 'bug'
-      - 'fix'
-      - 'security'
-      - 'dependencies'
-      - 'documentation'
-      - 'performance'
-      - 'refactor'
-  default: patch
 
 # Autolabeler is BACKUP for PRs without labels
 # Primary labeling happens via .github/labeler.yml
