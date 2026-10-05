@@ -211,7 +211,7 @@
     "mochawesome": "8.1.1",
     "mochawesome-merge": "5.1.1",
     "mochawesome-report-generator": "6.3.2",
-    "postcss": "8.5.28",
+    "postcss": "8.5.29",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-error-boundary": "6.1.6",
