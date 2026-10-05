@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.160**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.158**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **BUSINESS\_VALUE\_METRICS**: `Record`\<`string`, [`BusinessValueMetric`](../../../types/businessImpact/interfaces/BusinessValueMetric.md)\>
 
-Defined in: [constants/businessConstants.ts:270](https://github.com/Hack23/cia-compliance-manager/blob/65d80050336fcb6ec803a647b772abde27cf817d/src/constants/businessConstants.ts#L270)
+Defined in: [constants/businessConstants.ts:270](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/constants/businessConstants.ts#L270)
 
 Business value metrics for measuring security impact

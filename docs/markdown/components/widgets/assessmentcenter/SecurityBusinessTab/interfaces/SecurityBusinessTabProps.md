@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.160**](../../../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.158**](../../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityBusinessTabProps
 
-Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:8](https://github.com/Hack23/cia-compliance-manager/blob/65d80050336fcb6ec803a647b772abde27cf817d/src/components/widgets/assessmentcenter/SecurityBusinessTab.tsx#L8)
+Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:8](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/assessmentcenter/SecurityBusinessTab.tsx#L8)
 
 Props for SecurityBusinessTab component
 
@@ -16,7 +16,7 @@ Props for SecurityBusinessTab component
 
 > **businessMaturityLevel**: `string`
 
-Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/65d80050336fcb6ec803a647b772abde27cf817d/src/components/widgets/assessmentcenter/SecurityBusinessTab.tsx#L9)
+Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/assessmentcenter/SecurityBusinessTab.tsx#L9)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:9](http
 
 > **businessMaturityDescription**: `string`
 
-Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/65d80050336fcb6ec803a647b772abde27cf817d/src/components/widgets/assessmentcenter/SecurityBusinessTab.tsx#L10)
+Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/assessmentcenter/SecurityBusinessTab.tsx#L10)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:10](htt
 
 > **securityScore**: `number`
 
-Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/65d80050336fcb6ec803a647b772abde27cf817d/src/components/widgets/assessmentcenter/SecurityBusinessTab.tsx#L11)
+Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/assessmentcenter/SecurityBusinessTab.tsx#L11)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:11](htt
 
 > **costDetails**: `object`
 
-Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/65d80050336fcb6ec803a647b772abde27cf817d/src/components/widgets/assessmentcenter/SecurityBusinessTab.tsx#L12)
+Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/assessmentcenter/SecurityBusinessTab.tsx#L12)
 
 #### totalCapex
 
@@ -60,7 +60,7 @@ Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:12](htt
 
 > **testId**: `string`
 
-Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/65d80050336fcb6ec803a647b772abde27cf817d/src/components/widgets/assessmentcenter/SecurityBusinessTab.tsx#L17)
+Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/assessmentcenter/SecurityBusinessTab.tsx#L17)
 
 ***
 
@@ -68,4 +68,4 @@ Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:17](htt
 
 > **roiEstimate**: `string`
 
-Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/65d80050336fcb6ec803a647b772abde27cf817d/src/components/widgets/assessmentcenter/SecurityBusinessTab.tsx#L18)
+Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/components/widgets/assessmentcenter/SecurityBusinessTab.tsx#L18)

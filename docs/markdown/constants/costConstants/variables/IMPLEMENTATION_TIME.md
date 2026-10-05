@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.160**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.158**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **IMPLEMENTATION\_TIME**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), `number`\>
 
-Defined in: [constants/costConstants.ts:200](https://github.com/Hack23/cia-compliance-manager/blob/65d80050336fcb6ec803a647b772abde27cf817d/src/constants/costConstants.ts#L200)
+Defined in: [constants/costConstants.ts:200](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/constants/costConstants.ts#L200)
 
 Implementation time (in months) for each security level
