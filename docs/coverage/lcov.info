@@ -2327,7 +2327,7 @@ FNDA:110,(anonymous_7)
 FNDA:52,(anonymous_8)
 FNDA:330,(anonymous_9)
 FNDA:53,getDefaultExpertise
-DA:28,2
+DA:28,3
 DA:39,103
 DA:48,103
 DA:50,53
@@ -4753,12 +4753,12 @@ DA:17,21
 DA:18,21
 DA:19,21
 DA:21,21
-DA:25,7
-DA:26,7
+DA:25,10
+DA:26,10
 DA:28,0
 DA:29,0
 DA:34,0
-DA:36,7
+DA:36,10
 DA:40,42
 DA:41,20
 DA:44,42
@@ -7650,8 +7650,8 @@ SF:src/services/dataProviders.ts
 FN:8,createDefaultDataProvider
 FNF:1
 FNH:1
-FNDA:29,createDefaultDataProvider
-DA:9,29
+FNDA:32,createDefaultDataProvider
+DA:9,32
 LF:1
 LH:1
 BRF:0

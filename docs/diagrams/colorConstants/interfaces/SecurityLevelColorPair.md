@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.158**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.160**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityLevelColorPair
 
-Defined in: [constants/colorConstants.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/constants/colorConstants.ts#L33)
+Defined in: [constants/colorConstants.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/65d80050336fcb6ec803a647b772abde27cf817d/src/constants/colorConstants.ts#L33)
 
 Interface for security level color pair
 
@@ -16,7 +16,7 @@ Interface for security level color pair
 
 > **bg**: `string`
 
-Defined in: [constants/colorConstants.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/constants/colorConstants.ts#L34)
+Defined in: [constants/colorConstants.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/65d80050336fcb6ec803a647b772abde27cf817d/src/constants/colorConstants.ts#L34)
 
 Background color in hexadecimal format
 
@@ -26,6 +26,6 @@ Background color in hexadecimal format
 
 > **text**: `string`
 
-Defined in: [constants/colorConstants.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/constants/colorConstants.ts#L35)
+Defined in: [constants/colorConstants.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/65d80050336fcb6ec803a647b772abde27cf817d/src/constants/colorConstants.ts#L35)
 
 Text/foreground color in hexadecimal format

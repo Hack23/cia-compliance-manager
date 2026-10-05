@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.158**](../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.160**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **CIA\_COMPONENT\_COLORS**: `object`
 
-Defined in: [constants/colorConstants.ts:122](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/constants/colorConstants.ts#L122)
+Defined in: [constants/colorConstants.ts:122](https://github.com/Hack23/cia-compliance-manager/blob/65d80050336fcb6ec803a647b772abde27cf817d/src/constants/colorConstants.ts#L122)
 
 Color schemes for CIA triad components with enhanced distinctiveness.
 
