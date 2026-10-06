@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.161**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.158**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getFormattedRiskLevel**(`riskLevel`): `string`
 
-Defined in: [utils/riskUtils.ts:300](https://github.com/Hack23/cia-compliance-manager/blob/7d662390f20e5c0c4ed0fdc4480be9394bdbdd06/src/utils/riskUtils.ts#L300)
+Defined in: [utils/riskUtils.ts:300](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/utils/riskUtils.ts#L300)
 
 Format risk level with proper capitalization
 

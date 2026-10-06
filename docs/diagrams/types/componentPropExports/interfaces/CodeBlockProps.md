@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.161**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.158**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CodeBlockProps
 
-Defined in: [types/componentPropExports.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/7d662390f20e5c0c4ed0fdc4480be9394bdbdd06/src/types/componentPropExports.ts#L55)
+Defined in: [types/componentPropExports.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/types/componentPropExports.ts#L55)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:55](https://github.com/Hack23/cia-com
 
 > **code**: `string`
 
-Defined in: [types/componentPropExports.ts:59](https://github.com/Hack23/cia-compliance-manager/blob/7d662390f20e5c0c4ed0fdc4480be9394bdbdd06/src/types/componentPropExports.ts#L59)
+Defined in: [types/componentPropExports.ts:59](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/types/componentPropExports.ts#L59)
 
 The code content to display
 
@@ -24,7 +24,7 @@ The code content to display
 
 > `optional` **language?**: `string`
 
-Defined in: [types/componentPropExports.ts:65](https://github.com/Hack23/cia-compliance-manager/blob/7d662390f20e5c0c4ed0fdc4480be9394bdbdd06/src/types/componentPropExports.ts#L65)
+Defined in: [types/componentPropExports.ts:65](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/types/componentPropExports.ts#L65)
 
 The programming language for syntax highlighting
 
@@ -40,7 +40,7 @@ The programming language for syntax highlighting
 
 > `optional` **showLineNumbers?**: `boolean`
 
-Defined in: [types/componentPropExports.ts:71](https://github.com/Hack23/cia-compliance-manager/blob/7d662390f20e5c0c4ed0fdc4480be9394bdbdd06/src/types/componentPropExports.ts#L71)
+Defined in: [types/componentPropExports.ts:71](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/types/componentPropExports.ts#L71)
 
 Whether to show line numbers
 
@@ -56,7 +56,7 @@ false
 
 > `optional` **copyable?**: `boolean`
 
-Defined in: [types/componentPropExports.ts:77](https://github.com/Hack23/cia-compliance-manager/blob/7d662390f20e5c0c4ed0fdc4480be9394bdbdd06/src/types/componentPropExports.ts#L77)
+Defined in: [types/componentPropExports.ts:77](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/types/componentPropExports.ts#L77)
 
 Whether to show a copy button
 
@@ -72,7 +72,7 @@ true
 
 > `optional` **className?**: `string`
 
-Defined in: [types/componentPropExports.ts:82](https://github.com/Hack23/cia-compliance-manager/blob/7d662390f20e5c0c4ed0fdc4480be9394bdbdd06/src/types/componentPropExports.ts#L82)
+Defined in: [types/componentPropExports.ts:82](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/types/componentPropExports.ts#L82)
 
 Additional CSS classes
 
@@ -82,6 +82,6 @@ Additional CSS classes
 
 > `optional` **testId?**: `string`
 
-Defined in: [types/componentPropExports.ts:87](https://github.com/Hack23/cia-compliance-manager/blob/7d662390f20e5c0c4ed0fdc4480be9394bdbdd06/src/types/componentPropExports.ts#L87)
+Defined in: [types/componentPropExports.ts:87](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/types/componentPropExports.ts#L87)
 
 Test ID for testing
