@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.162**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.158**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **WIDGET\_ICONS**: `object`
 
-Defined in: [constants/appConstants.ts:323](https://github.com/Hack23/cia-compliance-manager/blob/c5d2cdbe87deaa6017000fb97918cf60099cbeee/src/constants/appConstants.ts#L323)
+Defined in: [constants/appConstants.ts:323](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/constants/appConstants.ts#L323)
 
 Widget icons for consistent UI representation
 
@@ -16,39 +16,39 @@ Widget icons for consistent UI representation
 
 ### SECURITY\_LEVEL
 
-> **SECURITY\_LEVEL**: `string` = "\\uD83D\\uDD10"
+> **SECURITY\_LEVEL**: `string` = "\uD83D\uDD10"
 
 ### SECURITY\_SUMMARY
 
-> **SECURITY\_SUMMARY**: `string` = "\\uD83D\\uDCCA"
+> **SECURITY\_SUMMARY**: `string` = "\uD83D\uDCCA"
 
 ### BUSINESS\_IMPACT\_ANALYSIS
 
-> **BUSINESS\_IMPACT\_ANALYSIS**: `string` = "\\uD83D\\uDCC8"
+> **BUSINESS\_IMPACT\_ANALYSIS**: `string` = "\uD83D\uDCC8"
 
 ### COMPLIANCE\_STATUS
 
-> **COMPLIANCE\_STATUS**: `string` = "\\uD83D\\uDCCB"
+> **COMPLIANCE\_STATUS**: `string` = "\uD83D\uDCCB"
 
 ### SECURITY\_RESOURCES
 
-> **SECURITY\_RESOURCES**: `string` = "\\uD83D\\uDCDA"
+> **SECURITY\_RESOURCES**: `string` = "\uD83D\uDCDA"
 
 ### COST\_ESTIMATION
 
-> **COST\_ESTIMATION**: `string` = "\\uD83D\\uDCB0"
+> **COST\_ESTIMATION**: `string` = "\uD83D\uDCB0"
 
 ### VALUE\_CREATION
 
-> **VALUE\_CREATION**: `string` = "\\uD83D\\uDC8E"
+> **VALUE\_CREATION**: `string` = "\uD83D\uDC8E"
 
 ### TECHNICAL\_DETAILS
 
-> **TECHNICAL\_DETAILS**: `string` = "\\u2699\\uFE0F"
+> **TECHNICAL\_DETAILS**: `string` = "\u2699\uFE0F"
 
 ### SECURITY\_VISUALIZATION
 
-> **SECURITY\_VISUALIZATION**: `string` = "\\uD83D\\uDCC8"
+> **SECURITY\_VISUALIZATION**: `string` = "\uD83D\uDCC8"
 
 ### AVAILABILITY\_IMPACT
 
