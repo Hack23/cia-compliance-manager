@@ -171,11 +171,8 @@ export default defineConfig(({ mode }) => ({
             renderSuccesses: true,
           },
         ],
-        "html",
+        ["html", { outputDir: "./build/test-results" }],
       ],
-      outputFile: {
-        html: "./build/test-results/index.html",
-      },
       // Configure types to ensure testing library matchers are recognized
       typecheck: {
         include: ["**/*.{test,spec}.{ts,tsx}"],
