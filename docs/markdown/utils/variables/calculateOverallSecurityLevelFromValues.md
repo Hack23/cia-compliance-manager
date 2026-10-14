@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.158**](../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.163**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **calculateOverallSecurityLevelFromValues**: (`availabilityLevel`, `integrityLevel`, `confidentialityLevel`, `strategy`) => [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [utils/index.ts:94](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/utils/index.ts#L94)
+Defined in: [utils/index.ts:94](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/utils/index.ts#L94)
 
 Calculate overall security level from individual CIA components
 
@@ -34,7 +34,7 @@ Confidentiality security level
 
 ### strategy?
 
-`"min"` \| `"max"` \| `"avg"` \| `"weighted"`
+`"min"` \| `"max"` \| `"avg"` \| `"weighted"` = `'min'`
 
 Calculation strategy ('min', 'max', 'avg', 'weighted')
 

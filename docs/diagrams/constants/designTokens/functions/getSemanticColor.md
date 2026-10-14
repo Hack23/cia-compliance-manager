@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.158**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.163**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSemanticColor**(`type`, `variant?`): `string`
 
-Defined in: [constants/designTokens.ts:261](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/constants/designTokens.ts#L261)
+Defined in: [constants/designTokens.ts:261](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/constants/designTokens.ts#L261)
 
 Helper function to get semantic color
 
@@ -22,7 +22,7 @@ Color type (primary, success, warning, error, info, neutral)
 
 ### variant?
 
-`"light"` \| `"dark"` \| `"main"`
+`"light"` \| `"dark"` \| `"main"` = `'main'`
 
 Color variant (light, main, dark)
 

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.158**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.163**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **WIDGET\_STYLES**: `object`
 
-Defined in: [constants/designTokens.ts:295](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/constants/designTokens.ts#L295)
+Defined in: [constants/designTokens.ts:295](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/constants/designTokens.ts#L295)
 
 Widget-specific styling utilities
 These helpers generate consistent className strings for common widget patterns
@@ -114,7 +114,7 @@ Get badge classes
 
 ##### variant?
 
-`"success"` \| `"info"` \| `"warning"` \| `"error"` \| `"neutral"` \| `"primary"`
+`"success"` \| `"info"` \| `"warning"` \| `"error"` \| `"neutral"` \| `"primary"` = `'neutral'`
 
 Color variant (primary, success, warning, error, info, neutral)
 

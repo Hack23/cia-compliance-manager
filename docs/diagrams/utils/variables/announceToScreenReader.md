@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.158**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.163**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **announceToScreenReader**: (`message`, `politeness`) => `void`
 
-Defined in: [utils/index.ts:43](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/utils/index.ts#L43)
+Defined in: [utils/index.ts:43](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/utils/index.ts#L43)
 
 Announce a message to screen readers using ARIA live region
 Uses a singleton live region to prevent duplicate announcements
@@ -23,7 +23,7 @@ Message to announce
 
 ### politeness?
 
-`"polite"` \| `"assertive"`
+`"polite"` \| `"assertive"` = `'polite'`
 
 ARIA live politeness level
 

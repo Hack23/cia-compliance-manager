@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.158**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.163**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **formatSecurityLevel**(`level?`): `string`
 
-Defined in: [types/cia.utility.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/types/cia.utility.ts#L9)
+Defined in: [types/cia.utility.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/types/cia.utility.ts#L9)
 
 Format security level string for display
 
