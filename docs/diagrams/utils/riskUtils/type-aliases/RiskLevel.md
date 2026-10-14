@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.158**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.162**](../../../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > **RiskLevel** = `"Critical Risk"` \| `"High Risk"` \| `"Medium Risk"` \| `"Low Risk"` \| `"Minimal Risk"` \| `"Unknown Risk"`
 
-Defined in: [utils/riskUtils.ts:237](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/utils/riskUtils.ts#L237)
+Defined in: [utils/riskUtils.ts:237](https://github.com/Hack23/cia-compliance-manager/blob/c5d2cdbe87deaa6017000fb97918cf60099cbeee/src/utils/riskUtils.ts#L237)

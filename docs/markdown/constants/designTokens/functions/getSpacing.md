@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.158**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.162**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSpacing**(`size`): `string`
 
-Defined in: [constants/designTokens.ts:242](https://github.com/Hack23/cia-compliance-manager/blob/65d61d3ef115f9c7c0045d3370762b4013c56a97/src/constants/designTokens.ts#L242)
+Defined in: [constants/designTokens.ts:242](https://github.com/Hack23/cia-compliance-manager/blob/c5d2cdbe87deaa6017000fb97918cf60099cbeee/src/constants/designTokens.ts#L242)
 
 Helper function to get spacing value
 
