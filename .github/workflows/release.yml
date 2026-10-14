@@ -188,10 +188,13 @@ jobs:
             cp -r build/cypress/. docs/cypress/ 2>/dev/null || echo "No cypress files to copy"
           fi
           # Copy test results
-          if [ -d "build/test-results" ]; then
-            mkdir -p docs/test-results
-            cp -r build/test-results/. docs/test-results/ 2>/dev/null || echo "No test-results files to copy"
+          if [ ! -s "build/test-results/index.html" ]; then
+            echo "::error::Vitest HTML report was not generated at build/test-results/index.html"
+            exit 1
           fi
+          rm -rf docs/test-results
+          mkdir -p docs/test-results
+          cp -r build/test-results/. docs/test-results/
           echo "Test results copied at $(date)" > docs/test-results-info.txt
 
       # Generate the sitemap after all documentation and report HTML is present.
@@ -237,7 +240,7 @@ jobs:
           fetch-depth: 0
           token: ${{ steps.app-token.outputs.token }}
           persist-credentials: true
-          ref: ${{ needs.prepare.outputs.version }}
+          ref: main
 
       - name: Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
