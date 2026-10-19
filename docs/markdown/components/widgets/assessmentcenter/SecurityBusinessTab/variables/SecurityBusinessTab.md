@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.163**](../../../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.164**](../../../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **SecurityBusinessTab**: `React.FC`\<[`SecurityBusinessTabProps`](../interfaces/SecurityBusinessTabProps.md)\>
 
-Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/components/widgets/assessmentcenter/SecurityBusinessTab.tsx#L25)
+Defined in: [components/widgets/assessmentcenter/SecurityBusinessTab.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/components/widgets/assessmentcenter/SecurityBusinessTab.tsx#L25)
 
 Business Value tab component for SecuritySummaryWidget
 Displays business impact, ROI, costs, and business enablement

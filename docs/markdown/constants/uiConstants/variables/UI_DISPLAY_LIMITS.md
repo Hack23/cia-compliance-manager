@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.163**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.164**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **UI\_DISPLAY\_LIMITS**: `object`
 
-Defined in: [constants/uiConstants.ts:113](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/constants/uiConstants.ts#L113)
+Defined in: [constants/uiConstants.ts:113](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/constants/uiConstants.ts#L113)
 
 UI display limits for compact layouts
 

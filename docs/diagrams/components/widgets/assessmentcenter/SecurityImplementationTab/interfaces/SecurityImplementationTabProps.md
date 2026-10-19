@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.163**](../../../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.164**](../../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityImplementationTabProps
 
-Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/components/widgets/assessmentcenter/SecurityImplementationTab.tsx#L10)
+Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/components/widgets/assessmentcenter/SecurityImplementationTab.tsx#L10)
 
 Props for SecurityImplementationTab component
 
@@ -16,7 +16,7 @@ Props for SecurityImplementationTab component
 
 > **availabilityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/components/widgets/assessmentcenter/SecurityImplementationTab.tsx#L11)
+Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/components/widgets/assessmentcenter/SecurityImplementationTab.tsx#L11)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:1
 
 > **integrityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/components/widgets/assessmentcenter/SecurityImplementationTab.tsx#L12)
+Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/components/widgets/assessmentcenter/SecurityImplementationTab.tsx#L12)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:1
 
 > **confidentialityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/components/widgets/assessmentcenter/SecurityImplementationTab.tsx#L13)
+Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/components/widgets/assessmentcenter/SecurityImplementationTab.tsx#L13)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:1
 
 > **implementationComplexity**: `string`
 
-Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:14](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/components/widgets/assessmentcenter/SecurityImplementationTab.tsx#L14)
+Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:14](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/components/widgets/assessmentcenter/SecurityImplementationTab.tsx#L14)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:1
 
 > **testId**: `string`
 
-Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/components/widgets/assessmentcenter/SecurityImplementationTab.tsx#L15)
+Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/components/widgets/assessmentcenter/SecurityImplementationTab.tsx#L15)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:1
 
 > **implementationTime**: `string`
 
-Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/components/widgets/assessmentcenter/SecurityImplementationTab.tsx#L16)
+Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/components/widgets/assessmentcenter/SecurityImplementationTab.tsx#L16)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:1
 
 > **requiredResources**: `string`
 
-Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/components/widgets/assessmentcenter/SecurityImplementationTab.tsx#L17)
+Defined in: [components/widgets/assessmentcenter/SecurityImplementationTab.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/components/widgets/assessmentcenter/SecurityImplementationTab.tsx#L17)

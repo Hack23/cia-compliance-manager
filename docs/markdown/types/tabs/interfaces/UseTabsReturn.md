@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.163**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.164**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: UseTabsReturn
 
-Defined in: [types/tabs.ts:67](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/types/tabs.ts#L67)
+Defined in: [types/tabs.ts:67](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/types/tabs.ts#L67)
 
 Return type for the useTabs hook
 
@@ -16,7 +16,7 @@ Return type for the useTabs hook
 
 > **activeTab**: `string`
 
-Defined in: [types/tabs.ts:69](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/types/tabs.ts#L69)
+Defined in: [types/tabs.ts:69](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/types/tabs.ts#L69)
 
 Currently active tab ID
 
@@ -26,7 +26,7 @@ Currently active tab ID
 
 > **selectTab**: (`tabId`) => `void`
 
-Defined in: [types/tabs.ts:72](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/types/tabs.ts#L72)
+Defined in: [types/tabs.ts:72](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/types/tabs.ts#L72)
 
 Function to select a tab programmatically
 
@@ -46,7 +46,7 @@ Function to select a tab programmatically
 
 > **handleKeyDown**: (`event`, `currentTabId`) => `void`
 
-Defined in: [types/tabs.ts:75](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/types/tabs.ts#L75)
+Defined in: [types/tabs.ts:75](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/types/tabs.ts#L75)
 
 Keyboard event handler for tab navigation
 
@@ -70,6 +70,6 @@ Keyboard event handler for tab navigation
 
 > **tabRefs**: `MutableRefObject`\<`Map`\<`string`, `HTMLButtonElement`\>\>
 
-Defined in: [types/tabs.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/types/tabs.ts#L78)
+Defined in: [types/tabs.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/types/tabs.ts#L78)
 
 Ref map for tab button elements (used for focus management)

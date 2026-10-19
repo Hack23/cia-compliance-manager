@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.163**](../../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.164**](../../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **KeyboardShortcutHelp**: `React.FC`\<[`KeyboardShortcutHelpProps`](../../../../types/keyboard/interfaces/KeyboardShortcutHelpProps.md)\>
 
-Defined in: [components/common/KeyboardShortcutHelp.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/b6c0f97b88df68ed75ec2bcce9765ce7021a6a5f/src/components/common/KeyboardShortcutHelp.tsx#L21)
+Defined in: [components/common/KeyboardShortcutHelp.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/components/common/KeyboardShortcutHelp.tsx#L21)
 
 KeyboardShortcutHelp component displays a modal with all available keyboard shortcuts
 
