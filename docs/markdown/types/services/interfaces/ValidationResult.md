@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.164**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.165**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ValidationResult
 
-Defined in: [types/services.ts:433](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/types/services.ts#L433)
+Defined in: [types/services.ts:433](https://github.com/Hack23/cia-compliance-manager/blob/1212b27dca9a90ca35b6865ea7beb24b601ee2c3/src/types/services.ts#L433)
 
 Detailed validation result (for internal use)
 
@@ -16,7 +16,7 @@ Detailed validation result (for internal use)
 
 > **valid**: `boolean`
 
-Defined in: [types/services.ts:437](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/types/services.ts#L437)
+Defined in: [types/services.ts:437](https://github.com/Hack23/cia-compliance-manager/blob/1212b27dca9a90ca35b6865ea7beb24b601ee2c3/src/types/services.ts#L437)
 
 Whether validation passed
 
@@ -26,6 +26,6 @@ Whether validation passed
 
 > **errors**: `string`[]
 
-Defined in: [types/services.ts:442](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/types/services.ts#L442)
+Defined in: [types/services.ts:442](https://github.com/Hack23/cia-compliance-manager/blob/1212b27dca9a90ca35b6865ea7beb24b601ee2c3/src/types/services.ts#L442)
 
 Validation errors if any

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.164**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.165**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getDefaultTechnologies**(`component`, `level`): `string`
 
-Defined in: [utils/technicalDetailsDefaults.ts:282](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/utils/technicalDetailsDefaults.ts#L282)
+Defined in: [utils/technicalDetailsDefaults.ts:282](https://github.com/Hack23/cia-compliance-manager/blob/1212b27dca9a90ca35b6865ea7beb24b601ee2c3/src/utils/technicalDetailsDefaults.ts#L282)
 
 Gets default technologies for a CIA component at a specific security level
 

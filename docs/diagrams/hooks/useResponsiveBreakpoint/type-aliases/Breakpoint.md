@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.164**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.165**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > **Breakpoint** = `"mobile"` \| `"tablet"` \| `"desktop"`
 
-Defined in: [hooks/useResponsiveBreakpoint.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/hooks/useResponsiveBreakpoint.ts#L6)
+Defined in: [hooks/useResponsiveBreakpoint.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/1212b27dca9a90ca35b6865ea7beb24b601ee2c3/src/hooks/useResponsiveBreakpoint.ts#L6)
 
 Responsive breakpoint names

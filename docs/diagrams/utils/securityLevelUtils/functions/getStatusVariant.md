@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.164**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.165**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getStatusVariant**(`level`): [`StatusType`](../../../types/common/StatusTypes/type-aliases/StatusType.md)
 
-Defined in: [utils/securityLevelUtils.ts:673](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/utils/securityLevelUtils.ts#L673)
+Defined in: [utils/securityLevelUtils.ts:673](https://github.com/Hack23/cia-compliance-manager/blob/1212b27dca9a90ca35b6865ea7beb24b601ee2c3/src/utils/securityLevelUtils.ts#L673)
 
 Converts a security level or risk level string to the appropriate StatusType
 

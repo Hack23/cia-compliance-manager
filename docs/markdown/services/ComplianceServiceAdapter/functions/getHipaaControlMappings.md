@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.164**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.165**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getHipaaControlMappings**(): [`ControlMapping`](../interfaces/ControlMapping.md)[]
 
-Defined in: [services/ComplianceServiceAdapter.ts:538](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/services/ComplianceServiceAdapter.ts#L538)
+Defined in: [services/ComplianceServiceAdapter.ts:538](https://github.com/Hack23/cia-compliance-manager/blob/1212b27dca9a90ca35b6865ea7beb24b601ee2c3/src/services/ComplianceServiceAdapter.ts#L538)
 
 Get HIPAA control mappings
 

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.164**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.165**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **formatLargeNumber**(`value`): `string`
 
-Defined in: [utils/formatUtils.ts:354](https://github.com/Hack23/cia-compliance-manager/blob/3774b84329aba54283915923ce99a7a5f49cc296/src/utils/formatUtils.ts#L354)
+Defined in: [utils/formatUtils.ts:354](https://github.com/Hack23/cia-compliance-manager/blob/1212b27dca9a90ca35b6865ea7beb24b601ee2c3/src/utils/formatUtils.ts#L354)
 
 Formats a large number with abbreviated suffixes (K, M, B)
 
