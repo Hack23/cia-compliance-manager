@@ -193,7 +193,7 @@
     "@vitest/coverage-v8": "5.0.5",
     "@vitest/ui": "5.0.5",
     "canvas": "3.2.3",
-    "chart.js": "4.5.1",
+    "chart.js": "4.6.1",
     "cross-env": "10.1.0",
     "cypress": "16.2.0",
     "cypress-junit-reporter": "1.3.1",
