@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.165**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.166**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **default**: `Logger`
 
-Defined in: [utils/logger.ts:48](https://github.com/Hack23/cia-compliance-manager/blob/1212b27dca9a90ca35b6865ea7beb24b601ee2c3/src/utils/logger.ts#L48)
+Defined in: [utils/logger.ts:48](https://github.com/Hack23/cia-compliance-manager/blob/6c5ab08a904eba39a19afb7ed081b6ddf715632e/src/utils/logger.ts#L48)
 
 Simple logger interface with different log levels.
 Uses standard console methods with level prefixes to distinguish severity.

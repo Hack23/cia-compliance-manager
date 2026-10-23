@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.165**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.166**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **toStatusType**(`value`, `fallback?`): [`StatusType`](../../../types/common/StatusTypes/type-aliases/StatusType.md)
 
-Defined in: [utils/typeGuards.ts:942](https://github.com/Hack23/cia-compliance-manager/blob/1212b27dca9a90ca35b6865ea7beb24b601ee2c3/src/utils/typeGuards.ts#L942)
+Defined in: [utils/typeGuards.ts:942](https://github.com/Hack23/cia-compliance-manager/blob/6c5ab08a904eba39a19afb7ed081b6ddf715632e/src/utils/typeGuards.ts#L942)
 
 Safely converts a string to a StatusType, with fallback
 

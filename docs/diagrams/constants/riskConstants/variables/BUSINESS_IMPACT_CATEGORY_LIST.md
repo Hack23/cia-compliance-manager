@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.165**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.166**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **BUSINESS\_IMPACT\_CATEGORY\_LIST**: `string`[]
 
-Defined in: [constants/riskConstants.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/1212b27dca9a90ca35b6865ea7beb24b601ee2c3/src/constants/riskConstants.ts#L33)
+Defined in: [constants/riskConstants.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/6c5ab08a904eba39a19afb7ed081b6ddf715632e/src/constants/riskConstants.ts#L33)
 
 Business impact category list for iteration
