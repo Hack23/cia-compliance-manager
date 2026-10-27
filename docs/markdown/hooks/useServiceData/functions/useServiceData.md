@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.166**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.167**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **useServiceData**\<`T`\>(`fetchFn`, `deps?`): [`ServiceDataState`](../interfaces/ServiceDataState.md)\<`T`\>
 
-Defined in: [hooks/useServiceData.ts:89](https://github.com/Hack23/cia-compliance-manager/blob/6c5ab08a904eba39a19afb7ed081b6ddf715632e/src/hooks/useServiceData.ts#L89)
+Defined in: [hooks/useServiceData.ts:89](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/hooks/useServiceData.ts#L89)
 
 Custom hook for fetching service data with loading and error states
 

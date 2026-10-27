@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.166**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.167**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **CostEstimationWidget**: `React.FC`\<[`CostEstimationWidgetProps`](../../types/widget-props/type-aliases/CostEstimationWidgetProps.md)\>
 
-Defined in: [components/widgets/businessvalue/CostEstimationWidget.tsx:28](https://github.com/Hack23/cia-compliance-manager/blob/6c5ab08a904eba39a19afb7ed081b6ddf715632e/src/components/widgets/businessvalue/CostEstimationWidget.tsx#L28)
+Defined in: [components/widgets/businessvalue/CostEstimationWidget.tsx:28](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/components/widgets/businessvalue/CostEstimationWidget.tsx#L28)
 
 Widget for estimating implementation and operational costs
 

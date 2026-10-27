@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.166**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.167**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getKeyCombination**(`event`): `string`
 
-Defined in: [utils/keyboardUtils.ts:188](https://github.com/Hack23/cia-compliance-manager/blob/6c5ab08a904eba39a19afb7ed081b6ddf715632e/src/utils/keyboardUtils.ts#L188)
+Defined in: [utils/keyboardUtils.ts:188](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/utils/keyboardUtils.ts#L188)
 
 Get key combination string from keyboard event
 

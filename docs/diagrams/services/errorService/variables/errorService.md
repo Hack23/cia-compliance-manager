@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.166**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.167**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **errorService**: [`ErrorService`](../classes/ErrorService.md)
 
-Defined in: [services/errorService.ts:370](https://github.com/Hack23/cia-compliance-manager/blob/6c5ab08a904eba39a19afb7ed081b6ddf715632e/src/services/errorService.ts#L370)
+Defined in: [services/errorService.ts:370](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/services/errorService.ts#L370)
 
 Export singleton instance for convenient access

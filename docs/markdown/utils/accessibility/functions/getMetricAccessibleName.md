@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.166**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.167**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getMetricAccessibleName**(`label`, `value`, `unit?`): `string`
 
-Defined in: [utils/accessibility.ts:498](https://github.com/Hack23/cia-compliance-manager/blob/6c5ab08a904eba39a19afb7ed081b6ddf715632e/src/utils/accessibility.ts#L498)
+Defined in: [utils/accessibility.ts:498](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/utils/accessibility.ts#L498)
 
 Generate accessible name for a metric or data point
 

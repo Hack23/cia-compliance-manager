@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.166**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.167**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: WidgetContainerProps
 
-Defined in: [types/componentPropExports.ts:294](https://github.com/Hack23/cia-compliance-manager/blob/6c5ab08a904eba39a19afb7ed081b6ddf715632e/src/types/componentPropExports.ts#L294)
+Defined in: [types/componentPropExports.ts:294](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/types/componentPropExports.ts#L294)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:294](https://github.com/Hack23/cia-co
 
 > **children**: `ReactNode`
 
-Defined in: [types/componentPropExports.ts:295](https://github.com/Hack23/cia-compliance-manager/blob/6c5ab08a904eba39a19afb7ed081b6ddf715632e/src/types/componentPropExports.ts#L295)
+Defined in: [types/componentPropExports.ts:295](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/types/componentPropExports.ts#L295)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types/componentPropExports.ts:295](https://github.com/Hack23/cia-co
 
 > `optional` **className?**: `string`
 
-Defined in: [types/componentPropExports.ts:296](https://github.com/Hack23/cia-compliance-manager/blob/6c5ab08a904eba39a19afb7ed081b6ddf715632e/src/types/componentPropExports.ts#L296)
+Defined in: [types/componentPropExports.ts:296](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/types/componentPropExports.ts#L296)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [types/componentPropExports.ts:296](https://github.com/Hack23/cia-co
 
 > `optional` **testId?**: `string`
 
-Defined in: [types/componentPropExports.ts:297](https://github.com/Hack23/cia-compliance-manager/blob/6c5ab08a904eba39a19afb7ed081b6ddf715632e/src/types/componentPropExports.ts#L297)
+Defined in: [types/componentPropExports.ts:297](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/types/componentPropExports.ts#L297)

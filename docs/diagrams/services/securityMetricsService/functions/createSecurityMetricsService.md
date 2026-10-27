@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.166**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.167**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **createSecurityMetricsService**(`dataProvider?`): [`SecurityMetricsService`](../classes/SecurityMetricsService.md)
 
-Defined in: [services/securityMetricsService.ts:1108](https://github.com/Hack23/cia-compliance-manager/blob/6c5ab08a904eba39a19afb7ed081b6ddf715632e/src/services/securityMetricsService.ts#L1108)
+Defined in: [services/securityMetricsService.ts:1108](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/services/securityMetricsService.ts#L1108)
 
 Create a SecurityMetricsService instance
 

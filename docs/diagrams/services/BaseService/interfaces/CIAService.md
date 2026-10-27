@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.166**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.167**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CIAService
 
-Defined in: [services/BaseService.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/6c5ab08a904eba39a19afb7ed081b6ddf715632e/src/services/BaseService.ts#L21)
+Defined in: [services/BaseService.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/services/BaseService.ts#L21)
 
 Common interface for CIA services
 
@@ -16,7 +16,7 @@ Common interface for CIA services
 
 > **getComponentDetails**(`component`, `level`): [`CIADetails`](../../../types/cia-services/interfaces/CIADetails.md) \| `undefined`
 
-Defined in: [services/BaseService.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/6c5ab08a904eba39a19afb7ed081b6ddf715632e/src/services/BaseService.ts#L22)
+Defined in: [services/BaseService.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/services/BaseService.ts#L22)
 
 #### Parameters
 
@@ -38,7 +38,7 @@ Defined in: [services/BaseService.ts:22](https://github.com/Hack23/cia-complianc
 
 > **getSecurityLevelDescription**(`level`): `string`
 
-Defined in: [services/BaseService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/6c5ab08a904eba39a19afb7ed081b6ddf715632e/src/services/BaseService.ts#L26)
+Defined in: [services/BaseService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/services/BaseService.ts#L26)
 
 #### Parameters
 
@@ -56,7 +56,7 @@ Defined in: [services/BaseService.ts:26](https://github.com/Hack23/cia-complianc
 
 > **getRiskLevelFromSecurityLevel**(`level`): `string`
 
-Defined in: [services/BaseService.ts:27](https://github.com/Hack23/cia-compliance-manager/blob/6c5ab08a904eba39a19afb7ed081b6ddf715632e/src/services/BaseService.ts#L27)
+Defined in: [services/BaseService.ts:27](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/services/BaseService.ts#L27)
 
 #### Parameters
 
