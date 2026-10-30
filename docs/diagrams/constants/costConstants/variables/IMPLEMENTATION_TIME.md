@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.167**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.168**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **IMPLEMENTATION\_TIME**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), `number`\>
 
-Defined in: [constants/costConstants.ts:200](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/constants/costConstants.ts#L200)
+Defined in: [constants/costConstants.ts:200](https://github.com/Hack23/cia-compliance-manager/blob/820d7a4fb23f28f59c88e35c49e2e30ecd03cd0d/src/constants/costConstants.ts#L200)
 
 Implementation time (in months) for each security level

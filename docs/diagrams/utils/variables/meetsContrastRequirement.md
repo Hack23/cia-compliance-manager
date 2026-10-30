@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.167**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.168**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **meetsContrastRequirement**: (`foreground`, `background`, `isLargeText`) => `boolean`
 
-Defined in: [utils/index.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/utils/index.ts#L44)
+Defined in: [utils/index.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/820d7a4fb23f28f59c88e35c49e2e30ecd03cd0d/src/utils/index.ts#L44)
 
 Check if element has sufficient color contrast
 Note: This is a simplified check. Use dedicated tools for comprehensive testing.

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — Markdown Documentation v1.1.167**](../../../README.md)
+[**CIA Compliance Manager — Markdown Documentation v1.1.168**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **announceToScreenReader**(`message`, `politeness?`): `void`
 
-Defined in: [utils/accessibility.ts:537](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/utils/accessibility.ts#L537)
+Defined in: [utils/accessibility.ts:537](https://github.com/Hack23/cia-compliance-manager/blob/820d7a4fb23f28f59c88e35c49e2e30ecd03cd0d/src/utils/accessibility.ts#L537)
 
 Announce a message to screen readers using ARIA live region
 Uses a singleton live region to prevent duplicate announcements

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.167**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.168**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: UseTabsOptions
 
-Defined in: [types/tabs.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/types/tabs.ts#L56)
+Defined in: [types/tabs.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/820d7a4fb23f28f59c88e35c49e2e30ecd03cd0d/src/types/tabs.ts#L56)
 
 Options for the useTabs hook
 
@@ -16,7 +16,7 @@ Options for the useTabs hook
 
 > `optional` **initialTab?**: `string`
 
-Defined in: [types/tabs.ts:58](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/types/tabs.ts#L58)
+Defined in: [types/tabs.ts:58](https://github.com/Hack23/cia-compliance-manager/blob/820d7a4fb23f28f59c88e35c49e2e30ecd03cd0d/src/types/tabs.ts#L58)
 
 Initial active tab ID (defaults to first tab if not specified)
 
@@ -26,7 +26,7 @@ Initial active tab ID (defaults to first tab if not specified)
 
 > `optional` **onChange?**: (`tabId`) => `void`
 
-Defined in: [types/tabs.ts:61](https://github.com/Hack23/cia-compliance-manager/blob/2ae69334cea45a949f2efda6ff07c1e1e463257f/src/types/tabs.ts#L61)
+Defined in: [types/tabs.ts:61](https://github.com/Hack23/cia-compliance-manager/blob/820d7a4fb23f28f59c88e35c49e2e30ecd03cd0d/src/types/tabs.ts#L61)
 
 Callback when tab changes
 
