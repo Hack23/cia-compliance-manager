@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.168**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.169**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **meetsComplianceRequirements**(`level`, `framework`): `boolean`
 
-Defined in: [utils/securityLevelUtils.ts:590](https://github.com/Hack23/cia-compliance-manager/blob/820d7a4fb23f28f59c88e35c49e2e30ecd03cd0d/src/utils/securityLevelUtils.ts#L590)
+Defined in: [utils/securityLevelUtils.ts:590](https://github.com/Hack23/cia-compliance-manager/blob/8541e80d27921e05ecad430966d158341a23bbe0/src/utils/securityLevelUtils.ts#L590)
 
 Determine if a security level meets compliance requirements for a specific framework
 

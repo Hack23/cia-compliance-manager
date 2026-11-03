@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.168**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.169**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **roiEstimatesData**: [`ROIEstimatesMap`](../../types/cia-services/interfaces/ROIEstimatesMap.md)
 
-Defined in: [data/security/roiEstimatesData.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/820d7a4fb23f28f59c88e35c49e2e30ecd03cd0d/src/data/security/roiEstimatesData.ts#L12)
+Defined in: [data/security/roiEstimatesData.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/8541e80d27921e05ecad430966d158341a23bbe0/src/data/security/roiEstimatesData.ts#L12)
 
 Return on investment estimates for different security levels
 
