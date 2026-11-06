@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.169**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.170**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **useKeyboardShortcutContextOptional**(): [`KeyboardShortcutContextValue`](../../../types/keyboard/interfaces/KeyboardShortcutContextValue.md) \| `undefined`
 
-Defined in: [contexts/KeyboardShortcutContext.tsx:166](https://github.com/Hack23/cia-compliance-manager/blob/8541e80d27921e05ecad430966d158341a23bbe0/src/contexts/KeyboardShortcutContext.tsx#L166)
+Defined in: [contexts/KeyboardShortcutContext.tsx:166](https://github.com/Hack23/cia-compliance-manager/blob/276996e15a71466c7b9b1aed3e1a103db89356a5/src/contexts/KeyboardShortcutContext.tsx#L166)
 
 Optional hook to access keyboard shortcut context (returns undefined if not in provider)
 

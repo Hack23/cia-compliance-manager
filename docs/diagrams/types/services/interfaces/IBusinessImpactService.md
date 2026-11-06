@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.169**](../../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.170**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: IBusinessImpactService
 
-Defined in: [types/services.ts:243](https://github.com/Hack23/cia-compliance-manager/blob/8541e80d27921e05ecad430966d158341a23bbe0/src/types/services.ts#L243)
+Defined in: [types/services.ts:243](https://github.com/Hack23/cia-compliance-manager/blob/276996e15a71466c7b9b1aed3e1a103db89356a5/src/types/services.ts#L243)
 
 Business Impact Service interface
 
@@ -22,7 +22,7 @@ Provides business impact analysis and risk assessment
 
 > `readonly` **name**: `string`
 
-Defined in: [types/services.ts:82](https://github.com/Hack23/cia-compliance-manager/blob/8541e80d27921e05ecad430966d158341a23bbe0/src/types/services.ts#L82)
+Defined in: [types/services.ts:82](https://github.com/Hack23/cia-compliance-manager/blob/276996e15a71466c7b9b1aed3e1a103db89356a5/src/types/services.ts#L82)
 
 Service name for identification and logging
 
@@ -36,7 +36,7 @@ Service name for identification and logging
 
 > **validate**(`input`): `boolean`
 
-Defined in: [types/services.ts:90](https://github.com/Hack23/cia-compliance-manager/blob/8541e80d27921e05ecad430966d158341a23bbe0/src/types/services.ts#L90)
+Defined in: [types/services.ts:90](https://github.com/Hack23/cia-compliance-manager/blob/276996e15a71466c7b9b1aed3e1a103db89356a5/src/types/services.ts#L90)
 
 Validate input parameters (returns simple boolean)
 
@@ -64,7 +64,7 @@ True if valid, false otherwise
 
 > **handleError**(`error`): [`ServiceError`](../../../services/errors/classes/ServiceError.md)
 
-Defined in: [types/services.ts:98](https://github.com/Hack23/cia-compliance-manager/blob/8541e80d27921e05ecad430966d158341a23bbe0/src/types/services.ts#L98)
+Defined in: [types/services.ts:98](https://github.com/Hack23/cia-compliance-manager/blob/276996e15a71466c7b9b1aed3e1a103db89356a5/src/types/services.ts#L98)
 
 Handle errors consistently across services
 
@@ -92,7 +92,7 @@ Formatted ServiceError
 
 > **getBusinessImpact**(`component`, `level`): [`BusinessImpactDetails`](../../cia-services/interfaces/BusinessImpactDetails.md)
 
-Defined in: [types/services.ts:251](https://github.com/Hack23/cia-compliance-manager/blob/8541e80d27921e05ecad430966d158341a23bbe0/src/types/services.ts#L251)
+Defined in: [types/services.ts:251](https://github.com/Hack23/cia-compliance-manager/blob/276996e15a71466c7b9b1aed3e1a103db89356a5/src/types/services.ts#L251)
 
 Get business impact details for a component and level
 
@@ -122,7 +122,7 @@ Business impact details
 
 > **getBusinessImpactDescription**(`component`, `level`): `string`
 
-Defined in: [types/services.ts:263](https://github.com/Hack23/cia-compliance-manager/blob/8541e80d27921e05ecad430966d158341a23bbe0/src/types/services.ts#L263)
+Defined in: [types/services.ts:263](https://github.com/Hack23/cia-compliance-manager/blob/276996e15a71466c7b9b1aed3e1a103db89356a5/src/types/services.ts#L263)
 
 Get business impact description
 
@@ -152,7 +152,7 @@ Business impact description
 
 > **calculateBusinessImpactLevel**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `string`
 
-Defined in: [types/services.ts:276](https://github.com/Hack23/cia-compliance-manager/blob/8541e80d27921e05ecad430966d158341a23bbe0/src/types/services.ts#L276)
+Defined in: [types/services.ts:276](https://github.com/Hack23/cia-compliance-manager/blob/276996e15a71466c7b9b1aed3e1a103db89356a5/src/types/services.ts#L276)
 
 Calculate overall business impact level
 
@@ -188,7 +188,7 @@ Business impact level description
 
 > **getCategoryIcon**(`category`): `string`
 
-Defined in: [types/services.ts:288](https://github.com/Hack23/cia-compliance-manager/blob/8541e80d27921e05ecad430966d158341a23bbe0/src/types/services.ts#L288)
+Defined in: [types/services.ts:288](https://github.com/Hack23/cia-compliance-manager/blob/276996e15a71466c7b9b1aed3e1a103db89356a5/src/types/services.ts#L288)
 
 Get category icon for business impact visualization
 

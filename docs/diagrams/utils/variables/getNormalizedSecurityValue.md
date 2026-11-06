@@ -1,4 +1,4 @@
-[**CIA Compliance Manager — UML Diagrams v1.1.169**](../../README.md)
+[**CIA Compliance Manager — UML Diagrams v1.1.170**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getNormalizedSecurityValue**: (`level`) => `number`
 
-Defined in: [utils/index.ts:96](https://github.com/Hack23/cia-compliance-manager/blob/8541e80d27921e05ecad430966d158341a23bbe0/src/utils/index.ts#L96)
+Defined in: [utils/index.ts:96](https://github.com/Hack23/cia-compliance-manager/blob/276996e15a71466c7b9b1aed3e1a103db89356a5/src/utils/index.ts#L96)
 
 Get normalized value (0-100) for a security level
 Used for visualization and progress indicators

@@ -9885,7 +9885,7 @@ FNDA:7,handleArrowKeyNavigation
 FNDA:3,getMetricAccessibleName
 FNDA:11,getLiveRegion
 FNDA:11,announceToScreenReader
-FNDA:6,(anonymous_14)
+FNDA:7,(anonymous_14)
 FNDA:2,(anonymous_15)
 FNDA:6,meetsContrastRequirement
 FNDA:6,calculateContrastRatio
@@ -9979,7 +9979,7 @@ DA:551,11
 DA:552,16
 DA:553,16
 DA:556,11
-DA:557,6
+DA:557,7
 DA:559,11
 DA:561,11
 DA:562,2
